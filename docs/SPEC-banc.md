@@ -24,6 +24,8 @@ Puis il vérifie, en faisant tourner le protocole adversarial, si ces deux mesur
 | **k** | Nombre moyen d'états touchés par assertion (l'état observé plus les conditions). |
 | **Champ** | L'état touché par le plus d'assertions. Exclu du réseau, car il pousse tout le monde de la même façon sans coupler personne. |
 | **Réseau** | Deux assertions sont reliées si elles partagent au moins un état, hors champ. |
+| **Taux de compilation** | Part des situations tirées au hasard où deux codes écrits indépendamment à partir de la même spec donnent le même résultat observable. C'est le cap du banc. |
+| **Divergence** | Une situation où les deux codes diffèrent. Le juge la classe : trou de spec, ou bug d'un des deux codes. |
 | **Champ local** | Nombre d'essais nécessaires pour faire passer une assertion pendant l'exécution. |
 | **Tour** | Un cycle du protocole adversarial : assertions → code → résultats. |
 | **Échec : bug** | L'assertion est juste, le code est faux. |
@@ -92,6 +94,11 @@ Format : `situation → résultat | observé: état | conditions: états`
 
 Une sonde **floue** n'est plus mesurée : on creuse sa spec (H16). L'écart-type est celui d'échantillon (diviseur n − 1).
 
+Deux consignes, deux séries de passes jamais mélangées : **v2 pour k** (`data/passes/strict-v2/`), **v3 pour les frontières** (`data/passes/strict-v3/`).
+
+- Deux passes v3 d'une sonde dont la part de frontières diffère d'au plus 10 points → les frontières de la sonde sont reproductibles | observé: concordance | conditions: frontières (seuil non validé)
+- Les trous signalés par le red avant le code → ils ne sont pas enregistrés comme mesure | observé: rapport | conditions: aucune
+
 ### 6.4 Exécution (branchement du protocole adversarial)
 
 - Lancer l'exécution d'une sonde concordante → le protocole reçoit les assertions de la passe A | observé: tour | conditions: concordance
@@ -107,6 +114,17 @@ Une sonde **floue** n'est plus mesurée : on creuse sa spec (H16). L'écart-type
 - Un échec classé trou → le nombre de niveaux remontés est enregistré | observé: remontée | conditions: type d'échec
 - Toutes les assertions passent sur un tour → l'exécution est terminée | observé: tour | conditions: statut d'assertion
 - Vingt tours sans que tout passe → l'exécution est arrêtée et marquée non convergente | observé: tour | conditions: aucune
+
+### 6.4 bis Test différentiel (cap : une spec compilable)
+
+- Une spec dont toutes les assertions passent avec deux greens de modèles différents → les deux codes sont soumis aux mêmes situations tirées au hasard | observé: situation | conditions: statut d'assertion
+- Une situation est une suite d'actions valides tirée par un générateur écrit sans voir le code → elle est rejouable à l'identique à partir de sa graine | observé: situation | conditions: aucune
+- Les deux codes donnent le même résultat observable à chaque étape d'une situation → la situation est concordante | observé: taux de compilation | conditions: situation
+- Un code donne deux résultats différents sur la même graine → la situation est écartée comme non déterministe | observé: situation | conditions: aucune
+- Une situation où les deux codes diffèrent → une divergence est enregistrée avec la graine et l'action où elle apparaît | observé: divergence | conditions: situation
+- Une divergence que la spec ne tranche pas → le juge la classe trou | observé: divergence | conditions: assertions
+- Une divergence où la spec donne raison à un des deux codes → le juge la classe bug de l'autre code | observé: divergence | conditions: assertions
+- Deux paires de greens différentes → les trous qu'elles trouvent sont comparés | observé: divergence | conditions: aucune
 
 ### 6.5 Champ local
 

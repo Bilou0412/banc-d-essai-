@@ -1,5 +1,7 @@
 # Banc d'essai des specs
 
+> **Cap : une spec compilable.** Deux codes écrits indépendamment à partir de la même spec ont le même comportement. Tout le reste sert ce chiffre : le **taux de compilation** (`outils/differentiel.py`, H20).
+
 Laboratoire pour mesurer les specs **avant** de construire, et vérifier en exécutant si la mesure prédit quelque chose.
 But final : savoir comment répartir l'effort d'une IA entre **découper** (spec) et **exécuter** (code).
 
@@ -24,6 +26,8 @@ Bilel, développeur freelance. Il pense par **intuitions structurelles et parall
 4. **Ne comparer que des passes faites avec la même règle** (stricte).
 5. **Toute thèse qui change de statut garde sa raison chiffrée.**
 6. **Pas de seuil fixé après avoir vu les données** sans le marquer « non validé ».
+7. **Deux consignes, deux séries de passes, jamais mélangées.** La v2 (`decompositeur-strict-v2.md`) mesure **k** ; la v3 (`decompositeur-strict-v3.md`) mesure les **frontières**. Critère de reproductibilité des frontières : écart de **part** ≤ 10 points entre passes (« non validé » jusqu'à la grosse sonde).
+8. **Les trous du red ne sont pas des données.** Le red attaque toujours, mais son compte de trous a priori ne se répète pas (ρ = 0,00 entre deux reds, V3) : on ne s'en sert plus comme mesure.
 
 ## Arborescence
 
