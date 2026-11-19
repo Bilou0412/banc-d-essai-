@@ -1,0 +1,40 @@
+ÉTATS: recettes; titre; ingrédients; quantité; unité; portions; catégorie; requête; résultats; liste; note; favori; photo; date
+ASSERTIONS:
+- Partant d'une collection sans recette, l'utilisateur crée une recette avec le titre « Crêpes » ; la collection contient une recette nommée « Crêpes ». | observé: recettes | conditions: titre
+- Partant d'un titre vide, l'utilisateur valide la création d'une recette ; la collection ne contient aucune nouvelle recette. | observé: recettes | conditions: titre
+- Partant d'une recette existante, l'utilisateur la supprime ; la collection ne contient plus cette recette. | observé: recettes | conditions: aucune
+- Partant d'une recette existante, l'utilisateur renomme son titre en « Gaufres » ; le titre affiché de la recette est « Gaufres ». | observé: titre | conditions: aucune
+- Partant d'une recette sans ingrédient, l'utilisateur ajoute l'ingrédient « farine » ; la liste des ingrédients de la recette contient « farine ». | observé: ingrédients | conditions: aucune
+- Partant d'une recette sans ingrédient, l'utilisateur ajoute « farine » avec la quantité 250 ; la quantité affichée pour « farine » est 250. | observé: quantité | conditions: aucune
+- Partant d'une recette sans ingrédient, l'utilisateur ajoute « farine » avec l'unité « g » ; l'unité affichée pour « farine » est « g ». | observé: unité | conditions: aucune
+- Partant d'une recette, l'utilisateur saisit une quantité nulle ou négative pour un ingrédient ; la quantité est refusée et l'ancienne valeur reste affichée. | observé: quantité | conditions: quantité
+- Partant d'une recette contenant « farine », l'utilisateur retire « farine » ; la liste des ingrédients de la recette ne contient plus « farine ». | observé: ingrédients | conditions: aucune
+- Partant d'une recette pour 4 portions contenant 200 g de farine, l'utilisateur règle les portions à 8 ; la quantité affichée pour « farine » est 400. | observé: quantité | conditions: portions
+- Partant d'une recette pour 4 portions contenant 200 g de farine, l'utilisateur règle les portions à 8 ; l'unité affichée pour « farine » reste « g ». | observé: unité | conditions: aucune
+- Partant d'une recette pour 4 portions réglée à 8 portions, l'utilisateur revient à 4 portions ; la quantité affichée pour « farine » est de nouveau 200. | observé: quantité | conditions: portions
+- Partant d'une recette pour 4 portions, l'utilisateur règle les portions à 0 ; la valeur est refusée et les portions restent à 4. | observé: portions | conditions: portions
+- Partant d'une recette sans catégorie, l'utilisateur lui attribue la catégorie « Dessert » ; la catégorie affichée de la recette est « Dessert ». | observé: catégorie | conditions: aucune
+- Partant de recettes de catégories « Dessert » et « Plat », l'utilisateur filtre sur « Dessert » ; les résultats ne contiennent que les recettes de catégorie « Dessert ». | observé: résultats | conditions: catégorie
+- Partant d'une recette titrée « Crêpes », l'utilisateur recherche « crêpe » ; les résultats contiennent « Crêpes ». | observé: résultats | conditions: requête, titre
+- Partant d'une recette contenant l'ingrédient « farine » dont le titre ne contient pas « farine », l'utilisateur recherche « farine » ; les résultats contiennent cette recette. | observé: résultats | conditions: requête, ingrédients
+- Partant d'aucune recette correspondant à « zzz », l'utilisateur recherche « zzz » ; les résultats sont vides. | observé: résultats | conditions: requête
+- Partant de plusieurs recettes, l'utilisateur efface la requête ; les résultats contiennent toutes les recettes. | observé: résultats | conditions: requête
+- Partant de recettes dont une seule est favorite, l'utilisateur filtre sur les favoris ; les résultats ne contiennent que la recette favorite. | observé: résultats | conditions: favori
+- Partant d'une liste de courses vide et d'une recette contenant 200 g de farine, l'utilisateur ajoute la recette à la liste ; la liste contient « farine 200 g ». | observé: liste | conditions: aucune
+- Partant d'une recette pour 4 portions réglée à 8 portions et contenant 200 g de farine, l'utilisateur ajoute la recette à la liste ; la liste contient « farine 400 g ». | observé: liste | conditions: portions
+- Partant d'une liste contenant « farine 200 g », l'utilisateur ajoute une autre recette contenant 250 g de farine ; la liste contient une seule ligne « farine 450 g ». | observé: liste | conditions: ingrédients, unité
+- Partant d'une liste contenant « lait 500 ml », l'utilisateur ajoute une recette contenant 2 tasses de lait ; la liste contient deux lignes distinctes pour « lait ». | observé: liste | conditions: unité
+- Partant d'une liste contenant les ingrédients d'une recette, l'utilisateur retire cette recette de la liste ; la liste ne contient plus les ingrédients de cette recette. | observé: liste | conditions: aucune
+- Partant d'une liste contenant les ingrédients d'une recette, l'utilisateur supprime cette recette ; la liste ne contient plus les ingrédients de cette recette. | observé: liste | conditions: aucune
+- Partant d'une recette sans note, l'utilisateur écrit la note « moins sucré » ; la note affichée de la recette est « moins sucré ». | observé: note | conditions: aucune
+- Partant d'une recette avec une note, l'utilisateur efface la note ; la recette n'affiche aucune note. | observé: note | conditions: aucune
+- Partant d'une recette non favorite, l'utilisateur la marque comme favorite ; la recette est affichée comme favorite. | observé: favori | conditions: aucune
+- Partant d'une recette favorite, l'utilisateur retire le favori ; la recette est affichée comme non favorite. | observé: favori | conditions: aucune
+- Partant d'une recette sans photo, l'utilisateur ajoute une image JPEG ; la recette affiche cette photo. | observé: photo | conditions: photo
+- Partant d'une recette sans photo, l'utilisateur choisit un fichier qui n'est pas une image ; la recette n'affiche aucune photo. | observé: photo | conditions: photo
+- Partant d'une recette avec photo, l'utilisateur supprime la photo ; la recette n'affiche aucune photo. | observé: photo | conditions: aucune
+- Partant d'une recette favorite, l'utilisateur ferme puis rouvre l'application ; la recette est affichée comme favorite. | observé: favori | conditions: aucune | frontière: oui
+- Partant d'une recette avec la note « moins sucré », l'utilisateur ferme puis rouvre l'application ; la note affichée est « moins sucré ». | observé: note | conditions: aucune | frontière: oui
+- Partant d'une recette avec photo, l'utilisateur ferme puis rouvre l'application ; la recette affiche la photo. | observé: photo | conditions: aucune | frontière: oui
+- Partant d'une liste contenant « farine 200 g », l'utilisateur ferme puis rouvre l'application ; la liste contient « farine 200 g ». | observé: liste | conditions: aucune | frontière: oui
+- Partant de deux recettes créées à des dates différentes, l'utilisateur trie par date de création ; la recette la plus récente apparaît en premier dans les résultats. | observé: résultats | conditions: date | frontière: oui

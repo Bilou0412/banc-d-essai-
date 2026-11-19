@@ -30,13 +30,15 @@ Bilel, développeur freelance. Il pense par **intuitions structurelles et parall
 ```
 CLAUDE.md                      ce fichier
 docs/SPEC-banc.md              spec fonctionnelle du banc (45 assertions strictes)
-docs/theses.md                 registre des thèses H1-H18
+docs/theses.md                 registre des thèses H1-H19
 docs/HISTORIQUE.md             la conversation d'origine, résumée
 prompts/decompositeur-strict.md  consigne exacte des passes aveugles (v1)
 prompts/decompositeur-strict-v2.md  v1 + règle 5 (assertions frontière, « | frontière: oui »)
+prompts/decompositeur-strict-v3.md  v2 avec la règle 5 précisée (6 mécanismes nommés + test d'exclusion)
 data/sondes.md                 les 10 sondes, leur description et leur k
 data/passes/strict/            23 passes aveugles strictes (P01_A ... P10_D)
 data/passes/strict-v2/         passes v2 des 10 sondes (jamais comparées aux v1)
+data/passes/strict-v3/         passes v3 de P02, P07, P08, P10 (frontières)
 data/passes/aveugle-libre/     4 passes aveugles sans la règle stricte (historique)
 data/passes/claude-libre/      passes écrites par Claude (biaisées, historique)
 outils/mesure.py               calcule k, réseau, champ et concordance
@@ -47,7 +49,8 @@ runs/<sonde>/                  duel V0 (passes v1, green sonnet, une attaque)
 runs-v1/<sonde>/               duel V1 (passes v2, green haiku, deux attaques, mécanismes réels)
 runs-v2/<sonde>/               duel V2 (P02, P06, P07 : H18)
 runs-v2-apriori/<sonde>/       attaque 1 du red seule (H15, H16)
-docs/duel-V0.md, V1, V2        rapports des duels
+runs-v3-apriori-B/<sonde>/     même attaque par un red neuf (reproductibilité du red)
+docs/duel-V0.md … V3           rapports des duels
 protocol/, .claude/agents/     le protocole adversarial attaché (tools/link.py), ne pas éditer protocol/
 ```
 

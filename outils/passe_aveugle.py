@@ -53,9 +53,11 @@ def main():
     ap.add_argument("passe")
     ap.add_argument("--model", default="opus")
     ap.add_argument("--v2", action="store_true", help="consigne v2 (assertions frontière)")
+    ap.add_argument("--version", default=None, help="v2, v3… : prompts/decompositeur-strict-<v>.md, data/passes/strict-<v>/")
     a = ap.parse_args()
-    modele = RACINE / "prompts" / ("decompositeur-strict-v2.md" if a.v2 else "decompositeur-strict.md")
-    cible = RACINE / "data" / "passes" / ("strict-v2" if a.v2 else "strict") / f"{a.sonde}_{a.passe}.txt"
+    v = a.version or ("v2" if a.v2 else None)
+    modele = RACINE / "prompts" / (f"decompositeur-strict-{v}.md" if v else "decompositeur-strict.md")
+    cible = RACINE / "data" / "passes" / (f"strict-{v}" if v else "strict") / f"{a.sonde}_{a.passe}.txt"
     cible.parent.mkdir(exist_ok=True)
     if cible.exists():
         sys.exit(f"{cible} existe déjà")

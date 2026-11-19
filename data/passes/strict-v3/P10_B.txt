@@ -1,0 +1,40 @@
+ÉTATS: contenu; remise; connexion; appareils; membres; code; vérification; alerte; minuterie; présence; ordre
+ASSERTIONS:
+- Quand l'utilisateur envoie un message à un contact connecté, le contact voit le contenu du message en clair | observé: contenu | conditions: connexion | frontière: oui
+- Quand l'utilisateur envoie un message à un contact hors ligne, le contenu du message n'apparaît pas chez ce contact tant qu'il reste hors ligne | observé: contenu | conditions: connexion | frontière: oui
+- Quand un contact hors ligne se reconnecte, il voit le contenu du message qui lui a été envoyé pendant son absence | observé: contenu | conditions: connexion | frontière: oui
+- Quand l'utilisateur envoie un message alors que son propre appareil est hors ligne, l'indicateur de remise affiche « en attente » | observé: remise | conditions: connexion | frontière: oui
+- Quand l'utilisateur envoie un message à un contact hors ligne, l'indicateur de remise affiche « envoyé » | observé: remise | conditions: connexion | frontière: oui
+- Quand l'appareil du contact reçoit le message, l'indicateur de remise chez l'expéditeur passe à « remis » | observé: remise | conditions: connexion | frontière: oui
+- Dans un groupe, l'indicateur de remise d'un message passe à « remis » seulement quand tous les membres l'ont reçu | observé: remise | conditions: membres | frontière: oui
+- Un message reçu par l'utilisateur affiche son contenu sur chacun de ses appareils liés | observé: contenu | conditions: appareils | frontière: oui
+- Un message envoyé depuis un appareil de l'utilisateur apparaît dans l'historique de ses autres appareils liés | observé: présence | conditions: appareils | frontière: oui
+- Quand l'utilisateur lie un nouvel appareil, cet appareil figure dans la liste des appareils | observé: appareils | conditions: aucune | frontière: oui
+- Quand l'utilisateur retire un appareil, cet appareil ne figure plus dans la liste des appareils | observé: appareils | conditions: aucune
+- Un appareil retiré n'affiche pas le contenu des messages envoyés après son retrait | observé: contenu | conditions: appareils | frontière: oui
+- Quand l'utilisateur ajoute un contact à un groupe, ce contact figure dans la liste des membres | observé: membres | conditions: aucune
+- Quand l'utilisateur retire un membre d'un groupe, ce membre ne figure plus dans la liste des membres | observé: membres | conditions: aucune
+- Quand un membre ajoute un contact au groupe, les autres membres voient ce contact dans la liste des membres | observé: membres | conditions: aucune | frontière: oui
+- Un message envoyé au groupe affiche son contenu chez chaque membre | observé: contenu | conditions: membres | frontière: oui
+- Un membre retiré du groupe ne voit pas le contenu des messages envoyés au groupe après son retrait | observé: contenu | conditions: membres | frontière: oui
+- Un contact ajouté au groupe ne voit pas le contenu des messages envoyés au groupe avant son ajout | observé: contenu | conditions: membres | frontière: oui
+- Le code de sécurité affiché pour une conversation est identique chez l'utilisateur et chez le contact | observé: code | conditions: aucune | frontière: oui
+- Quand un contact réinstalle l'application, le code de sécurité affiché pour ce contact change | observé: code | conditions: aucune | frontière: oui
+- Quand le code de sécurité d'un contact change, une alerte apparaît dans la conversation avec ce contact | observé: alerte | conditions: code | frontière: oui
+- Un contact nouvellement ajouté affiche la vérification « non vérifié » | observé: vérification | conditions: aucune
+- Quand l'utilisateur marque un contact comme vérifié, la vérification de ce contact affiche « vérifié » | observé: vérification | conditions: aucune
+- Quand le code de sécurité d'un contact vérifié change, la vérification de ce contact repasse à « non vérifié » | observé: vérification | conditions: code | frontière: oui
+- Un message dont la signature ne correspond pas à la clé de l'expéditeur n'affiche pas son contenu | observé: contenu | conditions: code | frontière: oui
+- Quand l'utilisateur règle la minuterie à une heure, la minuterie de la conversation affiche une heure | observé: minuterie | conditions: aucune
+- Quand un participant règle la minuterie, l'autre participant voit la même valeur de minuterie | observé: minuterie | conditions: aucune | frontière: oui
+- Quand deux participants règlent la minuterie au même moment à des valeurs différentes, les deux participants voient la même valeur finale | observé: minuterie | conditions: aucune | frontière: oui
+- Avec une minuterie active, un message disparaît de l'historique de l'expéditeur une fois la durée écoulée | observé: présence | conditions: minuterie | frontière: oui
+- Avec une minuterie active, un message disparaît de l'historique du destinataire une fois la durée écoulée | observé: présence | conditions: minuterie | frontière: oui
+- Avec la minuterie désactivée, un message reste dans l'historique quelle que soit la durée écoulée | observé: présence | conditions: minuterie | frontière: oui
+- Un message envoyé avant l'activation de la minuterie reste dans l'historique après l'écoulement de la durée | observé: présence | conditions: minuterie | frontière: oui
+- Quand l'utilisateur supprime un message pour lui-même, ce message disparaît de son historique | observé: présence | conditions: aucune
+- Après fermeture et réouverture de l'application, un message reçu non éphémère reste dans l'historique | observé: présence | conditions: minuterie | frontière: oui
+- Après fermeture et réouverture de l'application, la minuterie conserve sa valeur | observé: minuterie | conditions: aucune | frontière: oui
+- Après fermeture et réouverture de l'application, la vérification d'un contact conserve sa valeur | observé: vérification | conditions: aucune | frontière: oui
+- Les messages envoyés successivement par l'utilisateur dans une conversation apparaissent dans l'ordre d'envoi | observé: ordre | conditions: aucune
+- Quand deux membres envoient un message au groupe au même moment, tous les membres voient ces deux messages dans le même ordre | observé: ordre | conditions: membres | frontière: oui
