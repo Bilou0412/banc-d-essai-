@@ -40,7 +40,7 @@ def mesurer(assertions):
     ensembles = [{o} | c for o, c in assertions]
     etats = set().union(*ensembles)
     compte = {e: sum(e in a for a in ensembles) for e in etats}
-    champ = max(compte, key=compte.get)
+    champ = max(sorted(compte), key=compte.get)  # ordre fixe : à égalité, le choix ne dépend plus du hasard du hachage
     G = nx.Graph()
     G.add_nodes_from(range(n))
     for i, j in itertools.combinations(range(n), 2):

@@ -14,7 +14,7 @@ Bilel, développeur freelance. Il pense par **intuitions structurelles et parall
 - **Transformer chaque parallèle en thèse testable** (prédiction chiffrée + statut dans `docs/theses.md`). Ne pas juste approuver.
 - **Dire franchement** quand quelque chose ne tient pas, chiffres à l'appui. C'est ce qui a fait avancer le banc.
 - **Expliquer simplement, en français, avec des schémas** quand c'est possible.
-- Il a déjà un **protocole adversarial** branché dans Claude Code. Demande-lui où il est et comment on l'appelle avant de construire l'exécution.
+- Il a déjà un **protocole adversarial** branché dans Claude Code. Il vit dans `Bilou0412/adversarial-agents-protocol`, attaché ici dans `protocol/` et `.claude/agents/` ; `outils/duel.py` l'appelle en `claude -p --agent red|green|judge`.
 
 ## Règles du labo (ne pas casser)
 
@@ -30,19 +30,24 @@ Bilel, développeur freelance. Il pense par **intuitions structurelles et parall
 ```
 CLAUDE.md                      ce fichier
 docs/SPEC-banc.md              spec fonctionnelle du banc (45 assertions strictes)
-docs/theses.md                 registre des thèses H1-H14
+docs/theses.md                 registre des thèses H1-H15
 docs/HISTORIQUE.md             la conversation d'origine, résumée
 prompts/decompositeur-strict.md  consigne exacte des passes aveugles
 data/sondes.md                 les 10 sondes, leur description et leur k
-data/passes/strict/            20 passes aveugles strictes (P01_A ... P10_B)
+data/passes/strict/            23 passes aveugles strictes (P01_A ... P10_D)
 data/passes/aveugle-libre/     4 passes aveugles sans la règle stricte (historique)
 data/passes/claude-libre/      passes écrites par Claude (biaisées, historique)
 outils/mesure.py               calcule k, réseau, champ et concordance
+outils/passe_aveugle.py        lance une passe aveugle stricte (claude -p neuf, dossier vide)
+outils/duel.py                 fait tourner le protocole adversarial sur une sonde, tour par tour
+runs/<sonde>/                  journal, tests, code et lacunes de chaque duel
+docs/duel-V0.md                rapport du premier duel
+protocol/, .claude/agents/     le protocole adversarial attaché (tools/link.py), ne pas éditer protocol/
 ```
 
 `python outils/mesure.py data/passes/strict` doit redonner les k de `data/sondes.md`. Dépendance : `pip install networkx`.
 
-## Première tâche : V0, le duel (teste H14)
+## Première tâche : V0, le duel (teste H14) — faite le 19/11, voir `docs/duel-V0.md`
 
 1. **Compléter les passes** : P10 (chat chiffré) et P09 ne sont pas concordantes (écart > 0,15). Lancer une 3e passe aveugle pour P10 au minimum.
 2. **Brancher le protocole adversarial** (SPEC section 11). Vérifier qu'il rend, à chaque tour : le statut de chaque assertion, les tokens dépensés pour découper et pour exécuter, et de quoi classer chaque échec (bug / trou / contradiction). Ajouter ce qui manque.

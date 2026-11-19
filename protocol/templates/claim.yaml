@@ -1,0 +1,58 @@
+# Schema of a claim — the exchange (protocol.md §1)
+#
+# A claim is the only unit of exchange between an agent and the arbiter.
+# Agents never speak to each other directly: each one writes for the arbiter.
+#
+# The VALIDATOR that would check this file is not built: the protocol carries
+# only its most elementary job, citation checking (§3). Were it built, it would
+# be code, never an agent, and would NEVER judge whether the anchor supports
+# the assertion.
+
+round: 1                         # integer, increasing within the conversation
+author: red                      # red | green
+layer: code                      # spec | code — the layer the author was invoked on.
+                                 # A claim whose layer is not the invocation's is void:
+                                 # counted, never judged.
+question: Q-001                  # identifier of the question frozen by the arbiter.
+                                 # Only the arbiter may rephrase it.
+
+assertion: >                     # ONE statement. Bounded: the maximum length is
+                                 # set by the project and declared in its log.
+  The test Rule_4_2_EmptyInput_ReturnsEmptyList fails:
+  an empty input produces an exception instead of an empty list.
+
+anchor:                          # MANDATORY. An EXECUTABLE artefact and its result.
+  artefact: tests/<Component>Tests.<ext>#Rule_4_2_EmptyInput_ReturnsEmptyList
+  execution: <identifier of the execution report where this result can be read>
+                                 # the validator confronts the artefact with this report; it
+                                 # does not take the claim's author at their word
+  result: "FAIL — expected: empty list; got: error"
+
+# Optional — at most one of the two.
+concedes: null                   # identifier of an opposing claim that this claim concedes.
+                                 # A concession without a cited artefact is REJECTED.
+contests: null                   # identifier of an opposing claim that this claim contests.
+                                 # Only a contested claim (or one that contests) can go up to
+                                 # the arbiter, and only once a cold judge confirms it is
+                                 # theirs (§4). An anchored, uncontested claim is recorded,
+                                 # not arbitrated. A contested claim that any competent
+                                 # arbiter would settle the same way is a conflict of
+                                 # knowledge: a cold judge settles it from the dossier (§4).
+
+# ---------------------------------------------------------------------------
+# What the validator checks (and nothing else):
+#   - question == current question
+#   - length of the assertion <= bound declared by the project
+#   - anchor.artefact exists AND an execution report references it
+#   - concedes / contests, if filled in, designate an existing opposing claim
+#   - citation check: every test cites an existing spec rule or decision
+#
+# What it NEVER does:
+#   - rule on the substance
+#   - decide that an anchor supports the assertion
+#   - settle a disagreement
+#   - rewrite a claim
+#
+# Stopping condition of a dialogue: no new anchored claim any more
+# AND mechanical barrier crossed, OR conflict sent up to the arbiter.
+# Never "both agree".
