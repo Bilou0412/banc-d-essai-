@@ -1,0 +1,41 @@
+ÉTATS: article; nom; quantité; emplacement; statut; prêt; emprunteur; échéance; date; historique; filtre; liste; export
+ASSERTIONS:
+- Créer un article avec un nom non vide ajoute l'article à l'inventaire | observé: article | conditions: nom
+- Créer un article avec un nom vide n'ajoute aucun article à l'inventaire | observé: article | conditions: nom
+- Créer un article avec une quantité négative n'ajoute aucun article à l'inventaire | observé: article | conditions: quantité
+- Créer un article avec une quantité de 5 affiche une quantité de 5 pour cet article | observé: quantité | conditions: aucune
+- Créer un article avec l'emplacement « Atelier » affiche l'emplacement « Atelier » pour cet article | observé: emplacement | conditions: aucune
+- Un article nouvellement créé a le statut « en service » | observé: statut | conditions: aucune
+- Modifier l'emplacement d'un article affiche le nouvel emplacement | observé: emplacement | conditions: aucune
+- Modifier l'emplacement d'un article ajoute une entrée « déplacement » à l'historique de l'article | observé: historique | conditions: aucune
+- Modifier la quantité d'un article à une valeur inférieure à la quantité actuellement prêtée laisse la quantité inchangée | observé: quantité | conditions: prêt
+- Modifier la quantité d'un article à une valeur supérieure ou égale à la quantité actuellement prêtée affiche la nouvelle quantité | observé: quantité | conditions: prêt
+- Créer un prêt d'une quantité inférieure ou égale à la quantité non prêtée de l'article enregistre un prêt actif | observé: prêt | conditions: quantité, prêt
+- Créer un prêt d'une quantité supérieure à la quantité non prêtée de l'article n'enregistre aucun prêt | observé: prêt | conditions: quantité, prêt
+- Créer un prêt sur un article hors service n'enregistre aucun prêt | observé: prêt | conditions: statut
+- Créer un prêt sans emprunteur n'enregistre aucun prêt | observé: prêt | conditions: emprunteur
+- Créer un prêt avec une échéance antérieure à la date du jour n'enregistre aucun prêt | observé: prêt | conditions: échéance, date
+- Créer un prêt affiche l'emprunteur saisi sur ce prêt | observé: emprunteur | conditions: aucune
+- Créer un prêt affiche l'échéance saisie sur ce prêt | observé: échéance | conditions: aucune
+- Créer un prêt ajoute une entrée « prêt » à l'historique de l'article | observé: historique | conditions: aucune
+- Créer un prêt laisse la quantité de l'article inchangée | observé: quantité | conditions: aucune
+- Un prêt actif dont l'échéance est antérieure à la date du jour est affiché « en retard » | observé: prêt | conditions: échéance, date
+- Un prêt actif dont l'échéance est égale ou postérieure à la date du jour n'est pas affiché « en retard » | observé: prêt | conditions: échéance, date
+- Enregistrer le retour d'un prêt actif clôt ce prêt | observé: prêt | conditions: aucune
+- Enregistrer le retour d'un prêt actif ajoute une entrée « retour » à l'historique de l'article | observé: historique | conditions: aucune
+- Enregistrer le retour d'un prêt actif laisse l'emplacement de l'article inchangé | observé: emplacement | conditions: aucune
+- Prolonger un prêt actif affiche la nouvelle échéance sur ce prêt | observé: échéance | conditions: aucune
+- Passer en hors service un article sans prêt actif affiche le statut « hors service » | observé: statut | conditions: prêt
+- Passer en hors service un article ayant un prêt actif laisse le statut « en service » | observé: statut | conditions: prêt
+- Passer un article en hors service ajoute une entrée « hors service » à l'historique de l'article | observé: historique | conditions: aucune
+- Remettre en service un article hors service affiche le statut « en service » | observé: statut | conditions: aucune
+- Supprimer un article ayant un prêt actif laisse l'article dans l'inventaire | observé: article | conditions: prêt
+- Supprimer un article sans prêt actif retire l'article de l'inventaire | observé: article | conditions: prêt
+- L'historique d'un article affiche ses entrées de la plus récente à la plus ancienne | observé: historique | conditions: aucune
+- Sans filtre actif, la liste affiche tous les articles de l'inventaire | observé: liste | conditions: filtre
+- Appliquer le filtre d'emplacement « Atelier » limite la liste aux articles dont l'emplacement est « Atelier » | observé: liste | conditions: filtre, emplacement
+- Appliquer le filtre de statut « hors service » limite la liste aux articles hors service | observé: liste | conditions: filtre, statut
+- Appliquer le filtre « en retard » limite la liste aux articles ayant un prêt actif dont l'échéance est antérieure à la date du jour | observé: liste | conditions: filtre, échéance, date
+- Exporter sans filtre actif produit un fichier contenant une ligne par article de l'inventaire | observé: export | conditions: filtre
+- Exporter avec un filtre actif produit un fichier contenant uniquement les articles affichés dans la liste | observé: export | conditions: filtre, liste
+- Exporter produit un fichier dont la colonne « emplacement » reprend l'emplacement de chaque article | observé: export | conditions: emplacement

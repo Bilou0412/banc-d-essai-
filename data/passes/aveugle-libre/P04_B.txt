@@ -1,0 +1,29 @@
+- Créer une liste avec un nom non vide | listes, nom de liste
+- Créer une liste nom vide refusé | listes, nom de liste
+- Renommer une liste conserve tâches | nom de liste, appartenance liste
+- Supprimer une liste supprime ses tâches | listes, tâches, appartenance liste
+- Supprimer la liste active | listes, liste active
+- Sélectionner une liste | liste active, appartenance liste
+- Ajouter une tâche titre non vide | tâches, titre, liste active, appartenance liste, statut coché
+- Ajouter tâche titre vide refusé | tâches, titre
+- Nouvelle tâche en dernière position | tâches, ordre, appartenance liste
+- Modifier le titre | titre
+- Cocher | statut coché
+- Décocher | statut coché
+- Supprimer une tâche garde l'ordre | tâches, ordre, appartenance liste
+- Déplacer A vers B | appartenance liste
+- Déplacer conserve titre statut échéance | appartenance liste, titre, statut coché, échéance
+- Déplacer en dernière position | appartenance liste, ordre
+- Définir une échéance | échéance
+- Retirer l'échéance | échéance
+- Non cochée échéance passée en retard | échéance, date courante, statut coché
+- Cochée échéance passée pas en retard | échéance, date courante, statut coché
+- Échéance aujourd'hui pas en retard | échéance, date courante
+- Filtre actives | filtre actif, statut coché, liste active, appartenance liste
+- Filtre terminées | filtre actif, statut coché, liste active, appartenance liste
+- Filtre toutes | filtre actif, liste active, appartenance liste
+- Cocher sous filtre actives disparaît | filtre actif, statut coché
+- Glisser position 3 vers 1 | ordre
+- Réordonner n'affecte pas autres listes | ordre, appartenance liste
+- Recharger restaure tout | persistance, listes, tâches, statut coché, échéance, ordre
+- Recharger restaure liste active | persistance, liste active

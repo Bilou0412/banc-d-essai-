@@ -1,0 +1,39 @@
+ÉTATS: capacité; occupation; ouverture; durée; délai; quota; compteur; statut; attente; limite; récurrence; fuseau ressource; fuseau utilisateur; affichage
+ASSERTIONS:
+- Réserver un créneau dont l'occupation est inférieure à la capacité donne à la réservation le statut confirmée | observé: statut | conditions: occupation, capacité
+- Réserver un créneau dont l'occupation est inférieure à la capacité augmente l'occupation du créneau de un | observé: occupation | conditions: occupation, capacité
+- Réserver un créneau dont l'occupation est égale à la capacité donne à la demande le statut en attente | observé: statut | conditions: occupation, capacité
+- Réserver un créneau dont l'occupation est égale à la capacité ajoute l'utilisateur en dernière position de la liste d'attente | observé: attente | conditions: occupation, capacité
+- Réserver un créneau dont l'occupation est égale à la capacité laisse l'occupation inchangée | observé: occupation | conditions: occupation, capacité
+- Réserver un créneau qui commence avant l'heure d'ouverture donne le statut refusée | observé: statut | conditions: ouverture
+- Réserver un créneau qui se termine après l'heure de fermeture donne le statut refusée | observé: statut | conditions: ouverture
+- Le respect des horaires d'ouverture est vérifié selon l'heure locale du fuseau de la ressource | observé: statut | conditions: ouverture, fuseau ressource
+- Réserver un créneau plus court que la durée minimale donne le statut refusée | observé: statut | conditions: durée
+- Réserver un créneau plus long que la durée maximale donne le statut refusée | observé: statut | conditions: durée
+- Réserver un créneau qui commence moins longtemps à l'avance que le délai minimal donne le statut refusée | observé: statut | conditions: délai
+- Réserver un créneau qui commence exactement à l'échéance du délai minimal n'est pas refusé pour motif de délai | observé: statut | conditions: délai
+- Réserver alors que le compteur de réservations actives de l'utilisateur est égal au quota donne le statut refusée | observé: statut | conditions: compteur, quota
+- Une réservation confirmée augmente le compteur de l'utilisateur de un | observé: compteur | conditions: statut
+- Une demande refusée laisse le compteur de l'utilisateur inchangé | observé: compteur | conditions: statut
+- Une demande refusée laisse l'occupation du créneau inchangée | observé: occupation | conditions: statut
+- Annuler une réservation confirmée avant la limite d'annulation lui donne le statut annulée | observé: statut | conditions: limite
+- Annuler une réservation confirmée après la limite d'annulation laisse son statut confirmée | observé: statut | conditions: limite
+- Annuler une réservation confirmée avant la limite d'annulation, liste d'attente vide, diminue l'occupation de un | observé: occupation | conditions: limite, attente
+- Annuler une réservation confirmée avant la limite d'annulation diminue le compteur de l'utilisateur de un | observé: compteur | conditions: limite
+- Annuler une réservation confirmée alors que la liste d'attente n'est pas vide donne le statut confirmée à la demande du premier inscrit | observé: statut | conditions: attente
+- Annuler une réservation confirmée alors que la liste d'attente n'est pas vide retire le premier inscrit de la liste d'attente | observé: attente | conditions: attente
+- Annuler une réservation confirmée alors que la liste d'attente n'est pas vide laisse l'occupation inchangée | observé: occupation | conditions: attente
+- La promotion depuis la liste d'attente augmente le compteur de l'utilisateur promu de un | observé: compteur | conditions: attente
+- Un inscrit en liste d'attente dont le compteur est égal au quota n'est pas promu | observé: statut | conditions: attente, compteur, quota
+- Retirer sa demande de la liste d'attente supprime l'utilisateur de la liste d'attente | observé: attente | conditions: aucune
+- L'ordre de la liste d'attente suit l'ordre chronologique des inscriptions | observé: attente | conditions: aucune
+- L'heure d'un créneau est affichée dans le fuseau de l'utilisateur | observé: affichage | conditions: fuseau utilisateur
+- Réserver une récurrence de N occurrences toutes confirmées augmente le compteur de N | observé: compteur | conditions: récurrence
+- Une occurrence de récurrence tombant sur un créneau dont l'occupation est égale à la capacité reçoit le statut en attente | observé: statut | conditions: récurrence, occupation, capacité
+- Une occurrence de récurrence tombant hors des horaires d'ouverture reçoit le statut refusée | observé: statut | conditions: récurrence, ouverture
+- Le refus d'une occurrence de récurrence laisse le statut des autres occurrences inchangé | observé: statut | conditions: récurrence
+- Les occurrences d'une récurrence qui feraient dépasser le quota reçoivent le statut refusée | observé: statut | conditions: récurrence, compteur, quota
+- Annuler une récurrence avant la limite d'annulation donne le statut annulée à ses occurrences futures | observé: statut | conditions: récurrence, limite
+- Annuler une récurrence laisse le statut des occurrences passées inchangé | observé: statut | conditions: récurrence
+- Les occurrences d'une récurrence conservent la même heure locale de la ressource après un changement d'heure saisonnier | observé: affichage | conditions: récurrence, fuseau ressource
+- Réduire la capacité sous l'occupation actuelle laisse le statut des réservations existantes inchangé | observé: statut | conditions: capacité, occupation

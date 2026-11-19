@@ -1,0 +1,42 @@
+ÉTATS: phase; restant; marche; cycles; duréeTravail; duréePause; duréeLongue; intervalle; tâche; statsJour; statsTâche; série; jour
+ASSERTIONS:
+- Au premier lancement de l'application, la phase affichée est « travail » | observé: phase | conditions: aucune
+- Au premier lancement de l'application, la durée de travail vaut 25 minutes | observé: duréeTravail | conditions: aucune
+- Au premier lancement de l'application, la durée de pause courte vaut 5 minutes | observé: duréePause | conditions: aucune
+- Au premier lancement de l'application, la durée de pause longue vaut 15 minutes | observé: duréeLongue | conditions: aucune
+- Au premier lancement de l'application, l'intervalle de pause longue vaut 4 cycles | observé: intervalle | conditions: aucune
+- Au premier lancement de l'application, le minuteur est arrêté | observé: marche | conditions: aucune
+- Quand la phase est « travail » et le minuteur arrêté, le temps restant affiché est égal à la durée de travail | observé: restant | conditions: phase, duréeTravail, marche
+- Quand l'utilisateur appuie sur « Démarrer » alors que le minuteur est arrêté, le minuteur passe en marche | observé: marche | conditions: marche
+- Quand le minuteur est en marche, le temps restant diminue d'une seconde à chaque seconde écoulée | observé: restant | conditions: marche
+- Quand le minuteur est en pause, le temps restant ne diminue pas pendant que le temps s'écoule | observé: restant | conditions: marche
+- Quand l'utilisateur appuie sur « Pause » alors que le minuteur est en marche, le minuteur passe en pause | observé: marche | conditions: marche
+- Quand l'utilisateur appuie sur « Reprendre » alors que le minuteur est en pause, le temps restant repart de la valeur où il s'était arrêté | observé: restant | conditions: marche
+- Quand l'utilisateur appuie sur « Réinitialiser », le temps restant revient à la durée complète de la phase en cours | observé: restant | conditions: phase
+- Quand l'utilisateur appuie sur « Réinitialiser », le minuteur passe à l'état arrêté | observé: marche | conditions: aucune
+- Quand le temps restant d'une phase de travail atteint zéro, le nombre de cycles accomplis augmente de 1 | observé: cycles | conditions: phase
+- Quand le temps restant d'une phase de travail atteint zéro et que le nombre de cycles accomplis n'est pas un multiple de l'intervalle, la phase devient « pause courte » | observé: phase | conditions: cycles, intervalle
+- Quand le temps restant d'une phase de travail atteint zéro et que le nombre de cycles accomplis est un multiple de l'intervalle, la phase devient « pause longue » | observé: phase | conditions: cycles, intervalle
+- Quand la phase devient « pause courte », le temps restant affiché est égal à la durée de pause courte | observé: restant | conditions: duréePause
+- Quand la phase devient « pause longue », le temps restant affiché est égal à la durée de pause longue | observé: restant | conditions: duréeLongue
+- Quand le temps restant d'une pause courte ou longue atteint zéro, la phase devient « travail » | observé: phase | conditions: phase
+- Quand le temps restant d'une pause atteint zéro, le nombre de cycles accomplis ne change pas | observé: cycles | conditions: phase
+- Quand l'utilisateur appuie sur « Passer » pendant une phase de travail, le nombre de cycles accomplis ne change pas | observé: cycles | conditions: phase
+- Quand l'utilisateur modifie la durée de travail dans les réglages, la nouvelle valeur est enregistrée comme durée de travail | observé: duréeTravail | conditions: aucune
+- Quand l'utilisateur saisit une durée de travail inférieure à 1 minute, la durée de travail conserve sa valeur précédente | observé: duréeTravail | conditions: aucune
+- Quand l'utilisateur modifie la durée de travail alors que le minuteur est en marche en phase de travail, le temps restant en cours n'est pas modifié | observé: restant | conditions: marche, phase
+- Quand l'utilisateur modifie la durée de travail alors que le minuteur est arrêté en phase de travail, le temps restant affiché prend la nouvelle durée | observé: restant | conditions: marche, phase
+- Quand l'utilisateur modifie l'intervalle de pause longue dans les réglages, la nouvelle valeur est enregistrée comme intervalle | observé: intervalle | conditions: aucune
+- Quand l'utilisateur sélectionne une tâche dans la liste, cette tâche devient la tâche active | observé: tâche | conditions: aucune
+- Quand une phase de travail se termine avec une tâche active, le total de minutes de cette tâche augmente de la durée de travail | observé: statsTâche | conditions: tâche, duréeTravail
+- Quand une phase de travail se termine sans tâche active, le total par tâche ne change pas | observé: statsTâche | conditions: tâche
+- Quand une phase de travail se termine, le nombre de sessions du jour courant augmente de 1 | observé: statsJour | conditions: jour
+- Quand une phase de pause se termine, le nombre de sessions du jour courant ne change pas | observé: statsJour | conditions: phase
+- Quand une phase de travail est réinitialisée avant d'atteindre zéro, le nombre de sessions du jour courant ne change pas | observé: statsJour | conditions: aucune
+- Quand le jour change, le nombre de sessions affiché pour le nouveau jour vaut 0 | observé: statsJour | conditions: jour
+- Quand la première session de travail du jour se termine et que la veille comptait au moins une session, la série augmente de 1 | observé: série | conditions: statsJour, jour
+- Quand la première session de travail du jour se termine et que la veille ne comptait aucune session, la série vaut 1 | observé: série | conditions: statsJour, jour
+- Quand une deuxième session de travail se termine le même jour, la série ne change pas | observé: série | conditions: statsJour
+- Quand un jour entier s'écoule sans aucune session de travail terminée, la série affichée vaut 0 | observé: série | conditions: statsJour, jour
+- Quand l'utilisateur ferme puis rouvre l'application, la durée de travail conserve sa valeur réglée | observé: duréeTravail | conditions: aucune
+- Quand l'utilisateur ferme puis rouvre l'application, le nombre de sessions du jour conserve sa valeur | observé: statsJour | conditions: jour

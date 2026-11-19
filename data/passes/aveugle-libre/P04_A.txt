@@ -1,0 +1,30 @@
+- a1 | tâches, titre, liste active, appartenance à une liste, statut coché
+- a2 | tâches, titre
+- a3 | tâches, ordre des tâches, appartenance à une liste
+- a4 | listes, nom de liste, appartenance à une liste
+- a5 | listes, nom de liste
+- a6 | nom de liste, appartenance à une liste, tâches
+- a7 | statut coché
+- a8 | statut coché
+- a9 | titre, statut coché, échéance
+- a10 | appartenance à une liste, listes
+- a11 | appartenance à une liste, titre, statut coché, échéance
+- a12 | appartenance à une liste, ordre des tâches
+- a13 | ordre des tâches
+- a14 | ordre des listes, persistance
+- a15 | échéance
+- a16 | échéance
+- a17 | échéance, date courante, statut coché
+- a18 | échéance, date courante, statut coché
+- a19 | filtre, statut coché, liste active, appartenance à une liste
+- a20 | filtre, statut coché, liste active, appartenance à une liste
+- a21 | filtre, liste active, appartenance à une liste
+- a22 | tri, échéance
+- a23 | liste active, appartenance à une liste
+- a24 | statut coché, compteurs, appartenance à une liste
+- a25 | listes, confirmation de suppression, appartenance à une liste
+- a26 | listes, tâches, appartenance à une liste, confirmation de suppression
+- a27 | tâches, ordre des tâches
+- a28 | listes, liste active
+- a29 | tâches, statut coché, appartenance à une liste
+- a30 | persistance, listes, tâches, statut coché, échéance, ordre des tâches, ordre des listes

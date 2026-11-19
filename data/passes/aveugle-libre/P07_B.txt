@@ -1,0 +1,28 @@
+- a1 | contenu, connexion, stockage local
+- a2 | contenu, connexion, file d'attente, stockage local
+- a3 | contenu, stockage local
+- a4 | connexion, file d'attente, serveur
+- a5 | file d'attente, serveur, version
+- a6 | connexion, file d'attente, serveur
+- a7 | file d'attente, serveur, version
+- a8 | contenu, appareils, serveur, version
+- a9 | contenu, appareils, serveur
+- a10 | contenu, appareils, serveur, métadonnées
+- a11 | contenu, appareils, version, conflits
+- a12 | conflits, contenu
+- a13 | conflits, contenu, appareils, serveur, version
+- a14 | contenu, métadonnées, version, conflits
+- a15 | suppression, appareils, serveur, connexion
+- a16 | suppression, contenu, conflits, appareils
+- a17 | suppression, serveur, version, appareils
+- a18 | contenu, appareils, serveur, version
+- a19 | version, contenu, stockage local
+- a20 | métadonnées, contenu
+- a21 | connexion
+- a22 | file d'attente, connexion
+- a23 | connexion, contenu, file d'attente, stockage local
+- a24 | authentification, serveur
+- a25 | authentification, appareils, serveur
+- a26 | authentification, file d'attente, stockage local
+- a27 | stockage local, contenu
+- a28 | appareils, authentification, serveur, suppression

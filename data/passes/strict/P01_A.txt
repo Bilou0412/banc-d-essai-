@@ -1,0 +1,42 @@
+ÉTATS: contacts; nom; téléphone; courriel; étiquettes; favori; requête; résultats; ordre; erreur; fichier
+ASSERTIONS:
+- Créer un contact avec un nom non vide ajoute ce contact aux contacts | observé: contacts | conditions: nom
+- Créer un contact avec un nom vide n'ajoute aucun contact aux contacts | observé: contacts | conditions: nom
+- Créer un contact avec un nom vide affiche un message d'erreur « nom obligatoire » | observé: erreur | conditions: nom
+- Créer un contact avec un courriel mal formé affiche un message d'erreur « courriel invalide » | observé: erreur | conditions: courriel
+- Créer un contact avec un courriel mal formé n'ajoute aucun contact aux contacts | observé: contacts | conditions: courriel
+- Créer un contact avec un téléphone contenant des lettres affiche un message d'erreur « téléphone invalide » | observé: erreur | conditions: téléphone
+- Un contact nouvellement créé n'est pas favori | observé: favori | conditions: aucune
+- Un contact nouvellement créé sans étiquette choisie a une liste d'étiquettes vide | observé: étiquettes | conditions: aucune
+- Modifier le nom d'un contact existant remplace son nom par la nouvelle valeur | observé: nom | conditions: aucune
+- Modifier le nom d'un contact existant pour une valeur vide conserve l'ancien nom | observé: nom | conditions: aucune
+- Modifier le nom d'un contact existant pour une valeur vide affiche un message d'erreur « nom obligatoire » | observé: erreur | conditions: aucune
+- Modifier le téléphone d'un contact existant remplace son téléphone par la nouvelle valeur | observé: téléphone | conditions: aucune
+- Modifier le courriel d'un contact existant ne change pas son statut favori | observé: favori | conditions: aucune
+- Supprimer un contact confirmé le retire des contacts | observé: contacts | conditions: aucune
+- Supprimer un contact le retire des résultats affichés | observé: résultats | conditions: requête
+- Ajouter une étiquette à un contact ajoute cette étiquette à ses étiquettes | observé: étiquettes | conditions: aucune
+- Ajouter à un contact une étiquette qu'il possède déjà ne crée pas de doublon dans ses étiquettes | observé: étiquettes | conditions: étiquettes
+- Retirer une étiquette d'un contact la supprime de ses étiquettes | observé: étiquettes | conditions: aucune
+- Marquer un contact non favori comme favori le rend favori | observé: favori | conditions: favori
+- Marquer un contact favori comme favori le rend non favori | observé: favori | conditions: favori
+- Une requête vide affiche tous les contacts dans les résultats | observé: résultats | conditions: requête
+- Une requête affiche dans les résultats les contacts dont le nom contient la requête sans tenir compte de la casse | observé: résultats | conditions: requête, nom
+- Une requête affiche dans les résultats les contacts dont le courriel contient la requête | observé: résultats | conditions: requête, courriel
+- Une requête affiche dans les résultats les contacts dont le téléphone contient la requête | observé: résultats | conditions: requête, téléphone
+- Une requête affiche dans les résultats les contacts dont une étiquette correspond à la requête | observé: résultats | conditions: requête, étiquettes
+- Une requête ne correspondant à aucun contact affiche une liste de résultats vide | observé: résultats | conditions: requête
+- Avec l'ordre « nom croissant », les résultats sont classés par nom de A à Z | observé: résultats | conditions: ordre, nom
+- Avec l'ordre « nom décroissant », les résultats sont classés par nom de Z à A | observé: résultats | conditions: ordre, nom
+- Avec l'ordre « favoris d'abord », les contacts favoris apparaissent avant les contacts non favoris dans les résultats | observé: résultats | conditions: ordre, favori
+- Changer l'ordre ne modifie pas les contacts | observé: contacts | conditions: aucune
+- Exporter en CSV produit un fichier contenant une ligne par contact | observé: fichier | conditions: contacts
+- Exporter en CSV produit un fichier dont la première ligne contient les en-têtes nom, téléphone, courriel, étiquettes, favori | observé: fichier | conditions: aucune
+- Exporter en CSV produit un fichier où une valeur contenant une virgule est entourée de guillemets | observé: fichier | conditions: nom
+- Importer un fichier CSV valide ajoute aux contacts une entrée par ligne de données | observé: contacts | conditions: fichier
+- Importer un fichier CSV dont une ligne a un nom vide n'ajoute pas cette ligne aux contacts | observé: contacts | conditions: fichier
+- Importer un fichier CSV sans ligne d'en-têtes reconnue affiche un message d'erreur « format CSV invalide » | observé: erreur | conditions: fichier
+- Importer un fichier CSV sans ligne d'en-têtes reconnue n'ajoute aucun contact aux contacts | observé: contacts | conditions: fichier
+- Importer un fichier CSV dont une ligne a le même courriel qu'un contact existant n'ajoute pas de second contact pour ce courriel | observé: contacts | conditions: fichier, courriel
+- Importer une ligne CSV dont la colonne favori vaut « oui » crée un contact favori | observé: favori | conditions: fichier
+- Exporter puis réimporter un fichier CSV restitue les étiquettes de chaque contact | observé: étiquettes | conditions: fichier
