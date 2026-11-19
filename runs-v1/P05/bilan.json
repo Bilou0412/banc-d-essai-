@@ -207,5 +207,19 @@
   "red": "opus",
   "green": "haiku",
   "juge": "opus"
+ },
+ "causes": {
+  "causes_distinctes": 0,
+  "causes_par_tour": [
+   0,
+   0
+  ],
+  "champ_local": {
+   "tout": 0.0,
+   "frontiere": 0.0,
+   "autres": 0.0
+  },
+  "par_assertion": {},
+  "liste": []
  }
 }

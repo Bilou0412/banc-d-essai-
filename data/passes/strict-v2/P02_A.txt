@@ -1,0 +1,41 @@
+ÉTATS: recette; titre; ingrédient; quantité; unité; portions; catégorie; requête; résultats; favori; note; photo; courses; coché
+ASSERTIONS:
+- Avec un titre vide, l'action « enregistrer » ne crée pas la recette | observé: recette | conditions: titre
+- Avec un titre non vide, l'action « enregistrer » fait apparaître la recette dans la liste des recettes | observé: recette | conditions: titre
+- L'ajout d'un ingrédient à une recette fait apparaître cet ingrédient dans la liste des ingrédients de la recette | observé: ingrédient | conditions: aucune
+- La suppression d'un ingrédient le fait disparaître de la liste des ingrédients de la recette | observé: ingrédient | conditions: aucune
+- La saisie d'une quantité non numérique est refusée | observé: quantité | conditions: aucune
+- La saisie d'une quantité négative ou nulle est refusée | observé: quantité | conditions: aucune
+- Le passage des portions de 4 à 8 double la quantité affichée de chaque ingrédient | observé: quantité | conditions: portions
+- Le passage des portions de 4 à 2 divise par deux la quantité affichée de chaque ingrédient | observé: quantité | conditions: portions
+- Une quantité ajustée non entière s'affiche arrondie à deux décimales | observé: quantité | conditions: portions
+- L'ajustement des portions ne modifie pas l'unité affichée d'un ingrédient | observé: unité | conditions: portions
+- La saisie d'un nombre de portions inférieur à 1 est refusée | observé: portions | conditions: aucune
+- La réouverture d'une recette après ajustement affiche le nombre de portions d'origine | observé: portions | conditions: aucune
+- L'attribution d'une catégorie à une recette affiche cette catégorie sur la fiche de la recette | observé: catégorie | conditions: aucune
+- Le filtrage par une catégorie ne montre dans les résultats que les recettes de cette catégorie | observé: résultats | conditions: catégorie
+- Une requête contenant un mot du titre d'une recette fait apparaître cette recette dans les résultats | observé: résultats | conditions: requête, titre
+- Une requête contenant le nom d'un ingrédient fait apparaître les recettes qui contiennent cet ingrédient dans les résultats | observé: résultats | conditions: requête, ingrédient
+- Une requête en majuscules donne les mêmes résultats que la même requête en minuscules | observé: résultats | conditions: requête
+- Une requête vide affiche toutes les recettes dans les résultats | observé: résultats | conditions: requête
+- Une requête sans correspondance affiche le message « Aucun résultat » | observé: résultats | conditions: requête
+- Le marquage d'une recette comme favorite active l'icône favori sur sa fiche | observé: favori | conditions: aucune
+- Le retrait d'une recette des favoris désactive l'icône favori sur sa fiche | observé: favori | conditions: aucune
+- Le filtre « favoris » ne montre dans les résultats que les recettes marquées favorites | observé: résultats | conditions: favori
+- L'ajout d'une note à une recette affiche cette note sur la fiche de la recette | observé: note | conditions: aucune
+- L'effacement du texte d'une note retire la note de la fiche de la recette | observé: note | conditions: aucune
+- L'ajout d'une image à une recette affiche cette image sur la fiche de la recette | observé: photo | conditions: aucune
+- L'ajout d'un fichier qui n'est pas une image est refusé | observé: photo | conditions: aucune
+- Une recette sans photo affiche une image par défaut | observé: photo | conditions: aucune
+- La suppression de la photo d'une recette affiche l'image par défaut | observé: photo | conditions: aucune
+- L'ajout d'une recette à la liste de courses y fait apparaître chacun de ses ingrédients | observé: courses | conditions: aucune
+- L'ajout d'une recette à la liste de courses avec des portions ajustées y reporte les quantités ajustées | observé: courses | conditions: portions
+- L'ajout de deux recettes contenant le même ingrédient dans la même unité produit une seule ligne avec la somme des quantités | observé: courses | conditions: ingrédient, unité
+- L'ajout de deux recettes contenant le même ingrédient dans des unités différentes produit deux lignes distinctes | observé: courses | conditions: ingrédient, unité
+- Le cochage d'un article de la liste de courses l'affiche comme coché | observé: coché | conditions: aucune
+- L'action « retirer les articles cochés » fait disparaître de la liste de courses les articles cochés | observé: courses | conditions: coché
+- La suppression d'une recette la fait disparaître de la liste des recettes | observé: recette | conditions: aucune
+- La suppression d'une recette ne retire pas ses articles de la liste de courses | observé: courses | conditions: aucune
+- Après fermeture et réouverture de l'application, une recette enregistrée est toujours présente | observé: recette | conditions: aucune | frontière: oui
+- Après fermeture et réouverture de l'application, une recette favorite est toujours marquée favorite | observé: favori | conditions: aucune | frontière: oui
+- Après fermeture et réouverture de l'application, un article coché est toujours coché | observé: coché | conditions: aucune | frontière: oui

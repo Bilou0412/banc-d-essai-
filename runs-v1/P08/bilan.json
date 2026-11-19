@@ -252,5 +252,24 @@
   "red": "opus",
   "green": "haiku",
   "juge": "opus"
+ },
+ "causes": {
+  "causes_distinctes": 1,
+  "causes_par_tour": [
+   0,
+   1,
+   0
+  ],
+  "champ_local": {
+   "tout": 0.03,
+   "frontiere": 0.0,
+   "autres": 0.03
+  },
+  "par_assertion": {
+   "A28": 1
+  },
+  "liste": [
+   "AssertionError: seed=3 : attendu 'read', obtenu 'write'"
+  ]
  }
 }

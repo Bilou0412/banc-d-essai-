@@ -20,3 +20,20 @@ La « prédiction » est celle de Claude, figée avant les passes strictes. Elle
 Note : dans `data/passes/strict/P04_*` et `P07_*`, le texte des assertions a été abrégé en « a » lors de la recopie. Seuls l'état observé et les conditions sont exacts.
 
 k strict = médiane des passes (SPEC 6.3). Une sonde **floue** (3 passes, écart-type > 0,10) n'est plus mesurée : on creuse sa spec.
+
+## Consigne v2 (règle 5, assertions frontière)
+
+Passes dans `data/passes/strict-v2/`, jamais comparées aux v1.
+
+| ID | k v2 (médiane) | Statut v2 | Frontières (moyenne, part) |
+|---|---|---|---|
+| P01 | 1,88 | concordante | 2,5 (6 %) |
+| P02 | 1,61 | concordante | 4,0 (10 %) |
+| P03 | 1,69 | floue | 2,7 (7 %) |
+| P04 | 1,90 | concordante | 2,5 (6 %) |
+| P05 | 2,48 | floue | 2,7 (7 %) |
+| P06 | 2,10 | concordante | 2,5 (6 %) |
+| P07 | 1,85 | concordante | 5,0 (15 %) |
+| P08 | 1,83 | concordante | 6,0 (16 %) |
+| P09 | 2,56 | floue | 2,7 (7 %) |
+| P10 | 1,72 | concordante | 6,0 (16 %) |

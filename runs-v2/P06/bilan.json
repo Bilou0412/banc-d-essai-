@@ -1,0 +1,192 @@
+{
+ "sonde": "P06",
+ "passes": "strict-v2",
+ "passe": "A",
+ "k_passes": [
+  2.1,
+  2.1
+ ],
+ "k_retenu": 2.1,
+ "concordance": "concordante",
+ "convergent": true,
+ "tours": 3,
+ "attaques": 2,
+ "assertions": 40,
+ "frontieres": 2,
+ "champ_local": {
+  "tout": 1.02,
+  "frontiere": 1.0,
+  "autres": 1.03
+ },
+ "essais": {
+  "A01": 1,
+  "A02": 1,
+  "A03": 1,
+  "A04": 1,
+  "A05": 1,
+  "A06": 1,
+  "A07": 1,
+  "A08": 1,
+  "A09": 1,
+  "A10": 1,
+  "A11": 1,
+  "A12": 1,
+  "A13": 1,
+  "A14": 1,
+  "A15": 1,
+  "A16": 1,
+  "A17": 1,
+  "A18": 1,
+  "A19": 1,
+  "A20": 1,
+  "A21": 1,
+  "A22": 1,
+  "A23": 1,
+  "A24": 1,
+  "A25": 1,
+  "A26": 1,
+  "A27": 1,
+  "A28": 1,
+  "A29": 1,
+  "A30": 1,
+  "A31": 1,
+  "A32": 2,
+  "A33": 1,
+  "A34": 1,
+  "A35": 1,
+  "A36": 1,
+  "A37": 1,
+  "A38": 1,
+  "A39": 1,
+  "A40": 1
+ },
+ "non_passees": [],
+ "trous_a_priori": 14,
+ "echecs_par_type": {
+  "trou": 1
+ },
+ "nouvelles_assertions": {
+  "N01": "la session et le total jour comptent la durée travail en vigueur au démarrage de la session"
+ },
+ "lacunes": [
+  {
+   "cas": "A27 : la forme du refus d'une durée travail de 0 n'est pas fixée (exception, retour silencieux, message)",
+   "test": "test_A27_trou_zero_refuse",
+   "présumé": "Saisir une durée travail de 0 minute lève ValueError, la durée travail et le temps restant restent à leur valeur précédente. | observé: durée travail | conditions: aucune",
+   "attaque": 1
+  },
+  {
+   "cas": "A23 : « selon les cycles complétés » ne dit pas si le test de multiple porte sur les cycles actuels ou sur cycles+1, ni le cas cycles=0 (0 est multiple de tout)",
+   "test": "test_A23_trou_passer_cycles_non_multiple",
+   "présumé": "Lorsque la phase est « travail », l'action « passer » fait passer la phase à « pause longue » si les cycles complétés sont non nuls et multiples de l'intervalle longue, sinon à « pause courte ». | observé: phase | conditions: phase, cycles complétés, intervalle longue",
+   "attaque": 1
+  },
+  {
+   "cas": "A25 : modifier la durée travail quand le statut minuteur est « en pause » n'est tranché ni par A25 (arrêté) ni par A26 (en cours)",
+   "test": "test_A25_trou_en_pause_modifier_duree",
+   "présumé": "Lorsque le statut minuteur est « en pause », modifier la durée travail laisse le temps restant inchangé. | observé: temps restant | conditions: statut minuteur",
+   "attaque": 1
+  },
+  {
+   "cas": "A12 : l'effet de « réinitialiser » pendant une pause (courte ou longue) n'est pas fixé : phase conservée ou retour à « travail », temps restant",
+   "test": "test_A12_trou_reinitialiser_en_pause_courte",
+   "présumé": "Lorsque la phase est « pause courte », l'action « réinitialiser » laisse la phase inchangée et remet le temps restant à la durée pause. | observé: temps restant | conditions: phase, durée pause",
+   "attaque": 1
+  },
+  {
+   "cas": "A28 : la date d'une session qui chevauche minuit (date de démarrage ou date de fin) n'est pas fixée, ce qui change total jour et série jours",
+   "test": "test_A28_trou_date_de_fin_si_minuit",
+   "présumé": "Une session ajoutée à l'historique sessions porte la date courante au moment où le temps restant arrive à zéro. | observé: historique sessions | conditions: date courante",
+   "attaque": 1
+  },
+  {
+   "cas": "A33 : « la tâche active » n'indique pas si c'est celle au démarrage (comme A30) ou celle à l'arrivée à zéro, quand elle a changé entre-temps",
+   "test": "test_A33_trou_total_tache_au_demarrage",
+   "présumé": "Lorsque la phase est « travail », l'arrivée du temps restant à zéro augmente de la durée travail le total tâche de la tâche active au moment où la session a été démarrée. | observé: total tâche | conditions: phase, tâche active, durée travail",
+   "attaque": 1
+  },
+  {
+   "cas": "A25 : à l'arrêt en phase « pause courte », modifier la durée travail",
+   "test": "test_A25_trou_arrete_en_pause_courte_temps_restant_inchange",
+   "présumé": "le temps restant de la pause reste inchangé",
+   "attaque": 2
+  },
+  {
+   "cas": "A32 : durée travail modifiée pendant une session en cours (A26), puis la session arrive à zéro",
+   "test": "test_A32_trou_duree_modifiee_en_cours_compte_duree_du_demarrage",
+   "présumé": "la session et le total jour comptent la durée travail en vigueur au démarrage de la session",
+   "attaque": 2
+  },
+  {
+   "cas": "A16 : intervalle longue mis à 0 (aucun multiple défini)",
+   "test": "test_A16_trou_intervalle_zero_refuse",
+   "présumé": "refusé (ValueError) et l'intervalle reste à sa valeur précédente",
+   "attaque": 2
+  },
+  {
+   "cas": "A27 : durée travail négative",
+   "test": "test_A27_trou_duree_negative_refusee",
+   "présumé": "refusée (ValueError) et la durée travail reste à sa valeur précédente",
+   "attaque": 2
+  },
+  {
+   "cas": "A30 : la tâche active est supprimée pendant la session qu'elle a démarrée (A39 la met à « aucune »)",
+   "test": "test_A30_trou_tache_supprimee_en_cours_de_session",
+   "présumé": "la session reste rattachée à la tâche active au démarrage",
+   "attaque": 2
+  },
+  {
+   "cas": "A40 : le processus s'arrête sans appeler close() après l'ajout d'une session",
+   "test": "test_A40_trou_session_sur_disque_sans_close",
+   "présumé": "une session ajoutée est sur disque dès son ajout et relue à la réouverture",
+   "attaque": 2
+  },
+  {
+   "cas": "A32 : total jour après réouverture le même jour",
+   "test": "test_A32_trou_total_jour_apres_reouverture_meme_jour",
+   "présumé": "le total jour vaut la somme des sessions du jour dans l'historique relu",
+   "attaque": 2
+  },
+  {
+   "cas": "A33 : total tâche après réouverture",
+   "test": "test_A33_trou_total_tache_apres_reouverture",
+   "présumé": "le total tâche vaut la somme des sessions de la tâche dans l'historique relu",
+   "attaque": 2
+  }
+ ],
+ "modeles": {
+  "red": "opus",
+  "green": "haiku",
+  "juge": "opus"
+ },
+ "tokens_decoupe": {
+  "neufs": 109025,
+  "cache": 47376,
+  "usd": 1.3918232
+ },
+ "tokens_execution": {
+  "neufs": 302510,
+  "cache": 469469,
+  "usd": 0.09723489
+ },
+ "part_decoupe": 0.265,
+ "causes": {
+  "causes_distinctes": 1,
+  "causes_par_tour": [
+   0,
+   1,
+   0
+  ],
+  "champ_local": {
+   "tout": 0.03,
+   "frontiere": 0.0,
+   "autres": 0.03
+  },
+  "par_assertion": {
+   "A32": 1
+  },
+  "liste": [
+   "AssertionError: attendu 2 min travaillées, obtenu {'task': 'sans tâche', 'date': datetime.date(2026, 11, 19), 'minutes': 5}"
+  ]
+ }
+}

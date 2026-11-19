@@ -30,21 +30,24 @@ Bilel, développeur freelance. Il pense par **intuitions structurelles et parall
 ```
 CLAUDE.md                      ce fichier
 docs/SPEC-banc.md              spec fonctionnelle du banc (45 assertions strictes)
-docs/theses.md                 registre des thèses H1-H17
+docs/theses.md                 registre des thèses H1-H18
 docs/HISTORIQUE.md             la conversation d'origine, résumée
 prompts/decompositeur-strict.md  consigne exacte des passes aveugles (v1)
 prompts/decompositeur-strict-v2.md  v1 + règle 5 (assertions frontière, « | frontière: oui »)
 data/sondes.md                 les 10 sondes, leur description et leur k
 data/passes/strict/            23 passes aveugles strictes (P01_A ... P10_D)
-data/passes/strict-v2/         passes v2 de P05, P08, P10 (jamais comparées aux v1)
+data/passes/strict-v2/         passes v2 des 10 sondes (jamais comparées aux v1)
 data/passes/aveugle-libre/     4 passes aveugles sans la règle stricte (historique)
 data/passes/claude-libre/      passes écrites par Claude (biaisées, historique)
 outils/mesure.py               calcule k, réseau, champ et concordance
 outils/passe_aveugle.py        lance une passe aveugle stricte (claude -p neuf, dossier vide)
-outils/duel.py                 fait tourner le protocole adversarial sur une sonde, tour par tour
+outils/duel.py                 fait tourner le protocole adversarial sur une sonde, tour par tour (--attaque-seule : trous a priori)
+outils/causes.py               champ local compté par cause d'échec (même message = une cause)
 runs/<sonde>/                  duel V0 (passes v1, green sonnet, une attaque)
 runs-v1/<sonde>/               duel V1 (passes v2, green haiku, deux attaques, mécanismes réels)
-docs/duel-V0.md, duel-V1.md    rapports des duels
+runs-v2/<sonde>/               duel V2 (P02, P06, P07 : H18)
+runs-v2-apriori/<sonde>/       attaque 1 du red seule (H15, H16)
+docs/duel-V0.md, V1, V2        rapports des duels
 protocol/, .claude/agents/     le protocole adversarial attaché (tools/link.py), ne pas éditer protocol/
 ```
 

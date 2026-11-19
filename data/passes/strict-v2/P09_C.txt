@@ -1,0 +1,40 @@
+ÉTATS: capacité; occupation; places restantes; horaires; début; durée; durée min; durée max; préavis; maintenant; délai annulation; quota; actives; statut; motif; attente; file; position; fuseau utilisateur; fuseau ressource; heure affichée; récurrence; occurrences
+ASSERTIONS:
+- Une demande de réservation sur un créneau dont l'occupation est inférieure à la capacité reçoit le statut « confirmée » | observé: statut | conditions: capacité, occupation
+- Une demande de réservation sur un créneau dont l'occupation est égale à la capacité, avec l'attente désactivée, reçoit le statut « refusée » | observé: statut | conditions: capacité, occupation, attente
+- Une demande de réservation sur un créneau dont l'occupation est égale à la capacité, avec l'attente désactivée, affiche le motif « créneau complet » | observé: motif | conditions: capacité, occupation, attente
+- Une demande de réservation sur un créneau dont l'occupation est égale à la capacité, avec l'attente activée, reçoit le statut « en attente » | observé: statut | conditions: capacité, occupation, attente
+- Une demande placée en attente alors que la file contient N personnes reçoit la position N+1 | observé: position | conditions: file
+- La confirmation d'une réservation augmente l'occupation du créneau de 1 | observé: occupation | conditions: statut
+- Les places restantes affichées pour un créneau valent la capacité moins l'occupation | observé: places restantes | conditions: capacité, occupation
+- Une demande dont le début est en dehors des horaires reçoit le statut « refusée » | observé: statut | conditions: horaires, début
+- Une demande dont le début augmenté de la durée dépasse l'heure de fermeture reçoit le statut « refusée » | observé: statut | conditions: horaires, début, durée
+- Une demande dont la durée est inférieure à la durée min reçoit le statut « refusée » | observé: statut | conditions: durée, durée min
+- Une demande dont la durée est inférieure à la durée min affiche le motif « durée trop courte » | observé: motif | conditions: durée, durée min
+- Une demande dont la durée est supérieure à la durée max reçoit le statut « refusée » | observé: statut | conditions: durée, durée max
+- Une demande dont la durée est exactement égale à la durée max reçoit le statut « confirmée » | observé: statut | conditions: durée, durée max
+- Une demande dont l'écart entre maintenant et le début est inférieur au préavis reçoit le statut « refusée » | observé: statut | conditions: début, maintenant, préavis
+- Une demande dont l'écart entre maintenant et le début est exactement égal au préavis reçoit le statut « confirmée » | observé: statut | conditions: début, maintenant, préavis
+- Une demande dont le début est antérieur à maintenant reçoit le statut « refusée » | observé: statut | conditions: début, maintenant
+- Une demande d'un utilisateur dont le nombre de réservations actives est égal au quota reçoit le statut « refusée » | observé: statut | conditions: actives, quota
+- Une demande d'un utilisateur dont le nombre de réservations actives est égal au quota affiche le motif « quota atteint » | observé: motif | conditions: actives, quota
+- La confirmation d'une réservation augmente de 1 le nombre de réservations actives de l'utilisateur | observé: actives | conditions: statut
+- L'annulation d'une réservation confirmée lorsque l'écart entre maintenant et le début est supérieur ou égal au délai annulation donne le statut « annulée » | observé: statut | conditions: maintenant, début, délai annulation
+- L'annulation d'une réservation confirmée lorsque l'écart entre maintenant et le début est inférieur au délai annulation laisse le statut « confirmée » | observé: statut | conditions: maintenant, début, délai annulation
+- L'annulation d'une réservation confirmée lorsque l'écart entre maintenant et le début est inférieur au délai annulation affiche le motif « délai d'annulation dépassé » | observé: motif | conditions: maintenant, début, délai annulation
+- L'annulation réussie d'une réservation sur un créneau dont la file est vide diminue l'occupation de 1 | observé: occupation | conditions: file
+- L'annulation réussie d'une réservation diminue de 1 le nombre de réservations actives de son auteur | observé: actives | conditions: aucune
+- L'annulation réussie d'une réservation sur un créneau dont la file n'est pas vide fait passer la personne en position 1 au statut « confirmée » | observé: statut | conditions: file
+- L'annulation réussie d'une réservation sur un créneau dont la file n'est pas vide laisse l'occupation inchangée | observé: occupation | conditions: file
+- Après la promotion de la personne en position 1, chaque personne restante dans la file voit sa position diminuer de 1 | observé: position | conditions: file
+- Lors d'une promotion, la personne en position 1 dont le nombre de réservations actives est égal au quota garde le statut « en attente » | observé: statut | conditions: actives, quota | frontière: oui
+- Le retrait volontaire d'une personne en attente lui donne le statut « annulée » | observé: statut | conditions: aucune
+- L'heure affichée d'une réservation correspond au début converti dans le fuseau utilisateur | observé: heure affichée | conditions: début, fuseau utilisateur
+- La vérification des horaires d'une demande se fait dans le fuseau ressource, quel que soit le fuseau utilisateur | observé: statut | conditions: horaires, début, fuseau ressource
+- Une demande avec une récurrence hebdomadaire de N répétitions produit N occurrences | observé: occurrences | conditions: récurrence
+- Après un changement d'heure saisonnier dans le fuseau ressource, chaque occurrence d'une récurrence conserve la même heure locale de la ressource | observé: occurrences | conditions: récurrence, fuseau ressource | frontière: oui
+- Dans une récurrence, une occurrence tombant sur un créneau dont l'occupation est égale à la capacité, avec l'attente désactivée, reçoit le statut « refusée » | observé: statut | conditions: récurrence, capacité, occupation, attente
+- Dans une récurrence, une occurrence tombant sur un créneau dont l'occupation est inférieure à la capacité reçoit le statut « confirmée » même si une autre occurrence de la même série est refusée | observé: statut | conditions: récurrence, capacité, occupation
+- Dans une récurrence, les occurrences qui feraient dépasser le quota de réservations actives reçoivent le statut « refusée » | observé: statut | conditions: récurrence, actives, quota
+- L'annulation d'une série récurrente donne le statut « annulée » à chaque occurrence dont le début est postérieur à maintenant | observé: statut | conditions: récurrence, début, maintenant
+- L'annulation d'une série récurrente laisse inchangé le statut de chaque occurrence dont le début est antérieur à maintenant | observé: statut | conditions: récurrence, début, maintenant

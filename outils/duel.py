@@ -30,8 +30,9 @@ Classement de chaque test qui casse (une fois, à son premier échec) :
   - sinon                                          → bug
   - une assertion qui repasse deux fois de « passe » à « casse » → contradiction
 
-Champ local d'une assertion = nombre de tours où elle a cassé + 1 (si elle finit par passer),
-compté séparément pour les assertions frontière (consigne v2) et pour les autres.
+Champ local (V2, outils/causes.py) : nombre de CAUSES distinctes (même message d'erreur = une cause)
+rencontrées avant qu'une assertion passe, séparé pour les assertions frontière et les autres.
+L'ancien compte (tours cassés + 1) reste dans bilan.json sous `champ_local` / `essais`.
 
 Mécanismes frontière : interdit de les simuler (vraie cryptographie pour le chat, vraie fusion
 d'éditions concurrentes pour l'éditeur) ; le reste peut rester en mémoire.
@@ -80,6 +81,28 @@ REEL = {
   retarder et les livrer dans n'importe quel ordre.
 - Les répliques convergent par un vrai algorithme de fusion (transformation opérationnelle ou CRDT),
   pas par un verrou, ni par un serveur qui remplace tout le texte.
+""",
+    "P02": """Mécanisme à réaliser pour de vrai (interdit de le simuler) : la persistance entre deux ouvertures.
+- Exception à « pas de disque » : l'application enregistre ses données dans un fichier dont le chemin
+  est donné par les tests (par ex. `tmp_path`) ; une nouvelle instance créée sur ce chemin relit tout.
+- Rien ne passe d'une instance à l'autre par la mémoire (pas de variable globale ni de cache partagé).
+""",
+    "P06": """Mécanisme à réaliser pour de vrai (interdit de le simuler) : la persistance entre deux ouvertures.
+- Exception à « pas de disque » : l'application enregistre ses données dans un fichier dont le chemin
+  est donné par les tests (par ex. `tmp_path`) ; une nouvelle instance créée sur ce chemin relit tout.
+- Rien ne passe d'une instance à l'autre par la mémoire (pas de variable globale ni de cache partagé).
+""",
+    "P07": """Mécanisme à réaliser pour de vrai (interdit de le simuler) : la synchronisation hors ligne.
+- Chaque appareil a sa propre copie des notes et travaille sans connexion.
+- Les modifications passent par un réseau simulé qui peut couper, retarder, perdre un envoi en cours
+  et livrer dans n'importe quel ordre ; un envoi coupé est réessayé, sans doublon.
+- La réconciliation et la détection de conflit sont faites pour de vrai sur les copies,
+  pas par un objet partagé que tous les appareils lisent.
+""",
+    "P09": """Mécanisme à réaliser pour de vrai (interdit de le simuler) : les fuseaux horaires et la concurrence.
+- Les fuseaux passent par `zoneinfo` (vraies règles d'heure d'été), jamais par un décalage fixe.
+- Des demandes « simultanées » peuvent arriver depuis plusieurs threads en même temps : la capacité
+  doit tenir sous une vraie concurrence (verrou ou opération atomique), pas parce que les appels sont séquentiels.
 """,
 }
 REEL_DEFAUT = """Aucun mécanisme ne doit être simulé par un raccourci qui renvoie directement le
@@ -342,6 +365,8 @@ def main():
     ap.add_argument("--juge", default="opus")
     ap.add_argument("--sortie", default="runs-v1")
     ap.add_argument("--force", action="store_true", help="exécuter une sonde floue ou non concordante (marqué)")
+    ap.add_argument("--attaque-seule", action="store_true",
+                    help="H15 : seulement l'attaque 1 du red (trous a priori), sans green ni exécution")
     a = ap.parse_args()
 
     dossier_passes = RACINE / "data" / "passes" / a.passes
@@ -401,6 +426,16 @@ def main():
         return t
 
     t_attaque = attaquer(1)
+    if a.attaque_seule:
+        fin = {"sonde": a.sonde, "passes": a.passes, "passe": a.passe, "k_passes": [round(x, 2) for x in ks],
+               "k_retenu": round(k, 2) if k else None, "concordance": statut_conc, "assertions": len(assertions),
+               "frontieres": sum(frontiere.values()), "tests": len(noms_tests(travail)),
+               "trous_a_priori": len(trous_a_priori),
+               "trous_par_assertion": round(len(trous_a_priori) / len(assertions), 3),
+               "tokens_decoupe": t_attaque, "lacunes": trous_a_priori, "modeles": {"red": a.red}}
+        (sortie / "bilan.json").write_text(json.dumps(fin, ensure_ascii=False, indent=1), encoding="utf-8")
+        print(json.dumps({k: v for k, v in fin.items() if k != "lacunes"}, ensure_ascii=False))
+        return
     sceau = empreinte(travail)
     attaques = 1
     resultats_txt = "Premier tour : aucun résultat encore."
@@ -556,7 +591,13 @@ def main():
            "trous_a_priori": len(trous_a_priori), "echecs_par_type": types,
            "nouvelles_assertions": nouvelles, "lacunes": trous_a_priori,
            "modeles": {"red": a.red, "green": a.green, "juge": a.juge}}
+    tok = lambda cle: additionner(*[json.loads(l)[cle] for l in (sortie / "journal.jsonl").read_text(encoding="utf-8").splitlines()])
+    fin["tokens_decoupe"], fin["tokens_execution"] = tok("tokens_decoupe"), tok("tokens_execution")
+    fin["part_decoupe"] = round(fin["tokens_decoupe"]["neufs"] / max(1, fin["tokens_decoupe"]["neufs"] + fin["tokens_execution"]["neufs"]), 3)
     (sortie / "bilan.json").write_text(json.dumps(fin, ensure_ascii=False, indent=1), encoding="utf-8")
+    from causes import recalculer  # champ local par cause (duel V2)
+    _, c = recalculer(sortie)
+    fin["causes"] = {k: v for k, v in c.items() if k != "liste"}
     print(json.dumps({k: v for k, v in fin.items() if k not in ("lacunes", "essais")}, ensure_ascii=False))
 
 

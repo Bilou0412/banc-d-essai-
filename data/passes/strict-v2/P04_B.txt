@@ -1,0 +1,42 @@
+ÉTATS: listes; nom liste; liste active; tâches; titre; coche; échéance; date jour; retard; filtre; affichage; ordre; compteur; erreur
+ASSERTIONS:
+- Quand l'utilisateur crée une liste avec un nom non vide, la nouvelle liste apparaît dans les listes | observé: listes | conditions: nom liste
+- Quand l'utilisateur crée une liste avec un nom vide, un message d'erreur s'affiche | observé: erreur | conditions: nom liste
+- Quand l'utilisateur crée une liste avec un nom vide, les listes restent inchangées | observé: listes | conditions: nom liste
+- Quand l'utilisateur crée une liste avec un nom déjà utilisé par une autre liste, un message d'erreur s'affiche | observé: erreur | conditions: nom liste, listes
+- Quand l'utilisateur renomme une liste avec un nom non vide, la liste affiche le nouveau nom | observé: nom liste | conditions: nom liste
+- Quand l'utilisateur supprime une liste, cette liste n'apparaît plus dans les listes | observé: listes | conditions: aucune
+- Quand l'utilisateur supprime une liste, les tâches de cette liste ne sont plus accessibles | observé: tâches | conditions: aucune
+- Quand l'utilisateur supprime la liste active alors qu'il reste d'autres listes, la première liste restante devient la liste active | observé: liste active | conditions: liste active, listes
+- Quand l'utilisateur sélectionne une liste, cette liste devient la liste active | observé: liste active | conditions: aucune
+- Quand l'utilisateur ajoute une tâche avec un titre non vide, la tâche apparaît dans les tâches de la liste active | observé: tâches | conditions: titre, liste active
+- Quand l'utilisateur ajoute une tâche avec un titre vide, les tâches restent inchangées | observé: tâches | conditions: titre
+- Quand l'utilisateur ajoute une tâche dont le titre ne contient que des espaces, les tâches restent inchangées | observé: tâches | conditions: titre
+- Quand l'utilisateur ajoute une tâche, la nouvelle tâche est non cochée | observé: coche | conditions: aucune
+- Quand l'utilisateur ajoute une tâche, la nouvelle tâche est placée en dernière position de l'ordre | observé: ordre | conditions: aucune
+- Quand l'utilisateur ajoute une tâche sans préciser de date, la tâche n'a pas d'échéance | observé: échéance | conditions: aucune
+- Quand l'utilisateur coche une tâche non cochée, la tâche devient cochée | observé: coche | conditions: coche
+- Quand l'utilisateur coche une tâche déjà cochée, la tâche devient non cochée | observé: coche | conditions: coche
+- Le compteur affiche le nombre de tâches non cochées de la liste active | observé: compteur | conditions: tâches, coche, liste active
+- Quand l'utilisateur coche une tâche non cochée de la liste active, le compteur diminue de un | observé: compteur | conditions: coche
+- Quand l'utilisateur coche une tâche, la position de la tâche dans l'ordre ne change pas | observé: ordre | conditions: aucune
+- Quand l'utilisateur modifie le titre d'une tâche avec un texte non vide, la tâche affiche le nouveau titre | observé: titre | conditions: titre
+- Quand l'utilisateur modifie le titre d'une tâche avec un texte vide, la tâche conserve son titre précédent | observé: titre | conditions: titre
+- Quand l'utilisateur supprime une tâche, la tâche n'apparaît plus dans les tâches de sa liste | observé: tâches | conditions: aucune
+- Quand l'utilisateur déplace une tâche vers une autre liste, la tâche apparaît dans les tâches de la liste cible | observé: tâches | conditions: aucune
+- Quand l'utilisateur déplace une tâche vers une autre liste, la tâche n'apparaît plus dans les tâches de la liste d'origine | observé: tâches | conditions: aucune
+- Quand l'utilisateur déplace une tâche cochée vers une autre liste, la tâche reste cochée | observé: coche | conditions: coche
+- Quand l'utilisateur déplace une tâche ayant une échéance vers une autre liste, la tâche conserve son échéance | observé: échéance | conditions: échéance
+- Quand l'utilisateur déplace une tâche vers une autre liste, la tâche est placée en dernière position de l'ordre de la liste cible | observé: ordre | conditions: aucune
+- Quand l'utilisateur fait glisser une tâche à une nouvelle position, la tâche occupe cette position dans l'ordre | observé: ordre | conditions: aucune
+- Quand l'utilisateur définit une date d'échéance sur une tâche, la tâche affiche cette échéance | observé: échéance | conditions: aucune
+- Quand l'utilisateur retire l'échéance d'une tâche, la tâche n'affiche plus d'échéance | observé: échéance | conditions: échéance
+- Une tâche non cochée dont l'échéance est antérieure à la date du jour est marquée en retard | observé: retard | conditions: coche, échéance, date jour
+- Une tâche cochée dont l'échéance est antérieure à la date du jour n'est pas marquée en retard | observé: retard | conditions: coche, échéance, date jour
+- Une tâche non cochée dont l'échéance est égale à la date du jour n'est pas marquée en retard | observé: retard | conditions: échéance, date jour
+- Quand la date du jour dépasse l'échéance d'une tâche non cochée sans action de l'utilisateur, la tâche devient marquée en retard | observé: retard | conditions: date jour, échéance, coche | frontière: oui
+- Quand l'utilisateur choisit le filtre « à faire », l'affichage ne montre que les tâches non cochées de la liste active | observé: affichage | conditions: filtre, coche, liste active
+- Quand l'utilisateur choisit le filtre « terminées », l'affichage ne montre que les tâches cochées de la liste active | observé: affichage | conditions: filtre, coche, liste active
+- Quand l'utilisateur choisit le filtre « en retard », l'affichage ne montre que les tâches en retard de la liste active | observé: affichage | conditions: filtre, retard, liste active
+- Quand l'utilisateur coche une tâche alors que le filtre « à faire » est actif, la tâche disparaît de l'affichage | observé: affichage | conditions: filtre, coche
+- Quand l'utilisateur recharge l'application, les tâches créées auparavant sont de nouveau présentes | observé: tâches | conditions: aucune | frontière: oui

@@ -1,0 +1,42 @@
+ÉTATS: recette; titre; ingrédients; quantité; unité; catégorie; portions; requête; filtre; résultats; liste courses; note; favori; photo
+ASSERTIONS:
+- Valider la création d'une recette dont le titre est vide est refusé : aucune recette n'est créée | observé: recette | conditions: titre
+- Valider la création d'une recette dont le titre est non vide ajoute cette recette à la collection | observé: recette | conditions: titre
+- Supprimer une recette la retire de la collection | observé: recette | conditions: aucune
+- Ajouter un ingrédient à une recette fait apparaître cet ingrédient dans la liste des ingrédients de la recette | observé: ingrédients | conditions: aucune
+- Supprimer un ingrédient d'une recette le retire de la liste des ingrédients de la recette | observé: ingrédients | conditions: aucune
+- Saisir une quantité de 200 pour un ingrédient affiche la quantité 200 pour cet ingrédient | observé: quantité | conditions: aucune
+- Saisir une quantité négative pour un ingrédient est refusé : la quantité précédente reste affichée | observé: quantité | conditions: aucune
+- Saisir une quantité nulle pour un ingrédient est refusé : la quantité précédente reste affichée | observé: quantité | conditions: aucune
+- Choisir l'unité « g » pour un ingrédient affiche « g » à côté de sa quantité | observé: unité | conditions: aucune
+- Attribuer une catégorie à une recette affiche cette catégorie sur la recette | observé: catégorie | conditions: aucune
+- Supprimer une catégorie attribuée à une recette laisse cette recette sans catégorie | observé: catégorie | conditions: aucune
+- Passer les portions d'une recette de 4 à 8 double la quantité affichée de chaque ingrédient | observé: quantité | conditions: portions
+- Passer les portions d'une recette de 4 à 2 divise par deux la quantité affichée de chaque ingrédient | observé: quantité | conditions: portions
+- Ajuster les portions d'une recette ne change pas l'unité affichée de ses ingrédients | observé: unité | conditions: aucune
+- Saisir 0 comme nombre de portions est refusé : le nombre de portions précédent reste affiché | observé: portions | conditions: aucune
+- Lorsqu'un ajustement de portions produit une quantité non entière, la quantité affichée est arrondie | observé: quantité | conditions: portions | frontière: oui
+- Rouvrir une recette après en avoir ajusté les portions affiche le nombre de portions d'origine | observé: portions | conditions: aucune
+- Rechercher un mot présent dans le titre d'une recette fait figurer cette recette dans les résultats | observé: résultats | conditions: requête, titre
+- Rechercher le nom d'un ingrédient d'une recette fait figurer cette recette dans les résultats | observé: résultats | conditions: requête, ingrédients
+- Rechercher un mot présent uniquement dans la note d'une recette ne fait pas figurer cette recette dans les résultats | observé: résultats | conditions: requête, note
+- Rechercher un mot absent de toutes les recettes affiche une liste de résultats vide | observé: résultats | conditions: requête
+- Rechercher « TARTE » fait figurer la recette intitulée « tarte aux pommes » dans les résultats | observé: résultats | conditions: requête, titre
+- Rechercher « creme » fait figurer la recette intitulée « crème brûlée » dans les résultats | observé: résultats | conditions: requête, titre | frontière: oui
+- Avec une requête vide, les résultats contiennent toutes les recettes | observé: résultats | conditions: requête
+- Activer le filtre sur une catégorie restreint les résultats aux recettes de cette catégorie | observé: résultats | conditions: filtre, catégorie
+- Activer le filtre « favoris » restreint les résultats aux recettes marquées favorites | observé: résultats | conditions: filtre, favori
+- Marquer comme favorite une recette non favorite la rend favorite | observé: favori | conditions: favori
+- Marquer comme favorite une recette déjà favorite la rend non favorite | observé: favori | conditions: favori
+- Ajouter une recette à la liste de courses y ajoute une ligne par ingrédient de la recette | observé: liste courses | conditions: ingrédients
+- Ajouter à la liste de courses une recette dont les portions ont été ajustées y inscrit les quantités ajustées | observé: liste courses | conditions: portions
+- Ajouter à la liste de courses deux recettes contenant le même ingrédient dans la même unité produit une seule ligne dont la quantité est la somme | observé: liste courses | conditions: ingrédients, unité
+- Ajouter à la liste de courses deux recettes contenant le même ingrédient en « g » et en « kg » produit une seule ligne convertie dans une unité commune | observé: liste courses | conditions: ingrédients, unité | frontière: oui
+- Modifier la quantité d'un ingrédient après avoir ajouté sa recette à la liste de courses ne change pas la quantité inscrite dans la liste de courses | observé: liste courses | conditions: aucune | frontière: oui
+- Retirer une ligne de la liste de courses ne retire pas l'ingrédient correspondant de la recette | observé: ingrédients | conditions: aucune
+- Enregistrer un texte comme note d'une recette affiche ce texte sur la recette | observé: note | conditions: aucune
+- Effacer tout le texte de la note d'une recette et enregistrer laisse la recette sans note | observé: note | conditions: aucune
+- Ajouter un fichier image à une recette affiche cette image comme photo de la recette | observé: photo | conditions: aucune
+- Ajouter un fichier qui n'est pas une image comme photo est refusé : la photo précédente reste affichée | observé: photo | conditions: aucune
+- Ajouter une image dépassant la taille maximale autorisée comme photo est refusé : la photo précédente reste affichée | observé: photo | conditions: aucune | frontière: oui
+- Supprimer la photo d'une recette laisse la recette sans photo | observé: photo | conditions: aucune

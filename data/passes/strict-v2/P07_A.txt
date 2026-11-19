@@ -1,0 +1,37 @@
+ÉTATS: connexion; session; contenu; titre; présence; ordre; indicateur; conflit
+ASSERTIONS:
+- Quand l'appareil perd le réseau, l'application affiche le statut « hors ligne » | observé: connexion | conditions: aucune
+- Quand l'appareil retrouve le réseau, l'application cesse d'afficher le statut « hors ligne » | observé: connexion | conditions: aucune
+- Sur un appareil hors ligne, l'utilisateur crée une note : la note apparaît dans la liste de cet appareil | observé: présence | conditions: aucune
+- Sur un appareil hors ligne, l'utilisateur modifie le texte d'une note : la note affiche le nouveau texte sur cet appareil | observé: contenu | conditions: aucune
+- Sur un appareil hors ligne, l'utilisateur modifie le titre d'une note : la note affiche le nouveau titre sur cet appareil | observé: titre | conditions: aucune
+- Sur un appareil hors ligne, l'utilisateur supprime une note : la note n'apparaît plus dans la liste de cet appareil | observé: présence | conditions: aucune
+- Sur un appareil hors ligne, l'utilisateur modifie une note : la note affiche l'indicateur « en attente » | observé: indicateur | conditions: connexion
+- Sur un appareil en ligne avec une session ouverte, l'utilisateur modifie une note : la note affiche l'indicateur « synchronisée » une fois l'envoi terminé | observé: indicateur | conditions: connexion, session
+- Une note modifiée hors ligne affiche « en attente » ; l'appareil retrouve le réseau : la note affiche l'indicateur « synchronisée » | observé: indicateur | conditions: connexion, session
+- Une note modifiée hors ligne affiche « en attente » ; l'appareil retrouve le réseau alors que la session est fermée : la note conserve l'indicateur « en attente » | observé: indicateur | conditions: session
+- Après une modification faite hors ligne, l'utilisateur ferme puis rouvre l'application sans réseau : la note affiche le texte modifié | observé: contenu | conditions: aucune
+- Après une création faite hors ligne, l'utilisateur ferme puis rouvre l'application sans réseau : la note apparaît dans la liste | observé: présence | conditions: aucune
+- L'appareil A est hors ligne ; l'utilisateur modifie le texte d'une note sur A : l'appareil B affiche toujours l'ancien texte | observé: contenu | conditions: connexion
+- Le texte d'une note a été modifié hors ligne sur l'appareil A ; A retrouve le réseau : l'appareil B en ligne affiche le nouveau texte | observé: contenu | conditions: connexion, session
+- Le titre d'une note a été modifié hors ligne sur l'appareil A ; A retrouve le réseau : l'appareil B en ligne affiche le nouveau titre | observé: titre | conditions: connexion, session
+- Une note a été créée hors ligne sur l'appareil A ; A retrouve le réseau : la note apparaît dans la liste de l'appareil B en ligne | observé: présence | conditions: connexion, session
+- Une note a été supprimée hors ligne sur l'appareil A ; A retrouve le réseau : la note n'apparaît plus dans la liste de l'appareil B en ligne | observé: présence | conditions: connexion, session
+- Une note a été créée puis supprimée hors ligne sur l'appareil A ; A retrouve le réseau : la note n'apparaît jamais dans la liste de l'appareil B | observé: présence | conditions: aucune
+- Le texte d'une note a été modifié deux fois de suite hors ligne sur l'appareil A ; A retrouve le réseau : l'appareil B affiche le texte de la dernière modification | observé: contenu | conditions: aucune
+- L'appareil A a retrouvé le réseau mais sa session est fermée : l'appareil B affiche toujours l'ancien texte de la note modifiée sur A | observé: contenu | conditions: session
+- L'appareil A a des modifications en attente ; l'utilisateur rouvre sa session sur A en ligne : l'appareil B affiche le texte modifié sur A | observé: contenu | conditions: connexion
+- La connexion de l'appareil A se coupe pendant l'envoi d'une modification : la note sur A conserve l'indicateur « en attente » | observé: indicateur | conditions: connexion | frontière: oui
+- La connexion de l'appareil A se coupe pendant l'envoi d'une modification puis revient : l'appareil B affiche le texte complet de la modification, jamais un texte partiel | observé: contenu | conditions: aucune | frontière: oui
+- La même note a été modifiée hors ligne sur A et sur B avec des textes différents ; les deux appareils retrouvent le réseau : l'application signale un conflit sur cette note | observé: conflit | conditions: contenu
+- La même note a été modifiée hors ligne sur A et sur B avec un texte identique ; les deux appareils retrouvent le réseau : l'application ne signale aucun conflit | observé: conflit | conditions: contenu
+- Deux notes différentes ont été modifiées hors ligne, l'une sur A, l'autre sur B ; les deux appareils retrouvent le réseau : l'application ne signale aucun conflit | observé: conflit | conditions: aucune
+- Un conflit est signalé sur une note : une seconde note « copie de conflit » contenant l'autre version apparaît dans la liste | observé: présence | conditions: conflit
+- Un conflit est signalé sur une note : la note d'origine affiche la version modifiée en dernier selon l'heure des appareils | observé: contenu | conditions: conflit | frontière: oui
+- Un conflit est signalé sur une note ; l'utilisateur choisit une version : l'application ne signale plus de conflit sur cette note | observé: conflit | conditions: aucune
+- Un conflit est signalé sur une note ; l'utilisateur choisit une version sur A en ligne : l'appareil B affiche la version choisie | observé: contenu | conditions: connexion
+- Une note a été modifiée hors ligne sur A et supprimée hors ligne sur B ; les deux appareils retrouvent le réseau : la note modifiée apparaît dans la liste de B | observé: présence | conditions: connexion
+- L'utilisateur modifie une note : cette note passe en tête de la liste de l'appareil | observé: ordre | conditions: aucune
+- Une note est modifiée sur l'appareil B ; l'appareil A en ligne reçoit la modification : cette note passe en tête de la liste de A | observé: ordre | conditions: connexion
+- L'utilisateur ouvre une session sur un nouvel appareil en ligne : les notes existantes du compte apparaissent dans la liste | observé: présence | conditions: connexion, session
+- L'utilisateur lance l'application pour la première fois sur un nouvel appareil hors ligne : aucune note du compte n'apparaît dans la liste | observé: présence | conditions: connexion
