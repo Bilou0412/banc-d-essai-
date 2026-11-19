@@ -1,0 +1,211 @@
+{
+ "sonde": "P05",
+ "passes": "strict-v2",
+ "passe": "A",
+ "k_passes": [
+  2.18,
+  2.56,
+  2.48
+ ],
+ "k_retenu": 2.48,
+ "concordance": "floue",
+ "convergent": true,
+ "tours": 2,
+ "attaques": 2,
+ "assertions": 38,
+ "frontieres": 3,
+ "champ_local": {
+  "tout": 1.0,
+  "frontiere": 1.0,
+  "autres": 1.0
+ },
+ "essais": {
+  "A01": 1,
+  "A02": 1,
+  "A03": 1,
+  "A04": 1,
+  "A05": 1,
+  "A06": 1,
+  "A07": 1,
+  "A08": 1,
+  "A09": 1,
+  "A10": 1,
+  "A11": 1,
+  "A12": 1,
+  "A13": 1,
+  "A14": 1,
+  "A15": 1,
+  "A16": 1,
+  "A17": 1,
+  "A18": 1,
+  "A19": 1,
+  "A20": 1,
+  "A21": 1,
+  "A22": 1,
+  "A23": 1,
+  "A24": 1,
+  "A25": 1,
+  "A26": 1,
+  "A27": 1,
+  "A28": 1,
+  "A29": 1,
+  "A30": 1,
+  "A31": 1,
+  "A32": 1,
+  "A33": 1,
+  "A34": 1,
+  "A35": 1,
+  "A36": 1,
+  "A37": 1,
+  "A38": 1
+ },
+ "non_passees": [],
+ "trous_a_priori": 23,
+ "echecs_par_type": {},
+ "nouvelles_assertions": {},
+ "lacunes": [
+  {
+   "cas": "A01 : un utilisateur sans rôle auteur (modérateur seul) tente de créer un article",
+   "test": "test_A01_trou_moderateur_sans_role_auteur",
+   "présumé": "Un modérateur sans rôle d'auteur tente de créer un article : aucun article n'est créé | observé: visibilité | conditions: rôle",
+   "attaque": 1
+  },
+  {
+   "cas": "A08 : un auteur tente de planifier un brouillon dont il n'est pas le propriétaire",
+   "test": "test_A08_trou_non_proprietaire",
+   "présumé": "Un auteur tente de planifier un brouillon dont il n'est pas le propriétaire : le statut reste « brouillon » | observé: statut | conditions: propriété, date_planifiée",
+   "attaque": 1
+  },
+  {
+   "cas": "A09 : la date planifiée est exactement l'instant présent (ni futur ni passé)",
+   "test": "test_A09_trou_date_egale_maintenant",
+   "présumé": "Un auteur planifie son brouillon avec une date planifiée égale à l'instant présent : le statut reste « brouillon » | observé: statut | conditions: date_planifiée",
+   "attaque": 1
+  },
+  {
+   "cas": "A13 : un auteur tente d'annuler la planification d'un article dont il n'est pas le propriétaire",
+   "test": "test_A13_trou_non_proprietaire",
+   "présumé": "Un auteur tente d'annuler la planification d'un article « planifié » dont il n'est pas le propriétaire : le statut reste « planifié » | observé: statut | conditions: propriété",
+   "attaque": 1
+  },
+  {
+   "cas": "A14 : un auteur ou un modérateur tente de dépublier un article dont il n'est pas le propriétaire",
+   "test": "test_A14_trou_non_proprietaire",
+   "présumé": "Un utilisateur tente de dépublier un article « publié » dont il n'est pas le propriétaire : le statut reste « publié » | observé: statut | conditions: propriété",
+   "attaque": 1
+  },
+  {
+   "cas": "A16 : un modérateur tente de modifier le contenu d'un article dont il n'est pas le propriétaire",
+   "test": "test_A16_trou_moderateur_non_proprietaire",
+   "présumé": "Un modérateur tente de modifier le contenu d'un article dont il n'est pas le propriétaire : le contenu reste inchangé | observé: contenu | conditions: rôle, propriété",
+   "attaque": 1
+  },
+  {
+   "cas": "A24 : un auteur tente d'ajouter un tag à un article dont il n'est pas le propriétaire",
+   "test": "test_A24_trou_non_proprietaire",
+   "présumé": "Un auteur tente d'ajouter un tag à un article dont il n'est pas le propriétaire : le tag ne figure pas dans les tags de l'article | observé: tags | conditions: propriété",
+   "attaque": 1
+  },
+  {
+   "cas": "A27 : un article « planifié » portant le tag, avant puis après sa date planifiée",
+   "test": "test_A27_trou_article_planifie",
+   "présumé": "Un visiteur consulte la page d'un tag avant la date planifiée : un article « planifié » portant ce tag n'y figure pas | observé: page_tag | conditions: statut, tags, date_planifiée",
+   "attaque": 1
+  },
+  {
+   "cas": "A29 : un visiteur tente de commenter un article « brouillon »",
+   "test": "test_A29_trou_commentaire_sur_brouillon",
+   "présumé": "Un visiteur tente de poster un commentaire sur un article « brouillon » : aucun commentaire n'est créé | observé: modération | conditions: statut",
+   "attaque": 1
+  },
+  {
+   "cas": "A31 : un modérateur tente d'approuver un commentaire déjà « rejeté »",
+   "test": "test_A31_trou_approuver_rejete",
+   "présumé": "Un modérateur tente d'approuver un commentaire « rejeté » : la modération reste « rejeté » | observé: modération | conditions: rôle, modération",
+   "attaque": 1
+  },
+  {
+   "cas": "A33 : un auteur sans rôle de modérateur tente de rejeter un commentaire",
+   "test": "test_A33_trou_auteur_sans_role_ne_peut_rejeter",
+   "présumé": "Un auteur sans rôle de modérateur tente de rejeter un commentaire « en attente » : la modération reste « en attente » | observé: modération | conditions: rôle",
+   "attaque": 1
+  },
+  {
+   "cas": "A34 : un commentaire « approuvé » sur un article dépublié (A34 exige « publié », A38 dit « de nouveau » sans trancher l'entre-deux)",
+   "test": "test_A34_trou_article_depublie",
+   "présumé": "Un visiteur consulte un article dépublié : un commentaire « approuvé » n'est pas affiché | observé: affichage_commentaire | conditions: modération, statut",
+   "attaque": 1
+  },
+  {
+   "cas": "A36 : un modérateur approuve deux fois le même commentaire",
+   "test": "test_A36_trou_double_approbation",
+   "présumé": "Un modérateur approuve un commentaire déjà « approuvé » : le compteur de commentaires de l'article reste inchangé | observé: compteur_commentaires | conditions: modération",
+   "attaque": 1
+  },
+  {
+   "cas": "A38 : date de publication après dépublication puis republication (A07 dit « moment de la publication », A17 garde la date sur modification, rien ne tranche la republication)",
+   "test": "test_A38_trou_date_republication",
+   "présumé": "Un auteur republie son article dépublié : la date de publication est la date et l'heure de la republication | observé: date_publication | conditions: statut",
+   "attaque": 1
+  },
+  {
+   "cas": "A06 : deux instances de Blog coexistent ; un article publié sur l'une apparaît-il sur l'autre ?",
+   "test": "test_A06_trou_deux_blogs_independants",
+   "présumé": "chaque Blog est isolé (pas d'état global au module)",
+   "attaque": 2
+  },
+  {
+   "cas": "A04 : deux utilisateurs enregistrés sous le même nom ; l'homonyme peut-il publier l'article de l'autre ?",
+   "test": "test_A04_trou_homonyme_ne_publie_pas",
+   "présumé": "la propriété suit l'identité de l'utilisateur, pas son nom (ou register refuse le doublon)",
+   "attaque": 2
+  },
+  {
+   "cas": "A16 : un homonyme tente de modifier l'article de l'autre",
+   "test": "test_A16_trou_homonyme_ne_modifie_pas",
+   "présumé": "refusé, contenu inchangé (ou register refuse le doublon)",
+   "attaque": 2
+  },
+  {
+   "cas": "A13 : annulation demandée alors que la date planifiée est déjà atteinte",
+   "test": "test_A13_trou_annuler_apres_echeance_refuse",
+   "présumé": "refusée, l'article reste « publié » avec la date planifiée",
+   "attaque": 2
+  },
+  {
+   "cas": "A23 : contenu contenant des fins de ligne \\r\\n, \\r et des espaces de bord",
+   "test": "test_A23_trou_flux_preserve_fins_de_ligne_et_espaces",
+   "présumé": "item/description, une fois le XML analysé, est exactement le contenu",
+   "attaque": 2
+  },
+  {
+   "cas": "A03 : publier un article déjà « publié »",
+   "test": "test_A03_trou_republier_un_publie_ne_change_pas_la_date",
+   "présumé": "refusé ou sans effet, la date de publication ne bouge pas",
+   "attaque": 2
+  },
+  {
+   "cas": "A08 : planifier un article déjà « publié »",
+   "test": "test_A08_trou_planifier_un_publie_refuse",
+   "présumé": "refusé, l'article reste publié et visible",
+   "attaque": 2
+  },
+  {
+   "cas": "A28 : un non-propriétaire retire un tag",
+   "test": "test_A28_trou_non_proprietaire_ne_retire_pas",
+   "présumé": "refusé, le tag et la page restent",
+   "attaque": 2
+  },
+  {
+   "cas": "A33 : rejeter un commentaire déjà « approuvé »",
+   "test": "test_A33_trou_rejeter_un_approuve_refuse",
+   "présumé": "refusé, modération « approuvé » et compteur inchangés",
+   "attaque": 2
+  }
+ ],
+ "modeles": {
+  "red": "opus",
+  "green": "haiku",
+  "juge": "opus"
+ }
+}

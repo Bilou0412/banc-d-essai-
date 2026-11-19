@@ -1,0 +1,40 @@
+ÉTATS: contenu; historique; appareils; membres; vérification; empreinte; alerte; remise; réseau; joignabilité; minuteur; clé
+ASSERTIONS:
+- Quand A envoie un message à B, B voit le contenu du message en clair dans la conversation | observé: contenu | conditions: aucune
+- Un tiers qui intercepte un message entre A et B (y compris le serveur) ne voit pas le contenu en clair | observé: contenu | conditions: aucune | frontière: oui
+- Chaque nouveau message envoyé est chiffré avec une clé différente de celle du message précédent | observé: clé | conditions: aucune | frontière: oui
+- Si la clé d'un message est compromise, le contenu des messages antérieurs reste illisible pour l'attaquant | observé: contenu | conditions: clé | frontière: oui
+- Si un message ne peut pas être déchiffré, la conversation affiche un message d'erreur à la place du contenu | observé: contenu | conditions: clé | frontière: oui
+- Quand des messages arrivent dans le désordre, B voit le contenu de chacun en clair | observé: contenu | conditions: aucune | frontière: oui
+- Quand A lie un nouvel appareil à son compte, cet appareil apparaît dans la liste des appareils de A | observé: appareils | conditions: aucune
+- Quand A retire un appareil de son compte, cet appareil disparaît de la liste des appareils de A | observé: appareils | conditions: aucune
+- Quand A envoie un message à B qui a plusieurs appareils liés, le message apparaît dans l'historique de chaque appareil lié de B | observé: historique | conditions: appareils
+- Quand A envoie un message depuis un de ses appareils, le message apparaît dans l'historique des autres appareils liés de A | observé: historique | conditions: appareils
+- Un appareil nouvellement lié n'affiche pas dans son historique les messages échangés avant sa liaison | observé: historique | conditions: appareils
+- Un appareil retiré ne reçoit plus dans son historique les messages envoyés après son retrait | observé: historique | conditions: appareils
+- Quand B lie un nouvel appareil, A voit une alerte dans sa conversation avec B | observé: alerte | conditions: appareils
+- Quand A crée un groupe en choisissant des participants, la liste des membres du groupe contient ces participants | observé: membres | conditions: aucune
+- Quand un membre ajoute une personne au groupe, chaque membre voit cette personne dans la liste des membres | observé: membres | conditions: aucune
+- Quand un membre quitte le groupe, il disparaît de la liste des membres vue par les autres membres | observé: membres | conditions: aucune
+- Quand A envoie un message dans un groupe, chaque membre voit le contenu du message en clair | observé: contenu | conditions: membres
+- Une personne retirée du groupe ne voit pas dans son historique les messages envoyés après son retrait | observé: historique | conditions: membres
+- Un nouveau membre ne voit pas dans son historique les messages envoyés dans le groupe avant son ajout | observé: historique | conditions: membres
+- A et B voient la même empreinte pour leur conversation | observé: empreinte | conditions: aucune
+- Quand B réinstalle l'application avec une nouvelle clé d'identité, l'empreinte de la conversation affichée chez A change | observé: empreinte | conditions: clé
+- Un contact jamais vérifié est affiché comme « non vérifié » | observé: vérification | conditions: aucune
+- Quand A scanne le code de B et que l'empreinte correspond, B passe au statut « vérifié » chez A | observé: vérification | conditions: empreinte
+- Quand A scanne le code de B et que l'empreinte ne correspond pas, B reste au statut « non vérifié » chez A | observé: vérification | conditions: empreinte
+- Quand la clé d'identité d'un contact vérifié change, son statut redevient « non vérifié » | observé: vérification | conditions: clé
+- Quand la clé d'identité d'un contact change, une alerte apparaît dans la conversation avec ce contact | observé: alerte | conditions: clé
+- Quand A envoie un message sans réseau, l'indicateur de remise affiche « en attente » | observé: remise | conditions: réseau
+- Quand A retrouve le réseau, l'indicateur de remise d'un message « en attente » passe à « envoyé » | observé: remise | conditions: réseau
+- Quand le message est accepté par le serveur et que B est injoignable, l'indicateur de remise affiche « envoyé » | observé: remise | conditions: joignabilité
+- Quand au moins un appareil de B reçoit le message, l'indicateur de remise affiche « remis » | observé: remise | conditions: joignabilité
+- Dans un groupe, l'indicateur de remise n'affiche « remis » que lorsque chaque membre a reçu le message | observé: remise | conditions: membres
+- Quand A règle les messages éphémères sur une durée dans une conversation, le minuteur affiché chez A indique cette durée | observé: minuteur | conditions: aucune
+- Quand A règle le minuteur d'une conversation, B voit la même durée de minuteur dans cette conversation | observé: minuteur | conditions: aucune
+- Un message envoyé avec le minuteur actif disparaît de l'historique de A une fois la durée écoulée après l'envoi | observé: historique | conditions: minuteur
+- Chez B, un message éphémère disparaît de l'historique une fois la durée écoulée après son ouverture par B | observé: historique | conditions: minuteur
+- Un message éphémère disparaît de l'historique de chaque appareil lié une fois la durée écoulée | observé: historique | conditions: minuteur, appareils
+- Un message envoyé avant l'activation du minuteur reste dans l'historique | observé: historique | conditions: minuteur
+- Un message envoyé après la désactivation du minuteur reste dans l'historique | observé: historique | conditions: minuteur

@@ -1,38 +1,49 @@
 """Duel : fait tourner le protocole adversarial (couche code) sur une sonde, tour par tour.
 
 Usage :
-    python outils/duel.py P05            # à partir de data/passes/strict/P05_A.txt
-    python outils/duel.py P10 --max-tours 20
+    python outils/duel.py P05                         # duel V1 sur data/passes/strict-v2/P05_A.txt
+    python outils/duel.py P10 --force                 # sonde floue ou non concordante : exécutée, marquée
+    python outils/duel.py P05 --passes strict --attaques 1 --green sonnet --sortie runs   # réglages du V0
 
-Ce que fait un tour (SPEC §2 « Tour » : assertions → code → résultats) :
-  1. tour 1 seulement : le RED (agent `red`, couche code) écrit les tests depuis les
-     assertions seules. Chaque test cite son assertion dans son nom (test_A07_...).
-     Ce que les assertions ne tranchent pas, il ne le devine pas : il l'écrit dans
-     lacunes.md (« trou signalé à la découpe »).
-  2. le GREEN (agent `green`, autre modèle) écrit app.py. Il n'a ni Bash ni résultat
-     du tour en cours : chaque tour est un essai. Un test qu'il juge hors spec est
-     levé en réclamation ancrée, jamais neutralisé.
-  3. le banc exécute les tests, vérifie que le green n'a pas touché aux tests
-     (diff vide, protocol.md §3), et enregistre le statut de chaque assertion.
-  4. chaque échec est classé (SPEC 6.4) :
-       - réclamation du green → un JUGE froid (agent `judge`) tranche :
-           maintenue + « trou »          → trou (une nouvelle assertion est ajoutée)
-           maintenue + « contradiction » → contradiction (le test est écarté)
-           non tranchable                → trou
-           rejetée                       → bug
-       - pas de réclamation → bug
-       - une assertion qui repasse de « passe » à « casse » deux fois → contradiction
-  5. tokens : découpe = red + juge, exécution = green (tokens traités à neuf :
-     entrée + sortie + écriture de cache ; la lecture de cache est notée à part).
+(Le V0 du 19/11 a tourné avec la version de ce fichier au commit 2bd7412.)
 
-Aveuglement : les agents tournent dans un dossier temporaire HORS du dépôt, où ne
-sont copiés que les agents du protocole (.claude/agents) : ni CLAUDE.md du banc,
-ni thèses, ni k. Les artefacts sont recopiés ensuite dans runs/<sonde>/.
+Un tour (SPEC §2 « Tour ») : assertions → code → résultats.
 
-Sortie : runs/<sonde>/journal.jsonl (un objet par tour), runs/<sonde>/rapport.md,
-et les artefacts (tests, app.py, lacunes.md, réclamations, verdicts).
+  ATTAQUE 1 (avant le code) : le RED (agent `red`, couche code) écrit les tests depuis les
+     assertions seules ; chaque test cite son assertion (test_A07_...). Quand une assertion
+     ne tranche pas un cas, il le note dans lacunes.md (« trou a priori ») ET il écrit quand
+     même un test qui prend position, nommé test_A07_trou_... : un test qui casse.
+  TOURS : le GREEN (agent `green`, autre modèle) écrit app.py, sans Bash ni résultat du tour
+     en cours (un tour = un essai). Le banc exécute les tests, vérifie que le green n'a pas
+     touché aux tests, et enregistre le statut de chaque assertion.
+  ATTAQUE 2 : dès que tout passe (ou au tour --tour-attaque-2), le red attaque à nouveau :
+     il voit ses tests et leur statut, jamais le code, et écrit tests/test_app_2.py.
+  FIN : tout passe après la dernière attaque, ou --max-tours (SPEC 6.4 : 20 → non convergente).
+
+Classement de chaque test qui casse (une fois, à son premier échec) :
+  - test « _trou_ » du red                         → trou (son assertion présumée rejoint la spec)
+  - réclamation du green → JUGE froid (agent `judge`) :
+        maintenue + gap            → trou
+        maintenue + contradiction  → contradiction (le test est écarté)
+        non tranchable             → trou
+        rejetée                    → bug
+  - sinon                                          → bug
+  - une assertion qui repasse deux fois de « passe » à « casse » → contradiction
+
+Champ local d'une assertion = nombre de tours où elle a cassé + 1 (si elle finit par passer),
+compté séparément pour les assertions frontière (consigne v2) et pour les autres.
+
+Mécanismes frontière : interdit de les simuler (vraie cryptographie pour le chat, vraie fusion
+d'éditions concurrentes pour l'éditeur) ; le reste peut rester en mémoire.
+
+Tokens : découpe = red + juge, exécution = green (tokens traités à neuf : entrée + sortie +
+écriture de cache ; la lecture de cache et le coût en $ sont notés à part).
+
+Aveuglement : les agents tournent dans un dossier temporaire HORS du dépôt, où ne sont copiés
+que les agents du protocole : ni CLAUDE.md du banc, ni thèses, ni k, ni marque « frontière ».
 """
 import argparse
+import ast
 import hashlib
 import json
 import re
@@ -45,33 +56,59 @@ from pathlib import Path
 
 RACINE = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(RACINE / "outils"))
-from mesure import lire_passe, mesurer  # noqa: E402
+from mesure import concordance, frontieres, lire_passe, mesurer  # noqa: E402
 
-TECH = """Contexte technique (choisi par le banc, identique pour toutes les sondes) :
+TECH = """Contexte technique (identique pour toutes les sondes) :
 - Python 3.13, bibliothèque standard + le paquet `cryptography` (déjà installé). Rien d'autre.
-- Tout le système est simulé en mémoire, dans un seul module `app.py` (pas de réseau réel,
-  pas de disque, pas d'horloge réelle : le temps est une valeur que les tests font avancer).
-- Tests : pytest, dans `tests/test_app.py`, qui importe `app`.
+- Tout le système tient dans un seul module `app.py`. Pas de réseau réel ni de disque : les
+  échanges entre machines passent par un réseau simulé en mémoire, et le temps est une valeur
+  que les tests font avancer.
+- Tests : pytest, dans `tests/`, qui importent `app`. Chaque test s'exécute en moins de 20 s.
 """
 
-RED = """Couche : code.
+REEL = {
+    "P10": """Mécanisme à réaliser pour de vrai (interdit de le simuler) : le chiffrement de bout en bout.
+- Utiliser `cryptography` : accord de clés (par ex. X25519), dérivation (HKDF), chiffrement
+  authentifié (AES-GCM ou ChaCha20-Poly1305).
+- Chaque appareil génère ses propres clés privées et ne les partage avec aucun autre objet.
+- Le serveur ne reçoit et ne stocke que des octets chiffrés ; aucune clé de message ne passe par
+  le serveur ni par un objet partagé entre expéditeur et destinataire.
+""",
+    "P08": """Mécanisme à réaliser pour de vrai (interdit de le simuler) : la fusion des éditions concurrentes.
+- Chaque participant a sa propre réplique du document et édite localement, sans attendre.
+- Les éditions sont des opérations échangées entre répliques par un réseau simulé qui peut les
+  retarder et les livrer dans n'importe quel ordre.
+- Les répliques convergent par un vrai algorithme de fusion (transformation opérationnelle ou CRDT),
+  pas par un verrou, ni par un serveur qui remplace tout le texte.
+""",
+}
+REEL_DEFAUT = """Aucun mécanisme ne doit être simulé par un raccourci qui renvoie directement le
+résultat attendu ; ce qui dépend du temps passe par l'horloge que les tests font avancer.
+"""
+
+RED1 = """Couche : code. Première attaque.
 
 Tu écris les tests rouges de la sonde ci-dessous. Aucun code n'existe encore : c'est toi
 qui fixes l'interface publique de `app` par tes tests (classes, méthodes, valeurs), et le
 constructeur l'implémentera telle quelle. Garde-la simple et cohérente d'un test à l'autre.
 
 {tech}
+{reel}
+Tes tests doivent casser contre une implémentation qui simulerait ce mécanisme.
+
 Spécification (assertions, chacune avec son identifiant) :
 {assertions}
 
 Règles :
 - Chaque test cite l'assertion qu'il protège au début de son nom : `test_A07_...`.
   Plusieurs tests par assertion sont permis. Une assertion sans test n'est pas appliquée.
-- Un test vérifie un comportement observable par l'utilisateur, jamais une structure interne.
-- Si une assertion ne suffit pas à écrire un test sans deviner (un cas qu'elle ne tranche pas,
-  une valeur qu'elle ne fixe pas, deux assertions qui se croisent sans dire qui l'emporte),
-  NE DEVINE PAS : écris ce cas dans `lacunes.md`, une ligne par cas, au format
-  `- A07 : <le cas non tranché, en une phrase>`.
+- Un test vérifie un comportement observable de l'extérieur, jamais une structure interne.
+- Ton objectif est d'écrire des tests qui CASSENT pour une bonne raison. Quand une assertion
+  ne tranche pas un cas (une valeur qu'elle ne fixe pas, deux assertions qui se croisent sans
+  dire qui l'emporte), fais deux choses :
+  1. note le cas dans `lacunes.md`, une ligne par cas, au format exact :
+     `- A07 : <le cas non tranché> | test: test_A07_trou_<nom> | présumé: <l'assertion que ton test suppose, au format « texte | observé: état | conditions: états »>`
+  2. écris ce test `test_A07_trou_<nom>`, qui prend la position la plus raisonnable.
 
 Écris exactement deux fichiers, avec l'outil Write :
 - {dossier}/tests/test_app.py
@@ -79,13 +116,46 @@ Règles :
 Réponds ensuite seulement « ok ».
 """
 
-GREEN = """Couche : code. Tour {tour}.
+RED2 = """Couche : code. Deuxième attaque.
 
-Tu écris `{dossier}/app.py` pour que les tests de `{dossier}/tests/test_app.py` passent.
-Les tests sont en lecture seule : les modifier invalide tout ton travail.
-Tu n'as pas de moyen d'exécuter les tests pendant ce tour : relis-les avec soin.
+Le constructeur a fait passer tous tes tests (ou s'en est approché) : un test vert est, pour toi,
+un test qui n'a rien révélé. Attaque encore. Tu ne vois pas le code, seulement tes propres tests
+et leur statut.
 
 {tech}
+{reel}
+Spécification (assertions, chacune avec son identifiant) :
+{assertions}
+
+Tes tests de la première attaque (l'interface de `app` est celle-ci, garde-la) :
+```python
+{tests}
+```
+Statut à la fin du dernier tour :
+{statut}
+
+Cherche dans cet ordre : les invariants, les cas limites non dits (vide, zéro, un seul élément,
+doublon, ordre inversé, non-ASCII), les interactions entre règles, la répétition, la coordination
+de deux acteurs, et surtout tout ce qui casserait une implémentation qui simule le mécanisme.
+
+Mêmes règles qu'à la première attaque : chaque test cite son assertion (`test_A07_...`), noms
+nouveaux (aucun nom déjà pris), et pour un cas que la spec ne tranche pas, une ligne dans
+lacunes2.md au format `- A07 : <cas> | test: test_A07_trou_<nom> | présumé: <assertion>` et le test.
+
+Écris exactement deux fichiers, avec l'outil Write :
+- {dossier}/tests/test_app_2.py (il importe `app` comme le premier)
+- {dossier}/lacunes2.md (écris « aucune » si tu n'en as pas)
+Réponds ensuite seulement « ok ».
+"""
+
+GREEN = """Couche : code. Tour {tour}.
+
+Tu écris `{dossier}/app.py` pour que les tests de `{dossier}/tests/` passent.
+Les tests sont en lecture seule : les modifier invalide tout ton travail.
+Tu n'as pas de moyen d'exécuter les tests pendant ce tour : relis-les avec soin.
+{existant}
+{tech}
+{reel}
 Règles de la spec (chaque test cite l'une d'elles dans son nom) :
 {assertions}
 {decisions}
@@ -107,7 +177,7 @@ JUGE = """Une réclamation contestée, couche code. Tranche-la.
 Réclamation :
 {reclamation}
 
-Règles de la spec citées par le test (et la spec complète, pour l'ancre) :
+Spec complète (pour l'ancre) :
 {assertions}
 
 Test contesté (artefact exécuté) :
@@ -125,16 +195,18 @@ NOUVELLE_ASSERTION: <si maintenue et gap : l'assertion stricte qui manquait à l
 N'écris aucun fichier.
 """
 
+ZERO = {"neufs": 0, "cache": 0, "usd": 0}
+
 
 def appel(role, texte, modele, outils, dossier, delai=1800):
     """Un appel headless d'un agent du protocole, sans session persistante. Rend (rapport, tokens)."""
-    p = subprocess.run(["claude", "-p", "--agent", role, "--model", modele, "--output-format", "json",
-                        "--no-session-persistence", "--allowedTools", *outils.split(",")],
-                       input=texte, cwd=dossier, capture_output=True, text=True, timeout=delai)
     try:
+        p = subprocess.run(["claude", "-p", "--agent", role, "--model", modele, "--output-format", "json",
+                            "--no-session-persistence", "--allowedTools", *outils.split(",")],
+                           input=texte, cwd=dossier, capture_output=True, text=True, timeout=delai)
         r = json.loads(p.stdout)
-    except json.JSONDecodeError:
-        return {"is_error": True, "result": (p.stdout + p.stderr)[-1500:]}, {"neufs": 0, "cache": 0, "usd": 0}
+    except (json.JSONDecodeError, subprocess.TimeoutExpired) as e:
+        return {"is_error": True, "result": str(e)[-1500:]}, dict(ZERO)
     neufs = cache = 0
     for u in r.get("modelUsage", {}).values():
         neufs += u.get("inputTokens", 0) + u.get("outputTokens", 0) + u.get("cacheCreationInputTokens", 0)
@@ -146,15 +218,13 @@ def additionner(*ts):
     return {k: sum(t[k] for t in ts) for k in ("neufs", "cache", "usd")}
 
 
-ZERO = {"neufs": 0, "cache": 0, "usd": 0}
-
-
 def lignes_assertions(chemin):
     out = []
     for ligne in open(chemin, encoding="utf-8"):
         ligne = ligne.strip()
         if ligne.startswith("- ") and "observé:" in ligne:
-            out.append(ligne[2:])
+            texte = "|".join(m for m in ligne[2:].split("|") if not m.strip().lower().startswith("frontière:"))
+            out.append(texte.strip())  # la marque « frontière » n'est jamais montrée aux agents
     return {f"A{i:02d}": t for i, t in enumerate(out, 1)}
 
 
@@ -162,30 +232,59 @@ def formater(assertions):
     return "\n".join(f"{i} : {t}" for i, t in assertions.items())
 
 
-def empreinte(f):
-    return hashlib.sha256(f.read_bytes()).hexdigest() if f.exists() else None
+def empreinte(dossier):
+    h = hashlib.sha256()
+    for f in sorted((dossier / "tests").glob("*.py")):
+        h.update(f.name.encode() + f.read_bytes())
+    return h.hexdigest()
+
+
+def noms_tests(dossier):
+    noms = []
+    for f in sorted((dossier / "tests").glob("test_*.py")):
+        try:
+            arbre = ast.parse(f.read_text(encoding="utf-8"))
+        except SyntaxError:
+            continue
+        noms += [n.name for n in ast.walk(arbre) if isinstance(n, ast.FunctionDef) and n.name.startswith("test_")]
+    return noms
 
 
 def executer(dossier):
-    """Lance pytest ; rend {nom du test: (passe: bool, message)}."""
+    """Lance pytest ; rend {nom du test: (passe, message)}. Un test connu absent du rapport
+    (module qui ne s'importe pas, délai dépassé) compte comme cassé."""
     xml = dossier / "resultats.xml"
     xml.unlink(missing_ok=True)
-    subprocess.run([sys.executable, "-m", "pytest", "-q", "-p", "no:cacheprovider",
-                    f"--junitxml={xml}", "tests"], cwd=dossier, capture_output=True, text=True, timeout=900)
+    sortie_pytest = ""
+    try:
+        p = subprocess.run([sys.executable, "-m", "pytest", "-q", "-p", "no:cacheprovider", "--timeout=20",
+                            f"--junitxml={xml}", "tests"], cwd=dossier, capture_output=True, text=True, timeout=900)
+        sortie_pytest = p.stdout
+    except subprocess.TimeoutExpired:
+        pass
     res = {}
-    if not xml.exists():
-        return res
-    for tc in ET.parse(xml).iter("testcase"):
-        nom = tc.get("name")
-        echec = tc.find("failure")
-        if echec is None:
-            echec = tc.find("error")
-        if tc.find("skipped") is not None:
-            res[nom] = (False, "skipped")
-        elif echec is None:
-            res[nom] = (True, "")
-        else:
-            res[nom] = (False, (echec.get("message") or "")[:300])
+    collecte = ""
+    if xml.exists():
+        for tc in ET.parse(xml).iter("testcase"):
+            nom = tc.get("name")
+            echec = tc.find("failure")
+            if echec is None:
+                echec = tc.find("error")
+            if not nom.startswith("test_"):
+                # le message junit dit seulement « collection failure » : on garde la vraie erreur
+                # (corrigé après le duel V1, où le green du chat a perdu un tour faute de la voir)
+                detail = [l for l in sortie_pytest.splitlines() if "Error" in l or l.startswith("E ")]
+                collecte = " / ".join(detail[-3:]) or (echec.get("message") if echec is not None else "") or "erreur de collecte"
+                continue
+            nom = nom.split("[")[0]
+            ok = echec is None and tc.find("skipped") is None
+            msg = "" if ok else ("skipped" if echec is None else (echec.get("message") or "")[:300])
+            if nom in res:  # test paramétré : il passe si toutes ses variantes passent
+                ok, msg = res[nom][0] and ok, res[nom][1] or msg
+            res[nom] = (ok, msg)
+    for nom in noms_tests(dossier):
+        if nom not in res:
+            res[nom] = (False, f"non exécuté : {collecte[:400] or 'app.py ne s’importe pas ou délai dépassé'}")
     return res
 
 
@@ -195,9 +294,12 @@ def assertion_de(test):
 
 
 def source_test(dossier, nom):
-    src = (dossier / "tests" / "test_app.py").read_text(encoding="utf-8")
-    m = re.search(rf"^([ \t]*)def {re.escape(nom)}\(.*?(?=^\1def |^\S|\Z)", src, re.S | re.M)
-    return m.group(0) if m else "(source introuvable)"
+    for f in sorted((dossier / "tests").glob("test_*.py")):
+        src = f.read_text(encoding="utf-8")
+        m = re.search(rf"^([ \t]*)def {re.escape(nom)}\(.*?(?=^\1def |^\S|\Z)", src, re.S | re.M)
+        if m:
+            return m.group(0)
+    return "(source introuvable)"
 
 
 def lire_reclamations(f):
@@ -212,25 +314,44 @@ def lire_reclamations(f):
     return out
 
 
+def lire_lacunes(f):
+    """Lignes « - A07 : cas | test: nom | présumé: assertion » → liste de dicts."""
+    out = []
+    if not f.exists():
+        return out
+    motif = re.compile(r"^- (?P<cas>.*?)\s*\|\s*test:\s*(?P<test>\S+)\s*(?:\|\s*présumé:\s*(?P<pres>.*))?$")
+    for l in f.read_text(encoding="utf-8").splitlines():
+        if not l.startswith("- "):
+            continue
+        m = motif.match(l.strip())
+        champs = {"cas": m["cas"], "test": m["test"], "présumé": (m["pres"] or "").strip()} if m else {"cas": l[2:].strip()}
+        out.append(champs)
+    return out
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("sonde")
+    ap.add_argument("--passes", default="strict-v2", help="dossier de data/passes")
     ap.add_argument("--passe", default="A")
     ap.add_argument("--max-tours", type=int, default=20)  # SPEC 6.4 : vingt tours → non convergente
+    ap.add_argument("--attaques", type=int, default=2)
+    ap.add_argument("--tour-attaque-2", type=int, default=8, help="attaque 2 au plus tard à ce tour")
     ap.add_argument("--red", default="opus")
-    ap.add_argument("--green", default="sonnet")
+    ap.add_argument("--green", default="haiku")
     ap.add_argument("--juge", default="opus")
-    ap.add_argument("--force", action="store_true", help="exécuter une sonde non concordante (marqué au journal)")
+    ap.add_argument("--sortie", default="runs-v1")
+    ap.add_argument("--force", action="store_true", help="exécuter une sonde floue ou non concordante (marqué)")
     a = ap.parse_args()
 
-    # SPEC 6.4 : une sonde non concordante est refusée
-    passes = sorted((RACINE / "data" / "passes" / "strict").glob(f"{a.sonde}_*.txt"))
+    dossier_passes = RACINE / "data" / "passes" / a.passes
+    passes = sorted(dossier_passes.glob(f"{a.sonde}_*.txt"))
     ks = [mesurer(lire_passe(p))["k"] for p in passes]
-    concordante = len(ks) > 1 and max(ks) - min(ks) <= 0.15
-    if not concordante and not a.force:
-        sys.exit(f"{a.sonde} non concordante (k = {[round(k, 2) for k in ks]}) : exécution refusée (SPEC 6.4)")
+    k, statut_conc = concordance(ks)
+    if statut_conc != "concordante" and not a.force:
+        sys.exit(f"{a.sonde} : {statut_conc} (k = {[round(x, 2) for x in ks]}) : exécution refusée (SPEC 6.4)")
 
-    sortie = RACINE / "runs" / a.sonde
+    sortie = RACINE / a.sortie / a.sonde
     if sortie.exists():
         sys.exit(f"{sortie} existe déjà")
     sortie.mkdir(parents=True)
@@ -240,40 +361,68 @@ def main():
     (travail / "reclamations").mkdir()
     journal = (sortie / "journal.jsonl").open("a", encoding="utf-8")
 
-    assertions = lignes_assertions(RACINE / "data" / "passes" / "strict" / f"{a.sonde}_{a.passe}.txt")
+    fichier_passe = dossier_passes / f"{a.sonde}_{a.passe}.txt"
+    assertions = lignes_assertions(fichier_passe)
+    frontiere = {aid: f for aid, f in zip(assertions, frontieres(fichier_passe))}
+    reel = REEL.get(a.sonde, REEL_DEFAUT)
     nouvelles = {}
-    ecartes = set()  # tests écartés par un verdict de contradiction
+    ecartes = set()
     decisions = []
-    essais = {}  # assertion → tour où elle passe pour la première fois
-    bascules = {}  # assertion → nombre de passages passe → casse
+    classes = {}  # test → type d'échec, figé à son premier échec
+    casses = {}  # assertion → nombre de tours où elle a cassé
+    passee = {}  # assertion → a fini par passer
+    bascules = {}
     precedent = {}
+    lacunes_par_test = {}
+    trous_a_priori = []
 
-    # Tour 1, découpe : le red écrit les tests
-    r, t_red = appel("red", RED.format(tech=TECH, assertions=formater(assertions), dossier=travail),
-                     a.red, "Write", travail)
-    test_f = travail / "tests" / "test_app.py"
-    if not test_f.exists():
-        sys.exit(f"le red n'a pas écrit de tests : {r.get('result', '')[:500]}")
-    sceau = empreinte(test_f)
-    shutil.copy(test_f, sortie / "test_app.py")
-    lacunes = [l[2:].strip() for l in (travail / "lacunes.md").read_text(encoding="utf-8").splitlines()
-               if l.startswith("- ")] if (travail / "lacunes.md").exists() else []
+    def spec():
+        return formater({**assertions, **nouvelles})
 
+    def attaquer(n, statut_txt=""):
+        if n == 1:
+            texte = RED1.format(tech=TECH, reel=reel, assertions=spec(), dossier=travail)
+            fichier, lac = "test_app.py", "lacunes.md"
+        else:
+            tests = (travail / "tests" / "test_app.py").read_text(encoding="utf-8")
+            texte = RED2.format(tech=TECH, reel=reel, assertions=spec(), tests=tests, statut=statut_txt, dossier=travail)
+            fichier, lac = "test_app_2.py", "lacunes2.md"
+        r, t = appel("red", texte, a.red, "Write", travail)
+        if not (travail / "tests" / fichier).exists():
+            sys.exit(f"le red n'a pas écrit {fichier} : {str(r.get('result', ''))[:500]}")
+        shutil.copy(travail / "tests" / fichier, sortie / fichier)
+        if (travail / lac).exists():
+            shutil.copy(travail / lac, sortie / lac)
+        for l in lire_lacunes(travail / lac):
+            l["attaque"] = n
+            trous_a_priori.append(l)
+            if l.get("test"):
+                lacunes_par_test[l["test"]] = l
+        return t
+
+    t_attaque = attaquer(1)
+    sceau = empreinte(travail)
+    attaques = 1
     resultats_txt = "Premier tour : aucun résultat encore."
     convergent = False
-    for tour in range(1, a.max_tours + 1):
-        t_decoupe = t_red if tour == 1 else dict(ZERO)
-        dec_txt = ("Décisions du juge sur les réclamations précédentes :\n" + "\n".join(decisions) + "\n") if decisions else ""
-        r, t_green = appel("green", GREEN.format(tour=tour, dossier=travail, tech=TECH,
-                                                 assertions=formater({**assertions, **nouvelles}),
-                                                 decisions=dec_txt, resultats=resultats_txt),
+    tour = 0
+    while tour < a.max_tours:
+        tour += 1
+        t_decoupe, t_attaque = t_attaque, dict(ZERO)
+        dec_txt = ("Décisions sur les réclamations et les trous des tours précédents :\n" + "\n".join(decisions) + "\n") if decisions else ""
+        existant = ("Un app.py existe déjà (ton essai précédent) : lis-le et corrige-le.\n"
+                    if (travail / "app.py").exists() else "")
+        r, t_green = appel("green", GREEN.format(tour=tour, dossier=travail, tech=TECH, reel=reel, existant=existant,
+                                                 assertions=spec(), decisions=dec_txt, resultats=resultats_txt),
                            a.green, "Read,Write,Edit", travail)
-        viole = empreinte(test_f) != sceau
-        if viole:  # diff non vide sur les tests : travail invalidé, tests restaurés
-            shutil.copy(sortie / "test_app.py", test_f)
+        viole = empreinte(travail) != sceau
+        if viole:  # diff non vide sur les tests : tests restaurés depuis la copie du banc
+            for f in ("test_app.py", "test_app_2.py"):
+                if (sortie / f).exists():
+                    shutil.copy(sortie / f, travail / "tests" / f)
         res = executer(travail)
+        shutil.copy(travail / "app.py", sortie / f"app_tour{tour:02d}.py") if (travail / "app.py").exists() else None
 
-        # statut par assertion : passe si tous ses tests (non écartés) passent
         par_a = {}
         for nom, (ok, _) in res.items():
             if nom in ecartes:
@@ -281,13 +430,15 @@ def main():
             aid = assertion_de(nom) or "?"
             par_a[aid] = par_a.get(aid, True) and ok
         for aid, ok in par_a.items():
-            if ok and aid not in essais:
-                essais[aid] = tour
+            if ok:
+                passee[aid] = True
+            else:
+                casses[aid] = casses.get(aid, 0) + 1
+                passee[aid] = False
             if precedent.get(aid) and not ok:
                 bascules[aid] = bascules.get(aid, 0) + 1
         precedent = par_a
 
-        # classement des échecs
         recl = {c["test"]: c for c in lire_reclamations(travail / "reclamations" / f"tour{tour}.md")}
         echecs = []
         t_juge = dict(ZERO)
@@ -295,25 +446,38 @@ def main():
             if ok or nom in ecartes:
                 continue
             aid = assertion_de(nom)
-            e = {"test": nom, "assertion": aid, "message": msg, "type": "bug", "source": "pas de réclamation"}
-            if nom in recl:
+            e = {"test": nom, "assertion": aid, "frontiere": frontiere.get(aid, False), "message": msg}
+            if nom in classes and nom not in recl:
+                e.update(type=classes[nom], source="déjà classé")
+                echecs.append(e)
+                continue
+            if nom in lacunes_par_test:
+                l = lacunes_par_test[nom]
+                e.update(type="trou", source="test « trou » du red")
+                pres = l.get("présumé", "")
+                if pres and nom not in classes:
+                    nid = f"N{len(nouvelles) + 1:02d}"
+                    nouvelles[nid] = pres
+                    e["nouvelle_assertion"] = nid
+                    decisions.append(f"- {nom} : trou, la spec gagne {nid} : {pres} (le test reste exigé).")
+            elif nom in recl:
                 c = recl[nom]
-                rj, tj = appel("judge", JUGE.format(reclamation=c["texte"], assertions=formater({**assertions, **nouvelles}),
+                rj, tj = appel("judge", JUGE.format(reclamation=c["texte"], assertions=spec(),
                                                     test=source_test(travail, nom), resultat=msg or "échec"),
                                a.juge, "Write", travail, delai=900)
                 t_juge = additionner(t_juge, tj)
-                txt = rj.get("result", "")
+                txt = str(rj.get("result", ""))
                 v = re.search(r"VERDICT:\s*(maintenue|rejetée|rejetee|non tranchable)", txt)
                 v = v.group(1) if v else "non tranchable"
                 na = re.search(r"NOUVELLE_ASSERTION:\s*(.+)", txt)
                 na = na.group(1).strip() if na else "aucune"
                 (sortie / "verdicts").mkdir(exist_ok=True)
-                (sortie / "verdicts" / f"tour{tour}-{nom}.md").write_text(c["texte"] + "\n\n---\n\n" + txt, encoding="utf-8")
+                (sortie / "verdicts" / f"tour{tour:02d}-{nom}.md").write_text(c["texte"] + "\n\n---\n\n" + txt, encoding="utf-8")
                 if v == "maintenue" and c["kind"] == "contradiction":
                     e.update(type="contradiction", source="juge")
                     ecartes.add(nom)
                     decisions.append(f"- {nom} : contradiction reconnue, le test est écarté.")
-                elif v == "rejetée" or v == "rejetee":
+                elif v in ("rejetée", "rejetee"):
                     e.update(type="bug", source="juge : réclamation rejetée")
                     decisions.append(f"- {nom} : réclamation rejetée, le test reste exigé.")
                 else:
@@ -323,13 +487,19 @@ def main():
                         nouvelles[nid] = na
                         e["nouvelle_assertion"] = nid
                     decisions.append(f"- {nom} : trou reconnu, le test reste exigé ; la spec gagne : {na}")
-            elif aid and bascules.get(aid, 0) >= 2:
+            else:
+                e.update(type="bug", source="pas de réclamation")
+            if aid and bascules.get(aid, 0) >= 2 and e["type"] == "bug":
                 e.update(type="contradiction", source="alternance passe/casse")
+            classes.setdefault(nom, e["type"])
+            if e["type"] == "contradiction":
+                classes[nom] = "contradiction"
             echecs.append(e)
 
         tout_passe = bool(res) and all(ok for n, (ok, _) in res.items() if n not in ecartes)
         ligne = {
             "tour": tour,
+            "attaque": attaques,
             "statut": {aid: ("passe" if ok else "casse") for aid, ok in sorted(par_a.items())},
             "tests": {"total": len(res), "passent": sum(ok for ok, _ in res.values()), "ecartes": len(ecartes)},
             "tokens_decoupe": additionner(t_decoupe, t_juge),
@@ -337,30 +507,57 @@ def main():
             "echecs": echecs,
             "reclamations": len(recl),
             "violation_tests": viole,
-            "nouvelles_assertions": dict(nouvelles),
+            "green_erreur": bool(r.get("is_error")),
         }
         journal.write(json.dumps(ligne, ensure_ascii=False) + "\n")
         journal.flush()
-        print(f"{a.sonde} tour {tour} : {ligne['tests']['passent']}/{len(res)} tests, "
+        print(f"{a.sonde} tour {tour} (attaque {attaques}) : {ligne['tests']['passent']}/{len(res)} tests, "
               f"{sum(1 for v in ligne['statut'].values() if v == 'passe')}/{len(ligne['statut'])} assertions, "
-              f"échecs {[e['type'] for e in echecs]}", flush=True)
+              f"échecs {dict((t, sum(1 for e in echecs if e['type'] == t)) for t in ('bug', 'trou', 'contradiction'))}",
+              flush=True)
+        statut_txt = "\n".join(f"- {n} : {'passe' if ok else 'casse'}" for n, (ok, _) in sorted(res.items()))
+        if attaques < a.attaques and (tout_passe or tour >= a.tour_attaque_2):
+            attaques += 1
+            t_attaque = attaquer(attaques, statut_txt)
+            sceau = empreinte(travail)
+            resultats_txt = ("Le red a ajouté des tests (tests/test_app_2.py). Échecs à la fin du tour précédent :\n"
+                             + "\n".join(f"- {n} : {m}" for n, (ok, m) in sorted(res.items()) if not ok and n not in ecartes))
+            continue
         if tout_passe:
             convergent = True
             break
         resultats_txt = "Résultats de l'exécution des tests à la fin du tour précédent (échecs seulement) :\n" + "\n".join(
             f"- {nom} : {msg}" for nom, (ok, msg) in sorted(res.items()) if not ok and nom not in ecartes)
 
-    for f in ("app.py", "lacunes.md"):
+    for f in ("app.py",):
         if (travail / f).exists():
             shutil.copy(travail / f, sortie / f)
     if any((travail / "reclamations").iterdir()):
         shutil.copytree(travail / "reclamations", sortie / "reclamations")
-    fin = {"sonde": a.sonde, "passe": a.passe, "k": [round(k, 2) for k in ks], "concordante": concordante,
-           "convergent": convergent, "tours": tour, "essais": essais, "lacunes": lacunes,
-           "nouvelles_assertions": nouvelles, "modeles": {"red": a.red, "green": a.green, "juge": a.juge},
-           "assertions": len(assertions)}
+
+    # champ local : tours cassés + 1 si l'assertion a fini par passer
+    essais = {aid: casses.get(aid, 0) + (1 if passee.get(aid) else 0) for aid in set(casses) | set(passee) if aid in assertions}
+    non_passees = sorted(aid for aid in essais if not passee.get(aid))
+
+    def moyenne(ids):
+        v = [essais[i] for i in ids if i in essais]
+        return round(sum(v) / len(v), 2) if v else None
+
+    fr_ids = [i for i in assertions if frontiere.get(i)]
+    autres = [i for i in assertions if not frontiere.get(i)]
+    types = {}
+    for t in classes.values():
+        types[t] = types.get(t, 0) + 1
+    fin = {"sonde": a.sonde, "passes": a.passes, "passe": a.passe, "k_passes": [round(x, 2) for x in ks],
+           "k_retenu": round(k, 2) if k else None, "concordance": statut_conc, "convergent": convergent,
+           "tours": tour, "attaques": attaques, "assertions": len(assertions), "frontieres": len(fr_ids),
+           "champ_local": {"tout": moyenne(list(assertions)), "frontiere": moyenne(fr_ids), "autres": moyenne(autres)},
+           "essais": dict(sorted(essais.items())), "non_passees": non_passees,
+           "trous_a_priori": len(trous_a_priori), "echecs_par_type": types,
+           "nouvelles_assertions": nouvelles, "lacunes": trous_a_priori,
+           "modeles": {"red": a.red, "green": a.green, "juge": a.juge}}
     (sortie / "bilan.json").write_text(json.dumps(fin, ensure_ascii=False, indent=1), encoding="utf-8")
-    print(json.dumps(fin, ensure_ascii=False))
+    print(json.dumps({k: v for k, v in fin.items() if k not in ("lacunes", "essais")}, ensure_ascii=False))
 
 
 if __name__ == "__main__":

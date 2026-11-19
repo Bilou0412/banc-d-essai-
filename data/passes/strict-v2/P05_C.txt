@@ -1,0 +1,42 @@
+ÉTATS: statut_article; date_planifiée; heure_courante; date_affichée; rôle; propriété; visibilité_article; statut_commentaire; visibilité_commentaire; file_modération; compteur_commentaires; commentaires_ouverts; texte_commentaire; tags_article; page_tag; flux_RSS
+ASSERTIONS:
+- Un visiteur qui ouvre un article en brouillon ne voit pas l'article | observé: visibilité_article | conditions: statut_article, rôle
+- Un visiteur qui ouvre un article publié voit l'article | observé: visibilité_article | conditions: statut_article
+- L'auteur d'un article en brouillon qui ouvre cet article voit l'article | observé: visibilité_article | conditions: statut_article, propriété
+- Un auteur qui ouvre le brouillon d'un autre auteur ne voit pas l'article | observé: visibilité_article | conditions: statut_article, propriété
+- Un visiteur qui ouvre un article planifié dont la date planifiée n'est pas atteinte ne voit pas l'article | observé: visibilité_article | conditions: statut_article, heure_courante, date_planifiée
+- L'auteur d'un brouillon qui publie cet article fait passer son statut à « publié » | observé: statut_article | conditions: propriété
+- Un auteur qui tente de publier le brouillon d'un autre auteur laisse le statut de l'article à « brouillon » | observé: statut_article | conditions: propriété
+- Un visiteur qui tente de publier un brouillon laisse le statut de l'article à « brouillon » | observé: statut_article | conditions: rôle
+- L'auteur d'un brouillon qui le planifie avec une date future fait passer son statut à « planifié » | observé: statut_article | conditions: propriété, date_planifiée, heure_courante
+- L'auteur d'un brouillon qui le planifie avec une date passée laisse le statut de l'article à « brouillon » | observé: statut_article | conditions: date_planifiée, heure_courante
+- Lorsque l'heure courante atteint la date planifiée d'un article planifié, son statut passe à « publié » | observé: statut_article | conditions: statut_article, heure_courante, date_planifiée | frontière: oui
+- Un article publié par planification affiche comme date de publication sa date planifiée | observé: date_affichée | conditions: date_planifiée | frontière: oui
+- Un article publié immédiatement affiche comme date de publication l'heure de l'action de publication | observé: date_affichée | conditions: heure_courante
+- L'auteur d'un article publié qui le repasse en brouillon fait passer son statut à « brouillon » | observé: statut_article | conditions: propriété
+- Un visiteur qui poste un commentaire non vide sur un article publié aux commentaires ouverts crée un commentaire au statut « en attente » | observé: statut_commentaire | conditions: statut_article, commentaires_ouverts, texte_commentaire
+- Un visiteur qui poste un commentaire valide ajoute ce commentaire à la file de modération | observé: file_modération | conditions: commentaires_ouverts, statut_article, texte_commentaire
+- Un visiteur qui poste un commentaire sur un article aux commentaires fermés laisse la file de modération inchangée | observé: file_modération | conditions: commentaires_ouverts
+- Un visiteur qui poste un commentaire sur un article en brouillon laisse la file de modération inchangée | observé: file_modération | conditions: statut_article
+- Un visiteur qui poste un commentaire vide laisse la file de modération inchangée | observé: file_modération | conditions: texte_commentaire
+- Un commentaire en attente n'est pas affiché à un visiteur | observé: visibilité_commentaire | conditions: statut_commentaire, rôle
+- Un commentaire en attente est affiché à un modérateur | observé: visibilité_commentaire | conditions: statut_commentaire, rôle
+- Un modérateur qui approuve un commentaire en attente fait passer son statut à « approuvé » | observé: statut_commentaire | conditions: rôle
+- Un modérateur qui rejette un commentaire en attente fait passer son statut à « rejeté » | observé: statut_commentaire | conditions: rôle
+- Un auteur non modérateur qui tente d'approuver un commentaire en attente laisse son statut à « en attente » | observé: statut_commentaire | conditions: rôle
+- Un modérateur qui approuve un commentaire en attente retire ce commentaire de la file de modération | observé: file_modération | conditions: rôle
+- Un commentaire approuvé est affiché à un visiteur | observé: visibilité_commentaire | conditions: statut_commentaire
+- Un commentaire rejeté n'est pas affiché à un visiteur | observé: visibilité_commentaire | conditions: statut_commentaire
+- Un modérateur qui approuve un commentaire en attente augmente de un le compteur de commentaires de l'article | observé: compteur_commentaires | conditions: statut_commentaire, rôle
+- Un visiteur qui poste un commentaire laisse le compteur de commentaires de l'article inchangé | observé: compteur_commentaires | conditions: statut_commentaire
+- Un modérateur qui supprime un commentaire approuvé diminue de un le compteur de commentaires de l'article | observé: compteur_commentaires | conditions: statut_commentaire, rôle
+- L'auteur d'un article qui ferme ses commentaires fait passer l'option des commentaires à « fermés » | observé: commentaires_ouverts | conditions: propriété
+- L'auteur d'un article qui lui ajoute un tag absent fait apparaître ce tag dans les tags de l'article | observé: tags_article | conditions: propriété
+- L'auteur d'un article qui lui ajoute un tag déjà présent laisse les tags de l'article sans doublon | observé: tags_article | conditions: tags_article
+- La page d'un tag liste un article publié portant ce tag | observé: page_tag | conditions: statut_article, tags_article
+- La page d'un tag ne liste pas un article en brouillon portant ce tag | observé: page_tag | conditions: statut_article
+- L'auteur d'un article publié qui lui retire un tag fait disparaître l'article de la page de ce tag | observé: page_tag | conditions: tags_article
+- Le flux RSS contient un article publié | observé: flux_RSS | conditions: statut_article
+- Le flux RSS ne contient pas un article en brouillon | observé: flux_RSS | conditions: statut_article
+- Le flux RSS ne contient pas un article planifié dont la date planifiée n'est pas atteinte | observé: flux_RSS | conditions: statut_article, heure_courante, date_planifiée
+- Le flux RSS ordonne les articles par date de publication affichée décroissante | observé: flux_RSS | conditions: date_affichée

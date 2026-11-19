@@ -20,7 +20,7 @@ Bilel, développeur freelance. Il pense par **intuitions structurelles et parall
 
 1. **Aveuglement.** Les passes sont faites par des sous-agents neufs avec `prompts/decompositeur-strict.md`, **sans rien ajouter**. Jamais de prédiction, de thèse, ni de mots comme « densité », « spin » ou « k » dans leur consigne. C'est ce qui rend k fiable.
 2. **Prédiction figée avant les passes.** Elle sépare densité fonctionnelle et difficulté technique.
-3. **Deux passes minimum par sonde.** Si l'écart de k dépasse 0,15, une troisième passe.
+3. **Deux passes minimum par sonde.** Si l'écart de k dépasse 0,15, une troisième passe. À 3 passes, concordante si écart-type ≤ 0,10, sinon **floue** : pas de 4e passe, on creuse la spec. k retenu = médiane.
 4. **Ne comparer que des passes faites avec la même règle** (stricte).
 5. **Toute thèse qui change de statut garde sa raison chiffrée.**
 6. **Pas de seuil fixé après avoir vu les données** sans le marquer « non validé ».
@@ -30,18 +30,21 @@ Bilel, développeur freelance. Il pense par **intuitions structurelles et parall
 ```
 CLAUDE.md                      ce fichier
 docs/SPEC-banc.md              spec fonctionnelle du banc (45 assertions strictes)
-docs/theses.md                 registre des thèses H1-H15
+docs/theses.md                 registre des thèses H1-H17
 docs/HISTORIQUE.md             la conversation d'origine, résumée
-prompts/decompositeur-strict.md  consigne exacte des passes aveugles
+prompts/decompositeur-strict.md  consigne exacte des passes aveugles (v1)
+prompts/decompositeur-strict-v2.md  v1 + règle 5 (assertions frontière, « | frontière: oui »)
 data/sondes.md                 les 10 sondes, leur description et leur k
 data/passes/strict/            23 passes aveugles strictes (P01_A ... P10_D)
+data/passes/strict-v2/         passes v2 de P05, P08, P10 (jamais comparées aux v1)
 data/passes/aveugle-libre/     4 passes aveugles sans la règle stricte (historique)
 data/passes/claude-libre/      passes écrites par Claude (biaisées, historique)
 outils/mesure.py               calcule k, réseau, champ et concordance
 outils/passe_aveugle.py        lance une passe aveugle stricte (claude -p neuf, dossier vide)
 outils/duel.py                 fait tourner le protocole adversarial sur une sonde, tour par tour
-runs/<sonde>/                  journal, tests, code et lacunes de chaque duel
-docs/duel-V0.md                rapport du premier duel
+runs/<sonde>/                  duel V0 (passes v1, green sonnet, une attaque)
+runs-v1/<sonde>/               duel V1 (passes v2, green haiku, deux attaques, mécanismes réels)
+docs/duel-V0.md, duel-V1.md    rapports des duels
 protocol/, .claude/agents/     le protocole adversarial attaché (tools/link.py), ne pas éditer protocol/
 ```
 

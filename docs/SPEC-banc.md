@@ -85,12 +85,18 @@ Format : `situation → résultat | observé: état | conditions: états`
 - Deux assertions ne partagent que le champ → elles ne sont pas reliées | observé: réseau | conditions: champ
 - Deux passes d'une sonde avec un écart de k inférieur ou égal à 0,15 → la sonde est marquée concordante | observé: concordance | conditions: k
 - Deux passes d'une sonde avec un écart de k supérieur à 0,15 → une troisième passe est lancée | observé: passe | conditions: concordance
-- Une sonde concordante → son k retenu est la moyenne des passes | observé: k | conditions: concordance
+- Trois passes ou plus d'une sonde avec un écart-type de k inférieur ou égal à 0,10 → la sonde est marquée concordante | observé: concordance | conditions: k
+- Trois passes d'une sonde avec un écart-type de k supérieur à 0,10 → la sonde est marquée floue | observé: concordance | conditions: k
+- Une sonde floue → aucune passe supplémentaire n'est lancée | observé: passe | conditions: concordance
+- Une sonde avec plusieurs passes → son k retenu est la médiane des passes | observé: k | conditions: aucune
+
+Une sonde **floue** n'est plus mesurée : on creuse sa spec (H16). L'écart-type est celui d'échantillon (diviseur n − 1).
 
 ### 6.4 Exécution (branchement du protocole adversarial)
 
 - Lancer l'exécution d'une sonde concordante → le protocole reçoit les assertions de la passe A | observé: tour | conditions: concordance
 - Lancer l'exécution d'une sonde non concordante → l'exécution est refusée | observé: tour | conditions: concordance
+- Lancer l'exécution d'une sonde floue pour tester H16 → l'exécution est faite et marquée floue | observé: tour | conditions: concordance
 - Fin d'un tour → le statut de chaque assertion est enregistré (passe ou casse) | observé: statut d'assertion | conditions: tour
 - Fin d'un tour → les tokens de découpe du tour sont enregistrés | observé: tokens découpe | conditions: tour
 - Fin d'un tour → les tokens d'exécution du tour sont enregistrés | observé: tokens exécution | conditions: tour
@@ -137,18 +143,18 @@ Format : `situation → résultat | observé: état | conditions: états`
 
 k strict mesuré à l'aveugle (moyenne de 2 passes) :
 
-La colonne ± donne la moitié de l'écart entre les deux passes. Selon la règle 6.3 (écart total ≤ 0,15), **Réservation (écart 0,30) et Chat chiffré (écart 0,18) ne sont pas concordantes** et demandent une troisième passe.
+La colonne ± donne la moitié de l'écart entre les deux premières passes. Après la troisième passe (19/11), **Réservation (écart-type 0,15) et Chat chiffré (écart-type 0,26 sur 3 passes) sont floues** (règle 6.3). k retenu = médiane.
 
 | Sonde | k | ± |
 |---|---|---|
 | Blog avec commentaires | 2,40 | ±0,05 |
-| Réservation de créneaux | 2,20 | ±0,15 |
+| Réservation de créneaux (floue) | 2,18 | écart-type 0,15 |
 | Note synchronisée hors ligne | 1,94 | ±0,03 |
 | Pomodoro avec statistiques | 1,90 | ±0,05 |
 | Inventaire de matériel | 1,83 | ±0,04 |
 | Carnet de contacts | 1,76 | ±0,07 |
 | Todo multi-listes | 1,76 | ±0,01 |
-| Chat chiffré de bout en bout | 1,71 | ±0,09 |
+| Chat chiffré de bout en bout (floue) | 1,80 | écart-type 0,26 |
 | Éditeur collaboratif temps réel | 1,62 | ±0,01 |
 | Gestionnaire de recettes | 1,57 | ±0,05 |
 

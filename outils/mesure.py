@@ -18,7 +18,20 @@ import sys
 
 import networkx as nx
 
-ECART_MAX = 0.15  # écart de k toléré entre deux passes (voir SPEC 6.3)
+ECART_MAX = 0.15  # 2 passes : écart max − min toléré (SPEC 6.3)
+ECART_TYPE_MAX = 0.10  # 3 passes ou plus : écart-type (d'échantillon) toléré (SPEC 6.3)
+PASSES_MAX = 3  # au-delà, la sonde est « floue » : on ne la mesure plus, on creuse sa spec
+
+
+def concordance(ks):
+    """SPEC 6.3. Rend (k retenu = médiane, statut). Statuts : une seule passe,
+    concordante, non concordante (lancer une 3e passe), floue."""
+    if len(ks) < 2:
+        return (ks[0] if ks else None), "une seule passe"
+    k = st.median(ks)
+    if len(ks) == 2:
+        return k, "concordante" if max(ks) - min(ks) <= ECART_MAX else "non concordante : lancer une 3e passe"
+    return k, "concordante" if st.stdev(ks) <= ECART_TYPE_MAX else "floue"
 
 
 def lire_passe(chemin):
@@ -33,6 +46,18 @@ def lire_passe(chemin):
         cond = {c.strip().lower() for c in cond_txt.split(",") if c.strip() and c.strip().lower() != "aucune"}
         assertions.append((obs, cond - {obs}))
     return assertions
+
+
+def frontieres(chemin):
+    """Liste de booléens, une par assertion lue : marquée « | frontière: oui » (consigne v2)."""
+    out = []
+    for ligne in open(chemin, encoding="utf-8"):
+        ligne = ligne.strip()
+        if not ligne.startswith("- ") or "observé:" not in ligne:
+            continue
+        morceaux = [m.strip().lower() for m in ligne[2:].split("|")]
+        out.append(any(m.startswith("frontière:") and m.split(":", 1)[1].strip() == "oui" for m in morceaux))
+    return out
 
 
 def mesurer(assertions):
@@ -73,16 +98,20 @@ def main(cible):
             print(f"! {nom} : illisible ou presque vide ({len(A)} assertions)")
             continue
         m = mesurer(A)
+        fr = frontieres(f)
+        m["frontieres"] = sum(fr)
         par_sonde.setdefault(sonde, []).append(m)
         print(f"{nom:10s} k={m['k']:.2f}  densité={m['densite']:.2f}  modularité={m['modularite']:.2f}  "
-              f"assertions={m['assertions']}  états={m['etats']}  champ={m['champ']} ({m['part_champ']:.0%})")
+              f"assertions={m['assertions']}  états={m['etats']}  champ={m['champ']} ({m['part_champ']:.0%})"
+              + (f"  frontières={m['frontieres']} ({m['frontieres'] / m['assertions']:.0%})" if m["frontieres"] else ""))
     print()
     for sonde, ms in sorted(par_sonde.items()):
         ks = [m["k"] for m in ms]
-        ecart = (max(ks) - min(ks)) / 2
-        etat = "concordante" if len(ks) > 1 and max(ks) - min(ks) <= ECART_MAX else (
-            "une seule passe" if len(ks) == 1 else "NON concordante : lancer une passe de plus")
-        print(f"{sonde}: k retenu = {st.mean(ks):.2f} ± {ecart:.2f}  ({etat})")
+        k, etat = concordance(ks)
+        dispersion = f"écart-type {st.stdev(ks):.2f}" if len(ks) > 2 else f"écart {max(ks) - min(ks):.2f}"
+        fr = sum(m["frontieres"] for m in ms) / len(ms)
+        print(f"{sonde}: k retenu (médiane) = {k:.2f}, {len(ks)} passes, {dispersion}  ({etat})"
+              + (f"  frontières moy. = {fr:.1f}" if fr else ""))
 
 
 if __name__ == "__main__":
