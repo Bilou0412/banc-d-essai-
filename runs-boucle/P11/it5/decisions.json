@@ -1,0 +1,599 @@
+{
+ "journal": [
+  {
+   "lot": "A",
+   "groupe": "set_timezone [historique]",
+   "cas": "Two online modifications made one after the other by two people reach the server in the same delivery and show the same timestamp to the minute; their order in the version history is not specified.",
+   "decision": "V1",
+   "proposee": "Quand deux modifications faites en ligne par deux personnes sont enregistrées par le serveur lors d'une même livraison, l'historique des versions les ordonne selon le moment de la modification locale, la plus récente en premier, même si leurs horodatages affichés sont identiques | observé: versions | conditions: connexion"
+  },
+  {
+   "lot": "A",
+   "groupe": "reconnect [présence.bob]",
+   "cas": "Une personne revient en ligne alors qu'une autre, restée en ligne, a sélectionné une cellule pendant son absence et la garde sélectionnée.",
+   "decision": "V1",
+   "proposee": "Quand une personne revient en ligne alors qu'une autre personne en ligne a sélectionné une cellule pendant qu'elle était hors ligne et la garde sélectionnée, un indicateur de présence portant le nom de cette autre personne apparaît sur cette cellule après la livraison, sans nouvelle sélection | observé: présence | conditions: connexion"
+  },
+  {
+   "lot": "A",
+   "groupe": "redo [en_attente]",
+   "cas": "Une personne en ligne annule un import dont l'envoi était confirmé, puis rétablit cet import alors que l'annulation n'est pas encore confirmée ; on regarde le nombre de modifications en attente.",
+   "decision": "V1",
+   "proposee": "Quand une personne en ligne rétablit une action qu'elle avait annulée, alors que l'annulation est encore en attente (envoi pas encore confirmé), le rétablissement crée une nouvelle modification qui s'ajoute aux modifications en attente : leur nombre augmente de un, sans retirer l'annulation en attente | observé: attente | conditions: connexion, annulation, rétablissement"
+  },
+  {
+   "lot": "A",
+   "groupe": "set_cell [présence.bob]",
+   "cas": "Une personne sélectionne une cellule pendant qu'elle est hors ligne, puis revient en ligne sans sélectionner à nouveau ; on regarde si les autres voient son indicateur de présence.",
+   "decision": "V1",
+   "proposee": "Quand une personne sélectionne une cellule pendant qu'elle est hors ligne puis revient en ligne, aucun indicateur de présence à son nom n'apparaît chez les autres personnes tant qu'elle n'a pas de nouveau sélectionné une cellule une fois en ligne | observé: présence | conditions: connexion"
+  }
+ ],
+ "bugs": [
+  {
+   "lot": "A",
+   "groupe": "resolve_conflict [alertes]",
+   "final": "bug H1",
+   "cas": "Une personne qui a seulement le droit lecture demande à résoudre le conflit d'une cellule qui n'en montre aucun."
+  },
+  {
+   "lot": "A",
+   "groupe": "set_right [droits.bob]",
+   "final": "bug H2+S1+S2",
+   "cas": "La propriétaire, en ligne, passe à lecture le droit sur Feuille1 d'une personne qui avait le droit écriture, juste après deux actions qui ne changent rien."
+  },
+  {
+   "lot": "A",
+   "groupe": "rename_sheet [alertes]",
+   "final": "bug H1+H2",
+   "cas": "Une personne qui n'a que le droit lecture renomme une feuille en lui redonnant son nom actuel, alors qu'elle est en ligne."
+  },
+  {
+   "lot": "A",
+   "groupe": "reopen [présence.bob]",
+   "final": "bug H2",
+   "cas": "Une personne rouvre le classeur alors qu'une autre a sélectionné une cellule avant la réouverture et n'en a pas sélectionné de nouvelle depuis."
+  },
+  {
+   "lot": "A",
+   "groupe": "reconnect [cellules.*.conflit, cellules.*.contenu, cellules.*.erreur]",
+   "final": "bug H2",
+   "cas": "Une personne modifie hors ligne une cellule qu'une autre personne a modifiée en ligne entre-temps, puis elle revient en ligne et la fusion a lieu."
+  },
+  {
+   "lot": "A",
+   "groupe": "reopen [présence.alice]",
+   "final": "bug H2",
+   "cas": "Quand Carol rouvre le classeur après qu'Alice a sélectionné A3, sans nouvelle sélection d'Alice depuis, Carol ne doit voir aucun indicateur de présence d'Alice."
+  },
+  {
+   "lot": "A",
+   "groupe": "undo [en_attente]",
+   "final": "bug S1+S2",
+   "cas": "Une personne en ligne annule sa saisie d'une cellule après que ses modifications ont été livrées aux autres, et l'annulation doit soit retirer la modification en attente, soit ajouter une seule modification inverse."
+  },
+  {
+   "lot": "A",
+   "groupe": "undo [cellules.*.contenu, cellules.*.valeur, droits.alice]",
+   "final": "bug S1",
+   "cas": "Bob annule le renommage de la seule feuille, rétabli juste avant, après un refus de supprimer cette feuille et après qu'alice y a écrit B1 sous le nouveau nom."
+  }
+ ],
+ "a_trancher": [
+  {
+   "lot": "A",
+   "groupe": "set_right [droits.carol]",
+   "juges": [
+    "bug V1",
+    "trou"
+   ],
+   "cas": [
+    "Juste après l'ouverture du classeur, la propriétaire en ligne passe le droit d'une autre personne de lecture à écriture sur une feuille.",
+    "Right after the workbook is opened by alice, bob and carol, alice tries to raise carol's right on Feuille1 from lecture to écriture, and the spec never says whether alice is the owner."
+   ],
+   "variantes": [
+    {
+     "greens": [
+      "H2",
+      "S1",
+      "S2"
+     ],
+     "obs": {
+      "alertes": [],
+      "droits": {
+       "alice": "écriture",
+       "bob": "écriture",
+       "carol": "lecture"
+      }
+     }
+    },
+    {
+     "greens": [
+      "H1"
+     ],
+     "obs": {
+      "alertes": [],
+      "droits": {
+       "alice": "écriture",
+       "bob": "écriture",
+       "carol": "écriture"
+      }
+     }
+    }
+   ]
+  },
+  {
+   "lot": "A",
+   "groupe": "history [(tout)]",
+   "juges": [
+    "trou",
+    "bug V2"
+   ],
+   "cas": [
+    "Des modifications faites hors ligne sont enregistrées par le serveur après une modification faite en ligne plus tard. Toutes les entrées ont le même horodatage affiché, et il faut savoir comment l'historique les ordonne.",
+    "Après le retour en ligne d'une personne qui avait fait trois modifications hors ligne, une autre personne consulte un historique contenant ces trois entrées et sa propre modification en ligne faite après elles, toutes affichées à la même minute."
+   ],
+   "variantes": [
+    {
+     "greens": [
+      "H1",
+      "S1",
+      "S2"
+     ],
+     "obs": [
+      [
+       "alice",
+       "2026-03-29 01:30",
+       "modification"
+      ],
+      [
+       "bob",
+       "2026-03-29 01:30",
+       "modification"
+      ],
+      [
+       "bob",
+       "2026-03-29 01:30",
+       "modification"
+      ],
+      [
+       "bob",
+       "2026-03-29 01:30",
+       "modification"
+      ]
+     ]
+    },
+    {
+     "greens": [
+      "H2"
+     ],
+     "obs": [
+      [
+       "bob",
+       "2026-03-29 01:30",
+       "modification"
+      ],
+      [
+       "bob",
+       "2026-03-29 01:30",
+       "modification"
+      ],
+      [
+       "alice",
+       "2026-03-29 01:30",
+       "modification"
+      ],
+      [
+       "bob",
+       "2026-03-29 01:30",
+       "modification"
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "lot": "A",
+   "groupe": "deliver_all [alice.*.conflit, alice.*.contenu, alice.*.erreur]",
+   "juges": [
+    "trou",
+    "bug V2"
+   ],
+   "cas": [
+    "Bob puis Alice, tous deux en ligne, mettent des valeurs différentes dans la même cellule avant toute livraison ; à la livraison, il faut savoir quelle valeur le serveur reçoit en premier.",
+    "Bob then Alice each change Feuille1!A1 to a different value before either change is delivered, and the network then delivers everything."
+   ],
+   "variantes": [
+    {
+     "greens": [
+      "H1",
+      "S1",
+      "S2"
+     ],
+     "obs": {
+      "alice": {
+       "A1": {
+        "conflit": {
+         "par": "alice",
+         "écartée": "42"
+        },
+        "contenu": "=Feuille2!A1",
+        "erreur": "#REF!",
+        "valeur": "#REF!"
+       },
+       "A2": {
+        "contenu": null,
+        "erreur": null,
+        "valeur": null
+       },
+       "A3": {
+        "contenu": null,
+        "erreur": null,
+        "valeur": null
+       },
+       "B1": {
+        "contenu": null,
+        "erreur": null,
+        "valeur": null
+       },
+       "B2": {
+        "contenu": "2026-03-29 02:30",
+        "erreur": null,
+        "valeur": "2026-03-29 04:30"
+       },
+       "C1": {
+        "contenu": null,
+        "erreur": null,
+        "valeur": null
+       }
+      },
+      "bob": {
+       "A1": {
+        "conflit": {
+         "par": "alice",
+         "écartée": "42"
+        },
+        "contenu": "=Feuille2!A1",
+        "erreur": "#REF!",
+        "valeur": "#REF!"
+       },
+       "A2": {
+        "contenu": null,
+        "erreur": null,
+        "valeur": null
+       },
+       "A3": {
+        "contenu": null,
+        "erreur": null,
+        "valeur": null
+       },
+       "B1": {
+        "contenu": null,
+        "erreur": null,
+        "valeur": null
+       },
+       "B2": {
+        "contenu": "2026-03-29 02:30",
+        "erreur": null,
+        "valeur": "2026-03-29 02:30"
+       },
+       "C1": {
+        "contenu": null,
+        "erreur": null,
+        "valeur": null
+       }
+      },
+      "carol": {
+       "A1": {
+        "conflit": {
+         "par": "alice",
+         "écartée": "42"
+        },
+        "contenu": "=Feuille2!A1",
+        "erreur": "#REF!",
+        "valeur": "#REF!"
+       },
+       "A2": {
+        "contenu": null,
+        "erreur": null,
+        "valeur": null
+       },
+       "A3": {
+        "contenu": null,
+        "erreur": null,
+        "valeur": null
+       },
+       "B1": {
+        "contenu": null,
+        "erreur": null,
+        "valeur": null
+       },
+       "B2": {
+        "contenu": "2026-03-29 02:30",
+        "erreur": null,
+        "valeur": "2026-03-29 02:30"
+       },
+       "C1": {
+        "contenu": null,
+        "erreur": null,
+        "valeur": null
+       }
+      }
+     }
+    },
+    {
+     "greens": [
+      "H2"
+     ],
+     "obs": {
+      "alice": {
+       "A1": {
+        "conflit": {
+         "par": "bob",
+         "écartée": "=Feuille2!A1"
+        },
+        "contenu": "42",
+        "erreur": null,
+        "valeur": 42
+       },
+       "A2": {
+        "contenu": null,
+        "erreur": null,
+        "valeur": null
+       },
+       "A3": {
+        "contenu": null,
+        "erreur": null,
+        "valeur": null
+       },
+       "B1": {
+        "contenu": null,
+        "erreur": null,
+        "valeur": null
+       },
+       "B2": {
+        "contenu": "2026-03-29 02:30",
+        "erreur": null,
+        "valeur": "2026-03-29 04:30"
+       },
+       "C1": {
+        "contenu": null,
+        "erreur": null,
+        "valeur": null
+       }
+      },
+      "bob": {
+       "A1": {
+        "conflit": {
+         "par": "bob",
+         "écartée": "=Feuille2!A1"
+        },
+        "contenu": "42",
+        "erreur": null,
+        "valeur": 42
+       },
+       "A2": {
+        "contenu": null,
+        "erreur": null,
+        "valeur": null
+       },
+       "A3": {
+        "contenu": null,
+        "erreur": null,
+        "valeur": null
+       },
+       "B1": {
+        "contenu": null,
+        "erreur": null,
+        "valeur": null
+       },
+       "B2": {
+        "contenu": "2026-03-29 02:30",
+        "erreur": null,
+        "valeur": "2026-03-29 02:30"
+       },
+       "C1": {
+        "contenu": null,
+        "erreur": null,
+        "valeur": null
+       }
+      },
+      "carol": {
+       "A1": {
+        "conflit": {
+         "par": "bob",
+         "écartée": "=Feuille2!A1"
+        },
+        "contenu": "42",
+        "erreur": null,
+        "valeur": 42
+       },
+       "A2": {
+        "contenu": null,
+        "erreur": null,
+        "valeur": null
+       },
+       "A3": {
+        "contenu": null,
+        "erreur": null,
+        "valeur": null
+       },
+       "B1": {
+        "contenu": null,
+        "erreur": null,
+        "valeur": null
+       },
+       "B2": {
+        "contenu": "2026-03-29 02:30",
+        "erreur": null,
+        "valeur": "2026-03-29 02:30"
+       },
+       "C1": {
+        "contenu": null,
+        "erreur": null,
+        "valeur": null
+       }
+      }
+     }
+    }
+   ]
+  },
+  {
+   "lot": "A",
+   "groupe": "undo [cellules.*.valeur]",
+   "juges": [
+    "bug V2",
+    "trou"
+   ],
+   "cas": [
+    "Bob écrase la date-heure saisie par Alice dans un autre fuseau puis annule ; C1 doit de nouveau afficher la date-heure d'Alice convertie dans le fuseau de Bob.",
+    "Bob annule sa saisie dans C1, ce qui remet la date-heure sans décalage qu'alice avait saisie dans un autre fuseau, et la spec ne dit pas dans quel fuseau cette date-heure est lue à l'affichage chez bob."
+   ],
+   "variantes": [
+    {
+     "greens": [
+      "H2",
+      "S1",
+      "S2"
+     ],
+     "obs": {
+      "alertes": [],
+      "annuler": false,
+      "cellules": {
+       "A1": {
+        "contenu": null,
+        "erreur": null,
+        "valeur": null
+       },
+       "A2": {
+        "contenu": null,
+        "erreur": null,
+        "valeur": null
+       },
+       "A3": {
+        "contenu": null,
+        "erreur": null,
+        "valeur": null
+       },
+       "B1": {
+        "contenu": null,
+        "erreur": null,
+        "valeur": null
+       },
+       "B2": {
+        "contenu": null,
+        "erreur": null,
+        "valeur": null
+       },
+       "C1": {
+        "contenu": "2026-01-15 12:00",
+        "erreur": null,
+        "valeur": "2026-01-15 11:00"
+       }
+      },
+      "connexion": "en ligne",
+      "droits": {
+       "alice": "écriture",
+       "bob": "écriture",
+       "carol": "lecture"
+      },
+      "en_attente": 1,
+      "feuille_vue": "Feuille1",
+      "feuilles": [
+       "Feuille1"
+      ],
+      "personne": "bob",
+      "présence": {
+       "alice": [
+        "Feuille1",
+        "B2"
+       ]
+      },
+      "rétablir": true
+     }
+    },
+    {
+     "greens": [
+      "H1"
+     ],
+     "obs": {
+      "alertes": [],
+      "annuler": false,
+      "cellules": {
+       "A1": {
+        "contenu": null,
+        "erreur": null,
+        "valeur": null
+       },
+       "A2": {
+        "contenu": null,
+        "erreur": null,
+        "valeur": null
+       },
+       "A3": {
+        "contenu": null,
+        "erreur": null,
+        "valeur": null
+       },
+       "B1": {
+        "contenu": null,
+        "erreur": null,
+        "valeur": null
+       },
+       "B2": {
+        "contenu": null,
+        "erreur": null,
+        "valeur": null
+       },
+       "C1": {
+        "contenu": "2026-01-15 12:00",
+        "erreur": null,
+        "valeur": "2026-01-15 12:00"
+       }
+      },
+      "connexion": "en ligne",
+      "droits": {
+       "alice": "écriture",
+       "bob": "écriture",
+       "carol": "lecture"
+      },
+      "en_attente": 1,
+      "feuille_vue": "Feuille1",
+      "feuilles": [
+       "Feuille1"
+      ],
+      "personne": "bob",
+      "présence": {
+       "alice": [
+        "Feuille1",
+        "B2"
+       ]
+      },
+      "rétablir": true
+     }
+    }
+   ]
+  }
+ ],
+ "bilan": {
+  "iteration": 5,
+  "trous_juges": 4,
+  "assertions_ajoutees": 4,
+  "bugs": 8,
+  "a_trancher": 4,
+  "tests_ajoutes": 4,
+  "tests_retires": [],
+  "passages": {
+   "test_C38_same_delivery_same_minute_history_ordered_by_local_modification_most_recent_first": 4,
+   "test_C39_presence_selected_during_absence_appears_after_reconnect_without_new_selection": 3,
+   "test_C40_redo_while_undo_pending_adds_one_pending_modification_without_removing_undo": 3,
+   "test_C41_selection_made_offline_not_shown_to_others_after_reconnect_until_new_selection": 3
+  },
+  "ajouts": {
+   "C38": "Quand deux personnes en ligne font l'une après l'autre deux modifications que le serveur enregistre lors d'une même livraison, l'historique des versions les ordonne selon le moment de la modification locale, la plus récente en premier, même si leurs horodatages affichés sont identiques à la minute près | observé: versions | conditions: connexion",
+   "C39": "Quand une personne revient en ligne alors qu'une autre personne restée en ligne a sélectionné une cellule pendant son absence et la garde sélectionnée, un indicateur de présence portant le nom de cette autre personne apparaît sur cette cellule chez elle après la livraison, sans que l'autre personne ait à sélectionner de nouveau | observé: présence | conditions: connexion",
+   "C40": "Quand une personne en ligne rétablit une action qu'elle avait annulée alors que l'annulation est encore en attente (envoi pas encore confirmé), le rétablissement crée une nouvelle modification qui s'ajoute aux modifications en attente : leur nombre augmente de un, sans retirer l'annulation en attente (un import compte pour une seule modification) | observé: attente | conditions: connexion, annulation, rétablissement",
+   "C41": "Quand une personne sélectionne une cellule pendant qu'elle est hors ligne puis revient en ligne, aucun indicateur de présence à son nom n'apparaît chez les autres personnes après la livraison, même si elle saisit ensuite une valeur, tant qu'elle n'a pas de nouveau sélectionné une cellule une fois en ligne | observé: présence | conditions: connexion"
+  }
+ }
+}
