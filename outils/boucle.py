@@ -599,8 +599,90 @@ def decider(a):
     print(f"spec v{i} : {len(s)} assertions")
 
 
+BUGS = """Couche : code. Tu écris des tests de non-régression.
+
+{tech}
+{reel}
+Spécification (assertions) :
+{assertions}
+
+Interface publique de `app` (fixée par les tests existants, tu ne vois aucun code) :
+```
+{interface}
+```
+
+Des implémentations qui passaient tous les tests existants se sont trompées sur les cas ci-dessous.
+La spec les tranchait déjà (deux juges indépendants l'ont confirmé) : il manquait seulement un test.
+
+{cas}
+
+Pour chaque cas, écris au moins un test pytest qui reproduit la situation par le chemin le plus court
+et vérifie le comportement correct exigé par l'assertion citée. Nomme-le `test_<assertion>_reg_...`
+(par ex. `test_A89_reg_...`). Deux cas identiques donnent un seul test. N'utilise que l'interface ci-dessus.
+
+Écris exactement un fichier, avec l'outil Write : {dossier}/tests/{fichier} (il importe `app` comme les tests existants).
+Réponds ensuite seulement « ok ».
+"""
+
+
+def bugs_en_tests(i):
+    """Chaque bug jugé à l'itération i devient un test de non-régression de la spec v_{i+1} (la spec ne change pas)."""
+    suivant = it_dir(i + 1)
+    marque = it_dir(i) / "bugs-tests.json"
+    if marque.exists() or not (suivant / "tests").exists():
+        return
+    dec = json.loads((it_dir(i) / "decisions.json").read_text(encoding="utf-8"))
+    groupes = {g["groupe"]: g for l in (it_dir(i) / "lots").iterdir() if (l / "groupes.json").exists()
+               for g in json.loads((l / "groupes.json").read_text(encoding="utf-8"))}
+    blocs = []
+    for n, b in enumerate(dec["bugs"], 1):
+        g = groupes.get(b["groupe"])
+        if not g:
+            continue
+        fautifs = set(b["final"][4:].split("+"))
+        bons = [v for v in g["variantes"] if not fautifs & set(v["greens"])]
+        mauvais = [v for v in g["variantes"] if fautifs & set(v["greens"])]
+        j = g["juges"][0]
+        blocs.append(f"Cas {n} (action {g['action']}, assertion {j['assertion']}) : {j['cas']}\n"
+                     f"  comportement correct : {json.dumps(bons[0]['obs'] if bons else None, ensure_ascii=False)[:600]}\n"
+                     f"  comportement fautif : {json.dumps(mauvais[0]['obs'] if mauvais else None, ensure_ascii=False)[:600]}")
+    if not blocs:
+        marque.write_text("{}", encoding="utf-8")
+        return
+    garde(ESTIME["red"], f"tests de non-régression des bugs de it{i}")
+    travail = Path(tempfile.mkdtemp(prefix="boucle-bugs-"))
+    shutil.copytree(RACINE / ".claude" / "agents", travail / ".claude" / "agents")
+    (travail / "tests").mkdir()
+    fichier = f"test_app_reg{i + 1}.py"
+    r, t = appel("red", BUGS.format(tech=TECH, reel=REEL[SONDE], assertions=formater(spec(i + 1)), interface=interface(),
+                                    cas="\n\n".join(blocs), dossier=travail, fichier=fichier), "opus", "Write", travail)
+    noter(f"it{i}/bugs", t)
+    tf = travail / "tests" / fichier
+    if not tf.exists():
+        print("pas de tests de non-régression écrits")
+        return
+    passages = {}
+    for g in GREENS:
+        essai = Path(tempfile.mkdtemp(prefix="boucle-valide-"))
+        (essai / "tests").mkdir()
+        shutil.copy(tf, essai / "tests" / fichier)
+        shutil.copy(it_dir(i) / "lots" / "A" / "greens" / g / "app.py", essai / "app.py")
+        for nom, (ok, _) in executer(essai).items():
+            passages.setdefault(nom, []).append(g if ok else None)
+    # un test de non-régression doit passer sur au moins un green (celui qui avait raison) et casser sur au moins un
+    retires = [n for n, v in passages.items() if not any(v)]
+    if retires:
+        retirer_tests(tf, set(retires))
+    shutil.copy(tf, suivant / "tests" / fichier)
+    res = {"bugs": len(blocs), "tests": {n: [x for x in v if x] for n, v in passages.items()}, "retires": retires, "usd": t["usd"]}
+    marque.write_text(json.dumps(res, ensure_ascii=False, indent=1), encoding="utf-8")
+    print(f"non-régression it{i} : {len(blocs)} bugs, {len(passages) - len(retires)} tests gardés, {len(retires)} retirés")
+
+
 def iteration(a):
     i = a.it
+    if (BASE / "bugs-en-tests").exists() and i >= 1 and not (it_dir(i) / "lots").exists():
+        bugs_en_tests(i - 1)
     if not (it_dir(i) / "lots" / "A" / "greens").exists():
         a.lot = "A"
         lot(a)
