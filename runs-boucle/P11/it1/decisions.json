@@ -1,0 +1,229 @@
+{
+ "journal": [
+  {
+   "lot": "A",
+   "groupe": "resolve_conflict [alertes]",
+   "cas": "Une personne ayant seulement le droit lecture tente de résoudre le conflit d'une cellule en choisissant la valeur retenue.",
+   "decision": "V1",
+   "proposee": "Quand une personne ayant seulement le droit lecture tente de résoudre le conflit d'une cellule, une alerte « droit insuffisant » cite la feuille et la cellule en cause | observé: alerte | conditions: droit"
+  },
+  {
+   "lot": "A",
+   "groupe": "clear [annuler, en_attente]",
+   "cas": "Une personne en ligne ayant le droit écriture efface une cellule déjà vide, avant que l'envoi soit confirmé.",
+   "decision": "V1",
+   "proposee": "Quand une personne ayant le droit écriture efface une cellule déjà vide, l'effacement fait partie des actions qu'elle peut annuler : la commande annuler devient disponible et, avant confirmation de l'envoi, le nombre de modifications en attente augmente de un | observé: annulation, attente | conditions: droit, contenu, connexion"
+  },
+  {
+   "lot": "A",
+   "groupe": "clear [en_attente]",
+   "cas": "Une personne en ligne efface une cellule déjà vide alors que sa modification précédente attend encore la confirmation de l'envoi, et il faut savoir si cet effacement compte dans les modifications en attente.",
+   "decision": "V1",
+   "proposee": "Quand une personne en ligne efface une cellule déjà vide avant que l'envoi de sa modification précédente soit confirmé, le nombre de modifications en attente augmente de un | observé: attente | conditions: connexion, contenu"
+  },
+  {
+   "lot": "A",
+   "groupe": "set_cell [cellules.*.erreur, cellules.*.valeur]",
+   "cas": "A person enters in A1 a formula that refers to A1 itself and also to B1, while B1 holds a formula with invalid syntax.",
+   "decision": "V1",
+   "proposee": "Quand une personne saisit dans A1 la formule =B1-A1 alors que B1 contient une formule de syntaxe invalide, A1 affiche une erreur de référence circulaire et non une erreur de syntaxe | observé: erreur | conditions: contenu"
+  },
+  {
+   "lot": "A",
+   "groupe": "undo [en_attente]",
+   "cas": "Une personne en ligne modifie une cellule, change le droit d'une autre personne, puis annule la modification de cellule avant que l'envoi soit confirmé ; combien de modifications sont en attente ?",
+   "decision": "V2",
+   "proposee": "Quand le propriétaire en ligne modifie le droit d'une personne sur une feuille, le nombre de modifications en attente reste inchangé | observé: attente | conditions: connexion, rôle"
+  },
+  {
+   "lot": "A",
+   "groupe": "deliver_all [alice.*.contenu]",
+   "cas": "Une date-heure saisie sans décalage horaire par une personne est livrée à une personne d'un autre fuseau ; la question est de savoir si le contenu de la cellule chez celle-ci reste le texte saisi ou devient l'heure convertie dans son fuseau.",
+   "decision": "V1",
+   "proposee": "Quand une personne saisit une date-heure sans décalage horaire dans une cellule, le contenu de cette cellule chez une autre personne d'un autre fuseau est exactement le texte saisi, sans conversion ni décalage ajouté | observé: contenu | conditions: fuseau, connexion"
+  },
+  {
+   "lot": "A",
+   "groupe": "deliver_all [bob.*.contenu, carol.*.contenu]",
+   "cas": "Une personne saisit une date-heure sans décalage horaire, et sa saisie est transmise à d'autres personnes d'un autre fuseau : la spec ne dit pas si le contenu chez ces personnes est le texte saisi ou le texte converti dans leur fuseau.",
+   "decision": "V1",
+   "proposee": "Quand une personne saisit une date-heure sans décalage horaire dans une cellule, le contenu de la cellule chez les autres personnes, après réception, est exactement le texte saisi, même si leur fuseau est différent : seule la valeur affichée est convertie dans leur fuseau | observé: contenu | conditions: fuseau, connexion"
+  },
+  {
+   "lot": "A",
+   "groupe": "import_csv [alertes]",
+   "cas": "Une personne qui n'a que le droit lecture sur la feuille active y importe un fichier CSV vide.",
+   "decision": "V1",
+   "proposee": "Quand une personne ayant seulement le droit lecture importe un CSV dans la feuille active, même un CSV vide, une alerte « droit insuffisant » cite la feuille active | observé: alerte | conditions: droit"
+  },
+  {
+   "lot": "A",
+   "groupe": "set_right [droits.carol]",
+   "cas": "Alice, la première personne à ouvrir le classeur, passe le droit de carol sur Feuille1 de lecture à écriture.",
+   "decision": "V1",
+   "proposee": "Quand la personne qui a ouvert le classeur en premier (son propriétaire) passe le droit d'une autre personne de lecture à écriture sur une feuille, le droit affiché pour cette personne sur cette feuille devient écriture et aucune alerte n'apparaît | observé: droit, alerte | conditions: rôle, droit"
+  }
+ ],
+ "bugs": [
+  {
+   "lot": "A",
+   "groupe": "reconnect [cellules.*.contenu]",
+   "final": "bug S2",
+   "cas": "Une personne revient en ligne après qu'une autre a saisi une date-heure sans décalage horaire depuis un autre fuseau ; on regarde le contenu de la cellule chez la personne qui revient."
+  },
+  {
+   "lot": "A",
+   "groupe": "import_csv [en_attente]",
+   "final": "bug S1+S2",
+   "cas": "Une personne ayant le droit écriture, en ligne et avec une modification non confirmée, importe un CSV vide ; le nombre de modifications en attente doit augmenter de un."
+  },
+  {
+   "lot": "A",
+   "groupe": "rename_sheet [alertes]",
+   "final": "bug H1+S1+S2",
+   "cas": "Une personne en ligne qui n'a que le droit lecture renomme une feuille avec le nom que cette feuille porte déjà."
+  },
+  {
+   "lot": "A",
+   "groupe": "import_csv [cellules.*.contenu, cellules.*.valeur, en_attente]",
+   "final": "bug H1",
+   "cas": "Une personne ayant le droit écriture sur la feuille active, renommée juste avant, importe un CSV d'une ligne de deux champs accentués, et les cellules A1 et B1 doivent contenir ces champs."
+  },
+  {
+   "lot": "A",
+   "groupe": "import_csv [cellules.*.contenu]",
+   "final": "bug S2",
+   "cas": "Quand une personne ayant le droit écriture importe un CSV contenant une date-heure avec décalage horaire, le contenu de la cellule est le champ du fichier ou sa conversion dans le fuseau de la personne."
+  }
+ ],
+ "a_trancher": [
+  {
+   "lot": "A",
+   "groupe": "set_right [droits.bob]",
+   "juges": [
+    "bug V2",
+    "trou"
+   ],
+   "cas": [
+    "La propriétaire, en ligne, passe le droit d'une personne de écriture à lecture sur une feuille, juste après une résolution de conflit et un rétablissement.",
+    "Une personne en ligne ayant le droit écriture, première à avoir ouvert le classeur, passe le droit d'une autre personne de écriture à lecture sur une feuille, et la spec ne dit pas si elle est propriétaire."
+   ],
+   "variantes": [
+    {
+     "greens": [
+      "H1",
+      "S2"
+     ],
+     "obs": {
+      "alertes": [],
+      "droits": {
+       "alice": "écriture",
+       "bob": "lecture",
+       "carol": "lecture"
+      }
+     }
+    },
+    {
+     "greens": [
+      "H2",
+      "S1"
+     ],
+     "obs": {
+      "alertes": [],
+      "droits": {
+       "alice": "écriture",
+       "bob": "écriture",
+       "carol": "lecture"
+      }
+     }
+    }
+   ]
+  },
+  {
+   "lot": "A",
+   "groupe": "history [(tout)]",
+   "juges": [
+    "trou",
+    "bug V1"
+   ],
+   "cas": [
+    "Deux personnes modifient la même cellule avec des valeurs différentes. Une valeur est retenue, l'autre est écartée avec un indicateur de conflit. Il faut décider si la valeur écartée ajoute sa propre entrée à l'historique des versions.",
+    "Alice, en ligne, modifie B1 puis B2 pendant que bob, hors ligne, a modifié B1 puis revient en ligne ; l'historique doit montrer une entrée par modification enregistrée par le serveur, donc deux pour alice."
+   ],
+   "variantes": [
+    {
+     "greens": [
+      "H1",
+      "S1",
+      "S2"
+     ],
+     "obs": [
+      [
+       "alice",
+       "2026-01-15 11:00",
+       "modification"
+      ],
+      [
+       "bob",
+       "2026-01-15 11:00",
+       "modification"
+      ]
+     ]
+    },
+    {
+     "greens": [
+      "H2"
+     ],
+     "obs": [
+      [
+       "alice",
+       "2026-01-15 11:00",
+       "modification"
+      ],
+      [
+       "alice",
+       "2026-01-15 11:00",
+       "modification"
+      ],
+      [
+       "bob",
+       "2026-01-15 11:00",
+       "modification"
+      ]
+     ]
+    }
+   ]
+  }
+ ],
+ "bilan": {
+  "iteration": 1,
+  "trous_juges": 9,
+  "assertions_ajoutees": 7,
+  "bugs": 5,
+  "a_trancher": 2,
+  "tests_ajoutes": 11,
+  "tests_retires": [],
+  "passages": {
+   "test_C14_lecture_resout_conflit_valeur_retenue_alerte_droit_insuffisant": 3,
+   "test_C14_lecture_resout_conflit_valeur_ecartee_alerte_droit_insuffisant": 3,
+   "test_C15_effacer_cellule_vide_rend_annuler_disponible_et_compte_en_attente": 3,
+   "test_C15_effacer_cellule_vide_apres_modification_non_confirmee_ajoute_un": 3,
+   "test_C16_auto_reference_avec_dependance_en_erreur_syntaxe_donne_circ": 3,
+   "test_C17_changer_un_droit_ne_compte_pas_en_attente": 2,
+   "test_C17_changer_un_droit_apres_modification_non_confirmee_laisse_le_compte": 2,
+   "test_C18_date_heure_hiver_contenu_identique_chez_autre_fuseau": 3,
+   "test_C18_date_heure_jour_changement_heure_contenu_identique_chez_autre_fuseau": 3,
+   "test_C19_lecture_importe_csv_vide_alerte_droit_insuffisant_feuille_active": 4,
+   "test_C20_proprietaire_passe_lecture_a_ecriture_sans_alerte": 4
+  },
+  "ajouts": {
+   "C14": "Quand une personne ayant seulement le droit lecture tente de résoudre le conflit d'une cellule, quelle que soit la valeur choisie, une alerte « droit insuffisant » cite la feuille et la cellule en cause | observé: alerte | conditions: droit",
+   "C15": "Quand une personne en ligne ayant le droit écriture efface une cellule déjà vide, l'effacement compte comme une modification : la commande annuler devient disponible et, avant confirmation de l'envoi, le nombre de modifications en attente augmente de un, y compris quand une modification précédente attend encore sa confirmation | observé: annulation, attente | conditions: droit, contenu, connexion",
+   "C16": "Quand une personne saisit dans A1 la formule =B1-A1 alors que B1 contient une formule de syntaxe invalide, A1 affiche une erreur de référence circulaire et non une erreur de syntaxe | observé: erreur | conditions: contenu",
+   "C17": "Quand le propriétaire en ligne modifie le droit d'une personne sur une feuille, le nombre de modifications en attente reste inchangé | observé: attente | conditions: connexion, rôle",
+   "C18": "Quand une personne saisit une date-heure sans décalage horaire dans une cellule, le contenu de cette cellule chez une autre personne d'un autre fuseau, après réception, est exactement le texte saisi, sans conversion ni décalage ajouté : seule la valeur affichée est convertie dans le fuseau de celle qui regarde | observé: contenu | conditions: fuseau, connexion",
+   "C19": "Quand une personne ayant seulement le droit lecture importe un CSV dans la feuille active, même un CSV vide, une alerte « droit insuffisant » cite la feuille active | observé: alerte | conditions: droit",
+   "C20": "Quand le propriétaire passe le droit d'une autre personne de lecture à écriture sur une feuille, le droit affiché pour cette personne sur cette feuille devient écriture et aucune alerte n'apparaît | observé: droit, alerte | conditions: rôle, droit"
+  }
+ }
+}

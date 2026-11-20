@@ -70,3 +70,42 @@
 {"etape": "it0/B/juge2/clear [cellules.*.erreur, cellules.*.valeur, droits.alice]", "usd": 0.0393714, "neufs": 2354}
 {"etape": "it0/apparier", "usd": 0.0331242, "neufs": 3495}
 {"etape": "it0/ajouts", "usd": 0.47854260000000004, "neufs": 45390}
+{"etape": "it1/A/S1/tour1", "usd": 1.9985179999999998, "neufs": 306243}
+{"etape": "it1/A/S2/tour1", "usd": 2.1608164999999997, "neufs": 330833}
+{"etape": "it1/A/H1/tour1", "usd": 0.42378728000000004, "neufs": 505297}
+{"etape": "it1/A/H1/tour2", "usd": 0.02867728, "neufs": 100112}
+{"etape": "it1/A/H2/tour1", "usd": 0.4838566800000001, "neufs": 607670}
+{"etape": "it1/A/H2/tour2", "usd": 0.15288620000000003, "neufs": 155673}
+{"etape": "it1/A/juge1/set_right [droits.bob]", "usd": 0.1376482, "neufs": 15332}
+{"etape": "it1/A/juge1/clear [annuler, en_attente]", "usd": 0.1390962, "neufs": 15519}
+{"etape": "it1/A/juge1/clear [en_attente]", "usd": 0.1498362, "neufs": 16311}
+{"etape": "it1/A/juge1/resolve_conflict [alertes]", "usd": 0.1485882, "neufs": 15852}
+{"etape": "it1/A/juge2/clear [annuler, en_attente]", "usd": 0.039821999999999996, "neufs": 2377}
+{"etape": "it1/A/juge2/clear [en_attente]", "usd": 0.0362276, "neufs": 2190}
+{"etape": "it1/A/juge2/set_right [droits.bob]", "usd": 0.041856599999999994, "neufs": 2477}
+{"etape": "it1/A/juge2/resolve_conflict [alertes]", "usd": 0.032847600000000005, "neufs": 2030}
+{"etape": "it1/A/juge1/set_cell [cellules.*.erreur, cellules.*.valeur]", "usd": 0.1476682, "neufs": 17000}
+{"etape": "it1/A/juge1/reconnect [cellules.*.contenu]", "usd": 0.1445122, "neufs": 16223}
+{"etape": "it1/A/juge1/import_csv [en_attente]", "usd": 0.1443882, "neufs": 15975}
+{"etape": "it1/A/juge1/undo [en_attente]", "usd": 0.1544522, "neufs": 16696}
+{"etape": "it1/A/juge2/set_cell [cellules.*.erreur, cellules.*.valeur]", "usd": 0.0343452, "neufs": 2088}
+{"etape": "it1/A/juge2/reconnect [cellules.*.contenu]", "usd": 0.0335274, "neufs": 2055}
+{"etape": "it1/A/juge2/import_csv [en_attente]", "usd": 0.0419378, "neufs": 2479}
+{"etape": "it1/A/juge2/undo [en_attente]", "usd": 0.040174600000000005, "neufs": 2389}
+{"etape": "it1/A/juge1/rename_sheet [alertes]", "usd": 0.1517282, "neufs": 16333}
+{"etape": "it1/A/juge1/deliver_all [alice.*.contenu]", "usd": 0.1544962, "neufs": 16763}
+{"etape": "it1/A/juge1/import_csv [cellules.*.contenu, cellules.*.valeur, en_attente]", "usd": 0.1473242, "neufs": 16723}
+{"etape": "it1/A/juge2/rename_sheet [alertes]", "usd": 0.030019, "neufs": 1879}
+{"etape": "it1/A/juge2/deliver_all [alice.*.contenu]", "usd": 0.04547140000000001, "neufs": 2651}
+{"etape": "it1/A/juge1/history [(tout)]", "usd": 0.1754562, "neufs": 17652}
+{"etape": "it1/A/juge2/import_csv [cellules.*.contenu, cellules.*.valeur, en_attente]", "usd": 0.039659, "neufs": 2355}
+{"etape": "it1/A/juge1/deliver_all [bob.*.contenu, carol.*.contenu]", "usd": 0.14659619999999998, "neufs": 16548}
+{"etape": "it1/A/juge1/import_csv [alertes]", "usd": 0.14057219999999998, "neufs": 15969}
+{"etape": "it1/A/juge1/import_csv [cellules.*.contenu]", "usd": 0.1400882, "neufs": 15865}
+{"etape": "it1/A/juge2/deliver_all [bob.*.contenu, carol.*.contenu]", "usd": 0.037192800000000005, "neufs": 2231}
+{"etape": "it1/A/juge2/import_csv [alertes]", "usd": 0.0319154, "neufs": 1973}
+{"etape": "it1/A/juge2/history [(tout)]", "usd": 0.0661796, "neufs": 3689}
+{"etape": "it1/A/juge2/import_csv [cellules.*.contenu]", "usd": 0.034949400000000005, "neufs": 2126}
+{"etape": "it1/A/juge1/set_right [droits.carol]", "usd": 0.1450562, "neufs": 15532}
+{"etape": "it1/A/juge2/set_right [droits.carol]", "usd": 0.0441444, "neufs": 2596}
+{"etape": "it1/ajouts", "usd": 0.3588204, "neufs": 33699}
