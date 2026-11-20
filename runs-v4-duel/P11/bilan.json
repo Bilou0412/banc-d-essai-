@@ -1,0 +1,387 @@
+{
+ "sonde": "P11",
+ "passes": "strict-v2-xl",
+ "passe": "A",
+ "k_passes": [
+  1.77,
+  1.75
+ ],
+ "k_retenu": 1.76,
+ "concordance": "concordante",
+ "convergent": true,
+ "tours": 4,
+ "attaques": 2,
+ "assertions": 159,
+ "frontieres": 8,
+ "champ_local": {
+  "tout": 1.03,
+  "frontiere": 1.0,
+  "autres": 1.03
+ },
+ "essais": {
+  "A01": 1,
+  "A02": 1,
+  "A03": 1,
+  "A04": 1,
+  "A05": 1,
+  "A06": 1,
+  "A07": 1,
+  "A08": 1,
+  "A09": 1,
+  "A10": 1,
+  "A100": 1,
+  "A101": 1,
+  "A102": 1,
+  "A103": 1,
+  "A104": 1,
+  "A105": 1,
+  "A106": 1,
+  "A107": 1,
+  "A108": 1,
+  "A109": 1,
+  "A11": 1,
+  "A110": 1,
+  "A111": 1,
+  "A112": 1,
+  "A113": 1,
+  "A114": 1,
+  "A115": 1,
+  "A116": 1,
+  "A117": 1,
+  "A118": 1,
+  "A119": 1,
+  "A12": 1,
+  "A120": 1,
+  "A121": 1,
+  "A122": 1,
+  "A123": 1,
+  "A124": 1,
+  "A125": 1,
+  "A126": 1,
+  "A127": 1,
+  "A128": 1,
+  "A129": 1,
+  "A13": 1,
+  "A130": 1,
+  "A131": 1,
+  "A132": 1,
+  "A133": 1,
+  "A134": 1,
+  "A135": 2,
+  "A136": 1,
+  "A137": 1,
+  "A138": 1,
+  "A139": 1,
+  "A14": 1,
+  "A140": 1,
+  "A141": 1,
+  "A142": 1,
+  "A143": 1,
+  "A144": 1,
+  "A145": 1,
+  "A146": 1,
+  "A147": 1,
+  "A148": 1,
+  "A149": 1,
+  "A15": 1,
+  "A150": 1,
+  "A151": 1,
+  "A152": 1,
+  "A153": 1,
+  "A154": 1,
+  "A155": 1,
+  "A156": 1,
+  "A157": 1,
+  "A158": 1,
+  "A159": 1,
+  "A16": 1,
+  "A17": 1,
+  "A18": 1,
+  "A19": 1,
+  "A20": 1,
+  "A21": 1,
+  "A22": 1,
+  "A23": 1,
+  "A24": 1,
+  "A25": 1,
+  "A26": 2,
+  "A27": 2,
+  "A28": 1,
+  "A29": 1,
+  "A30": 1,
+  "A31": 1,
+  "A32": 1,
+  "A33": 1,
+  "A34": 2,
+  "A35": 1,
+  "A36": 1,
+  "A37": 1,
+  "A38": 1,
+  "A39": 1,
+  "A40": 1,
+  "A41": 1,
+  "A42": 1,
+  "A43": 1,
+  "A44": 1,
+  "A45": 1,
+  "A46": 1,
+  "A47": 1,
+  "A48": 1,
+  "A49": 1,
+  "A50": 1,
+  "A51": 1,
+  "A52": 1,
+  "A53": 1,
+  "A54": 1,
+  "A55": 1,
+  "A56": 1,
+  "A57": 1,
+  "A58": 1,
+  "A59": 1,
+  "A60": 1,
+  "A61": 1,
+  "A62": 1,
+  "A63": 1,
+  "A64": 1,
+  "A65": 1,
+  "A66": 1,
+  "A67": 1,
+  "A68": 1,
+  "A69": 1,
+  "A70": 1,
+  "A71": 1,
+  "A72": 1,
+  "A73": 1,
+  "A74": 1,
+  "A75": 1,
+  "A76": 1,
+  "A77": 1,
+  "A78": 1,
+  "A79": 1,
+  "A80": 1,
+  "A81": 1,
+  "A82": 1,
+  "A83": 1,
+  "A84": 1,
+  "A85": 1,
+  "A86": 1,
+  "A87": 1,
+  "A88": 1,
+  "A89": 1,
+  "A90": 1,
+  "A91": 1,
+  "A92": 1,
+  "A93": 1,
+  "A94": 1,
+  "A95": 1,
+  "A96": 1,
+  "A97": 1,
+  "A98": 1,
+  "A99": 1
+ },
+ "non_passees": [],
+ "trous_a_priori": 25,
+ "echecs_par_type": {
+  "bug": 3,
+  "trou": 2
+ },
+ "nouvelles_assertions": {
+  "N01": "Une formule =B1-A1 entre 2026-03-28 12:00 et 2026-03-29 12:00 saisies à Paris affiche 23/24 de jour | observé: valeur | conditions: fuseau",
+  "N02": "l'écart vaut 1 jour exactement"
+ },
+ "lacunes": [
+  {
+   "cas": "A04 : la priorité des opérateurs et les parenthèses ne sont fixées par aucune assertion",
+   "test": "test_A04_trou_priorite_operateurs",
+   "présumé": "Quand une personne saisit =A1+A2*2 alors que A1 contient 2 et A2 contient 3, la cellule affiche la valeur 8 | observé: valeur | conditions: contenu",
+   "attaque": 1
+  },
+  {
+   "cas": "A15 : une plage de fonction qui contient la cellule elle-même (=SOMME(A1:A3) dans A2) n'est pas dite circulaire",
+   "test": "test_A15_trou_somme_incluant_soi",
+   "présumé": "Quand une personne saisit =SOMME(A1:A3) dans A2, A2 affiche une erreur de référence circulaire | observé: erreur | conditions: aucune",
+   "attaque": 1
+  },
+  {
+   "cas": "A16 : seuls les cycles de une et deux cellules sont spécifiés ; un cycle plus long n'est pas tranché",
+   "test": "test_A16_trou_cycle_long",
+   "présumé": "Quand cinq cellules forment un cycle de références, chacune affiche une erreur de référence circulaire | observé: erreur | conditions: contenu",
+   "attaque": 1
+  },
+  {
+   "cas": "A34 : l'unité et la valeur de l'écart entre deux date-heures (jours écoulés réels à travers un changement d'heure) ne sont pas fixées",
+   "test": "test_A34_trou_unite_ecart",
+   "présumé": "Une formule =B1-A1 entre 2026-03-28 12:00 et 2026-03-29 12:00 saisies à Paris affiche 23/24 de jour | observé: valeur | conditions: fuseau",
+   "attaque": 1
+  },
+  {
+   "cas": "A42 : un nom ne différant que par la casse d'une feuille existante n'est pas dit « déjà utilisé »",
+   "test": "test_A42_trou_casse_differente",
+   "présumé": "Quand une personne renomme une feuille avec un nom ne différant d'une autre que par la casse, la liste des feuilles reste inchangée | observé: feuilles | conditions: aucune",
+   "attaque": 1
+  },
+  {
+   "cas": "A52 : la modification de droit tentée hors ligne par le propriétaire n'est pas dite non appliquée à son retour en ligne",
+   "test": "test_A52_trou_pas_applique_au_retour",
+   "présumé": "Quand le propriétaire revient en ligne après avoir tenté de modifier un droit hors ligne, le droit reste inchangé | observé: droit | conditions: connexion, rôle",
+   "attaque": 1
+  },
+  {
+   "cas": "A55 : A87 montre la modification hors ligne sur l'appareil, A55 la rejette au retour sans dire si la copie locale revient au contenu du serveur",
+   "test": "test_A55_trou_copie_locale_revient",
+   "présumé": "Quand une modification hors ligne est rejetée au retour faute de droit écriture, le contenu de la cellule sur l'appareil de la personne revient au contenu du serveur | observé: contenu | conditions: droit, connexion",
+   "attaque": 1
+  },
+  {
+   "cas": "A68 : la copie sur laquelle l'indicateur de conflit apparaît (auteurs seulement ou toutes les personnes) n'est pas dite",
+   "test": "test_A68_trou_visible_chez_tous",
+   "présumé": "Quand deux personnes modifient en même temps la même cellule avec des valeurs différentes, l'indicateur de conflit apparaît chez toutes les personnes | observé: conflit | conditions: contenu",
+   "attaque": 1
+  },
+  {
+   "cas": "A81 : quand deux personnes hors ligne modifient la même cellule, l'apparition d'un indicateur de conflit n'est pas dite (A80 ne couvre que le cas hors ligne contre en ligne)",
+   "test": "test_A81_trou_conflit_signale",
+   "présumé": "Quand deux personnes hors ligne modifient la même cellule avec des valeurs différentes, un indicateur de conflit proposant la valeur de la personne revenue en second apparaît | observé: conflit | conditions: connexion",
+   "attaque": 1
+  },
+  {
+   "cas": "A121 : A124 horodate une version hors ligne au moment local, A121 trie de la plus récente à la plus ancienne sans dire si l'ordre suit l'horodatage ou l'ordre d'enregistrement par le serveur",
+   "test": "test_A121_trou_ordre_horodatage_hors_ligne",
+   "présumé": "L'historique des versions est trié par horodatage affiché, une version hors ligne enregistrée tard se plaçant à son moment local | observé: versions | conditions: connexion",
+   "attaque": 1
+  },
+  {
+   "cas": "A137 : le format d'écriture d'un nombre entier calculé dans le CSV (5 ou 5.0) n'est pas fixé",
+   "test": "test_A137_trou_format_nombre",
+   "présumé": "Quand une personne exporte en CSV une cellule dont la valeur calculée est l'entier 5, le champ CSV est 5 | observé: fichier CSV | conditions: contenu",
+   "attaque": 1
+  },
+  {
+   "cas": "A145 : le format de la date-heure exportée avec son décalage n'est pas fixé",
+   "test": "test_A145_trou_format_iso",
+   "présumé": "Quand une personne de Paris exporte en CSV une date-heure du 15 janvier 2026 à 12:00, le champ CSV est 2026-01-15T12:00:00+01:00 | observé: fichier CSV | conditions: fuseau",
+   "attaque": 1
+  },
+  {
+   "cas": "A148 : A05 affiche une formule =A1+1 dans la barre de formule, A148 donne le même contenu =A1+1 à un texte importé : la valeur affichée de ce texte n'est pas fixée",
+   "test": "test_A148_trou_valeur_texte",
+   "présumé": "Quand une personne importe un CSV contenant le champ =A1+1, la cellule affiche le texte =A1+1 comme valeur | observé: valeur | conditions: aucune",
+   "attaque": 1
+  },
+  {
+   "cas": "A04 : formule contenant des espaces entre opérandes et opérateurs",
+   "test": "test_A04_trou2_espaces_et_decimaux",
+   "présumé": "les espaces sont ignorés, « = A1 + 0.5 » vaut A1+0,5",
+   "attaque": 2
+  },
+  {
+   "cas": "A08 : chaîne de dépendances plus profonde que la pile d'appels (1200 cellules)",
+   "test": "test_A08_trou2_chaine_profonde",
+   "présumé": "le recalcul aboutit sans erreur, quelle que soit la profondeur",
+   "attaque": 2
+  },
+  {
+   "cas": "A10 : formule dépendant d'une cellule en erreur de type",
+   "test": "test_A10_trou2_erreur_type_propagee",
+   "présumé": "l'erreur se propage aux dépendants",
+   "attaque": 2
+  },
+  {
+   "cas": "A22 : nom de feuille non ASCII dans une référence",
+   "test": "test_A22_trou2_nom_de_feuille_accentue",
+   "présumé": "=Dépenses!A1 est une référence valide",
+   "attaque": 2
+  },
+  {
+   "cas": "A38 : une personne en lecture sur Feuille1 ajoute une feuille",
+   "test": "test_A38_trou2_lecteur_cree_sa_feuille",
+   "présumé": "l'ajout est permis et donne l'écriture sur la nouvelle feuille seulement",
+   "attaque": 2
+  },
+  {
+   "cas": "A42 : renommage et ajout concurrents vers le même nom",
+   "test": "test_A42_trou2_renommage_et_ajout_concurrents",
+   "présumé": "aucun nom en double, toutes les copies convergent",
+   "attaque": 2
+  },
+  {
+   "cas": "A45 : deux personnes suppriment en même temps les deux dernières feuilles",
+   "test": "test_A45_trou2_suppressions_concurrentes",
+   "présumé": "il reste au moins une feuille, la même liste chez tous",
+   "attaque": 2
+  },
+  {
+   "cas": "A64 : la personne revient en ligne alors qu'une autre a toujours une cellule sélectionnée",
+   "test": "test_A64_trou2_presence_revient",
+   "présumé": "l'indicateur de présence réapparaît",
+   "attaque": 2
+  },
+  {
+   "cas": "A136 : cellules vides en début ou au milieu d'une ligne exportée",
+   "test": "test_A136_trou2_colonnes_preservees",
+   "présumé": "les champs vides sont émis, les colonnes restent alignées",
+   "attaque": 2
+  },
+  {
+   "cas": "A149 : saut de ligne à l'intérieur d'un champ entre guillemets",
+   "test": "test_A149_trou2_saut_de_ligne_dans_un_champ",
+   "présumé": "le champ entier va dans une seule cellule",
+   "attaque": 2
+  },
+  {
+   "cas": "A152 : fichier UTF-8 commençant par une marque d'ordre d'octets",
+   "test": "test_A152_trou2_bom_utf8",
+   "présumé": "la marque est retirée, elle n'apparaît pas dans A1",
+   "attaque": 2
+  },
+  {
+   "cas": "N01 : écart entre deux dates seules qui encadrent le passage à l'heure d'été",
+   "test": "test_N01_trou2_dates_seules",
+   "présumé": "l'écart vaut 1 jour exactement",
+   "attaque": 2
+  }
+ ],
+ "modeles": {
+  "red": "opus",
+  "green": "haiku",
+  "juge": "opus"
+ },
+ "tokens_decoupe": {
+  "neufs": 217407,
+  "cache": 78100,
+  "usd": 2.7309720000000004
+ },
+ "tokens_execution": {
+  "neufs": 1014754,
+  "cache": 3222162,
+  "usd": 0.6528690800000001
+ },
+ "part_decoupe": 0.176,
+ "causes": {
+  "causes_distinctes": 5,
+  "causes_par_tour": [
+   4,
+   0,
+   1,
+   0
+  ],
+  "champ_local": {
+   "tout": 0.03,
+   "frontiere": 0.0,
+   "autres": 0.03
+  },
+  "par_assertion": {
+   "A26": 1,
+   "A27": 1,
+   "A34": 1,
+   "A135": 1
+  },
+  "liste": [
+   "AssertionError: contenu de B1 chez alice : attendu '=Ventes!A1', obtenu '=Feuille2!A1'",
+   "AssertionError: liste après restauration : ['Feuille1', 'Ventes']",
+   "AssertionError: valeur de B1 : attendu 8, obtenu '#REF!'",
+   "AssertionError: écart en jours écoulés réels (23 h à cause de l'heure d'été) : attendu 0.9583333333333334, obtenu -0.9583333333333334",
+   "AssertionError: écart numérique attendu, obtenu '#TYPE!'"
+  ]
+ }
+}

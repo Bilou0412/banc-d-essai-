@@ -1,0 +1,61 @@
+[
+ {
+  "groupe": "check_item",
+  "divergences": 195,
+  "graine": 0,
+  "etape": 1,
+  "action": "check_item('beurre', 'c. à s.', checked=True)",
+  "x": [],
+  "y": "refusé",
+  "classe": "invalide",
+  "assertion": "A33",
+  "cas": "On coche dans la liste de courses un article (« beurre », « c. à s. ») alors qu'aucune recette n'existe et que la liste de courses est vide.",
+  "verdict": "claim:     Lors de l'action check_item('beurre', 'c. à s.', checked=True) sur une application vide, une implémentation renvoie une liste de courses vide `[]` et l'autre renvoie « refusé ». L'une des deux viole-t-elle la spec ?\nruling:    rejected\nbecause:   Aucune des deux ne viole la spec, car aucune assertion ne s'applique à cette action. A33 ne parle que de « Le cochage d'un article **de la liste de courses** », et l'état précédent est `{\"recettes\": []}`. Aucune recette n'a été ajoutée à la liste de courses (A29), donc aucun article « beurre » ne peut y figurer. La situation coche un article qui n'existe pas, et un utilisateur ne peut pas le faire : il n'a sous les yeux aucune case à cocher pour cet article.\ncertainty: close — on pourrait aussi y voir un trou de la spec, qui ne dit pas quoi faire quand on coche un article absent. Mais l'action n'a pas d'équivalent pour l'utilisateur, donc ce n'est pas un cas que la spec devait trancher.\n\nCLASSE: invalide\nASSERTION: A33\nCAS: On coche dans la liste de courses un article (« beurre », « c. à s. ») alors qu'aucune recette n'existe et que la liste de courses est vide."
+ },
+ {
+  "groupe": "add_ingredient",
+  "divergences": 26,
+  "graine": 32,
+  "etape": 5,
+  "action": "add_ingredient(Omelette#1, 'crème', 3, 'cl')",
+  "x": {
+   "titre": "Omelette",
+   "portions": 4,
+   "catégorie": null,
+   "favori": false,
+   "note": null,
+   "photo": "image par défaut",
+   "ingrédients": [
+    [
+     "crème",
+     "0.1",
+     "cl"
+    ],
+    [
+     "crème",
+     "3",
+     "cl"
+    ]
+   ]
+  },
+  "y": {
+   "titre": "Omelette",
+   "portions": 4,
+   "catégorie": null,
+   "favori": false,
+   "note": null,
+   "photo": "image par défaut",
+   "ingrédients": [
+    [
+     "crème",
+     "3",
+     "cl"
+    ]
+   ]
+  },
+  "classe": "trou",
+  "assertion": "A03",
+  "cas": "Quand on ajoute à une recette un ingrédient qu'elle contient déjà dans la même unité, la spec ne dit pas si l'ancienne ligne est gardée à côté de la nouvelle, remplacée ou fusionnée.",
+  "verdict": "```\nclaim:     Ajouter l'ingrédient « crème » (3 cl) à une recette qui contient déjà « crème » (0.1 cl) : soit la liste garde deux lignes (X), soit la nouvelle ligne remplace l'ancienne (Y). Un des deux comportements viole la spec.\nruling:    rejected\nbecause:   A03 dit seulement que « L'ajout d'un ingrédient à une recette fait apparaître cet ingrédient dans la liste des ingrédients de la recette ». Les deux résultats montrent [\"crème\", \"3\", \"cl\"], donc A03 est respectée des deux côtés. Aucune assertion ne dit si un ingrédient déjà présent dans la recette est gardé, fusionné ou remplacé. La règle de fusion de A31 vise seulement la liste de courses. A04 vise seulement la suppression.\ncertainty: close\n```\n\nLe jugement est `close` parce qu'on pourrait lire A03 comme supposant que l'ajout ne retire rien de la liste. Mais aucune assertion ne le dit. Le comportement de Y (remplacer) et celui de X (garder deux lignes) respectent tous les deux le texte.\n\nCLASSE: trou\nASSERTION: A03\nCAS: Quand on ajoute à une recette un ingrédient qu'elle contient déjà dans la même unité, la spec ne dit pas si l'ancienne ligne est gardée à côté de la nouvelle, remplacée ou fusionnée."
+ }
+]

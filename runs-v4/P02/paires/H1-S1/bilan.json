@@ -1,0 +1,26 @@
+{
+ "sonde": "P02",
+ "a": "H1",
+ "b": "S1",
+ "situations": 300,
+ "jouees": 300,
+ "concordantes": 295,
+ "taux_compilation": 0.983,
+ "non_deterministes": 0,
+ "erreurs_generateur": 0,
+ "divergences": 5,
+ "groupes": 1,
+ "juges": 1,
+ "classes": {
+  "trou": 1
+ },
+ "tokens_juge": {
+  "neufs": 6104,
+  "cache": 1741,
+  "usd": 0.0670522
+ },
+ "stderr": {
+  "H1": "",
+  "S1": ""
+ }
+}

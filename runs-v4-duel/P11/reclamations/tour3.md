@@ -1,0 +1,4 @@
+test:      test_N01_trou2_dates_seules
+kind:      gap
+assertion: Le test exige que la différence de deux dates seules (sans heure, par exemple =B1-A1 avec A1=2026-03-28 et B1=2026-03-29) vaille 1 (un nombre de jours). La spec ne dit pas cela : elle définit l'écart en jours uniquement entre deux date-heures (N01, A34), et pour une date seule elle ne dit que son affichage (A33 : même jour quel que soit le fuseau). Aucune règle ne fixe le résultat d'une soustraction de dates seules.
+anchor:    Règles A33 (« Une cellule contenant une date seule sans heure affiche le même jour quel que soit le fuseau ») et N01 (« Une formule =B1-A1 entre 2026-03-28 12:00 et 2026-03-29 12:00 saisies à Paris affiche 23/24 de jour »). Test : tests/test_app_2.py::test_N01_trou2_dates_seules, assertion `abs(v - 1) < 1e-9` sur `=B1-A1` avec dates seules ; le code ne lui donne aucune valeur numérique, faute de règle.

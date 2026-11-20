@@ -104,6 +104,15 @@ REEL = {
 - Des demandes « simultanées » peuvent arriver depuis plusieurs threads en même temps : la capacité
   doit tenir sous une vraie concurrence (verrou ou opération atomique), pas parce que les appels sont séquentiels.
 """,
+    "P11": """Mécanismes à réaliser pour de vrai (interdit de les simuler) :
+- Formules : un vrai analyseur d'expressions et un recalcul qui suit le graphe des dépendances entre
+  cellules ; une référence circulaire est détectée sur ce graphe, pas par une liste de cas connus.
+- Collaboration hors ligne : chaque personne a sa propre copie du classeur et édite sans attendre ;
+  les modifications passent par un réseau simulé qui peut les retarder, les couper et les livrer dans
+  n'importe quel ordre ; la fusion et la détection de conflit se font sur les copies, pas par un
+  objet partagé que tout le monde lit.
+- Dates : les fuseaux passent par `zoneinfo` (vraies règles d'heure d'été), jamais par un décalage fixe.
+""",
 }
 REEL_DEFAUT = """Aucun mécanisme ne doit être simulé par un raccourci qui renvoie directement le
 résultat attendu ; ce qui dépend du temps passe par l'horloge que les tests font avancer.

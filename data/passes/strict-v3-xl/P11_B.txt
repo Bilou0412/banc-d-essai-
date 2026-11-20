@@ -1,0 +1,156 @@
+ÉTATS: contenu; valeur; erreur formule; signal circulaire; feuilles; feuille active; nom feuille; droit; connexion; file attente; conflit; pile annuler; pile rétablir; historique; fuseau; date affichée; fichier exporté; présence
+ASSERTIONS:
+- Saisir un nombre dans une cellule vide fait afficher ce nombre comme valeur de la cellule | observé: valeur | conditions: contenu
+- Saisir un texte dans une cellule vide fait afficher ce texte comme valeur de la cellule | observé: valeur | conditions: contenu
+- Saisir « =2+3 » dans une cellule fait afficher 5 comme valeur de la cellule | observé: valeur | conditions: contenu
+- Saisir une formule dans une cellule conserve le texte de la formule dans le contenu de la cellule | observé: contenu | conditions: aucune
+- Sélectionner une cellule qui contient une formule montre le texte de la formule dans la barre de saisie | observé: contenu | conditions: contenu
+- Quand B1 contient « =A1*2 », remplacer 3 par 4 dans A1 fait passer la valeur de B1 de 6 à 8 | observé: valeur | conditions: contenu
+- Quand C1 contient « =B1 » et B1 contient « =A1 », modifier A1 met à jour la valeur de C1 | observé: valeur | conditions: contenu
+- Modifier A1 ne change pas la valeur d'une cellule dont la formule ne fait pas référence à A1 | observé: valeur | conditions: contenu
+- Quand B1 contient « =A1+1 », effacer le contenu de A1 fait afficher 1 comme valeur de B1 | observé: valeur | conditions: contenu
+- Quand A1 contient « =SOMME(B1:B3) », saisir 5 dans B2 augmente la valeur de A1 de 5 | observé: valeur | conditions: contenu
+- Une formule qui additionne un nombre et une cellule contenant du texte affiche une erreur de formule | observé: erreur formule | conditions: contenu
+- Une formule qui divise par une cellule valant 0 affiche une erreur de formule | observé: erreur formule | conditions: contenu
+- Saisir une formule dont la syntaxe est invalide affiche une erreur de formule | observé: erreur formule | conditions: contenu
+- Saisir une formule qui appelle une fonction inconnue affiche une erreur de formule | observé: erreur formule | conditions: contenu
+- Corriger une formule invalide en une formule valide fait disparaître l'erreur de formule de la cellule | observé: erreur formule | conditions: contenu
+- Une cellule dont la formule dépend d'une cellule en erreur affiche elle aussi une erreur de formule | observé: erreur formule | conditions: contenu
+- Une formule qui fait référence à une cellule d'une autre feuille affiche la valeur de cette cellule | observé: valeur | conditions: contenu
+- Modifier une cellule de la feuille 2 met à jour la valeur d'une formule de la feuille 1 qui y fait référence | observé: valeur | conditions: contenu
+- Une formule qui fait référence à un nom de feuille inexistant affiche une erreur de formule | observé: erreur formule | conditions: feuilles, contenu
+- Supprimer une feuille fait afficher une erreur de formule dans les cellules d'autres feuilles qui y faisaient référence | observé: erreur formule | conditions: contenu
+- Renommer une feuille remplace l'ancien nom par le nouveau dans le contenu des formules qui y font référence | observé: contenu | conditions: contenu
+- Renommer une feuille ne change pas la valeur des formules qui y font référence | observé: valeur | conditions: contenu
+- Une formule qui calcule l'écart en jours entre deux cellules contenant des dates affiche le même nombre quel que soit le fuseau de la personne qui regarde | observé: valeur | conditions: contenu
+- Quand A1 contient « =B1 » et B1 contient « =A1 », la cellule A1 affiche le signal de référence circulaire | observé: signal circulaire | conditions: contenu
+- Saisir « =A1 » dans A1 fait afficher le signal de référence circulaire sur A1 | observé: signal circulaire | conditions: contenu
+- Un cycle de trois cellules (A1 dépend de B1, B1 de C1, C1 de A1) fait afficher le signal de référence circulaire sur C1 | observé: signal circulaire | conditions: contenu
+- Un cycle passant par deux feuilles fait afficher le signal de référence circulaire sur les cellules du cycle | observé: signal circulaire | conditions: contenu
+- Une cellule prise dans un cycle n'affiche aucun résultat numérique comme valeur | observé: valeur | conditions: signal circulaire
+- Remplacer une formule du cycle par un nombre fait disparaître le signal de référence circulaire | observé: signal circulaire | conditions: contenu
+- Remplacer une formule du cycle par un nombre fait afficher un résultat calculé dans les autres cellules de l'ancien cycle | observé: valeur | conditions: contenu
+- Une cellule hors du cycle dont la formule dépend d'une cellule du cycle affiche une erreur de formule | observé: erreur formule | conditions: signal circulaire
+- Annuler la saisie qui a créé un cycle fait disparaître le signal de référence circulaire | observé: signal circulaire | conditions: pile annuler
+- Quand deux personnes saisissent au même moment A1 « =B1 » et B1 « =A1 », le signal de référence circulaire apparaît chez chacune | observé: signal circulaire | conditions: contenu | frontière: oui
+- Ajouter une feuille augmente de un le nombre d'onglets de la liste des feuilles | observé: feuilles | conditions: aucune
+- Ajouter une feuille fait de la nouvelle feuille la feuille active | observé: feuille active | conditions: aucune
+- Une nouvelle feuille reçoit un nom par défaut différent des noms des feuilles existantes | observé: nom feuille | conditions: feuilles
+- Renommer une feuille avec le nom d'une autre feuille existante est refusé et le nom reste inchangé | observé: nom feuille | conditions: feuilles
+- Renommer une feuille avec un nom vide est refusé et le nom reste inchangé | observé: nom feuille | conditions: aucune
+- Renommer une feuille avec un nom libre affiche ce nom sur l'onglet | observé: nom feuille | conditions: feuilles
+- Supprimer une feuille retire son onglet de la liste des feuilles | observé: feuilles | conditions: aucune
+- Supprimer la seule feuille restante est refusé | observé: feuilles | conditions: feuilles
+- Supprimer la feuille active fait d'une feuille voisine la feuille active | observé: feuille active | conditions: feuille active
+- Cliquer sur un onglet fait de cette feuille la feuille active | observé: feuille active | conditions: aucune
+- Saisir 7 dans A1 de la feuille 1 ne change pas la valeur de A1 de la feuille 2 | observé: valeur | conditions: aucune
+- Dupliquer une feuille crée une feuille dont les cellules ont le même contenu que l'originale | observé: contenu | conditions: contenu
+- Déplacer un onglet par glisser change sa position dans la liste des feuilles | observé: feuilles | conditions: aucune
+- Une feuille ajoutée par une autre personne apparaît dans ma liste des feuilles | observé: feuilles | conditions: droit, connexion | frontière: oui
+- Une feuille renommée par une autre personne affiche son nouveau nom chez moi | observé: nom feuille | conditions: connexion | frontière: oui
+- Quand deux personnes créent hors connexion une feuille portant le même nom, après fusion l'une des deux feuilles porte un nom modifié | observé: nom feuille | conditions: connexion | frontière: oui
+- Avec le droit lecture sur une feuille, saisir dans une cellule est refusé et le contenu reste inchangé | observé: contenu | conditions: droit
+- Avec le droit lecture sur une feuille, les valeurs des cellules de cette feuille sont visibles | observé: valeur | conditions: droit
+- Avec le droit écriture sur une feuille, saisir dans une cellule modifie son contenu | observé: contenu | conditions: droit
+- Une feuille sur laquelle je n'ai ni lecture ni écriture n'apparaît pas dans ma liste des feuilles | observé: feuilles | conditions: droit
+- Avec le droit lecture sur une feuille, la renommer est refusé | observé: nom feuille | conditions: droit
+- Avec le droit lecture sur une feuille, la supprimer est refusé | observé: feuilles | conditions: droit
+- Avec le droit écriture sur la feuille 2 et lecture sur la feuille 1, saisir dans la feuille 1 est refusé | observé: contenu | conditions: droit
+- Une formule d'une feuille où j'écris peut faire référence à une feuille où je n'ai que la lecture et affiche sa valeur | observé: valeur | conditions: droit
+- Une formule qui fait référence à une feuille sur laquelle je n'ai aucun droit affiche une erreur de formule chez moi | observé: erreur formule | conditions: droit
+- Avec le droit lecture sur une feuille, résoudre un conflit sur cette feuille est refusé et le conflit reste signalé | observé: conflit | conditions: droit
+- Quand le propriétaire retire mon droit écriture pendant que je suis connecté, ma saisie suivante sur cette feuille est refusée | observé: contenu | conditions: droit, connexion | frontière: oui
+- Quand le propriétaire me donne le droit lecture sur une feuille, elle apparaît dans ma liste des feuilles | observé: feuilles | conditions: connexion | frontière: oui
+- Une modification faite hors connexion sur une feuille dont mon droit écriture a été retiré entre-temps est rejetée au retour de la connexion | observé: contenu | conditions: droit, connexion | frontière: oui
+- Hors connexion, saisir dans une cellule modifie son contenu à l'écran | observé: contenu | conditions: aucune
+- Hors connexion, une formule dépendante d'une cellule modifiée est recalculée | observé: valeur | conditions: contenu
+- Perdre le réseau fait afficher l'indicateur « hors connexion » | observé: connexion | conditions: aucune | frontière: oui
+- Retrouver le réseau fait afficher l'indicateur « connecté » | observé: connexion | conditions: aucune | frontière: oui
+- Hors connexion, chaque saisie augmente de un le nombre de modifications en attente affiché | observé: file attente | conditions: connexion | frontière: oui
+- Connecté, une saisie ne laisse aucune modification en attente une fois envoyée | observé: file attente | conditions: connexion | frontière: oui
+- Au retour de la connexion, le nombre de modifications en attente redescend à zéro après fusion | observé: file attente | conditions: connexion | frontière: oui
+- Au retour de la connexion, une autre personne voit le contenu que j'ai saisi hors connexion | observé: contenu | conditions: droit | frontière: oui
+- Au retour de la connexion, une cellule modifiée par une autre personne pendant mon absence affiche le contenu qu'elle a saisi | observé: contenu | conditions: conflit | frontière: oui
+- Au retour de la connexion, une cellule que j'ai modifiée hors connexion et que personne d'autre n'a touchée garde mon contenu | observé: contenu | conditions: conflit | frontière: oui
+- Au retour de la connexion, une formule locale qui dépend d'une cellule modifiée à distance est recalculée | observé: valeur | conditions: contenu | frontière: oui
+- Une feuille créée hors connexion apparaît dans la liste des feuilles des autres personnes au retour de la connexion | observé: feuilles | conditions: droit | frontière: oui
+- Fermer puis rouvrir l'application hors connexion conserve le contenu saisi hors connexion | observé: contenu | conditions: aucune | frontière: oui
+- Fermer puis rouvrir l'application hors connexion conserve le nombre de modifications en attente | observé: file attente | conditions: file attente | frontière: oui
+- Une modification en attente envoyée après réouverture de l'application devient visible pour les autres personnes | observé: contenu | conditions: connexion | frontière: oui
+- Une saisie d'une autre personne connectée apparaît dans ma cellule sans action de ma part | observé: contenu | conditions: connexion | frontière: oui
+- Une saisie d'une autre personne recalcule la valeur de mes formules qui dépendent de cette cellule | observé: valeur | conditions: contenu | frontière: oui
+- Quand une autre personne sélectionne une cellule de la feuille active, un repère à son nom s'affiche sur cette cellule | observé: présence | conditions: feuille active, connexion | frontière: oui
+- Quand une autre personne quitte le document, son repère disparaît | observé: présence | conditions: connexion | frontière: oui
+- Quand je passe hors connexion, les repères des autres personnes disparaissent | observé: présence | conditions: connexion | frontière: oui
+- Quand deux personnes modifient la même cellule au même moment, un conflit est signalé sur cette cellule | observé: conflit | conditions: contenu | frontière: oui
+- Quand deux personnes modifient au même moment deux cellules différentes, aucun conflit n'est signalé | observé: conflit | conditions: contenu | frontière: oui
+- Quand une cellule a été modifiée hors connexion et à distance pendant l'absence, un conflit est signalé au retour de la connexion | observé: conflit | conditions: connexion | frontière: oui
+- Quand un conflit est signalé, la cellule affiche le contenu de la modification reçue en dernier par le serveur | observé: contenu | conditions: conflit | frontière: oui
+- Ouvrir un conflit montre les deux contenus en concurrence avec le nom de leur auteur | observé: conflit | conditions: conflit | frontière: oui
+- Choisir ma version pour résoudre un conflit donne à la cellule le contenu que j'avais saisi | observé: contenu | conditions: conflit
+- Choisir la version de l'autre personne pour résoudre un conflit donne à la cellule le contenu qu'elle avait saisi | observé: contenu | conditions: conflit | frontière: oui
+- Résoudre un conflit fait disparaître son signalement chez moi | observé: conflit | conditions: droit
+- Un conflit résolu par une personne disparaît chez les autres personnes connectées | observé: conflit | conditions: connexion | frontière: oui
+- Un conflit non résolu reste signalé après fermeture puis réouverture de l'application | observé: conflit | conditions: aucune | frontière: oui
+- Les deux contenus d'un conflit figurent chacun comme une version dans l'historique | observé: historique | conditions: conflit | frontière: oui
+- Une modification faite hors connexion dans une feuille supprimée à distance pendant l'absence ne fait pas réapparaître la feuille au retour de la connexion | observé: feuilles | conditions: connexion | frontière: oui
+- Annuler remet dans la cellule le contenu qu'elle avait avant ma dernière modification | observé: contenu | conditions: pile annuler
+- Annuler recalcule la valeur des formules qui dépendaient de la cellule restaurée | observé: valeur | conditions: contenu
+- Annuler ajoute l'action annulée à la pile rétablir | observé: pile rétablir | conditions: pile annuler
+- Rétablir remet dans la cellule le contenu que l'annulation avait retiré | observé: contenu | conditions: pile rétablir
+- Rétablir ajoute l'action rétablie à la pile annuler | observé: pile annuler | conditions: pile rétablir
+- Une nouvelle saisie après une annulation vide la pile rétablir | observé: pile rétablir | conditions: aucune
+- Annuler quand la pile annuler est vide ne change aucun contenu | observé: contenu | conditions: pile annuler
+- Rétablir quand la pile rétablir est vide ne change aucun contenu | observé: contenu | conditions: pile rétablir
+- Annuler la suppression d'une feuille la fait réapparaître dans la liste des feuilles | observé: feuilles | conditions: pile annuler
+- Annuler le renommage d'une feuille lui rend son ancien nom | observé: nom feuille | conditions: pile annuler
+- Annuler un import CSV rend aux cellules le contenu qu'elles avaient avant l'import | observé: contenu | conditions: pile annuler
+- Annuler une restauration de version rend aux cellules le contenu qu'elles avaient avant la restauration | observé: contenu | conditions: pile annuler
+- Hors connexion, annuler ma dernière modification rend à la cellule son contenu précédent | observé: contenu | conditions: pile annuler
+- Une modification faite par une autre personne n'est pas ajoutée à ma pile annuler | observé: pile annuler | conditions: aucune | frontière: oui
+- Annuler ne retire pas une modification faite par une autre personne sur une autre cellule | observé: contenu | conditions: pile annuler | frontière: oui
+- Annuler ma modification d'une cellule que l'autre personne a modifiée après moi laisse le contenu saisi par l'autre personne | observé: contenu | conditions: pile annuler | frontière: oui
+- Annuler une modification sur une feuille où mon droit est passé en lecture est refusé | observé: contenu | conditions: droit
+- Fermer puis rouvrir l'application vide la pile annuler | observé: pile annuler | conditions: aucune | frontière: oui
+- Une modification de cellule ajoute une version à l'historique | observé: historique | conditions: aucune
+- Une version créée par une autre personne affiche le nom de cette personne dans l'historique | observé: historique | conditions: aucune | frontière: oui
+- Consulter une ancienne version montre le contenu des cellules à ce moment-là | observé: contenu | conditions: historique
+- Consulter une ancienne version sans la restaurer ne change pas le contenu actuel des cellules | observé: contenu | conditions: aucune
+- Restaurer une ancienne version donne aux cellules le contenu qu'elles avaient dans cette version | observé: contenu | conditions: historique
+- Restaurer une ancienne version recalcule la valeur des formules | observé: valeur | conditions: contenu
+- Restaurer une version antérieure à la suppression d'une feuille fait réapparaître cette feuille | observé: feuilles | conditions: historique
+- Restaurer une ancienne version ajoute une nouvelle version en tête de l'historique sans effacer les versions suivantes | observé: historique | conditions: aucune
+- Avec le droit lecture, restaurer une version est refusé | observé: contenu | conditions: droit
+- L'historique des versions est toujours présent après fermeture puis réouverture de l'application | observé: historique | conditions: aucune | frontière: oui
+- Les modifications faites hors connexion apparaissent dans l'historique des autres personnes au retour de la connexion | observé: historique | conditions: connexion | frontière: oui
+- La date d'une version enregistrée à 12:00 UTC s'affiche 13:00 pour une personne dont le fuseau est Paris en hiver | observé: date affichée | conditions: fuseau | frontière: oui
+- La date de la même version s'affiche 07:00 pour une personne dont le fuseau est New York en hiver | observé: date affichée | conditions: fuseau | frontière: oui
+- Changer le fuseau horaire de l'appareil change l'heure affichée des versions existantes | observé: date affichée | conditions: fuseau | frontière: oui
+- La date d'une version enregistrée en été s'affiche avec le décalage de l'heure d'été du fuseau de la personne | observé: date affichée | conditions: fuseau | frontière: oui
+- Une date-heure saisie dans une cellule est interprétée dans le fuseau de la personne qui la saisit | observé: contenu | conditions: fuseau | frontière: oui
+- Une date-heure saisie à 10:00 par une personne à Paris s'affiche 18:00 pour une personne à Tokyo en hiver | observé: date affichée | conditions: fuseau | frontière: oui
+- Une date sans heure saisie dans une cellule s'affiche au même jour quel que soit le fuseau de la personne qui regarde | observé: date affichée | conditions: contenu | frontière: oui
+- La formule « =MAINTENANT() » affiche la date et l'heure courantes dans le fuseau de la personne qui regarde | observé: valeur | conditions: fuseau | frontière: oui
+- La valeur de « =MAINTENANT() » se met à jour quand le temps passe | observé: valeur | conditions: aucune | frontière: oui
+- Exporter en CSV écrit la valeur calculée d'une cellule à formule et non le texte de la formule | observé: fichier exporté | conditions: contenu
+- Exporter en CSV ne contient que les cellules de la feuille active | observé: fichier exporté | conditions: feuille active
+- Exporter en CSV place entre guillemets une valeur contenant une virgule | observé: fichier exporté | conditions: contenu
+- Exporter en CSV double un guillemet présent dans une valeur | observé: fichier exporté | conditions: contenu
+- Exporter en CSV écrit le texte d'erreur pour une cellule en erreur de formule | observé: fichier exporté | conditions: erreur formule
+- Exporter en CSV écrit le marqueur de référence circulaire pour une cellule prise dans un cycle | observé: fichier exporté | conditions: signal circulaire
+- Exporter en CSV écrit les date-heures dans le fuseau de la personne qui exporte | observé: fichier exporté | conditions: fuseau | frontière: oui
+- Avec le droit lecture sur une feuille, l'export CSV de cette feuille est autorisé | observé: fichier exporté | conditions: droit
+- Importer un CSV place chaque champ dans la cellule correspondant à sa ligne et à sa colonne | observé: contenu | conditions: aucune
+- Importer un CSV place un champ entre guillemets contenant une virgule dans une seule cellule | observé: contenu | conditions: aucune
+- Importer un CSV enregistre un champ commençant par « = » comme du texte et non comme une formule | observé: contenu | conditions: aucune
+- Importer un CSV rend les champs numériques utilisables comme nombres dans les formules | observé: valeur | conditions: contenu
+- Importer un CSV remplace le contenu des cellules existantes de la zone importée | observé: contenu | conditions: contenu
+- Importer un CSV recalcule la valeur des formules qui dépendent des cellules importées | observé: valeur | conditions: contenu
+- Importer un CSV dont un guillemet n'est pas fermé est refusé et le contenu des cellules reste inchangé | observé: contenu | conditions: aucune
+- Importer un CSV dans une nouvelle feuille ajoute un onglet à la liste des feuilles | observé: feuilles | conditions: aucune
+- Avec le droit lecture sur une feuille, importer un CSV dans cette feuille est refusé | observé: contenu | conditions: droit
+- Importer un CSV ajoute une seule version à l'historique | observé: historique | conditions: aucune
+- Importer un CSV ajoute une seule action à la pile annuler | observé: pile annuler | conditions: aucune
+- Importer le CSV d'une feuille sans formules exporté juste avant redonne aux cellules le même contenu | observé: contenu | conditions: contenu
+- Un import CSV fait par une autre personne apparaît dans mes cellules | observé: contenu | conditions: connexion | frontière: oui
+- Un import CSV fait hors connexion augmente le nombre de modifications en attente | observé: file attente | conditions: connexion | frontière: oui

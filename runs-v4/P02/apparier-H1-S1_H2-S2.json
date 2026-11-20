@@ -1,0 +1,20 @@
+{
+ "paires": [
+  "H1-S1",
+  "H2-S2"
+ ],
+ "trous": [
+  1,
+  2
+ ],
+ "communs": 0,
+ "jaccard": 0.0,
+ "appariement": [],
+ "l1": "1.1 Quand on ajoute deux fois la même recette à la liste de courses avec des portions différentes, rien n'indique si la quantité totale additionne les valeurs exactes puis arrondit (0.83) ou additionne les valeurs déjà arrondies (0.84). (action add_to_shopping_list, A09)",
+ "l2": "2.1 Quand on ajoute à une recette un ingrédient qui y figure déjà sous le même nom et dans la même unité, la spec ne dit pas si la nouvelle saisie remplace l'ancienne ligne, s'ajoute comme seconde ligne ou s'additionne à elle. (action add_ingredient, A03)\n2.2 On demande de supprimer un ingrédient en écrivant son nom avec une autre casse que celle de l'enregistrement (« farine » au lieu de « Farine »), et la spec ne dit pas si cela désigne le même ingrédient. (action remove_ingredient, A04)",
+ "tokens": {
+  "neufs": 1926,
+  "cache": 1741,
+  "usd": 0.015808199999999998
+ }
+}
