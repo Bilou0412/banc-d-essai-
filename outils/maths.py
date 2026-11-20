@@ -176,6 +176,24 @@ def non_vus():
             "capture_recapture_it0": {"nA": na, "nB": nb, "m": m, "N": round((na + 1) * (nb + 1) / (m + 1) - 1, 1)}}
 
 
+def good_turing():
+    """P(la prochaine situation tombe sur un trou jamais vu) ≈ f1 / n, par lot.
+    Une « observation » = une situation dont la première divergence à 4 tombe dans un groupe ; un groupe = un trou
+    candidat, sauf s'il a été jugé bug ou invalide. Les groupes non jugés (les plus petits) restent des trous candidats :
+    c'est là que sont presque tous les singletons."""
+    from boucle import accord
+    out = []
+    for i, l, d in lots():
+        _, divs = accord(i, l, traces(d))
+        exclus = {g["groupe"] for g in json.loads((d / "groupes.json").read_text(encoding="utf-8"))
+                  if g["final"].startswith("bug") or g["final"] == "invalide"}
+        taille = Counter(dv["groupe"] for dv in divs if dv["groupe"] not in exclus)
+        n = sum(taille.values())
+        f1 = sum(1 for v in taille.values() if v == 1)
+        out.append({"it": i, "lot": l, "n": n, "f1": f1, "groupes": len(taille), "p_nouveau": round(f1 / n, 3) if n else None})
+    return out
+
+
 # ── 4. corrélation des greens ─────────────────────────────────────────────
 
 def correlation():
@@ -228,7 +246,7 @@ def correlation():
 
 def main():
     taux = json.loads((BASE / "taux.json").read_text(encoding="utf-8"))
-    res = {"divergence": divergence(taux), "relaxation": relaxation(taux), "non_vus": non_vus(), "correlation": correlation()}
+    res = {"divergence": divergence(taux), "relaxation": relaxation(taux), "non_vus": non_vus(), "good_turing": good_turing(), "correlation": correlation()}
     (BASE / "maths.json").write_text(json.dumps(res, ensure_ascii=False, indent=1), encoding="utf-8")
     print("1. λ, p")
     for r in res["divergence"]:
@@ -237,6 +255,8 @@ def main():
               f"| spec p_est={r['p_estime_spec']} | actions divergentes {r['part_actions_divergentes']}")
     print("2. relaxation", json.dumps(res["relaxation"], ensure_ascii=False))
     print("3. non vus", json.dumps(res["non_vus"], ensure_ascii=False))
+    for r in res["good_turing"]:
+        print(f"  Good-Turing it{r['it']}{r['lot']} : f1={r['f1']} n={r['n']} groupes={r['groupes']} → P(trou jamais vu) ≈ {r['p_nouveau']}")
     c = res["correlation"]
     print("4. corrélation", json.dumps({k: v for k, v in c.items() if k != "paires"}, ensure_ascii=False))
     for k, v in c["paires"].items():

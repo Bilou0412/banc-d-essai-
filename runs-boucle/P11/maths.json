@@ -166,6 +166,64 @@
    "N": 18.2
   }
  },
+ "good_turing": [
+  {
+   "it": 0,
+   "lot": "A",
+   "n": 292,
+   "f1": 16,
+   "groupes": 38,
+   "p_nouveau": 0.055
+  },
+  {
+   "it": 0,
+   "lot": "B",
+   "n": 241,
+   "f1": 16,
+   "groupes": 33,
+   "p_nouveau": 0.066
+  },
+  {
+   "it": 1,
+   "lot": "A",
+   "n": 233,
+   "f1": 31,
+   "groupes": 59,
+   "p_nouveau": 0.133
+  },
+  {
+   "it": 2,
+   "lot": "A",
+   "n": 172,
+   "f1": 9,
+   "groupes": 31,
+   "p_nouveau": 0.052
+  },
+  {
+   "it": 3,
+   "lot": "A",
+   "n": 107,
+   "f1": 21,
+   "groupes": 36,
+   "p_nouveau": 0.196
+  },
+  {
+   "it": 4,
+   "lot": "A",
+   "n": 91,
+   "f1": 22,
+   "groupes": 45,
+   "p_nouveau": 0.242
+  },
+  {
+   "it": 5,
+   "lot": "A",
+   "n": 70,
+   "f1": 25,
+   "groupes": 39,
+   "p_nouveau": 0.357
+  }
+ ],
  "correlation": {
   "paires": {
    "H1-H2": {
