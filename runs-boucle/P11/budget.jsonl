@@ -271,3 +271,5 @@
 {"etape": "it5/A/juge2/undo [cellules.*.contenu, cellules.*.valeur, droits.alice]", "usd": 0.06203360000000001, "neufs": 3433}
 {"etape": "it5/A/juge2/undo [en_attente]", "usd": 0.0743606, "neufs": 4060}
 {"etape": "it5/ajouts", "usd": 0.3328808, "neufs": 32055}
+{"etape":"it6/lot abandonné (greens coupés après 15 min, coût non rapporté, estimé)","usd":1.0,"neufs":0}
+{"etape": "it6/bugs", "usd": 0.7204268, "neufs": 65680}

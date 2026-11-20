@@ -46,7 +46,7 @@ from differentiel import APPARIER, REJOUER, nom_action  # noqa: E402
 SONDE = "P11"
 BASE = RACINE / "runs-boucle" / SONDE
 GEN = RACINE / "runs-v4" / SONDE / "generateur.py"
-PLAFOND = 120.0  # Bilel a levé la limite de 40 $ le 20/11 ; garde-fou contre un emballement
+PLAFOND = 75.8  # 20/11 : 60,80 $ dépensés + 15 $ accordés par Bilel pour la fin de la boucle
 N = 300
 GREENS = {"H1": "haiku", "H2": "haiku", "S1": "sonnet", "S2": "sonnet"}
 ESTIME = {"haiku": 0.7, "sonnet": 2.2, "juge": 0.13, "red": 1.2}
@@ -625,64 +625,76 @@ Réponds ensuite seulement « ok ».
 """
 
 
-def bugs_en_tests(i):
-    """Chaque bug jugé à l'itération i devient un test de non-régression de la spec v_{i+1} (la spec ne change pas)."""
-    suivant = it_dir(i + 1)
-    marque = it_dir(i) / "bugs-tests.json"
-    if marque.exists() or not (suivant / "tests").exists():
-        return
-    dec = json.loads((it_dir(i) / "decisions.json").read_text(encoding="utf-8"))
-    groupes = {g["groupe"]: g for l in (it_dir(i) / "lots").iterdir() if (l / "groupes.json").exists()
-               for g in json.loads((l / "groupes.json").read_text(encoding="utf-8"))}
-    blocs = []
-    for n, b in enumerate(dec["bugs"], 1):
-        g = groupes.get(b["groupe"])
-        if not g:
-            continue
-        fautifs = set(b["final"][4:].split("+"))
-        bons = [v for v in g["variantes"] if not fautifs & set(v["greens"])]
-        mauvais = [v for v in g["variantes"] if fautifs & set(v["greens"])]
-        j = g["juges"][0]
-        blocs.append(f"Cas {n} (action {g['action']}, assertion {j['assertion']}) : {j['cas']}\n"
-                     f"  comportement correct : {json.dumps(bons[0]['obs'] if bons else None, ensure_ascii=False)[:600]}\n"
-                     f"  comportement fautif : {json.dumps(mauvais[0]['obs'] if mauvais else None, ensure_ascii=False)[:600]}")
-    if not blocs:
-        marque.write_text("{}", encoding="utf-8")
-        return
-    garde(ESTIME["red"], f"tests de non-régression des bugs de it{i}")
+def est_bug(g):
+    """Bug retenu : les deux juges disent bug de la même variante, ou un seul le dit et l'autre ne classe pas (pas de désaccord)."""
+    c = [j["classe"] for j in g["juges"]]
+    if g["final"].startswith("bug"):
+        return g["final"][4:].split("+")
+    b = [x for x in c if x.startswith("bug V")]
+    if len(b) == 1 and "non classé" in c:
+        n = int(b[0][5:])
+        return g["variantes"][n - 1]["greens"] if n <= len(g["variantes"]) else None
+    return None
+
+
+def bugs_en_tests(cible, iterations):
+    """Les bugs jugés aux itérations données deviennent des tests de non-régression de la spec v_cible (la spec ne change pas)."""
+    marque = it_dir(cible) / "bugs-tests.json"
+    if marque.exists():
+        sys.exit(f"{marque} existe déjà")
+    blocs, vus = [], set()
+    for i in iterations:
+        for l in sorted((it_dir(i) / "lots").iterdir()):
+            if not (l / "groupes.json").exists():
+                continue
+            for g in json.loads((l / "groupes.json").read_text(encoding="utf-8")):
+                fautifs = est_bug(g)
+                if not fautifs:
+                    continue
+                j = next(x for x in g["juges"] if x["classe"].startswith("bug"))
+                cle = (g["groupe"], j["assertion"])
+                if cle in vus:
+                    continue
+                vus.add(cle)
+                bons = [v for v in g["variantes"] if not set(fautifs) & set(v["greens"])]
+                mauvais = [v for v in g["variantes"] if set(fautifs) & set(v["greens"])]
+                blocs.append(f"Cas {len(blocs) + 1} (itération {i}, action {g['action']}, assertion {j['assertion']}) : {j['cas']}\n"
+                             f"  comportement correct : {json.dumps(bons[0]['obs'] if bons else None, ensure_ascii=False)[:600]}\n"
+                             f"  comportement fautif : {json.dumps(mauvais[0]['obs'] if mauvais else None, ensure_ascii=False)[:600]}")
+    garde(ESTIME["red"] * 1.5, f"tests de non-régression ({len(blocs)} bugs)")
     travail = Path(tempfile.mkdtemp(prefix="boucle-bugs-"))
     shutil.copytree(RACINE / ".claude" / "agents", travail / ".claude" / "agents")
     (travail / "tests").mkdir()
-    fichier = f"test_app_reg{i + 1}.py"
-    r, t = appel("red", BUGS.format(tech=TECH, reel=REEL[SONDE], assertions=formater(spec(i + 1)), interface=interface(),
+    fichier = f"test_app_reg{cible}.py"
+    r, t = appel("red", BUGS.format(tech=TECH, reel=REEL[SONDE], assertions=formater(spec(cible)), interface=interface(),
                                     cas="\n\n".join(blocs), dossier=travail, fichier=fichier), "opus", "Write", travail)
-    noter(f"it{i}/bugs", t)
+    noter(f"it{cible}/bugs", t)
     tf = travail / "tests" / fichier
     if not tf.exists():
-        print("pas de tests de non-régression écrits")
-        return
+        sys.exit("pas de tests de non-régression écrits")
+    # contrôle sur les greens des itérations d'où viennent les bugs : un test doit passer sur au moins un green
     passages = {}
-    for g in GREENS:
-        essai = Path(tempfile.mkdtemp(prefix="boucle-valide-"))
-        (essai / "tests").mkdir()
-        shutil.copy(tf, essai / "tests" / fichier)
-        shutil.copy(it_dir(i) / "lots" / "A" / "greens" / g / "app.py", essai / "app.py")
-        for nom, (ok, _) in executer(essai).items():
-            passages.setdefault(nom, []).append(g if ok else None)
-    # un test de non-régression doit passer sur au moins un green (celui qui avait raison) et casser sur au moins un
+    for i in iterations:
+        for g in GREENS:
+            app_py = it_dir(i) / "lots" / "A" / "greens" / g / "app.py"
+            essai = Path(tempfile.mkdtemp(prefix="boucle-valide-"))
+            (essai / "tests").mkdir()
+            shutil.copy(tf, essai / "tests" / fichier)
+            shutil.copy(app_py, essai / "app.py")
+            for nom, (ok, _) in executer(essai).items():
+                passages.setdefault(nom, []).append(f"it{i}{g}" if ok else None)
     retires = [n for n, v in passages.items() if not any(v)]
     if retires:
         retirer_tests(tf, set(retires))
-    shutil.copy(tf, suivant / "tests" / fichier)
-    res = {"bugs": len(blocs), "tests": {n: [x for x in v if x] for n, v in passages.items()}, "retires": retires, "usd": t["usd"]}
+    shutil.copy(tf, it_dir(cible) / "tests" / fichier)
+    res = {"iterations": list(iterations), "bugs": len(blocs), "cas": blocs, "retires": retires, "usd": t["usd"],
+           "tests": {n: sum(1 for x in v if x) for n, v in passages.items()}}
     marque.write_text(json.dumps(res, ensure_ascii=False, indent=1), encoding="utf-8")
-    print(f"non-régression it{i} : {len(blocs)} bugs, {len(passages) - len(retires)} tests gardés, {len(retires)} retirés")
-
+    print(f"non-régression → it{cible} : {len(blocs)} bugs, {len(passages) - len(retires)} tests gardés "
+          f"(sur {len(iterations) * 4} greens), {len(retires)} retirés")
 
 def iteration(a):
     i = a.it
-    if (BASE / "bugs-en-tests").exists() and i >= 1 and not (it_dir(i) / "lots").exists():
-        bugs_en_tests(i - 1)
     if not (it_dir(i) / "lots" / "A" / "greens").exists():
         a.lot = "A"
         lot(a)
@@ -706,13 +718,14 @@ def bilan(a):
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("commande", choices=["init", "lot", "analyser", "apparier", "ajouter", "iteration", "bilan", "decider"])
+    ap.add_argument("commande", choices=["init", "lot", "analyser", "apparier", "ajouter", "iteration", "bilan", "decider", "bugs"])
     ap.add_argument("--it", type=int, default=0)
     ap.add_argument("--lot", default="A")
+    ap.add_argument("--depuis", type=int, nargs="*", default=None)
     a = ap.parse_args()
     BASE.mkdir(parents=True, exist_ok=True)
     {"init": init, "lot": lot, "analyser": analyser, "apparier": apparier, "ajouter": ajouter,
-     "iteration": iteration, "bilan": bilan, "decider": decider}[a.commande](a)
+     "iteration": iteration, "bilan": bilan, "decider": decider, "bugs": lambda a: bugs_en_tests(a.it, a.depuis)}[a.commande](a)
 
 
 if __name__ == "__main__":
