@@ -23,7 +23,7 @@ Usage :
     python outils/boucle.py bilan                      # tableau de toutes les itérations
 
 Budget : chaque appel est noté dans runs-boucle/P11/budget.jsonl ; une étape dont l'estimation
-dépasserait le plafond (40 $) n'est pas lancée.
+dépasserait le plafond (120 $, garde-fou) n'est pas lancée.
 """
 import argparse
 import ast
@@ -46,7 +46,7 @@ from differentiel import APPARIER, REJOUER, nom_action  # noqa: E402
 SONDE = "P11"
 BASE = RACINE / "runs-boucle" / SONDE
 GEN = RACINE / "runs-v4" / SONDE / "generateur.py"
-PLAFOND = 40.0
+PLAFOND = 120.0  # Bilel a levé la limite de 40 $ le 20/11 ; garde-fou contre un emballement
 N = 300
 GREENS = {"H1": "haiku", "H2": "haiku", "S1": "sonnet", "S2": "sonnet"}
 ESTIME = {"haiku": 0.7, "sonnet": 2.2, "juge": 0.13, "red": 1.2}

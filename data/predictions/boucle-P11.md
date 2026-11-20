@@ -27,3 +27,13 @@ Pourquoi une montée lente : on ne regarde que la **première** divergence de ch
 3. **H20b** : Jaccard des unions de trous lot A / lot B sur v0 ≈ **0,45**. Je prédis donc qu'elle **échoue de peu** au critère ≥ 0,5. Raison : 4 greens ne couvrent qu'une partie des façons de combler chaque trou, et la première divergence masque les autres.
 4. **Juges** : les deux juges sont d'accord sur ≥ 75 % des groupes. Le reste part en « à trancher ».
 5. **Effet de bord** : des assertions ajoutées créent de nouveaux trous (ce qu'elles disent croise d'autres règles). Je m'attends à en voir au moins 1 par itération.
+
+## Complément (20/11, avant la fin de l'itération 0, aucune donnée de la boucle vue)
+
+Bilel lève la limite de 40 $ et demande combien d'itérations pour atteindre 0,9. Modèle simple : le taux d'une paire ≈ exp(−M), où M est la « masse de trous » qu'une situation rencontre. Au départ, M ≈ 2,4 (taux 0,09). Pour 0,9, il faut M ≈ 0,1, soit 23 fois moins. Si chaque itération enlève environ la moitié de la masse (elle ferme les gros trous, mais en démasque et en crée d'autres) :
+
+| Itération | 0 | 1 | 2 | 3 | 4 | 5 |
+|---|---|---|---|---|---|---|
+| Taux moyen (modèle) | 0,09 | 0,30 | 0,55 | 0,74 | 0,86 | 0,93 |
+
+Ce modèle est plus optimiste que le tableau du haut, qui reste la prédiction figée. Les deux sont notés : la boucle dira lequel est le plus proche. Attendu : **0,9 vers l'itération 5, pour environ 55 à 60 $ en tout**. Si chaque itération n'enlève qu'un tiers de la masse, il faut 8 itérations, soit environ 85 $. La courbe a une forme de S en taux : la montée paraît s'accélérer, puis elle sature près de 1.
