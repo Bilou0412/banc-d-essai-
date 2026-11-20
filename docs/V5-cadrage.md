@@ -139,3 +139,47 @@ Je propose un plafond de **75 $**, avec une alerte à 60 $.
 2. **L'accès réseau.** Ce fil tourne sur l'environnement intégré par défaut, sans réglages : il bloque OpenRouter, Hugging Face (pour télécharger NuExtract) et les sites des RC. Il faut créer un environnement cloud dans [Project settings](#project-settings/environment) (menu Cloud environment → Add cloud environment), avec ces domaines autorisés : `openrouter.ai`, `huggingface.co`, `epernay.fr`, `epernay-agglo.fr`, `betterplace.info`, `ste-marguerite-sur-mer.fr`, `parc-pyrenees-catalanes.fr`. Pour les RC, tu peux aussi m'envoyer les 5 PDF dans le fil.
 3. **La clé OpenRouter**, dans ce même environnement, en variable `OPENROUTER_API_KEY`. Ne la colle pas dans le chat.
 4. Un nouvel environnement n'est pris que par une **nouvelle session** : la boucle tournera dans un nouveau fil, qui reprendra ce cadrage et les prédictions figées.
+
+## 10. Révision du 20/11, après ta réponse
+
+**Ce qui change.**
+
+- Plus de modèles hébergés, plus d'OpenRouter. Le lot : **haiku et sonnet** écrivent le code de la tranche ; **ton code** est le green Bilel, comparé sur ses 11 faits.
+- **Chaque fait du RC devient une assertion atomique** de la spec (observé : le fait ; conditions : ce qui change sa valeur), et la règle « une valeur n'est gardée que si elle est retrouvée dans la page » fait partie de la spec.
+- **H23 redéfinie** : ton pipeline (NuExtract local + vérification dans la page) contre sonnet, qui lit les mêmes pages sous la même règle. Sur les RC synthétiques, le générateur connaît la vérité : on mesure la **justesse** des deux, fait par fait. Sur les 5 RC publics, on mesure leur **accord**. On compte aussi la part des faits confirmés par l'algorithme seul, et la liste des faits où le petit modèle échoue. Seuil et prédictions figés dans `data/predictions/V5.md` (complément du 20/11, 17 h).
+
+```
+              ┌─────────────────────────────┐
+  pages ───►  │ NuExtract (local, T = 0)    │──► valeur proposée ──► retrouvée dans la page ? ──► fait
+  du RC       └─────────────────────────────┘                          non : « non trouvé »
+              ┌─────────────────────────────┐
+  pages ───►  │ sonnet (modèle fort)        │──► valeur proposée ──► même vérification       ──► fait
+              └─────────────────────────────┘
+                       justesse face à la vérité du générateur (synthétiques), accord entre eux (publics)
+```
+
+**Faisabilité de NuExtract en local.**
+
+- Ton serveur de production le fait déjà tourner sur CPU : `extractor/fly.toml` sert NuExtract 3 (fichier `NuExtract3-Q4_K_M.gguf`) avec llama.cpp sur une machine Fly *performance-4x* de **8 Go**, 4 fils, contexte de 8 192 jetons, et ton commentaire dit qu'une requête « peut prendre plusieurs minutes sur CPU ».
+- Mon environnement : 4 cœurs Xeon avec AVX-512, 15 Go de mémoire, 60 Go de disque libres. C'est au moins la machine de production : **NuExtract y tient.**
+- **llama.cpp compile ici** : `llama-server` et `llama-bench` construits pour ce processeur (AVX-512), en quelques minutes. Le seul blocage est le téléchargement du modèle : cette session n'a pas encore ton nouvel environnement, qui ouvre `huggingface.co`. Un nouveau fil lancé sur cet environnement le fera.
+- Durée attendue, à mesurer au premier RC : 1 à 3 minutes par RC synthétique court (une seule tranche de texte), plusieurs minutes par RC public long. Le pipeline ne change pas d'une itération à l'autre : on le passe **une seule fois** sur les 300 RC, en tâche de fond, soit **5 à 15 heures de calcul, 0 $**. Si c'est trop long, 100 synthétiques + 5 publics suffisent pour H23.
+- Sur ton Dell XPS (i7-9750H, 6 cœurs, AVX2, 32 Go), ça tourne aussi, à une vitesse comparable : llama.cpp compilé pour CPU, le même fichier GGUF, `llama-server` lancé avec `--ctx-size 8192 --threads 6 --temp 0`, et `EXTRACTOR_URL=http://localhost:8080`. On n'en a besoin que si l'environnement cloud bloque.
+
+**Budget recalculé, sans modèles hébergés.**
+
+| Poste | Ton choix : 1 haiku + 1 sonnet | Variante : 2 haiku + 2 sonnet |
+|---|---|---|
+| Passes v2 et v3 sur la tranche | 2 | 2 |
+| Spec v0 + duel complet | 8 | 8 |
+| Générateur de RC synthétiques + adaptateur du green Bilel | 3 | 3 |
+| Référence H23 : sonnet lit 300 RC (11 faits) | 5 | 5 |
+| NuExtract local sur 300 RC | 0 | 0 |
+| Par itération : greens | 2,9 | 5,8 |
+| Par itération : 2 juges, red, juge client/convention, bugs → tests | 5,1 | 6,2 |
+| 6 itérations | 48 | 72 |
+| **Total** | **≈ 66 $** | **≈ 90 $** |
+
+La variante coûte 24 $ de plus. Ce qu'elle achète : avec une seule paire, un trou ne se voit que si haiku et sonnet ont choisi différemment. Sur P11, chaque paire ne voyait qu'une partie des trous (H20 réfutée pour cette raison), et 4 greens en trouvaient bien plus. Avec une paire, le taux montera plus vite, mais il dira moins bien si la spec compile vraiment. Je recommande quand même **ton choix à 66 $** pour cette tranche : H23 n'en dépend pas, et la boucle reste comparable d'une itération à l'autre. On ajoute des greens si le taux spec dépasse 0,8, pour vérifier qu'il tient.
+
+Plafond proposé : **70 $**, alerte à 55 $.
