@@ -34,7 +34,7 @@ Bilel, développeur freelance. Il pense par **intuitions structurelles et parall
 ```
 CLAUDE.md                      ce fichier
 docs/SPEC-banc.md              spec fonctionnelle du banc (45 assertions strictes)
-docs/theses.md                 registre des thèses H1-H22 (+ cadre théorique L*)
+docs/theses.md                 registre des thèses H1-H29 (+ cadre théorique L*)
 docs/pistes.md                 carnet des pistes en attente (graphes, maths, produit), rien à lancer sans plan
 docs/HISTORIQUE.md             la conversation d'origine, résumée
 prompts/decompositeur-strict.md  consigne exacte des passes aveugles (v1)
@@ -58,6 +58,7 @@ outils/quatre.py               accord entre N greens sur les mêmes situations (
 outils/boucle.py               la boucle de compilation (H21) : lots de 4 greens, double juge, trous → assertions, bugs → tests
 outils/taux_spec.py            taux brut, taux « spec » (bugs = accord) et taux par action de chaque itération
 outils/maths.py                lecture mathématique sans modèle : λ et p, relaxation, trous non vus, corrélation des greens
+outils/fiedler.py              G2 : λ2 de Fiedler des passes v2 contre k (H24), écrit data/fiedler.json
 runs/<sonde>/                  duel V0 (passes v1, green sonnet, une attaque)
 runs-v1/<sonde>/               duel V1 (passes v2, green haiku, deux attaques, mécanismes réels)
 runs-v2/<sonde>/               duel V2 (P02, P06, P07 : H18)
@@ -68,6 +69,7 @@ runs-v4-duel/P11/              duel complet de la grosse sonde
 runs-boucle/P11/               la boucle : it<i>/ (spec, tests, lots, décisions), budget.jsonl, taux.json, maths.json
 docs/duel-V0.md … V4           rapports des duels
 docs/boucle-P11.md             rapport de la boucle de compilation
+docs/V5-cadrage.md             V5 : repo client BuildForge, tranche « du RC au plan du mémoire », RC publics, modèles ouverts, budget
 protocol/, .claude/agents/     le protocole adversarial attaché (tools/link.py), ne pas éditer protocol/
 ```
 
