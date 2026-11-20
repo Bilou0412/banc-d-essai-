@@ -1,0 +1,222 @@
+{
+ "divergence": [
+  {
+   "it": 0,
+   "lot": "A",
+   "lambda": 27.09,
+   "lambda_p_brut": 2.419,
+   "lambda_p_spec": 2.303,
+   "p_estime_brut": 0.0893,
+   "p_estime_spec": 0.085,
+   "p_mesure": 0.0881,
+   "taux_predit_par_p_mesure": 0.092,
+   "taux_brut": 0.089,
+   "part_actions_divergentes": 0.32
+  },
+  {
+   "it": 0,
+   "lot": "B",
+   "lambda": 27.09,
+   "lambda_p_brut": 1.79,
+   "lambda_p_spec": 1.704,
+   "p_estime_brut": 0.0661,
+   "p_estime_spec": 0.0629,
+   "p_mesure": 0.0654,
+   "taux_predit_par_p_mesure": 0.17,
+   "taux_brut": 0.167,
+   "part_actions_divergentes": 0.263
+  },
+  {
+   "it": 1,
+   "lot": "A",
+   "lambda": 27.09,
+   "lambda_p_brut": 1.124,
+   "lambda_p_spec": 0.939,
+   "p_estime_brut": 0.0415,
+   "p_estime_spec": 0.0347,
+   "p_mesure": 0.0395,
+   "taux_predit_par_p_mesure": 0.343,
+   "taux_brut": 0.325,
+   "part_actions_divergentes": 0.145
+  },
+  {
+   "it": 2,
+   "lot": "A",
+   "lambda": 27.09,
+   "lambda_p_brut": 0.801,
+   "lambda_p_spec": 0.552,
+   "p_estime_brut": 0.0296,
+   "p_estime_spec": 0.0204,
+   "p_mesure": 0.0285,
+   "taux_predit_par_p_mesure": 0.462,
+   "taux_brut": 0.449,
+   "part_actions_divergentes": 0.115
+  },
+  {
+   "it": 3,
+   "lot": "A",
+   "lambda": 27.09,
+   "lambda_p_brut": 0.596,
+   "lambda_p_spec": 0.326,
+   "p_estime_brut": 0.022,
+   "p_estime_spec": 0.012,
+   "p_mesure": 0.0209,
+   "taux_predit_par_p_mesure": 0.567,
+   "taux_brut": 0.551,
+   "part_actions_divergentes": 0.091
+  },
+  {
+   "it": 4,
+   "lot": "A",
+   "lambda": 27.09,
+   "lambda_p_brut": 0.796,
+   "lambda_p_spec": 0.323,
+   "p_estime_brut": 0.0294,
+   "p_estime_spec": 0.0119,
+   "p_mesure": 0.028,
+   "taux_predit_par_p_mesure": 0.468,
+   "taux_brut": 0.451,
+   "part_actions_divergentes": 0.12
+  },
+  {
+   "it": 5,
+   "lot": "A",
+   "lambda": 27.09,
+   "lambda_p_brut": 0.46,
+   "lambda_p_spec": 0.196,
+   "p_estime_brut": 0.017,
+   "p_estime_spec": 0.0072,
+   "p_mesure": 0.0165,
+   "taux_predit_par_p_mesure": 0.64,
+   "taux_brut": 0.631,
+   "part_actions_divergentes": 0.065
+  }
+ ],
+ "relaxation": {
+  "points": [
+   [
+    0,
+    2.104
+   ],
+   [
+    1,
+    1.124
+   ],
+   [
+    2,
+    0.801
+   ],
+   [
+    3,
+    0.596
+   ],
+   [
+    4,
+    0.796
+   ],
+   [
+    5,
+    0.46
+   ]
+  ],
+  "sans_it6": {
+   "a": 1.518,
+   "b": 1.011,
+   "c": 0.583,
+   "demi_vie": 0.69,
+   "taux_max": 0.558,
+   "residu": 0.0564,
+   "points": 6
+  },
+  "spec": {
+   "a": 1.782,
+   "b": 0.876,
+   "c": 0.217,
+   "demi_vie": 0.79,
+   "taux_max": 0.805,
+   "residu": 0.0061,
+   "points": 6
+  }
+ },
+ "non_vus": {
+  "S_obs": 38,
+  "fusions_it0": 4,
+  "distribution": {
+   "1": 28,
+   "2": 6,
+   "3": 4
+  },
+  "alpha": 0.05,
+  "beta": 3.49,
+  "theta_moyen": 0.014,
+  "P0_4_greens": 0.959,
+  "N_beta": 926.9,
+  "non_vus": {
+   "4": 888.9,
+   "8": 869.2,
+   "16": 845.9
+  },
+  "f1": 28,
+  "f2": 6,
+  "chao1": 103.3,
+  "capture_recapture_it0": {
+   "nA": 11,
+   "nB": 7,
+   "m": 4,
+   "N": 18.2
+  }
+ },
+ "correlation": {
+  "paires": {
+   "H1-H2": {
+    "n": 18088,
+    "p_ecart_a": 0.048,
+    "p_ecart_b": 0.04,
+    "p_ensemble": 0.016,
+    "rho": 0.334
+   },
+   "H1-S1": {
+    "n": 17524,
+    "p_ecart_a": 0.034,
+    "p_ecart_b": 0.009,
+    "p_ensemble": 0.001,
+    "rho": 0.067
+   },
+   "H1-S2": {
+    "n": 17579,
+    "p_ecart_a": 0.037,
+    "p_ecart_b": 0.012,
+    "p_ensemble": 0.002,
+    "rho": 0.097
+   },
+   "H2-S1": {
+    "n": 17390,
+    "p_ecart_a": 0.027,
+    "p_ecart_b": 0.01,
+    "p_ensemble": 0.002,
+    "rho": 0.137
+   },
+   "H2-S2": {
+    "n": 17388,
+    "p_ecart_a": 0.026,
+    "p_ecart_b": 0.01,
+    "p_ensemble": 0.001,
+    "rho": 0.077
+   },
+   "S1-S2": {
+    "n": 17351,
+    "p_ecart_a": 0.024,
+    "p_ecart_b": 0.024,
+    "p_ensemble": 0.016,
+    "rho": 0.674
+   }
+  },
+  "rho_haiku_haiku": 0.334,
+  "rho_sonnet_sonnet": 0.674,
+  "rho_haiku_sonnet": 0.095,
+  "rho_lot_mixte": 0.231,
+  "n_eff_4_haiku": 2.0,
+  "n_eff_4_sonnet": 1.32,
+  "n_eff_lot_mixte": 2.36
+ }
+}
