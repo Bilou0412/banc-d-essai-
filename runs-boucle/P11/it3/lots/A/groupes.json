@@ -1,0 +1,2484 @@
+[
+ {
+  "groupe": "resolve_conflict [alertes]",
+  "graine": 92,
+  "etape": 1,
+  "action": "carol.resolve_conflict('A1', use_discarded=False)",
+  "variantes": [
+   {
+    "greens": [
+     "H1",
+     "S1",
+     "S2"
+    ],
+    "obs": {
+     "alertes": [
+      [
+       "droit_insuffisant",
+       "Feuille1",
+       "A1",
+       null
+      ]
+     ],
+     "annuler": false,
+     "cellules": {
+      "A1": {
+       "contenu": null,
+       "erreur": null,
+       "valeur": null
+      }
+     },
+     "connexion": "en ligne",
+     "droits": {
+      "alice": "écriture",
+      "bob": "écriture",
+      "carol": "lecture"
+     },
+     "en_attente": 0,
+     "feuille_vue": "Feuille1",
+     "feuilles": [
+      "Feuille1"
+     ],
+     "personne": "carol",
+     "présence": {},
+     "rétablir": false
+    }
+   },
+   {
+    "greens": [
+     "H2"
+    ],
+    "obs": {
+     "alertes": [],
+     "annuler": false,
+     "cellules": {
+      "A1": {
+       "contenu": null,
+       "erreur": null,
+       "valeur": null
+      }
+     },
+     "connexion": "en ligne",
+     "droits": {
+      "alice": "écriture",
+      "bob": "écriture",
+      "carol": "lecture"
+     },
+     "en_attente": 0,
+     "feuille_vue": "Feuille1",
+     "feuilles": [
+      "Feuille1"
+     ],
+     "personne": "carol",
+     "présence": {},
+     "rétablir": false
+    }
+   }
+  ],
+  "final": "bug H2",
+  "juges": [
+   {
+    "classe": "bug V2",
+    "assertion": "C14",
+    "cas": "Une personne qui n'a que le droit lecture demande à résoudre le conflit d'une cellule vide qui ne montre aucun conflit.",
+    "choix": "aucun",
+    "nouvelle": "aucune",
+    "usd": 0.16686800000000002,
+    "texte": "llule, quelle que soit la valeur choisie, une alerte « droit insuffisant » cite la feuille et la cellule en cause ». C27 le répète pour « toute écriture, quelle qu'elle soit (… résolution de conflit) ». C19 montre que la spec vérifie le droit avant de regarder si l'action ne change rien : il faut une alerte « même [pour] un CSV vide ». La règle « ne rien changer » de C22 vaut seulement pour une personne qui a « le droit écriture ». Le principe P1 (C21) énumère valeur, versions et attente, mais pas les alertes.\ncertainty: close\n```\n\nLe point qui reste discutable : on peut lire « le conflit d'une cellule » dans C14 comme supposant qu'un conflit existe. Dans ce cas, une demande sur une cellule sans conflit ne serait pas une tentative de résolution, et l'absence d'alerte de V2 pourrait se défendre avec P1. C19 tranche en sens contraire. Pour quelqu'un qui n'a que le droit lecture, la spec refuse explicitement l'écriture même quand elle n'aurait rien changé. C14 et C27 visent la tentative, pas son effet.\n\nCLASSE: bug V2\nASSERTION: C14\nCAS: Une personne qui n'a que le droit lecture demande à résoudre le conflit d'une cellule vide qui ne montre aucun conflit.\nCHOIX: aucun\nNOUVELLE: aucune"
+   },
+   {
+    "classe": "bug V2",
+    "assertion": "C14",
+    "cas": "Une personne qui n'a que le droit lecture demande de résoudre un conflit sur une cellule vide qui n'en montre aucun.",
+    "choix": "aucun",
+    "nouvelle": "aucune",
+    "usd": 0.0375184,
+    "texte": "it lecture tente une écriture, quelle qu'elle soit (… résolution de conflit), l'écriture est refusée et une alerte « droit insuffisant » cite la feuille en cause ». C14 ajoute, « quelle que soit la valeur choisie », que l'alerte cite la feuille et la cellule.\n           Le principe P1 (C21, C22), invoqué pour une absence d'alerte, ne couvre pas ce cas. C21 ne parle que de valeur, d'historique et de modifications en attente, pas d'alerte. C22 vise explicitement une personne « ayant le droit écriture ».\n           La spec tranche d'ailleurs le cas voisin de l'action sans effet pour une personne en lecture : C19 exige l'alerte « même [pour] un CSV vide ».\ncertainty: close\n```\n\nC'est serré pour une raison : C14 et C27 ne disent pas mot pour mot « même sur une cellule sans conflit ». La règle se déduit de « quelle qu'elle soit » dans C27 et de l'exemple de C19, sans être écrite pour ce cas précis. Ce qui exclut la lecture de V2, c'est que l'exemption P1 de C22 n'est prévue que pour une personne en écriture.\n\nCLASSE: bug V2\nASSERTION: C14\nCAS: Une personne qui n'a que le droit lecture demande de résoudre un conflit sur une cellule vide qui n'en montre aucun.\nCHOIX: aucun\nNOUVELLE: aucune"
+   }
+  ],
+  "divergences": 63
+ },
+ {
+  "groupe": "history [(tout)]",
+  "graine": 275,
+  "etape": 3,
+  "action": "carol.history()",
+  "variantes": [
+   {
+    "greens": [
+     "H1",
+     "S1",
+     "S2"
+    ],
+    "obs": []
+   },
+   {
+    "greens": [
+     "H2"
+    ],
+    "obs": [
+     [
+      "bob",
+      "2026-01-15 10:00",
+      "modification"
+     ]
+    ]
+   }
+  ],
+  "final": "trou",
+  "juges": [
+   {
+    "classe": "trou",
+    "assertion": "A119",
+    "cas": "Une personne consulte l'historique des versions de sa feuille après qu'une autre personne a ajouté une nouvelle feuille au classeur, sans qu'aucune cellule n'ait été modifiée.",
+    "choix": "V1",
+    "nouvelle": "Quand une autre personne ajoute une feuille, l'historique des versions d'une feuille existante consulté par une personne reste inchangé : aucune entrée n'y apparaît pour cet ajout | observé: versions | conditions: connexion, droit",
+    "usd": 0.16786,
+    "texte": "e V2 la respectent\nbecause:   A119 ne crée une entrée que pour une modification de cellule : « Quand une modification de cellule est enregistrée par le serveur, une nouvelle entrée apparaît dans l'historique des versions ». A58 et A96 rattachent l'historique à une feuille (« l'historique des versions de cette feuille »). Aucune assertion n'interdit qu'un ajout de feuille par une autre personne laisse une entrée dans l'historique que carol consulte. C29 dit seulement que carol n'a aucun droit sur « Dépenses », pas qu'elle ne peut pas en voir la trace. Ni A38 ni C03 ne parlent de l'historique pour un ajout de feuille. Le fait qui manque est une règle de la spec : il revient à l'auteur de la spec, pas au chercheur.\ncertainty: close\n\nCLASSE: trou\nASSERTION: A119\nCAS: Une personne consulte l'historique des versions de sa feuille après qu'une autre personne a ajouté une nouvelle feuille au classeur, sans qu'aucune cellule n'ait été modifiée.\nCHOIX: V1\nNOUVELLE: Quand une autre personne ajoute une feuille, l'historique des versions d'une feuille existante consulté par une personne reste inchangé : aucune entrée n'y apparaît pour cet ajout | observé: versions | conditions: connexion, droit"
+   },
+   {
+    "classe": "trou",
+    "assertion": "A119",
+    "cas": "Une personne non propriétaire ajoute une feuille, l'ajout est livré à tous, puis une troisième personne, sans droit sur la nouvelle feuille, consulte l'historique des versions.",
+    "choix": "V1",
+    "nouvelle": "Quand une autre personne ajoute une feuille, l'historique des versions vu par une personne n'ayant aucun droit sur cette nouvelle feuille ne gagne aucune entrée, même après livraison de l'ajout | observé: versions | conditions: droit, connexion",
+    "usd": 0.0382928,
+    "texte": ":    not resolvable\nbecause:   The spec only creates history entries for some actions: « Quand une modification de cellule est enregistrée par le serveur, une nouvelle entrée apparaît » (A119), plus import (C12) and restore (A131). Adding a sheet changes no cell, and no assertion says whether it leaves an entry. History is described per sheet (« l'historique des versions de cette feuille », A58), and Carol has no right on the new sheet (« toute autre personne n'obtient aucun droit sur cette feuille », C29). Both of those lean toward V1, but neither forbids V2's entry. The dossier cannot settle this; the arbiter has to decide what they intend, and the new assertion below settles it in favour of V1.\ncertainty: close\n\nCLASSE: trou\nASSERTION: A119\nCAS: Une personne non propriétaire ajoute une feuille, l'ajout est livré à tous, puis une troisième personne, sans droit sur la nouvelle feuille, consulte l'historique des versions.\nCHOIX: V1\nNOUVELLE: Quand une autre personne ajoute une feuille, l'historique des versions vu par une personne n'ayant aucun droit sur cette nouvelle feuille ne gagne aucune entrée, même après livraison de l'ajout | observé: versions | conditions: droit, connexion"
+   }
+  ],
+  "divergences": 40
+ },
+ {
+  "groupe": "set_timezone [historique]",
+  "graine": 47,
+  "etape": 11,
+  "action": "alice.set_timezone('UTC')",
+  "variantes": [
+   {
+    "greens": [
+     "H1",
+     "S1",
+     "S2"
+    ],
+    "obs": {
+     "cellules": {
+      "A1": {
+       "contenu": "2026-03-15",
+       "erreur": null,
+       "valeur": "2026-03-15"
+      },
+      "A2": {
+       "contenu": null,
+       "erreur": null,
+       "valeur": null
+      },
+      "A3": {
+       "contenu": null,
+       "erreur": null,
+       "valeur": null
+      },
+      "B1": {
+       "contenu": null,
+       "erreur": null,
+       "valeur": null
+      },
+      "B2": {
+       "contenu": null,
+       "erreur": null,
+       "valeur": null
+      },
+      "C1": {
+       "contenu": null,
+       "erreur": null,
+       "valeur": null
+      }
+     },
+     "historique": [
+      [
+       "bob",
+       "2026-01-15 10:00",
+       "modification"
+      ]
+     ]
+    }
+   },
+   {
+    "greens": [
+     "H2"
+    ],
+    "obs": {
+     "cellules": {
+      "A1": {
+       "contenu": "2026-03-15",
+       "erreur": null,
+       "valeur": "2026-03-15"
+      },
+      "A2": {
+       "contenu": null,
+       "erreur": null,
+       "valeur": null
+      },
+      "A3": {
+       "contenu": null,
+       "erreur": null,
+       "valeur": null
+      },
+      "B1": {
+       "contenu": null,
+       "erreur": null,
+       "valeur": null
+      },
+      "B2": {
+       "contenu": null,
+       "erreur": null,
+       "valeur": null
+      },
+      "C1": {
+       "contenu": null,
+       "erreur": null,
+       "valeur": null
+      }
+     },
+     "historique": [
+      [
+       "alice",
+       "2026-01-15 10:00",
+       "modification"
+      ],
+      [
+       "bob",
+       "2026-01-15 10:00",
+       "modification"
+      ],
+      [
+       "bob",
+       "2026-01-15 10:00",
+       "modification"
+      ]
+     ]
+    }
+   }
+  ],
+  "final": "trou",
+  "juges": [
+   {
+    "classe": "trou",
+    "assertion": "A119",
+    "cas": "Des personnes ajoutent des feuilles (dont une hors ligne), puis l'historique des versions d'une autre feuille déjà existante est consulté.",
+    "choix": "V1",
+    "nouvelle": "Quand une personne ajoute une feuille, l'historique des versions des autres feuilles ne gagne aucune entrée | observé: versions | conditions: aucune",
+    "usd": 0.19897600000000001,
+    "texte": " de V1\nbecause:   Trois entrées à 10:00, triées de la plus récente à la plus ancienne (A121), et des entrées hors ligne datées du moment local (A124) : la lecture la plus cohérente est que V2 enregistre aussi `bob.add_sheet('Dépenses')` et `alice.add_sheet('Feuille2')`. Ce ne serait donc pas l'import refusé ; s'il l'était, C21 (« aucune entrée n'apparaît dans l'historique des versions ») suffirait à trancher, et on aurait un bug de V2. Or la spec ne dit pas si l'ajout d'une feuille crée une entrée. A119 ne parle que d'une « modification de cellule », et A58 d'un « historique des versions de cette feuille ». Ces deux textes penchent vers V1 sans l'exiger. Le fait qui manque est une intention de l'arbitre : l'historique est-il propre à chaque feuille, et un ajout de feuille y compte-t-il ? Le dossier ne contient pas cette réponse.\ncertainty: close\n\nCLASSE: trou\nASSERTION: A119\nCAS: Des personnes ajoutent des feuilles (dont une hors ligne), puis l'historique des versions d'une autre feuille déjà existante est consulté.\nCHOIX: V1\nNOUVELLE: Quand une personne ajoute une feuille, l'historique des versions des autres feuilles ne gagne aucune entrée | observé: versions | conditions: aucune"
+   },
+   {
+    "classe": "trou",
+    "assertion": "A119",
+    "cas": "Après qu'une personne a ajouté une feuille, l'historique des versions consulté sur une autre feuille gagne-t-il une entrée pour cet ajout ?",
+    "choix": "V1",
+    "nouvelle": "Quand une personne ajoute une feuille, l'historique des versions de chacune des autres feuilles reste inchangé : il ne contient que les entrées des modifications de cellules de cette feuille | observé: versions | conditions: aucune",
+    "usd": 0.0648978,
+    "texte": "lice) (V2).\nruling:    not resolvable\nbecause:   La spec dit quand une entrée doit apparaître, pas quand elle est interdite : A119 « Quand une modification de cellule est enregistrée par le serveur, une nouvelle entrée apparaît dans l'historique des versions », et A58 parle de « l'historique des versions de cette feuille » sans écarter ce qui arrive aux autres feuilles. Les deux variantes la respectent ; il faut une assertion nouvelle, et c'est un choix de spécification.\ncertainty: close\n```\n\nThe fact that would settle it: is the history kept per sheet, and does adding a sheet produce a version entry? That is the spec author's intent, so it goes to the arbiter, not to the dossier. Close, because A58's \"de cette feuille\" leans toward V1 without saying so outright.\n\nCLASSE: trou\nASSERTION: A119\nCAS: Après qu'une personne a ajouté une feuille, l'historique des versions consulté sur une autre feuille gagne-t-il une entrée pour cet ajout ?\nCHOIX: V1\nNOUVELLE: Quand une personne ajoute une feuille, l'historique des versions de chacune des autres feuilles reste inchangé : il ne contient que les entrées des modifications de cellules de cette feuille | observé: versions | conditions: aucune"
+   }
+  ],
+  "divergences": 11
+ },
+ {
+  "groupe": "rename_sheet [alertes]",
+  "graine": 176,
+  "etape": 3,
+  "action": "carol.rename_sheet('Feuille1', 'Feuille1')",
+  "variantes": [
+   {
+    "greens": [
+     "H1",
+     "S2"
+    ],
+    "obs": {
+     "alertes": [
+      [
+       "droit_insuffisant",
+       "Feuille1",
+       null,
+       null
+      ]
+     ],
+     "annuler": false,
+     "cellules": {
+      "A1": {
+       "contenu": null,
+       "erreur": null,
+       "valeur": null
+      },
+      "A2": {
+       "contenu": null,
+       "erreur": null,
+       "valeur": null
+      },
+      "A3": {
+       "contenu": null,
+       "erreur": null,
+       "valeur": null
+      },
+      "B1": {
+       "contenu": null,
+       "erreur": null,
+       "valeur": null
+      },
+      "B2": {
+       "contenu": null,
+       "erreur": null,
+       "valeur": null
+      },
+      "C1": {
+       "contenu": null,
+       "erreur": null,
+       "valeur": null
+      }
+     },
+     "connexion": "en ligne",
+     "droits": {
+      "alice": "écriture",
+      "bob": "écriture",
+      "carol": "lecture"
+     },
+     "en_attente": 0,
+     "feuille_vue": "Feuille1",
+     "feuilles": [
+      "Feuille1"
+     ],
+     "personne": "carol",
+     "présence": {},
+     "rétablir": false
+    }
+   },
+   {
+    "greens": [
+     "H2",
+     "S1"
+    ],
+    "obs": {
+     "alertes": [],
+     "annuler": false,
+     "cellules": {
+      "A1": {
+       "contenu": null,
+       "erreur": null,
+       "valeur": null
+      },
+      "A2": {
+       "contenu": null,
+       "erreur": null,
+       "valeur": null
+      },
+      "A3": {
+       "contenu": null,
+       "erreur": null,
+       "valeur": null
+      },
+      "B1": {
+       "contenu": null,
+       "erreur": null,
+       "valeur": null
+      },
+      "B2": {
+       "contenu": null,
+       "erreur": null,
+       "valeur": null
+      },
+      "C1": {
+       "contenu": null,
+       "erreur": null,
+       "valeur": null
+      }
+     },
+     "connexion": "en ligne",
+     "droits": {
+      "alice": "écriture",
+      "bob": "écriture",
+      "carol": "lecture"
+     },
+     "en_attente": 0,
+     "feuille_vue": "Feuille1",
+     "feuilles": [
+      "Feuille1"
+     ],
+     "personne": "carol",
+     "présence": {},
+     "rétablir": false
+    }
+   }
+  ],
+  "final": "bug H2+S1",
+  "juges": [
+   {
+    "classe": "bug V2",
+    "assertion": "C27",
+    "cas": "Une personne qui n'a que le droit lecture renomme une feuille avec le nom qu'elle porte déjà.",
+    "choix": "aucun",
+    "nouvelle": "aucune",
+    "usd": 0.174632,
+    "texte": "g:    upheld (V1) — V2 viole C27\nbecause:   C27 tranche pour toute personne en lecture : « quand une personne ayant seulement le droit lecture tente une écriture, quelle qu'elle soit (… renommage …), l'écriture est refusée et une alerte « droit insuffisant » cite la feuille en cause ». C19 (« même un CSV vide ») et C14 (« quelle que soit la valeur choisie ») montrent aussi que le contrôle du droit passe avant la détection d'une action sans effet. À l'inverse, C13 (« aucune alerte n'apparaît ») ne porte pas le droit dans ses conditions, et C22, son pendant explicite pour l'action sans effet, le limite à « une personne ayant le droit écriture ».\ncertainty: close\n```\n\nC13 est écrit pour « une personne en ligne » sans condition de droit. Lu au pied de la lettre, il donne raison à V2. La règle la plus précise sur le droit l'emporte, ce qui donne raison à V1 sans lever le doute. Pour le lever, il faut savoir si l'auteur voulait que C13 couvre aussi les lecteurs. C'est son intention : seul l'arbitre peut y répondre, pas le dossier.\n\nCLASSE: bug V2\nASSERTION: C27\nCAS: Une personne qui n'a que le droit lecture renomme une feuille avec le nom qu'elle porte déjà.\nCHOIX: aucun\nNOUVELLE: aucune"
+   },
+   {
+    "classe": "bug V2",
+    "assertion": "C27",
+    "cas": "Une personne qui n'a que le droit lecture renomme une feuille avec le nom qu'elle porte déjà, ce qui ne changerait rien même si c'était autorisé.",
+    "choix": "aucun",
+    "nouvelle": "aucune",
+    "usd": 0.0310992,
+    "texte": "isant » doit apparaître ?\nruling:    upheld — la spec tranche en faveur de V1 ; V2 la viole\nbecause:   C27 couvre explicitement ce cas : « Quand une personne ayant seulement le droit lecture tente une écriture, quelle qu'elle soit (… renommage …), l'écriture est refusée et une alerte « droit insuffisant » cite la feuille en cause ». C19 et C14 confirment le même principe : la vérification du droit passe avant le « rien ne change ». Ainsi, C19 exige l'alerte « même [pour] un CSV vide » et C14 l'exige « quelle que soit la valeur choisie ». C13 (« aucune alerte ») ne précise pas le droit de la personne, et C22, la règle voisine sur les actions qui ne changent rien, ne vise que le droit écriture. C21 (P1) ne compte pas les alertes parmi les traces interdites.\ncertainty: close — à la lettre, C13 s'applique aussi à une personne en lecture. Le désaccord ne disparaît qu'en faisant passer la règle précise sur le droit (C27, appuyée par C19 et C14) avant la règle générale de C13.\n```\n\nCLASSE: bug V2\nASSERTION: C27\nCAS: Une personne qui n'a que le droit lecture renomme une feuille avec le nom qu'elle porte déjà, ce qui ne changerait rien même si c'était autorisé.\nCHOIX: aucun\nNOUVELLE: aucune"
+   }
+  ],
+  "divergences": 9
+ },
+ {
+  "groupe": "deliver_all [alice.*.conflit, alice.*.contenu, alice.*.erreur]",
+  "graine": 164,
+  "etape": 8,
+  "action": "réseau.deliver_all()",
+  "variantes": [
+   {
+    "greens": [
+     "H1",
+     "H2",
+     "S2"
+    ],
+    "obs": {
+     "alice": {
+      "A1": {
+       "conflit": {
+        "par": "alice",
+        "écartée": "42"
+       },
+       "contenu": "=Feuille2!A1",
+       "erreur": "#REF!",
+       "valeur": "#REF!"
+      },
+      "A2": {
+       "contenu": null,
+       "erreur": null,
+       "valeur": null
+      },
+      "A3": {
+       "contenu": null,
+       "erreur": null,
+       "valeur": null
+      },
+      "B1": {
+       "contenu": null,
+       "erreur": null,
+       "valeur": null
+      },
+      "B2": {
+       "contenu": "2026-03-29 02:30",
+       "erreur": null,
+       "valeur": "2026-03-29 04:30"
+      },
+      "C1": {
+       "contenu": null,
+       "erreur": null,
+       "valeur": null
+      }
+     },
+     "bob": {
+      "A1": {
+       "conflit": {
+        "par": "alice",
+        "écartée": "42"
+       },
+       "contenu": "=Feuille2!A1",
+       "erreur": "#REF!",
+       "valeur": "#REF!"
+      },
+      "A2": {
+       "contenu": null,
+       "erreur": null,
+       "valeur": null
+      },
+      "A3": {
+       "contenu": null,
+       "erreur": null,
+       "valeur": null
+      },
+      "B1": {
+       "contenu": null,
+       "erreur": null,
+       "valeur": null
+      },
+      "B2": {
+       "contenu": "2026-03-29 02:30",
+       "erreur": null,
+       "valeur": "2026-03-29 02:30"
+      },
+      "C1": {
+       "contenu": null,
+       "erreur": null,
+       "valeur": null
+      }
+     },
+     "carol": {
+      "A1": {
+       "conflit": {
+        "par": "alice",
+        "écartée": "42"
+       },
+       "contenu": "=Feuille2!A1",
+       "erreur": "#REF!",
+       "valeur": "#REF!"
+      },
+      "A2": {
+       "contenu": null,
+       "erreur": null,
+       "valeur": null
+      },
+      "A3": {
+       "contenu": null,
+       "erreur": null,
+       "valeur": null
+      },
+      "B1": {
+       "contenu": null,
+       "erreur": null,
+       "valeur": null
+      },
+      "B2": {
+       "contenu": "2026-03-29 02:30",
+       "erreur": null,
+       "valeur": "2026-03-29 02:30"
+      },
+      "C1": {
+       "contenu": null,
+       "erreur": null,
+       "valeur": null
+      }
+     }
+    }
+   },
+   {
+    "greens": [
+     "S1"
+    ],
+    "obs": {
+     "alice": {
+      "A1": {
+       "conflit": {
+        "par": "bob",
+        "écartée": "=Feuille2!A1"
+       },
+       "contenu": "42",
+       "erreur": null,
+       "valeur": 42
+      },
+      "A2": {
+       "contenu": null,
+       "erreur": null,
+       "valeur": null
+      },
+      "A3": {
+       "contenu": null,
+       "erreur": null,
+       "valeur": null
+      },
+      "B1": {
+       "contenu": null,
+       "erreur": null,
+       "valeur": null
+      },
+      "B2": {
+       "contenu": "2026-03-29 02:30",
+       "erreur": null,
+       "valeur": "2026-03-29 04:30"
+      },
+      "C1": {
+       "contenu": null,
+       "erreur": null,
+       "valeur": null
+      }
+     },
+     "bob": {
+      "A1": {
+       "conflit": {
+        "par": "bob",
+        "écartée": "=Feuille2!A1"
+       },
+       "contenu": "42",
+       "erreur": null,
+       "valeur": 42
+      },
+      "A2": {
+       "contenu": null,
+       "erreur": null,
+       "valeur": null
+      },
+      "A3": {
+       "contenu": null,
+       "erreur": null,
+       "valeur": null
+      },
+      "B1": {
+       "contenu": null,
+       "erreur": null,
+       "valeur": null
+      },
+      "B2": {
+       "contenu": "2026-03-29 02:30",
+       "erreur": null,
+       "valeur": "2026-03-29 02:30"
+      },
+      "C1": {
+       "contenu": null,
+       "erreur": null,
+       "valeur": null
+      }
+     },
+     "carol": {
+      "A1": {
+       "conflit": {
+        "par": "bob",
+        "écartée": "=Feuille2!A1"
+       },
+       "contenu": "42",
+       "erreur": null,
+       "valeur": 42
+      },
+      "A2": {
+       "contenu": null,
+       "erreur": null,
+       "valeur": null
+      },
+      "A3": {
+       "contenu": null,
+       "erreur": null,
+       "valeur": null
+      },
+      "B1": {
+       "contenu": null,
+       "erreur": null,
+       "valeur": null
+      },
+      "B2": {
+       "contenu": "2026-03-29 02:30",
+       "erreur": null,
+       "valeur": "2026-03-29 02:30"
+      },
+      "C1": {
+       "contenu": null,
+       "erreur": null,
+       "valeur": null
+      }
+     }
+    }
+   }
+  ],
+  "final": "à trancher",
+  "juges": [
+   {
+    "classe": "trou",
+    "assertion": "A67",
+    "cas": "Deux personnes modifient la même cellule l'une après l'autre sans livraison entre les deux, puis les deux modifications sont livrées ensemble ; on ne sait pas laquelle le serveur a reçue en premier.",
+    "choix": "V1",
+    "nouvelle": "Quand deux personnes modifient la même cellule l'une après l'autre avant toute livraison, puis que les deux modifications sont livrées ensemble, la cellule garde chez tous la valeur saisie en premier et l'indicateur de conflit propose la valeur saisie en second, au nom de la personne qui l'a saisie | observé: contenu, conflit | conditions: contenu, connexion",
+    "usd": 0.1808322,
+    "texte": " à l'arbitre.\ncertainty: close\n```\n\nC'est serré pour une raison précise. Bob a fait sa saisie avant Alice. Si la spec supposait que le serveur reçoit les modifications dans l'ordre où elles ont été faites, V2 violerait A67. Mais la spec ne le dit nulle part : elle parle de « reçue en premier » sans relier cet ordre à celui des saisies. Le reste est cohérent dans les deux variantes : la valeur gardée, la valeur écartée et le nom de la personne écartée correspondent entre eux. La cellule B2 est identique dans V1 et V2. La nouvelle assertion ci-dessous fixe l'ordre, en faveur de V1.\n\nCLASSE: trou\nASSERTION: A67\nCAS: Deux personnes modifient la même cellule l'une après l'autre sans livraison entre les deux, puis les deux modifications sont livrées ensemble ; on ne sait pas laquelle le serveur a reçue en premier.\nCHOIX: V1\nNOUVELLE: Quand deux personnes modifient la même cellule l'une après l'autre avant toute livraison, puis que les deux modifications sont livrées ensemble, la cellule garde chez tous la valeur saisie en premier et l'indicateur de conflit propose la valeur saisie en second, au nom de la personne qui l'a saisie | observé: contenu, conflit | conditions: contenu, connexion"
+   },
+   {
+    "classe": "bug V2",
+    "assertion": "A67",
+    "cas": "Bob then alice, both online, write different contents to the same cell A1 before any delivery, and the network then delivers both edits together.",
+    "choix": "aucun",
+    "nouvelle": "aucune",
+    "usd": 0.0365458,
+    "texte": "s discarded value \"42\" (V1), rather than keeping alice's \"42\" and discarding bob's formula (V2).\nruling:    upheld\nbecause:   A67 says \"la cellule garde la valeur reçue en premier par le serveur\". Both people were online. Bob sent \"=Feuille2!A1\" before alice sent \"42\", and nothing was delivered between the two sends. In a network that delivers in sending order, bob's edit reaches the server first, so A1 must keep bob's formula and show alice's \"42\" as the discarded value, as A69 and A70 require. V2 keeps the value sent second.\ncertainty: close\n```\n\nMy certainty is `close` because the spec never says in what order the server receives edits that are delivered in the same `deliver_all`. It only says \"reçue en premier par le serveur\". If the network may deliver in any order it likes, such as person by person in alphabetical order, the case becomes a gap in the spec rather than a bug. I read the network as delivering in sending order, and three of the four codes behave that way.\n\nCLASSE: bug V2\nASSERTION: A67\nCAS: Bob then alice, both online, write different contents to the same cell A1 before any delivery, and the network then delivers both edits together.\nCHOIX: aucun\nNOUVELLE: aucune"
+   }
+  ],
+  "divergences": 6
+ },
+ {
+  "groupe": "reconnect [cellules.*.conflit, cellules.*.contenu, cellules.*.valeur]",
+  "graine": 73,
+  "etape": 4,
+  "action": "réseau.reconnect('bob'); deliver_all()",
+  "variantes": [
+   {
+    "greens": [
+     "H1",
+     "H2",
+     "S2"
+    ],
+    "obs": {
+     "alertes": [],
+     "annuler": true,
+     "cellules": {
+      "A1": {
+       "contenu": null,
+       "erreur": null,
+       "valeur": null
+      },
+      "A2": {
+       "contenu": null,
+       "erreur": null,
+       "valeur": null
+      },
+      "A3": {
+       "contenu": null,
+       "erreur": null,
+       "valeur": null
+      },
+      "B1": {
+       "conflit": {
+        "par": "alice",
+        "écartée": "abc"
+       },
+       "contenu": "dit \"oui\"",
+       "erreur": null,
+       "valeur": "dit \"oui\""
+      },
+      "B2": {
+       "contenu": null,
+       "erreur": null,
+       "valeur": null
+      },
+      "C1": {
+       "contenu": null,
+       "erreur": null,
+       "valeur": null
+      }
+     },
+     "connexion": "en ligne",
+     "droits": {
+      "alice": "écriture",
+      "bob": "écriture",
+      "carol": "lecture"
+     },
+     "en_attente": 0,
+     "feuille_vue": "Feuille1",
+     "feuilles": [
+      "Feuille1"
+     ],
+     "personne": "bob",
+     "présence": {},
+     "rétablir": false
+    }
+   },
+   {
+    "greens": [
+     "S1"
+    ],
+    "obs": {
+     "alertes": [],
+     "annuler": true,
+     "cellules": {
+      "A1": {
+       "contenu": null,
+       "erreur": null,
+       "valeur": null
+      },
+      "A2": {
+       "contenu": null,
+       "erreur": null,
+       "valeur": null
+      },
+      "A3": {
+       "contenu": null,
+       "erreur": null,
+       "valeur": null
+      },
+      "B1": {
+       "conflit": {
+        "par": "bob",
+        "écartée": "dit \"oui\""
+       },
+       "contenu": "abc",
+       "erreur": null,
+       "valeur": "abc"
+      },
+      "B2": {
+       "contenu": null,
+       "erreur": null,
+       "valeur": null
+      },
+      "C1": {
+       "contenu": null,
+       "erreur": null,
+       "valeur": null
+      }
+     },
+     "connexion": "en ligne",
+     "droits": {
+      "alice": "écriture",
+      "bob": "écriture",
+      "carol": "lecture"
+     },
+     "en_attente": 0,
+     "feuille_vue": "Feuille1",
+     "feuilles": [
+      "Feuille1"
+     ],
+     "personne": "bob",
+     "présence": {},
+     "rétablir": false
+    }
+   }
+  ],
+  "final": "bug H1+H2+S2",
+  "juges": [
+   {
+    "classe": "bug V1",
+    "assertion": "A79",
+    "cas": "Une personne modifie B1 hors ligne, une autre la modifie en ligne ensuite, puis la première revient en ligne et la fusion a lieu.",
+    "choix": "aucun",
+    "nouvelle": "aucune",
+    "usd": 0.1713242,
+    "texte": " B1 le contenu `abc`, avec un conflit dont la valeur écartée est `dit \"oui\"`, au nom de Bob. C'est conforme à A79, A80 et A70.\n- V1 garde la valeur de Bob, celle qui était hors ligne, et écarte celle d'Alice. Cela viole A79.\n\nQue Bob ait saisi avant Alice ne change rien. A79 dit « modifiée en ligne entre-temps », c'est-à-dire entre la modification hors ligne et le retour de la connexion. L'ordre de saisie ne compte pas.\n\n```\nclaim:     Au retour en ligne de bob, B1 garde « dit \"oui\" » (saisie hors ligne de bob) et écarte « abc » (saisie en ligne d'alice) — V1 ; ou garde « abc » et écarte « dit \"oui\" » — V2.\nruling:    upheld (V1 viole la spec)\nbecause:   A79 : « Quand une personne modifie hors ligne une cellule qu'une autre personne a modifiée en ligne entre-temps, la cellule garde la valeur de la personne restée en ligne au retour de la connexion » ; alice est restée en ligne (sa valeur était déjà connue du serveur), donc B1 doit valoir « abc », ce que seule V2 montre.\ncertainty: firm\n```\n\nCLASSE: bug V1\nASSERTION: A79\nCAS: Une personne modifie B1 hors ligne, une autre la modifie en ligne ensuite, puis la première revient en ligne et la fusion a lieu.\nCHOIX: aucun\nNOUVELLE: aucune"
+   },
+   {
+    "classe": "bug V1",
+    "assertion": "A79",
+    "cas": "Une personne modifie hors ligne une cellule, une autre la modifie ensuite en ligne avec une autre valeur, puis la première revient en ligne.",
+    "choix": "aucun",
+    "nouvelle": "aucune",
+    "usd": 0.034455,
+    "texte": "i B1 = « abc » en ligne entre-temps, B1 garde « dit \"oui\" » avec un conflit au nom d'alice (V1) — ou garde « abc » avec un conflit au nom de bob (V2).\nruling:    upheld for V2 — V1 violates the spec\nbecause:   A79 decides it: « Quand une personne modifie hors ligne une cellule qu'une autre personne a modifiée en ligne entre-temps, la cellule garde la valeur de la personne restée en ligne au retour de la connexion ». Alice is the one who stayed online, so B1 must keep « abc ». A67 points the same way (« la valeur reçue en premier par le serveur » is Alice's, since Bob's edit only arrives when he reconnects). A70 then requires the conflict to name Bob, whose value was discarded, which is what V2 shows.\ncertainty: firm\n```\n\nThe only doubt is whether Bob was really offline, since his disconnection isn't among the steps shown. The action `réseau.reconnect('bob')` assumes he was. Alice's edit came after Bob's offline edit and before he returned, which is exactly A79's « entre-temps ».\n\nCLASSE: bug V1\nASSERTION: A79\nCAS: Une personne modifie hors ligne une cellule, une autre la modifie ensuite en ligne avec une autre valeur, puis la première revient en ligne.\nCHOIX: aucun\nNOUVELLE: aucune"
+   }
+  ],
+  "divergences": 4
+ },
+ {
+  "groupe": "set_cell [droits.alice]",
+  "graine": 50,
+  "etape": 5,
+  "action": "bob.set_cell('B2', '0', sheet='Feuille1')",
+  "variantes": [
+   {
+    "greens": [
+     "H1",
+     "S1",
+     "S2"
+    ],
+    "obs": {
+     "alertes": [],
+     "annuler": true,
+     "cellules": {
+      "A1": {
+       "contenu": null,
+       "erreur": null,
+       "valeur": null
+      },
+      "A2": {
+       "contenu": null,
+       "erreur": null,
+       "valeur": null
+      },
+      "A3": {
+       "contenu": null,
+       "erreur": null,
+       "valeur": null
+      },
+      "B1": {
+       "contenu": null,
+       "erreur": null,
+       "valeur": null
+      },
+      "B2": {
+       "contenu": "0",
+       "erreur": null,
+       "valeur": 0
+      },
+      "C1": {
+       "contenu": null,
+       "erreur": null,
+       "valeur": null
+      }
+     },
+     "connexion": "en ligne",
+     "droits": {
+      "alice": "écriture",
+      "bob": "écriture",
+      "carol": "lecture"
+     },
+     "en_attente": 1,
+     "feuille_vue": "Feuille1",
+     "feuilles": [
+      "Feuille1"
+     ],
+     "personne": "bob",
+     "présence": {},
+     "rétablir": false
+    }
+   },
+   {
+    "greens": [
+     "H2"
+    ],
+    "obs": {
+     "alertes": [],
+     "annuler": true,
+     "cellules": {
+      "A1": {
+       "contenu": null,
+       "erreur": null,
+       "valeur": null
+      },
+      "A2": {
+       "contenu": null,
+       "erreur": null,
+       "valeur": null
+      },
+      "A3": {
+       "contenu": null,
+       "erreur": null,
+       "valeur": null
+      },
+      "B1": {
+       "contenu": null,
+       "erreur": null,
+       "valeur": null
+      },
+      "B2": {
+       "contenu": "0",
+       "erreur": null,
+       "valeur": 0
+      },
+      "C1": {
+       "contenu": null,
+       "erreur": null,
+       "valeur": null
+      }
+     },
+     "connexion": "en ligne",
+     "droits": {
+      "alice": "lecture",
+      "bob": "écriture",
+      "carol": "lecture"
+     },
+     "en_attente": 1,
+     "feuille_vue": "Feuille1",
+     "feuilles": [
+      "Feuille1"
+     ],
+     "personne": "bob",
+     "présence": {},
+     "rétablir": false
+    }
+   }
+  ],
+  "final": "trou",
+  "juges": [
+   {
+    "classe": "trou",
+    "assertion": "A50",
+    "cas": "Le propriétaire tente de passer son propre droit sur une feuille de écriture à lecture, puis une autre personne regarde les droits après la livraison.",
+    "choix": "V1",
+    "nouvelle": "Quand le propriétaire tente de passer son propre droit sur une feuille de écriture à lecture, le droit affiché pour lui sur cette feuille reste écriture chez toutes les personnes, même après livraison, et aucune alerte n'apparaît | observé: droit, alerte | conditions: rôle, connexion",
+    "usd": 0.1746082,
+    "texte": "ommune juste après set_right montre déjà « alice: écriture, alertes: [] » dans tous les codes. A50 n'a donc pas tranché ce cas dans les codes, même quand il est lu au sens large.\ncertainty: close\n```\n\nLa spec ne dit pas si le propriétaire peut baisser son propre droit. C'est à l'arbitre de le décider, pas au dossier. Les deux lectures se défendent :\n- **Le changement est refusé** : le propriétaire garde l'écriture, comme le suggère C29.\n- **Le changement est appliqué** : c'est la lecture littérale de A50.\n\nV2 a aussi une incohérence : chez alice, il affiche « écriture » juste après l'action, puis « lecture » chez bob après la livraison. J'ai rédigé la nouvelle assertion en faveur de V1, comme demandé.\n\nCLASSE: trou\nASSERTION: A50\nCAS: Le propriétaire tente de passer son propre droit sur une feuille de écriture à lecture, puis une autre personne regarde les droits après la livraison.\nCHOIX: V1\nNOUVELLE: Quand le propriétaire tente de passer son propre droit sur une feuille de écriture à lecture, le droit affiché pour lui sur cette feuille reste écriture chez toutes les personnes, même après livraison, et aucune alerte n'apparaît | observé: droit, alerte | conditions: rôle, connexion"
+   },
+   {
+    "classe": "trou",
+    "assertion": "A50",
+    "cas": "Une personne passe son propre droit sur une feuille de écriture à lecture, puis la modification est livrée à toutes les personnes.",
+    "choix": "V1",
+    "nouvelle": "Quand une personne tente de modifier son propre droit sur une feuille, ce droit reste inchangé chez toutes les personnes, même après livraison | observé: droit | conditions: rôle, connexion",
+    "usd": 0.043732599999999996,
+    "texte": "t lecture\"), and A51 covers a change made by someone else (\"une personne non propriétaire tente de modifier le droit d'une autre personne … reste inchangé\"). Neither covers a person changing her own right. The situation never says whether alice is the owner. Even if she is, C29 gives the owner write access to every new sheet, which points to that right being fixed. Whether A50's \"une personne\" includes the owner herself is a matter of the arbiter's intent. The dossier cannot settle it: it would take a rule on whether a person, owner or not, may change her own right.\ncertainty: close\n```\n\nAll four implementations pass the spec, yet they disagree. I read this as a gap in the spec. I side with V1, the majority: changing your own right has no effect, which fits A51 and C29. The proposed assertion below closes the gap.\n\nCLASSE: trou\nASSERTION: A50\nCAS: Une personne passe son propre droit sur une feuille de écriture à lecture, puis la modification est livrée à toutes les personnes.\nCHOIX: V1\nNOUVELLE: Quand une personne tente de modifier son propre droit sur une feuille, ce droit reste inchangé chez toutes les personnes, même après livraison | observé: droit | conditions: rôle, connexion"
+   }
+  ],
+  "divergences": 4
+ },
+ {
+  "groupe": "set_cell [cellules.*.conflit]",
+  "graine": 0,
+  "etape": 9,
+  "action": "bob.set_cell('C1', '=Feuille1!A1', sheet='Feuille1')",
+  "variantes": [
+   {
+    "greens": [
+     "H2",
+     "S1",
+     "S2"
+    ],
+    "obs": {
+     "alertes": [],
+     "annuler": true,
+     "cellules": {
+      "A1": {
+       "contenu": null,
+       "erreur": null,
+       "valeur": null
+      },
+      "A2": {
+       "contenu": null,
+       "erreur": null,
+       "valeur": null
+      },
+      "A3": {
+       "contenu": null,
+       "erreur": null,
+       "valeur": null
+      },
+      "B1": {
+       "contenu": null,
+       "erreur": null,
+       "valeur": null
+      },
+      "B2": {
+       "contenu": "=Feuille2!A1",
+       "erreur": "#REF!",
+       "valeur": "#REF!"
+      },
+      "C1": {
+       "contenu": "=Feuille1!A1",
+       "erreur": null,
+       "valeur": 0
+      }
+     },
+     "connexion": "en ligne",
+     "droits": {
+      "alice": "écriture",
+      "bob": "écriture",
+      "carol": "lecture"
+     },
+     "en_attente": 1,
+     "feuille_vue": "Feuille1",
+     "feuilles": [
+      "Dépenses",
+      "Feuille1"
+     ],
+     "personne": "bob",
+     "présence": {},
+     "rétablir": false
+    }
+   },
+   {
+    "greens": [
+     "H1"
+    ],
+    "obs": {
+     "alertes": [],
+     "annuler": true,
+     "cellules": {
+      "A1": {
+       "contenu": null,
+       "erreur": null,
+       "valeur": null
+      },
+      "A2": {
+       "contenu": null,
+       "erreur": null,
+       "valeur": null
+      },
+      "A3": {
+       "contenu": null,
+       "erreur": null,
+       "valeur": null
+      },
+      "B1": {
+       "contenu": null,
+       "erreur": null,
+       "valeur": null
+      },
+      "B2": {
+       "contenu": "=Feuille2!A1",
+       "erreur": "#REF!",
+       "valeur": "#REF!"
+      },
+      "C1": {
+       "conflit": {
+        "par": "bob",
+        "écartée": "20"
+       },
+       "contenu": "=Feuille1!A1",
+       "erreur": null,
+       "valeur": 0
+      }
+     },
+     "connexion": "en ligne",
+     "droits": {
+      "alice": "écriture",
+      "bob": "écriture",
+      "carol": "lecture"
+     },
+     "en_attente": 1,
+     "feuille_vue": "Feuille1",
+     "feuilles": [
+      "Dépenses",
+      "Feuille1"
+     ],
+     "personne": "bob",
+     "présence": {},
+     "rétablir": false
+    }
+   }
+  ],
+  "final": "bug H1",
+  "juges": [
+   {
+    "classe": "bug V2",
+    "assertion": "A74",
+    "cas": "Une personne ayant le droit écriture saisit une nouvelle formule dans une cellule encore marquée en conflit après des saisies simultanées.",
+    "choix": "aucun",
+    "nouvelle": "aucune",
+    "usd": 0.1709522,
+    "texte": "araître.\ncertainty: firm\n```\n\n**Les ancrages, vérifiés :**\n- **L'ancien conflit est réel.** Quand Bob a saisi « 20 », il ne voyait que [\"Feuille1\"]. Il n'avait donc pas encore reçu l'ajout de « Dépenses » par Alice, ni sa saisie de C1. Ces deux saisies de C1 étaient donc simultanées au sens de A67/A68. Le conflit que V2 montre (« écartée : 20 », par Bob) correspond bien à ce qui s'est passé.\n- **A74 s'applique exactement.** Bob a le droit écriture, C1 est en conflit, et Bob y saisit une nouvelle valeur. Aucune condition de connexion ne bloque : Bob est « en ligne ».\n- **L'autre lecture mène au même verdict.** Si l'on suppose qu'il n'y a jamais eu de conflit, V2 affiche un indicateur que rien ne justifie : A68 exige deux saisies simultanées, et la nouvelle saisie de Bob n'en rencontre aucune autre sur C1. Dans les deux cas, c'est V2 qui a tort.\n- **Le reste est identique.** Les deux variantes s'accordent sur tout le reste (contenu, valeur 0, en_attente 1, annuler). V1 respecte A74.\n\nCLASSE: bug V2\nASSERTION: A74\nCAS: Une personne ayant le droit écriture saisit une nouvelle formule dans une cellule encore marquée en conflit après des saisies simultanées.\nCHOIX: aucun\nNOUVELLE: aucune"
+   },
+   {
+    "classe": "bug V2",
+    "assertion": "A74",
+    "cas": "Une personne ayant le droit écriture saisit une nouvelle formule dans une cellule qui portait un indicateur de conflit, et l'indicateur doit disparaître.",
+    "choix": "aucun",
+    "nouvelle": "aucune",
+    "usd": 0.034424199999999995,
+    "texte": " personne ayant le droit écriture saisit une nouvelle valeur dans une cellule en conflit, l'indicateur de conflit disparaît ». L'observation donne \"bob\": \"écriture\", et C1 vient de recevoir la nouvelle valeur =Feuille1!A1. V2 laisse donc le conflit là où A74 dit qu'il disparaît.\ncertainty: firm\n```\n\n**Pourquoi V2 a tort dans tous les cas :**\n- **S'il y avait un conflit avant cette saisie.** C'est le cas si les saisies concurrentes d'Alice (« dit \"oui\" ») et de Bob (« 20 ») ont été livrées ensemble par `deliver_all`. A74 s'applique alors directement : la nouvelle saisie de Bob efface le conflit.\n- **S'il n'y en avait pas.** V2 affiche alors un conflit qu'aucune assertion ne crée. A68 et A80 ne font apparaître un conflit qu'au moment d'écritures concurrentes, pas lors d'une saisie locale faite seul.\n\nLes autres champs observés sont identiques entre V1 et V2 et cohérents avec la spec : la valeur de C1 vaut 0 car A1 est vide (A09), et il y a une modification en attente.\n\nCLASSE: bug V2\nASSERTION: A74\nCAS: Une personne ayant le droit écriture saisit une nouvelle formule dans une cellule qui portait un indicateur de conflit, et l'indicateur doit disparaître.\nCHOIX: aucun\nNOUVELLE: aucune"
+   }
+  ],
+  "divergences": 3
+ },
+ {
+  "groupe": "rename_sheet [présence.alice]",
+  "graine": 195,
+  "etape": 10,
+  "action": "bob.rename_sheet('Feuille1', 'Feuille2')",
+  "variantes": [
+   {
+    "greens": [
+     "H1",
+     "H2"
+    ],
+    "obs": {
+     "alertes": [],
+     "annuler": true,
+     "cellules": {
+      "A1": {
+       "contenu": null,
+       "erreur": null,
+       "valeur": null
+      },
+      "A2": {
+       "contenu": "2026-01-15 12:00",
+       "erreur": null,
+       "valeur": "2026-01-15 11:00"
+      },
+      "A3": {
+       "contenu": null,
+       "erreur": null,
+       "valeur": null
+      },
+      "B1": {
+       "contenu": null,
+       "erreur": null,
+       "valeur": null
+      },
+      "B2": {
+       "contenu": null,
+       "erreur": null,
+       "valeur": null
+      },
+      "C1": {
+       "contenu": null,
+       "erreur": null,
+       "valeur": null
+      }
+     },
+     "connexion": "en ligne",
+     "droits": {
+      "alice": "écriture",
+      "bob": "écriture",
+      "carol": "lecture"
+     },
+     "en_attente": 1,
+     "feuille_vue": "Feuille2",
+     "feuilles": [
+      "Feuille2"
+     ],
+     "personne": "bob",
+     "présence": {
+      "alice": [
+       "Feuille1",
+       "A2"
+      ]
+     },
+     "rétablir": false
+    }
+   },
+   {
+    "greens": [
+     "S1",
+     "S2"
+    ],
+    "obs": {
+     "alertes": [],
+     "annuler": true,
+     "cellules": {
+      "A1": {
+       "contenu": null,
+       "erreur": null,
+       "valeur": null
+      },
+      "A2": {
+       "contenu": "2026-01-15 12:00",
+       "erreur": null,
+       "valeur": "2026-01-15 11:00"
+      },
+      "A3": {
+       "contenu": null,
+       "erreur": null,
+       "valeur": null
+      },
+      "B1": {
+       "contenu": null,
+       "erreur": null,
+       "valeur": null
+      },
+      "B2": {
+       "contenu": null,
+       "erreur": null,
+       "valeur": null
+      },
+      "C1": {
+       "contenu": null,
+       "erreur": null,
+       "valeur": null
+      }
+     },
+     "connexion": "en ligne",
+     "droits": {
+      "alice": "écriture",
+      "bob": "écriture",
+      "carol": "lecture"
+     },
+     "en_attente": 1,
+     "feuille_vue": "Feuille2",
+     "feuilles": [
+      "Feuille2"
+     ],
+     "personne": "bob",
+     "présence": {
+      "alice": [
+       "Feuille2",
+       "A2"
+      ]
+     },
+     "rétablir": false
+    }
+   }
+  ],
+  "final": "bug H1+H2",
+  "juges": [
+   {
+    "classe": "bug V1",
+    "assertion": "A62",
+    "cas": "Une personne renomme la feuille où une autre personne en ligne a sélectionné une cellule, et l'indicateur de présence de cette autre personne doit rester sur la même cellule, sous le nouveau nom de la feuille.",
+    "choix": "aucun",
+    "nouvelle": "aucune",
+    "usd": 0.1701962,
+    "texte": "pparaît sur cette cellule ». A63 dit qu'il ne disparaît que quand la personne « passe hors ligne » : il reste donc affiché tant qu'alice est en ligne. Alice n'a pas changé de sélection, et sa cellule s'appelle désormais Feuille2!A2. V1 montre chez bob, dont la liste des feuilles est [\"Feuille2\"], un indicateur sur « Feuille1 », une feuille qui n'existe plus. Cet indicateur ne s'affiche donc sur aucune cellule visible : en pratique il a disparu alors qu'alice est toujours en ligne.\ncertainty: close\n```\n\nLa décision est serrée pour cette raison : on peut lire A62 comme un événement ponctuel, au moment de la sélection, qui ne dit rien du sort de l'indicateur après un renommage. Avec cette lecture, ce serait un trou dans la spec. Je retiens le bug parce que A63 n'admet qu'une seule cause de disparition, le passage hors ligne. C28 va dans le même sens : après un renommage, ce qui citait l'ancien nom cite le nouveau.\n\nCLASSE: bug V1\nASSERTION: A62\nCAS: Une personne renomme la feuille où une autre personne en ligne a sélectionné une cellule, et l'indicateur de présence de cette autre personne doit rester sur la même cellule, sous le nouveau nom de la feuille.\nCHOIX: aucun\nNOUVELLE: aucune"
+   },
+   {
+    "classe": "bug V1",
+    "assertion": "A62",
+    "cas": "Une personne a sélectionné A2 sur Feuille1, puis une autre personne ayant le droit écriture renomme Feuille1 en Feuille2 ; on regarde sur quelle feuille l'indicateur de présence de la première est placé.",
+    "choix": "aucun",
+    "nouvelle": "aucune",
+    "usd": 0.0362702,
+    "texte": "e indicator (she selected A2 on Feuille1 before the rename) must point to the renamed sheet, Feuille2 A2, and not to Feuille1, which no longer exists.\nruling:    upheld\nbecause:   A62 places the indicator \"sur cette cellule\", the cell alice selected, and that cell is now in the sheet called \"Feuille2\" (A41: \"la liste des feuilles affiche « Ventes »\"). V1 attaches it to \"Feuille1\", which is missing from bob's list ([\"Feuille2\"]). Its indicator therefore sits on no cell bob can see, which breaks A62 for the same selection. C28 applies the same rule to formulas: after a rename, they cite the new name.\ncertainty: close\n```\n\nWhy it is close: A62 covers the moment of selection, not a rename that comes after it. A reading where V1 only shows a frozen label could argue this is a gap in the spec. The certainty would become firm if the spec stated that presence follows the sheet through a rename, the way C28 does for formulas.\n\nCLASSE: bug V1\nASSERTION: A62\nCAS: Une personne a sélectionné A2 sur Feuille1, puis une autre personne ayant le droit écriture renomme Feuille1 en Feuille2 ; on regarde sur quelle feuille l'indicateur de présence de la première est placé.\nCHOIX: aucun\nNOUVELLE: aucune"
+   }
+  ],
+  "divergences": 3
+ },
+ {
+  "groupe": "deliver_all [alice.*.conflit, alice.*.contenu, alice.*.valeur]",
+  "graine": 277,
+  "etape": 7,
+  "action": "réseau.deliver_all()",
+  "variantes": [
+   {
+    "greens": [
+     "H2",
+     "S1",
+     "S2"
+    ],
+    "obs": {
+     "alice": {
+      "A1": {
+       "conflit": {
+        "par": "bob",
+        "écartée": "7"
+       },
+       "contenu": "Été à Noël",
+       "erreur": null,
+       "valeur": "Été à Noël"
+      },
+      "A2": {
+       "contenu": null,
+       "erreur": null,
+       "valeur": null
+      },
+      "A3": {
+       "contenu": null,
+       "erreur": null,
+       "valeur": null
+      },
+      "B1": {
+       "contenu": null,
+       "erreur": null,
+       "valeur": null
+      },
+      "B2": {
+       "contenu": "=Inexistante!A1",
+       "erreur": "#REF!",
+       "valeur": "#REF!"
+      },
+      "C1": {
+       "contenu": "=(A1+2",
+       "erreur": "#SYNTAXE!",
+       "valeur": "#SYNTAXE!"
+      }
+     },
+     "bob": {
+      "A1": {
+       "conflit": {
+        "par": "bob",
+        "écartée": "7"
+       },
+       "contenu": "Été à Noël",
+       "erreur": null,
+       "valeur": "Été à Noël"
+      },
+      "A2": {
+       "contenu": null,
+       "erreur": null,
+       "valeur": null
+      },
+      "A3": {
+       "contenu": null,
+       "erreur": null,
+       "valeur": null
+      },
+      "B1": {
+       "contenu": null,
+       "erreur": null,
+       "valeur": null
+      },
+      "B2": {
+       "contenu": "=Inexistante!A1",
+       "erreur": "#REF!",
+       "valeur": "#REF!"
+      },
+      "C1": {
+       "contenu": "=(A1+2",
+       "erreur": "#SYNTAXE!",
+       "valeur": "#SYNTAXE!"
+      }
+     },
+     "carol": {
+      "A1": {
+       "conflit": {
+        "par": "bob",
+        "écartée": "7"
+       },
+       "contenu": "Été à Noël",
+       "erreur": null,
+       "valeur": "Été à Noël"
+      },
+      "A2": {
+       "contenu": null,
+       "erreur": null,
+       "valeur": null
+      },
+      "A3": {
+       "contenu": null,
+       "erreur": null,
+       "valeur": null
+      },
+      "B1": {
+       "contenu": null,
+       "erreur": null,
+       "valeur": null
+      },
+      "B2": {
+       "contenu": "=Inexistante!A1",
+       "erreur": "#REF!",
+       "valeur": "#REF!"
+      },
+      "C1": {
+       "contenu": "=(A1+2",
+       "erreur": "#SYNTAXE!",
+       "valeur": "#SYNTAXE!"
+      }
+     }
+    }
+   },
+   {
+    "greens": [
+     "H1"
+    ],
+    "obs": {
+     "alice": {
+      "A1": {
+       "contenu": "7",
+       "erreur": null,
+       "valeur": 7
+      },
+      "A2": {
+       "contenu": null,
+       "erreur": null,
+       "valeur": null
+      },
+      "A3": {
+       "contenu": null,
+       "erreur": null,
+       "valeur": null
+      },
+      "B1": {
+       "contenu": null,
+       "erreur": null,
+       "valeur": null
+      },
+      "B2": {
+       "contenu": "=Inexistante!A1",
+       "erreur": "#REF!",
+       "valeur": "#REF!"
+      },
+      "C1": {
+       "contenu": "=(A1+2",
+       "erreur": "#SYNTAXE!",
+       "valeur": "#SYNTAXE!"
+      }
+     },
+     "bob": {
+      "A1": {
+       "contenu": "7",
+       "erreur": null,
+       "valeur": 7
+      },
+      "A2": {
+       "contenu": null,
+       "erreur": null,
+       "valeur": null
+      },
+      "A3": {
+       "contenu": null,
+       "erreur": null,
+       "valeur": null
+      },
+      "B1": {
+       "contenu": null,
+       "erreur": null,
+       "valeur": null
+      },
+      "B2": {
+       "contenu": "=Inexistante!A1",
+       "erreur": "#REF!",
+       "valeur": "#REF!"
+      },
+      "C1": {
+       "contenu": "=(A1+2",
+       "erreur": "#SYNTAXE!",
+       "valeur": "#SYNTAXE!"
+      }
+     },
+     "carol": {
+      "A1": {
+       "contenu": "7",
+       "erreur": null,
+       "valeur": 7
+      },
+      "A2": {
+       "contenu": null,
+       "erreur": null,
+       "valeur": null
+      },
+      "A3": {
+       "contenu": null,
+       "erreur": null,
+       "valeur": null
+      },
+      "B1": {
+       "contenu": null,
+       "erreur": null,
+       "valeur": null
+      },
+      "B2": {
+       "contenu": "=Inexistante!A1",
+       "erreur": "#REF!",
+       "valeur": "#REF!"
+      },
+      "C1": {
+       "contenu": "=(A1+2",
+       "erreur": "#SYNTAXE!",
+       "valeur": "#SYNTAXE!"
+      }
+     }
+    }
+   }
+  ],
+  "final": "bug H1",
+  "juges": [
+   {
+    "classe": "bug V2",
+    "assertion": "A67",
+    "cas": "Bob's CSV import puts 7 in A1 and Alice types « Été à Noël » in A1 at the same time; Alice's change reaches the server first, then everything else is delivered.",
+    "choix": "aucun",
+    "nouvelle": "aucune",
+    "usd": 0.1690082,
+    "texte": "()`, Alice's value « Été à Noël » is already on the server and Bob's import of « 7 » into A1 has not been delivered. The question is what A1 should show and whether a conflict indicator should appear.\nruling:    upheld (bug V2)\nbecause:   A67 says « la cellule garde la valeur reçue en premier par le serveur ». Alice's change reached the server first through `réseau.deliver_from('alice')`, so A1 must stay « Été à Noël ». A68 says « un indicateur de conflit apparaît sur la cellule », and A69 and A70 add that the indicator offers the discarded value « 7 » and names Bob. V1 shows all of this. V2 lets the last delivery win (« 7 ») and shows no conflict, which breaks A67 and A68.\ncertainty: firm\n\nThe two writes were concurrent: Bob imported before Alice typed, and neither had received the other's change. A CSV import counts as a modification of the cell, so A67 and A68 apply. This is not a spec gap: the spec decides the case, and V2 is the variant that violates it.\n\nCLASSE: bug V2\nASSERTION: A67\nCAS: Bob's CSV import puts 7 in A1 and Alice types « Été à Noël » in A1 at the same time; Alice's change reaches the server first, then everything else is delivered.\nCHOIX: aucun\nNOUVELLE: aucune"
+   },
+   {
+    "classe": "bug V2",
+    "assertion": "A67",
+    "cas": "Deux personnes modifient A1 en même temps avec des valeurs différentes (l'une par un import CSV, l'autre par une saisie) ; la saisie arrive la première au serveur, puis tout est livré.",
+    "choix": "aucun",
+    "nouvelle": "aucune",
+    "usd": 0.035596600000000006,
+    "texte": " ce cas avec A67 et A68, et seule V2 la viole.\n\n```\nclaim:     À la livraison générale, A1 — modifiée en concurrence par bob (import CSV « 7 ») et par alice (« Été à Noël », livrée la première) — garde « Été à Noël » avec un indicateur de conflit proposant 7 au nom de bob (V1), plutôt que de prendre 7 sans conflit (V2).\nruling:    upheld\nbecause:   A67 dit « la cellule garde la valeur reçue en premier par le serveur », et `deliver_from('alice')` fait parvenir la saisie d'alice au serveur avant celle de bob. A68 (« un indicateur de conflit apparaît sur la cellule ») et A69/A70 (valeur écartée « 7 », « par: bob ») décrivent exactement ce que montre V1. V2 applique la règle « le dernier arrivé gagne » et n'affiche aucun conflit, ce qui viole A67 et A68. La définition s'applique bien à ce cas : chaque personne a modifié A1 sans avoir vu la modification de l'autre, et un import CSV change le contenu de la cellule (A147).\ncertainty: firm\n```\n\nCLASSE: bug V2\nASSERTION: A67\nCAS: Deux personnes modifient A1 en même temps avec des valeurs différentes (l'une par un import CSV, l'autre par une saisie) ; la saisie arrive la première au serveur, puis tout est livré.\nCHOIX: aucun\nNOUVELLE: aucune"
+   }
+  ],
+  "divergences": 3
+ },
+ {
+  "groupe": "restore_version [historique]",
+  "graine": 18,
+  "etape": 6,
+  "action": "bob.restore_version(v1); deliver_all()",
+  "variantes": [
+   {
+    "greens": [
+     "H2",
+     "S1",
+     "S2"
+    ],
+    "obs": {
+     "historique": [
+      [
+       "bob",
+       "2026-01-15 10:00",
+       "modification"
+      ]
+     ],
+     "vue": {
+      "alertes": [],
+      "annuler": true,
+      "cellules": {
+       "A1": {
+        "contenu": null,
+        "erreur": null,
+        "valeur": null
+       },
+       "A2": {
+        "contenu": null,
+        "erreur": null,
+        "valeur": null
+       },
+       "A3": {
+        "contenu": "2026-10-25 02:30",
+        "erreur": null,
+        "valeur": "2026-10-25 02:30"
+       },
+       "B1": {
+        "contenu": null,
+        "erreur": null,
+        "valeur": null
+       },
+       "B2": {
+        "contenu": null,
+        "erreur": null,
+        "valeur": null
+       },
+       "C1": {
+        "contenu": null,
+        "erreur": null,
+        "valeur": null
+       }
+      },
+      "connexion": "en ligne",
+      "droits": {
+       "alice": "écriture",
+       "bob": "écriture",
+       "carol": "lecture"
+      },
+      "en_attente": 0,
+      "feuille_vue": "Feuille1",
+      "feuilles": [
+       "Brouillon",
+       "Feuille1"
+      ],
+      "personne": "bob",
+      "présence": {},
+      "rétablir": false
+     }
+    }
+   },
+   {
+    "greens": [
+     "H1"
+    ],
+    "obs": {
+     "historique": [
+      [
+       "bob",
+       "2026-01-15 10:00",
+       "restauration"
+      ],
+      [
+       "bob",
+       "2026-01-15 10:00",
+       "modification"
+      ]
+     ],
+     "vue": {
+      "alertes": [],
+      "annuler": true,
+      "cellules": {
+       "A1": {
+        "contenu": null,
+        "erreur": null,
+        "valeur": null
+       },
+       "A2": {
+        "contenu": null,
+        "erreur": null,
+        "valeur": null
+       },
+       "A3": {
+        "contenu": "2026-10-25 02:30",
+        "erreur": null,
+        "valeur": "2026-10-25 02:30"
+       },
+       "B1": {
+        "contenu": null,
+        "erreur": null,
+        "valeur": null
+       },
+       "B2": {
+        "contenu": null,
+        "erreur": null,
+        "valeur": null
+       },
+       "C1": {
+        "contenu": null,
+        "erreur": null,
+        "valeur": null
+       }
+      },
+      "connexion": "en ligne",
+      "droits": {
+       "alice": "écriture",
+       "bob": "écriture",
+       "carol": "lecture"
+      },
+      "en_attente": 0,
+      "feuille_vue": "Feuille1",
+      "feuilles": [
+       "Brouillon",
+       "Feuille1"
+      ],
+      "personne": "bob",
+      "présence": {},
+      "rétablir": false
+     }
+    }
+   }
+  ],
+  "final": "bug H1",
+  "juges": [
+   {
+    "classe": "bug V2",
+    "assertion": "C21",
+    "cas": "Une personne restaure la version qui est déjà la version courante de la feuille, ce qui ne change aucun contenu.",
+    "choix": "aucun",
+    "nouvelle": "aucune",
+    "usd": 0.15604020000000002,
+    "texte": "```\nclaim:     Quand bob restaure v1, qui est la version courante de Feuille1, l'historique gagne une entrée « restauration » (V2). Selon V1, il reste inchangé.\nruling:    upheld — bug V2\nbecause:   La restauration ne change rien. Après restore_version(v1), les cellules, les valeurs, les droits, la liste des feuilles et le nombre de modifications en attente (0) sont identiques à ceux d'avant, et v1 est la seule version de l'historique. Le principe C21 s'applique donc : « une action qui ne change rien ne laisse aucune trace ; […] aucune entrée n'apparaît dans l'historique des versions ». A131 (« une nouvelle entrée de restauration apparaît ») est la règle générale. La spec fait déjà passer P1 avant ce type de règle générale : C15 refuse une entrée d'historique à un effacement sans effet, malgré A119. C22 et C23 vont dans le même sens.\ncertainty: firm\n```\n\nCLASSE: bug V2\nASSERTION: C21\nCAS: Une personne restaure la version qui est déjà la version courante de la feuille, ce qui ne change aucun contenu.\nCHOIX: aucun\nNOUVELLE: aucune"
+   },
+   {
+    "classe": "bug V2",
+    "assertion": "C21",
+    "cas": "Une personne restaure une ancienne version alors que la feuille est déjà exactement dans l'état de cette version, ce qui ne change rien.",
+    "choix": "aucun",
+    "nouvelle": "aucune",
+    "usd": 0.031606,
+    "texte": " touche pas Feuille1, et le changement de droit d'alice par bob n'a pas eu lieu. Restaurer v1 ne change donc rien.\n\n```\nclaim:     Restaurer la version v1 alors que la feuille est déjà exactement dans l'état de v1 doit (ou non) ajouter une entrée « restauration » à l'historique des versions.\nruling:    upheld — l'action ne laisse aucune trace ; V2 enfreint la spec\nbecause:   C21 traite précisément le cas d'une action qui ne change rien : « une action qui ne change rien ne laisse aucune trace ; aucune valeur ne change, aucune entrée n'apparaît dans l'historique des versions ». A131 (« une nouvelle entrée de restauration apparaît dans l'historique des versions ») est la règle générale. La spec applique déjà P1 avant les règles générales dans C15, C22 et C23, et ici les quatre versions montrent un contenu et des valeurs identiques avant et après.\ncertainty: close — le texte d'A131, lu seul, donnerait raison à V2 ; c'est l'ordre P1 avant A131, établi par C15, C22 et C23, qui décide.\n```\n\nCLASSE: bug V2\nASSERTION: C21\nCAS: Une personne restaure une ancienne version alors que la feuille est déjà exactement dans l'état de cette version, ce qui ne change rien.\nCHOIX: aucun\nNOUVELLE: aucune"
+   }
+  ],
+  "divergences": 3
+ },
+ {
+  "groupe": "reconnect [droits.alice]",
+  "graine": 26,
+  "etape": 8,
+  "action": "réseau.reconnect('carol'); deliver_all()",
+  "variantes": [
+   {
+    "greens": [
+     "H1",
+     "S1",
+     "S2"
+    ],
+    "obs": {
+     "alertes": [
+      [
+       "droit_insuffisant",
+       "Feuille1",
+       "A2",
+       null
+      ],
+      [
+       "droit_insuffisant",
+       "Feuille1",
+       "B2",
+       null
+      ]
+     ],
+     "annuler": false,
+     "cellules": {
+      "A1": {
+       "contenu": null,
+       "erreur": null,
+       "valeur": null
+      },
+      "A2": {
+       "contenu": null,
+       "erreur": null,
+       "valeur": null
+      },
+      "A3": {
+       "contenu": null,
+       "erreur": null,
+       "valeur": null
+      },
+      "B1": {
+       "contenu": null,
+       "erreur": null,
+       "valeur": null
+      },
+      "B2": {
+       "contenu": null,
+       "erreur": null,
+       "valeur": null
+      },
+      "C1": {
+       "contenu": null,
+       "erreur": null,
+       "valeur": null
+      }
+     },
+     "connexion": "en ligne",
+     "droits": {
+      "alice": "écriture",
+      "bob": "écriture",
+      "carol": "lecture"
+     },
+     "en_attente": 0,
+     "feuille_vue": "Feuille1",
+     "feuilles": [
+      "Feuille1"
+     ],
+     "personne": "carol",
+     "présence": {},
+     "rétablir": false
+    }
+   },
+   {
+    "greens": [
+     "H2"
+    ],
+    "obs": {
+     "alertes": [
+      [
+       "droit_insuffisant",
+       "Feuille1",
+       "A2",
+       null
+      ],
+      [
+       "droit_insuffisant",
+       "Feuille1",
+       "B2",
+       null
+      ]
+     ],
+     "annuler": false,
+     "cellules": {
+      "A1": {
+       "contenu": null,
+       "erreur": null,
+       "valeur": null
+      },
+      "A2": {
+       "contenu": null,
+       "erreur": null,
+       "valeur": null
+      },
+      "A3": {
+       "contenu": null,
+       "erreur": null,
+       "valeur": null
+      },
+      "B1": {
+       "contenu": null,
+       "erreur": null,
+       "valeur": null
+      },
+      "B2": {
+       "contenu": null,
+       "erreur": null,
+       "valeur": null
+      },
+      "C1": {
+       "contenu": null,
+       "erreur": null,
+       "valeur": null
+      }
+     },
+     "connexion": "en ligne",
+     "droits": {
+      "alice": "lecture",
+      "bob": "écriture",
+      "carol": "lecture"
+     },
+     "en_attente": 0,
+     "feuille_vue": "Feuille1",
+     "feuilles": [
+      "Feuille1"
+     ],
+     "personne": "carol",
+     "présence": {},
+     "rétablir": false
+    }
+   }
+  ],
+  "final": "à trancher",
+  "juges": [
+   {
+    "classe": "bug V2",
+    "assertion": "A51",
+    "cas": "Une personne qui n'est pas propriétaire tente de passer son propre droit à lecture, la tentative ne change rien sur le moment, puis une livraison réseau sans rapport a lieu.",
+    "choix": "aucun",
+    "nouvelle": "aucune",
+    "usd": 0.1782882,
+    "texte": "criture », sans alerte. La règle P1 (C21) dit qu'« une action qui ne change rien ne laisse aucune trace […] le nombre de modifications en attente reste inchangé ». Une livraison ultérieure ne peut donc pas appliquer ce changement, et seuls les propriétaires changent les droits (A50, A51, A52). V2 applique une demande qui avait été refusée, et cela au moment où arrivent les modifications de carol, sans lien avec elle.\ncertainty: close\n```\n\nC'est serré parce que A51 ne parle que du droit d'« une autre personne ». Aucune assertion ne traite explicitement le cas où quelqu'un qui n'est pas propriétaire baisse son propre droit. Mais si ce changement avait été accepté, il aurait dû s'afficher tout de suite : C17 dit qu'un changement de droit fait en ligne n'ajoute rien aux modifications en attente. Il n'aurait pas dû apparaître plus tard, à la reconnexion de carol. Que la demande ait été refusée ou acceptée, le résultat de V2 contredit la spécification.\n\nCLASSE: bug V2\nASSERTION: A51\nCAS: Une personne qui n'est pas propriétaire tente de passer son propre droit à lecture, la tentative ne change rien sur le moment, puis une livraison réseau sans rapport a lieu.\nCHOIX: aucun\nNOUVELLE: aucune"
+   },
+   {
+    "classe": "trou",
+    "assertion": "A51",
+    "cas": "Une personne qui n'est pas propriétaire tente de passer son propre droit sur une feuille de écriture à lecture, puis toutes les modifications sont livrées.",
+    "choix": "V1",
+    "nouvelle": "Quand une personne non propriétaire tente de modifier son propre droit sur une feuille, ce droit reste inchangé chez toutes les personnes, y compris après la livraison de toutes les modifications | observé: droit | conditions: rôle, connexion",
+    "usd": 0.050712,
+    "texte": "pas. Bob a passé Carol en lecture, sans alerte, et ce droit a bien été appliqué : les saisies de Carol sont refusées. Bob se comporte donc en propriétaire. Si c'était en fait Alice, A50/C17 pourraient s'appliquer et le cas deviendrait différent. C'est un fait que le dossier peut contenir.\n- **Une bizarrerie de V2 :** au moment où Alice change son droit, toutes les variantes renvoient `alice: \"écriture\"` sans alerte. V2 n'affiche « lecture » qu'après la livraison. La spec n'exige pas non plus que le résultat affiché sur le moment soit le résultat final, donc ce n'est pas une violation.\n\n**Choix :** j'écris l'assertion en faveur de V1, suivie par 3 codes sur 4. Elle prolonge A51 de façon cohérente : seul le propriétaire modifie les droits.\n\nCLASSE: trou\nASSERTION: A51\nCAS: Une personne qui n'est pas propriétaire tente de passer son propre droit sur une feuille de écriture à lecture, puis toutes les modifications sont livrées.\nCHOIX: V1\nNOUVELLE: Quand une personne non propriétaire tente de modifier son propre droit sur une feuille, ce droit reste inchangé chez toutes les personnes, y compris après la livraison de toutes les modifications | observé: droit | conditions: rôle, connexion"
+   }
+  ],
+  "divergences": 3
+ },
+ {
+  "groupe": "rename_sheet [présence.bob]",
+  "graine": 44,
+  "etape": 6,
+  "action": "alice.rename_sheet('Feuille1', 'Ventes')",
+  "variantes": [
+   {
+    "greens": [
+     "H1",
+     "H2"
+    ],
+    "obs": {
+     "alertes": [],
+     "annuler": true,
+     "cellules": {
+      "A1": {
+       "contenu": "dit \"oui\"",
+       "erreur": null,
+       "valeur": "dit \"oui\""
+      },
+      "A2": {
+       "contenu": null,
+       "erreur": null,
+       "valeur": null
+      },
+      "A3": {
+       "contenu": null,
+       "erreur": null,
+       "valeur": null
+      },
+      "B1": {
+       "contenu": null,
+       "erreur": null,
+       "valeur": null
+      },
+      "B2": {
+       "contenu": null,
+       "erreur": null,
+       "valeur": null
+      },
+      "C1": {
+       "contenu": null,
+       "erreur": null,
+       "valeur": null
+      }
+     },
+     "connexion": "en ligne",
+     "droits": {
+      "alice": "écriture",
+      "bob": "écriture",
+      "carol": "lecture"
+     },
+     "en_attente": 1,
+     "feuille_vue": "Ventes",
+     "feuilles": [
+      "Ventes"
+     ],
+     "personne": "alice",
+     "présence": {
+      "bob": [
+       "Feuille1",
+       "C1"
+      ]
+     },
+     "rétablir": false
+    }
+   },
+   {
+    "greens": [
+     "S1",
+     "S2"
+    ],
+    "obs": {
+     "alertes": [],
+     "annuler": true,
+     "cellules": {
+      "A1": {
+       "contenu": "dit \"oui\"",
+       "erreur": null,
+       "valeur": "dit \"oui\""
+      },
+      "A2": {
+       "contenu": null,
+       "erreur": null,
+       "valeur": null
+      },
+      "A3": {
+       "contenu": null,
+       "erreur": null,
+       "valeur": null
+      },
+      "B1": {
+       "contenu": null,
+       "erreur": null,
+       "valeur": null
+      },
+      "B2": {
+       "contenu": null,
+       "erreur": null,
+       "valeur": null
+      },
+      "C1": {
+       "contenu": null,
+       "erreur": null,
+       "valeur": null
+      }
+     },
+     "connexion": "en ligne",
+     "droits": {
+      "alice": "écriture",
+      "bob": "écriture",
+      "carol": "lecture"
+     },
+     "en_attente": 1,
+     "feuille_vue": "Ventes",
+     "feuilles": [
+      "Ventes"
+     ],
+     "personne": "alice",
+     "présence": {
+      "bob": [
+       "Ventes",
+       "C1"
+      ]
+     },
+     "rétablir": false
+    }
+   }
+  ],
+  "final": "bug H1+H2",
+  "juges": [
+   {
+    "classe": "bug V1",
+    "assertion": "A62",
+    "cas": "An online person renames a sheet while another online person has a cell of that sheet selected, and the rename has not yet been delivered.",
+    "choix": "aucun",
+    "nouvelle": "aucune",
+    "usd": 0.1588322,
+    "texte": "r view reads [\"Feuille1\",\"C1\"] in V1 and [\"Ventes\",\"C1\"] in V2.\nruling:    upheld (bug V1)\nbecause:   A62 says that when another person selects a cell, « un indicateur de présence portant son nom apparaît sur cette cellule ». Bob is still online and still on the same cell, which alice now sees as Ventes!C1. In V1, alice's sheet list is [\"Ventes\"], so the indicator points to a sheet that is no longer there and sits on no cell she can see. V2 keeps it on the cell bob selected.\ncertainty: close\n```\n\nThis is close because nothing in the spec says outright that the sheet name inside the presence indicator follows a rename. C28 only covers formulas, and only once the rename has been delivered. You could argue this is a gap. But V1 goes against what A62 is checking from alice's side: bob's name should stay on the cell he selected. V1 would only be acceptable if presence tracked the sheet by an internal ID and showed the old name only as a label, and the observation gives no sign of that.\n\nCLASSE: bug V1\nASSERTION: A62\nCAS: An online person renames a sheet while another online person has a cell of that sheet selected, and the rename has not yet been delivered.\nCHOIX: aucun\nNOUVELLE: aucune"
+   },
+   {
+    "classe": "bug V1",
+    "assertion": "A62",
+    "cas": "Une personne renomme la feuille où une autre personne en ligne a sélectionné une cellule, et l'indicateur de présence de cette autre personne doit rester sur la même cellule, sous le nouveau nom de la feuille.",
+    "choix": "aucun",
+    "nouvelle": "aucune",
+    "usd": 0.0344858,
+    "texte": "le renommage local, la liste des feuilles d'alice est [\"Ventes\"]. L'indicateur de V1 renvoie à « Feuille1 », une feuille qui n'existe plus dans ce qu'alice voit, donc il n'apparaît sur aucune cellule visible. bob est pourtant toujours sur la même cellule, qui s'appelle maintenant Ventes!C1. C28 suit la même logique pour les formules : après un renommage, rien ne doit plus citer l'ancien nom.\ncertainty: close\n```\n\nJe classe ce cas comme bug de V1, mais avec une réserve. A62 ne dit pas explicitement comment la feuille doit être nommée dans l'indicateur. On peut aussi soutenir que c'est un trou : V1 garderait la dernière position que bob a lui-même envoyée, puisque bob n'a pas encore reçu le renommage (`en_attente` vaut 1). Pour l'utilisatrice, pourtant, un indicateur qui renvoie à une feuille absente de sa liste n'est sur aucune cellule. C'est ce qui fait pencher vers une violation de A62 plutôt que vers un trou.\n\nCLASSE: bug V1\nASSERTION: A62\nCAS: Une personne renomme la feuille où une autre personne en ligne a sélectionné une cellule, et l'indicateur de présence de cette autre personne doit rester sur la même cellule, sous le nouveau nom de la feuille.\nCHOIX: aucun\nNOUVELLE: aucune"
+   }
+  ],
+  "divergences": 3
+ },
+ {
+  "groupe": "reconnect [cellules.*.conflit, cellules.*.contenu, cellules.*.erreur]",
+  "graine": 290,
+  "etape": 4,
+  "action": "réseau.reconnect('alice'); deliver_all()",
+  "variantes": [
+   {
+    "greens": [
+     "H2",
+     "S1",
+     "S2"
+    ],
+    "obs": {
+     "alertes": [],
+     "annuler": true,
+     "cellules": {
+      "A1": {
+       "conflit": {
+        "par": "bob",
+        "écartée": "Café"
+       },
+       "contenu": "=Ventes!A1",
+       "erreur": "#REF!",
+       "valeur": "#REF!"
+      },
+      "A2": {
+       "contenu": null,
+       "erreur": null,
+       "valeur": null
+      },
+      "A3": {
+       "contenu": null,
+       "erreur": null,
+       "valeur": null
+      },
+      "B1": {
+       "contenu": "Noël",
+       "erreur": null,
+       "valeur": "Noël"
+      },
+      "B2": {
+       "contenu": null,
+       "erreur": null,
+       "valeur": null
+      },
+      "C1": {
+       "contenu": null,
+       "erreur": null,
+       "valeur": null
+      }
+     },
+     "connexion": "en ligne",
+     "droits": {
+      "alice": "écriture",
+      "bob": "écriture",
+      "carol": "lecture"
+     },
+     "en_attente": 0,
+     "feuille_vue": "Feuille1",
+     "feuilles": [
+      "Feuille1"
+     ],
+     "personne": "alice",
+     "présence": {},
+     "rétablir": false
+    }
+   },
+   {
+    "greens": [
+     "H1"
+    ],
+    "obs": {
+     "alertes": [],
+     "annuler": true,
+     "cellules": {
+      "A1": {
+       "contenu": "Café",
+       "erreur": null,
+       "valeur": "Café"
+      },
+      "A2": {
+       "contenu": null,
+       "erreur": null,
+       "valeur": null
+      },
+      "A3": {
+       "contenu": null,
+       "erreur": null,
+       "valeur": null
+      },
+      "B1": {
+       "contenu": "Noël",
+       "erreur": null,
+       "valeur": "Noël"
+      },
+      "B2": {
+       "contenu": null,
+       "erreur": null,
+       "valeur": null
+      },
+      "C1": {
+       "contenu": null,
+       "erreur": null,
+       "valeur": null
+      }
+     },
+     "connexion": "en ligne",
+     "droits": {
+      "alice": "écriture",
+      "bob": "écriture",
+      "carol": "lecture"
+     },
+     "en_attente": 0,
+     "feuille_vue": "Feuille1",
+     "feuilles": [
+      "Feuille1"
+     ],
+     "personne": "alice",
+     "présence": {},
+     "rétablir": false
+    }
+   }
+  ],
+  "final": "à trancher",
+  "juges": [
+   {
+    "classe": "bug V2",
+    "assertion": "A68",
+    "cas": "Alice et bob écrivent chacun une valeur différente dans A1 sans voir l'écriture de l'autre (alice une formule, bob un import CSV), puis alice revient en ligne et tout est livré.",
+    "choix": "aucun",
+    "nouvelle": "aucune",
+    "usd": 0.1879002,
+    "texte": "igne, dit « un indicateur de conflit apparaît sur la cellule au retour de la connexion ». V2 n'en affiche aucun. A71, la seule exception, ne vaut que pour la même valeur. V1 affiche l'indicateur, avec la valeur écartée (A69) et le nom de bob (A70).\ncertainty: close\n```\n\nJe laisse un point ouvert : quelle valeur doit rester dans A1. La situation montre seulement les dernières étapes, et on ne voit pas si alice était déjà hors ligne quand elle a tapé =Ventes!A1.\n- **Si oui**, A79 donne la victoire à la valeur de bob, « Café ». V1 aurait alors aussi tort sur le contenu.\n- **Si non**, la modification d'alice attendait simplement d'être envoyée. A67 garde alors la première valeur reçue par le serveur, et V1 est entièrement cohérent.\n\nLes étapes complètes de la situation trancheraient ce point. Elles sont dans le dossier, donc la question revient au chercheur et non à l'arbitre. Quelle que soit la réponse, il manque l'indicateur de conflit dans V2.\n\nCLASSE: bug V2\nASSERTION: A68\nCAS: Alice et bob écrivent chacun une valeur différente dans A1 sans voir l'écriture de l'autre (alice une formule, bob un import CSV), puis alice revient en ligne et tout est livré.\nCHOIX: aucun\nNOUVELLE: aucune"
+   },
+   {
+    "classe": "bug V1",
+    "assertion": "A79",
+    "cas": "Alice saisit hors ligne =Ventes!A1 dans A1, Bob, resté en ligne, importe un CSV qui met « Café » dans A1, puis Alice revient en ligne et tout est livré.",
+    "choix": "aucun",
+    "nouvelle": "aucune",
+    "usd": 0.04817880000000001,
+    "texte": "t resté en ligne pendant l'import, et B1 = « Noël » montre que son import a bien été livré. V1 garde pourtant la valeur d'alice, qui revenait d'une coupure, et écarte celle de Bob : c'est l'inverse de ce que demande la spec. Mais V2 ne montre aucun indicateur de conflit sur A1, alors que A80 en exige un (« un indicateur de conflit apparaît sur la cellule au retour de la connexion »).\ncertainty: close\n```\n\nIl n'y a pas de trou : le cas est couvert. Une écriture faite hors ligne arrive après une modification en ligne de la même cellule, et le fait que cette modification passe par un import CSV ne la retire pas de « modifie en ligne une cellule ». Sur le contenu, l'erreur et la valeur de A1, V1 viole A79 et V2 a raison. Sur l'indicateur de conflit, V2 viole A80. Le classement retient V1, la variante qui donne le mauvais état de la cellule. L'absence de conflit chez V2 est un second défaut, distinct, qu'il faut signaler à part. C'est pour ça que la certitude est `close`.\n\nCLASSE: bug V1\nASSERTION: A79\nCAS: Alice saisit hors ligne =Ventes!A1 dans A1, Bob, resté en ligne, importe un CSV qui met « Café » dans A1, puis Alice revient en ligne et tout est livré.\nCHOIX: aucun\nNOUVELLE: aucune"
+   }
+  ],
+  "divergences": 3
+ },
+ {
+  "groupe": "reopen [présence.bob]",
+  "graine": 115,
+  "etape": 7,
+  "action": "carol.reopen()",
+  "variantes": [
+   {
+    "greens": [
+     "H1",
+     "H2"
+    ],
+    "obs": {
+     "alertes": [],
+     "annuler": false,
+     "cellules": {
+      "A1": {
+       "contenu": null,
+       "erreur": null,
+       "valeur": null
+      },
+      "A2": {
+       "contenu": null,
+       "erreur": null,
+       "valeur": null
+      },
+      "A3": {
+       "contenu": null,
+       "erreur": null,
+       "valeur": null
+      },
+      "B1": {
+       "contenu": null,
+       "erreur": null,
+       "valeur": null
+      },
+      "B2": {
+       "contenu": null,
+       "erreur": null,
+       "valeur": null
+      },
+      "C1": {
+       "contenu": null,
+       "erreur": null,
+       "valeur": null
+      }
+     },
+     "connexion": "en ligne",
+     "droits": {
+      "alice": "écriture",
+      "bob": "écriture",
+      "carol": "lecture"
+     },
+     "en_attente": 0,
+     "feuille_vue": "Feuille1",
+     "feuilles": [
+      "Feuille1"
+     ],
+     "personne": "carol",
+     "présence": {
+      "bob": [
+       "Feuille1",
+       "A1"
+      ]
+     },
+     "rétablir": false
+    }
+   },
+   {
+    "greens": [
+     "S1",
+     "S2"
+    ],
+    "obs": {
+     "alertes": [],
+     "annuler": false,
+     "cellules": {
+      "A1": {
+       "contenu": null,
+       "erreur": null,
+       "valeur": null
+      },
+      "A2": {
+       "contenu": null,
+       "erreur": null,
+       "valeur": null
+      },
+      "A3": {
+       "contenu": null,
+       "erreur": null,
+       "valeur": null
+      },
+      "B1": {
+       "contenu": null,
+       "erreur": null,
+       "valeur": null
+      },
+      "B2": {
+       "contenu": null,
+       "erreur": null,
+       "valeur": null
+      },
+      "C1": {
+       "contenu": null,
+       "erreur": null,
+       "valeur": null
+      }
+     },
+     "connexion": "en ligne",
+     "droits": {
+      "alice": "écriture",
+      "bob": "écriture",
+      "carol": "lecture"
+     },
+     "en_attente": 0,
+     "feuille_vue": "Feuille1",
+     "feuilles": [
+      "Feuille1"
+     ],
+     "personne": "carol",
+     "présence": {},
+     "rétablir": false
+    }
+   }
+  ],
+  "final": "trou",
+  "juges": [
+   {
+    "classe": "trou",
+    "assertion": "A62",
+    "cas": "Une personne rouvre le classeur alors qu'une autre personne en ligne avait sélectionné une cellule avant la réouverture, et n'en a pas sélectionné d'autre depuis.",
+    "choix": "V2",
+    "nouvelle": "Quand une personne ferme puis rouvre le classeur, aucun indicateur de présence des autres personnes n'apparaît tant qu'elles n'ont pas sélectionné de nouveau une cellule | observé: présence | conditions: connexion",
+    "usd": 0.1643402,
+    "texte": "r que si quelqu'un passe hors ligne, et carol comme bob restent en ligne. Aucune assertion ne dit si la présence survit à la réouverture : la spec ne tranche pas.\ncertainty: close\n```\n\nC'est une ruling `close` parce qu'on peut lire A62 comme la description d'un état durable : bob est toujours en ligne et sélectionne toujours A1, donc l'indicateur devrait s'afficher. Mais le texte décrit un événement (« quand … sélectionne … apparaît »), et rien ne dit qu'un client rouvert reçoit les présences déjà en cours.\n\nJe retiens V2, la variante la plus simple : la présence reste un état éphémère qu'on ne conserve pas, ce qui va dans le même sens qu'A118 (la commande annuler est perdue à la réouverture). Pour V2, l'indicateur de bob reviendrait à sa prochaine sélection.\n\nCLASSE: trou\nASSERTION: A62\nCAS: Une personne rouvre le classeur alors qu'une autre personne en ligne avait sélectionné une cellule avant la réouverture, et n'en a pas sélectionné d'autre depuis.\nCHOIX: V2\nNOUVELLE: Quand une personne ferme puis rouvre le classeur, aucun indicateur de présence des autres personnes n'apparaît tant qu'elles n'ont pas sélectionné de nouveau une cellule | observé: présence | conditions: connexion"
+   },
+   {
+    "classe": "trou",
+    "assertion": "A62",
+    "cas": "Une personne rouvre l'application en ligne alors qu'une autre personne, toujours en ligne, avait sélectionné une cellule avant cette réouverture.",
+    "choix": "V1",
+    "nouvelle": "Quand une personne rouvre l'application en ligne alors qu'une autre personne en ligne a une cellule sélectionnée, l'indicateur de présence portant le nom de l'autre personne est affiché sur cette cellule | observé: présence | conditions: connexion",
+    "usd": 0.040735600000000004,
+    "texte": "ur ». Ici, carol rouvre en ligne et bob n'est pas passé hors ligne. Aucune assertion ne dit si une réouverture garde ou recharge la présence des autres, donc les deux variantes respectent la spec. Ce point se règle par une décision de spec, pas par le dossier.\ncertainty: close\n```\n\n**Pourquoi V1 :** avec V1, ce qu'on voit de la présence dépend seulement de l'état actuel des autres personnes et de la connexion. Bob est toujours en ligne et a toujours A1 sélectionnée. Avec V2, ce qu'on voit dépend en plus de ce que la personne qui regarde a fait avant, ici une réouverture. A118 vide bien l'historique d'annulation à la réouverture, mais il s'agit des propres actions de la personne, pas de l'état des autres. Je ne l'étends donc pas à la présence.\n\nCLASSE: trou\nASSERTION: A62\nCAS: Une personne rouvre l'application en ligne alors qu'une autre personne, toujours en ligne, avait sélectionné une cellule avant cette réouverture.\nCHOIX: V1\nNOUVELLE: Quand une personne rouvre l'application en ligne alors qu'une autre personne en ligne a une cellule sélectionnée, l'indicateur de présence portant le nom de l'autre personne est affiché sur cette cellule | observé: présence | conditions: connexion"
+   }
+  ],
+  "divergences": 3
+ },
+ {
+  "groupe": "rename_sheet [présence.carol]",
+  "graine": 8,
+  "etape": 9,
+  "action": "bob.rename_sheet('Feuille1', 'Feuille2')",
+  "variantes": [
+   {
+    "greens": [
+     "H1",
+     "H2"
+    ],
+    "obs": {
+     "alertes": [
+      [
+       "nom_existant",
+       "Feuille1",
+       null,
+       null
+      ]
+     ],
+     "annuler": true,
+     "cellules": {
+      "A1": {
+       "contenu": null,
+       "erreur": null,
+       "valeur": null
+      },
+      "A2": {
+       "contenu": null,
+       "erreur": null,
+       "valeur": null
+      },
+      "A3": {
+       "contenu": null,
+       "erreur": null,
+       "valeur": null
+      },
+      "B1": {
+       "contenu": null,
+       "erreur": null,
+       "valeur": null
+      },
+      "B2": {
+       "contenu": null,
+       "erreur": null,
+       "valeur": null
+      },
+      "C1": {
+       "contenu": null,
+       "erreur": null,
+       "valeur": null
+      }
+     },
+     "connexion": "en ligne",
+     "droits": {
+      "alice": "écriture",
+      "bob": "écriture",
+      "carol": "lecture"
+     },
+     "en_attente": 1,
+     "feuille_vue": "Feuille2",
+     "feuilles": [
+      "Feuille2"
+     ],
+     "personne": "bob",
+     "présence": {
+      "carol": [
+       "Feuille1",
+       "B1"
+      ]
+     },
+     "rétablir": false
+    }
+   },
+   {
+    "greens": [
+     "S1",
+     "S2"
+    ],
+    "obs": {
+     "alertes": [
+      [
+       "nom_existant",
+       "Feuille1",
+       null,
+       null
+      ]
+     ],
+     "annuler": true,
+     "cellules": {
+      "A1": {
+       "contenu": null,
+       "erreur": null,
+       "valeur": null
+      },
+      "A2": {
+       "contenu": null,
+       "erreur": null,
+       "valeur": null
+      },
+      "A3": {
+       "contenu": null,
+       "erreur": null,
+       "valeur": null
+      },
+      "B1": {
+       "contenu": null,
+       "erreur": null,
+       "valeur": null
+      },
+      "B2": {
+       "contenu": null,
+       "erreur": null,
+       "valeur": null
+      },
+      "C1": {
+       "contenu": null,
+       "erreur": null,
+       "valeur": null
+      }
+     },
+     "connexion": "en ligne",
+     "droits": {
+      "alice": "écriture",
+      "bob": "écriture",
+      "carol": "lecture"
+     },
+     "en_attente": 1,
+     "feuille_vue": "Feuille2",
+     "feuilles": [
+      "Feuille2"
+     ],
+     "personne": "bob",
+     "présence": {
+      "carol": [
+       "Feuille2",
+       "B1"
+      ]
+     },
+     "rétablir": false
+    }
+   }
+  ],
+  "final": "à trancher",
+  "juges": [
+   {
+    "classe": "trou",
+    "assertion": "A62",
+    "cas": "Une personne renomme la feuille sur laquelle une autre personne en ligne a sélectionné une cellule ; l'indicateur de présence de cette autre personne, chez celle qui renomme, est-il désigné par l'ancien ou le nouveau nom de la feuille ?",
+    "choix": "V2",
+    "nouvelle": "Quand une personne renomme une feuille sur laquelle une autre personne en ligne a sélectionné une cellule, l'indicateur de présence de cette autre personne, chez celle qui renomme, reste sur la même cellule et cite le nouveau nom de la feuille | observé: présence | conditions: connexion, feuilles",
+    "usd": 0.1742602,
+    "texte": "ertainty: close\n```\n\nLa lecture contraire se défend : V1 désigne une feuille, « Feuille1 », qui ne figure plus dans la liste de bob (`feuilles: [\"Feuille2\"]`). On peut donc soutenir que l'indicateur n'est plus « sur cette cellule », ce qui violerait A62. Mais A62 ne précise pas comment la cellule est désignée après un renommage, et le renommage n'est pas encore livré (`en_attente: 1`). Je ne retiens donc pas de bug.\n\nJe choisis V2 parce que son indicateur reste cohérent avec la liste des feuilles que bob voit. C'est aussi la logique de C28 : après un renommage, ce qui citait l'ancien nom cite le nouveau.\n\nCLASSE: trou\nASSERTION: A62\nCAS: Une personne renomme la feuille sur laquelle une autre personne en ligne a sélectionné une cellule ; l'indicateur de présence de cette autre personne, chez celle qui renomme, est-il désigné par l'ancien ou le nouveau nom de la feuille ?\nCHOIX: V2\nNOUVELLE: Quand une personne renomme une feuille sur laquelle une autre personne en ligne a sélectionné une cellule, l'indicateur de présence de cette autre personne, chez celle qui renomme, reste sur la même cellule et cite le nouveau nom de la feuille | observé: présence | conditions: connexion, feuilles"
+   },
+   {
+    "classe": "bug V1",
+    "assertion": "A62",
+    "cas": "Une personne renomme la feuille sur laquelle une autre personne en ligne a sélectionné une cellule, et l'indicateur de présence de celle-ci doit rester sur cette cellule sous le nouveau nom de la feuille.",
+    "choix": "aucun",
+    "nouvelle": "aucune",
+    "usd": 0.0369362,
+    "texte": "1 en Feuille2 par bob, l'indicateur de présence de carol (qui a sélectionné Feuille1!B1, toujours en ligne) doit désigner la feuille sous son nouveau nom.\nruling:    upheld\nbecause:   A62 places the indicator \"sur cette cellule\" (\"un indicateur de présence portant son nom apparaît sur cette cellule\"), and only A63 removes it (when the person goes offline). V1 keeps it on \"Feuille1\", a name missing from Bob's own list (\"feuilles\": [\"Feuille2\"]), so the indicator is no longer on the cell Carol selected. C28 applies the same rule to formulas: after a rename, references to the old name cite the new one.\ncertainty: close\n```\n\nThe call is close because no assertion speaks directly about presence after a rename. The ruling rests on reading A62 as \"the same cell\", regardless of the sheet's name. Someone could instead read V1's sheet label as an internal key that the user never sees, and then this would be a gap in the spec.\n\nCLASSE: bug V1\nASSERTION: A62\nCAS: Une personne renomme la feuille sur laquelle une autre personne en ligne a sélectionné une cellule, et l'indicateur de présence de celle-ci doit rester sur cette cellule sous le nouveau nom de la feuille.\nCHOIX: aucun\nNOUVELLE: aucune"
+   }
+  ],
+  "divergences": 2
+ }
+]

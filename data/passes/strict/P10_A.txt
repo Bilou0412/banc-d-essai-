@@ -1,0 +1,37 @@
+ÉTATS: lisibilité; clé_message; appareils; membres; empreinte; vérification; alerte; accusé; réseau; connexion; minuteur; présence
+ASSERTIONS:
+- Un message envoyé à un contact est lisible par ce contact | observé: lisibilité | conditions: aucune
+- Un message stocké sur le serveur n'est pas lisible par le serveur | observé: lisibilité | conditions: aucune
+- L'envoi d'un message utilise une clé_message différente de celle du message précédent | observé: clé_message | conditions: aucune
+- Après la compromission d'une clé_message, les messages antérieurs à ce message restent illisibles pour l'attaquant | observé: lisibilité | conditions: clé_message
+- Après la compromission d'une clé_message, les messages postérieurs à ce message restent illisibles pour l'attaquant | observé: lisibilité | conditions: clé_message
+- Lier un nouvel appareil ajoute cet appareil à la liste des appareils | observé: appareils | conditions: aucune
+- Un message reçu après la liaison d'un appareil est lisible sur cet appareil | observé: lisibilité | conditions: appareils
+- Un message reçu avant la liaison d'un appareil n'est pas lisible sur cet appareil | observé: lisibilité | conditions: appareils
+- Retirer un appareil supprime cet appareil de la liste des appareils | observé: appareils | conditions: aucune
+- Un message envoyé après le retrait d'un appareil n'est pas lisible sur cet appareil | observé: lisibilité | conditions: appareils
+- Un message envoyé depuis un appareil apparaît dans la conversation sur les autres appareils liés de l'expéditeur | observé: présence | conditions: appareils
+- Ajouter une personne à un groupe ajoute cette personne à la liste des membres | observé: membres | conditions: aucune
+- Un message de groupe envoyé après l'ajout d'un membre est lisible par ce membre | observé: lisibilité | conditions: membres
+- Un message de groupe envoyé avant l'ajout d'un membre n'est pas lisible par ce membre | observé: lisibilité | conditions: membres
+- Retirer un membre d'un groupe supprime ce membre de la liste des membres | observé: membres | conditions: aucune
+- Quitter un groupe supprime l'utilisateur de la liste des membres | observé: membres | conditions: aucune
+- Un message de groupe envoyé après le retrait d'un membre n'est pas lisible par ce membre | observé: lisibilité | conditions: membres
+- Deux contacts dont les clés d'identité n'ont pas été substituées voient la même empreinte pour leur conversation | observé: empreinte | conditions: aucune
+- Marquer un contact comme vérifié passe sa vérification à « vérifié » | observé: vérification | conditions: aucune
+- Un changement de clé d'identité d'un contact modifie l'empreinte de la conversation | observé: empreinte | conditions: aucune
+- Un changement de clé d'identité d'un contact repasse sa vérification à « non vérifié » | observé: vérification | conditions: aucune
+- Un changement de clé d'identité d'un contact affiche une alerte dans la conversation | observé: alerte | conditions: aucune
+- Un message envoyé sans réseau chez l'expéditeur a l'accusé « en attente » | observé: accusé | conditions: réseau
+- Un message reçu par le serveur a l'accusé « envoyé » | observé: accusé | conditions: réseau
+- Un message destiné à un contact hors connexion garde l'accusé « envoyé » | observé: accusé | conditions: connexion
+- Un message reçu par au moins un appareil du destinataire passe à l'accusé « remis » | observé: accusé | conditions: connexion
+- Un message de groupe passe à l'accusé « remis » seulement quand tous les membres l'ont reçu | observé: accusé | conditions: membres
+- L'ouverture d'un message par le destinataire passe ce message à l'accusé « lu » | observé: accusé | conditions: aucune
+- Choisir une durée de message éphémère fixe le minuteur de la conversation à cette durée | observé: minuteur | conditions: aucune
+- Un changement du minuteur par un membre d'un groupe s'applique au minuteur de tous les membres | observé: minuteur | conditions: membres
+- Un message envoyé avec le minuteur actif disparaît de la conversation une fois la durée écoulée | observé: présence | conditions: minuteur, accusé
+- Un message envoyé avec le minuteur désactivé reste dans la conversation | observé: présence | conditions: minuteur
+- Un message éphémère dont l'accusé n'est pas « lu » reste dans la conversation du destinataire après la durée | observé: présence | conditions: minuteur, accusé
+- Un message déjà envoyé conserve la durée d'origine après une modification du minuteur | observé: présence | conditions: minuteur
+- Un message éphémère disparu sur un appareil disparaît aussi sur les autres appareils liés | observé: présence | conditions: minuteur

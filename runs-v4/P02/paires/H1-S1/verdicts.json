@@ -1,0 +1,41 @@
+[
+ {
+  "groupe": "add_to_shopping_list",
+  "divergences": 5,
+  "graine": 54,
+  "etape": 12,
+  "action": "add_to_shopping_list(Pain#1, servings=4)",
+  "x": [
+   [
+    "lait",
+    "0.83",
+    "ml",
+    false
+   ],
+   [
+    "sucre glace",
+    "0.33",
+    "g",
+    false
+   ]
+  ],
+  "y": [
+   [
+    "lait",
+    "0.84",
+    "ml",
+    false
+   ],
+   [
+    "sucre glace",
+    "0.33",
+    "g",
+    false
+   ]
+  ],
+  "classe": "trou",
+  "assertion": "A09",
+  "cas": "Quand on ajoute deux fois la même recette à la liste de courses avec des portions différentes, rien n'indique si la quantité totale additionne les valeurs exactes puis arrondit (0.83) ou additionne les valeurs déjà arrondies (0.84).",
+  "verdict": "=4), la ligne « lait » vaut 0.83 ml chez X et 0.84 ml chez Y ; la spec tranche entre les deux.\nruling:    rejected\nbecause:   A09 dit seulement qu'« une quantité ajustée non entière s'affiche arrondie à deux décimales ». A31 exige « une seule ligne avec la somme des quantités », mais pour l'« ajout de deux recettes ». Aucune des deux ne dit si l'on additionne les valeurs exactes (2/12 + 8/12 = 0.8333, soit 0.83) ou les valeurs déjà arrondies (0.17 + 0.67 = 0.84). Aucune ne traite non plus le cas où la même recette est ajoutée deux fois. Les deux résultats respectent donc la spec.\ncertainty: close\n```\n\nC'est serré pour une raison précise. A09 dit que l'arrondi se fait à l'affichage (« s'affiche arrondie »). Si on le lit comme une règle sur ce qui est conservé, la somme devrait partir des valeurs exactes, et Y aurait tort. Mais la ligne additionnée n'est pas une seule « quantité ajustée » au sens de A09 : elle additionne deux quantités ajustées, chacune déjà affichée arrondie (0.17 puis 0.67). Pour trancher, la spec devrait dire si la liste de courses additionne les quantités exactes ou les quantités affichées. Cette précision relève de la spec (elle va au chercheur ou au rédacteur) ; l'arbitre n'a pas à la fournir.\n\nCLASSE: trou\nASSERTION: A09\nCAS: Quand on ajoute deux fois la même recette à la liste de courses avec des portions différentes, rien n'indique si la quantité totale additionne les valeurs exactes puis arrondit (0.83) ou additionne les valeurs déjà arrondies (0.84)."
+ }
+]

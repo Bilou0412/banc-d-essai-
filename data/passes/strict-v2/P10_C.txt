@@ -1,0 +1,39 @@
+ÉTATS: lisibilité; présence; appareils; transfert; membres; rôle; numéro_sécurité; vérification; alerte; remise; connexion; réseau; minuterie; lecture
+ASSERTIONS:
+- Quand A envoie un message à B, B peut lire le contenu du message | observé: lisibilité | conditions: aucune
+- Quand A envoie un message à B, le serveur relais ne peut pas lire le contenu du message | observé: lisibilité | conditions: aucune | frontière: oui
+- Quand A envoie un message à B, chaque appareil figurant dans la liste des appareils de B peut lire le message | observé: lisibilité | conditions: appareils
+- Quand A envoie un message depuis un appareil, chaque autre appareil figurant dans la liste des appareils de A affiche ce message | observé: présence | conditions: appareils
+- Quand un tiers obtient la clé d'un message, il ne peut pas lire les messages envoyés avant celui-ci | observé: lisibilité | conditions: aucune | frontière: oui
+- Quand un tiers a obtenu la clé d'un message, il ne peut plus lire les messages envoyés après le renouvellement de clé suivant | observé: lisibilité | conditions: aucune | frontière: oui
+- Lier un nouvel appareil ajoute cet appareil à la liste des appareils du compte | observé: appareils | conditions: aucune
+- Retirer un appareil enlève cet appareil de la liste des appareils du compte | observé: appareils | conditions: aucune
+- Un appareil retiré de la liste des appareils ne peut pas lire les messages envoyés après son retrait | observé: lisibilité | conditions: appareils | frontière: oui
+- Lier un nouvel appareil avec le transfert désactivé n'affiche aucun message antérieur à la liaison sur cet appareil | observé: présence | conditions: transfert
+- Lier un nouvel appareil avec le transfert activé affiche les messages antérieurs à la liaison sur cet appareil | observé: présence | conditions: transfert
+- Quand un administrateur ajoute un contact au groupe, ce contact apparaît dans la liste des membres | observé: membres | conditions: rôle
+- Quand un administrateur retire un membre du groupe, ce membre disparaît de la liste des membres | observé: membres | conditions: rôle
+- Quand un membre non administrateur tente de retirer un autre membre, la liste des membres reste inchangée | observé: membres | conditions: rôle
+- Un message envoyé au groupe peut être lu par chaque contact figurant dans la liste des membres | observé: lisibilité | conditions: membres
+- Un membre ajouté au groupe ne peut pas lire les messages envoyés au groupe avant son ajout | observé: lisibilité | conditions: membres | frontière: oui
+- Un membre retiré du groupe ne peut pas lire les messages envoyés au groupe après son retrait | observé: lisibilité | conditions: membres | frontière: oui
+- Quand A et B ouvrent l'écran de vérification de leur conversation, ils voient le même numéro de sécurité | observé: numéro_sécurité | conditions: aucune
+- Quand A scanne le code de B et que le numéro de sécurité correspond, B passe au statut vérifié chez A | observé: vérification | conditions: numéro_sécurité
+- Quand A scanne le code de B et que le numéro de sécurité ne correspond pas, B reste au statut non vérifié chez A | observé: vérification | conditions: numéro_sécurité
+- Quand A retire manuellement la vérification de B, B passe au statut non vérifié chez A | observé: vérification | conditions: aucune
+- Quand B réinstalle l'application, le numéro de sécurité affiché chez A pour B change | observé: numéro_sécurité | conditions: aucune | frontière: oui
+- Quand le numéro de sécurité de B change, B repasse au statut non vérifié chez A | observé: vérification | conditions: numéro_sécurité
+- Quand le numéro de sécurité de B change, une alerte apparaît dans la conversation de A avec B | observé: alerte | conditions: numéro_sécurité
+- Quand A envoie un message sans réseau, l'indicateur du message affiche « en attente » | observé: remise | conditions: réseau
+- Quand A envoie un message avec réseau, l'indicateur du message affiche « envoyé » | observé: remise | conditions: réseau
+- Quand A envoie un message à B dont aucun appareil n'est connecté, l'indicateur reste à « envoyé » | observé: remise | conditions: connexion
+- Quand un appareil de B se connecte après l'envoi, l'indicateur du message passe à « remis » | observé: remise | conditions: connexion
+- Dans un groupe, l'indicateur d'un message passe à « remis » seulement quand chaque membre a reçu le message | observé: remise | conditions: membres, connexion
+- Quand A règle la minuterie d'une conversation sur une heure, la durée d'une heure s'affiche dans la conversation chez A | observé: minuterie | conditions: aucune
+- Quand A règle la minuterie d'une conversation, la même durée s'affiche dans cette conversation chez B | observé: minuterie | conditions: aucune
+- Un message envoyé avec la minuterie active disparaît de la conversation de l'expéditeur une fois la durée écoulée | observé: présence | conditions: minuterie
+- Un message envoyé avec la minuterie désactivée reste affiché dans la conversation | observé: présence | conditions: minuterie
+- Chez le destinataire, un message éphémère non ouvert reste affiché au-delà de la durée de la minuterie | observé: présence | conditions: minuterie, lecture
+- Chez le destinataire, un message éphémère ouvert disparaît une fois la durée écoulée depuis son ouverture | observé: présence | conditions: minuterie, lecture
+- Modifier la minuterie ne change pas la durée de disparition des messages déjà envoyés | observé: présence | conditions: minuterie
+- Quand un message éphémère disparaît sur un appareil, il disparaît aussi sur chaque autre appareil de la liste des appareils du même compte | observé: présence | conditions: minuterie, appareils

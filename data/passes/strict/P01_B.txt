@@ -1,0 +1,41 @@
+ÉTATS: liste; nom; email; téléphone; étiquette; favori; recherche; tri; export; erreur
+ASSERTIONS:
+- Après la création d'un contact avec un nom valide, ce contact apparaît dans la liste | observé: liste | conditions: nom
+- Après la création d'un contact avec un nom vide, un message d'erreur « nom obligatoire » est affiché | observé: erreur | conditions: nom
+- Après la création d'un contact avec un nom vide, la liste ne contient aucun nouveau contact | observé: liste | conditions: nom
+- Après la création d'un contact avec un email sans « @ », un message d'erreur « email invalide » est affiché | observé: erreur | conditions: email
+- Après la création d'un contact avec un email vide, aucun message d'erreur n'est affiché | observé: erreur | conditions: email
+- Après la création d'un contact avec un téléphone contenant des lettres, un message d'erreur « téléphone invalide » est affiché | observé: erreur | conditions: téléphone
+- Un contact nouvellement créé n'est pas marqué favori | observé: favori | conditions: aucune
+- Après la modification du nom d'un contact, la fiche du contact affiche le nouveau nom | observé: nom | conditions: aucune
+- Après la modification de l'email d'un contact avec une valeur invalide, la fiche du contact affiche toujours l'ancien email | observé: email | conditions: email
+- Après la modification du téléphone d'un contact, la fiche du contact affiche le nouveau téléphone | observé: téléphone | conditions: aucune
+- Après la modification du nom d'un contact, son étiquette est inchangée | observé: étiquette | conditions: aucune
+- Après la modification du nom d'un contact, son statut favori est inchangé | observé: favori | conditions: aucune
+- Après la suppression confirmée d'un contact, ce contact n'apparaît plus dans la liste | observé: liste | conditions: aucune
+- Après l'annulation de la confirmation de suppression, le contact apparaît toujours dans la liste | observé: liste | conditions: aucune
+- Avec une recherche vide, la liste affiche tous les contacts | observé: liste | conditions: recherche
+- Avec une recherche saisie, la liste n'affiche que les contacts dont le nom contient le texte recherché | observé: liste | conditions: recherche, nom
+- La recherche ignore la différence entre majuscules et minuscules | observé: liste | conditions: recherche, nom
+- Avec une recherche saisie, un contact dont l'email contient le texte recherché apparaît dans la liste | observé: liste | conditions: recherche, email
+- Avec une recherche qui ne correspond à aucun contact, la liste affiche le message « aucun résultat » | observé: liste | conditions: recherche
+- Avec le tri « nom croissant », la liste est ordonnée alphabétiquement de A à Z | observé: liste | conditions: tri, nom
+- Avec le tri « nom décroissant », la liste est ordonnée alphabétiquement de Z à A | observé: liste | conditions: tri, nom
+- Avec le tri « favoris en premier », les contacts favoris apparaissent avant les autres dans la liste | observé: liste | conditions: tri, favori
+- Après la création d'un contact, la liste respecte le tri sélectionné | observé: liste | conditions: tri
+- Après l'ajout d'une étiquette à un contact, la fiche du contact affiche cette étiquette | observé: étiquette | conditions: aucune
+- Après le retrait d'une étiquette d'un contact, la fiche du contact n'affiche plus cette étiquette | observé: étiquette | conditions: aucune
+- Après l'ajout à un contact d'une étiquette qu'il possède déjà, la fiche du contact affiche cette étiquette une seule fois | observé: étiquette | conditions: étiquette
+- Après la sélection d'une étiquette comme filtre, la liste n'affiche que les contacts portant cette étiquette | observé: liste | conditions: étiquette
+- Après un clic sur l'étoile d'un contact non favori, le contact est marqué favori | observé: favori | conditions: favori
+- Après un clic sur l'étoile d'un contact favori, le contact n'est plus marqué favori | observé: favori | conditions: favori
+- Après l'export CSV, le fichier exporté contient une ligne par contact de la liste | observé: export | conditions: liste
+- Après l'export CSV, la première ligne du fichier exporté contient les en-têtes nom, email, téléphone, étiquette, favori | observé: export | conditions: aucune
+- Après l'export CSV d'un contact dont le nom contient une virgule, le nom est entouré de guillemets dans le fichier exporté | observé: export | conditions: nom
+- Après l'export CSV avec une liste vide, le fichier exporté ne contient que la ligne d'en-têtes | observé: export | conditions: liste
+- Après l'import d'un fichier CSV valide, chaque ligne du fichier apparaît comme contact dans la liste | observé: liste | conditions: aucune
+- Après l'import d'un fichier CSV dont une ligne a un nom vide, cette ligne n'apparaît pas dans la liste | observé: liste | conditions: nom
+- Après l'import d'un fichier CSV dont une ligne a un nom vide, un message d'erreur indique le numéro de la ligne ignorée | observé: erreur | conditions: nom
+- Après l'import d'un fichier qui n'est pas au format CSV, un message d'erreur « format invalide » est affiché | observé: erreur | conditions: aucune
+- Après l'import d'un fichier CSV dont la colonne favori vaut « oui », le contact importé est marqué favori | observé: favori | conditions: aucune
+- Après l'import d'un fichier CSV dont la colonne étiquette est renseignée, le contact importé affiche cette étiquette | observé: étiquette | conditions: aucune

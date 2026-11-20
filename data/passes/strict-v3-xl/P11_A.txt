@@ -1,0 +1,160 @@
+ÉTATS: contenu; résultat; alerte circulaire; feuilles; nom feuille; feuille active; rôle; droit; connexion; attente; conflit; présence; annulation; rétablissement; historique; fuseau; affichage date; export; erreur import
+ASSERTIONS:
+- Quand une personne ayant le droit écriture saisit le nombre 5 dans la cellule vide A1, le contenu de A1 devient 5 | observé: contenu | conditions: droit
+- Quand une personne saisit le nombre 5 dans A1, le résultat affiché dans A1 est 5 | observé: résultat | conditions: contenu
+- Quand une personne saisit le texte « bonjour » dans A1, le résultat affiché dans A1 est « bonjour » | observé: résultat | conditions: contenu
+- Quand une personne saisit « =2+3 » dans A1, le contenu de A1 est la formule « =2+3 » | observé: contenu | conditions: aucune
+- Quand une personne saisit « =2+3 » dans A1, le résultat affiché dans A1 est 5 | observé: résultat | conditions: contenu
+- Si A1 contient 4, quand une personne saisit « =A1*2 » dans B1, le résultat de B1 est 8 | observé: résultat | conditions: contenu
+- Si B1 contient « =A1*2 », quand A1 passe de 4 à 10, le résultat de B1 devient 20 | observé: résultat | conditions: contenu
+- Si C1 contient « =B1+1 » et B1 contient « =A1*2 », quand A1 passe de 4 à 10, le résultat de C1 devient 21 | observé: résultat | conditions: contenu
+- Si B1 contient « =A1*2 », quand une personne modifie D1, le résultat de B1 reste inchangé | observé: résultat | conditions: contenu
+- Si B1 contient « =A1*2 » et que A1 est vide, le résultat de B1 est 0 | observé: résultat | conditions: contenu
+- Si B1 contient « =A1*2 » et que A1 contient le texte « abc », le résultat de B1 est l'erreur « #VALEUR! » | observé: résultat | conditions: contenu
+- Quand une personne saisit la formule incomplète « =2+ » dans A1, le résultat de A1 est une erreur de syntaxe | observé: résultat | conditions: contenu
+- Quand une personne saisit « =1/0 » dans A1, le résultat de A1 est l'erreur « #DIV/0! » | observé: résultat | conditions: contenu
+- Quand une personne ayant le droit écriture efface A1, le contenu de A1 devient vide | observé: contenu | conditions: droit
+- Si B1 contient « =A1*2 » et A1 contient 4, quand A1 est effacé, le résultat de B1 devient 0 | observé: résultat | conditions: contenu
+- Si A1, A2 et A3 contiennent 1, 2 et 3, quand une personne saisit « =SOMME(A1:A3) » dans B1, le résultat de B1 est 6 | observé: résultat | conditions: contenu
+- Si B1 contient « =SOMME(A1:A3) » avec A1=1, A2=2, A3=3, quand A2 passe à 10, le résultat de B1 devient 14 | observé: résultat | conditions: contenu
+- Si la cellule A1 de la feuille « Feuille2 » contient 7, quand une personne saisit « =Feuille2!A1 » dans une cellule de « Feuille1 », le résultat de cette cellule est 7 | observé: résultat | conditions: contenu, feuilles
+- Si une cellule de « Feuille1 » contient « =Feuille2!A1 », quand Feuille2!A1 passe de 7 à 9, le résultat de cette cellule devient 9 | observé: résultat | conditions: contenu
+- Quand une personne saisit une formule qui référence une feuille inexistante, le résultat de la cellule est l'erreur « #REF! » | observé: résultat | conditions: feuilles
+- Si une cellule contient « =Feuille2!A1 », quand la feuille « Feuille2 » est supprimée, le résultat de cette cellule devient l'erreur « #REF! » | observé: résultat | conditions: feuilles
+- Si une cellule contient « =Feuille2!A1 », quand « Feuille2 » est renommée « Ventes », le contenu de cette cellule devient « =Ventes!A1 » | observé: contenu | conditions: nom feuille
+- Si une cellule contient « =Feuille2!A1 », quand « Feuille2 » est renommée « Ventes », le résultat de cette cellule reste inchangé | observé: résultat | conditions: nom feuille
+- Si A1 contient « =B1 », quand une personne saisit « =A1 » dans B1, une alerte circulaire est affichée sur B1 | observé: alerte circulaire | conditions: contenu
+- Si A1 contient « =B1 », quand une personne saisit « =A1 » dans B1, le résultat de B1 est l'erreur « #CIRC! » | observé: résultat | conditions: contenu
+- Quand une personne saisit « =A1+1 » dans A1, une alerte circulaire est affichée sur A1 | observé: alerte circulaire | conditions: contenu
+- Si A1 contient « =B1 » et B1 contient « =C1 », quand une personne saisit « =A1 » dans C1, une alerte circulaire est affichée sur C1 | observé: alerte circulaire | conditions: contenu
+- Si A1 et B1 forment une référence circulaire, une cellule D1 contenant « =A1+1 » affiche le résultat « #CIRC! » | observé: résultat | conditions: contenu
+- Si A1 et B1 forment une référence circulaire, la cellule D1 contenant « =A1+1 » n'affiche pas d'alerte circulaire | observé: alerte circulaire | conditions: contenu
+- Si A1 contient « =B1 » et B1 contient « =A1 », quand B1 est remplacé par la valeur 3, l'alerte circulaire disparaît | observé: alerte circulaire | conditions: contenu
+- Si A1 contient « =B1 » et B1 contient « =A1 », quand B1 est remplacé par la valeur 3, le résultat de A1 devient 3 | observé: résultat | conditions: contenu
+- Si Feuille2!A1 contient « =Feuille1!A1 », quand une personne saisit « =Feuille2!A1 » dans Feuille1!A1, une alerte circulaire est affichée sur Feuille1!A1 | observé: alerte circulaire | conditions: contenu, feuilles
+- Quand une personne saisit une formule qui crée une référence circulaire, le contenu de la cellule est conservé tel que saisi | observé: contenu | conditions: aucune
+- Quand le propriétaire ajoute une feuille, la liste des feuilles compte une feuille de plus | observé: feuilles | conditions: rôle
+- Quand une personne ajoute une feuille, toutes les cellules de la nouvelle feuille ont un contenu vide | observé: contenu | conditions: aucune
+- Si les feuilles « Feuille1 » et « Feuille2 » existent, une feuille ajoutée reçoit le nom « Feuille3 » | observé: nom feuille | conditions: feuilles
+- Quand le propriétaire renomme « Feuille1 » en « Budget », le nom de la feuille devient « Budget » | observé: nom feuille | conditions: rôle
+- Si une feuille « Budget » existe déjà, quand le propriétaire renomme une autre feuille en « Budget », le nom de cette autre feuille reste inchangé | observé: nom feuille | conditions: feuilles
+- Quand le propriétaire renomme une feuille avec un nom vide, le nom de la feuille reste inchangé | observé: nom feuille | conditions: aucune
+- Quand un membre qui n'est pas propriétaire tente de renommer une feuille, le nom de la feuille reste inchangé | observé: nom feuille | conditions: rôle
+- Quand le propriétaire supprime une feuille, la liste des feuilles compte une feuille de moins | observé: feuilles | conditions: rôle
+- Si le classeur ne contient qu'une feuille, quand le propriétaire tente de la supprimer, la liste des feuilles reste inchangée | observé: feuilles | conditions: feuilles
+- Quand un membre qui n'est pas propriétaire tente de supprimer une feuille, la liste des feuilles reste inchangée | observé: feuilles | conditions: rôle
+- Quand un membre qui n'est pas propriétaire tente d'ajouter une feuille, la liste des feuilles reste inchangée | observé: feuilles | conditions: rôle
+- Quand une personne clique sur l'onglet « Feuille2 », la feuille active devient « Feuille2 » | observé: feuille active | conditions: aucune
+- Quand le propriétaire supprime la feuille active, la feuille active devient la feuille voisine | observé: feuille active | conditions: feuilles
+- Quand Alice change de feuille active, la feuille active de Bob reste inchangée | observé: feuille active | conditions: aucune | frontière: oui
+- Quand une personne ayant le droit lecture sur une feuille tente de saisir une valeur, le contenu de la cellule reste inchangé | observé: contenu | conditions: droit
+- Une personne ayant le droit lecture sur une feuille voit le résultat des cellules de cette feuille | observé: résultat | conditions: droit
+- Une personne sans aucun droit sur une feuille ne voit pas cette feuille dans sa liste des feuilles | observé: feuilles | conditions: droit
+- Si Bob a le droit écriture sur « Feuille1 » et le droit lecture sur « Feuille2 », quand Bob tente de saisir une valeur dans « Feuille2 », le contenu de la cellule reste inchangé | observé: contenu | conditions: droit
+- Si Bob a le droit écriture sur « Feuille1 » et le droit lecture sur « Feuille2 », quand Bob saisit une valeur dans « Feuille1 », le contenu de la cellule devient cette valeur | observé: contenu | conditions: droit
+- Quand le propriétaire passe le droit de Bob de lecture à écriture sur une feuille, le droit de Bob sur cette feuille devient écriture | observé: droit | conditions: rôle
+- Quand un membre qui n'est pas propriétaire tente de modifier le droit d'une autre personne, ce droit reste inchangé | observé: droit | conditions: rôle
+- Le propriétaire a toujours le droit écriture sur toutes les feuilles | observé: droit | conditions: rôle
+- Si Bob n'a aucun droit sur « Feuille2 », une cellule de « Feuille1 » contenant « =Feuille2!A1 » affiche pour Bob l'erreur « #ACCÈS! » | observé: résultat | conditions: droit
+- Si Bob a le droit lecture sur « Feuille2 », une cellule de « Feuille1 » contenant « =Feuille2!A1 » affiche pour Bob la valeur de Feuille2!A1 | observé: résultat | conditions: droit
+- Quand le propriétaire retire le droit écriture de Bob pendant que Bob est en ligne, la saisie suivante de Bob sur cette feuille laisse le contenu inchangé | observé: contenu | conditions: droit, connexion | frontière: oui
+- Si Bob a modifié une cellule hors ligne et que son droit écriture est retiré avant son retour en ligne, la modification de Bob est rejetée à la fusion | observé: contenu | conditions: droit, connexion | frontière: oui
+- Quand une personne ayant le droit lecture tente d'importer un fichier CSV dans une feuille, le contenu de la feuille reste inchangé | observé: contenu | conditions: droit
+- Quand une personne ayant le droit lecture exporte une feuille en CSV, un fichier CSV est produit | observé: export | conditions: droit
+- Quand Alice saisit 7 dans A1 alors qu'Alice et Bob sont en ligne, le contenu de A1 chez Bob devient 7 | observé: contenu | conditions: connexion | frontière: oui
+- Si B1 contient « =A1*2 », quand Alice saisit 7 dans A1 alors qu'Alice et Bob sont en ligne, le résultat de B1 chez Bob devient 14 | observé: résultat | conditions: contenu, connexion | frontière: oui
+- Quand Alice sélectionne la cellule C3 alors qu'Alice et Bob sont en ligne, Bob voit un indicateur de présence d'Alice sur C3 | observé: présence | conditions: connexion | frontière: oui
+- Quand Alice passe hors ligne, l'indicateur de présence d'Alice disparaît chez Bob | observé: présence | conditions: connexion | frontière: oui
+- Quand Alice saisit dans A1 au même moment où Bob saisit dans B2, le contenu de A1 est la valeur d'Alice | observé: contenu | conditions: aucune | frontière: oui
+- Quand Alice saisit dans A1 au même moment où Bob saisit dans B2, le contenu de B2 est la valeur de Bob | observé: contenu | conditions: aucune | frontière: oui
+- Quand Alice saisit 3 dans A1 au même moment où Bob saisit 8 dans A1, un conflit est signalé sur A1 | observé: conflit | conditions: contenu | frontière: oui
+- Quand Alice et Bob saisissent tous deux 3 dans A1 au même moment, aucun conflit n'est signalé | observé: conflit | conditions: contenu | frontière: oui
+- Quand Alice saisit 3 dans A1 au même moment où Bob saisit 8 dans A1, le contenu provisoire de A1 est la valeur reçue en dernier par le serveur | observé: contenu | conditions: aucune | frontière: oui
+- Quand un conflit est signalé sur A1, le conflit présente les deux valeurs proposées | observé: conflit | conditions: aucune
+- Quand une personne ayant le droit écriture résout le conflit de A1 en choisissant la valeur 3, le contenu de A1 devient 3 | observé: contenu | conditions: conflit, droit
+- Quand une personne résout le conflit de A1, le signalement de conflit disparaît sur A1 | observé: conflit | conditions: aucune
+- Quand Alice résout un conflit alors que Bob est en ligne, le signalement de conflit disparaît chez Bob | observé: conflit | conditions: connexion | frontière: oui
+- Quand une personne ayant le droit lecture tente de résoudre un conflit, le signalement de conflit reste affiché | observé: conflit | conditions: droit
+- Quand le propriétaire ajoute une feuille alors que Bob est en ligne, la nouvelle feuille apparaît dans la liste des feuilles de Bob | observé: feuilles | conditions: connexion | frontière: oui
+- Quand le réseau de l'appareil est coupé, l'indicateur de connexion affiche « hors ligne » | observé: connexion | conditions: aucune | frontière: oui
+- Quand le réseau de l'appareil revient, l'indicateur de connexion affiche « en ligne » | observé: connexion | conditions: aucune | frontière: oui
+- Quand une personne hors ligne saisit 5 dans A1, le contenu de A1 sur son appareil devient 5 | observé: contenu | conditions: droit
+- Si B1 contient « =A1*2 », quand une personne hors ligne saisit 5 dans A1, le résultat de B1 sur son appareil devient 10 | observé: résultat | conditions: contenu
+- Quand une personne hors ligne saisit une valeur, le compteur de modifications en attente augmente de 1 | observé: attente | conditions: connexion | frontière: oui
+- Quand Alice hors ligne saisit 5 dans A1, le contenu de A1 chez Bob reste inchangé | observé: contenu | conditions: connexion | frontière: oui
+- Quand Alice revient en ligne avec des modifications en attente, le compteur de modifications en attente revient à 0 | observé: attente | conditions: connexion | frontière: oui
+- Quand Alice revient en ligne après avoir saisi 5 dans A1 hors ligne, le contenu de A1 chez Bob devient 5 | observé: contenu | conditions: connexion | frontière: oui
+- Quand Alice revient en ligne, les modifications faites par Bob pendant son absence apparaissent dans le contenu des cellules chez Alice | observé: contenu | conditions: connexion | frontière: oui
+- Si Alice hors ligne et Bob en ligne ont modifié A1 avec des valeurs différentes, un conflit est signalé sur A1 au retour en ligne d'Alice | observé: conflit | conditions: contenu, connexion | frontière: oui
+- Si Alice hors ligne a modifié A1 et Bob a modifié B1, aucun conflit n'est signalé au retour en ligne d'Alice | observé: conflit | conditions: contenu, connexion | frontière: oui
+- Si Alice hors ligne a modifié A1 deux fois sans modification de Bob sur A1, aucun conflit n'est signalé au retour en ligne | observé: conflit | conditions: contenu | frontière: oui
+- Si Alice ferme l'application hors ligne après avoir saisi 5 dans A1, le contenu de A1 est 5 à la réouverture | observé: contenu | conditions: connexion | frontière: oui
+- Si Alice ferme l'application hors ligne avec 3 modifications en attente, le compteur de modifications en attente affiche 3 à la réouverture | observé: attente | conditions: connexion | frontière: oui
+- Si Alice a fermé puis rouvert l'application hors ligne, ses modifications en attente apparaissent chez Bob après son retour en ligne | observé: contenu | conditions: connexion | frontière: oui
+- Si Alice hors ligne et Bob en ligne ont chacun ajouté une feuille nommée « Bilan », la feuille d'Alice est renommée « Bilan (2) » au retour en ligne d'Alice | observé: nom feuille | conditions: feuilles, connexion | frontière: oui
+- Si Alice hors ligne a modifié une cellule d'une feuille que le propriétaire a supprimée entre-temps, un conflit est signalé à Alice au retour en ligne | observé: conflit | conditions: feuilles, connexion | frontière: oui
+- Si Alice hors ligne a saisi « =A1*2 » dans B1 et que Bob a passé A1 à 6, le résultat de B1 chez Alice devient 12 au retour en ligne | observé: résultat | conditions: contenu, connexion | frontière: oui
+- Si Alice hors ligne a saisi « =B1 » dans A1 et que Bob a saisi « =A1 » dans B1, une alerte circulaire est affichée au retour en ligne d'Alice | observé: alerte circulaire | conditions: contenu, connexion | frontière: oui
+- Avant toute modification par une personne, l'annulation est indisponible pour cette personne | observé: annulation | conditions: aucune
+- Après qu'une personne a saisi une valeur, l'annulation est disponible pour cette personne | observé: annulation | conditions: aucune
+- Si A1 contenait 4, quand une personne saisit 9 dans A1 puis annule, le contenu de A1 redevient 4 | observé: contenu | conditions: annulation
+- Si B1 contient « =A1*2 », quand la saisie de 9 dans A1 est annulée, le résultat de B1 redevient celui calculé avec l'ancienne valeur de A1 | observé: résultat | conditions: contenu
+- Après une annulation, le rétablissement est disponible | observé: rétablissement | conditions: aucune
+- Quand une personne rétablit une saisie annulée de 9 dans A1, le contenu de A1 redevient 9 | observé: contenu | conditions: rétablissement
+- Quand une personne fait une nouvelle saisie après une annulation, le rétablissement devient indisponible | observé: rétablissement | conditions: aucune
+- Si Alice a saisi dans A1 puis Bob a saisi dans C1, quand Alice annule, le contenu de C1 reste la valeur de Bob | observé: contenu | conditions: aucune | frontière: oui
+- Si Alice a saisi dans A1 puis Bob a saisi dans C1, quand Alice annule, le contenu de A1 revient à sa valeur précédente | observé: contenu | conditions: aucune | frontière: oui
+- Quand Alice annule une saisie alors que Bob est en ligne, le contenu de la cellule chez Bob revient à la valeur précédente | observé: contenu | conditions: connexion | frontière: oui
+- Si Bob a modifié A1 après une saisie d'Alice dans A1, quand Alice annule, le contenu de A1 reste la valeur de Bob | observé: contenu | conditions: aucune | frontière: oui
+- Si Bob a modifié A1 après une saisie d'Alice dans A1, l'annulation de cette saisie est indisponible pour Alice | observé: annulation | conditions: aucune | frontière: oui
+- Quand le propriétaire annule la suppression d'une feuille, la feuille réapparaît dans la liste des feuilles | observé: feuilles | conditions: annulation
+- Quand le propriétaire annule la suppression d'une feuille, le contenu des cellules de cette feuille est restauré | observé: contenu | conditions: annulation
+- Quand le propriétaire annule le renommage d'une feuille, la feuille reprend son nom précédent | observé: nom feuille | conditions: annulation
+- Quand une personne annule un import CSV, le contenu des cellules redevient celui d'avant l'import | observé: contenu | conditions: annulation
+- Quand une personne hors ligne annule sa dernière saisie, le contenu de la cellule revient à sa valeur précédente | observé: contenu | conditions: annulation
+- Quand une personne ferme puis rouvre l'application, l'annulation est indisponible | observé: annulation | conditions: aucune | frontière: oui
+- Si le droit d'une personne sur une feuille passe à lecture, l'annulation de ses saisies sur cette feuille devient indisponible | observé: annulation | conditions: droit
+- Quand une personne annule la saisie qui avait créé une référence circulaire, l'alerte circulaire disparaît | observé: alerte circulaire | conditions: contenu
+- Quand une personne modifie le contenu d'une cellule, une nouvelle version est ajoutée à l'historique | observé: historique | conditions: aucune
+- Chaque version de l'historique indique le nom de la personne qui a fait la modification | observé: historique | conditions: aucune
+- Chaque version de l'historique indique la date et l'heure de la modification | observé: historique | conditions: aucune | frontière: oui
+- Les versions de l'historique sont classées de la plus récente à la plus ancienne | observé: historique | conditions: aucune | frontière: oui
+- Quand une personne consulte une version passée sans la restaurer, le contenu actuel des cellules reste inchangé | observé: contenu | conditions: aucune
+- Quand une personne ayant le droit écriture restaure une version, le contenu des cellules redevient celui de cette version | observé: contenu | conditions: droit
+- Quand une version est restaurée, le résultat des formules est recalculé à partir du contenu restauré | observé: résultat | conditions: contenu
+- Quand une version est restaurée, une nouvelle version est ajoutée à l'historique | observé: historique | conditions: aucune
+- Quand une personne ayant le droit lecture tente de restaurer une version, le contenu des cellules reste inchangé | observé: contenu | conditions: droit
+- Quand le propriétaire restaure une version où existait une feuille supprimée depuis, cette feuille réapparaît dans la liste des feuilles | observé: feuilles | conditions: rôle
+- Quand Alice restaure une version alors que Bob est en ligne, le contenu restauré apparaît chez Bob | observé: contenu | conditions: connexion | frontière: oui
+- Les modifications faites hors ligne apparaissent dans l'historique des autres personnes après le retour en ligne | observé: historique | conditions: connexion | frontière: oui
+- Une modification faite hors ligne apparaît dans l'historique avec l'heure de sa saisie, et non l'heure du retour en ligne | observé: historique | conditions: connexion | frontière: oui
+- L'historique est présent après la fermeture puis la réouverture de l'application | observé: historique | conditions: aucune | frontière: oui
+- La date de chaque version de l'historique est affichée dans le fuseau de la personne qui consulte | observé: historique | conditions: fuseau | frontière: oui
+- Si Alice, dans le fuseau de Paris, saisit la date-heure 2026-03-10 14:00 dans A1, Alice voit 2026-03-10 14:00 | observé: affichage date | conditions: fuseau | frontière: oui
+- Si Alice, dans le fuseau de Paris, saisit la date-heure 2026-03-10 14:00 dans A1, Bob dans le fuseau de New York voit 2026-03-10 09:00 | observé: affichage date | conditions: fuseau | frontière: oui
+- Quand le fuseau de l'appareil d'une personne change, l'affichage des dates-heures change pour correspondre au nouveau fuseau | observé: affichage date | conditions: fuseau | frontière: oui
+- Une date sans heure saisie comme 2026-03-10 est affichée 2026-03-10 dans tous les fuseaux | observé: affichage date | conditions: fuseau | frontière: oui
+- Une date-heure en été est affichée avec le décalage d'heure d'été du fuseau de la personne qui consulte | observé: affichage date | conditions: fuseau | frontière: oui
+- Si A1 et A2 contiennent deux dates-heures, le résultat de « =A2-A1 » est identique pour des personnes de fuseaux différents | observé: résultat | conditions: fuseau | frontière: oui
+- Le résultat de « =AUJOURDHUI() » est la date du jour dans le fuseau de la personne qui consulte | observé: résultat | conditions: fuseau | frontière: oui
+- Quand minuit passe dans le fuseau de la personne, le résultat de « =AUJOURDHUI() » passe à la nouvelle date | observé: résultat | conditions: fuseau | frontière: oui
+- Quand une personne exporte une feuille, le fichier CSV contient une ligne par ligne non vide de la feuille | observé: export | conditions: contenu
+- Quand une personne exporte, le fichier CSV contient uniquement les cellules de la feuille active | observé: export | conditions: feuille active
+- Si B1 contient « =2+3 », le fichier CSV exporté contient 5 pour B1 | observé: export | conditions: contenu
+- Si A1 contient le texte « Paris, France », le fichier CSV exporté contient « "Paris, France" » entre guillemets | observé: export | conditions: contenu
+- Si A1 contient un guillemet, le fichier CSV exporté contient ce guillemet doublé | observé: export | conditions: contenu
+- Si A1 affiche l'erreur « #DIV/0! », le fichier CSV exporté contient « #DIV/0! » pour A1 | observé: export | conditions: résultat
+- Si la feuille active est vide, le fichier CSV exporté est vide | observé: export | conditions: contenu
+- Si A1 contient une date-heure, le fichier CSV exporté contient cette date-heure au format ISO 8601 avec le décalage du fuseau de la personne qui exporte | observé: export | conditions: fuseau | frontière: oui
+- Quand une personne ayant le droit écriture importe un fichier CSV de 2 lignes et 3 colonnes, le contenu des cellules A1 à C2 devient les valeurs du fichier | observé: contenu | conditions: droit
+- Quand une personne importe un fichier CSV contenant le champ « =1+1 », le contenu de la cellule est le texte « =1+1 » | observé: contenu | conditions: aucune
+- Si B1 contient « =A1*2 », quand l'import place le nombre 4 dans A1, le résultat de B1 devient 8 | observé: résultat | conditions: contenu
+- Quand une personne importe un fichier CSV dont un guillemet n'est pas fermé, un message d'erreur d'import est affiché | observé: erreur import | conditions: aucune
+- Quand une personne importe un fichier CSV dont un guillemet n'est pas fermé, le contenu de la feuille reste inchangé | observé: contenu | conditions: erreur import
+- Quand une personne importe un fichier CSV encodé en UTF-8 contenant « é », le contenu de la cellule contient « é » | observé: contenu | conditions: aucune
+- Quand une personne importe un fichier CSV dont une ligne a moins de champs que les autres, les cellules manquantes de cette ligne ont un contenu vide | observé: contenu | conditions: aucune
+- Quand une personne importe un fichier CSV, une nouvelle version est ajoutée à l'historique | observé: historique | conditions: aucune
+- Quand une personne importe un fichier CSV contenant une date-heure sans fuseau, la date-heure est interprétée dans le fuseau de cette personne | observé: affichage date | conditions: fuseau | frontière: oui
+- Quand une personne hors ligne importe un fichier CSV, le compteur de modifications en attente augmente | observé: attente | conditions: connexion | frontière: oui
+- Si une personne en ligne ferme puis rouvre l'application, le contenu des cellules est celui d'avant la fermeture | observé: contenu | conditions: aucune | frontière: oui
+- Si une personne ferme puis rouvre l'application, la liste des feuilles est celle d'avant la fermeture | observé: feuilles | conditions: aucune | frontière: oui

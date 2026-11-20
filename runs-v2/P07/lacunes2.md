@@ -1,0 +1,19 @@
+- A13 : modification faite en ligne sur A, aucun message encore livré à B | test: test_A13_trou_B_ne_voit_rien_avant_livraison | présumé: B affiche l'ancien texte tant qu'aucun message ne lui a été livré, et le rattrape au retour en ligne
+- A13 : l'appelant modifie le dict renvoyé par note()/list_notes() | test: test_A13_trou_dicts_renvoyes_sont_des_copies | présumé: ni la copie de l'appareil ni celle de l'autre appareil ne changent
+- A16 : deux appareils hors ligne créent une note à la même heure | test: test_A16_trou_creations_simultanees_ids_distincts | présumé: identifiants distincts, deux notes sur chaque appareil, aucun conflit
+- A12 : création après fermeture/réouverture de l'application | test: test_A12_trou_identifiant_unique_apres_redemarrage | présumé: l'identifiant n'est jamais recyclé
+- A08 : l'acquittement de v1 arrive alors que v2 n'a pas été acquittée | test: test_A08_trou_acquittement_ancien_ne_marque_pas_synchronisee | présumé: la note reste « en attente »
+- A22 : le serveur a reçu la modification, l'acquittement est perdu, A réessaie | test: test_A22_trou_acquittement_perdu_reessai_sans_conflit | présumé: aucun conflit, aucune copie, aucun doublon, « synchronisée »
+- A22 : le réessai arrive après une modification de B faite en ayant vu celle de A (horloge de A en avance) | test: test_A22_trou_reessai_tardif_n_ecrase_pas_modification_posterieure | présumé: le texte de B reste, sans conflit
+- A17 : un rejeu tardif de la création arrive après la suppression | test: test_A17_trou_creation_rejouee_apres_suppression_ne_ressuscite_pas | présumé: la note ne réapparaît nulle part
+- A19 : un rejeu tardif de v1 arrive après v2 | test: test_A19_trou_modification_rejouee_n_ecrase_pas_la_derniere | présumé: v2 reste affichée, sans conflit
+- A14 : le relais du serveur vers B est perdu | test: test_A14_trou_relais_perdu_vers_B_rattrape | présumé: B rattrape la modification
+- A11 : l'application est fermée pendant un envoi en cours | test: test_A11_trou_fermeture_pendant_envoi | présumé: après réouverture, la note est synchronisée, sans conflit
+- A28 : les deux versions en conflit portent exactement la même heure | test: test_A28_trou_horloges_egales_les_appareils_convergent | présumé: les deux appareils affichent la même version et la même copie
+- A24 : titre modifié sur A, texte modifié sur B, même note | test: test_A24_trou_titre_sur_A_texte_sur_B_pas_de_conflit | présumé: aucun conflit, les deux modifications sont conservées
+- A17 : la même note est supprimée hors ligne sur A et sur B | test: test_A17_trou_supprimee_des_deux_cotes_sans_conflit | présumé: aucun conflit, la note est absente partout
+- A31 : modification/suppression livrées dans un ordre aléatoire | test: test_A31_trou_ordre_aleatoire_une_seule_note_modifiee | présumé: la note modifiée apparaît exactement une fois sur chaque appareil
+- A27 : trois appareils modifient la même note différemment | test: test_A27_trou_trois_appareils_aucune_version_perdue | présumé: aucune version perdue, la plus récente en original, copies identiques sur tous les appareils
+- A29 : modification de la note après la résolution | test: test_A29_trou_modification_apres_resolution_sans_nouveau_conflit | présumé: aucun nouveau conflit
+- A16 : bascules répétées hors ligne/en ligne avec envois dupliqués et partiels | test: test_A16_trou_bascules_repetees_sans_doublon | présumé: une seule note, dernier texte, synchronisée
+- A08 : plusieurs modifications en ligne avant toute livraison | test: test_A08_trou_modifications_rapprochees_en_ligne_sans_conflit | présumé: dernière version partout, aucun conflit

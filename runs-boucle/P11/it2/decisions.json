@@ -1,0 +1,1072 @@
+{
+ "journal": [
+  {
+   "lot": "A",
+   "groupe": "add_sheet [droits.alice]",
+   "cas": "Quand une personne qui n'est pas propriétaire ajoute une feuille, la spec ne dit pas quel droit les autres personnes, dont la propriétaire, reçoivent sur cette feuille.",
+   "decision": "V1",
+   "proposee": "Quand une personne ajoute une feuille, le propriétaire du classeur obtient le droit écriture sur cette feuille et les autres personnes n'obtiennent aucun droit, sauf celle qui l'ajoute | observé: droit | conditions: rôle"
+  },
+  {
+   "lot": "A",
+   "groupe": "set_right [droits.alice]",
+   "cas": "Une personne ayant le droit écriture tente de passer son propre droit sur une feuille à lecture.",
+   "decision": "V1",
+   "proposee": "Quand une personne tente de modifier son propre droit sur une feuille, ce droit reste inchangé et aucune alerte n'apparaît | observé: droit, alerte | conditions: rôle, droit"
+  },
+  {
+   "lot": "A",
+   "groupe": "set_cell [cellules.*.valeur]",
+   "cas": "Une personne saisit une date-heure sans décalage horaire qui tombe dans l'heure sautée au passage à l'heure d'été de son fuseau (2026-03-29 02:30 à Paris).",
+   "decision": "V1",
+   "proposee": "Quand une personne saisit une date-heure sans décalage horaire qui n'existe pas dans son fuseau (heure sautée au passage à l'heure d'été), la cellule affiche chez cette personne exactement la date-heure saisie, sans la décaler | observé: valeur | conditions: fuseau"
+  },
+  {
+   "lot": "A",
+   "groupe": "set_cell [cellules.*.erreur, cellules.*.valeur]",
+   "cas": "Une personne saisit =SOMME(A1:A3) alors que A3 contient un texte non numérique et que A1 et A2 sont vides, sans référence circulaire.",
+   "decision": "V1",
+   "proposee": "Quand une personne saisit =SOMME(A1:A3) alors qu'une cellule de la plage contient un texte non numérique et qu'aucune référence circulaire n'est en jeu, la cellule affiche la somme des seules cellules numériques de la plage (0 si aucune), sans erreur de type | observé: valeur, erreur | conditions: contenu"
+  }
+ ],
+ "bugs": [
+  {
+   "lot": "A",
+   "groupe": "resolve_conflict [alertes]",
+   "final": "bug H2",
+   "cas": "Une personne qui n'a que le droit lecture demande de résoudre un conflit sur une cellule qui n'en montre aucun."
+  },
+  {
+   "lot": "A",
+   "groupe": "set_right [droits.carol]",
+   "final": "bug H2",
+   "cas": "La propriétaire, en ligne, fait passer le droit d'une autre personne de lecture à écriture sur une feuille."
+  },
+  {
+   "lot": "A",
+   "groupe": "set_cell [cellules.*.conflit]",
+   "final": "bug H2",
+   "cas": "Une personne ayant le droit écriture saisit une nouvelle formule dans une cellule encore marquée en conflit après une saisie concurrente, avant que son envoi soit confirmé."
+  },
+  {
+   "lot": "A",
+   "groupe": "reconnect [cellules.*.conflit, cellules.*.contenu, cellules.*.valeur]",
+   "final": "bug H2+S1+S2",
+   "cas": "Bob modifie B1 hors ligne, puis alice, en ligne, modifie B1 avec une autre valeur avant que bob revienne en ligne et que tout soit livré."
+  }
+ ],
+ "a_trancher": [
+  {
+   "lot": "A",
+   "groupe": "history [(tout)]",
+   "juges": [
+    "trou",
+    "bug V2"
+   ],
+   "cas": [
+    "Après qu'une personne a renommé une feuille sans modifier aucune de ses cellules, l'historique des versions de la feuille renommée est consulté.",
+    "Une personne renomme Feuille1 en « Ventes », puis saisit une formule dans une cellule de « Feuille1 », qui n'existe plus sous ce nom. La saisie ne change rien, et l'historique des versions de « Ventes » est consulté."
+   ],
+   "variantes": [
+    {
+     "greens": [
+      "H2",
+      "S1",
+      "S2"
+     ],
+     "obs": []
+    },
+    {
+     "greens": [
+      "H1"
+     ],
+     "obs": [
+      [
+       "bob",
+       "2026-10-25 00:30",
+       "modification"
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "lot": "A",
+   "groupe": "set_right [droits.bob]",
+   "juges": [
+    "bug V2",
+    "trou"
+   ],
+   "cas": [
+    "Le propriétaire, en ligne, passe le droit d'écriture d'une autre personne à lecture sur une feuille, après deux actions qui n'ont rien changé.",
+    "Juste après l'ouverture commune du classeur par alice, bob et carol, alice passe le droit de bob sur Feuille1 de écriture à lecture, sans que la spec dise qui est propriétaire du classeur."
+   ],
+   "variantes": [
+    {
+     "greens": [
+      "H1",
+      "S1",
+      "S2"
+     ],
+     "obs": {
+      "alertes": [],
+      "droits": {
+       "alice": "écriture",
+       "bob": "lecture",
+       "carol": "lecture"
+      }
+     }
+    },
+    {
+     "greens": [
+      "H2"
+     ],
+     "obs": {
+      "alertes": [],
+      "droits": {
+       "alice": "écriture",
+       "bob": "écriture",
+       "carol": "lecture"
+      }
+     }
+    }
+   ]
+  },
+  {
+   "lot": "A",
+   "groupe": "rename_sheet [alertes]",
+   "juges": [
+    "trou",
+    "bug V1"
+   ],
+   "cas": [
+    "Une personne qui n'a que le droit lecture renomme une feuille avec le nom qu'elle porte déjà.",
+    "Une personne qui n'a que le droit lecture renomme une feuille avec le nom que cette feuille porte déjà."
+   ],
+   "variantes": [
+    {
+     "greens": [
+      "H1",
+      "H2",
+      "S1"
+     ],
+     "obs": {
+      "alertes": [],
+      "annuler": false,
+      "cellules": {
+       "A1": {
+        "contenu": null,
+        "erreur": null,
+        "valeur": null
+       },
+       "A2": {
+        "contenu": null,
+        "erreur": null,
+        "valeur": null
+       },
+       "A3": {
+        "contenu": null,
+        "erreur": null,
+        "valeur": null
+       },
+       "B1": {
+        "contenu": null,
+        "erreur": null,
+        "valeur": null
+       },
+       "B2": {
+        "contenu": null,
+        "erreur": null,
+        "valeur": null
+       },
+       "C1": {
+        "contenu": null,
+        "erreur": null,
+        "valeur": null
+       }
+      },
+      "connexion": "en ligne",
+      "droits": {
+       "alice": "écriture",
+       "bob": "écriture",
+       "carol": "lecture"
+      },
+      "en_attente": 0,
+      "feuille_vue": "Feuille1",
+      "feuilles": [
+       "Feuille1"
+      ],
+      "personne": "carol",
+      "présence": {},
+      "rétablir": false
+     }
+    },
+    {
+     "greens": [
+      "S2"
+     ],
+     "obs": {
+      "alertes": [
+       [
+        "droit_insuffisant",
+        "Feuille1",
+        null,
+        null
+       ]
+      ],
+      "annuler": false,
+      "cellules": {
+       "A1": {
+        "contenu": null,
+        "erreur": null,
+        "valeur": null
+       },
+       "A2": {
+        "contenu": null,
+        "erreur": null,
+        "valeur": null
+       },
+       "A3": {
+        "contenu": null,
+        "erreur": null,
+        "valeur": null
+       },
+       "B1": {
+        "contenu": null,
+        "erreur": null,
+        "valeur": null
+       },
+       "B2": {
+        "contenu": null,
+        "erreur": null,
+        "valeur": null
+       },
+       "C1": {
+        "contenu": null,
+        "erreur": null,
+        "valeur": null
+       }
+      },
+      "connexion": "en ligne",
+      "droits": {
+       "alice": "écriture",
+       "bob": "écriture",
+       "carol": "lecture"
+      },
+      "en_attente": 0,
+      "feuille_vue": "Feuille1",
+      "feuilles": [
+       "Feuille1"
+      ],
+      "personne": "carol",
+      "présence": {},
+      "rétablir": false
+     }
+    }
+   ]
+  },
+  {
+   "lot": "A",
+   "groupe": "reconnect [cellules.*.conflit, cellules.*.contenu, cellules.*.erreur]",
+   "juges": [
+    "bug V1",
+    "bug V2"
+   ],
+   "cas": [
+    "Une personne modifie A1 hors ligne, puis une autre personne restée en ligne remplace A1 par un import CSV ; au retour en ligne de la première, la cellule doit garder la valeur importée par la personne restée en ligne.",
+    "Alice comes back online after writing =Ventes!A1 in A1 while bob, at the same time, imported a CSV that puts « Café » in A1. The two values differ, so a conflict indicator must appear on A1."
+   ],
+   "variantes": [
+    {
+     "greens": [
+      "H2",
+      "S1",
+      "S2"
+     ],
+     "obs": {
+      "alertes": [],
+      "annuler": true,
+      "cellules": {
+       "A1": {
+        "conflit": {
+         "par": "bob",
+         "écartée": "Café"
+        },
+        "contenu": "=Ventes!A1",
+        "erreur": "#REF!",
+        "valeur": "#REF!"
+       },
+       "A2": {
+        "contenu": null,
+        "erreur": null,
+        "valeur": null
+       },
+       "A3": {
+        "contenu": null,
+        "erreur": null,
+        "valeur": null
+       },
+       "B1": {
+        "contenu": "Noël",
+        "erreur": null,
+        "valeur": "Noël"
+       },
+       "B2": {
+        "contenu": null,
+        "erreur": null,
+        "valeur": null
+       },
+       "C1": {
+        "contenu": null,
+        "erreur": null,
+        "valeur": null
+       }
+      },
+      "connexion": "en ligne",
+      "droits": {
+       "alice": "écriture",
+       "bob": "écriture",
+       "carol": "lecture"
+      },
+      "en_attente": 0,
+      "feuille_vue": "Feuille1",
+      "feuilles": [
+       "Feuille1"
+      ],
+      "personne": "alice",
+      "présence": {},
+      "rétablir": false
+     }
+    },
+    {
+     "greens": [
+      "H1"
+     ],
+     "obs": {
+      "alertes": [],
+      "annuler": true,
+      "cellules": {
+       "A1": {
+        "contenu": "Café",
+        "erreur": null,
+        "valeur": "Café"
+       },
+       "A2": {
+        "contenu": null,
+        "erreur": null,
+        "valeur": null
+       },
+       "A3": {
+        "contenu": null,
+        "erreur": null,
+        "valeur": null
+       },
+       "B1": {
+        "contenu": "Noël",
+        "erreur": null,
+        "valeur": "Noël"
+       },
+       "B2": {
+        "contenu": null,
+        "erreur": null,
+        "valeur": null
+       },
+       "C1": {
+        "contenu": null,
+        "erreur": null,
+        "valeur": null
+       }
+      },
+      "connexion": "en ligne",
+      "droits": {
+       "alice": "écriture",
+       "bob": "écriture",
+       "carol": "lecture"
+      },
+      "en_attente": 0,
+      "feuille_vue": "Feuille1",
+      "feuilles": [
+       "Feuille1"
+      ],
+      "personne": "alice",
+      "présence": {},
+      "rétablir": false
+     }
+    }
+   ]
+  },
+  {
+   "lot": "A",
+   "groupe": "deliver_all [alice.*.conflit, alice.*.contenu, alice.*.erreur]",
+   "juges": [
+    "bug V2",
+    "trou"
+   ],
+   "cas": [
+    "Deux personnes saisissent dans la même cellule des valeurs différentes, l'une après l'autre, sans livraison entre les deux. À la livraison, le serveur reçoit d'abord la saisie de la première personne.",
+    "Deux personnes modifient A1 avec des valeurs différentes avant toute livraison, puis une seule livraison les transmet ensemble ; la spec ne dit pas laquelle le serveur reçoit en premier."
+   ],
+   "variantes": [
+    {
+     "greens": [
+      "H2",
+      "S1",
+      "S2"
+     ],
+     "obs": {
+      "alice": {
+       "A1": {
+        "conflit": {
+         "par": "alice",
+         "écartée": "42"
+        },
+        "contenu": "=Feuille2!A1",
+        "erreur": "#REF!",
+        "valeur": "#REF!"
+       },
+       "A2": {
+        "contenu": null,
+        "erreur": null,
+        "valeur": null
+       },
+       "A3": {
+        "contenu": null,
+        "erreur": null,
+        "valeur": null
+       },
+       "B1": {
+        "contenu": null,
+        "erreur": null,
+        "valeur": null
+       },
+       "B2": {
+        "contenu": "2026-03-29 02:30",
+        "erreur": null,
+        "valeur": "2026-03-29 04:30"
+       },
+       "C1": {
+        "contenu": null,
+        "erreur": null,
+        "valeur": null
+       }
+      },
+      "bob": {
+       "A1": {
+        "conflit": {
+         "par": "alice",
+         "écartée": "42"
+        },
+        "contenu": "=Feuille2!A1",
+        "erreur": "#REF!",
+        "valeur": "#REF!"
+       },
+       "A2": {
+        "contenu": null,
+        "erreur": null,
+        "valeur": null
+       },
+       "A3": {
+        "contenu": null,
+        "erreur": null,
+        "valeur": null
+       },
+       "B1": {
+        "contenu": null,
+        "erreur": null,
+        "valeur": null
+       },
+       "B2": {
+        "contenu": "2026-03-29 02:30",
+        "erreur": null,
+        "valeur": "2026-03-29 02:30"
+       },
+       "C1": {
+        "contenu": null,
+        "erreur": null,
+        "valeur": null
+       }
+      },
+      "carol": {
+       "A1": {
+        "conflit": {
+         "par": "alice",
+         "écartée": "42"
+        },
+        "contenu": "=Feuille2!A1",
+        "erreur": "#REF!",
+        "valeur": "#REF!"
+       },
+       "A2": {
+        "contenu": null,
+        "erreur": null,
+        "valeur": null
+       },
+       "A3": {
+        "contenu": null,
+        "erreur": null,
+        "valeur": null
+       },
+       "B1": {
+        "contenu": null,
+        "erreur": null,
+        "valeur": null
+       },
+       "B2": {
+        "contenu": "2026-03-29 02:30",
+        "erreur": null,
+        "valeur": "2026-03-29 02:30"
+       },
+       "C1": {
+        "contenu": null,
+        "erreur": null,
+        "valeur": null
+       }
+      }
+     }
+    },
+    {
+     "greens": [
+      "H1"
+     ],
+     "obs": {
+      "alice": {
+       "A1": {
+        "conflit": {
+         "par": "bob",
+         "écartée": "=Feuille2!A1"
+        },
+        "contenu": "42",
+        "erreur": null,
+        "valeur": 42
+       },
+       "A2": {
+        "contenu": null,
+        "erreur": null,
+        "valeur": null
+       },
+       "A3": {
+        "contenu": null,
+        "erreur": null,
+        "valeur": null
+       },
+       "B1": {
+        "contenu": null,
+        "erreur": null,
+        "valeur": null
+       },
+       "B2": {
+        "contenu": "2026-03-29 02:30",
+        "erreur": null,
+        "valeur": "2026-03-29 04:30"
+       },
+       "C1": {
+        "contenu": null,
+        "erreur": null,
+        "valeur": null
+       }
+      },
+      "bob": {
+       "A1": {
+        "conflit": {
+         "par": "bob",
+         "écartée": "=Feuille2!A1"
+        },
+        "contenu": "42",
+        "erreur": null,
+        "valeur": 42
+       },
+       "A2": {
+        "contenu": null,
+        "erreur": null,
+        "valeur": null
+       },
+       "A3": {
+        "contenu": null,
+        "erreur": null,
+        "valeur": null
+       },
+       "B1": {
+        "contenu": null,
+        "erreur": null,
+        "valeur": null
+       },
+       "B2": {
+        "contenu": "2026-03-29 02:30",
+        "erreur": null,
+        "valeur": "2026-03-29 02:30"
+       },
+       "C1": {
+        "contenu": null,
+        "erreur": null,
+        "valeur": null
+       }
+      },
+      "carol": {
+       "A1": {
+        "conflit": {
+         "par": "bob",
+         "écartée": "=Feuille2!A1"
+        },
+        "contenu": "42",
+        "erreur": null,
+        "valeur": 42
+       },
+       "A2": {
+        "contenu": null,
+        "erreur": null,
+        "valeur": null
+       },
+       "A3": {
+        "contenu": null,
+        "erreur": null,
+        "valeur": null
+       },
+       "B1": {
+        "contenu": null,
+        "erreur": null,
+        "valeur": null
+       },
+       "B2": {
+        "contenu": "2026-03-29 02:30",
+        "erreur": null,
+        "valeur": "2026-03-29 02:30"
+       },
+       "C1": {
+        "contenu": null,
+        "erreur": null,
+        "valeur": null
+       }
+      }
+     }
+    }
+   ]
+  },
+  {
+   "lot": "A",
+   "groupe": "set_timezone [historique]",
+   "juges": [
+    "trou",
+    "bug V2"
+   ],
+   "cas": [
+    "Deux modifications en ligne faites dans la même minute (bob sur A2, puis alice sur B1) sont enregistrées par le serveur dans une même livraison, et leurs entrées d'historique ont le même horodatage affiché.",
+    "Deux modifications de deux personnes, faites l'une après l'autre puis livrées ensemble au serveur, donnent dans l'historique des versions deux entrées affichant la même minute."
+   ],
+   "variantes": [
+    {
+     "greens": [
+      "H2",
+      "S1",
+      "S2"
+     ],
+     "obs": {
+      "cellules": {
+       "A1": {
+        "contenu": "-50",
+        "erreur": null,
+        "valeur": -50
+       },
+       "A2": {
+        "contenu": "42",
+        "erreur": null,
+        "valeur": 42
+       },
+       "A3": {
+        "contenu": null,
+        "erreur": null,
+        "valeur": null
+       },
+       "B1": {
+        "contenu": "=A1-A2-A3",
+        "erreur": null,
+        "valeur": -92
+       },
+       "B2": {
+        "contenu": null,
+        "erreur": null,
+        "valeur": null
+       },
+       "C1": {
+        "contenu": null,
+        "erreur": null,
+        "valeur": null
+       }
+      },
+      "historique": [
+       [
+        "alice",
+        "2026-03-29 14:30",
+        "modification"
+       ],
+       [
+        "bob",
+        "2026-03-29 14:30",
+        "modification"
+       ]
+      ]
+     }
+    },
+    {
+     "greens": [
+      "H1"
+     ],
+     "obs": {
+      "cellules": {
+       "A1": {
+        "contenu": "-50",
+        "erreur": null,
+        "valeur": -50
+       },
+       "A2": {
+        "contenu": "42",
+        "erreur": null,
+        "valeur": 42
+       },
+       "A3": {
+        "contenu": null,
+        "erreur": null,
+        "valeur": null
+       },
+       "B1": {
+        "contenu": "=A1-A2-A3",
+        "erreur": null,
+        "valeur": -92
+       },
+       "B2": {
+        "contenu": null,
+        "erreur": null,
+        "valeur": null
+       },
+       "C1": {
+        "contenu": null,
+        "erreur": null,
+        "valeur": null
+       }
+      },
+      "historique": [
+       [
+        "bob",
+        "2026-03-29 14:30",
+        "modification"
+       ],
+       [
+        "alice",
+        "2026-03-29 14:30",
+        "modification"
+       ]
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "lot": "A",
+   "groupe": "rename_sheet [présence.alice]",
+   "juges": [
+    "trou",
+    "bug V1"
+   ],
+   "cas": [
+    "Une personne a sélectionné une cellule d'une feuille, puis une autre personne renomme cette feuille, et l'on regarde sous quel nom de feuille l'indicateur de présence est affiché.",
+    "Une personne en ligne renomme la feuille sur laquelle une autre personne sélectionne une cellule, et l'indicateur de présence de cette autre personne doit rester sur la même cellule sous le nouveau nom de la feuille."
+   ],
+   "variantes": [
+    {
+     "greens": [
+      "H1",
+      "H2"
+     ],
+     "obs": {
+      "alertes": [],
+      "annuler": true,
+      "cellules": {
+       "A1": {
+        "contenu": null,
+        "erreur": null,
+        "valeur": null
+       },
+       "A2": {
+        "contenu": "2026-01-15 12:00",
+        "erreur": null,
+        "valeur": "2026-01-15 11:00"
+       },
+       "A3": {
+        "contenu": null,
+        "erreur": null,
+        "valeur": null
+       },
+       "B1": {
+        "contenu": null,
+        "erreur": null,
+        "valeur": null
+       },
+       "B2": {
+        "contenu": null,
+        "erreur": null,
+        "valeur": null
+       },
+       "C1": {
+        "contenu": null,
+        "erreur": null,
+        "valeur": null
+       }
+      },
+      "connexion": "en ligne",
+      "droits": {
+       "alice": "écriture",
+       "bob": "écriture",
+       "carol": "lecture"
+      },
+      "en_attente": 1,
+      "feuille_vue": "Feuille2",
+      "feuilles": [
+       "Feuille2"
+      ],
+      "personne": "bob",
+      "présence": {
+       "alice": [
+        "Feuille1",
+        "A2"
+       ]
+      },
+      "rétablir": false
+     }
+    },
+    {
+     "greens": [
+      "S1",
+      "S2"
+     ],
+     "obs": {
+      "alertes": [],
+      "annuler": true,
+      "cellules": {
+       "A1": {
+        "contenu": null,
+        "erreur": null,
+        "valeur": null
+       },
+       "A2": {
+        "contenu": "2026-01-15 12:00",
+        "erreur": null,
+        "valeur": "2026-01-15 11:00"
+       },
+       "A3": {
+        "contenu": null,
+        "erreur": null,
+        "valeur": null
+       },
+       "B1": {
+        "contenu": null,
+        "erreur": null,
+        "valeur": null
+       },
+       "B2": {
+        "contenu": null,
+        "erreur": null,
+        "valeur": null
+       },
+       "C1": {
+        "contenu": null,
+        "erreur": null,
+        "valeur": null
+       }
+      },
+      "connexion": "en ligne",
+      "droits": {
+       "alice": "écriture",
+       "bob": "écriture",
+       "carol": "lecture"
+      },
+      "en_attente": 1,
+      "feuille_vue": "Feuille2",
+      "feuilles": [
+       "Feuille2"
+      ],
+      "personne": "bob",
+      "présence": {
+       "alice": [
+        "Feuille2",
+        "A2"
+       ]
+      },
+      "rétablir": false
+     }
+    }
+   ]
+  },
+  {
+   "lot": "A",
+   "groupe": "rename_sheet [présence.carol]",
+   "juges": [
+    "trou",
+    "bug V1"
+   ],
+   "cas": [
+    "Une personne en ligne a sélectionné une cellule d'une feuille qu'une autre personne renomme ensuite, et il faut savoir sous quel nom de feuille l'indicateur de présence la situe.",
+    "Une personne a sélectionné B1 sur Feuille1, puis une autre renomme Feuille1 en Feuille2 ; on regarde quelle feuille l'indicateur de présence de la première personne désigne chez celle qui a renommé."
+   ],
+   "variantes": [
+    {
+     "greens": [
+      "H1",
+      "H2"
+     ],
+     "obs": {
+      "alertes": [
+       [
+        "nom_existant",
+        "Feuille1",
+        null,
+        null
+       ]
+      ],
+      "annuler": true,
+      "cellules": {
+       "A1": {
+        "contenu": null,
+        "erreur": null,
+        "valeur": null
+       },
+       "A2": {
+        "contenu": null,
+        "erreur": null,
+        "valeur": null
+       },
+       "A3": {
+        "contenu": null,
+        "erreur": null,
+        "valeur": null
+       },
+       "B1": {
+        "contenu": null,
+        "erreur": null,
+        "valeur": null
+       },
+       "B2": {
+        "contenu": null,
+        "erreur": null,
+        "valeur": null
+       },
+       "C1": {
+        "contenu": null,
+        "erreur": null,
+        "valeur": null
+       }
+      },
+      "connexion": "en ligne",
+      "droits": {
+       "alice": "écriture",
+       "bob": "écriture",
+       "carol": "lecture"
+      },
+      "en_attente": 1,
+      "feuille_vue": "Feuille2",
+      "feuilles": [
+       "Feuille2"
+      ],
+      "personne": "bob",
+      "présence": {
+       "carol": [
+        "Feuille1",
+        "B1"
+       ]
+      },
+      "rétablir": false
+     }
+    },
+    {
+     "greens": [
+      "S1",
+      "S2"
+     ],
+     "obs": {
+      "alertes": [
+       [
+        "nom_existant",
+        "Feuille1",
+        null,
+        null
+       ]
+      ],
+      "annuler": true,
+      "cellules": {
+       "A1": {
+        "contenu": null,
+        "erreur": null,
+        "valeur": null
+       },
+       "A2": {
+        "contenu": null,
+        "erreur": null,
+        "valeur": null
+       },
+       "A3": {
+        "contenu": null,
+        "erreur": null,
+        "valeur": null
+       },
+       "B1": {
+        "contenu": null,
+        "erreur": null,
+        "valeur": null
+       },
+       "B2": {
+        "contenu": null,
+        "erreur": null,
+        "valeur": null
+       },
+       "C1": {
+        "contenu": null,
+        "erreur": null,
+        "valeur": null
+       }
+      },
+      "connexion": "en ligne",
+      "droits": {
+       "alice": "écriture",
+       "bob": "écriture",
+       "carol": "lecture"
+      },
+      "en_attente": 1,
+      "feuille_vue": "Feuille2",
+      "feuilles": [
+       "Feuille2"
+      ],
+      "personne": "bob",
+      "présence": {
+       "carol": [
+        "Feuille2",
+        "B1"
+       ]
+      },
+      "rétablir": false
+     }
+    }
+   ]
+  }
+ ],
+ "bilan": {
+  "iteration": 2,
+  "trous_juges": 4,
+  "assertions_ajoutees": 3,
+  "bugs": 4,
+  "a_trancher": 8,
+  "tests_ajoutes": 7,
+  "tests_retires": [],
+  "passages": {
+   "test_C29_non_owner_adds_sheet_owner_gets_write_others_none": 3,
+   "test_C29_non_owner_adds_sheet_owner_right_visible_on_adder_before_delivery": 3,
+   "test_C30_datetime_in_dst_gap_displayed_as_typed_paris": 2,
+   "test_C30_datetime_in_dst_gap_still_as_typed_after_delivery": 2,
+   "test_C31_sum_over_text_and_empty_cells_is_zero_without_error": 3,
+   "test_C31_sum_ignores_text_and_adds_numbers": 3,
+   "test_C31_sum_recomputed_when_text_replaced_by_number": 4
+  },
+  "ajouts": {
+   "C29": "Quand une personne qui n'est pas propriétaire ajoute une feuille, le propriétaire du classeur obtient le droit écriture sur cette feuille, la personne qui l'ajoute aussi, et toute autre personne n'obtient aucun droit sur cette feuille | observé: droit | conditions: rôle",
+   "C30": "Quand une personne saisit une date-heure sans décalage horaire qui n'existe pas dans son fuseau (heure sautée au passage à l'heure d'été, par exemple 2026-03-29 02:30 à Paris), la cellule affiche chez cette personne exactement la date-heure saisie, sans la décaler, sans erreur et sans alerte | observé: valeur, erreur, alerte | conditions: fuseau",
+   "C31": "Quand une personne saisit =SOMME(A1:A3) alors qu'une cellule de la plage contient un texte non numérique et qu'aucune référence circulaire n'est en jeu, la cellule affiche la somme des seules cellules numériques de la plage (0 si aucune), sans erreur de type | observé: valeur, erreur | conditions: contenu"
+  }
+ }
+}

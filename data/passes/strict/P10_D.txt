@@ -1,0 +1,36 @@
+ÉTATS: contenu; clé; appareil; membres; empreinte; vérification; alerte; connexion; remise; minuterie; présence; intégrité
+ASSERTIONS:
+- Après l'envoi d'un message, le serveur relais ne peut pas lire le texte du message en clair | observé: contenu | conditions: aucune
+- Un message reçu sur un appareil lié au compte du destinataire est lisible en clair sur cet appareil | observé: contenu | conditions: appareil
+- Lors de l'envoi de deux messages successifs, le second message est chiffré avec une clé différente de celle du premier | observé: clé | conditions: aucune
+- Lorsque la clé d'un message est divulguée, le texte d'un message antérieur reste illisible pour celui qui détient cette clé | observé: contenu | conditions: clé
+- Lorsque la clé d'un message est divulguée, le texte d'un message postérieur reste illisible pour celui qui détient cette clé | observé: contenu | conditions: clé
+- Lier un nouvel appareil au compte ajoute cet appareil à la liste des appareils du compte | observé: appareil | conditions: aucune
+- Un message envoyé après la liaison d'un nouvel appareil est lisible en clair sur ce nouvel appareil | observé: contenu | conditions: appareil
+- Un message envoyé avant la liaison d'un nouvel appareil est absent de l'historique de ce nouvel appareil | observé: présence | conditions: appareil
+- Un message envoyé par l'utilisateur depuis un appareil apparaît dans l'historique de ses autres appareils liés | observé: présence | conditions: appareil
+- Délier un appareil retire cet appareil de la liste des appareils du compte | observé: appareil | conditions: aucune
+- Un message envoyé après la déliaison d'un appareil est illisible sur cet appareil délié | observé: contenu | conditions: appareil
+- Ajouter un contact à un groupe ajoute ce contact à la liste des membres du groupe | observé: membres | conditions: aucune
+- Un message de groupe envoyé après l'ajout d'un membre est lisible en clair par ce nouveau membre | observé: contenu | conditions: membres
+- Un message de groupe envoyé avant l'ajout d'un membre est absent de l'historique de ce nouveau membre | observé: présence | conditions: membres
+- Retirer un membre d'un groupe retire ce contact de la liste des membres du groupe | observé: membres | conditions: aucune
+- Un message de groupe envoyé après le retrait d'un membre est illisible pour ce membre retiré | observé: contenu | conditions: membres
+- Après le retrait d'un membre, le message de groupe suivant est chiffré avec une clé différente de celle utilisée avant le retrait | observé: clé | conditions: membres
+- L'empreinte affichée chez l'utilisateur A pour le contact B est identique à l'empreinte affichée chez B pour A | observé: empreinte | conditions: aucune
+- Lorsqu'un contact réinstalle l'application avec une nouvelle clé d'identité, l'empreinte de ce contact change | observé: empreinte | conditions: aucune
+- Scanner le code du contact lorsque les empreintes concordent fait passer le contact au statut vérifié | observé: vérification | conditions: empreinte
+- Scanner le code du contact lorsque les empreintes ne concordent pas laisse le contact au statut non vérifié | observé: vérification | conditions: empreinte
+- Lorsque l'empreinte d'un contact vérifié change, le contact repasse au statut non vérifié | observé: vérification | conditions: empreinte
+- Lorsque l'empreinte d'un contact change, un avertissement de changement d'empreinte s'affiche dans la conversation avec ce contact | observé: alerte | conditions: empreinte
+- Lorsque l'empreinte d'un contact est inchangée, aucun avertissement de changement d'empreinte ne s'affiche dans la conversation | observé: alerte | conditions: empreinte
+- Envoyer un message à un destinataire dont un appareil est connecté fait passer l'accusé du message à « remis » | observé: remise | conditions: connexion
+- Envoyer un message à un destinataire dont aucun appareil n'est connecté laisse l'accusé du message à « envoyé » | observé: remise | conditions: connexion
+- Lorsqu'un destinataire hors ligne se reconnecte, l'accusé du message en attente passe de « envoyé » à « remis » | observé: remise | conditions: connexion
+- Dans un groupe, l'accusé d'un message reste à « envoyé » tant qu'au moins un membre n'a reçu le message sur aucun appareil | observé: remise | conditions: membres, connexion
+- Régler la minuterie éphémère d'une conversation à une heure affiche cette durée chez chaque participant de la conversation | observé: minuterie | conditions: aucune
+- Un message envoyé avec la minuterie éphémère active disparaît de l'historique une fois la durée écoulée | observé: présence | conditions: minuterie
+- Un message envoyé avec la minuterie éphémère désactivée reste dans l'historique sans limite de durée | observé: présence | conditions: minuterie
+- Modifier la minuterie éphémère ne change pas la durée de vie d'un message déjà envoyé | observé: présence | conditions: minuterie
+- Un message éphémère expiré disparaît aussi de l'historique des autres appareils liés de l'utilisateur | observé: présence | conditions: minuterie
+- Un message altéré pendant le transit n'apparaît pas dans l'historique du destinataire | observé: présence | conditions: intégrité

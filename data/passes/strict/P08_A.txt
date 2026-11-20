@@ -1,0 +1,40 @@
+ÉTATS: texte; permission; connexion; présence; curseurs; annulation; versions; auteur
+ASSERTIONS:
+- Un utilisateur en écriture tape un caractère : le caractère apparaît dans le texte | observé: texte | conditions: permission
+- Un utilisateur en lecture tape un caractère : le texte ne change pas | observé: texte | conditions: permission
+- Le propriétaire tape un caractère : le caractère apparaît dans le texte | observé: texte | conditions: permission
+- A, connecté, insère un mot : B voit ce mot dans son texte | observé: texte | conditions: connexion
+- A, hors connexion, insère un mot : B ne voit pas ce mot dans son texte | observé: texte | conditions: connexion
+- A se reconnecte après avoir inséré un mot hors connexion : B voit ce mot dans son texte | observé: texte | conditions: connexion
+- A et B insèrent chacun un mot à la même position au même moment : le texte contient les deux mots | observé: texte | conditions: aucune
+- A supprime un paragraphe pendant que B insère un mot dans un autre paragraphe : le mot de B reste dans le texte | observé: texte | conditions: aucune
+- A et B voient, une fois synchronisés, un texte identique | observé: texte | conditions: connexion
+- B ouvre le document : B apparaît dans la présence affichée chez A | observé: présence | conditions: aucune
+- B ferme le document : B disparaît de la présence affichée chez A | observé: présence | conditions: aucune
+- B perd la connexion : B disparaît de la présence affichée chez A | observé: présence | conditions: connexion
+- B ouvre le document en lecture : B apparaît dans la présence affichée chez A | observé: présence | conditions: aucune
+- B déplace son curseur : A voit le curseur de B à la nouvelle position | observé: curseurs | conditions: connexion
+- B déplace son curseur hors connexion : A voit le curseur de B à l'ancienne position | observé: curseurs | conditions: connexion
+- Le curseur de B affiché chez A porte le nom de B | observé: curseurs | conditions: aucune
+- A insère un mot avant le curseur de B : le curseur de B reste devant le même caractère | observé: curseurs | conditions: aucune
+- B ferme le document : le curseur de B disparaît chez A | observé: curseurs | conditions: aucune
+- A ne voit pas son propre curseur parmi les curseurs des autres | observé: curseurs | conditions: aucune
+- A annule juste après avoir tapé un mot : le mot disparaît du texte | observé: texte | conditions: annulation, auteur
+- A annule alors que la dernière modification vient de B : la modification de B reste dans le texte | observé: texte | conditions: auteur
+- A annule avec une pile d'annulation vide : le texte ne change pas | observé: texte | conditions: annulation
+- A, en lecture, annule : le texte ne change pas | observé: texte | conditions: permission
+- A annule un mot qu'il a tapé : B voit le mot disparaître de son texte | observé: texte | conditions: connexion
+- A tape un mot : la pile d'annulation de A gagne une entrée | observé: annulation | conditions: auteur
+- B tape un mot : la pile d'annulation de A ne change pas | observé: annulation | conditions: auteur
+- A, en écriture, enregistre une version : l'historique gagne une version | observé: versions | conditions: permission
+- A, en lecture, tente d'enregistrer une version : l'historique ne change pas | observé: versions | conditions: permission
+- Chaque version de l'historique affiche le nom de son auteur | observé: versions | conditions: aucune
+- A consulte une ancienne version : le texte courant ne change pas | observé: texte | conditions: aucune
+- A, en écriture, restaure une ancienne version : le texte courant devient celui de cette version | observé: texte | conditions: permission
+- A, en lecture, tente de restaurer une ancienne version : le texte courant ne change pas | observé: texte | conditions: permission
+- A restaure une ancienne version : B voit le texte de cette version | observé: texte | conditions: connexion
+- A restaure une ancienne version : l'historique gagne une version | observé: versions | conditions: aucune
+- A restaure une ancienne version : les versions plus récentes restent dans l'historique | observé: versions | conditions: aucune
+- Le propriétaire passe B de écriture à lecture : la permission de B devient lecture | observé: permission | conditions: aucune
+- A, en écriture, tente de changer la permission de B : la permission de B ne change pas | observé: permission | conditions: permission
+- B, passé en lecture pendant l'édition, tape un caractère : le texte ne change pas | observé: texte | conditions: permission

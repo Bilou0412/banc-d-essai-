@@ -1,0 +1,39 @@
+ÉTATS: lisibilité; clé compromise; antériorité; appareil lié; appartenance; interception; numéro sécurité; changement clé; vérification; alerte; envoi; connexion; accusé; minuteur; lecture; présence
+ASSERTIONS:
+- Un message envoyé est illisible pour le serveur relais | observé: lisibilité | conditions: aucune
+- Un message envoyé est lisible par son destinataire | observé: lisibilité | conditions: aucune
+- Quand la clé d'un message est compromise, ce message est lisible par l'attaquant | observé: lisibilité | conditions: clé compromise
+- Quand la clé d'un message est compromise, un message envoyé avant lui reste illisible pour l'attaquant | observé: lisibilité | conditions: clé compromise, antériorité
+- Quand la clé d'un message est compromise, un message envoyé après lui reste illisible pour l'attaquant | observé: lisibilité | conditions: clé compromise, antériorité
+- Lier un nouvel appareil fait apparaître cet appareil dans la liste des appareils liés | observé: appareil lié | conditions: aucune
+- Un message reçu après la liaison d'un appareil est lisible sur cet appareil | observé: lisibilité | conditions: appareil lié, antériorité
+- Un message reçu avant la liaison d'un appareil n'est pas affiché sur cet appareil | observé: présence | conditions: appareil lié, antériorité
+- Un message envoyé depuis un appareil lié est affiché sur les autres appareils de l'expéditeur | observé: présence | conditions: appareil lié
+- Délier un appareil le retire de la liste des appareils liés | observé: appareil lié | conditions: aucune
+- Un message envoyé après la déliaison d'un appareil est illisible sur cet appareil | observé: lisibilité | conditions: appareil lié, antériorité
+- Ajouter un contact à un groupe le fait apparaître dans la liste des membres | observé: appartenance | conditions: aucune
+- Un message envoyé au groupe après l'ajout d'un membre est lisible par ce membre | observé: lisibilité | conditions: appartenance, antériorité
+- Un message envoyé au groupe avant l'ajout d'un membre est illisible par ce membre | observé: lisibilité | conditions: appartenance, antériorité
+- Retirer un membre d'un groupe le fait disparaître de la liste des membres | observé: appartenance | conditions: aucune
+- Un message envoyé au groupe après le retrait d'un membre est illisible par l'ancien membre | observé: lisibilité | conditions: appartenance, antériorité
+- Un message envoyé à un groupe est illisible pour un non-membre | observé: lisibilité | conditions: appartenance
+- Sans interception, le numéro de sécurité affiché est identique chez les deux interlocuteurs | observé: numéro sécurité | conditions: interception
+- Avec une interception, le numéro de sécurité affiché diffère entre les deux interlocuteurs | observé: numéro sécurité | conditions: interception
+- Marquer un contact comme vérifié affiche le statut « vérifié » pour ce contact | observé: vérification | conditions: aucune
+- Quand la clé d'identité d'un contact change, son numéro de sécurité affiché change | observé: numéro sécurité | conditions: changement clé
+- Quand la clé d'identité d'un contact vérifié change, son statut repasse à « non vérifié » | observé: vérification | conditions: changement clé, vérification
+- Quand la clé d'identité d'un contact change, une alerte s'affiche dans la conversation | observé: alerte | conditions: changement clé
+- Sans changement de clé d'identité, aucune alerte ne s'affiche dans la conversation | observé: alerte | conditions: changement clé
+- Envoyer un message à un contact vérifié dont la clé d'identité a changé est bloqué jusqu'à confirmation | observé: envoi | conditions: vérification, changement clé
+- Envoyer un message à un contact non vérifié dont la clé d'identité a changé n'est pas bloqué | observé: envoi | conditions: vérification, changement clé
+- Un message envoyé à un destinataire connecté affiche l'accusé « remis » | observé: accusé | conditions: connexion
+- Un message envoyé à un destinataire hors ligne affiche l'accusé « envoyé » | observé: accusé | conditions: connexion
+- La reconnexion du destinataire fait passer l'accusé de « envoyé » à « remis » | observé: accusé | conditions: connexion
+- Un message de groupe dont un membre est hors ligne garde l'accusé « envoyé » | observé: accusé | conditions: connexion, appartenance
+- Ouvrir un message reçu le fait passer à l'état « lu » | observé: lecture | conditions: aucune
+- Activer un minuteur de messages éphémères affiche sa durée dans la conversation | observé: minuteur | conditions: aucune
+- Un message éphémère lu disparaît une fois la durée du minuteur écoulée | observé: présence | conditions: minuteur, lecture
+- Un message éphémère non lu reste affiché après la durée du minuteur | observé: présence | conditions: minuteur, lecture
+- Un message éphémère expiré disparaît aussi des appareils liés | observé: présence | conditions: minuteur, appareil lié
+- Un message envoyé sans minuteur reste affiché indéfiniment | observé: présence | conditions: minuteur
+- Modifier le minuteur ne change pas la durée d'un message déjà envoyé | observé: minuteur | conditions: antériorité

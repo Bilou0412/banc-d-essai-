@@ -1,0 +1,9 @@
+- A06 : deux instances de Blog coexistent ; un article publié sur l'une apparaît-il sur l'autre ? | test: test_A06_trou_deux_blogs_independants | présumé: chaque Blog est isolé (pas d'état global au module)
+- A04 : deux utilisateurs enregistrés sous le même nom ; l'homonyme peut-il publier l'article de l'autre ? | test: test_A04_trou_homonyme_ne_publie_pas | présumé: la propriété suit l'identité de l'utilisateur, pas son nom (ou register refuse le doublon)
+- A16 : un homonyme tente de modifier l'article de l'autre | test: test_A16_trou_homonyme_ne_modifie_pas | présumé: refusé, contenu inchangé (ou register refuse le doublon)
+- A13 : annulation demandée alors que la date planifiée est déjà atteinte | test: test_A13_trou_annuler_apres_echeance_refuse | présumé: refusée, l'article reste « publié » avec la date planifiée
+- A23 : contenu contenant des fins de ligne \r\n, \r et des espaces de bord | test: test_A23_trou_flux_preserve_fins_de_ligne_et_espaces | présumé: item/description, une fois le XML analysé, est exactement le contenu
+- A03 : publier un article déjà « publié » | test: test_A03_trou_republier_un_publie_ne_change_pas_la_date | présumé: refusé ou sans effet, la date de publication ne bouge pas
+- A08 : planifier un article déjà « publié » | test: test_A08_trou_planifier_un_publie_refuse | présumé: refusé, l'article reste publié et visible
+- A28 : un non-propriétaire retire un tag | test: test_A28_trou_non_proprietaire_ne_retire_pas | présumé: refusé, le tag et la page restent
+- A33 : rejeter un commentaire déjà « approuvé » | test: test_A33_trou_rejeter_un_approuve_refuse | présumé: refusé, modération « approuvé » et compteur inchangés

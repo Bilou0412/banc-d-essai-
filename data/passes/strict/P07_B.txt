@@ -1,0 +1,34 @@
+- a | observé: liste | conditions: aucune
+- a | observé: statut | conditions: connexion
+- a | observé: contenu | conditions: aucune
+- a | observé: statut | conditions: connexion
+- a | observé: date | conditions: aucune
+- a | observé: copie | conditions: connexion
+- a | observé: contenu | conditions: aucune
+- a | observé: liste | conditions: aucune
+- a | observé: statut | conditions: connexion
+- a | observé: copie | conditions: session, conflit
+- a | observé: statut | conditions: session, conflit
+- a | observé: liste | conditions: session
+- a | observé: copie | conditions: connexion, session
+- a | observé: statut | conditions: connexion, session
+- a | observé: statut | conditions: session
+- a | observé: copie | conditions: session
+- a | observé: statut | conditions: connexion, conflit
+- a | observé: conflit | conditions: copie
+- a | observé: contenu | conditions: copie
+- a | observé: conflit | conditions: copie
+- a | observé: statut | conditions: conflit
+- a | observé: copie | conditions: connexion
+- a | observé: conflit | conditions: aucune
+- a | observé: contenu | conditions: aucune
+- a | observé: conflit | conditions: aucune
+- a | observé: statut | conditions: connexion
+- a | observé: liste | conditions: aucune
+- a | observé: liste | conditions: connexion
+- a | observé: liste | conditions: session, copie
+- a | observé: conflit | conditions: copie
+- a | observé: contenu | conditions: connexion, session, conflit
+- a | observé: date | conditions: connexion, session, conflit
+- a | observé: statut | conditions: aucune
+- a | observé: contenu | conditions: aucune

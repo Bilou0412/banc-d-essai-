@@ -1,0 +1,1538 @@
+[
+ {
+  "graine": 54,
+  "etape": 12,
+  "action": "add_to_shopping_list(Pain#1, servings=4)",
+  "groupe": "add_to_shopping_list",
+  "x": [
+   [
+    "lait",
+    "0.83",
+    "ml",
+    false
+   ],
+   [
+    "sucre glace",
+    "0.33",
+    "g",
+    false
+   ]
+  ],
+  "y": [
+   [
+    "lait",
+    "0.84",
+    "ml",
+    false
+   ],
+   [
+    "sucre glace",
+    "0.33",
+    "g",
+    false
+   ]
+  ],
+  "prefixe": [
+   [
+    "App(dossier/recettes.db)",
+    {
+     "recettes": []
+    }
+   ],
+   [
+    "save_recipe('Pain', 12) -> Pain#1",
+    [
+     "Pain"
+    ]
+   ],
+   [
+    "check_item('sucre glace', 'g', checked=True)",
+    []
+   ],
+   [
+    "add_ingredient(Pain#1, 'oeufs', '0.0', 'pièce')",
+    "refusé"
+   ],
+   [
+    "remove_ingredient(Pain#1, 'crème')",
+    {
+     "titre": "Pain",
+     "portions": 12,
+     "catégorie": null,
+     "favori": false,
+     "note": null,
+     "photo": "image par défaut",
+     "ingrédients": []
+    }
+   ],
+   [
+    "fermer puis rouvrir l'application",
+    {
+     "recettes": [
+      "Pain"
+     ],
+     "favoris": [],
+     "courses": []
+    }
+   ],
+   [
+    "fermer puis rouvrir l'application",
+    {
+     "recettes": [
+      "Pain"
+     ],
+     "favoris": [],
+     "courses": []
+    }
+   ],
+   [
+    "add_ingredient(Pain#1, 'lait', 2, 'ml')",
+    {
+     "titre": "Pain",
+     "portions": 12,
+     "catégorie": null,
+     "favori": false,
+     "note": null,
+     "photo": "image par défaut",
+     "ingrédients": [
+      [
+       "lait",
+       "2",
+       "ml"
+      ]
+     ]
+    }
+   ],
+   [
+    "add_to_shopping_list(Pain#1, servings=1)",
+    [
+     [
+      "lait",
+      "0.17",
+      "ml",
+      false
+     ]
+    ]
+   ],
+   [
+    "add_ingredient(Pain#1, 'sucre glace', 1, 'g')",
+    {
+     "titre": "Pain",
+     "portions": 12,
+     "catégorie": null,
+     "favori": false,
+     "note": null,
+     "photo": "image par défaut",
+     "ingrédients": [
+      [
+       "lait",
+       "2",
+       "ml"
+      ],
+      [
+       "sucre glace",
+       "1",
+       "g"
+      ]
+     ]
+    }
+   ],
+   [
+    "set_favorite(Pain#1, False)",
+    {
+     "titre": "Pain",
+     "portions": 12,
+     "catégorie": null,
+     "favori": false,
+     "note": null,
+     "photo": "image par défaut",
+     "ingrédients": [
+      [
+       "lait",
+       "2",
+       "ml"
+      ],
+      [
+       "sucre glace",
+       "1",
+       "g"
+      ]
+     ]
+    }
+   ],
+   [
+    "set_favorite(Pain#1, True)",
+    {
+     "titre": "Pain",
+     "portions": 12,
+     "catégorie": null,
+     "favori": true,
+     "note": null,
+     "photo": "image par défaut",
+     "ingrédients": [
+      [
+       "lait",
+       "2",
+       "ml"
+      ],
+      [
+       "sucre glace",
+       "1",
+       "g"
+      ]
+     ]
+    }
+   ]
+  ]
+ },
+ {
+  "graine": 74,
+  "etape": 27,
+  "action": "add_to_shopping_list(Tarte salée#2, servings=8)",
+  "groupe": "add_to_shopping_list",
+  "x": [
+   [
+    "oeufs",
+    "10",
+    "pièce",
+    false
+   ],
+   [
+    "œufs",
+    "6.67",
+    "pièce",
+    false
+   ]
+  ],
+  "y": [
+   [
+    "oeufs",
+    "10",
+    "pièce",
+    false
+   ],
+   [
+    "œufs",
+    "6.66",
+    "pièce",
+    false
+   ]
+  ],
+  "prefixe": [
+   [
+    "App(dossier/recettes.db)",
+    {
+     "recettes": []
+    }
+   ],
+   [
+    "save_recipe('')",
+    "refusé"
+   ],
+   [
+    "check_item('lait', 'l', checked=False)",
+    []
+   ],
+   [
+    "fermer puis rouvrir l'application",
+    {
+     "recettes": [],
+     "favoris": [],
+     "courses": []
+    }
+   ],
+   [
+    "save_recipe('Pain', 4) -> Pain#1",
+    [
+     "Pain"
+    ]
+   ],
+   [
+    "add_to_shopping_list(Pain#1)",
+    []
+   ],
+   [
+    "shopping_list()",
+    []
+   ],
+   [
+    "recipe(Pain#1)",
+    {
+     "titre": "Pain",
+     "portions": 4,
+     "catégorie": null,
+     "favori": false,
+     "note": null,
+     "photo": "image par défaut",
+     "ingrédients": []
+    }
+   ],
+   [
+    "remove_photo(Pain#1)",
+    {
+     "titre": "Pain",
+     "portions": 4,
+     "catégorie": null,
+     "favori": false,
+     "note": null,
+     "photo": "image par défaut",
+     "ingrédients": []
+    }
+   ],
+   [
+    "recipe(Pain#1)",
+    {
+     "titre": "Pain",
+     "portions": 4,
+     "catégorie": null,
+     "favori": false,
+     "note": null,
+     "photo": "image par défaut",
+     "ingrédients": []
+    }
+   ],
+   [
+    "delete_recipe(Pain#1)",
+    {
+     "recettes": [],
+     "courses": []
+    }
+   ],
+   [
+    "save_recipe('Tarte salée', 3) -> Tarte salée#2",
+    [
+     "Tarte salée"
+    ]
+   ],
+   [
+    "recipe(Tarte salée#2, servings=3)",
+    {
+     "titre": "Tarte salée",
+     "portions": 3,
+     "catégorie": null,
+     "favori": false,
+     "note": null,
+     "photo": "image par défaut",
+     "ingrédients": []
+    }
+   ],
+   [
+    "save_recipe('')",
+    "refusé"
+   ],
+   [
+    "add_ingredient(Tarte salée#2, 'beurre', '12abc', 'c. à s.')",
+    "refusé"
+   ],
+   [
+    "recipe(Tarte salée#2, servings=4)",
+    {
+     "titre": "Tarte salée",
+     "portions": 4,
+     "catégorie": null,
+     "favori": false,
+     "note": null,
+     "photo": "image par défaut",
+     "ingrédients": []
+    }
+   ],
+   [
+    "recipe(Tarte salée#2)",
+    {
+     "titre": "Tarte salée",
+     "portions": 3,
+     "catégorie": null,
+     "favori": false,
+     "note": null,
+     "photo": "image par défaut",
+     "ingrédients": []
+    }
+   ],
+   [
+    "add_to_shopping_list(Tarte salée#2, servings=2)",
+    []
+   ],
+   [
+    "add_ingredient(Tarte salée#2, 'œufs', 2, 'pièce')",
+    {
+     "titre": "Tarte salée",
+     "portions": 3,
+     "catégorie": null,
+     "favori": false,
+     "note": null,
+     "photo": "image par défaut",
+     "ingrédients": [
+      [
+       "œufs",
+       "2",
+       "pièce"
+      ]
+     ]
+    }
+   ],
+   [
+    "recipe(Tarte salée#2, servings=3)",
+    {
+     "titre": "Tarte salée",
+     "portions": 3,
+     "catégorie": null,
+     "favori": false,
+     "note": null,
+     "photo": "image par défaut",
+     "ingrédients": [
+      [
+       "œufs",
+       "2",
+       "pièce"
+      ]
+     ]
+    }
+   ],
+   [
+    "fermer puis rouvrir l'application",
+    {
+     "recettes": [
+      "Tarte salée"
+     ],
+     "favoris": [],
+     "courses": []
+    }
+   ],
+   [
+    "add_ingredient(Tarte salée#2, 'oeufs', 3, 'pièce')",
+    {
+     "titre": "Tarte salée",
+     "portions": 3,
+     "catégorie": null,
+     "favori": false,
+     "note": null,
+     "photo": "image par défaut",
+     "ingrédients": [
+      [
+       "oeufs",
+       "3",
+       "pièce"
+      ],
+      [
+       "œufs",
+       "2",
+       "pièce"
+      ]
+     ]
+    }
+   ],
+   [
+    "recipe(Tarte salée#2)",
+    {
+     "titre": "Tarte salée",
+     "portions": 3,
+     "catégorie": null,
+     "favori": false,
+     "note": null,
+     "photo": "image par défaut",
+     "ingrédients": [
+      [
+       "oeufs",
+       "3",
+       "pièce"
+      ],
+      [
+       "œufs",
+       "2",
+       "pièce"
+      ]
+     ]
+    }
+   ],
+   [
+    "set_favorite(Tarte salée#2, True)",
+    {
+     "titre": "Tarte salée",
+     "portions": 3,
+     "catégorie": null,
+     "favori": true,
+     "note": null,
+     "photo": "image par défaut",
+     "ingrédients": [
+      [
+       "oeufs",
+       "3",
+       "pièce"
+      ],
+      [
+       "œufs",
+       "2",
+       "pièce"
+      ]
+     ]
+    }
+   ],
+   [
+    "fermer puis rouvrir l'application",
+    {
+     "recettes": [
+      "Tarte salée"
+     ],
+     "favoris": [
+      "Tarte salée"
+     ],
+     "courses": []
+    }
+   ],
+   [
+    "add_to_shopping_list(Tarte salée#2, servings=2)",
+    [
+     [
+      "oeufs",
+      "2",
+      "pièce",
+      false
+     ],
+     [
+      "œufs",
+      "1.33",
+      "pièce",
+      false
+     ]
+    ]
+   ],
+   [
+    "search('brûlée', category='Plat', favorites_only=True)",
+    {
+     "résultats": [],
+     "message": "Aucun résultat"
+    }
+   ]
+  ]
+ },
+ {
+  "graine": 122,
+  "etape": 18,
+  "action": "add_to_shopping_list(Crêpes#1, servings=3)",
+  "groupe": "add_to_shopping_list",
+  "x": [
+   [
+    "lait",
+    "0.19",
+    "ml",
+    false
+   ],
+   [
+    "pommes",
+    "187.5",
+    "pièce",
+    false
+   ],
+   [
+    "sucre glace",
+    "15.51",
+    "g",
+    false
+   ]
+  ],
+  "y": [
+   [
+    "lait",
+    "0.19",
+    "ml",
+    false
+   ],
+   [
+    "pommes",
+    "187.5",
+    "pièce",
+    false
+   ],
+   [
+    "sucre glace",
+    "15.52",
+    "g",
+    false
+   ]
+  ],
+  "prefixe": [
+   [
+    "App(dossier/recettes.db)",
+    {
+     "recettes": []
+    }
+   ],
+   [
+    "save_recipe('Crêpes', 8) -> Crêpes#1",
+    [
+     "Crêpes"
+    ]
+   ],
+   [
+    "set_favorite(Crêpes#1, False)",
+    {
+     "titre": "Crêpes",
+     "portions": 8,
+     "catégorie": null,
+     "favori": false,
+     "note": null,
+     "photo": "image par défaut",
+     "ingrédients": []
+    }
+   ],
+   [
+    "set_category(Crêpes#1, 'Dessert')",
+    {
+     "titre": "Crêpes",
+     "portions": 8,
+     "catégorie": "Dessert",
+     "favori": false,
+     "note": null,
+     "photo": "image par défaut",
+     "ingrédients": []
+    }
+   ],
+   [
+    "fermer puis rouvrir l'application",
+    {
+     "recettes": [
+      "Crêpes"
+     ],
+     "favoris": [],
+     "courses": []
+    }
+   ],
+   [
+    "set_favorite(Crêpes#1, True)",
+    {
+     "titre": "Crêpes",
+     "portions": 8,
+     "catégorie": "Dessert",
+     "favori": true,
+     "note": null,
+     "photo": "image par défaut",
+     "ingrédients": []
+    }
+   ],
+   [
+    "add_ingredient(Crêpes#1, 'sucre glace', 7, 'g')",
+    {
+     "titre": "Crêpes",
+     "portions": 8,
+     "catégorie": "Dessert",
+     "favori": true,
+     "note": null,
+     "photo": "image par défaut",
+     "ingrédients": [
+      [
+       "sucre glace",
+       "7",
+       "g"
+      ]
+     ]
+    }
+   ],
+   [
+    "add_ingredient(Crêpes#1, 'lait', '0.1', 'ml')",
+    {
+     "titre": "Crêpes",
+     "portions": 8,
+     "catégorie": "Dessert",
+     "favori": true,
+     "note": null,
+     "photo": "image par défaut",
+     "ingrédients": [
+      [
+       "lait",
+       "0.1",
+       "ml"
+      ],
+      [
+       "sucre glace",
+       "7",
+       "g"
+      ]
+     ]
+    }
+   ],
+   [
+    "recipe(Crêpes#1, servings=0.5)",
+    "refusé"
+   ],
+   [
+    "add_to_shopping_list(Crêpes#1, servings=12)",
+    [
+     [
+      "lait",
+      "0.15",
+      "ml",
+      false
+     ],
+     [
+      "sucre glace",
+      "10.5",
+      "g",
+      false
+     ]
+    ]
+   ],
+   [
+    "fermer puis rouvrir l'application",
+    {
+     "recettes": [
+      "Crêpes"
+     ],
+     "favoris": [
+      "Crêpes"
+     ],
+     "courses": [
+      [
+       "lait",
+       "0.15",
+       "ml",
+       false
+      ],
+      [
+       "sucre glace",
+       "10.5",
+       "g",
+       false
+      ]
+     ]
+    }
+   ],
+   [
+    "add_ingredient(Crêpes#1, 'pommes', 500, 'pièce')",
+    {
+     "titre": "Crêpes",
+     "portions": 8,
+     "catégorie": "Dessert",
+     "favori": true,
+     "note": null,
+     "photo": "image par défaut",
+     "ingrédients": [
+      [
+       "lait",
+       "0.1",
+       "ml"
+      ],
+      [
+       "pommes",
+       "500",
+       "pièce"
+      ],
+      [
+       "sucre glace",
+       "7",
+       "g"
+      ]
+     ]
+    }
+   ],
+   [
+    "add_ingredient(Crêpes#1, 'farine', 0, 'g')",
+    "refusé"
+   ],
+   [
+    "add_ingredient(Crêpes#1, 'sucre glace', 1, 'g')",
+    {
+     "titre": "Crêpes",
+     "portions": 8,
+     "catégorie": "Dessert",
+     "favori": true,
+     "note": null,
+     "photo": "image par défaut",
+     "ingrédients": [
+      [
+       "lait",
+       "0.1",
+       "ml"
+      ],
+      [
+       "pommes",
+       "500",
+       "pièce"
+      ],
+      [
+       "sucre glace",
+       "1",
+       "g"
+      ],
+      [
+       "sucre glace",
+       "7",
+       "g"
+      ]
+     ]
+    }
+   ],
+   [
+    "save_recipe('Pâtes, sauce tomate', 4) -> Pâtes, sauce tomate#2",
+    [
+     "Crêpes",
+     "Pâtes, sauce tomate"
+    ]
+   ],
+   [
+    "search('chocolat', favorites_only=True)",
+    {
+     "résultats": [],
+     "message": "Aucun résultat"
+    }
+   ],
+   [
+    "remove_checked()",
+    [
+     [
+      "lait",
+      "0.15",
+      "ml",
+      false
+     ],
+     [
+      "sucre glace",
+      "10.5",
+      "g",
+      false
+     ]
+    ]
+   ],
+   [
+    "add_ingredient(Crêpes#1, 'sucre glace', 5.35, 'g')",
+    {
+     "titre": "Crêpes",
+     "portions": 8,
+     "catégorie": "Dessert",
+     "favori": true,
+     "note": null,
+     "photo": "image par défaut",
+     "ingrédients": [
+      [
+       "lait",
+       "0.1",
+       "ml"
+      ],
+      [
+       "pommes",
+       "500",
+       "pièce"
+      ],
+      [
+       "sucre glace",
+       "1",
+       "g"
+      ],
+      [
+       "sucre glace",
+       "5.35",
+       "g"
+      ],
+      [
+       "sucre glace",
+       "7",
+       "g"
+      ]
+     ]
+    }
+   ]
+  ]
+ },
+ {
+  "graine": 151,
+  "etape": 19,
+  "action": "add_to_shopping_list(Tarte salée#1, servings=6)",
+  "groupe": "add_to_shopping_list",
+  "x": [
+   [
+    "crème",
+    "3",
+    "cl",
+    false
+   ],
+   [
+    "lait",
+    "11.04",
+    "ml",
+    false
+   ],
+   [
+    "sel",
+    "750",
+    "g",
+    false
+   ],
+   [
+    "œufs",
+    "300",
+    "pièce",
+    false
+   ]
+  ],
+  "y": [
+   [
+    "crème",
+    "3",
+    "cl",
+    false
+   ],
+   [
+    "lait",
+    "11.05",
+    "ml",
+    false
+   ],
+   [
+    "sel",
+    "750",
+    "g",
+    false
+   ],
+   [
+    "œufs",
+    "300",
+    "pièce",
+    false
+   ]
+  ],
+  "prefixe": [
+   [
+    "App(dossier/recettes.db)",
+    {
+     "recettes": []
+    }
+   ],
+   [
+    "save_recipe('Tarte salée', 4) -> Tarte salée#1",
+    [
+     "Tarte salée"
+    ]
+   ],
+   [
+    "list_recipes()",
+    [
+     "Tarte salée"
+    ]
+   ],
+   [
+    "shopping_list()",
+    []
+   ],
+   [
+    "add_ingredient(Tarte salée#1, 'sel', 500, 'g')",
+    {
+     "titre": "Tarte salée",
+     "portions": 4,
+     "catégorie": null,
+     "favori": false,
+     "note": null,
+     "photo": "image par défaut",
+     "ingrédients": [
+      [
+       "sel",
+       "500",
+       "g"
+      ]
+     ]
+    }
+   ],
+   [
+    "add_ingredient(Tarte salée#1, 'œufs', '200', 'pièce')",
+    {
+     "titre": "Tarte salée",
+     "portions": 4,
+     "catégorie": null,
+     "favori": false,
+     "note": null,
+     "photo": "image par défaut",
+     "ingrédients": [
+      [
+       "sel",
+       "500",
+       "g"
+      ],
+      [
+       "œufs",
+       "200",
+       "pièce"
+      ]
+     ]
+    }
+   ],
+   [
+    "add_ingredient(Tarte salée#1, 'lait', '12abc', 'l')",
+    "refusé"
+   ],
+   [
+    "set_favorite(Tarte salée#1, True)",
+    {
+     "titre": "Tarte salée",
+     "portions": 4,
+     "catégorie": null,
+     "favori": true,
+     "note": null,
+     "photo": "image par défaut",
+     "ingrédients": [
+      [
+       "sel",
+       "500",
+       "g"
+      ],
+      [
+       "œufs",
+       "200",
+       "pièce"
+      ]
+     ]
+    }
+   ],
+   [
+    "add_ingredient(Tarte salée#1, 'crème', 2, 'cl')",
+    {
+     "titre": "Tarte salée",
+     "portions": 4,
+     "catégorie": null,
+     "favori": true,
+     "note": null,
+     "photo": "image par défaut",
+     "ingrédients": [
+      [
+       "crème",
+       "2",
+       "cl"
+      ],
+      [
+       "sel",
+       "500",
+       "g"
+      ],
+      [
+       "œufs",
+       "200",
+       "pièce"
+      ]
+     ]
+    }
+   ],
+   [
+    "set_note(Tarte salée#1, '  \\n ')",
+    {
+     "titre": "Tarte salée",
+     "portions": 4,
+     "catégorie": null,
+     "favori": true,
+     "note": null,
+     "photo": "image par défaut",
+     "ingrédients": [
+      [
+       "crème",
+       "2",
+       "cl"
+      ],
+      [
+       "sel",
+       "500",
+       "g"
+      ],
+      [
+       "œufs",
+       "200",
+       "pièce"
+      ]
+     ]
+    }
+   ],
+   [
+    "check_item('lait', 'ml', checked=True)",
+    []
+   ],
+   [
+    "set_note(Tarte salée#1, 'Délicieux')",
+    {
+     "titre": "Tarte salée",
+     "portions": 4,
+     "catégorie": null,
+     "favori": true,
+     "note": "Délicieux",
+     "photo": "image par défaut",
+     "ingrédients": [
+      [
+       "crème",
+       "2",
+       "cl"
+      ],
+      [
+       "sel",
+       "500",
+       "g"
+      ],
+      [
+       "œufs",
+       "200",
+       "pièce"
+      ]
+     ]
+    }
+   ],
+   [
+    "set_favorite(Tarte salée#1, True)",
+    {
+     "titre": "Tarte salée",
+     "portions": 4,
+     "catégorie": null,
+     "favori": true,
+     "note": "Délicieux",
+     "photo": "image par défaut",
+     "ingrédients": [
+      [
+       "crème",
+       "2",
+       "cl"
+      ],
+      [
+       "sel",
+       "500",
+       "g"
+      ],
+      [
+       "œufs",
+       "200",
+       "pièce"
+      ]
+     ]
+    }
+   ],
+   [
+    "add_ingredient(Tarte salée#1, 'lait', 5.35, 'ml')",
+    {
+     "titre": "Tarte salée",
+     "portions": 4,
+     "catégorie": null,
+     "favori": true,
+     "note": "Délicieux",
+     "photo": "image par défaut",
+     "ingrédients": [
+      [
+       "crème",
+       "2",
+       "cl"
+      ],
+      [
+       "lait",
+       "5.35",
+       "ml"
+      ],
+      [
+       "sel",
+       "500",
+       "g"
+      ],
+      [
+       "œufs",
+       "200",
+       "pièce"
+      ]
+     ]
+    }
+   ],
+   [
+    "recipe(Tarte salée#1)",
+    {
+     "titre": "Tarte salée",
+     "portions": 4,
+     "catégorie": null,
+     "favori": true,
+     "note": "Délicieux",
+     "photo": "image par défaut",
+     "ingrédients": [
+      [
+       "crème",
+       "2",
+       "cl"
+      ],
+      [
+       "lait",
+       "5.35",
+       "ml"
+      ],
+      [
+       "sel",
+       "500",
+       "g"
+      ],
+      [
+       "œufs",
+       "200",
+       "pièce"
+      ]
+     ]
+    }
+   ],
+   [
+    "recipe(Tarte salée#1)",
+    {
+     "titre": "Tarte salée",
+     "portions": 4,
+     "catégorie": null,
+     "favori": true,
+     "note": "Délicieux",
+     "photo": "image par défaut",
+     "ingrédients": [
+      [
+       "crème",
+       "2",
+       "cl"
+      ],
+      [
+       "lait",
+       "5.35",
+       "ml"
+      ],
+      [
+       "sel",
+       "500",
+       "g"
+      ],
+      [
+       "œufs",
+       "200",
+       "pièce"
+      ]
+     ]
+    }
+   ],
+   [
+    "check_item('crème', 'cl', checked=True)",
+    []
+   ],
+   [
+    "add_ingredient(Tarte salée#1, 'lait', 2.01, 'ml')",
+    {
+     "titre": "Tarte salée",
+     "portions": 4,
+     "catégorie": null,
+     "favori": true,
+     "note": "Délicieux",
+     "photo": "image par défaut",
+     "ingrédients": [
+      [
+       "crème",
+       "2",
+       "cl"
+      ],
+      [
+       "lait",
+       "2.01",
+       "ml"
+      ],
+      [
+       "lait",
+       "5.35",
+       "ml"
+      ],
+      [
+       "sel",
+       "500",
+       "g"
+      ],
+      [
+       "œufs",
+       "200",
+       "pièce"
+      ]
+     ]
+    }
+   ],
+   [
+    "recipe(Tarte salée#1)",
+    {
+     "titre": "Tarte salée",
+     "portions": 4,
+     "catégorie": null,
+     "favori": true,
+     "note": "Délicieux",
+     "photo": "image par défaut",
+     "ingrédients": [
+      [
+       "crème",
+       "2",
+       "cl"
+      ],
+      [
+       "lait",
+       "2.01",
+       "ml"
+      ],
+      [
+       "lait",
+       "5.35",
+       "ml"
+      ],
+      [
+       "sel",
+       "500",
+       "g"
+      ],
+      [
+       "œufs",
+       "200",
+       "pièce"
+      ]
+     ]
+    }
+   ]
+  ]
+ },
+ {
+  "graine": 196,
+  "etape": 20,
+  "action": "add_to_shopping_list(Weißwurst#2, servings=4)",
+  "groupe": "add_to_shopping_list",
+  "x": [
+   [
+    "Farine",
+    "667.33",
+    "g",
+    false
+   ],
+   [
+    "beurre",
+    "9.33",
+    "c. à s.",
+    false
+   ]
+  ],
+  "y": [
+   [
+    "Farine",
+    "667.34",
+    "g",
+    false
+   ],
+   [
+    "beurre",
+    "9.33",
+    "c. à s.",
+    false
+   ]
+  ],
+  "prefixe": [
+   [
+    "App(dossier/recettes.db)",
+    {
+     "recettes": []
+    }
+   ],
+   [
+    "save_recipe('Tarte aux pommes', 4) -> Tarte aux pommes#1",
+    [
+     "Tarte aux pommes"
+    ]
+   ],
+   [
+    "set_favorite(Tarte aux pommes#1, False)",
+    {
+     "titre": "Tarte aux pommes",
+     "portions": 4,
+     "catégorie": null,
+     "favori": false,
+     "note": null,
+     "photo": "image par défaut",
+     "ingrédients": []
+    }
+   ],
+   [
+    "set_photo(Tarte aux pommes#1, <DEFAULT_PHOTO>)",
+    {
+     "titre": "Tarte aux pommes",
+     "portions": 4,
+     "catégorie": null,
+     "favori": false,
+     "note": null,
+     "photo": "image par défaut",
+     "ingrédients": []
+    }
+   ],
+   [
+    "recipe(Tarte aux pommes#1, servings=6)",
+    {
+     "titre": "Tarte aux pommes",
+     "portions": 6,
+     "catégorie": null,
+     "favori": false,
+     "note": null,
+     "photo": "image par défaut",
+     "ingrédients": []
+    }
+   ],
+   [
+    "shopping_list()",
+    []
+   ],
+   [
+    "remove_photo(Tarte aux pommes#1)",
+    {
+     "titre": "Tarte aux pommes",
+     "portions": 4,
+     "catégorie": null,
+     "favori": false,
+     "note": null,
+     "photo": "image par défaut",
+     "ingrédients": []
+    }
+   ],
+   [
+    "set_favorite(Tarte aux pommes#1, True)",
+    {
+     "titre": "Tarte aux pommes",
+     "portions": 4,
+     "catégorie": null,
+     "favori": true,
+     "note": null,
+     "photo": "image par défaut",
+     "ingrédients": []
+    }
+   ],
+   [
+    "set_favorite(Tarte aux pommes#1, True)",
+    {
+     "titre": "Tarte aux pommes",
+     "portions": 4,
+     "catégorie": null,
+     "favori": true,
+     "note": null,
+     "photo": "image par défaut",
+     "ingrédients": []
+    }
+   ],
+   [
+    "recipe(Tarte aux pommes#1, servings=4)",
+    {
+     "titre": "Tarte aux pommes",
+     "portions": 4,
+     "catégorie": null,
+     "favori": true,
+     "note": null,
+     "photo": "image par défaut",
+     "ingrédients": []
+    }
+   ],
+   [
+    "delete_recipe(Tarte aux pommes#1)",
+    {
+     "recettes": [],
+     "courses": []
+    }
+   ],
+   [
+    "save_recipe('Weißwurst', 3) -> Weißwurst#2",
+    [
+     "Weißwurst"
+    ]
+   ],
+   [
+    "check_item('pommes', 'pièce', checked=True)",
+    []
+   ],
+   [
+    "add_ingredient(Weißwurst#2, 'Farine', '0.5', 'g')",
+    {
+     "titre": "Weißwurst",
+     "portions": 3,
+     "catégorie": null,
+     "favori": false,
+     "note": null,
+     "photo": "image par défaut",
+     "ingrédients": [
+      [
+       "Farine",
+       "0.5",
+       "g"
+      ]
+     ]
+    }
+   ],
+   [
+    "add_ingredient(Weißwurst#2, 'Farine', 500, 'g')",
+    {
+     "titre": "Weißwurst",
+     "portions": 3,
+     "catégorie": null,
+     "favori": false,
+     "note": null,
+     "photo": "image par défaut",
+     "ingrédients": [
+      [
+       "Farine",
+       "0.5",
+       "g"
+      ],
+      [
+       "Farine",
+       "500",
+       "g"
+      ]
+     ]
+    }
+   ],
+   [
+    "add_ingredient(Weißwurst#2, 'beurre', 7, 'c. à s.')",
+    {
+     "titre": "Weißwurst",
+     "portions": 3,
+     "catégorie": null,
+     "favori": false,
+     "note": null,
+     "photo": "image par défaut",
+     "ingrédients": [
+      [
+       "Farine",
+       "0.5",
+       "g"
+      ],
+      [
+       "Farine",
+       "500",
+       "g"
+      ],
+      [
+       "beurre",
+       "7",
+       "c. à s."
+      ]
+     ]
+    }
+   ],
+   [
+    "save_recipe('Soupe', 4) -> Soupe#3",
+    [
+     "Soupe",
+     "Weißwurst"
+    ]
+   ],
+   [
+    "save_recipe('Soupe', 1) -> Soupe#4",
+    [
+     "Soupe",
+     "Soupe",
+     "Weißwurst"
+    ]
+   ],
+   [
+    "set_favorite(Soupe#3, False)",
+    {
+     "titre": "Soupe",
+     "portions": 4,
+     "catégorie": null,
+     "favori": false,
+     "note": null,
+     "photo": "image par défaut",
+     "ingrédients": []
+    }
+   ],
+   [
+    "save_recipe('Pain', 4) -> Pain#5",
+    [
+     "Pain",
+     "Soupe",
+     "Soupe",
+     "Weißwurst"
+    ]
+   ]
+  ]
+ }
+]

@@ -1,0 +1,39 @@
+ÉTATS: contenu; permission; curseur; présence; annulation; historique; connexion
+ASSERTIONS:
+- Un utilisateur ayant la permission écriture tape un caractère : le contenu contient ce caractère | observé: contenu | conditions: permission
+- Un utilisateur ayant la permission lecture tape un caractère : le contenu reste inchangé | observé: contenu | conditions: permission
+- Un utilisateur ayant la permission écriture supprime un mot : le contenu ne contient plus ce mot | observé: contenu | conditions: permission
+- Un autre utilisateur tape un caractère pendant que je suis connecté : mon contenu affiché contient ce caractère | observé: contenu | conditions: connexion | frontière: oui
+- Un autre utilisateur tape un caractère pendant que je suis hors ligne : mon contenu affiché ne contient pas ce caractère | observé: contenu | conditions: connexion | frontière: oui
+- Je tape un mot hors ligne puis je me reconnecte : le contenu affiché chez un autre utilisateur contient ce mot | observé: contenu | conditions: connexion | frontière: oui
+- Deux utilisateurs insèrent chacun un mot au même endroit au même moment : le contenu contient les deux mots | observé: contenu | conditions: aucune | frontière: oui
+- Un utilisateur supprime une phrase pendant qu'un autre la modifie au même moment : le contenu affiché est identique chez les deux utilisateurs | observé: contenu | conditions: aucune | frontière: oui
+- J'ouvre le document : mon nom apparaît dans la présence | observé: présence | conditions: aucune
+- Un autre utilisateur ouvre le document : son nom apparaît dans ma présence | observé: présence | conditions: connexion | frontière: oui
+- Un autre utilisateur ferme le document : son nom disparaît de ma présence | observé: présence | conditions: connexion | frontière: oui
+- Un autre utilisateur perd sa connexion sans fermer le document : son nom disparaît de ma présence après un délai | observé: présence | conditions: aucune | frontière: oui
+- Je suis hors ligne : ma présence ne montre que mon nom | observé: présence | conditions: connexion | frontière: oui
+- Un autre utilisateur déplace son curseur : son curseur s'affiche chez moi à la nouvelle position | observé: curseur | conditions: connexion | frontière: oui
+- Un curseur distant est affiché : il porte le nom de son utilisateur | observé: curseur | conditions: aucune | frontière: oui
+- J'insère un mot avant le curseur d'un autre utilisateur : son curseur affiché reste placé après le même caractère qu'avant l'insertion | observé: curseur | conditions: aucune | frontière: oui
+- Un autre utilisateur ferme le document : son curseur disparaît de mon affichage | observé: curseur | conditions: aucune | frontière: oui
+- Je tape un mot puis j'annule : le contenu ne contient plus ce mot | observé: contenu | conditions: aucune
+- Je tape deux mots successivement puis j'annule une fois : le contenu contient encore le premier mot | observé: contenu | conditions: aucune
+- Je tape un mot, un autre utilisateur tape ensuite un mot, puis j'annule : le contenu contient encore le mot de l'autre utilisateur | observé: contenu | conditions: aucune | frontière: oui
+- Je n'ai fait aucune modification depuis l'ouverture : l'annulation est indisponible | observé: annulation | conditions: aucune
+- Je tape un mot : l'annulation devient disponible | observé: annulation | conditions: permission
+- Un autre utilisateur modifie le document alors que je n'ai rien modifié : l'annulation reste indisponible pour moi | observé: annulation | conditions: aucune | frontière: oui
+- Je tape un mot, je ferme puis je rouvre le document : l'annulation est indisponible | observé: annulation | conditions: aucune | frontière: oui
+- Le propriétaire passe un utilisateur en lecture : la permission affichée pour cet utilisateur chez le propriétaire devient lecture | observé: permission | conditions: permission
+- Un utilisateur ayant la permission écriture tente de changer la permission d'un autre : la permission de l'autre reste inchangée | observé: permission | conditions: permission
+- Le propriétaire passe un utilisateur connecté en lecture : la permission de cet utilisateur devient lecture sur son propre appareil | observé: permission | conditions: connexion | frontière: oui
+- Un utilisateur ayant la permission écriture crée une version : l'historique contient une nouvelle entrée | observé: historique | conditions: permission
+- Un utilisateur ayant la permission lecture tente de créer une version : l'historique reste inchangé | observé: historique | conditions: permission
+- Un utilisateur ayant la permission lecture ouvre l'historique : l'historique affiche les versions existantes | observé: historique | conditions: aucune
+- Un utilisateur ayant la permission écriture restaure une version : le contenu devient égal au contenu de cette version | observé: contenu | conditions: permission
+- Un utilisateur ayant la permission écriture restaure une version : l'historique contient une nouvelle entrée de restauration | observé: historique | conditions: permission
+- Une version est créée : son entrée dans l'historique affiche l'heure de création dans le fuseau horaire de l'utilisateur | observé: historique | conditions: aucune | frontière: oui
+- Un autre utilisateur crée une version : mon historique contient cette version | observé: historique | conditions: connexion | frontière: oui
+- Je crée une version, je ferme puis je rouvre le document : l'historique contient cette version | observé: historique | conditions: aucune | frontière: oui
+- Je tape un mot, je ferme puis je rouvre le document : le contenu contient ce mot | observé: contenu | conditions: aucune | frontière: oui
+- Mon appareil perd la connexion réseau : l'indicateur de connexion affiche hors ligne | observé: connexion | conditions: aucune | frontière: oui

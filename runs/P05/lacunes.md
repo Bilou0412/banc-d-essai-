@@ -1,0 +1,22 @@
+- A24 : l'ouverture aux commentaires par défaut d'un article nouvellement créé n'est fixée nulle part (les tests ouvrent explicitement via `open_comments`).
+- A09 : la planification avec une date égale à l'instant courant n'est ni future (A08) ni passée (A09) : le statut résultant n'est pas tranché.
+- A08 : le cas d'un auteur qui planifie le brouillon d'un autre auteur n'est pas tranché (seul A06 couvre la publication).
+- A12 : le cas d'un auteur qui repasse en brouillon l'article publié d'un autre auteur n'est pas tranché.
+- A13 : le cas d'un auteur qui annule la planification de l'article d'un autre auteur n'est pas tranché.
+- A14 : le cas d'un autre auteur (non modérateur) qui modifie le texte d'un article n'est pas tranché (A15 ne couvre que le modérateur).
+- A16 : le cas d'un auteur qui ajoute ou retire un tag sur l'article d'un autre auteur n'est pas tranché.
+- A16 : l'égalité de deux tags (casse, espaces, normalisation Unicode) et l'effet d'un ajout en double suivi d'un seul retrait ne sont pas fixés.
+- A06 : le cas d'un modérateur qui tente de publier le brouillon d'un auteur n'est pas tranché.
+- A10 : la visibilité d'un article planifié pour son propre auteur avant la date n'est pas fixée (A03 ne couvre que le brouillon).
+- A11 : la date de publication retenue pour le tri du flux (A23) quand l'horloge saute au-delà de la date planifiée — date planifiée ou instant où l'horloge l'a dépassée — n'est pas fixée.
+- A23 : l'ordre de deux articles du flux ayant la même date de publication n'est pas fixé.
+- A23 : la date de publication d'un article republié après un retour en brouillon (A12) — la première ou la nouvelle — n'est pas fixée.
+- A24 : le cas d'un commentaire sur un article planifié non encore publié n'est pas tranché (A26 ne couvre que le brouillon).
+- A24 : le statut d'un commentaire déposé par un auteur ou un modérateur (et non un visiteur) n'est pas fixé.
+- A28 : l'affichage d'un commentaire en attente à l'auteur de l'article (ni visiteur ni modérateur) n'est pas fixé.
+- A28 : l'affichage au modérateur des commentaires d'un article repassé en brouillon (A34 ne parle que des visiteurs) n'est pas fixé.
+- A29 : l'effet d'une approbation sur un commentaire déjà rejeté (ou d'un rejet sur un commentaire approuvé) n'est pas tranché.
+- A30 : le cas d'un visiteur qui tente d'approuver ou de rejeter un commentaire n'est pas tranché ; A32 n'a pas de pendant pour un non-modérateur qui tente de rejeter.
+- A34 : le réaffichage aux visiteurs des commentaires approuvés lorsque l'article est republié n'est pas fixé.
+- A35 : le cas d'un auteur qui ferme les commentaires de l'article d'un autre auteur n'est pas tranché, ni la possibilité de les rouvrir.
+- A36 : le sort des commentaires encore en attente au moment de la fermeture (toujours approuvables ou non) n'est pas fixé.

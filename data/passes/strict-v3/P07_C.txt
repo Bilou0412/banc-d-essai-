@@ -1,0 +1,40 @@
+ÉTATS: connexion; titre; contenu; liste; ordre; épingle; recherche; corbeille; indicateur; conflit; date; compte
+ASSERTIONS:
+- Quand l'utilisateur crée une note, la nouvelle note apparaît dans la liste. | observé: liste | conditions: aucune
+- Quand l'utilisateur crée une note sans connexion, la nouvelle note apparaît dans la liste. | observé: liste | conditions: aucune
+- Quand l'utilisateur modifie le titre d'une note, la liste affiche le nouveau titre de cette note. | observé: titre | conditions: aucune
+- Quand l'utilisateur modifie le contenu d'une note puis la rouvre, la note affiche le nouveau contenu. | observé: contenu | conditions: aucune
+- Quand l'utilisateur ferme une note dont le titre et le contenu sont vides, cette note n'apparaît pas dans la liste. | observé: liste | conditions: titre, contenu
+- Quand l'utilisateur supprime une note, cette note disparaît de la liste. | observé: liste | conditions: aucune
+- Quand l'utilisateur supprime une note, cette note apparaît dans la corbeille. | observé: corbeille | conditions: aucune
+- Quand l'utilisateur restaure une note depuis la corbeille, cette note réapparaît dans la liste. | observé: liste | conditions: corbeille
+- Quand l'utilisateur restaure une note depuis la corbeille, cette note disparaît de la corbeille. | observé: corbeille | conditions: aucune
+- Quand l'utilisateur saisit un mot dans la recherche, la liste n'affiche que les notes dont le titre ou le contenu contient ce mot. | observé: liste | conditions: recherche
+- Quand l'utilisateur efface la recherche, la liste affiche de nouveau toutes les notes non supprimées. | observé: liste | conditions: recherche
+- Quand l'utilisateur modifie une note, cette note passe en tête de la liste des notes non épinglées. | observé: ordre | conditions: épingle
+- Quand l'utilisateur épingle une note, cette note s'affiche en tête de la liste. | observé: ordre | conditions: épingle
+- Une note épinglée reste au-dessus d'une note non épinglée modifiée plus récemment. | observé: ordre | conditions: épingle
+- Quand l'utilisateur modifie une note sans connexion, l'indicateur de cette note affiche « en attente de synchronisation ». | observé: indicateur | conditions: connexion | frontière: oui
+- Quand la connexion revient après une modification faite hors connexion, l'indicateur de la note passe à « synchronisé ». | observé: indicateur | conditions: connexion | frontière: oui
+- Quand une note créée hors connexion sur un appareil A est synchronisée, cette note apparaît dans la liste d'un appareil B du même compte. | observé: liste | conditions: connexion, compte | frontière: oui
+- Quand le titre d'une note est modifié hors connexion sur l'appareil A puis synchronisé, l'appareil B affiche le nouveau titre. | observé: titre | conditions: connexion | frontière: oui
+- Quand le contenu d'une note est modifié hors connexion sur l'appareil A puis synchronisé, l'appareil B affiche le nouveau contenu. | observé: contenu | conditions: connexion | frontière: oui
+- Quand une note est supprimée sur l'appareil A puis synchronisée, cette note disparaît de la liste de l'appareil B. | observé: liste | conditions: connexion | frontière: oui
+- Quand une note est supprimée sur l'appareil A puis synchronisée, cette note apparaît dans la corbeille de l'appareil B. | observé: corbeille | conditions: connexion | frontière: oui
+- Quand une note est restaurée sur l'appareil A puis synchronisée, cette note réapparaît dans la liste de l'appareil B. | observé: liste | conditions: corbeille, connexion | frontière: oui
+- Quand une note est épinglée sur l'appareil A puis synchronisée, cette note est épinglée sur l'appareil B. | observé: épingle | conditions: connexion | frontière: oui
+- Quand une note ouverte sur l'appareil B est modifiée sur l'appareil A connecté, le contenu affiché sur l'appareil B se met à jour sans action de l'utilisateur. | observé: contenu | conditions: connexion | frontière: oui
+- Quand une note modifiée sur l'appareil B est synchronisée, cette note passe en tête de la liste des notes non épinglées de l'appareil A. | observé: ordre | conditions: épingle, connexion | frontière: oui
+- Quand le contenu d'une même note est modifié hors connexion sur deux appareils, un conflit est signalé au retour de la connexion. | observé: conflit | conditions: contenu, connexion | frontière: oui
+- Quand le titre d'une note est modifié hors connexion sur l'appareil A et son contenu sur l'appareil B, aucun conflit n'est signalé au retour de la connexion. | observé: conflit | conditions: titre, contenu, connexion | frontière: oui
+- Quand le titre d'une note est modifié sur l'appareil A et son contenu sur l'appareil B hors connexion, le titre affiché après synchronisation est celui de l'appareil A. | observé: titre | conditions: connexion | frontière: oui
+- Quand le titre d'une note est modifié sur l'appareil A et son contenu sur l'appareil B hors connexion, le contenu affiché après synchronisation est celui de l'appareil B. | observé: contenu | conditions: connexion | frontière: oui
+- Quand l'utilisateur résout un conflit en choisissant la version de l'appareil A, la note affiche le contenu de la version A. | observé: contenu | conditions: conflit | frontière: oui
+- Quand l'utilisateur résout un conflit, le signalement de conflit disparaît. | observé: conflit | conditions: aucune | frontière: oui
+- Quand une note est supprimée hors connexion sur l'appareil A et modifiée hors connexion sur l'appareil B, la note reste dans la liste après synchronisation. | observé: liste | conditions: connexion | frontière: oui
+- Quand l'utilisateur ferme puis rouvre l'application sans connexion, une note créée auparavant figure toujours dans la liste. | observé: liste | conditions: aucune | frontière: oui
+- Quand l'utilisateur ferme puis rouvre l'application sans connexion, une note modifiée auparavant affiche toujours son dernier contenu. | observé: contenu | conditions: aucune | frontière: oui
+- Quand l'application est fermée avant la synchronisation d'une modification puis rouverte avec connexion, l'indicateur de la note passe à « synchronisé ». | observé: indicateur | conditions: connexion | frontière: oui
+- Une note restée 30 jours dans la corbeille disparaît de la corbeille. | observé: corbeille | conditions: date | frontière: oui
+- La date de dernière modification d'une note s'affiche dans le fuseau horaire de l'appareil qui l'affiche. | observé: date | conditions: aucune | frontière: oui
+- Quand l'utilisateur se connecte à son compte sur un nouvel appareil, la liste de cet appareil affiche les notes du compte. | observé: liste | conditions: compte, connexion | frontière: oui

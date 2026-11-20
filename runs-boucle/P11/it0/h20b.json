@@ -1,0 +1,34 @@
+{
+ "trous_A": 11,
+ "trous_B": 7,
+ "cas_distincts": 14,
+ "communs": 4,
+ "seulement_A": 7,
+ "seulement_B": 3,
+ "jaccard": 0.286,
+ "appariement": [
+  [
+   "1",
+   "2"
+  ],
+  [
+   "4",
+   "3"
+  ],
+  [
+   "6",
+   "1"
+  ],
+  [
+   "10",
+   "7"
+  ]
+ ],
+ "l1": "1.1 Une personne saisit une date-heure sans décalage horaire dans une cellule, et la spec ne dit pas si le contenu de la cellule garde le texte saisi tel quel ou devient une date-heure normalisée avec le décalage du fuseau. (action set_cell [cellules.*.contenu])\n1.2 Une personne ayant le droit écriture renomme une feuille, et on observe les droits de chaque personne sur cette feuille juste après. (action rename_sheet [droits.alice, droits.bob, droits.carol])\n1.3 Juste après qu'une personne a ajouté une feuille, on ne sait pas si cet ajout peut s'annuler, ni quel droit les autres personnes ont sur la nouvelle feuille. (action add_sheet [annuler, droits.alice])\n1.4 Une personne non propriétaire, avec le droit lecture, tente de passer en lecture le droit d'une autre personne sur une feuille : le droit ne change pas, mais la spec ne dit pas si une alerte doit apparaître. (action set_right [alertes])\n1.5 Une personne avec le droit écriture importe un CSV de deux champs avant que l'envoi soit confirmé ; on regarde de combien augmente le nombre de modifications en attente. (action import_csv [en_attente])\n1.6 Juste après qu'une personne a ajouté une feuille au classeur, la spec ne dit pas si la commande annuler est disponible. (action add_sheet [annuler])\n1.7 Une personne ajoute une feuille sous un nom déjà porté par une autre feuille du classeur, et l'alerte « nom existant » ne dit pas forcément quel nom est en cause. (action add_sheet [alertes])\n1.8 Une personne en ligne modifie une cellule puis annule aussitôt cette modification, avant toute confirmation d'envoi par le serveur, et on observe le nombre de modifications en attente. (action undo [en_attente])\n1.9 Une personne ayant le droit écriture importe un CSV dont un guillemet n'est jamais fermé à partir de la ligne 2, et l'alerte d'import invalide peut nommer ou non la feuille visée. (action import_csv [alertes])\n1.10 Lors d'un export CSV, une ligne non vide qui se termine par des cellules vides est plus courte qu'une autre ligne de la feuille. (action export_csv [lignes])\n1.11 Une formule SOMME dont la plage contient sa propre cellule et une cellule de texte cumule une référence circulaire et une possible erreur de type, et la spec ne dit pas laquelle s'affiche. (action set_cell [cellules.*.erreur, cellules.*.valeur])",
+ "l2": "2.1 Une personne qui vient d'ouvrir le classeur et dont la seule action est d'ajouter une feuille : la commande annuler est-elle disponible ? (action add_sheet [annuler])\n2.2 Quand une personne saisit une date-heure sans décalage horaire dans une cellule, la spec ne dit pas si le contenu de la cellule reste le texte saisi ou devient l'instant normalisé avec son décalage. (action set_cell [cellules.*.contenu])\n2.3 Une personne non propriétaire tente de passer en lecture le droit d'une autre personne sur une feuille ; le droit ne change pas, mais la spec ne dit pas si une alerte doit apparaître. (action set_right [alertes])\n2.4 Une personne qui n'a que le droit lecture tente de supprimer l'unique feuille du classeur, et la spec ne dit pas si une alerte doit lui indiquer qu'elle n'a pas le droit écriture. (action delete_sheet [alertes])\n2.5 Une personne hors ligne consulte l'historique des versions après un import CSV fait par une autre personne, et l'entrée de cet import doit avoir un type. (action history [(tout)])\n2.6 Une personne en ligne renomme une feuille avec le nom que cette feuille porte déjà. (action rename_sheet [alertes, en_attente])\n2.7 À l'export CSV d'une feuille où une ligne a moins de cellules non vides à droite qu'une autre ligne, faut-il compléter cette ligne par des champs vides jusqu'à la dernière colonne utilisée ? (action export_csv [lignes])",
+ "tokens": {
+  "neufs": 3495,
+  "cache": 1741,
+  "usd": 0.0331242
+ }
+}

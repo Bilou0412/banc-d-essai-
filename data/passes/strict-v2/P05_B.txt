@@ -1,0 +1,41 @@
+ÉTATS: statut_article; date_planifiée; horloge; rôle; propriété; page_article; date_publication; statut_commentaire; liste_commentaires; tags; page_tag; flux_RSS
+ASSERTIONS:
+- Un auteur qui crée un article obtient un article au statut brouillon | observé: statut_article | conditions: rôle
+- Un visiteur qui ouvre un article en brouillon obtient une page introuvable | observé: page_article | conditions: statut_article, rôle
+- L'auteur propriétaire d'un article en brouillon peut en afficher la page en aperçu | observé: page_article | conditions: statut_article, rôle, propriété
+- Un auteur non propriétaire qui ouvre le brouillon d'un autre auteur obtient une page introuvable | observé: page_article | conditions: statut_article, rôle, propriété
+- Un visiteur qui ouvre un article publié en voit la page | observé: page_article | conditions: statut_article
+- L'auteur propriétaire qui publie son brouillon fait passer l'article au statut publié | observé: statut_article | conditions: rôle, propriété
+- Un auteur non propriétaire qui tente de publier le brouillon d'un autre auteur laisse l'article au statut brouillon | observé: statut_article | conditions: rôle, propriété
+- Un modérateur qui tente de publier un brouillon laisse l'article au statut brouillon | observé: statut_article | conditions: rôle
+- La publication immédiate d'un brouillon fixe la date de publication à la valeur de l'horloge au moment de l'action | observé: date_publication | conditions: horloge
+- La modification du contenu d'un article publié laisse sa date de publication inchangée | observé: date_publication | conditions: statut_article
+- L'auteur propriétaire qui planifie son brouillon avec une date future fait passer l'article au statut planifié | observé: statut_article | conditions: rôle, propriété, date_planifiée, horloge
+- L'auteur propriétaire qui planifie son brouillon avec une date déjà passée laisse l'article au statut brouillon | observé: statut_article | conditions: date_planifiée, horloge
+- Un visiteur qui ouvre un article planifié dont la date planifiée n'est pas atteinte obtient une page introuvable | observé: page_article | conditions: statut_article, date_planifiée, horloge
+- Lorsque l'horloge atteint la date planifiée, un article planifié passe au statut publié sans action de l'auteur | observé: statut_article | conditions: statut_article, date_planifiée, horloge | frontière: oui
+- Un article publié par planification affiche la date planifiée comme date de publication | observé: date_publication | conditions: date_planifiée | frontière: oui
+- L'auteur propriétaire qui annule la planification fait repasser l'article au statut brouillon | observé: statut_article | conditions: statut_article, rôle, propriété
+- L'auteur propriétaire qui dépublie un article publié le fait repasser au statut brouillon | observé: statut_article | conditions: statut_article, rôle, propriété
+- Un article publié apparaît dans le flux RSS | observé: flux_RSS | conditions: statut_article
+- Un article en brouillon n'apparaît pas dans le flux RSS | observé: flux_RSS | conditions: statut_article
+- Un article planifié dont la date planifiée n'est pas atteinte n'apparaît pas dans le flux RSS | observé: flux_RSS | conditions: statut_article, date_planifiée, horloge
+- Le flux RSS ordonne les articles du plus récent au plus ancien selon leur date de publication | observé: flux_RSS | conditions: date_publication
+- Un article qui vient d'être publié peut être absent du flux RSS jusqu'au renouvellement du cache du flux | observé: flux_RSS | conditions: statut_article | frontière: oui
+- Un visiteur qui commente un article publié crée un commentaire au statut en attente | observé: statut_commentaire | conditions: statut_article
+- Une tentative de commenter un article non publié n'ajoute aucun commentaire à l'article | observé: liste_commentaires | conditions: statut_article
+- Un commentaire en attente n'est pas affiché à un visiteur | observé: liste_commentaires | conditions: statut_commentaire, rôle
+- Un commentaire en attente est affiché à un modérateur | observé: liste_commentaires | conditions: statut_commentaire, rôle
+- Un modérateur qui approuve un commentaire en attente le fait passer au statut approuvé | observé: statut_commentaire | conditions: statut_commentaire, rôle
+- Un modérateur qui rejette un commentaire en attente le fait passer au statut rejeté | observé: statut_commentaire | conditions: statut_commentaire, rôle
+- Un auteur qui tente d'approuver un commentaire en attente le laisse au statut en attente | observé: statut_commentaire | conditions: rôle
+- Un commentaire approuvé est affiché à un visiteur | observé: liste_commentaires | conditions: statut_commentaire
+- Un commentaire rejeté n'est pas affiché à un visiteur | observé: liste_commentaires | conditions: statut_commentaire
+- La dépublication d'un article laisse le statut de ses commentaires inchangé | observé: statut_commentaire | conditions: aucune
+- L'auteur propriétaire qui ajoute un tag à son article fait figurer ce tag dans les tags de l'article | observé: tags | conditions: rôle, propriété
+- L'auteur propriétaire qui retire un tag de son article fait disparaître ce tag des tags de l'article | observé: tags | conditions: rôle, propriété
+- Un auteur non propriétaire qui tente d'ajouter un tag à l'article d'un autre laisse les tags de l'article inchangés | observé: tags | conditions: rôle, propriété
+- L'ajout d'un tag déjà présent sur l'article ne crée pas de doublon dans les tags de l'article | observé: tags | conditions: tags
+- La page d'un tag liste un article publié portant ce tag | observé: page_tag | conditions: statut_article, tags
+- La page d'un tag ne liste pas un article en brouillon portant ce tag | observé: page_tag | conditions: statut_article
+- La page d'un tag ne liste pas un article publié ne portant pas ce tag | observé: page_tag | conditions: tags

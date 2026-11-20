@@ -1,0 +1,86 @@
+{
+ "sonde": "P04",
+ "passes": "strict-v2",
+ "passe": "A",
+ "k_passes": [
+  1.9,
+  1.9
+ ],
+ "k_retenu": 1.9,
+ "concordance": "concordante",
+ "assertions": 40,
+ "frontieres": 3,
+ "tests": 67,
+ "trous_a_priori": 10,
+ "trous_par_assertion": 0.25,
+ "tokens_decoupe": {
+  "neufs": 36108,
+  "cache": 16170,
+  "usd": 0.48185000000000006
+ },
+ "lacunes": [
+  {
+   "cas": "A05 : renommer une liste avec un nom vide ou composé d'espaces n'est pas tranché",
+   "test": "test_A05_trou_nom_vide",
+   "présumé": "Renommer une liste avec un nom vide ou composé uniquement d'espaces laisse son nom inchangé | observé: nom_liste | conditions: nom_liste",
+   "attaque": 1
+  },
+  {
+   "cas": "A05 : renommer une liste avec le nom d'une autre liste n'est pas tranché (A03 ne couvre que la création)",
+   "test": "test_A05_trou_nom_duplique",
+   "présumé": "Renommer une liste avec un nom déjà porté par une autre liste laisse son nom inchangé | observé: nom_liste | conditions: nom_liste",
+   "attaque": 1
+  },
+  {
+   "cas": "A08 : supprimer la seule liste restante ne laisse aucune « autre liste restante » à rendre active",
+   "test": "test_A08_trou_derniere_liste",
+   "présumé": "Supprimer la dernière liste laisse l'application sans liste active | observé: liste_active | conditions: liste_active",
+   "attaque": 1
+  },
+  {
+   "cas": "A11 : ajouter une tâche quand aucune liste n'est active n'est pas tranché",
+   "test": "test_A11_trou_sans_liste_active",
+   "présumé": "Ajouter une tâche sans liste active ne crée aucune tâche | observé: tâches | conditions: liste_active",
+   "attaque": 1
+  },
+  {
+   "cas": "A18 : cocher une tâche déjà cochée n'est pas tranché (compteur et statut)",
+   "test": "test_A18_trou_cocher_deja_cochee",
+   "présumé": "Cocher une tâche déjà cochée laisse le compteur inchangé | observé: compteur | conditions: statut",
+   "attaque": 1
+  },
+  {
+   "cas": "A21 : un titre composé uniquement d'espaces n'est pas dit vide pour la modification (A12 le traite comme vide à l'ajout)",
+   "test": "test_A21_trou_espaces",
+   "présumé": "Modifier le titre d'une tâche avec un texte composé uniquement d'espaces laisse le titre précédent inchangé | observé: titre | conditions: titre",
+   "attaque": 1
+  },
+  {
+   "cas": "A22 : la position en tri manuel d'une tâche déplacée dans la liste cible n'est pas fixée",
+   "test": "test_A22_trou_position_dans_cible",
+   "présumé": "En tri manuel, une tâche déplacée vers une autre liste est placée en dernière position de la liste cible | observé: ordre | conditions: tri",
+   "attaque": 1
+  },
+  {
+   "cas": "A37 : on ne sait pas si un glisser en tri par échéance modifie l'ordre manuel retrouvé au retour en tri manuel",
+   "test": "test_A37_trou_retour_manuel",
+   "présumé": "En tri par échéance, glisser une tâche laisse l'ordre manuel inchangé | observé: ordre | conditions: tri",
+   "attaque": 1
+  },
+  {
+   "cas": "A38 : l'ordre de tâches de même échéance n'est pas fixé",
+   "test": "test_A38_trou_egalite",
+   "présumé": "En tri par échéance, les tâches de même échéance gardent leur ordre manuel relatif | observé: ordre | conditions: tri, échéance",
+   "attaque": 1
+  },
+  {
+   "cas": "A39 : seule la présence des tâches est garantie au rechargement, pas celle des listes ni de l'appartenance",
+   "test": "test_A39_trou_listes_persistees",
+   "présumé": "Après rechargement de l'application, chaque tâche appartient toujours à sa liste | observé: appartenance | conditions: aucune",
+   "attaque": 1
+  }
+ ],
+ "modeles": {
+  "red": "opus"
+ }
+}

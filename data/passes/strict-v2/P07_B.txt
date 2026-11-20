@@ -1,0 +1,35 @@
+ÉTATS: connexion; session; contenu; présence; indicateur; conflit; date; corbeille
+ASSERTIONS:
+- Hors connexion, l'utilisateur crée une note : la note apparaît dans la liste de l'appareil | observé: présence | conditions: aucune
+- Hors connexion, l'utilisateur modifie le texte d'une note : le nouveau texte est affiché sur l'appareil | observé: contenu | conditions: aucune
+- Hors connexion, l'utilisateur modifie une note : l'indicateur de la note passe à « en attente » | observé: indicateur | conditions: connexion
+- En ligne avec une session ouverte, l'utilisateur modifie une note : l'indicateur de la note passe à « synchronisé » | observé: indicateur | conditions: connexion, session
+- En ligne sans session ouverte, l'utilisateur modifie une note : l'indicateur de la note reste à « en attente » | observé: indicateur | conditions: connexion, session
+- Hors connexion, l'utilisateur ferme puis rouvre l'application : le texte modifié de la note est toujours affiché | observé: contenu | conditions: aucune
+- Hors connexion, l'utilisateur ferme puis rouvre l'application : l'indicateur de la note modifiée affiche toujours « en attente » | observé: indicateur | conditions: connexion
+- Une note est « en attente » ; la connexion revient avec une session ouverte : l'indicateur de la note passe à « synchronisé » | observé: indicateur | conditions: connexion, session
+- Une note a été modifiée hors connexion sur l'appareil A ; la connexion revient sur A : l'appareil B en ligne affiche le nouveau texte | observé: contenu | conditions: connexion, session
+- Une note a été créée hors connexion sur l'appareil A ; la connexion revient sur A : la note apparaît dans la liste de l'appareil B en ligne | observé: présence | conditions: connexion, session
+- Une note a été modifiée sur l'appareil A synchronisé ; l'appareil B reste hors connexion : l'appareil B affiche l'ancien texte | observé: contenu | conditions: connexion
+- Une note a été modifiée sur l'appareil A synchronisé ; l'appareil B retrouve la connexion : l'appareil B affiche le nouveau texte | observé: contenu | conditions: connexion, session
+- Une note a été modifiée sur un appareil connecté à un autre compte : la note n'apparaît pas dans la liste de l'appareil de l'utilisateur | observé: présence | conditions: session
+- La même note a été modifiée hors connexion sur A et sur B ; les deux appareils se reconnectent : une copie de conflit de la note est affichée | observé: conflit | conditions: connexion | frontière: oui
+- La même note a été modifiée hors connexion sur A et sur B ; les deux appareils se reconnectent : la version de A n'est pas perdue | observé: contenu | conditions: connexion | frontière: oui
+- La même note a été modifiée hors connexion sur A et sur B ; les deux appareils se reconnectent : la version de B n'est pas perdue | observé: contenu | conditions: connexion | frontière: oui
+- Deux notes différentes ont été modifiées hors connexion, l'une sur A, l'autre sur B ; les deux appareils se reconnectent : aucune copie de conflit n'est affichée | observé: conflit | conditions: connexion | frontière: oui
+- Une copie de conflit est affichée ; l'utilisateur choisit une version : la copie de conflit disparaît | observé: conflit | conditions: aucune
+- Une copie de conflit est affichée ; l'utilisateur choisit une version : la note affiche le texte de la version choisie | observé: contenu | conditions: aucune
+- L'utilisateur résout un conflit sur A en ligne : la copie de conflit disparaît sur B en ligne | observé: conflit | conditions: connexion, session
+- Hors connexion, l'utilisateur supprime une note : la note disparaît de la liste de l'appareil | observé: présence | conditions: aucune
+- Hors connexion, l'utilisateur supprime une note : la note apparaît dans la corbeille de l'appareil | observé: corbeille | conditions: aucune
+- Une note a été supprimée hors connexion sur A ; la connexion revient sur A : la note disparaît de la liste de B en ligne | observé: présence | conditions: connexion, session
+- Une note a été supprimée hors connexion sur A et modifiée hors connexion sur B ; les deux se reconnectent : la note reste présente dans la liste de B | observé: présence | conditions: connexion | frontière: oui
+- L'utilisateur restaure une note depuis la corbeille : la note réapparaît dans la liste | observé: présence | conditions: aucune
+- L'utilisateur restaure une note depuis la corbeille : la note restaurée affiche le texte qu'elle avait avant la suppression | observé: contenu | conditions: aucune
+- L'utilisateur vide la corbeille : la note n'apparaît plus dans la corbeille | observé: corbeille | conditions: aucune
+- Hors connexion, l'utilisateur modifie une note : la date de modification affichée devient l'heure de la modification | observé: date | conditions: aucune
+- Une note modifiée hors connexion est synchronisée plus tard : la date de modification affichée sur B est l'heure de la modification et non l'heure de la synchronisation | observé: date | conditions: connexion | frontière: oui
+- L'utilisateur se déconnecte de son compte : l'indicateur affiche « non synchronisé » pour toutes ses notes | observé: indicateur | conditions: session
+- L'utilisateur se connecte à son compte sur un nouvel appareil en ligne : ses notes existantes apparaissent dans la liste | observé: présence | conditions: connexion, session
+- La connexion est perdue pendant la synchronisation d'une note : l'indicateur de la note affiche « en attente » | observé: indicateur | conditions: connexion | frontière: oui
+- La connexion est perdue pendant la synchronisation d'une note : le texte de la note sur l'appareil reste celui saisi par l'utilisateur | observé: contenu | conditions: aucune

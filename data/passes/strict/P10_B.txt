@@ -1,0 +1,37 @@
+ÉTATS: contenu; clé; appareils; historique; membres; empreinte; vérification; alerte; envoi; accusé; connexion; minuterie
+ASSERTIONS:
+- Quand l'utilisateur envoie un message à un contact, le contenu du message est lisible sur l'appareil du contact | observé: contenu | conditions: aucune
+- Quand un message transite par le serveur, son contenu n'est pas lisible par le serveur | observé: contenu | conditions: aucune
+- Quand l'utilisateur envoie deux messages successifs, chaque message utilise une clé différente | observé: clé | conditions: aucune
+- Quand la clé d'un message est compromise, le contenu des autres messages de la conversation reste illisible pour l'attaquant | observé: contenu | conditions: clé
+- Quand l'utilisateur lie un nouvel appareil à son compte, cet appareil apparaît dans la liste des appareils | observé: appareils | conditions: aucune
+- Quand un contact envoie un message après la liaison d'un nouvel appareil, le contenu est lisible sur ce nouvel appareil | observé: contenu | conditions: appareils
+- Quand l'utilisateur ouvre une conversation sur un appareil nouvellement lié, les messages reçus avant la liaison n'apparaissent pas dans l'historique | observé: historique | conditions: appareils
+- Quand l'utilisateur envoie un message depuis un de ses appareils, le message apparaît dans l'historique de ses autres appareils liés | observé: historique | conditions: appareils
+- Quand l'utilisateur retire un appareil, cet appareil disparaît de la liste des appareils | observé: appareils | conditions: aucune
+- Quand un contact envoie un message après le retrait d'un appareil, le contenu n'est pas lisible sur l'appareil retiré | observé: contenu | conditions: appareils
+- Quand l'utilisateur envoie un message à un groupe, le contenu est lisible par chaque membre du groupe | observé: contenu | conditions: membres
+- Quand un administrateur ajoute une personne au groupe, elle apparaît dans la liste des membres | observé: membres | conditions: aucune
+- Quand un nouveau membre ouvre la conversation de groupe, les messages antérieurs à son ajout n'apparaissent pas dans son historique | observé: historique | conditions: membres
+- Quand un administrateur retire un membre du groupe, il disparaît de la liste des membres | observé: membres | conditions: aucune
+- Quand un membre quitte le groupe, il disparaît de la liste des membres | observé: membres | conditions: aucune
+- Quand un message est envoyé au groupe après le retrait d'un membre, le contenu n'est pas lisible par le membre retiré | observé: contenu | conditions: membres
+- Quand l'utilisateur et un contact affichent leur empreinte commune, la même empreinte apparaît sur les deux appareils | observé: empreinte | conditions: aucune
+- Quand un contact réinstalle l'application, l'empreinte affichée pour ce contact change | observé: empreinte | conditions: aucune
+- Quand l'utilisateur scanne le code d'un contact dont l'empreinte correspond, le contact passe au statut vérifié | observé: vérification | conditions: empreinte
+- Quand l'utilisateur scanne le code d'un contact dont l'empreinte ne correspond pas, le contact reste non vérifié | observé: vérification | conditions: empreinte
+- Quand l'empreinte d'un contact vérifié change, le contact repasse au statut non vérifié | observé: vérification | conditions: empreinte
+- Quand l'empreinte d'un contact change, une alerte de changement d'empreinte s'affiche dans la conversation | observé: alerte | conditions: empreinte
+- Quand l'empreinte d'un contact précédemment vérifié a changé, l'envoi d'un nouveau message est bloqué jusqu'à confirmation de l'utilisateur | observé: envoi | conditions: empreinte, vérification
+- Quand l'empreinte d'un contact jamais vérifié a changé, l'envoi d'un nouveau message reste possible sans confirmation | observé: envoi | conditions: empreinte, vérification
+- Quand l'utilisateur envoie un message à un contact hors ligne, l'accusé affiche « envoyé » | observé: accusé | conditions: connexion
+- Quand le contact se reconnecte, l'accusé du message passe à « remis » | observé: accusé | conditions: connexion
+- Quand le contact ouvre la conversation contenant le message, l'accusé passe à « lu » | observé: accusé | conditions: aucune
+- Quand un message est envoyé à un groupe dont un membre est hors ligne, l'accusé reste « envoyé » | observé: accusé | conditions: membres, connexion
+- Quand l'utilisateur règle la minuterie d'une conversation sur une heure, la minuterie de la conversation affiche une heure | observé: minuterie | conditions: aucune
+- Quand l'utilisateur modifie la minuterie, la nouvelle minuterie s'affiche aussi chez le contact | observé: minuterie | conditions: aucune
+- Quand le délai de la minuterie s'est écoulé après la lecture d'un message, ce message disparaît de l'historique | observé: historique | conditions: minuterie, accusé
+- Quand un message éphémère n'a pas encore été lu, il reste dans l'historique du destinataire | observé: historique | conditions: minuterie, accusé
+- Quand un message est envoyé sans minuterie active, il reste dans l'historique sans limite de temps | observé: historique | conditions: minuterie
+- Quand l'utilisateur modifie la minuterie, les messages envoyés auparavant conservent leur délai d'origine dans l'historique | observé: historique | conditions: minuterie
+- Quand un message éphémère expire, il disparaît aussi de l'historique des autres appareils liés | observé: historique | conditions: minuterie, appareils

@@ -1,0 +1,41 @@
+ÉTATS: contenu; visibilité; statut; connexion; signature; empreinte; vérification; alerte; appareils; membres; minuterie
+ASSERTIONS:
+- Lorsque l'utilisateur saisit un texte et envoie le message, le message affiché dans sa propre conversation porte exactement ce texte | observé: contenu | conditions: aucune
+- Lorsque l'expéditeur envoie un message à un destinataire dont l'appareil est connecté, le texte affiché chez le destinataire est identique au texte saisi par l'expéditeur | observé: contenu | conditions: connexion | frontière: oui
+- Lorsque l'expéditeur envoie un message alors que son appareil est hors connexion, le statut affiché pour ce message est « en attente » | observé: statut | conditions: connexion | frontière: oui
+- Lorsque l'appareil de l'expéditeur retrouve la connexion, le statut d'un message « en attente » devient « envoyé » | observé: statut | conditions: connexion | frontière: oui
+- Lorsque l'appareil du destinataire reçoit le message, le statut affiché chez l'expéditeur devient « remis » | observé: statut | conditions: connexion | frontière: oui
+- Tant que tous les appareils du destinataire sont hors connexion, le statut affiché chez l'expéditeur reste « envoyé » | observé: statut | conditions: connexion | frontière: oui
+- Dans un groupe, le statut d'un message devient « remis » seulement lorsque l'appareil de chaque membre l'a reçu | observé: statut | conditions: membres, connexion | frontière: oui
+- Lorsqu'un destinataire hors connexion se reconnecte, le message envoyé pendant son absence apparaît dans sa conversation | observé: visibilité | conditions: connexion | frontière: oui
+- Lorsqu'un message reçu ne porte pas une signature valide de l'expéditeur, il n'apparaît pas dans la conversation du destinataire | observé: visibilité | conditions: signature | frontière: oui
+- Lorsque l'utilisateur ouvre l'écran de vérification d'un contact, l'empreinte affichée est identique à celle affichée sur l'appareil de ce contact | observé: empreinte | conditions: aucune | frontière: oui
+- Lorsque le contact réinstalle l'application avec une nouvelle clé, l'empreinte affichée chez l'utilisateur change | observé: empreinte | conditions: aucune | frontière: oui
+- Lorsque l'utilisateur marque manuellement un contact comme vérifié, ce contact apparaît comme vérifié | observé: vérification | conditions: aucune
+- Lorsque l'utilisateur annule la vérification d'un contact vérifié, ce contact apparaît comme non vérifié | observé: vérification | conditions: aucune
+- Lorsque l'utilisateur scanne le code du contact et que les empreintes correspondent, le contact apparaît comme vérifié | observé: vérification | conditions: empreinte | frontière: oui
+- Lorsque l'utilisateur scanne le code du contact et que les empreintes ne correspondent pas, le contact reste non vérifié | observé: vérification | conditions: empreinte | frontière: oui
+- Lorsque la clé d'un contact vérifié change, ce contact repasse à l'état non vérifié | observé: vérification | conditions: empreinte | frontière: oui
+- Lorsque la clé d'un contact change, une alerte de changement de clé s'affiche dans la conversation avec ce contact | observé: alerte | conditions: empreinte | frontière: oui
+- Lorsque la clé d'un contact n'a pas changé, aucune alerte de changement de clé n'est affichée dans la conversation | observé: alerte | conditions: empreinte | frontière: oui
+- Lorsque l'utilisateur relie un nouvel appareil, cet appareil apparaît dans sa liste d'appareils | observé: appareils | conditions: aucune
+- Lorsque l'utilisateur retire un appareil, cet appareil disparaît de sa liste d'appareils | observé: appareils | conditions: aucune
+- Lorsque l'utilisateur envoie un message depuis un appareil, ce message apparaît sur ses autres appareils reliés | observé: visibilité | conditions: appareils | frontière: oui
+- Lorsqu'un message est envoyé à l'utilisateur, il apparaît sur chacun de ses appareils reliés | observé: visibilité | conditions: appareils | frontière: oui
+- Un appareil relié après la réception d'un message n'affiche pas ce message | observé: visibilité | conditions: appareils | frontière: oui
+- Un appareil retiré de la liste n'affiche pas les messages reçus après son retrait | observé: visibilité | conditions: appareils | frontière: oui
+- Lorsque l'utilisateur ajoute un contact à un groupe, ce contact apparaît dans la liste des membres | observé: membres | conditions: aucune
+- Lorsqu'un membre quitte un groupe, il disparaît de la liste des membres affichée chez les autres membres | observé: membres | conditions: aucune | frontière: oui
+- Lorsqu'un message est envoyé à un groupe, il apparaît chez chaque membre du groupe | observé: visibilité | conditions: membres | frontière: oui
+- Un membre retiré d'un groupe ne voit pas les messages envoyés au groupe après son retrait | observé: visibilité | conditions: membres | frontière: oui
+- Un membre ajouté à un groupe ne voit pas les messages envoyés au groupe avant son ajout | observé: visibilité | conditions: membres | frontière: oui
+- Lorsque l'utilisateur règle la minuterie d'une conversation sur une durée, la conversation affiche cette durée | observé: minuterie | conditions: aucune
+- Lorsqu'un participant règle la minuterie d'une conversation, la nouvelle durée s'affiche chez l'autre participant | observé: minuterie | conditions: aucune | frontière: oui
+- Lorsque la durée de la minuterie est écoulée, le message éphémère disparaît de la conversation de l'expéditeur | observé: visibilité | conditions: minuterie | frontière: oui
+- Lorsque la durée de la minuterie est écoulée, le message éphémère disparaît de la conversation du destinataire | observé: visibilité | conditions: minuterie | frontière: oui
+- Avant que la durée de la minuterie soit écoulée, le message éphémère reste affiché dans la conversation | observé: visibilité | conditions: minuterie | frontière: oui
+- Lorsque la minuterie est désactivée, un message envoyé reste affiché quel que soit le temps écoulé | observé: visibilité | conditions: minuterie | frontière: oui
+- Lorsque l'utilisateur modifie la minuterie, un message envoyé avant la modification disparaît au terme de l'ancienne durée | observé: visibilité | conditions: minuterie | frontière: oui
+- Lorsque la durée d'un message éphémère s'écoule pendant que l'application est fermée, ce message n'apparaît plus à la réouverture | observé: visibilité | conditions: minuterie | frontière: oui
+- Lorsque l'utilisateur ferme puis rouvre l'application, un message non éphémère apparaît toujours dans la conversation | observé: visibilité | conditions: minuterie | frontière: oui
+- Lorsque l'utilisateur supprime un message de son appareil, ce message disparaît de sa conversation | observé: visibilité | conditions: aucune

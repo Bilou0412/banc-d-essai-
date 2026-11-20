@@ -1,0 +1,40 @@
+ÉTATS: quantité; disponible; emplacement; prêt; emprunteur; échéance; aujourd'hui; retard; statut; historique; filtre; liste; export
+ASSERTIONS:
+- Créer un article avec une quantité de 5 fait afficher une quantité de 5 pour cet article | observé: quantité | conditions: aucune
+- Un article de quantité 5 sans prêt en cours affiche 5 unités disponibles | observé: disponible | conditions: quantité, prêt
+- Créer un article avec l'emplacement « Étagère A » fait afficher l'emplacement « Étagère A » pour cet article | observé: emplacement | conditions: aucune
+- Créer un article avec une quantité négative n'ajoute pas l'article à la liste | observé: liste | conditions: quantité
+- Modifier l'emplacement d'un article de « Étagère A » à « Atelier » fait afficher l'emplacement « Atelier » | observé: emplacement | conditions: aucune
+- Prêter 2 unités d'un article ayant 5 unités disponibles fait passer les unités disponibles à 3 | observé: disponible | conditions: disponible
+- Prêter 2 unités d'un article de quantité 5 laisse la quantité affichée à 5 | observé: quantité | conditions: aucune
+- Prêter 6 unités d'un article ayant 5 unités disponibles n'enregistre aucun prêt | observé: prêt | conditions: disponible
+- Prêter une unité d'un article hors service n'enregistre aucun prêt | observé: prêt | conditions: statut
+- Prêter un article sans indiquer d'emprunteur n'enregistre aucun prêt | observé: prêt | conditions: emprunteur
+- Prêter un article avec une échéance antérieure à aujourd'hui n'enregistre aucun prêt | observé: prêt | conditions: échéance, aujourd'hui
+- Prêter un article à « Martin » fait afficher « Martin » comme emprunteur du prêt | observé: emprunteur | conditions: aucune
+- Prêter un article avec une date de retour au 30/11 fait afficher l'échéance 30/11 sur le prêt | observé: échéance | conditions: aucune
+- Un prêt en cours dont l'échéance est antérieure à aujourd'hui est affiché en retard | observé: retard | conditions: prêt, échéance, aujourd'hui
+- Un prêt en cours dont l'échéance est égale à aujourd'hui n'est pas affiché en retard | observé: retard | conditions: prêt, échéance, aujourd'hui
+- Sans aucune action, un prêt en cours devient affiché en retard le lendemain de son échéance | observé: retard | conditions: prêt, échéance, aujourd'hui | frontière: oui
+- Enregistrer le retour d'un prêt de 2 unités augmente de 2 les unités disponibles | observé: disponible | conditions: statut
+- Enregistrer le retour d'un prêt fait disparaître ce prêt des prêts en cours | observé: prêt | conditions: aucune
+- Enregistrer le retour d'un prêt en retard fait disparaître l'indication de retard | observé: retard | conditions: retard
+- Enregistrer un prêt ajoute une entrée « prêt » à l'historique de l'article | observé: historique | conditions: aucune
+- Enregistrer un retour ajoute une entrée « retour » à l'historique de l'article | observé: historique | conditions: aucune
+- Marquer un article hors service ajoute une entrée « hors service » à l'historique de l'article | observé: historique | conditions: aucune
+- Tenter de supprimer une entrée de l'historique laisse cette entrée affichée | observé: historique | conditions: aucune
+- Marquer un article hors service fait afficher le statut « hors service » | observé: statut | conditions: aucune
+- Un article hors service affiche 0 unité disponible | observé: disponible | conditions: statut
+- Remettre en service un article de quantité 5 avec 2 unités prêtées fait afficher 3 unités disponibles | observé: disponible | conditions: quantité, prêt
+- Marquer hors service un article ayant un prêt en cours laisse ce prêt en cours | observé: prêt | conditions: prêt
+- Réduire la quantité d'un article en dessous du nombre d'unités prêtées laisse la quantité inchangée | observé: quantité | conditions: prêt
+- Supprimer un article ayant un prêt en cours laisse l'article dans la liste | observé: liste | conditions: prêt
+- Appliquer le filtre emplacement « Atelier » n'affiche dans la liste que les articles situés à « Atelier » | observé: liste | conditions: filtre, emplacement
+- Appliquer le filtre statut « hors service » n'affiche dans la liste que les articles hors service | observé: liste | conditions: filtre, statut
+- Appliquer le filtre « en retard » n'affiche dans la liste que les articles ayant un prêt en retard | observé: liste | conditions: filtre, retard
+- Appliquer le filtre emprunteur « Martin » n'affiche dans la liste que les articles prêtés à « Martin » | observé: liste | conditions: filtre, emprunteur
+- Effacer le filtre affiche tous les articles dans la liste | observé: liste | conditions: filtre
+- Exporter avec un filtre actif produit un fichier ne contenant que les articles de la liste filtrée | observé: export | conditions: filtre
+- Exporter sans filtre produit un fichier contenant tous les articles | observé: export | conditions: filtre
+- Exporter un article hors service produit un fichier indiquant le statut « hors service » pour cet article | observé: export | conditions: statut
+- Après redémarrage de l'application, un prêt en cours est toujours affiché | observé: prêt | conditions: prêt | frontière: oui

@@ -1,0 +1,93 @@
+[
+ {
+  "groupe": "remove_ingredient",
+  "divergences": 5,
+  "graine": 96,
+  "etape": 8,
+  "action": "remove_ingredient(Omelette#1, 'farine')",
+  "x": {
+   "titre": "Omelette",
+   "portions": 2,
+   "catégorie": null,
+   "favori": false,
+   "note": null,
+   "photo": {
+    "image": true,
+    "taille": 69
+   },
+   "ingrédients": [
+    [
+     "Farine",
+     "0.35",
+     "g"
+    ],
+    [
+     "oeufs",
+     "0.5",
+     "pièce"
+    ]
+   ]
+  },
+  "y": {
+   "titre": "Omelette",
+   "portions": 2,
+   "catégorie": null,
+   "favori": false,
+   "note": null,
+   "photo": {
+    "image": true,
+    "taille": 69
+   },
+   "ingrédients": [
+    [
+     "oeufs",
+     "0.5",
+     "pièce"
+    ]
+   ]
+  },
+  "classe": "trou",
+  "assertion": "A04",
+  "cas": "On demande de supprimer un ingrédient en écrivant son nom avec une casse différente de celle enregistrée (« farine » au lieu de « Farine »), et la spec ne dit pas si ce nom désigne l'ingrédient existant.",
+  "verdict": "claim:     La suppression de « farine » (en minuscules) doit retirer l'ingrédient enregistré sous le nom « Farine ».\nruling:    not resolvable\nbecause:   A04 dit seulement que « La suppression d'un ingrédient le fait disparaître de la liste des ingrédients de la recette ». La spec ne dit pas si « farine » désigne le même ingrédient que « Farine ». La seule règle d'insensibilité à la casse est A17 (« Une requête en majuscules donne les mêmes résultats que la même requête en minuscules »), et elle ne vaut que pour la recherche, pas pour la suppression. On peut donc soutenir les deux comportements : ne rien supprimer parce qu'aucun ingrédient ne s'appelle « farine », ou supprimer « Farine » en ignorant la casse. Pour trancher, il faut savoir si l'identification d'un ingrédient par son nom ignore la casse. Seul l'arbitre peut le dire (c'est son intention), pas le dossier.\ncertainty: close\n\nCLASSE: trou\nASSERTION: A04\nCAS: On demande de supprimer un ingrédient en écrivant son nom avec une casse différente de celle enregistrée (« farine » au lieu de « Farine »), et la spec ne dit pas si ce nom désigne l'ingrédient existant."
+ },
+ {
+  "groupe": "add_to_shopping_list",
+  "divergences": 5,
+  "graine": 54,
+  "etape": 12,
+  "action": "add_to_shopping_list(Pain#1, servings=4)",
+  "x": [
+   [
+    "lait",
+    "0.83",
+    "ml",
+    false
+   ],
+   [
+    "sucre glace",
+    "0.33",
+    "g",
+    false
+   ]
+  ],
+  "y": [
+   [
+    "lait",
+    "0.84",
+    "ml",
+    false
+   ],
+   [
+    "sucre glace",
+    "0.33",
+    "g",
+    false
+   ]
+  ],
+  "classe": "trou",
+  "assertion": "A31",
+  "cas": "Quand on ajoute deux fois la même recette avec des portions ajustées non entières, la spec ne dit pas si la ligne fusionnée additionne les quantités exactes avant d'arrondir ou additionne les quantités déjà arrondies.",
+  "verdict": "\nclaim:     À l'ajout de Pain#1 avec servings=4, la ligne « lait » de la liste de courses doit afficher 0.83 et non 0.84 : l'une des deux implémentations viole la spec.\nruling:    rejected\nbecause:   A09 dit seulement qu'« une quantité ajustée non entière s'affiche arrondie à deux décimales ». Elle ne dit pas si la liste de courses garde la valeur exacte (0,1666… + 0,6666… = 0,8333…, donc 0.83) ou la valeur arrondie que A30 « y reporte » (0.17 + 0.67 = 0.84). De plus, A31 ne vise que « l'ajout de deux recettes contenant le même ingrédient », pas l'ajout répété de la même recette. Les deux comportements respectent donc le texte.\ncertainty: close\n```\n\nC'est serré pour une raison : si on lit A09 strictement comme une règle d'affichage, la quantité gardée en mémoire reste exacte, et Y serait en faute (0.84 n'est pas la somme arrondie). Mais aucune assertion ne dit à quel moment arrondir, ni comment cumuler deux ajouts de la même recette.\n\nPour trancher, il faut savoir si la liste de courses doit garder les quantités exactes et n'arrondir qu'à l'affichage, ou garder les valeurs déjà arrondies. Seule l'intention de l'arbitre peut le dire, pas le dossier. Il faut aussi savoir si A31 s'applique quand on ajoute deux fois la même recette.\n\nCLASSE: trou\nASSERTION: A31\nCAS: Quand on ajoute deux fois la même recette avec des portions ajustées non entières, la spec ne dit pas si la ligne fusionnée additionne les quantités exactes avant d'arrondir ou additionne les quantités déjà arrondies."
+ }
+]

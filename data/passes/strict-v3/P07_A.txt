@@ -1,0 +1,40 @@
+ÉTATS: connexion; compte; liste; titre; contenu; corbeille; recherche; ordre; date; statut; conflit
+ASSERTIONS:
+- Créer une note ajoute une nouvelle note à la liste | observé: liste | conditions: aucune
+- Créer une note sans saisir de titre affiche « Sans titre » comme titre de cette note | observé: titre | conditions: aucune
+- Modifier le titre d'une note remplace le titre affiché de cette note par le nouveau titre | observé: titre | conditions: aucune
+- Modifier le texte d'une note remplace le contenu affiché de cette note par le nouveau texte | observé: contenu | conditions: aucune
+- Supprimer une note la retire de la liste | observé: liste | conditions: aucune
+- Supprimer une note la place dans la corbeille | observé: corbeille | conditions: aucune
+- Restaurer une note présente dans la corbeille la remet dans la liste | observé: liste | conditions: corbeille
+- Restaurer une note présente dans la corbeille la retire de la corbeille | observé: corbeille | conditions: corbeille
+- Vider la corbeille laisse la corbeille vide | observé: corbeille | conditions: aucune
+- Rechercher un mot présent dans le contenu d'une note fait apparaître cette note dans les résultats de recherche | observé: recherche | conditions: contenu
+- Rechercher un mot présent dans le titre d'une note fait apparaître cette note dans les résultats de recherche | observé: recherche | conditions: titre
+- Rechercher un mot absent du titre et du contenu de toutes les notes n'affiche aucun résultat de recherche | observé: recherche | conditions: titre, contenu
+- Une note placée dans la corbeille n'apparaît pas dans les résultats de recherche, même si elle contient le mot recherché | observé: recherche | conditions: corbeille, contenu
+- Quand l'ordre choisi est « par titre », la liste affiche les notes dans l'ordre alphabétique de leur titre | observé: liste | conditions: ordre, titre
+- Quand l'ordre choisi est « dernière modification », la note modifiée en dernier apparaît en tête de la liste | observé: liste | conditions: ordre
+- Sans compte connecté, le statut d'une note affiche « non synchronisée » | observé: statut | conditions: compte
+- Se déconnecter du compte retire de la liste les notes de ce compte | observé: liste | conditions: compte
+- Supprimer une copie de conflit fait disparaître l'indication de conflit de la note concernée | observé: conflit | conditions: conflit
+- Modifier une note affiche comme date de modification l'heure actuelle de l'horloge de l'appareil | observé: date | conditions: aucune | frontière: oui
+- Une note modifiée sur un appareil A affiche, sur un appareil B réglé sur un autre fuseau horaire, sa date de modification dans le fuseau horaire de l'appareil B | observé: date | conditions: compte | frontière: oui
+- Hors ligne, modifier une note affiche le statut « en attente de synchronisation » pour cette note | observé: statut | conditions: connexion, compte | frontière: oui
+- En ligne, modifier une note affiche le statut « synchronisée » pour cette note une fois l'envoi terminé | observé: statut | conditions: connexion, compte | frontière: oui
+- Quand la connexion revient, une note au statut « en attente de synchronisation » passe au statut « synchronisée » | observé: statut | conditions: compte | frontière: oui
+- Une note créée hors ligne sur l'appareil A apparaît dans la liste de l'appareil B, connecté au même compte, après le retour de la connexion | observé: liste | conditions: compte, connexion | frontière: oui
+- Une note créée sur l'appareil A n'apparaît pas dans la liste d'un appareil B connecté à un autre compte | observé: liste | conditions: compte | frontière: oui
+- Une modification du texte faite hors ligne sur l'appareil A apparaît dans le contenu de la note sur l'appareil B après le retour de la connexion | observé: contenu | conditions: compte, connexion | frontière: oui
+- Une modification du titre faite hors ligne sur l'appareil A apparaît dans le titre de la note sur l'appareil B après le retour de la connexion | observé: titre | conditions: compte, connexion | frontière: oui
+- Une note supprimée sur l'appareil A disparaît de la liste de l'appareil B après synchronisation | observé: liste | conditions: compte | frontière: oui
+- Une note supprimée sur l'appareil A apparaît dans la corbeille de l'appareil B après synchronisation | observé: corbeille | conditions: compte | frontière: oui
+- Une note restaurée depuis la corbeille sur l'appareil A réapparaît dans la liste de l'appareil B après synchronisation | observé: liste | conditions: compte, corbeille | frontière: oui
+- Quand la même note a reçu des modifications de texte différentes sur l'appareil A et sur l'appareil B pendant qu'ils étaient hors ligne, une copie de conflit apparaît après le retour de la connexion | observé: conflit | conditions: contenu, connexion | frontière: oui
+- Quand la même note a reçu exactement le même texte sur l'appareil A et sur l'appareil B pendant qu'ils étaient hors ligne, aucune copie de conflit n'apparaît après le retour de la connexion | observé: conflit | conditions: contenu, connexion | frontière: oui
+- En cas de conflit, la note d'origine affiche le contenu de la modification dont l'heure de modification est la plus récente | observé: contenu | conditions: conflit, date | frontière: oui
+- Quand une note est modifiée sur l'appareil A et supprimée sur l'appareil B pendant qu'ils sont hors ligne, la note figure dans la liste après le retour de la connexion | observé: liste | conditions: connexion | frontière: oui
+- Une note créée hors ligne figure toujours dans la liste après fermeture puis réouverture de l'application | observé: liste | conditions: aucune | frontière: oui
+- Le texte saisi dans une note figure toujours dans son contenu après fermeture puis réouverture de l'application | observé: contenu | conditions: aucune | frontière: oui
+- Une note au statut « en attente de synchronisation » garde ce statut après fermeture puis réouverture de l'application hors ligne | observé: statut | conditions: connexion | frontière: oui
+- Une note présente dans la corbeille depuis plus de 30 jours disparaît de la corbeille | observé: corbeille | conditions: date | frontière: oui

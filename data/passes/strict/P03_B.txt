@@ -1,0 +1,42 @@
+ÉTATS: article; nom; quantité; disponible; emplacement; hors service; prêt; emprunteur; date retour; date courante; retard; historique; filtre emplacement; filtre statut; liste affichée; export
+ASSERTIONS:
+- Créer un article avec un nom non vide ajoute cet article à l'inventaire | observé: article | conditions: nom
+- Créer un article avec un nom vide n'ajoute aucun article à l'inventaire | observé: article | conditions: nom
+- Créer un article avec une quantité négative n'ajoute aucun article à l'inventaire | observé: article | conditions: quantité
+- Un article créé avec une quantité N a une quantité disponible égale à N | observé: disponible | conditions: quantité
+- Modifier l'emplacement d'un article remplace son emplacement par la nouvelle valeur | observé: emplacement | conditions: aucune
+- Modifier l'emplacement d'un article ajoute une entrée de déplacement à l'historique | observé: historique | conditions: aucune
+- Prêter un article dont la quantité disponible est au moins 1 crée un prêt actif | observé: prêt | conditions: disponible
+- Prêter un article dont la quantité disponible est 0 ne crée aucun prêt | observé: prêt | conditions: disponible
+- Prêter un article hors service ne crée aucun prêt | observé: prêt | conditions: hors service
+- Prêter un article sans emprunteur renseigné ne crée aucun prêt | observé: prêt | conditions: emprunteur
+- Prêter un article avec une date de retour antérieure à la date courante ne crée aucun prêt | observé: prêt | conditions: date retour, date courante
+- Prêter un article diminue sa quantité disponible de 1 | observé: disponible | conditions: disponible
+- Prêter un article ne modifie pas sa quantité | observé: quantité | conditions: aucune
+- Le prêt créé porte l'emprunteur saisi | observé: emprunteur | conditions: aucune
+- Le prêt créé porte la date de retour saisie | observé: date retour | conditions: aucune
+- Prêter un article ajoute une entrée de prêt à l'historique | observé: historique | conditions: aucune
+- Enregistrer le retour d'un prêt actif clôt ce prêt | observé: prêt | conditions: aucune
+- Enregistrer le retour d'un prêt actif augmente la quantité disponible de l'article de 1 | observé: disponible | conditions: hors service
+- Enregistrer le retour d'un prêt actif ajoute une entrée de retour à l'historique | observé: historique | conditions: aucune
+- Un prêt actif dont la date de retour est antérieure à la date courante est en retard | observé: retard | conditions: prêt, date retour, date courante
+- Un prêt actif dont la date de retour est égale ou postérieure à la date courante n'est pas en retard | observé: retard | conditions: date retour, date courante
+- Un prêt clos n'est pas en retard | observé: retard | conditions: prêt
+- Marquer hors service un article sans prêt actif le place au statut hors service | observé: hors service | conditions: prêt
+- Marquer hors service un article ayant un prêt actif est refusé | observé: hors service | conditions: prêt
+- Marquer un article hors service ramène sa quantité disponible à 0 | observé: disponible | conditions: aucune
+- Marquer un article hors service ajoute une entrée à l'historique | observé: historique | conditions: aucune
+- Remettre en service un article rend sa quantité disponible égale à sa quantité | observé: disponible | conditions: quantité
+- Augmenter de K la quantité d'un article en service augmente sa quantité disponible de K | observé: disponible | conditions: hors service
+- Réduire la quantité d'un article en dessous du nombre de ses prêts actifs est refusé | observé: quantité | conditions: prêt
+- Supprimer un article sans prêt actif le retire de l'inventaire | observé: article | conditions: prêt
+- Supprimer un article ayant un prêt actif est refusé | observé: article | conditions: prêt
+- Sans filtre actif, la liste affiche tous les articles | observé: liste affichée | conditions: filtre emplacement, filtre statut
+- Avec un filtre emplacement actif, la liste n'affiche que les articles situés à cet emplacement | observé: liste affichée | conditions: filtre emplacement, emplacement
+- Avec le filtre statut « prêté », la liste n'affiche que les articles ayant au moins un prêt actif | observé: liste affichée | conditions: filtre statut, prêt
+- Avec le filtre statut « hors service », la liste n'affiche que les articles hors service | observé: liste affichée | conditions: filtre statut, hors service
+- Avec le filtre statut « en retard », la liste n'affiche que les articles ayant un prêt en retard | observé: liste affichée | conditions: filtre statut, retard
+- Exporter produit un fichier contenant exactement les articles de la liste affichée | observé: export | conditions: liste affichée
+- Exporter produit un fichier indiquant la quantité de chaque article | observé: export | conditions: aucune
+- Exporter produit un fichier indiquant l'emplacement de chaque article | observé: export | conditions: aucune
+- Exporter n'ajoute aucune entrée à l'historique | observé: historique | conditions: aucune

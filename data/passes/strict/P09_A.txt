@@ -1,0 +1,40 @@
+ÉTATS: capacité; occupation; ouverture; durée minimale; durée maximale; préavis; horizon; quota; compteur; statut; délai d'annulation; attente; rang; fuseau; heure affichée; récurrence; occurrences
+ASSERTIONS:
+- Une demande de réservation sur un créneau dont l'occupation est inférieure à la capacité reçoit le statut « confirmée » | observé: statut | conditions: capacité, occupation
+- Quand une demande de réservation reçoit le statut « confirmée », l'occupation du créneau augmente de un | observé: occupation | conditions: statut
+- Une demande de réservation sur un créneau dont l'occupation est égale à la capacité reçoit le statut « en attente » | observé: statut | conditions: capacité, occupation
+- Une demande qui reçoit le statut « en attente » est placée au dernier rang de la liste d'attente du créneau | observé: rang | conditions: attente
+- Une demande de réservation dont le créneau se situe entièrement hors des horaires d'ouverture de la ressource reçoit le statut « refusée » | observé: statut | conditions: ouverture
+- Une demande de réservation dont le créneau déborde partiellement des horaires d'ouverture de la ressource reçoit le statut « refusée » | observé: statut | conditions: ouverture
+- Une demande de réservation dont la durée est inférieure à la durée minimale reçoit le statut « refusée » | observé: statut | conditions: durée minimale
+- Une demande de réservation dont la durée est supérieure à la durée maximale reçoit le statut « refusée » | observé: statut | conditions: durée maximale
+- Une demande de réservation par ailleurs valide dont la durée est exactement égale à la durée maximale reçoit le statut « confirmée » | observé: statut | conditions: durée maximale
+- Une demande de réservation dont le début est plus proche de l'instant présent que le préavis reçoit le statut « refusée » | observé: statut | conditions: préavis
+- Une demande de réservation dont le début est plus éloigné de l'instant présent que l'horizon reçoit le statut « refusée » | observé: statut | conditions: horizon
+- Une demande de réservation d'un utilisateur dont le compteur de réservations actives est égal au quota reçoit le statut « refusée » | observé: statut | conditions: quota, compteur
+- Quand une demande de réservation reçoit le statut « confirmée », le compteur de réservations actives de l'utilisateur augmente de un | observé: compteur | conditions: statut
+- Quand une demande de réservation reçoit le statut « en attente », le compteur de réservations actives de l'utilisateur reste inchangé | observé: compteur | conditions: statut
+- Quand une demande de réservation reçoit le statut « refusée », le compteur de réservations actives de l'utilisateur reste inchangé | observé: compteur | conditions: statut
+- L'annulation d'une réservation confirmée demandée avant le délai d'annulation fait passer son statut à « annulée » | observé: statut | conditions: délai d'annulation
+- L'annulation d'une réservation confirmée demandée après le délai d'annulation est rejetée et son statut reste « confirmée » | observé: statut | conditions: délai d'annulation
+- Une annulation acceptée diminue de un le compteur de réservations actives de l'utilisateur | observé: compteur | conditions: aucune
+- Une annulation acceptée sur un créneau dont la liste d'attente est vide diminue l'occupation du créneau de un | observé: occupation | conditions: attente
+- Une annulation acceptée sur un créneau dont la liste d'attente n'est pas vide fait passer la demande de premier rang au statut « confirmée » | observé: statut | conditions: attente
+- Une annulation acceptée sur un créneau dont la liste d'attente n'est pas vide laisse l'occupation du créneau inchangée | observé: occupation | conditions: attente
+- Lorsqu'une demande en attente est promue, le rang de chaque demande restante dans la liste d'attente diminue de un | observé: rang | conditions: aucune
+- Lorsqu'une demande en attente est promue, le compteur de réservations actives de son auteur augmente de un | observé: compteur | conditions: aucune
+- Lorsqu'une place se libère et que l'auteur de la demande de premier rang a un compteur égal au quota, cette demande garde le statut « en attente » | observé: statut | conditions: quota, compteur
+- Le retrait volontaire d'une demande de la liste d'attente diminue de un le rang de chaque demande placée derrière elle | observé: rang | conditions: aucune
+- Une augmentation de la capacité d'un créneau dont la liste d'attente n'est pas vide fait passer la demande de premier rang au statut « confirmée » | observé: statut | conditions: attente
+- Une réduction de la capacité en dessous de l'occupation laisse les réservations existantes au statut « confirmée » | observé: statut | conditions: capacité
+- L'heure d'un créneau est affichée convertie dans le fuseau de l'utilisateur | observé: heure affichée | conditions: fuseau
+- Un changement du fuseau de l'utilisateur modifie l'heure affichée de ses réservations | observé: heure affichée | conditions: aucune
+- Une demande saisie dans le fuseau de l'utilisateur dont l'heure convertie dans le fuseau de la ressource tombe hors des horaires d'ouverture reçoit le statut « refusée » | observé: statut | conditions: ouverture, fuseau
+- Une demande avec une récurrence hebdomadaire sur N semaines produit N occurrences | observé: occurrences | conditions: récurrence
+- Une occurrence d'une récurrence tombant sur un créneau dont l'occupation est égale à la capacité reçoit le statut « en attente » | observé: statut | conditions: capacité, occupation
+- Une occurrence d'une récurrence dont le début dépasse l'horizon reçoit le statut « refusée » | observé: statut | conditions: horizon
+- Chaque occurrence confirmée d'une récurrence augmente de un le compteur de réservations actives de l'utilisateur | observé: compteur | conditions: aucune
+- Les occurrences d'une récurrence qui feraient dépasser le quota reçoivent le statut « refusée » | observé: statut | conditions: quota, compteur
+- L'annulation acceptée d'une seule occurrence d'une récurrence diminue de un le nombre d'occurrences actives | observé: occurrences | conditions: délai d'annulation
+- L'annulation de toute la série fait passer chaque occurrence future dont le délai d'annulation n'est pas dépassé au statut « annulée » | observé: statut | conditions: délai d'annulation
+- Pour une récurrence traversant un changement d'heure du fuseau de la ressource, l'heure affichée des occurrences varie pour un utilisateur situé dans un fuseau sans ce changement | observé: heure affichée | conditions: fuseau, récurrence

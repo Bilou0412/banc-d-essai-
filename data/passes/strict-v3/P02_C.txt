@@ -1,0 +1,41 @@
+ÉTATS: recettes; titre; ingrédients; quantité; unité; portions; catégorie; requête; résultats; tri; courses; note; favori; photo
+ASSERTIONS:
+- Quand l'utilisateur enregistre une nouvelle recette dont le titre est « Tarte aux pommes », la recette « Tarte aux pommes » apparaît dans la liste des recettes | observé: recettes | conditions: titre
+- Quand l'utilisateur enregistre une nouvelle recette dont le titre est vide, aucune nouvelle recette n'apparaît dans la liste des recettes | observé: recettes | conditions: titre
+- Quand l'utilisateur supprime la recette « Tarte aux pommes », elle n'apparaît plus dans la liste des recettes | observé: recettes | conditions: aucune
+- Quand l'utilisateur ajoute l'ingrédient « farine » à une recette, « farine » apparaît dans la liste des ingrédients de cette recette | observé: ingrédients | conditions: aucune
+- Quand l'utilisateur retire l'ingrédient « farine » d'une recette, « farine » n'apparaît plus dans la liste des ingrédients de cette recette | observé: ingrédients | conditions: aucune
+- Quand l'utilisateur saisit une quantité négative pour un ingrédient, la quantité est refusée | observé: quantité | conditions: aucune
+- Quand l'utilisateur saisit une quantité non numérique pour un ingrédient, la quantité est refusée | observé: quantité | conditions: aucune
+- Pour une recette de 4 portions contenant 200 g de farine, quand l'utilisateur passe à 8 portions, la quantité de farine affichée est 400 g | observé: quantité | conditions: portions
+- Pour une recette de 4 portions contenant 200 g de farine, quand l'utilisateur passe à 2 portions, la quantité de farine affichée est 100 g | observé: quantité | conditions: portions
+- Pour une recette de 4 portions passée à 8 portions, quand l'utilisateur revient à 4 portions, la quantité de farine affichée redevient 200 g | observé: quantité | conditions: portions
+- Quand l'utilisateur fixe le nombre de portions à 0, la valeur est refusée | observé: portions | conditions: aucune
+- Pour une recette de 4 portions passée à 8 portions, l'unité de la farine affichée reste « g » | observé: unité | conditions: aucune
+- Quand l'utilisateur attribue la catégorie « Dessert » à une recette, la recette affiche la catégorie « Dessert » | observé: catégorie | conditions: aucune
+- Quand l'utilisateur filtre sur la catégorie « Dessert », les résultats ne contiennent que les recettes de catégorie « Dessert » | observé: résultats | conditions: catégorie
+- Quand l'utilisateur recherche « tarte », les résultats contiennent la recette dont le titre est « Tarte aux pommes » | observé: résultats | conditions: requête, titre
+- Quand l'utilisateur recherche « TARTE », les résultats contiennent la recette dont le titre est « Tarte aux pommes » | observé: résultats | conditions: requête, titre
+- Quand l'utilisateur recherche « farine », les résultats contiennent les recettes dont les ingrédients incluent « farine » | observé: résultats | conditions: requête, ingrédients
+- Quand l'utilisateur recherche un texte qui ne correspond à aucune recette, les résultats sont vides | observé: résultats | conditions: requête
+- Quand la requête est vide, les résultats contiennent toutes les recettes | observé: résultats | conditions: requête, recettes
+- Quand l'utilisateur active le filtre des favoris, les résultats ne contiennent que les recettes marquées favorites | observé: résultats | conditions: favori
+- Quand l'utilisateur ajoute une recette à la liste de courses, chaque ingrédient de la recette apparaît dans la liste de courses | observé: courses | conditions: ingrédients
+- Quand l'utilisateur ajoute à la liste de courses deux recettes contenant chacune 200 g de farine, la liste de courses affiche 400 g de farine | observé: courses | conditions: quantité, unité
+- Quand l'utilisateur ajoute à la liste de courses une recette contenant 200 g de farine et une recette contenant 1 tasse de farine, la liste de courses affiche deux lignes distinctes pour la farine | observé: courses | conditions: unité
+- Quand l'utilisateur ajoute à la liste de courses une recette de 4 portions réglée sur 8 portions et contenant 200 g de farine, la liste de courses affiche 400 g de farine | observé: courses | conditions: portions
+- Quand l'utilisateur coche « farine » dans la liste de courses, « farine » est marquée comme achetée | observé: courses | conditions: aucune
+- Quand l'utilisateur retire une recette de la liste de courses, les quantités apportées par cette recette disparaissent de la liste de courses | observé: courses | conditions: aucune
+- Quand l'utilisateur supprime une recette présente dans la liste de courses, les quantités apportées par cette recette disparaissent de la liste de courses | observé: courses | conditions: aucune
+- Quand l'utilisateur écrit une note sur une recette, la note s'affiche sur cette recette | observé: note | conditions: aucune
+- Quand l'utilisateur efface le texte de la note d'une recette, la recette n'affiche plus de note | observé: note | conditions: aucune
+- Quand l'utilisateur marque une recette comme favorite, la recette affiche l'indicateur de favori | observé: favori | conditions: aucune
+- Quand l'utilisateur retire une recette des favoris, la recette n'affiche plus l'indicateur de favori | observé: favori | conditions: aucune
+- Quand l'utilisateur ajoute une image à une recette, la photo s'affiche sur cette recette | observé: photo | conditions: aucune
+- Quand l'utilisateur ajoute un fichier qui n'est pas une image comme photo, la photo est refusée | observé: photo | conditions: aucune
+- Quand l'utilisateur supprime la photo d'une recette, la recette n'affiche plus de photo | observé: photo | conditions: aucune
+- Après fermeture puis réouverture de l'application, la recette « Tarte aux pommes » apparaît toujours dans la liste des recettes | observé: recettes | conditions: aucune | frontière: oui
+- Après fermeture puis réouverture de l'application, une recette marquée favorite affiche toujours l'indicateur de favori | observé: favori | conditions: aucune | frontière: oui
+- Après fermeture puis réouverture de l'application, la liste de courses contient toujours les articles ajoutés | observé: courses | conditions: aucune | frontière: oui
+- Quand le tri est « plus récentes d'abord », la recette créée en dernier apparaît en premier dans les résultats | observé: résultats | conditions: tri | frontière: oui
+- Quand l'utilisateur modifie la note d'une recette sur un appareil, la note modifiée s'affiche sur un second appareil du même utilisateur après synchronisation | observé: note | conditions: aucune | frontière: oui

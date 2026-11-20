@@ -1,0 +1,111 @@
+{
+ "sonde": "P03",
+ "passes": "strict-v2",
+ "passe": "A",
+ "k_passes": [
+  1.63,
+  1.92,
+  1.69
+ ],
+ "k_retenu": 1.69,
+ "concordance": "floue",
+ "assertions": 38,
+ "frontieres": 3,
+ "tests": 69,
+ "trous_a_priori": 14,
+ "trous_par_assertion": 0.368,
+ "tokens_decoupe": {
+  "neufs": 34160,
+  "cache": 16468,
+  "usd": 0.45286160000000003
+ },
+ "lacunes": [
+  {
+   "cas": "A02 : une quantité nulle n'est ni positive (A01) ni négative (A02) ; rien ne dit si l'article est créé",
+   "test": "test_A02_trou_quantite_zero",
+   "présumé": "Quand l'utilisateur ajoute un article avec une quantité nulle, l'article n'est pas créé | observé: article | conditions: quantité",
+   "attaque": 1
+  },
+  {
+   "cas": "A01 : un nom vide ou composé d'espaces n'est pas traité",
+   "test": "test_A01_trou_nom_vide",
+   "présumé": "Quand l'utilisateur ajoute un article sans nom (vide ou blanc), l'article n'est pas créé | observé: article | conditions: aucune",
+   "attaque": 1
+  },
+  {
+   "cas": "A05 : réduire la quantité exactement au nombre d'unités prêtées n'est ni « en dessous » ni explicitement permis",
+   "test": "test_A05_trou_reduction_egale_au_prete_acceptee",
+   "présumé": "Quand l'utilisateur réduit la quantité d'un article au nombre exact d'unités prêtées, la nouvelle quantité est enregistrée | observé: quantité | conditions: prêt",
+   "attaque": 1
+  },
+  {
+   "cas": "A03 : le disponible après une modification de quantité n'est fixé que juste après la création",
+   "test": "test_A03_trou_disponible_apres_modification_quantite",
+   "présumé": "Quand l'utilisateur modifie la quantité d'un article en service, le nombre d'unités disponibles devient la nouvelle quantité moins les unités prêtées | observé: disponible | conditions: quantité, prêt",
+   "attaque": 1
+  },
+  {
+   "cas": "A05 : une modification vers une quantité négative n'est pas traitée (A02 ne couvre que l'ajout)",
+   "test": "test_A05_trou_quantite_negative_refusee_en_modification",
+   "présumé": "Quand l'utilisateur modifie la quantité d'un article vers une valeur négative, la quantité reste inchangée | observé: quantité | conditions: quantité",
+   "attaque": 1
+  },
+  {
+   "cas": "A07 : un prêt de 0 unité ou d'un nombre négatif d'unités n'est pas traité",
+   "test": "test_A07_trou_pret_zero_ou_negatif",
+   "présumé": "Quand l'utilisateur tente de prêter 0 unité ou un nombre négatif d'unités, aucun prêt n'est créé | observé: prêt | conditions: disponible",
+   "attaque": 1
+  },
+  {
+   "cas": "A09 : un emprunteur composé uniquement d'espaces n'est pas qualifié",
+   "test": "test_A09_trou_emprunteur_blanc",
+   "présumé": "Quand l'utilisateur tente de créer un prêt avec un emprunteur blanc, aucun prêt n'est créé | observé: prêt | conditions: emprunteur",
+   "attaque": 1
+  },
+  {
+   "cas": "A11 : une date de retour égale à la date du jour n'est pas « antérieure » ; son acceptation n'est pas dite",
+   "test": "test_A11_trou_date_retour_aujourdhui_acceptee",
+   "présumé": "Quand l'utilisateur crée un prêt avec une date de retour égale à la date du jour, le prêt est créé | observé: prêt | conditions: échéance",
+   "attaque": 1
+  },
+  {
+   "cas": "A15 : le jour même de l'échéance, la date est-elle « dépassée » ?",
+   "test": "test_A15_trou_jour_echeance_pas_en_retard",
+   "présumé": "Un prêt non rendu dont la date de retour est la date du jour n'est pas marqué en retard | observé: retard | conditions: échéance",
+   "attaque": 1
+  },
+  {
+   "cas": "A16 : enregistrer deux fois le retour du même prêt n'est pas traité ; A16 appliquée deux fois ferait dépasser la quantité",
+   "test": "test_A16_trou_double_retour",
+   "présumé": "Quand l'utilisateur enregistre le retour d'un prêt déjà rendu, le nombre d'unités disponibles ne change pas | observé: disponible | conditions: statut",
+   "attaque": 1
+  },
+  {
+   "cas": "A16 : A16 (+2 au retour) et A24 (hors service ⇒ disponible 0) se croisent sur le retour d'un prêt d'un article hors service, sans dire qui l'emporte",
+   "test": "test_A16_trou_retour_sur_article_hors_service",
+   "présumé": "Quand l'utilisateur enregistre le retour d'un prêt d'un article hors service, son nombre d'unités disponibles reste 0 | observé: disponible | conditions: statut",
+   "attaque": 1
+  },
+  {
+   "cas": "A21 : une modification de quantité refusée (A05) ajoute-t-elle une entrée de modification ?",
+   "test": "test_A21_trou_modification_refusee_sans_entree",
+   "présumé": "Quand une modification de quantité est refusée, aucune entrée de modification n'est ajoutée à l'historique de l'article | observé: historique | conditions: prêt",
+   "attaque": 1
+  },
+  {
+   "cas": "A30 : la combinaison de plusieurs filtres actifs (emplacement et statut) n'est pas définie",
+   "test": "test_A30_trou_filtres_combines",
+   "présumé": "Quand plusieurs filtres sont actifs, seuls les articles satisfaisant tous les filtres sont affichés | observé: affichage | conditions: filtre, emplacement, statut",
+   "attaque": 1
+  },
+  {
+   "cas": "A36 : le format du fichier exporté face à un nom ou un emplacement contenant virgule ou guillemets n'est pas fixé",
+   "test": "test_A36_trou_export_nom_avec_virgule_et_guillemets",
+   "présumé": "Quand l'utilisateur exporte un article dont le nom ou l'emplacement contient une virgule ou des guillemets, chaque champ exporté se relit à l'identique | observé: export | conditions: aucune",
+   "attaque": 1
+  }
+ ],
+ "modeles": {
+  "red": "opus"
+ }
+}

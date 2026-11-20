@@ -1,0 +1,44 @@
+{
+ "situations": 300,
+ "paires": {
+  "H1-H2": 0.273,
+  "H1-S1": 0.343,
+  "H1-S2": 0.333,
+  "H2-S1": 0.467,
+  "H2-S2": 0.43,
+  "S1-S2": 0.85
+ },
+ "taux_moyen": 0.449,
+ "accord_4": 70,
+ "accord_4_part": 0.233,
+ "groupes": 35,
+ "juges": 16,
+ "non_juges": [
+  "restore_version [historique] (2)",
+  "select [alice.bob, carol.bob] (2)",
+  "set_cell [présence.bob] (2)",
+  "rename_sheet [présence.bob] (2)",
+  "undo [en_attente] (2)",
+  "select [alice.carol, bob.carol] (2)",
+  "select [bob.alice, carol.alice] (2)",
+  "set_cell [cellules.*.conflit, cellules.*.contenu, cellules.*.erreur] (2)",
+  "rename_sheet [cellules.*.contenu] (2)",
+  "deliver_all [alice.*.conflit, alice.*.contenu, alice.*.valeur] (2)",
+  "reconnect [présence.carol] (1)",
+  "reconnect [présence.alice] (1)",
+  "undo [présence.alice] (1)",
+  "import_csv [cellules.*.conflit] (1)",
+  "reconnect [cellules.*.conflit] (1)",
+  "rename_sheet [droits.alice, droits.bob, droits.carol] (1)",
+  "undo [cellules.*.conflit, cellules.*.contenu, cellules.*.valeur] (1)",
+  "redo [présence.alice] (1)",
+  "reconnect [alertes, cellules.*.conflit] (1)"
+ ],
+ "classes": {
+  "trou": 4,
+  "bug H2": 3,
+  "à trancher": 8,
+  "bug H2+S1+S2": 1
+ },
+ "accord_juges": 0.5
+}

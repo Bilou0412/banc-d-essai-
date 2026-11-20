@@ -1,0 +1,14 @@
+- A02 : une action refusée pour permission (frappe, annulation, version, restauration, changement de permission) doit-elle lever une erreur visible ou être ignorée silencieusement — la spécification ne le dit pas.
+- A15 : A12 retire B de la présence quand il perd la connexion, mais A15 exige que A voie encore le curseur de B à l'ancienne position : le curseur d'un utilisateur hors connexion reste-t-il affiché ou disparaît-il ?
+- A25 : un mot tapé caractère par caractère crée-t-il une seule entrée dans la pile d'annulation ou une entrée par caractère (granularité de l'annulation non fixée).
+- A07 : l'ordre relatif des deux mots insérés au même endroit au même moment n'est pas fixé (seule la présence des deux l'est).
+- A21 : quand A annule alors que la dernière modification vient de B, l'annulation doit-elle défaire la modification précédente de A ou ne rien faire du tout ?
+- A17 : si A insère exactement à la position du curseur de B, le curseur de B reste-t-il avant ou après le mot inséré ?
+- A34 : la version créée par une restauration a-t-elle pour auteur celui qui restaure ou l'auteur de la version restaurée ?
+- A08 : ce qu'est un « paragraphe » (séparateur, retour à la ligne final inclus ou non) n'est pas défini.
+- A38 : des frappes faites par B hors connexion avant d'être passé en lecture, puis envoyées après le changement, sont-elles acceptées ou rejetées ?
+- A23 : la pile d'annulation d'un utilisateur passé en lecture est-elle vidée (undo_count) ou conservée mais inutilisable ?
+- A33 : quand A restaure une version alors que B a des modifications locales non synchronisées, ces modifications sont-elles écrasées ou fusionnées dans le texte restauré ?
+- A11 : si le même utilisateur ouvre le document dans deux sessions et en ferme une, reste-t-il dans la présence ?
+- A20 : l'annulation d'une modification faite hors connexion, puis la reconnexion, doit-elle propager l'insertion puis sa suppression ou ne rien propager ?
+- A10 : la présence affichée chez un utilisateur inclut-elle cet utilisateur lui-même (A19 l'exclut seulement pour les curseurs) ?

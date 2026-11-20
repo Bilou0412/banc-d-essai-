@@ -1,0 +1,246 @@
+{
+ "sonde": "P10",
+ "passes": "strict-v2",
+ "passe": "A",
+ "k_passes": [
+  1.72,
+  1.68
+ ],
+ "k_retenu": 1.7,
+ "concordance": "concordante",
+ "convergent": true,
+ "tours": 4,
+ "attaques": 2,
+ "assertions": 36,
+ "frontieres": 6,
+ "champ_local": {
+  "tout": 3.0,
+  "frontiere": 3.0,
+  "autres": 3.0
+ },
+ "essais": {
+  "A01": 3,
+  "A02": 3,
+  "A03": 3,
+  "A04": 3,
+  "A05": 3,
+  "A06": 3,
+  "A07": 3,
+  "A08": 3,
+  "A09": 3,
+  "A10": 3,
+  "A11": 3,
+  "A12": 3,
+  "A13": 3,
+  "A14": 3,
+  "A15": 3,
+  "A16": 3,
+  "A17": 3,
+  "A18": 3,
+  "A19": 3,
+  "A20": 3,
+  "A21": 3,
+  "A22": 3,
+  "A23": 3,
+  "A24": 3,
+  "A25": 3,
+  "A26": 3,
+  "A27": 3,
+  "A28": 3,
+  "A29": 3,
+  "A30": 3,
+  "A31": 3,
+  "A32": 3,
+  "A33": 3,
+  "A34": 3,
+  "A35": 3,
+  "A36": 3
+ },
+ "non_passees": [],
+ "trous_a_priori": 18,
+ "echecs_par_type": {
+  "bug": 53,
+  "trou": 9
+ },
+ "nouvelles_assertions": {
+  "N01": "Quand un utilisateur envoie un message, son autre appareil lié, absent de la liste des appareils du destinataire, n'affiche pas ce message en clair | observé: lisibilité | conditions: appareils",
+  "N02": "Quand l'utilisateur confirme le changement d'empreinte d'un contact, le contact reste à l'état « non vérifié » | observé: vérification | conditions: empreinte",
+  "N03": "Quand l'utilisateur confirme le changement d'empreinte, le message bloqué passe à « envoyé » et s'affiche en clair chez le destinataire | observé: envoi | conditions: vérification, empreinte",
+  "N04": "Quand un utilisateur envoie un message à un contact « non vérifié » dont l'empreinte a changé, l'envoi n'est pas bloqué et le message s'affiche en clair chez le destinataire | observé: envoi | conditions: vérification, empreinte",
+  "N05": "Quand un utilisateur envoie un message à un destinataire dont au moins un appareil est en ligne, l'accusé indique « remis » | observé: accusé | conditions: connexion destinataire",
+  "N06": "Quand un utilisateur ajoute un contact à un groupe, ce contact apparaît dans la liste des membres vue par les autres membres | observé: membres | conditions: aucune",
+  "N07": "Quand l'autre participant revient en ligne après une modification de la minuterie, la nouvelle valeur s'affiche chez lui | observé: minuterie | conditions: connexion destinataire",
+  "N08": "Quand exactement la durée de la minuterie s'est écoulée depuis la lecture d'un message, ce message a disparu de l'appareil du destinataire | observé: présence | conditions: minuterie",
+  "N09": "Tant que le destinataire n'a pas lu un message éphémère, ce message ne disparaît pas de l'appareil de l'expéditeur | observé: présence | conditions: minuterie"
+ },
+ "lacunes": [
+  {
+   "cas": "A03 : l'autre appareil lié de l'expéditeur n'est pas dans la liste des appareils du destinataire ; A03 lui interdit-il d'afficher le message envoyé (synchronisation multi-appareils de l'expéditeur) ?",
+   "test": "test_A03_trou_autre_appareil_expediteur",
+   "présumé": "Quand un utilisateur envoie un message, son autre appareil lié, absent de la liste des appareils du destinataire, n'affiche pas ce message en clair | observé: lisibilité | conditions: appareils",
+   "attaque": 1
+  },
+  {
+   "cas": "A16 : A19 exige une confirmation de l'utilisateur mais ne dit pas si cette confirmation rend au contact l'état « vérifié »",
+   "test": "test_A16_trou_confirmation_ne_reverifie_pas",
+   "présumé": "Quand l'utilisateur confirme le changement d'empreinte d'un contact, le contact reste à l'état « non vérifié » | observé: vérification | conditions: empreinte",
+   "attaque": 1
+  },
+  {
+   "cas": "A19 : l'assertion ne dit pas si la confirmation libère le message bloqué ou s'il faut le renvoyer",
+   "test": "test_A19_trou_confirmation_libere_message",
+   "présumé": "Quand l'utilisateur confirme le changement d'empreinte, le message bloqué passe à « envoyé » et s'affiche en clair chez le destinataire | observé: envoi | conditions: vérification, empreinte",
+   "attaque": 1
+  },
+  {
+   "cas": "A19 : rien ne dit si l'envoi à un contact « non vérifié » dont l'empreinte a changé est bloqué",
+   "test": "test_A19_trou_non_verifie_pas_bloque",
+   "présumé": "Quand un utilisateur envoie un message à un contact « non vérifié » dont l'empreinte a changé, l'envoi n'est pas bloqué et le message s'affiche en clair chez le destinataire | observé: envoi | conditions: vérification, empreinte",
+   "attaque": 1
+  },
+  {
+   "cas": "A22 : A22 traite le cas où tous les appareils sont hors ligne, A23 le retour en ligne ; l'accusé quand un seul des appareils du destinataire est en ligne n'est pas fixé",
+   "test": "test_A22_trou_un_appareil_en_ligne_suffit",
+   "présumé": "Quand un utilisateur envoie un message à un destinataire dont au moins un appareil est en ligne, l'accusé indique « remis » | observé: accusé | conditions: connexion destinataire",
+   "attaque": 1
+  },
+  {
+   "cas": "A24 : la liste des membres dont il est question n'est pas précisée (celle de l'utilisateur qui ajoute ou celle de tous les membres)",
+   "test": "test_A24_trou_liste_vue_par_autre_membre",
+   "présumé": "Quand un utilisateur ajoute un contact à un groupe, ce contact apparaît dans la liste des membres vue par les autres membres | observé: membres | conditions: aucune",
+   "attaque": 1
+  },
+  {
+   "cas": "A31 : la propagation de la minuterie à un participant hors ligne au moment de la modification n'est pas tranchée",
+   "test": "test_A31_trou_participant_hors_ligne_voit_la_minuterie_au_retour",
+   "présumé": "Quand l'autre participant revient en ligne après une modification de la minuterie, la nouvelle valeur s'affiche chez lui | observé: minuterie | conditions: connexion destinataire",
+   "attaque": 1
+  },
+  {
+   "cas": "A32 : l'instant exact où la durée « s'est écoulée » (strictement après ou à égalité) n'est pas fixé",
+   "test": "test_A32_trou_borne_exacte",
+   "présumé": "Quand exactement la durée de la minuterie s'est écoulée depuis la lecture d'un message, ce message a disparu de l'appareil du destinataire | observé: présence | conditions: minuterie",
+   "attaque": 1
+  },
+  {
+   "cas": "A33 : côté expéditeur, la « lecture » qui déclenche la minuterie n'est pas définie (envoi, ou lecture par le destinataire) ; le sort d'un message jamais lu par le destinataire n'est pas fixé",
+   "test": "test_A33_trou_non_lu_reste_chez_expediteur",
+   "présumé": "Tant que le destinataire n'a pas lu un message éphémère, ce message ne disparaît pas de l'appareil de l'expéditeur | observé: présence | conditions: minuterie",
+   "attaque": 1
+  },
+  {
+   "cas": "A07 : un blob authentique d'un autre expéditeur (carol→bob) substitué en transit à un message alice→bob",
+   "test": "test_A07_trou_substitution_par_blob_d_un_autre_expediteur",
+   "présumé": "le texte de carol ne s'affiche pas dans la conversation avec alice",
+   "attaque": 2
+  },
+  {
+   "cas": "A07 : rejeu en transit d'un blob déjà remis",
+   "test": "test_A07_trou_rejeu_ne_duplique_pas",
+   "présumé": "le message rejoué ne s'affiche qu'une fois",
+   "attaque": 2
+  },
+  {
+   "cas": "A17 : seconde réinstallation d'un contact anciennement vérifié, sans confirmation entre les deux",
+   "test": "test_A17_trou_second_changement_sans_confirmation",
+   "présumé": "le contact étant « non vérifié » (A16), aucun nouvel avertissement (A18)",
+   "attaque": 2
+  },
+  {
+   "cas": "A19 : ordre des messages bloqués libérés par la confirmation",
+   "test": "test_A19_trou_plusieurs_bloques_liberes_dans_l_ordre",
+   "présumé": "affichés chez le destinataire dans l'ordre d'envoi",
+   "attaque": 2
+  },
+  {
+   "cas": "A21 : ordre des messages « en attente » au retour en ligne",
+   "test": "test_A21_trou_ordre_des_messages_en_attente",
+   "présumé": "affichés chez le destinataire dans l'ordre d'envoi",
+   "attaque": 2
+  },
+  {
+   "cas": "A24 : ajout en double d'un même contact au groupe",
+   "test": "test_A24_trou_ajout_en_double",
+   "présumé": "le contact apparaît une seule fois et reçoit chaque message une seule fois",
+   "attaque": 2
+  },
+  {
+   "cas": "A26 : membre du groupe ayant deux appareils liés",
+   "test": "test_A26_trou_membre_a_deux_appareils",
+   "présumé": "le message de groupe s'affiche en clair sur chacun de ses appareils (comme A02)",
+   "attaque": 2
+  },
+  {
+   "cas": "A27 : contact jamais ajouté au groupe",
+   "test": "test_A27_trou_non_membre_ne_dechiffre_pas",
+   "présumé": "il ne peut pas déchiffrer les messages du groupe",
+   "attaque": 2
+  },
+  {
+   "cas": "A30 : valeur par défaut et portée de la minuterie",
+   "test": "test_A30_trou_minuterie_propre_a_la_conversation",
+   "présumé": "désactivée (None) par défaut, et propre à chaque conversation",
+   "attaque": 2
+  }
+ ],
+ "modeles": {
+  "red": "opus",
+  "green": "haiku",
+  "juge": "opus"
+ },
+ "causes": {
+  "causes_distinctes": 1,
+  "causes_par_tour": [
+   1,
+   1,
+   0,
+   0
+  ],
+  "champ_local": {
+   "tout": 1.0,
+   "frontiere": 1.0,
+   "autres": 1.0
+  },
+  "par_assertion": {
+   "A01": 1,
+   "A02": 1,
+   "A03": 1,
+   "A04": 1,
+   "A05": 1,
+   "A06": 1,
+   "A07": 1,
+   "A08": 1,
+   "A09": 1,
+   "A10": 1,
+   "A11": 1,
+   "A12": 1,
+   "A13": 1,
+   "A14": 1,
+   "A15": 1,
+   "A16": 1,
+   "A17": 1,
+   "A18": 1,
+   "A19": 1,
+   "A20": 1,
+   "A21": 1,
+   "A22": 1,
+   "A23": 1,
+   "A24": 1,
+   "A25": 1,
+   "A26": 1,
+   "A27": 1,
+   "A28": 1,
+   "A29": 1,
+   "A30": 1,
+   "A31": 1,
+   "A32": 1,
+   "A33": 1,
+   "A34": 1,
+   "A35": 1,
+   "A36": 1
+  },
+  "liste": [
+   "collection failure"
+  ]
+ }
+}

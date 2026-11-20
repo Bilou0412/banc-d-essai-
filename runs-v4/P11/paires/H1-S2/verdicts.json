@@ -1,0 +1,1110 @@
+[
+ {
+  "groupe": "alice.resolve_conflict",
+  "divergences": 30,
+  "graine": 187,
+  "etape": 1,
+  "action": "alice.resolve_conflict('B2', use_discarded=False)",
+  "x": {
+   "personne": "alice",
+   "feuilles": [
+    "Feuille1"
+   ],
+   "feuille_vue": "Feuille1",
+   "cellules": {
+    "B2": {
+     "contenu": null,
+     "valeur": null,
+     "erreur": null
+    }
+   },
+   "connexion": "en ligne",
+   "en_attente": 1,
+   "annuler": false,
+   "rétablir": false,
+   "alertes": [],
+   "présence": {},
+   "droits": {
+    "alice": "écriture",
+    "bob": "écriture",
+    "carol": "lecture"
+   }
+  },
+  "y": {
+   "personne": "alice",
+   "feuilles": [
+    "Feuille1"
+   ],
+   "feuille_vue": "Feuille1",
+   "cellules": {
+    "B2": {
+     "contenu": null,
+     "valeur": null,
+     "erreur": null
+    }
+   },
+   "connexion": "en ligne",
+   "en_attente": 0,
+   "annuler": false,
+   "rétablir": false,
+   "alertes": [],
+   "présence": {},
+   "droits": {
+    "alice": "écriture",
+    "bob": "écriture",
+    "carol": "lecture"
+   }
+  },
+  "classe": "trou",
+  "assertion": "A89",
+  "cas": "Une personne en ligne résout un conflit en gardant la valeur retenue, et la spec ne dit pas si ce choix compte comme une modification en attente.",
+  "verdict": "zéro une fois l'envoi confirmé » quand une personne en ligne « modifie une cellule ». Garder la valeur retenue ne modifie pas le contenu (B2 reste null). Aucune assertion (A73, A89, A90) ne dit si une résolution de conflit compte comme une modification en attente, ni quand l'envoi d'une résolution est confirmé.\ncertainty: close\n```\n\nOn peut trancher avec deux faits que je n'ai pas :\n- **La valeur de `en_attente` juste avant cette étape.** La situation fournie est coupée avant. Si elle valait déjà 1 et qu'X la garde, ou si elle valait 0 et qu'X la fait monter, ce n'est pas le même cas.\n- **Ce que veut l'arbitre.** Résoudre un conflit en gardant la valeur retenue est-il une action à envoyer au serveur, comptée en attente comme une saisie ? Seul l'arbitre peut le dire.\n\nFaute de ces faits, je lis le cas comme un trou. Les deux comportements tiennent dans le texte : A89 parle de modifier une cellule, ce que ce choix ne fait pas, et rien ne fixe quand on observe le compteur par rapport à la confirmation. Si l'arbitre répond qu'une résolution doit être envoyée et confirmée comme une saisie, X viole A89 par extension.\n\nIl y a aussi un indice d'invalidité : B2 est vide alors qu'on y résout un conflit. Sans les étapes précédentes, je ne peux pas vérifier qu'un indicateur de conflit était bien affiché sur B2.\n\nCLASSE: trou\nASSERTION: A89\nCAS: Une personne en ligne résout un conflit en gardant la valeur retenue, et la spec ne dit pas si ce choix compte comme une modification en attente."
+ },
+ {
+  "groupe": "carol.resolve_conflict",
+  "divergences": 27,
+  "graine": 92,
+  "etape": 1,
+  "action": "carol.resolve_conflict('A1', use_discarded=False)",
+  "x": {
+   "personne": "carol",
+   "feuilles": [
+    "Feuille1"
+   ],
+   "feuille_vue": "Feuille1",
+   "cellules": {
+    "A1": {
+     "contenu": null,
+     "valeur": null,
+     "erreur": null
+    }
+   },
+   "connexion": "en ligne",
+   "en_attente": 0,
+   "annuler": false,
+   "rétablir": false,
+   "alertes": [],
+   "présence": {},
+   "droits": {
+    "alice": "écriture",
+    "bob": "écriture",
+    "carol": "lecture"
+   }
+  },
+  "y": {
+   "personne": "carol",
+   "feuilles": [
+    "Feuille1"
+   ],
+   "feuille_vue": "Feuille1",
+   "cellules": {
+    "A1": {
+     "contenu": null,
+     "valeur": null,
+     "erreur": null
+    }
+   },
+   "connexion": "en ligne",
+   "en_attente": 0,
+   "annuler": false,
+   "rétablir": false,
+   "alertes": [
+    [
+     "droit_insuffisant",
+     "Feuille1",
+     "A1",
+     null
+    ]
+   ],
+   "présence": {},
+   "droits": {
+    "alice": "écriture",
+    "bob": "écriture",
+    "carol": "lecture"
+   }
+  },
+  "classe": "trou",
+  "assertion": "A75",
+  "cas": "Une personne qui n'a que le droit lecture tente de résoudre un conflit en gardant la valeur retenue, et la spec ne dit pas si ce refus doit afficher une alerte de droit insuffisant.",
+  "verdict": "yant le droit lecture ne peut pas résoudre un conflit : l'indicateur de conflit reste affiché ». Elle ne parle que de l'indicateur, et X comme Y donnent la même observation sur ce point. A47 exige une alerte seulement quand un lecteur « tente d'y modifier une cellule ». Or garder la valeur retenue (use_discarded=False) ne change pas le contenu : rien ne fait de cette résolution une modification de cellule.\ncertainty: close\n```\n\nLes deux comportements respectent la spec, qui ne dit pas si un refus de résolution doit déclencher une alerte. Je classe donc en trou plutôt qu'en bug. Seul l'arbitre peut trancher, parce que la réponse dépend de son intention : veut-il étendre l'alerte d'A47 aux tentatives de résolution de conflit par un lecteur ? Le dossier ne contient pas cette réponse.\n\nJe mets « close » pour deux raisons :\n- **A47 lu largement** : si l'arbitre considère toute action d'écriture sur une cellule comme une tentative de modification, A47 s'applique et c'est X qui a tort.\n- **Pas de conflit visible** : A1 est vide dans les deux observations et rien n'y montre de conflit. Si aucun conflit n'existait vraiment, la situation pourrait aussi être classée invalide. Je ne retiens pas cette lecture, parce qu'A75 prévoit bien qu'un lecteur puisse tenter cette action.\n\nCLASSE: trou\nASSERTION: A75\nCAS: Une personne qui n'a que le droit lecture tente de résoudre un conflit en gardant la valeur retenue, et la spec ne dit pas si ce refus doit afficher une alerte de droit insuffisant."
+ },
+ {
+  "groupe": "alice.add_sheet",
+  "divergences": 26,
+  "graine": 34,
+  "etape": 1,
+  "action": "alice.add_sheet('Feuille1')",
+  "x": {
+   "personne": "alice",
+   "feuilles": [
+    "Feuille1"
+   ],
+   "feuille_vue": "Feuille1",
+   "cellules": {
+    "A1": {
+     "contenu": null,
+     "valeur": null,
+     "erreur": null
+    },
+    "B2": {
+     "contenu": null,
+     "valeur": null,
+     "erreur": null
+    }
+   },
+   "connexion": "en ligne",
+   "en_attente": 0,
+   "annuler": false,
+   "rétablir": false,
+   "alertes": [
+    [
+     "nom_existant",
+     null,
+     null,
+     null
+    ]
+   ],
+   "présence": {},
+   "droits": {
+    "alice": "écriture",
+    "bob": "écriture",
+    "carol": "lecture"
+   }
+  },
+  "y": {
+   "personne": "alice",
+   "feuilles": [
+    "Feuille1"
+   ],
+   "feuille_vue": "Feuille1",
+   "cellules": {
+    "A1": {
+     "contenu": null,
+     "valeur": null,
+     "erreur": null
+    },
+    "B2": {
+     "contenu": null,
+     "valeur": null,
+     "erreur": null
+    }
+   },
+   "connexion": "en ligne",
+   "en_attente": 0,
+   "annuler": false,
+   "rétablir": false,
+   "alertes": [
+    [
+     "nom_existant",
+     "Feuille1",
+     null,
+     null
+    ]
+   ],
+   "présence": {},
+   "droits": {
+    "alice": "écriture",
+    "bob": "écriture",
+    "carol": "lecture"
+   }
+  },
+  "classe": "trou",
+  "assertion": "A43",
+  "cas": "Quand une personne ajoute une feuille sous un nom déjà porté par une autre feuille, l'alerte « nom existant » peut indiquer ou non le nom en conflit, et la spec ne dit pas lequel.",
+  "verdict": "```\nclaim:     Quand Alice ajoute une feuille sous le nom « Feuille1 » alors que ce nom existe déjà, l'alerte nom_existant doit dire (ou ne pas dire) quel nom est en conflit.\nruling:    rejected\nbecause:   Le seul texte proche est A43, qui ne parle que du renommage : « une alerte indique que le nom existe déjà ». Il n'exige pas que l'alerte donne le nom, et aucune assertion ne traite l'ajout d'une feuille sous un nom déjà pris. Les deux comportements respectent le texte : la liste des feuilles ne change pas et l'alerte nom_existant apparaît dans les deux cas.\ncertainty: firm\n```\n\nLe claim est rejeté parce que la spec ne tranche pas ce cas. Seul le contenu de l'alerte diffère : X ne donne pas le nom de la feuille, Y donne « Feuille1 ». Rien dans la spec n'impose l'un ou l'autre.\n\nCLASSE: trou\nASSERTION: A43\nCAS: Quand une personne ajoute une feuille sous un nom déjà porté par une autre feuille, l'alerte « nom existant » peut indiquer ou non le nom en conflit, et la spec ne dit pas lequel."
+ },
+ {
+  "groupe": "bob.rename_sheet",
+  "divergences": 23,
+  "graine": 33,
+  "etape": 1,
+  "action": "bob.rename_sheet('Feuille1', 'Brouillon')",
+  "x": {
+   "personne": "bob",
+   "feuilles": [
+    "Brouillon"
+   ],
+   "feuille_vue": "Brouillon",
+   "cellules": {
+    "A1": {
+     "contenu": null,
+     "valeur": null,
+     "erreur": null
+    },
+    "A2": {
+     "contenu": null,
+     "valeur": null,
+     "erreur": null
+    },
+    "A3": {
+     "contenu": null,
+     "valeur": null,
+     "erreur": null
+    },
+    "B1": {
+     "contenu": null,
+     "valeur": null,
+     "erreur": null
+    },
+    "B2": {
+     "contenu": null,
+     "valeur": null,
+     "erreur": null
+    },
+    "C1": {
+     "contenu": null,
+     "valeur": null,
+     "erreur": null
+    }
+   },
+   "connexion": "en ligne",
+   "en_attente": 1,
+   "annuler": true,
+   "rétablir": false,
+   "alertes": [],
+   "présence": {},
+   "droits": {
+    "alice": null,
+    "bob": null,
+    "carol": null
+   }
+  },
+  "y": {
+   "personne": "bob",
+   "feuilles": [
+    "Brouillon"
+   ],
+   "feuille_vue": "Brouillon",
+   "cellules": {
+    "A1": {
+     "contenu": null,
+     "valeur": null,
+     "erreur": null
+    },
+    "A2": {
+     "contenu": null,
+     "valeur": null,
+     "erreur": null
+    },
+    "A3": {
+     "contenu": null,
+     "valeur": null,
+     "erreur": null
+    },
+    "B1": {
+     "contenu": null,
+     "valeur": null,
+     "erreur": null
+    },
+    "B2": {
+     "contenu": null,
+     "valeur": null,
+     "erreur": null
+    },
+    "C1": {
+     "contenu": null,
+     "valeur": null,
+     "erreur": null
+    }
+   },
+   "connexion": "en ligne",
+   "en_attente": 1,
+   "annuler": true,
+   "rétablir": false,
+   "alertes": [],
+   "présence": {},
+   "droits": {
+    "alice": "écriture",
+    "bob": "écriture",
+    "carol": "lecture"
+   }
+  },
+  "classe": "trou",
+  "assertion": "aucune",
+  "cas": "Quand une personne renomme une feuille, la spec ne dit pas si les droits des personnes sur cette feuille sont conservés sous le nouveau nom.",
+  "verdict": "     After bob renames \"Feuille1\" to \"Brouillon\", the \"droits\" field for the renamed sheet should keep the rights it had before (alice: écriture, bob: écriture, carol: lecture). One of the two observations is wrong.\nruling:    not resolvable\nbecause:   No assertion says what happens to per-sheet rights when the sheet is renamed. A41 only says \"la liste des feuilles affiche « Ventes »\". A26/A27 cover only references and values (\"le contenu de B1 devient =Ventes!A1\", \"B1 garde sa valeur\"). A50/A51 cover rights changes made \"par le propriétaire\" or attempted by a non-owner, and a rename is neither. Both observations satisfy every assertion. The fact that would settle it is whether a rename keeps the sheet's identity, rights included. The arbiter would have to state that intent, because the dossier cannot derive it from the current assertions.\ncertainty: close\n```\n\nWhy it is close: the spec treats a rename as keeping the sheet's identity (A26/A27). X shows bob with no right on a sheet he could rename only because he had write access. So X's behaviour is very likely unintended. But no assertion is broken: A51 is about an attempt to change a right, not about a side effect of renaming. The opening observation was truncated before the \"droits\" field, so I couldn't check what rights were shown before the step.\n\nCLASSE: trou\nASSERTION: aucune\nCAS: Quand une personne renomme une feuille, la spec ne dit pas si les droits des personnes sur cette feuille sont conservés sous le nouveau nom."
+ },
+ {
+  "groupe": "alice.rename_sheet",
+  "divergences": 22,
+  "graine": 146,
+  "etape": 1,
+  "action": "alice.rename_sheet('Feuille1', 'Feuille1')",
+  "x": {
+   "personne": "alice",
+   "feuilles": [
+    "Feuille1"
+   ],
+   "feuille_vue": "Feuille1",
+   "cellules": {
+    "A1": {
+     "contenu": null,
+     "valeur": null,
+     "erreur": null
+    },
+    "A2": {
+     "contenu": null,
+     "valeur": null,
+     "erreur": null
+    },
+    "A3": {
+     "contenu": null,
+     "valeur": null,
+     "erreur": null
+    },
+    "B1": {
+     "contenu": null,
+     "valeur": null,
+     "erreur": null
+    },
+    "B2": {
+     "contenu": null,
+     "valeur": null,
+     "erreur": null
+    },
+    "C1": {
+     "contenu": null,
+     "valeur": null,
+     "erreur": null
+    }
+   },
+   "connexion": "en ligne",
+   "en_attente": 0,
+   "annuler": false,
+   "rétablir": false,
+   "alertes": [
+    [
+     "nom_existant",
+     null,
+     null,
+     null
+    ]
+   ],
+   "présence": {},
+   "droits": {
+    "alice": "écriture",
+    "bob": "écriture",
+    "carol": "lecture"
+   }
+  },
+  "y": {
+   "personne": "alice",
+   "feuilles": [
+    "Feuille1"
+   ],
+   "feuille_vue": "Feuille1",
+   "cellules": {
+    "A1": {
+     "contenu": null,
+     "valeur": null,
+     "erreur": null
+    },
+    "A2": {
+     "contenu": null,
+     "valeur": null,
+     "erreur": null
+    },
+    "A3": {
+     "contenu": null,
+     "valeur": null,
+     "erreur": null
+    },
+    "B1": {
+     "contenu": null,
+     "valeur": null,
+     "erreur": null
+    },
+    "B2": {
+     "contenu": null,
+     "valeur": null,
+     "erreur": null
+    },
+    "C1": {
+     "contenu": null,
+     "valeur": null,
+     "erreur": null
+    }
+   },
+   "connexion": "en ligne",
+   "en_attente": 1,
+   "annuler": true,
+   "rétablir": false,
+   "alertes": [],
+   "présence": {},
+   "droits": {
+    "alice": "écriture",
+    "bob": "écriture",
+    "carol": "lecture"
+   }
+  },
+  "classe": "trou",
+  "assertion": "A43",
+  "cas": "Renaming a sheet to the name it already has: the spec does not say whether this counts as a duplicate name that triggers the alert, or as a valid rename that changes nothing but adds an action to undo and a pending change.",
+  "verdict": "claim:     Renaming the sheet \"Feuille1\" to \"Feuille1\" (its own current name) is decided by the spec. Under one reading, this is a duplicate name, so A43's alert is required and there is nothing to undo. Under the other, it is an ordinary rename that does nothing, so no alert is needed and undo becomes available.\nruling:    not resolvable\nbecause:   A42 says \"un nom déjà utilisé **par une autre feuille**\", and here no other sheet uses the name. A43 only says \"un nom déjà utilisé\" and does not say whether a sheet's own name counts. Read next to A42, it most likely means another sheet. A41 (\"renomme une feuille en « Ventes »\") does not say what a rename to the same name should do. Neither behaviour breaks any assertion: in both, the sheet list stays [\"Feuille1\"]. Y's `en_attente: 1` while online does not break A89 either, because A89 is about cell edits and only applies \"une fois l'envoi confirmé\". The deciding fact is whether renaming a sheet to its own name is a duplicate-name rename that triggers the alert, a do-nothing that can be undone, or a do-nothing that cannot be undone. That is the spec author's intent, so it goes to the arbiter. The dossier cannot answer it.\ncertainty: close\n\nCLASSE: trou\nASSERTION: A43\nCAS: Renaming a sheet to the name it already has: the spec does not say whether this counts as a duplicate name that triggers the alert, or as a valid rename that changes nothing but adds an action to undo and a pending change."
+ },
+ {
+  "groupe": "bob.resolve_conflict",
+  "divergences": 22,
+  "graine": 17,
+  "etape": 1,
+  "action": "bob.resolve_conflict('A3', use_discarded=True)",
+  "x": {
+   "personne": "bob",
+   "feuilles": [
+    "Feuille1"
+   ],
+   "feuille_vue": "Feuille1",
+   "cellules": {
+    "A3": {
+     "contenu": null,
+     "valeur": null,
+     "erreur": null
+    }
+   },
+   "connexion": "en ligne",
+   "en_attente": 1,
+   "annuler": false,
+   "rétablir": false,
+   "alertes": [],
+   "présence": {},
+   "droits": {
+    "alice": "écriture",
+    "bob": "écriture",
+    "carol": "lecture"
+   }
+  },
+  "y": {
+   "personne": "bob",
+   "feuilles": [
+    "Feuille1"
+   ],
+   "feuille_vue": "Feuille1",
+   "cellules": {
+    "A3": {
+     "contenu": null,
+     "valeur": null,
+     "erreur": null
+    }
+   },
+   "connexion": "en ligne",
+   "en_attente": 0,
+   "annuler": false,
+   "rétablir": false,
+   "alertes": [],
+   "présence": {},
+   "droits": {
+    "alice": "écriture",
+    "bob": "écriture",
+    "carol": "lecture"
+   }
+  },
+  "classe": "bug H1",
+  "assertion": "A89",
+  "cas": "Une personne en ligne avec le droit écriture résout un conflit en choisissant la valeur écartée, et son nombre de modifications en attente reste à 1 au lieu de revenir à 0.",
+  "verdict": "e, la spécification fixe le nombre de modifications en attente qu'il voit à 0. Elle ne le laisse pas à 1.\nruling:    upheld\nbecause:   A89 dit : « Quand une personne en ligne modifie une cellule, le nombre de modifications en attente reste à zéro une fois l'envoi confirmé ». Selon A72, choisir la valeur écartée fait que « le contenu de la cellule devient la valeur écartée ». Il s'agit donc bien d'une modification de cellule faite en ligne, et X affiche quand même \"en_attente\": 1. A90 va dans le même sens : si un reste d'attente venait d'un passage hors ligne plus tôt, le compte devrait déjà être revenu à zéro « après la fusion ».\ncertainty: close\n```\nLe jugement est serré parce que A89 ajoute « une fois l'envoi confirmé ». Si l'observation est faite avant la confirmation du serveur, X a pu montrer un état passager. J'ai supposé que chaque observation montre l'état une fois l'action terminée. Rien dans la spécification ne confirme ni n'exclut cette hypothèse. Deux choses tranchent la question : savoir si les observations sont prises après la confirmation, et voir l'état complet avant la divergence. La situation reçue est coupée, et on ne sait pas si bob avait déjà une modification en attente. Le chercheur peut trouver ces deux faits ; l'arbitre n'a pas besoin d'intervenir.\n\nCLASSE: bug X\nASSERTION: A89\nCAS: Une personne en ligne avec le droit écriture résout un conflit en choisissant la valeur écartée, et son nombre de modifications en attente reste à 1 au lieu de revenir à 0."
+ },
+ {
+  "groupe": "bob.add_sheet",
+  "divergences": 22,
+  "graine": 60,
+  "etape": 1,
+  "action": "bob.add_sheet('Feuille2')",
+  "x": {
+   "personne": "bob",
+   "feuilles": [
+    "Feuille1",
+    "Feuille2"
+   ],
+   "feuille_vue": "Feuille2",
+   "cellules": {
+    "A1": {
+     "contenu": null,
+     "valeur": null,
+     "erreur": null
+    },
+    "B2": {
+     "contenu": null,
+     "valeur": null,
+     "erreur": null
+    }
+   },
+   "connexion": "en ligne",
+   "en_attente": 1,
+   "annuler": true,
+   "rétablir": false,
+   "alertes": [],
+   "présence": {},
+   "droits": {
+    "alice": null,
+    "bob": "écriture",
+    "carol": null
+   }
+  },
+  "y": {
+   "personne": "bob",
+   "feuilles": [
+    "Feuille1",
+    "Feuille2"
+   ],
+   "feuille_vue": "Feuille2",
+   "cellules": {
+    "A1": {
+     "contenu": null,
+     "valeur": null,
+     "erreur": null
+    },
+    "B2": {
+     "contenu": null,
+     "valeur": null,
+     "erreur": null
+    }
+   },
+   "connexion": "en ligne",
+   "en_attente": 1,
+   "annuler": false,
+   "rétablir": false,
+   "alertes": [],
+   "présence": {},
+   "droits": {
+    "alice": "écriture",
+    "bob": "écriture",
+    "carol": null
+   }
+  },
+  "classe": "trou",
+  "assertion": "A38",
+  "cas": "After someone adds a sheet, the spec doesn't say whether they can undo it, or what right other people (including a possible owner) get on the new sheet.",
+  "verdict": "\"`. The question is whether the spec decides either difference.\nruling:    rejected — the spec does not decide either difference. This is a gap in the spec, not a bug in X or Y.\nbecause:   **Rights.** A38 covers only the person who adds the sheet: « Quand une personne ajoute une feuille, elle obtient le droit écriture sur cette feuille ». Both implementations give bob `écriture`. No assertion sets alice's right on a sheet someone else created. If alice is the owner, A50 suggests the owner has authority over rights. But the opening state is cut off, so it doesn't say who the owner is. Even if alice were the owner, no assertion says she gets a right on a new sheet automatically.\n\n**Undo.** Only certain actions are named as undoable: deleting a sheet (A110), renaming one (A112), importing a CSV (A113) and restoring a version (A134). Adding a sheet is not named. A104, « aucune modification depuis l'ouverture → annuler indisponible », does not mean undo becomes available after any modification. Both values therefore meet the spec. `en_attente: 1` in both shows the action counts as a pending change, but none of A88–A90 links pending changes to undo.\ncertainty: close — a reasonable reader expects adding a sheet to be undoable, like the other sheet actions (A110, A112). The spec still doesn't say so.\n\nCLASSE: trou\nASSERTION: A38\nCAS: After someone adds a sheet, the spec doesn't say whether they can undo it, or what right other people (including a possible owner) get on the new sheet."
+ },
+ {
+  "groupe": "carol.add_sheet",
+  "divergences": 21,
+  "graine": 90,
+  "etape": 2,
+  "action": "carol.add_sheet('Ventes')",
+  "x": {
+   "personne": "carol",
+   "feuilles": [
+    "Feuille1",
+    "Ventes"
+   ],
+   "feuille_vue": "Ventes",
+   "cellules": {
+    "A1": {
+     "contenu": null,
+     "valeur": null,
+     "erreur": null
+    },
+    "B2": {
+     "contenu": null,
+     "valeur": null,
+     "erreur": null
+    }
+   },
+   "connexion": "en ligne",
+   "en_attente": 1,
+   "annuler": true,
+   "rétablir": false,
+   "alertes": [],
+   "présence": {},
+   "droits": {
+    "alice": null,
+    "bob": null,
+    "carol": "écriture"
+   }
+  },
+  "y": {
+   "personne": "carol",
+   "feuilles": [
+    "Feuille1",
+    "Ventes"
+   ],
+   "feuille_vue": "Ventes",
+   "cellules": {
+    "A1": {
+     "contenu": null,
+     "valeur": null,
+     "erreur": null
+    },
+    "B2": {
+     "contenu": null,
+     "valeur": null,
+     "erreur": null
+    }
+   },
+   "connexion": "en ligne",
+   "en_attente": 1,
+   "annuler": false,
+   "rétablir": false,
+   "alertes": [],
+   "présence": {},
+   "droits": {
+    "alice": "écriture",
+    "bob": null,
+    "carol": "écriture"
+   }
+  },
+  "classe": "trou",
+  "assertion": "aucune",
+  "cas": "Quand une personne ajoute une feuille, la spec ne dit ni si cet ajout rend la commande annuler disponible, ni quel droit les autres personnes du classeur reçoivent sur la nouvelle feuille.",
+  "verdict": "uling:    rejected\nbecause:   Aucune assertion ne tranche l'un ou l'autre point. A38 dit seulement que « quand une personne ajoute une feuille, elle obtient le droit écriture sur cette feuille ». Les deux donnent écriture à carol, et la spec ne dit rien du droit des autres personnes sur une feuille nouvelle. A104 rend annuler indisponible « quand une personne n'a fait aucune modification depuis l'ouverture ». Elle ne dit pas qu'ajouter une feuille rend annuler disponible. A110 et A112 couvrent l'annulation d'une suppression et d'un renommage, A134 celle d'une restauration, mais rien ne couvre l'annulation d'un ajout de feuille.\ncertainty: close\n```\n\n- **Pourquoi je rejette :** les deux comportements respectent toutes les assertions citées. La spec ne permet donc pas de dire laquelle des deux implémentations a tort.\n- **Pourquoi c'est serré :** on peut lire l'ajout d'une feuille comme une « modification » au sens d'A104. Avec cette lecture, A104 n'oblige toujours pas annuler à devenir disponible.\n- **Ce qui le tranche :** l'auteur de la spec doit décider deux choses. Ajouter une feuille fait-il partie des actions que la personne peut annuler ? Quel droit les autres personnes reçoivent-elles sur une feuille nouvelle ? Le dossier ne contient pas la réponse.\n\nCLASSE: trou\nASSERTION: aucune\nCAS: Quand une personne ajoute une feuille, la spec ne dit ni si cet ajout rend la commande annuler disponible, ni quel droit les autres personnes du classeur reçoivent sur la nouvelle feuille."
+ },
+ {
+  "groupe": "carol.rename_sheet",
+  "divergences": 21,
+  "graine": 135,
+  "etape": 1,
+  "action": "carol.rename_sheet('Feuille1', 'Brouillon')",
+  "x": {
+   "personne": "carol",
+   "feuilles": [
+    "Feuille1"
+   ],
+   "feuille_vue": "Brouillon",
+   "cellules": {
+    "A1": {
+     "contenu": null,
+     "valeur": "#REF!",
+     "erreur": "#REF!"
+    },
+    "A2": {
+     "contenu": null,
+     "valeur": "#REF!",
+     "erreur": "#REF!"
+    },
+    "A3": {
+     "contenu": null,
+     "valeur": "#REF!",
+     "erreur": "#REF!"
+    },
+    "B1": {
+     "contenu": null,
+     "valeur": "#REF!",
+     "erreur": "#REF!"
+    },
+    "B2": {
+     "contenu": null,
+     "valeur": "#REF!",
+     "erreur": "#REF!"
+    },
+    "C1": {
+     "contenu": null,
+     "valeur": "#REF!",
+     "erreur": "#REF!"
+    }
+   },
+   "connexion": "en ligne",
+   "en_attente": 0,
+   "annuler": false,
+   "rétablir": false,
+   "alertes": [
+    [
+     "droit_insuffisant",
+     "Feuille1",
+     null,
+     null
+    ]
+   ],
+   "présence": {},
+   "droits": {
+    "alice": null,
+    "bob": null,
+    "carol": null
+   }
+  },
+  "y": {
+   "personne": "carol",
+   "feuilles": [
+    "Feuille1"
+   ],
+   "feuille_vue": "Brouillon",
+   "cellules": {
+    "A1": {
+     "contenu": null,
+     "valeur": null,
+     "erreur": null
+    },
+    "A2": {
+     "contenu": null,
+     "valeur": null,
+     "erreur": null
+    },
+    "A3": {
+     "contenu": null,
+     "valeur": null,
+     "erreur": null
+    },
+    "B1": {
+     "contenu": null,
+     "valeur": null,
+     "erreur": null
+    },
+    "B2": {
+     "contenu": null,
+     "valeur": null,
+     "erreur": null
+    },
+    "C1": {
+     "contenu": null,
+     "valeur": null,
+     "erreur": null
+    }
+   },
+   "connexion": "en ligne",
+   "en_attente": 0,
+   "annuler": false,
+   "rétablir": false,
+   "alertes": [
+    [
+     "droit_insuffisant",
+     "Feuille1",
+     null,
+     null
+    ]
+   ],
+   "présence": {},
+   "droits": {
+    "alice": null,
+    "bob": null,
+    "carol": null
+   }
+  },
+  "classe": "invalide",
+  "assertion": "aucune",
+  "cas": "Après un renommage de feuille refusé faute de droit, l'observation montre comme feuille vue le nom demandé, une feuille qui n'existe pas, et la question est ce qu'affichent ses cellules vides.",
+  "verdict": "covers a formula pointing to a missing sheet, A46 covers content (null in both), and A48 covers someone with the read right (carol has `null`). The question only comes from an impossible observation, a view of a sheet that is not in the list.\ncertainty: close\n```\n\nThe test is the problem here, not either implementation. The spec allows the action: a rename without rights should be refused and the sheet list should stay the same, by analogy with A40, A41 and A42. Both implementations do that. But the shared observation says carol is looking at \"Brouillon\", which is not in the list of sheets. That only makes sense if the test harness tracks the view by the name it asked for, not by the real sheet. What a cell on a missing sheet shows means nothing to the user.\n\nThe fact that would settle it belongs in the dossier, not with the arbiter: after a refused rename, what should `feuille_vue` be? It should almost certainly stay \"Feuille1\". If the harness is fixed that way, this divergence should go away. If it doesn't, the question becomes whether someone with no rights at all sees values, which no assertion covers.\n\nIt's a close call between `invalide` and `trou`. I chose `invalide` because the divergence exists only through the non-existent viewed sheet.\n\nCLASSE: invalide\nASSERTION: aucune\nCAS: Après un renommage de feuille refusé faute de droit, l'observation montre comme feuille vue le nom demandé, une feuille qui n'existe pas, et la question est ce qu'affichent ses cellules vides."
+ },
+ {
+  "groupe": "bob.undo",
+  "divergences": 12,
+  "graine": 200,
+  "etape": 3,
+  "action": "bob.undo()",
+  "x": {
+   "personne": "bob",
+   "feuilles": [
+    "Feuille1"
+   ],
+   "feuille_vue": "Feuille1",
+   "cellules": {
+    "A1": {
+     "contenu": null,
+     "valeur": null,
+     "erreur": null
+    },
+    "A2": {
+     "contenu": null,
+     "valeur": null,
+     "erreur": null
+    },
+    "A3": {
+     "contenu": null,
+     "valeur": null,
+     "erreur": null
+    },
+    "B1": {
+     "contenu": null,
+     "valeur": null,
+     "erreur": null
+    },
+    "B2": {
+     "contenu": null,
+     "valeur": null,
+     "erreur": null
+    },
+    "C1": {
+     "contenu": null,
+     "valeur": null,
+     "erreur": null
+    }
+   },
+   "connexion": "en ligne",
+   "en_attente": 0,
+   "annuler": false,
+   "rétablir": true,
+   "alertes": [],
+   "présence": {},
+   "droits": {
+    "alice": "écriture",
+    "bob": "écriture",
+    "carol": "lecture"
+   }
+  },
+  "y": {
+   "personne": "bob",
+   "feuilles": [
+    "Feuille1"
+   ],
+   "feuille_vue": "Feuille1",
+   "cellules": {
+    "A1": {
+     "contenu": null,
+     "valeur": null,
+     "erreur": null
+    },
+    "A2": {
+     "contenu": null,
+     "valeur": null,
+     "erreur": null
+    },
+    "A3": {
+     "contenu": null,
+     "valeur": null,
+     "erreur": null
+    },
+    "B1": {
+     "contenu": null,
+     "valeur": null,
+     "erreur": null
+    },
+    "B2": {
+     "contenu": null,
+     "valeur": null,
+     "erreur": null
+    },
+    "C1": {
+     "contenu": null,
+     "valeur": null,
+     "erreur": null
+    }
+   },
+   "connexion": "en ligne",
+   "en_attente": 2,
+   "annuler": false,
+   "rétablir": true,
+   "alertes": [],
+   "présence": {},
+   "droits": {
+    "alice": "écriture",
+    "bob": "écriture",
+    "carol": "lecture"
+   }
+  },
+  "classe": "bug S2",
+  "assertion": "A89",
+  "cas": "Someone online changes a cell and then undoes that change while still online, and once the send is confirmed the pending count does not return to zero.",
+  "verdict": "```\nclaim:     After bob, who is online, undoes his own set_cell('C1','4'), the pending-change count shows 0 (X) or 2 (Y).\nruling:    upheld (bug Y)\nbecause:   A89 says « Quand une personne en ligne modifie une cellule, le nombre de modifications en attente reste à zéro une fois l'envoi confirmé ». Bob is « en ligne » at every step, and his undo changes C1's content back to the previous value (A100). That makes the undo an online cell change, so once it is sent the pending count must be 0, as X shows. A99 is the only rule where an undo touches the pending count, and it covers only an undo made offline (« conditions: connexion »). So Y has no anchor for a count of 2.\ncertainty: close\n```\n\nThis is `close` for two reasons. The spec never says outright that an online undo counts as a \"modification\" under A89. And the observation does not show whether the send was already confirmed. Even so, an online client with no unconfirmed send could not plausibly show 2 pending changes. The undo could account for at most one pending change. The second would mean bob's set_cell was still unconfirmed or was counted twice. No assertion allows either.\n\nCLASSE: bug Y\nASSERTION: A89\nCAS: Someone online changes a cell and then undoes that change while still online, and once the send is confirmed the pending count does not return to zero."
+ },
+ {
+  "groupe": "alice.undo",
+  "divergences": 10,
+  "graine": 8,
+  "etape": 2,
+  "action": "alice.undo()",
+  "x": {
+   "personne": "alice",
+   "feuilles": [
+    "Feuille1"
+   ],
+   "feuille_vue": "Feuille1",
+   "cellules": {
+    "A1": {
+     "contenu": null,
+     "valeur": null,
+     "erreur": null
+    },
+    "A2": {
+     "contenu": null,
+     "valeur": null,
+     "erreur": null
+    },
+    "A3": {
+     "contenu": null,
+     "valeur": null,
+     "erreur": null
+    },
+    "B1": {
+     "contenu": null,
+     "valeur": null,
+     "erreur": null
+    },
+    "B2": {
+     "contenu": null,
+     "valeur": null,
+     "erreur": null
+    },
+    "C1": {
+     "contenu": null,
+     "valeur": null,
+     "erreur": null
+    }
+   },
+   "connexion": "en ligne",
+   "en_attente": 0,
+   "annuler": false,
+   "rétablir": true,
+   "alertes": [],
+   "présence": {},
+   "droits": {
+    "alice": "écriture",
+    "bob": "écriture",
+    "carol": "lecture"
+   }
+  },
+  "y": {
+   "personne": "alice",
+   "feuilles": [
+    "Feuille1"
+   ],
+   "feuille_vue": "Feuille1",
+   "cellules": {
+    "A1": {
+     "contenu": null,
+     "valeur": null,
+     "erreur": null
+    },
+    "A2": {
+     "contenu": null,
+     "valeur": null,
+     "erreur": null
+    },
+    "A3": {
+     "contenu": null,
+     "valeur": null,
+     "erreur": null
+    },
+    "B1": {
+     "contenu": null,
+     "valeur": null,
+     "erreur": null
+    },
+    "B2": {
+     "contenu": null,
+     "valeur": null,
+     "erreur": null
+    },
+    "C1": {
+     "contenu": null,
+     "valeur": null,
+     "erreur": null
+    }
+   },
+   "connexion": "en ligne",
+   "en_attente": 2,
+   "annuler": false,
+   "rétablir": true,
+   "alertes": [],
+   "présence": {},
+   "droits": {
+    "alice": "écriture",
+    "bob": "écriture",
+    "carol": "lecture"
+   }
+  },
+  "classe": "bug S2",
+  "assertion": "A89",
+  "cas": "When a person who is online undoes a CSV import that had filled two cells, the number of pending changes must go back to zero instead of keeping the two undone cells pending.",
+  "verdict": "I'm upholding the claim that Y is wrong here, with close certainty. After an online import, undoing it leaves Y with 2 pending changes, while the spec says an online edit leaves zero pending once it is confirmed.\n\n```\nclaim:     after alice, online, undoes a CSV import that filled two cells, the number of pending changes is 0 (not 2)\nruling:    upheld\nbecause:   A89 says \"Quand une personne en ligne modifie une cellule, le nombre de modifications en attente reste à zéro une fois l'envoi confirmé\". Undoing the import is an online change to the contents of A1 and B1. Alice is \"en ligne\", yet Y shows \"en_attente\": 2. That is exactly the two undone cells, still unsent, while X shows 0 at the same point in the scenario. A99 (offline undo) and A90 (coming back online) don't apply here.\ncertainty: close — A89 says \"modifie une cellule\" without naming undo, and the snapshot doesn't show whether the send was confirmed. Still, the same moment shows 0 for X, so Y's 2 means its changes stay pending while online, not that they are waiting to be confirmed.\n```\n\nCLASSE: bug Y\nASSERTION: A89\nCAS: When a person who is online undoes a CSV import that had filled two cells, the number of pending changes must go back to zero instead of keeping the two undone cells pending."
+ },
+ {
+  "groupe": "bob.set_cell",
+  "divergences": 8,
+  "graine": 50,
+  "etape": 5,
+  "action": "bob.set_cell('B2', '0', sheet='Feuille1')",
+  "x": {
+   "personne": "bob",
+   "feuilles": [
+    "Feuille1"
+   ],
+   "feuille_vue": "Feuille1",
+   "cellules": {
+    "A1": {
+     "contenu": null,
+     "valeur": null,
+     "erreur": null
+    },
+    "A2": {
+     "contenu": null,
+     "valeur": null,
+     "erreur": null
+    },
+    "A3": {
+     "contenu": null,
+     "valeur": null,
+     "erreur": null
+    },
+    "B1": {
+     "contenu": null,
+     "valeur": null,
+     "erreur": null
+    },
+    "B2": {
+     "contenu": "0",
+     "valeur": 0,
+     "erreur": null
+    },
+    "C1": {
+     "contenu": null,
+     "valeur": null,
+     "erreur": null
+    }
+   },
+   "connexion": "en ligne",
+   "en_attente": 1,
+   "annuler": true,
+   "rétablir": false,
+   "alertes": [],
+   "présence": {},
+   "droits": {
+    "alice": "lecture",
+    "bob": "écriture",
+    "carol": "lecture"
+   }
+  },
+  "y": {
+   "personne": "bob",
+   "feuilles": [
+    "Feuille1"
+   ],
+   "feuille_vue": "Feuille1",
+   "cellules": {
+    "A1": {
+     "contenu": null,
+     "valeur": null,
+     "erreur": null
+    },
+    "A2": {
+     "contenu": null,
+     "valeur": null,
+     "erreur": null
+    },
+    "A3": {
+     "contenu": null,
+     "valeur": null,
+     "erreur": null
+    },
+    "B1": {
+     "contenu": null,
+     "valeur": null,
+     "erreur": null
+    },
+    "B2": {
+     "contenu": "0",
+     "valeur": 0,
+     "erreur": null
+    },
+    "C1": {
+     "contenu": null,
+     "valeur": null,
+     "erreur": null
+    }
+   },
+   "connexion": "en ligne",
+   "en_attente": 1,
+   "annuler": true,
+   "rétablir": false,
+   "alertes": [],
+   "présence": {},
+   "droits": {
+    "alice": "écriture",
+    "bob": "écriture",
+    "carol": "lecture"
+   }
+  },
+  "classe": "trou",
+  "assertion": "A50",
+  "cas": "Une personne dont la spec ne dit pas si elle est propriétaire passe son propre droit de écriture à lecture, et il n'est pas tranché si les autres doivent voir ce droit devenir lecture.",
+  "verdict": "use:** Two assertions could apply, and they give opposite answers. Which one applies depends on whether Alice is the owner, and the spec never says who the owner is.\n- If Alice is the owner, A50 applies: \"Quand le propriétaire passe le droit d'une personne de écriture à lecture sur une feuille, le droit affiché pour cette personne sur cette feuille devient lecture\". That makes X right.\n- If she is not the owner, A51 applies: \"Quand une personne non propriétaire tente de modifier le droit d'une autre personne, ce droit reste inchangé\". That makes Y right. Even then, A51 says \"d'une autre personne\", so it doesn't strictly cover changing your own right.\n\nNothing in the situation settles it:\n- `ouvrir_classeur(alice, bob, carol)` doesn't say who owns the workbook.\n- No assertion says who owns the workbook.\n- No assertion says whether an owner may lower their own right.\n- Right after `set_right`, both implementations showed Alice's right as `écriture` with no alert. That fits either \"change not applied yet\" or \"change refused\", so it doesn't decide anything either.\n\n**What would resolve it:** a rule saying who owns the workbook and whether the owner can change their own right. Only the spec's author can supply that; there's nothing to look up.\n\n**Certainty:** close.\n\nCLASSE: trou\nASSERTION: A50\nCAS: Une personne dont la spec ne dit pas si elle est propriétaire passe son propre droit de écriture à lecture, et il n'est pas tranché si les autres doivent voir ce droit devenir lecture."
+ }
+]

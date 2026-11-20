@@ -1,0 +1,316 @@
+{
+ "journal": [
+  {
+   "lot": "A",
+   "groupe": "delete_sheet [cellules.*.erreur]",
+   "cas": "Une personne tente de supprimer la seule feuille du classeur, juste après l'avoir renommée, alors qu'une autre personne a modifié une cellule de cette feuille sous l'ancien nom sans que ce soit encore livré.",
+   "decision": "V1",
+   "proposee": "Quand la suppression de la dernière feuille du classeur est refusée, rien ne change : la liste des feuilles reste la même et les cellules vides restent vides, sans valeur ni erreur (principe P1) | observé: feuilles, valeur, erreur | conditions: feuilles"
+  },
+  {
+   "lot": "A",
+   "groupe": "set_cell [cellules.*.erreur, cellules.*.valeur]",
+   "cas": "Une formule qui multiplie par un nombre une cellule contenant une date-heure (importée avec décalage) doit-elle donner une erreur de type ou un nombre ?",
+   "decision": "V1",
+   "proposee": "Quand une personne saisit =A1*2 alors que A1 contient une date-heure, la cellule affiche une erreur de type et aucune valeur numérique | observé: erreur, valeur | conditions: contenu"
+  },
+  {
+   "lot": "A",
+   "groupe": "rename_sheet [présence.bob]",
+   "cas": "Une personne renomme une feuille alors qu'une autre personne a déjà un indicateur de présence posé sur une cellule de cette feuille.",
+   "decision": "V1",
+   "proposee": "Quand une personne renomme une feuille alors qu'une autre personne a un indicateur de présence sur une cellule de cette feuille, l'indicateur garde le nom de feuille sous lequel cette autre personne a sélectionné la cellule, jusqu'à sa prochaine sélection | observé: présence | conditions: connexion, feuilles"
+  }
+ ],
+ "bugs": [
+  {
+   "lot": "A",
+   "groupe": "resolve_conflict [alertes]",
+   "final": "bug H1+H2",
+   "cas": "Une personne qui n'a que le droit lecture demande de résoudre le conflit de la cellule A1 en gardant la valeur retenue."
+  },
+  {
+   "lot": "A",
+   "groupe": "rename_sheet [cellules.*.erreur]",
+   "final": "bug H2",
+   "cas": "A person with no write right tries to rename the only sheet, the rename is refused, and the sheet's empty cells must stay empty with no value and no error."
+  },
+  {
+   "lot": "A",
+   "groupe": "deliver_all [alice.*.erreur, bob.*.erreur, carol.*.erreur]",
+   "final": "bug H2",
+   "cas": "Après le renommage d'une feuille vide, une fois livré à toutes les personnes, chacune voit les cellules vides de cette feuille avec ou sans erreur de référence."
+  },
+  {
+   "lot": "A",
+   "groupe": "history [(tout)]",
+   "final": "bug H1",
+   "cas": "Carol n'a que le droit lecture sur Feuille1 et y saisit une formule, puis alice consulte l'historique des versions de Feuille1 avant toute livraison."
+  },
+  {
+   "lot": "A",
+   "groupe": "deliver_all [alice.*.conflit, alice.*.contenu, alice.*.valeur]",
+   "final": "bug H2",
+   "cas": "Une personne modifie B2 puis annule avant la confirmation de l'envoi ; une autre écrit « Budget » dans B2 ; après la livraison, B2 doit contenir « Budget » sans indicateur de conflit."
+  },
+  {
+   "lot": "A",
+   "groupe": "set_cell [cellules.*.conflit]",
+   "final": "bug H2",
+   "cas": "Une personne ayant le droit écriture saisit une nouvelle formule dans une cellule qui portait un indicateur de conflit hérité de deux saisies simultanées déjà livrées."
+  },
+  {
+   "lot": "A",
+   "groupe": "reconnect [cellules.*.conflit, cellules.*.contenu, cellules.*.valeur]",
+   "final": "bug H2",
+   "cas": "Une personne modifie A1 hors ligne puis annule cette modification avant de revenir en ligne. Pendant ce temps, une autre personne en ligne a saisi un texte dans A1. Au retour de la connexion, la cellule doit afficher le texte de l'autre personne, sans conflit."
+  },
+  {
+   "lot": "A",
+   "groupe": "reopen [présence.bob]",
+   "final": "bug H2",
+   "cas": "Une personne rouvre le classeur après qu'une autre a sélectionné une cellule, et cette autre personne n'a rien sélectionné depuis la réouverture."
+  }
+ ],
+ "a_trancher": [
+  {
+   "lot": "A",
+   "groupe": "set_right [droits.bob]",
+   "juges": [
+    "bug V2",
+    "bug V1"
+   ],
+   "cas": [
+    "Alice is online with write access but is not the workbook owner, and she tries to change bob's right on Feuille1 from write to read.",
+    "Alice, the workbook owner (taken to be the first person to open it), is online and changes Bob's right on Feuille1 from écriture to lecture."
+   ],
+   "variantes": [
+    {
+     "greens": [
+      "H2",
+      "S1",
+      "S2"
+     ],
+     "obs": {
+      "alertes": [],
+      "droits": {
+       "alice": "écriture",
+       "bob": "écriture",
+       "carol": "lecture"
+      }
+     }
+    },
+    {
+     "greens": [
+      "H1"
+     ],
+     "obs": {
+      "alertes": [],
+      "droits": {
+       "alice": "écriture",
+       "bob": "lecture",
+       "carol": "lecture"
+      }
+     }
+    }
+   ]
+  },
+  {
+   "lot": "A",
+   "groupe": "set_right [droits.carol]",
+   "juges": [
+    "trou",
+    "bug V2"
+   ],
+   "cas": [
+    "Juste après l'ouverture partagée du classeur, alice passe le droit de carol de lecture à écriture sur Feuille1, alors qu'aucune assertion ne dit si ouvrir le classeur rend alice propriétaire.",
+    "Alice tente de passer le droit de carol sur Feuille1 de lecture à écriture alors que, dans les étapes précédentes, elle ne peut pas modifier les droits (elle est hors ligne ou n'est pas propriétaire)."
+   ],
+   "variantes": [
+    {
+     "greens": [
+      "H2",
+      "S1",
+      "S2"
+     ],
+     "obs": {
+      "alertes": [],
+      "droits": {
+       "alice": "écriture",
+       "bob": "écriture",
+       "carol": "lecture"
+      }
+     }
+    },
+    {
+     "greens": [
+      "H1"
+     ],
+     "obs": {
+      "alertes": [],
+      "droits": {
+       "alice": "écriture",
+       "bob": "écriture",
+       "carol": "écriture"
+      }
+     }
+    }
+   ]
+  },
+  {
+   "lot": "A",
+   "groupe": "rename_sheet [alertes]",
+   "juges": [
+    "trou",
+    "bug V1"
+   ],
+   "cas": [
+    "Une personne qui n'a que le droit lecture sur une feuille la renomme avec le nom que la feuille porte déjà.",
+    "Une personne qui n'a que le droit lecture et qui est en ligne renomme une feuille avec le nom que la feuille porte déjà."
+   ],
+   "variantes": [
+    {
+     "greens": [
+      "H1",
+      "H2",
+      "S1"
+     ],
+     "obs": {
+      "alertes": [],
+      "annuler": false,
+      "cellules": {
+       "A1": {
+        "contenu": null,
+        "erreur": null,
+        "valeur": null
+       },
+       "A2": {
+        "contenu": null,
+        "erreur": null,
+        "valeur": null
+       },
+       "A3": {
+        "contenu": null,
+        "erreur": null,
+        "valeur": null
+       },
+       "B1": {
+        "contenu": null,
+        "erreur": null,
+        "valeur": null
+       },
+       "B2": {
+        "contenu": null,
+        "erreur": null,
+        "valeur": null
+       },
+       "C1": {
+        "contenu": null,
+        "erreur": null,
+        "valeur": null
+       }
+      },
+      "connexion": "en ligne",
+      "droits": {
+       "alice": "écriture",
+       "bob": "écriture",
+       "carol": "lecture"
+      },
+      "en_attente": 0,
+      "feuille_vue": "Feuille1",
+      "feuilles": [
+       "Feuille1"
+      ],
+      "personne": "carol",
+      "présence": {},
+      "rétablir": false
+     }
+    },
+    {
+     "greens": [
+      "S2"
+     ],
+     "obs": {
+      "alertes": [
+       [
+        "droit_insuffisant",
+        "Feuille1",
+        null,
+        null
+       ]
+      ],
+      "annuler": false,
+      "cellules": {
+       "A1": {
+        "contenu": null,
+        "erreur": null,
+        "valeur": null
+       },
+       "A2": {
+        "contenu": null,
+        "erreur": null,
+        "valeur": null
+       },
+       "A3": {
+        "contenu": null,
+        "erreur": null,
+        "valeur": null
+       },
+       "B1": {
+        "contenu": null,
+        "erreur": null,
+        "valeur": null
+       },
+       "B2": {
+        "contenu": null,
+        "erreur": null,
+        "valeur": null
+       },
+       "C1": {
+        "contenu": null,
+        "erreur": null,
+        "valeur": null
+       }
+      },
+      "connexion": "en ligne",
+      "droits": {
+       "alice": "écriture",
+       "bob": "écriture",
+       "carol": "lecture"
+      },
+      "en_attente": 0,
+      "feuille_vue": "Feuille1",
+      "feuilles": [
+       "Feuille1"
+      ],
+      "personne": "carol",
+      "présence": {},
+      "rétablir": false
+     }
+    }
+   ]
+  }
+ ],
+ "bilan": {
+  "iteration": 4,
+  "trous_juges": 3,
+  "assertions_ajoutees": 3,
+  "bugs": 8,
+  "a_trancher": 3,
+  "tests_ajoutes": 6,
+  "tests_retires": [],
+  "passages": {
+   "test_C35_delete_last_sheet_just_renamed_is_refused_without_trace": 4,
+   "test_C35_refused_delete_of_last_sheet_leaves_sheet_for_everyone_after_delivery": 4,
+   "test_C36_imported_datetime_times_number_is_type_error": 3,
+   "test_C36_typed_datetime_times_number_is_type_error": 3,
+   "test_C37_presence_keeps_old_sheet_name_right_after_rename": 3,
+   "test_C37_presence_keeps_old_sheet_name_after_delivery_until_next_select": 3
+  },
+  "ajouts": {
+   "C35": "Quand une personne ayant le droit écriture tente de supprimer la dernière feuille du classeur, même juste après l'avoir renommée et alors qu'une modification d'une autre personne sur cette feuille n'est pas encore livrée, la suppression est refusée et rien ne change : la liste des feuilles garde cette feuille sous son nom courant, les cellules vides restent vides sans valeur ni erreur, le nombre de modifications en attente reste inchangé et aucune alerte n'apparaît (principe P1) | observé: feuilles, valeur, erreur, attente, alerte | conditions: feuilles, droit, connexion",
+   "C36": "Quand une personne saisit =A1*2 alors que A1 contient une date-heure (saisie ou importée avec décalage horaire), la cellule affiche une erreur de type : son erreur est « #TYPE! » et sa valeur affichée est ce code d'erreur, jamais un nombre | observé: erreur, valeur | conditions: contenu",
+   "C37": "Quand une personne renomme une feuille alors qu'une autre personne a un indicateur de présence sur une cellule de cette feuille, l'indicateur garde le nom de feuille sous lequel cette autre personne a sélectionné la cellule, avant comme après livraison du renommage, jusqu'à la prochaine sélection de cette autre personne | observé: présence | conditions: connexion, feuilles"
+  }
+ }
+}

@@ -1,0 +1,20 @@
+{
+ "modele": "sonnet",
+ "tours": 1,
+ "tout_passe": true,
+ "passent": 269,
+ "total": 269,
+ "tokens": {
+  "neufs": 306243,
+  "cache": 195860,
+  "usd": 1.9985179999999998
+ },
+ "journal": [
+  {
+   "tour": 1,
+   "passent": 269,
+   "total": 269,
+   "usd": 1.9985179999999998
+  }
+ ]
+}

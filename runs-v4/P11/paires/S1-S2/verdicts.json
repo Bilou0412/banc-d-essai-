@@ -1,0 +1,1059 @@
+[
+ {
+  "groupe": "carol.resolve_conflict",
+  "divergences": 44,
+  "graine": 92,
+  "etape": 1,
+  "action": "carol.resolve_conflict('A1', use_discarded=False)",
+  "x": {
+   "personne": "carol",
+   "feuilles": [
+    "Feuille1"
+   ],
+   "feuille_vue": "Feuille1",
+   "cellules": {
+    "A1": {
+     "contenu": null,
+     "valeur": null,
+     "erreur": null
+    }
+   },
+   "connexion": "en ligne",
+   "en_attente": 0,
+   "annuler": false,
+   "rétablir": false,
+   "alertes": [],
+   "présence": {},
+   "droits": {
+    "alice": "écriture",
+    "bob": "écriture",
+    "carol": "lecture"
+   }
+  },
+  "y": {
+   "personne": "carol",
+   "feuilles": [
+    "Feuille1"
+   ],
+   "feuille_vue": "Feuille1",
+   "cellules": {
+    "A1": {
+     "contenu": null,
+     "valeur": null,
+     "erreur": null
+    }
+   },
+   "connexion": "en ligne",
+   "en_attente": 0,
+   "annuler": false,
+   "rétablir": false,
+   "alertes": [
+    [
+     "droit_insuffisant",
+     "Feuille1",
+     "A1",
+     null
+    ]
+   ],
+   "présence": {},
+   "droits": {
+    "alice": "écriture",
+    "bob": "écriture",
+    "carol": "lecture"
+   }
+  },
+  "classe": "trou",
+  "assertion": "A75",
+  "cas": "Une personne qui n'a que le droit lecture choisit de garder la valeur retenue dans un indicateur de conflit, et la spec ne dit pas si une alerte de droit doit apparaître.",
+  "verdict": "     Carol a seulement le droit lecture. Elle choisit de garder la valeur retenue dans l'indicateur de conflit de A1 (resolve_conflict('A1', use_discarded=False)). Faut-il qu'une alerte « droit_insuffisant » apparaisse ?\nruling:    not resolvable\nbecause:   A75 traite exactement ce cas et dit seulement que « l'indicateur de conflit reste affiché ». Il ne dit rien d'une alerte. L'alerte de droit vient d'A47, qui ne vise que « tente d'y modifier une cellule ». Or garder la valeur retenue ne change pas le contenu. Les deux comportements respectent donc la spec. La réponse doit venir de l'arbitre : une lectrice qui tente de résoudre un conflit doit-elle recevoir l'alerte de droit ? C'est son intention, le dossier ne peut pas la fournir.\ncertainty: close\n```\n\nJe classe la divergence en trou de la spec, mais avec une réserve. On peut lire « résoudre un conflit » comme une tentative de modifier la cellule. Dans ce cas A47 s'appliquerait et ce serait un bug de X. Je ne retiens pas cette lecture : A47 parle de modifier le contenu, et ce choix ne le modifie pas.\n\nAutre réserve : l'observation ne contient aucun champ « conflit », et le contenu de A1 est vide. Je ne peux donc pas vérifier qu'un conflit existait vraiment sur A1. S'il n'y en avait pas, la situation serait plutôt invalide.\n\nCLASSE: trou\nASSERTION: A75\nCAS: Une personne qui n'a que le droit lecture choisit de garder la valeur retenue dans un indicateur de conflit, et la spec ne dit pas si une alerte de droit doit apparaître."
+ },
+ {
+  "groupe": "carol.add_sheet",
+  "divergences": 26,
+  "graine": 90,
+  "etape": 2,
+  "action": "carol.add_sheet('Ventes')",
+  "x": {
+   "personne": "carol",
+   "feuilles": [
+    "Feuille1",
+    "Ventes"
+   ],
+   "feuille_vue": "Ventes",
+   "cellules": {
+    "A1": {
+     "contenu": null,
+     "valeur": null,
+     "erreur": null
+    },
+    "B2": {
+     "contenu": null,
+     "valeur": null,
+     "erreur": null
+    }
+   },
+   "connexion": "en ligne",
+   "en_attente": 1,
+   "annuler": true,
+   "rétablir": false,
+   "alertes": [],
+   "présence": {},
+   "droits": {
+    "alice": "écriture",
+    "bob": null,
+    "carol": "écriture"
+   }
+  },
+  "y": {
+   "personne": "carol",
+   "feuilles": [
+    "Feuille1",
+    "Ventes"
+   ],
+   "feuille_vue": "Ventes",
+   "cellules": {
+    "A1": {
+     "contenu": null,
+     "valeur": null,
+     "erreur": null
+    },
+    "B2": {
+     "contenu": null,
+     "valeur": null,
+     "erreur": null
+    }
+   },
+   "connexion": "en ligne",
+   "en_attente": 1,
+   "annuler": false,
+   "rétablir": false,
+   "alertes": [],
+   "présence": {},
+   "droits": {
+    "alice": "écriture",
+    "bob": null,
+    "carol": "écriture"
+   }
+  },
+  "classe": "trou",
+  "assertion": "A104",
+  "cas": "Juste après qu'une personne a ajouté une feuille, la spec ne dit pas si la commande annuler doit être disponible pour défaire cet ajout.",
+  "verdict": "Aucune assertion n'oblige à rendre l'ajout d'une feuille annulable, ni ne l'interdit. Les deux comportements respectent donc la spec.\n\n```\nclaim:     Après carol.add_sheet('Ventes'), la spec impose-t-elle que la commande annuler soit disponible (X, annuler: true) ou indisponible (Y, annuler: false) ?\nruling:    not resolvable\nbecause:   A104 dit seulement que « Quand une personne n'a fait aucune modification depuis l'ouverture, la commande annuler est indisponible ». Ce n'est pas le cas ici, car carol vient d'agir. A104 ne dit pas non plus qu'une action rend annuler disponible. Les assertions sur les actions de feuille ne couvrent que la suppression (« annule la suppression d'une feuille », A110) et le renommage (A112), jamais l'ajout. Aucune assertion ne tranche entre X et Y. Il faut savoir si l'ajout d'une feuille entre dans la liste des actions qu'on peut annuler. C'est une intention du produit que seul l'arbitre connaît : le dossier ne peut pas le trancher.\ncertainty: close\n```\n\nLa certitude est `close` pour une raison précise : puisque la suppression et le renommage d'une feuille sont annulables, on pourrait en conclure que l'ajout l'est aussi, ce qui donnerait raison à X. Mais aucune assertion ne le dit.\n\nCLASSE: trou\nASSERTION: A104\nCAS: Juste après qu'une personne a ajouté une feuille, la spec ne dit pas si la commande annuler doit être disponible pour défaire cet ajout."
+ },
+ {
+  "groupe": "carol.set_right",
+  "divergences": 25,
+  "graine": 12,
+  "etape": 1,
+  "action": "carol.set_right('bob', 'Feuille1', 'lecture')",
+  "x": {
+   "droits": {
+    "alice": "écriture",
+    "bob": "écriture",
+    "carol": "lecture"
+   },
+   "alertes": [
+    "droit_insuffisant"
+   ]
+  },
+  "y": {
+   "droits": {
+    "alice": "écriture",
+    "bob": "écriture",
+    "carol": "lecture"
+   },
+   "alertes": []
+  },
+  "classe": "trou",
+  "assertion": "A51",
+  "cas": "Quand une personne non propriétaire tente de changer le droit d'une autre personne, la spec n'exige ni n'interdit une alerte qui signale le refus.",
+  "verdict": "claim:     carol.set_right('bob', 'Feuille1', 'lecture') — un comportement est requis, l'autre interdit : X lève l'alerte « droit_insuffisant », Y ne lève aucune alerte ; les deux laissent bob en écriture.\nruling:    rejected\nbecause:   A51 dit seulement « Quand une personne non propriétaire tente de modifier le droit d'une autre personne, ce droit reste inchangé ». Le droit de bob reste « écriture » chez X comme chez Y, donc les deux respectent A51. A51 ne parle d'aucune alerte. Seul A47 exige une alerte de droit (« une alerte indique qu'elle n'a pas le droit écriture »), mais il porte sur une autre action : quelqu'un en lecture qui tente de modifier une cellule. Changer le droit d'une autre personne n'est pas ce cas. Aucune assertion n'exige ni n'interdit une alerte quand on refuse un changement de droit.\ncertainty: firm\n```\n\nLes deux implémentations donnent le même résultat : le droit de bob ne change pas. Elles diffèrent seulement sur l'alerte, et la spec ne dit rien de ce point. On peut aussi vérifier que carol n'est pas propriétaire : si elle l'était, A50 imposerait que bob passe en « lecture », et les deux implémentations seraient en faute. La situation affichée est coupée et ne dit pas qui est propriétaire. Mais cela ne change pas le classement, puisque X et Y ne diffèrent que par l'alerte.\n\nCLASSE: trou\nASSERTION: A51\nCAS: Quand une personne non propriétaire tente de changer le droit d'une autre personne, la spec n'exige ni n'interdit une alerte qui signale le refus."
+ },
+ {
+  "groupe": "bob.set_right",
+  "divergences": 24,
+  "graine": 18,
+  "etape": 1,
+  "action": "bob.set_right('alice', 'Feuille1', 'lecture')",
+  "x": {
+   "droits": {
+    "alice": "écriture",
+    "bob": "écriture",
+    "carol": "lecture"
+   },
+   "alertes": [
+    "droit_insuffisant"
+   ]
+  },
+  "y": {
+   "droits": {
+    "alice": "écriture",
+    "bob": "écriture",
+    "carol": "lecture"
+   },
+   "alertes": []
+  },
+  "classe": "trou",
+  "assertion": "A51",
+  "cas": "Quand une personne non propriétaire tente de modifier le droit d'une autre personne, le droit reste inchangé, mais la spec ne dit pas si une alerte doit l'indiquer.",
+  "verdict": "claim:     Une personne non propriétaire (bob) qui tente de passer le droit d'alice sur Feuille1 à lecture doit recevoir une alerte « droit_insuffisant ».\nruling:    rejected\nbecause:   Les deux implémentations gardent les mêmes droits (alice reste en écriture), ce qui suffit pour A51 : « Quand une personne non propriétaire tente de modifier le droit d'une autre personne, ce droit reste inchangé ». Aucune assertion n'exige d'alerte dans ce cas. Les alertes pour droit manquant, A47 et A56, concernent la modification de cellules, pas la modification de droits.\ncertainty: firm\n\nUne réserve : le début de la situation est tronqué, donc je ne vois pas directement qui est propriétaire. Je considère que bob n'est pas propriétaire parce que les deux implémentations ont refusé le changement de droit. Si bob était propriétaire, X et Y violeraient toutes les deux A50, ce qui ne les départagerait pas.\n\nCLASSE: trou\nASSERTION: A51\nCAS: Quand une personne non propriétaire tente de modifier le droit d'une autre personne, le droit reste inchangé, mais la spec ne dit pas si une alerte doit l'indiquer."
+ },
+ {
+  "groupe": "alice.add_sheet",
+  "divergences": 23,
+  "graine": 57,
+  "etape": 1,
+  "action": "alice.add_sheet('Feuille2')",
+  "x": {
+   "personne": "alice",
+   "feuilles": [
+    "Feuille1",
+    "Feuille2"
+   ],
+   "feuille_vue": "Feuille2",
+   "cellules": {
+    "A1": {
+     "contenu": null,
+     "valeur": null,
+     "erreur": null
+    },
+    "B2": {
+     "contenu": null,
+     "valeur": null,
+     "erreur": null
+    }
+   },
+   "connexion": "en ligne",
+   "en_attente": 1,
+   "annuler": true,
+   "rétablir": false,
+   "alertes": [],
+   "présence": {},
+   "droits": {
+    "alice": "écriture",
+    "bob": null,
+    "carol": null
+   }
+  },
+  "y": {
+   "personne": "alice",
+   "feuilles": [
+    "Feuille1",
+    "Feuille2"
+   ],
+   "feuille_vue": "Feuille2",
+   "cellules": {
+    "A1": {
+     "contenu": null,
+     "valeur": null,
+     "erreur": null
+    },
+    "B2": {
+     "contenu": null,
+     "valeur": null,
+     "erreur": null
+    }
+   },
+   "connexion": "en ligne",
+   "en_attente": 1,
+   "annuler": false,
+   "rétablir": false,
+   "alertes": [],
+   "présence": {},
+   "droits": {
+    "alice": "écriture",
+    "bob": null,
+    "carol": null
+   }
+  },
+  "classe": "trou",
+  "assertion": "A104",
+  "cas": "Right after a person adds a sheet online, the spec does not say whether the undo command becomes available.",
+  "verdict": "```\nclaim:     After alice.add_sheet('Feuille2') online, X shows the undo command as available (\"annuler\": true) and Y shows it as unavailable (\"annuler\": false). Everything else in the two observations is identical.\nruling:    not resolvable\nbecause:   A104 only covers one direction: \"Quand une personne n'a fait aucune modification depuis l'ouverture, la commande annuler est indisponible\". No assertion says adding a sheet becomes an action the person can undo. A110 (undoing a sheet deletion), A112 (undoing a sheet rename) and A134 (undoing a version restore) say this for other actions, but none of them names adding a sheet.\ncertainty: close\n```\n\nThe spec could settle this, so the question goes back to the spec, not to the arbiter. It needs one line saying whether adding a sheet can be undone, for example: \"Quand une personne annule l'ajout d'une feuille, la liste des feuilles ne contient plus cette feuille\". Until that line exists, both behaviours meet the spec.\n\nThis is close because the spec lets almost every other sheet action be undone (deleting, renaming, restoring, importing), so X looks like the expected answer. But that comes from analogy, not from what the spec says, and I can't call Y a bug on that alone.\n\nCLASSE: trou\nASSERTION: A104\nCAS: Right after a person adds a sheet online, the spec does not say whether the undo command becomes available."
+ },
+ {
+  "groupe": "bob.add_sheet",
+  "divergences": 15,
+  "graine": 60,
+  "etape": 1,
+  "action": "bob.add_sheet('Feuille2')",
+  "x": {
+   "personne": "bob",
+   "feuilles": [
+    "Feuille1",
+    "Feuille2"
+   ],
+   "feuille_vue": "Feuille2",
+   "cellules": {
+    "A1": {
+     "contenu": null,
+     "valeur": null,
+     "erreur": null
+    },
+    "B2": {
+     "contenu": null,
+     "valeur": null,
+     "erreur": null
+    }
+   },
+   "connexion": "en ligne",
+   "en_attente": 1,
+   "annuler": true,
+   "rétablir": false,
+   "alertes": [],
+   "présence": {},
+   "droits": {
+    "alice": "écriture",
+    "bob": "écriture",
+    "carol": null
+   }
+  },
+  "y": {
+   "personne": "bob",
+   "feuilles": [
+    "Feuille1",
+    "Feuille2"
+   ],
+   "feuille_vue": "Feuille2",
+   "cellules": {
+    "A1": {
+     "contenu": null,
+     "valeur": null,
+     "erreur": null
+    },
+    "B2": {
+     "contenu": null,
+     "valeur": null,
+     "erreur": null
+    }
+   },
+   "connexion": "en ligne",
+   "en_attente": 1,
+   "annuler": false,
+   "rétablir": false,
+   "alertes": [],
+   "présence": {},
+   "droits": {
+    "alice": "écriture",
+    "bob": "écriture",
+    "carol": null
+   }
+  },
+  "classe": "trou",
+  "assertion": "A104",
+  "cas": "Right after a person adds a sheet, as their first action since opening, the spec doesn't say whether undo is available.",
+  "verdict": "claim:     After bob adds a sheet, X shows undo as available (`\"annuler\": true`) and Y shows it as unavailable (`\"annuler\": false`). Every other field matches.\nruling:    not resolvable (gap in the spec)\nbecause:   A104 only says that if a person has made \"aucune modification depuis l'ouverture, la commande annuler est indisponible\". It does not say what happens after a modification. The spec lists undo for deleting a sheet (A110), renaming one (A112), a CSV import (A113) and restoring a version (A134), but never for adding a sheet, so nothing says whether bob can undo it. Both results fit the spec. To settle it, the spec would need an assertion saying \"quand une personne annule l'ajout d'une feuille…\". That decision belongs to whoever owns the spec, not the dossier.\ncertainty: close. The shared trace is cut off. If bob had changed a cell before this step, A100 and A104 together would make undo available, and Y would be wrong. Only `ouvrir_classeur` appears before the divergence, so I'm treating `add_sheet` as bob's first action.\n\nCLASSE: trou\nASSERTION: A104\nCAS: Right after a person adds a sheet, as their first action since opening, the spec doesn't say whether undo is available."
+ },
+ {
+  "groupe": "réseau.reconnect",
+  "divergences": 11,
+  "graine": 23,
+  "etape": 4,
+  "action": "réseau.reconnect('alice'); deliver_all()",
+  "x": {
+   "personne": "alice",
+   "feuilles": [
+    "Feuille1"
+   ],
+   "feuille_vue": "Feuille1",
+   "cellules": {
+    "A1": {
+     "contenu": "2026-07-01 12:00",
+     "valeur": "2026-07-01 14:00",
+     "erreur": null
+    },
+    "A2": {
+     "contenu": null,
+     "valeur": null,
+     "erreur": null
+    },
+    "A3": {
+     "contenu": null,
+     "valeur": null,
+     "erreur": null
+    },
+    "B1": {
+     "contenu": null,
+     "valeur": null,
+     "erreur": null
+    },
+    "B2": {
+     "contenu": "2026-07-01 12:00",
+     "valeur": "2026-07-01 14:00",
+     "erreur": null
+    },
+    "C1": {
+     "contenu": null,
+     "valeur": null,
+     "erreur": null
+    }
+   },
+   "connexion": "en ligne",
+   "en_attente": 0,
+   "annuler": false,
+   "rétablir": false,
+   "alertes": [],
+   "présence": {},
+   "droits": {
+    "alice": "écriture",
+    "bob": "écriture",
+    "carol": "lecture"
+   }
+  },
+  "y": {
+   "personne": "alice",
+   "feuilles": [
+    "Feuille1"
+   ],
+   "feuille_vue": "Feuille1",
+   "cellules": {
+    "A1": {
+     "contenu": "2026-07-01 14:00",
+     "valeur": "2026-07-01 14:00",
+     "erreur": null
+    },
+    "A2": {
+     "contenu": null,
+     "valeur": null,
+     "erreur": null
+    },
+    "A3": {
+     "contenu": null,
+     "valeur": null,
+     "erreur": null
+    },
+    "B1": {
+     "contenu": null,
+     "valeur": null,
+     "erreur": null
+    },
+    "B2": {
+     "contenu": "2026-07-01 14:00",
+     "valeur": "2026-07-01 14:00",
+     "erreur": null
+    },
+    "C1": {
+     "contenu": null,
+     "valeur": null,
+     "erreur": null
+    }
+   },
+   "connexion": "en ligne",
+   "en_attente": 0,
+   "annuler": false,
+   "rétablir": false,
+   "alertes": [],
+   "présence": {},
+   "droits": {
+    "alice": "écriture",
+    "bob": "écriture",
+    "carol": "lecture"
+   }
+  },
+  "classe": "trou",
+  "assertion": "A61",
+  "cas": "Quand une personne revient en ligne après qu'une autre, dans un autre fuseau, a saisi une date-heure, la spec ne dit pas si le contenu de la cellule garde le texte saisi ou s'affiche converti dans le fuseau de la personne qui regarde ; elle fixe seulement la valeur.",
+  "verdict": " » (Y). La valeur est 14:00 dans les deux cas.\nruling:    rejected\nbecause:   Pour une date-heure, la spec ne règle que la valeur. A30 dit « la cellule affiche cette date-heure dans le fuseau de la personne » et A31 en donne un exemple ; X et Y y satisfont tous les deux avec 14:00. Aucune assertion ne fixe le contenu d'une date-heure vu par une autre personne. A01 et A05 portent sur un nombre et une formule. A14 et A148 portent sur une formule invalide et sur un import CSV. A61 exige seulement que « le contenu de cette cellule affiche la modification de l'autre personne ». « Affiche » permet de convertir dans le fuseau d'alice, et 14:00 chez elle désigne le même instant que 12:00 chez bob. Les deux comportements respectent donc la spec.\ncertainty: close\n```\n\nJe réponds « close » parce qu'on pourrait lire A61, avec A01 et A05, comme « le contenu est le texte saisi, sans conversion ». Avec cette lecture, ce serait un bug Y. Mais aucune assertion ne le dit pour une date-heure. Il faudrait une assertion qui dise si le contenu d'une date-heure (celui de la barre de formule) dépend du fuseau de la personne qui regarde. C'est une décision de spécification, à faire trancher par l'arbitre.\n\nCLASSE: trou\nASSERTION: A61\nCAS: Quand une personne revient en ligne après qu'une autre, dans un autre fuseau, a saisi une date-heure, la spec ne dit pas si le contenu de la cellule garde le texte saisi ou s'affiche converti dans le fuseau de la personne qui regarde ; elle fixe seulement la valeur."
+ },
+ {
+  "groupe": "alice.set_right",
+  "divergences": 11,
+  "graine": 159,
+  "etape": 1,
+  "action": "alice.set_right('carol', 'Feuille1', 'écriture')",
+  "x": {
+   "droits": {
+    "alice": "écriture",
+    "bob": "écriture",
+    "carol": "lecture"
+   },
+   "alertes": []
+  },
+  "y": {
+   "droits": {
+    "alice": "écriture",
+    "bob": "écriture",
+    "carol": "écriture"
+   },
+   "alertes": []
+  },
+  "classe": "trou",
+  "assertion": "A50",
+  "cas": "A person gives another person the écriture right on a sheet where that person had only lecture, and the spec only says what happens when a right is lowered from écriture to lecture, not raised.",
+  "verdict": "t, A50, covers one direction only: « Quand le propriétaire passe le droit d'une personne de écriture à lecture […] le droit affiché […] devient lecture ». No assertion covers raising a right from lecture to écriture. The two other rights assertions don't settle this case either. A51 (« une personne non propriétaire tente de modifier le droit d'une autre personne, ce droit reste inchangé ») would make X right only if alice is not the owner, and A52 would do the same only if the owner is offline. The truncated situation shows neither fact.\ncertainty: close\n```\n\nThe spec doesn't settle this case. If alice is the owner, A50 makes X's behaviour very likely wrong, because nothing in the spec suggests a raise should work differently from a lower. But no assertion literally forbids X's result, so both behaviours fit the text as written.\n\nTwo facts are needed to rule on it:\n- **Who owns the workbook, and whether alice is online at this step.** The spec doesn't say, but the full situation log would. This goes back to the searcher.\n- **Whether a raise from lecture to écriture should follow the same rule as A50.** This is about what the spec's author intended. It goes to the arbiter, who could settle it by adding a matching assertion to A50 in the other direction.\n\nCLASSE: trou\nASSERTION: A50\nCAS: A person gives another person the écriture right on a sheet where that person had only lecture, and the spec only says what happens when a right is lowered from écriture to lecture, not raised."
+ },
+ {
+  "groupe": "réseau.deliver_all",
+  "divergences": 10,
+  "graine": 195,
+  "etape": 2,
+  "action": "réseau.deliver_all()",
+  "x": {
+   "alice": {
+    "A1": {
+     "contenu": null,
+     "valeur": null,
+     "erreur": null
+    },
+    "A2": {
+     "contenu": "2026-01-15 12:00",
+     "valeur": "2026-01-15 12:00",
+     "erreur": null
+    },
+    "A3": {
+     "contenu": null,
+     "valeur": null,
+     "erreur": null
+    },
+    "B1": {
+     "contenu": null,
+     "valeur": null,
+     "erreur": null
+    },
+    "B2": {
+     "contenu": null,
+     "valeur": null,
+     "erreur": null
+    },
+    "C1": {
+     "contenu": null,
+     "valeur": null,
+     "erreur": null
+    }
+   },
+   "bob": {
+    "A1": {
+     "contenu": null,
+     "valeur": null,
+     "erreur": null
+    },
+    "A2": {
+     "contenu": "2026-01-15 12:00",
+     "valeur": "2026-01-15 11:00",
+     "erreur": null
+    },
+    "A3": {
+     "contenu": null,
+     "valeur": null,
+     "erreur": null
+    },
+    "B1": {
+     "contenu": null,
+     "valeur": null,
+     "erreur": null
+    },
+    "B2": {
+     "contenu": null,
+     "valeur": null,
+     "erreur": null
+    },
+    "C1": {
+     "contenu": null,
+     "valeur": null,
+     "erreur": null
+    }
+   },
+   "carol": {
+    "A1": {
+     "contenu": null,
+     "valeur": null,
+     "erreur": null
+    },
+    "A2": {
+     "contenu": "2026-01-15 12:00",
+     "valeur": "2026-01-15 11:00",
+     "erreur": null
+    },
+    "A3": {
+     "contenu": null,
+     "valeur": null,
+     "erreur": null
+    },
+    "B1": {
+     "contenu": null,
+     "valeur": null,
+     "erreur": null
+    },
+    "B2": {
+     "contenu": null,
+     "valeur": null,
+     "erreur": null
+    },
+    "C1": {
+     "contenu": null,
+     "valeur": null,
+     "erreur": null
+    }
+   }
+  },
+  "y": {
+   "alice": {
+    "A1": {
+     "contenu": null,
+     "valeur": null,
+     "erreur": null
+    },
+    "A2": {
+     "contenu": "2026-01-15 12:00",
+     "valeur": "2026-01-15 12:00",
+     "erreur": null
+    },
+    "A3": {
+     "contenu": null,
+     "valeur": null,
+     "erreur": null
+    },
+    "B1": {
+     "contenu": null,
+     "valeur": null,
+     "erreur": null
+    },
+    "B2": {
+     "contenu": null,
+     "valeur": null,
+     "erreur": null
+    },
+    "C1": {
+     "contenu": null,
+     "valeur": null,
+     "erreur": null
+    }
+   },
+   "bob": {
+    "A1": {
+     "contenu": null,
+     "valeur": null,
+     "erreur": null
+    },
+    "A2": {
+     "contenu": "2026-01-15 11:00",
+     "valeur": "2026-01-15 11:00",
+     "erreur": null
+    },
+    "A3": {
+     "contenu": null,
+     "valeur": null,
+     "erreur": null
+    },
+    "B1": {
+     "contenu": null,
+     "valeur": null,
+     "erreur": null
+    },
+    "B2": {
+     "contenu": null,
+     "valeur": null,
+     "erreur": null
+    },
+    "C1": {
+     "contenu": null,
+     "valeur": null,
+     "erreur": null
+    }
+   },
+   "carol": {
+    "A1": {
+     "contenu": null,
+     "valeur": null,
+     "erreur": null
+    },
+    "A2": {
+     "contenu": "2026-01-15 11:00",
+     "valeur": "2026-01-15 11:00",
+     "erreur": null
+    },
+    "A3": {
+     "contenu": null,
+     "valeur": null,
+     "erreur": null
+    },
+    "B1": {
+     "contenu": null,
+     "valeur": null,
+     "erreur": null
+    },
+    "B2": {
+     "contenu": null,
+     "valeur": null,
+     "erreur": null
+    },
+    "C1": {
+     "contenu": null,
+     "valeur": null,
+     "erreur": null
+    }
+   }
+  },
+  "classe": "bug S2",
+  "assertion": "A59",
+  "cas": "Quand une date-heure saisie dans un fuseau est transmise à une personne d'un autre fuseau, le contenu de la cellule chez elle reste le texte saisi ; seule la valeur affichée est convertie dans son fuseau.",
+  "verdict": "```\nclaim:     Au deliver_all, Bob (fuseau UTC) reçoit la date-heure qu'Alice a saisie à Paris. X garde le contenu tel qu'Alice l'a saisi (« 2026-01-15 12:00 ») et ne convertit que la valeur affichée (11:00). Y réécrit aussi le contenu chez Bob en « 2026-01-15 11:00 ».\nruling:    upheld (bug Y)\nbecause:   La spec tranche. A59 dit « le contenu de cette cellule est mis à jour chez une personne en ligne », et A61 précise que ce contenu « affiche la modification de l'autre personne » : le contenu reçu doit être ce qu'Alice a saisi, pas une réécriture. Le fuseau ne s'applique qu'à la valeur : A30 et A31 sont classées « observé: valeur ». A31 parle d'« une même cellule » qui affiche 11:00, donc la cellule et son contenu sont les mêmes pour tous, et seul l'affichage change. Le contenu reste le texte saisi, comme dans A05 et A14. X satisfait A31 sur la valeur et A59 sur le contenu ; Y donne à Bob un contenu qu'Alice n'a jamais saisi.\ncertainty: close — une lecture large de « mis à jour » dans A59 (refléter le même instant plutôt que le même texte) laisserait une place à Y. Mais la séparation constante entre contenu et valeur dans la spec penche nettement pour X.\n```\n\nCLASSE: bug Y\nASSERTION: A59\nCAS: Quand une date-heure saisie dans un fuseau est transmise à une personne d'un autre fuseau, le contenu de la cellule chez elle reste le texte saisi ; seule la valeur affichée est convertie dans son fuseau."
+ },
+ {
+  "groupe": "alice.rename_sheet",
+  "divergences": 9,
+  "graine": 146,
+  "etape": 1,
+  "action": "alice.rename_sheet('Feuille1', 'Feuille1')",
+  "x": {
+   "personne": "alice",
+   "feuilles": [
+    "Feuille1"
+   ],
+   "feuille_vue": "Feuille1",
+   "cellules": {
+    "A1": {
+     "contenu": null,
+     "valeur": null,
+     "erreur": null
+    },
+    "A2": {
+     "contenu": null,
+     "valeur": null,
+     "erreur": null
+    },
+    "A3": {
+     "contenu": null,
+     "valeur": null,
+     "erreur": null
+    },
+    "B1": {
+     "contenu": null,
+     "valeur": null,
+     "erreur": null
+    },
+    "B2": {
+     "contenu": null,
+     "valeur": null,
+     "erreur": null
+    },
+    "C1": {
+     "contenu": null,
+     "valeur": null,
+     "erreur": null
+    }
+   },
+   "connexion": "en ligne",
+   "en_attente": 0,
+   "annuler": false,
+   "rétablir": false,
+   "alertes": [],
+   "présence": {},
+   "droits": {
+    "alice": "écriture",
+    "bob": "écriture",
+    "carol": "lecture"
+   }
+  },
+  "y": {
+   "personne": "alice",
+   "feuilles": [
+    "Feuille1"
+   ],
+   "feuille_vue": "Feuille1",
+   "cellules": {
+    "A1": {
+     "contenu": null,
+     "valeur": null,
+     "erreur": null
+    },
+    "A2": {
+     "contenu": null,
+     "valeur": null,
+     "erreur": null
+    },
+    "A3": {
+     "contenu": null,
+     "valeur": null,
+     "erreur": null
+    },
+    "B1": {
+     "contenu": null,
+     "valeur": null,
+     "erreur": null
+    },
+    "B2": {
+     "contenu": null,
+     "valeur": null,
+     "erreur": null
+    },
+    "C1": {
+     "contenu": null,
+     "valeur": null,
+     "erreur": null
+    }
+   },
+   "connexion": "en ligne",
+   "en_attente": 1,
+   "annuler": true,
+   "rétablir": false,
+   "alertes": [],
+   "présence": {},
+   "droits": {
+    "alice": "écriture",
+    "bob": "écriture",
+    "carol": "lecture"
+   }
+  },
+  "classe": "trou",
+  "assertion": "A42",
+  "cas": "Une personne renomme une feuille en lui donnant exactement son nom actuel. La spec ne dit pas si ce renommage compte comme une action, à annuler et à envoyer, ou comme une opération sans effet.",
+  "verdict": "  Divergence sur alice.rename_sheet('Feuille1', 'Feuille1') : X ne change rien (en_attente 0, annuler false) ; Y enregistre une action (en_attente 1, annuler true), sans changement visible par ailleurs.\nruling:    not resolvable\nbecause:   Aucune assertion ne couvre le renommage d'une feuille sous son propre nom. A42 et A43 visent seulement « un nom déjà utilisé par une autre feuille ». A41, A112 et A135 supposent un vrai changement de nom. A89 (« reste à zéro une fois l'envoi confirmé ») porte sur une modification de cellule et n'exige pas un compteur à zéro tant que l'envoi n'est pas confirmé. A104 ne dit pas si un renommage qui ne change rien compte comme une « modification ». Les deux comportements respectent donc la spec. Pour trancher, il faut une décision de l'arbitre : un renommage sans effet est-il une action (à annuler et à envoyer) ou rien du tout ? Le dossier ne peut pas fournir ce fait : la question va à l'arbitre.\ncertainty: close\n```\n\nLa certitude est `close` pour deux raisons. Le `en_attente: 1` de Y, observé alors qu'Alice est en ligne, pourrait être lu comme contraire à l'esprit de A89. Et si un renommage sans effet ne compte pas comme une « modification », alors Y irait contre A104. Mais aucun texte n'impose l'une ou l'autre lecture.\n\nCLASSE: trou\nASSERTION: A42\nCAS: Une personne renomme une feuille en lui donnant exactement son nom actuel. La spec ne dit pas si ce renommage compte comme une action, à annuler et à envoyer, ou comme une opération sans effet."
+ },
+ {
+  "groupe": "bob.rename_sheet",
+  "divergences": 7,
+  "graine": 8,
+  "etape": 9,
+  "action": "bob.rename_sheet('Feuille1', 'Feuille2')",
+  "x": {
+   "personne": "bob",
+   "feuilles": [
+    "Feuille2"
+   ],
+   "feuille_vue": "Feuille2",
+   "cellules": {
+    "A1": {
+     "contenu": null,
+     "valeur": null,
+     "erreur": null
+    },
+    "A2": {
+     "contenu": null,
+     "valeur": null,
+     "erreur": null
+    },
+    "A3": {
+     "contenu": null,
+     "valeur": null,
+     "erreur": null
+    },
+    "B1": {
+     "contenu": null,
+     "valeur": null,
+     "erreur": null
+    },
+    "B2": {
+     "contenu": null,
+     "valeur": null,
+     "erreur": null
+    },
+    "C1": {
+     "contenu": null,
+     "valeur": null,
+     "erreur": null
+    }
+   },
+   "connexion": "en ligne",
+   "en_attente": 1,
+   "annuler": true,
+   "rétablir": false,
+   "alertes": [
+    [
+     "nom_existant",
+     "Feuille1",
+     null,
+     null
+    ]
+   ],
+   "présence": {
+    "carol": [
+     "Feuille2",
+     "B1"
+    ]
+   },
+   "droits": {
+    "alice": "écriture",
+    "bob": "écriture",
+    "carol": "lecture"
+   }
+  },
+  "y": {
+   "personne": "bob",
+   "feuilles": [
+    "Feuille2"
+   ],
+   "feuille_vue": "Feuille2",
+   "cellules": {
+    "A1": {
+     "contenu": null,
+     "valeur": null,
+     "erreur": null
+    },
+    "A2": {
+     "contenu": null,
+     "valeur": null,
+     "erreur": null
+    },
+    "A3": {
+     "contenu": null,
+     "valeur": null,
+     "erreur": null
+    },
+    "B1": {
+     "contenu": null,
+     "valeur": null,
+     "erreur": null
+    },
+    "B2": {
+     "contenu": null,
+     "valeur": null,
+     "erreur": null
+    },
+    "C1": {
+     "contenu": null,
+     "valeur": null,
+     "erreur": null
+    }
+   },
+   "connexion": "en ligne",
+   "en_attente": 1,
+   "annuler": true,
+   "rétablir": false,
+   "alertes": [
+    [
+     "nom_existant",
+     "Feuille1",
+     null,
+     null
+    ]
+   ],
+   "présence": {
+    "carol": [
+     "Feuille1",
+     "B1"
+    ]
+   },
+   "droits": {
+    "alice": "écriture",
+    "bob": "écriture",
+    "carol": "lecture"
+   }
+  },
+  "classe": "bug S2",
+  "assertion": "A62",
+  "cas": "When another person renames the sheet where someone has selected a cell, that person's presence indicator must stay on the same cell, under the sheet's new name.",
+  "verdict": "```\nclaim:     After bob renames Feuille1 to Feuille2, carol's presence indicator on B1 should point to Feuille2!B1 (X), not to Feuille1!B1 (Y).\nruling:    upheld (bug Y)\nbecause:   A62 says that when carol selects a cell, \"un indicateur de présence portant son nom apparaît sur cette cellule\". Under A63, the indicator goes away only when the person goes offline (\"Quand une autre personne passe hors ligne, son indicateur de présence disparaît\"), and carol has not gone offline. A26 and A27 show that a rename keeps the same cells. Y places the indicator on \"Feuille1\", a sheet that is no longer in bob's list ([\"Feuille2\"]), so bob no longer sees it on the cell carol selected.\ncertainty: close\n```\n\nThe ruling is close because A62 describes the moment carol selects the cell. No assertion says outright that the indicator follows a sheet rename. The inference comes from three points read together:\n- the cell stays the same cell after the rename (A26 and A27);\n- going offline is the only stated reason for the indicator to disappear (A63);\n- Y's observation refers to a sheet that does not exist for the person looking at it.\n\nCLASSE: bug Y\nASSERTION: A62\nCAS: When another person renames the sheet where someone has selected a cell, that person's presence indicator must stay on the same cell, under the sheet's new name."
+ },
+ {
+  "groupe": "alice.set_cell",
+  "divergences": 6,
+  "graine": 13,
+  "etape": 4,
+  "action": "alice.set_cell('A1', '2026-03-29 02:30', sheet='Feuille1')",
+  "x": {
+   "personne": "alice",
+   "feuilles": [
+    "Feuille1"
+   ],
+   "feuille_vue": "Feuille1",
+   "cellules": {
+    "A1": {
+     "contenu": "2026-03-29 02:30",
+     "valeur": "2026-03-29 03:30",
+     "erreur": null
+    },
+    "A2": {
+     "contenu": null,
+     "valeur": null,
+     "erreur": null
+    },
+    "A3": {
+     "contenu": null,
+     "valeur": null,
+     "erreur": null
+    },
+    "B1": {
+     "contenu": null,
+     "valeur": null,
+     "erreur": null
+    },
+    "B2": {
+     "contenu": null,
+     "valeur": null,
+     "erreur": null
+    },
+    "C1": {
+     "contenu": null,
+     "valeur": null,
+     "erreur": null
+    }
+   },
+   "connexion": "en ligne",
+   "en_attente": 1,
+   "annuler": true,
+   "rétablir": false,
+   "alertes": [],
+   "présence": {
+    "carol": [
+     "Feuille1",
+     "A2"
+    ]
+   },
+   "droits": {
+    "alice": "écriture",
+    "bob": "écriture",
+    "carol": "lecture"
+   }
+  },
+  "y": {
+   "personne": "alice",
+   "feuilles": [
+    "Feuille1"
+   ],
+   "feuille_vue": "Feuille1",
+   "cellules": {
+    "A1": {
+     "contenu": "2026-03-29 03:30",
+     "valeur": "2026-03-29 03:30",
+     "erreur": null
+    },
+    "A2": {
+     "contenu": null,
+     "valeur": null,
+     "erreur": null
+    },
+    "A3": {
+     "contenu": null,
+     "valeur": null,
+     "erreur": null
+    },
+    "B1": {
+     "contenu": null,
+     "valeur": null,
+     "erreur": null
+    },
+    "B2": {
+     "contenu": null,
+     "valeur": null,
+     "erreur": null
+    },
+    "C1": {
+     "contenu": null,
+     "valeur": null,
+     "erreur": null
+    }
+   },
+   "connexion": "en ligne",
+   "en_attente": 1,
+   "annuler": true,
+   "rétablir": false,
+   "alertes": [],
+   "présence": {
+    "carol": [
+     "Feuille1",
+     "A2"
+    ]
+   },
+   "droits": {
+    "alice": "écriture",
+    "bob": "écriture",
+    "carol": "lecture"
+   }
+  },
+  "classe": "trou",
+  "assertion": "A30",
+  "cas": "Une personne saisit dans une cellule une heure qui n'existe pas dans son fuseau (02:30 le jour du passage à l'heure d'été). La valeur affichée devient 03:30, mais la spec ne dit pas si le contenu garde le texte saisi ou prend l'heure corrigée.",
+  "verdict": "ent la même valeur, 03:30. La spécification tranche-t-elle entre les deux ?\nruling:    rejected (la spec ne tranche pas : c'est un trou)\nbecause:   La seule assertion sur la saisie d'une date-heure, A30, porte sur la valeur : « la cellule affiche cette date-heure dans le fuseau de la personne ». Sur ce point, les deux implémentations affichent la même chose. Aucune assertion ne dit ce que devient le contenu quand on saisit une date-heure, encore moins une heure locale qui n'existe pas. Le 29 mars 2026 à Paris, on passe de 02:00 à 03:00, donc 02:30 n'existe pas. A01 (« le contenu de la cellule devient 42 ») ne concerne que la saisie d'un nombre, et A14 que les formules de syntaxe invalide. Ces deux assertions suggèrent un principe : le contenu garde ce qui a été saisi. Mais elles ne l'énoncent pas pour les dates-heures.\ncertainty: close\n```\n\nPour trancher, il faut une décision qui appartient à l'auteur de la spec, pas une donnée qu'on pourrait aller chercher. Quand on saisit une heure locale inexistante, le contenu garde-t-il le texte saisi, ou devient-il l'heure normalisée ? C'est proche parce que A01, A05 et A14 vont toutes dans le même sens, celui du texte saisi conservé. Mais aucune ne couvre ce cas.\n\nCLASSE: trou\nASSERTION: A30\nCAS: Une personne saisit dans une cellule une heure qui n'existe pas dans son fuseau (02:30 le jour du passage à l'heure d'été). La valeur affichée devient 03:30, mais la spec ne dit pas si le contenu garde le texte saisi ou prend l'heure corrigée."
+ }
+]

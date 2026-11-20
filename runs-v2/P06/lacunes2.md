@@ -1,0 +1,8 @@
+- A25 : à l'arrêt en phase « pause courte », modifier la durée travail | test: test_A25_trou_arrete_en_pause_courte_temps_restant_inchange | présumé: le temps restant de la pause reste inchangé
+- A32 : durée travail modifiée pendant une session en cours (A26), puis la session arrive à zéro | test: test_A32_trou_duree_modifiee_en_cours_compte_duree_du_demarrage | présumé: la session et le total jour comptent la durée travail en vigueur au démarrage de la session
+- A16 : intervalle longue mis à 0 (aucun multiple défini) | test: test_A16_trou_intervalle_zero_refuse | présumé: refusé (ValueError) et l'intervalle reste à sa valeur précédente
+- A27 : durée travail négative | test: test_A27_trou_duree_negative_refusee | présumé: refusée (ValueError) et la durée travail reste à sa valeur précédente
+- A30 : la tâche active est supprimée pendant la session qu'elle a démarrée (A39 la met à « aucune ») | test: test_A30_trou_tache_supprimee_en_cours_de_session | présumé: la session reste rattachée à la tâche active au démarrage
+- A40 : le processus s'arrête sans appeler close() après l'ajout d'une session | test: test_A40_trou_session_sur_disque_sans_close | présumé: une session ajoutée est sur disque dès son ajout et relue à la réouverture
+- A32 : total jour après réouverture le même jour | test: test_A32_trou_total_jour_apres_reouverture_meme_jour | présumé: le total jour vaut la somme des sessions du jour dans l'historique relu
+- A33 : total tâche après réouverture | test: test_A33_trou_total_tache_apres_reouverture | présumé: le total tâche vaut la somme des sessions de la tâche dans l'historique relu

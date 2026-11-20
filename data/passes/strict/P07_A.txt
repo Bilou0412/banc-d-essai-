@@ -1,0 +1,35 @@
+- a | observé: connexion | conditions: aucune
+- a | observé: liste locale | conditions: aucune
+- a | observé: statut | conditions: connexion
+- a | observé: statut | conditions: connexion, session
+- a | observé: liste distante | conditions: connexion
+- a | observé: liste distante | conditions: connexion, session
+- a | observé: contenu local | conditions: aucune
+- a | observé: contenu distant | conditions: connexion
+- a | observé: titre | conditions: aucune
+- a | observé: date modification | conditions: aucune
+- a | observé: contenu distant | conditions: statut, édition distante
+- a | observé: statut | conditions: statut, édition distante
+- a | observé: contenu local | conditions: statut, édition distante
+- a | observé: date modification | conditions: statut, édition distante
+- a | observé: contenu local | conditions: statut, édition distante
+- a | observé: copie conflit | conditions: statut, édition distante
+- a | observé: statut | conditions: statut, édition distante
+- a | observé: titre | conditions: aucune
+- a | observé: statut | conditions: statut, connexion
+- a | observé: liste locale | conditions: aucune
+- a | observé: corbeille | conditions: aucune
+- a | observé: liste distante | conditions: connexion
+- a | observé: liste distante | conditions: édition distante
+- a | observé: liste locale | conditions: édition distante
+- a | observé: liste locale | conditions: aucune
+- a | observé: corbeille | conditions: aucune
+- a | observé: contenu local | conditions: aucune
+- a | observé: corbeille | conditions: aucune
+- a | observé: contenu local | conditions: aucune
+- a | observé: statut | conditions: statut, connexion
+- a | observé: contenu local | conditions: stockage
+- a | observé: statut | conditions: stockage
+- a | observé: statut | conditions: session
+- a | observé: contenu distant | conditions: statut, connexion, édition distante
+- a | observé: statut | conditions: connexion, session

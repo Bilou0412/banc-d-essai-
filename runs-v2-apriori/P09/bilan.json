@@ -1,0 +1,75 @@
+{
+ "sonde": "P09",
+ "passes": "strict-v2",
+ "passe": "A",
+ "k_passes": [
+  2.33,
+  2.56,
+  3.11
+ ],
+ "k_retenu": 2.56,
+ "concordance": "floue",
+ "assertions": 39,
+ "frontieres": 3,
+ "tests": 65,
+ "trous_a_priori": 8,
+ "trous_par_assertion": 0.205,
+ "tokens_decoupe": {
+  "neufs": 59216,
+  "cache": 17408,
+  "usd": 0.7981816
+ },
+ "lacunes": [
+  {
+   "cas": "A15 : une durée exactement égale à la durée minimale n'est pas tranchée (A15 ne dit que « plus court »)",
+   "test": "test_A15_trou_duree_egale_minimum_confirmee",
+   "présumé": "Un utilisateur demande un créneau disponible dont la durée est exactement égale à la durée minimale ; sa demande passe au statut « confirmée » | observé: statut réservation | conditions: durée minimale",
+   "attaque": 1
+  },
+  {
+   "cas": "A18 : un créneau commençant exactement au préavis minimal n'est pas tranché (A18 ne dit que « inférieur »)",
+   "test": "test_A18_trou_preavis_exactement_egal_confirme",
+   "présumé": "Un utilisateur demande un créneau disponible commençant exactement au préavis minimal ; sa demande passe au statut « confirmée » | observé: statut réservation | conditions: préavis minimal",
+   "attaque": 1
+  },
+  {
+   "cas": "A21 : une annulation tentée exactement à l'échéance du délai d'annulation n'est ni « avant » (A20) ni « après » (A21)",
+   "test": "test_A21_trou_annulation_a_l_echeance_exacte_refusee",
+   "présumé": "Un utilisateur tente d'annuler une réservation confirmée exactement à l'échéance du délai d'annulation ; la réservation reste au statut « confirmée » | observé: statut réservation | conditions: délai annulation",
+   "attaque": 1
+  },
+  {
+   "cas": "A24 : A08 ne couvre que la confirmation obtenue par une demande ; l'effet d'une promotion depuis l'attente sur les réservations actives du promu n'est pas dit",
+   "test": "test_A24_trou_promu_compte_dans_reservations_actives",
+   "présumé": "Le premier utilisateur en attente est promu après une annulation ; son nombre de réservations actives augmente de 1 | observé: réservations actives | conditions: liste attente",
+   "attaque": 1
+  },
+  {
+   "cas": "A27 : une réduction de capacité sous le nombre de réservations confirmées ne fixe pas la valeur des places restantes (négative ou 0)",
+   "test": "test_A27_trou_capacite_sous_les_confirmees_affiche_0",
+   "présumé": "Un administrateur réduit la capacité d'une ressource de 5 à 1 alors que 2 réservations sont confirmées sur un créneau ; ce créneau affiche 0 place restante | observé: places restantes | conditions: capacité",
+   "attaque": 1
+  },
+  {
+   "cas": "A29 : « 9h00 » ne vaut qu'hors de la période où New York est déjà en heure d'été et Paris pas encore ; l'affichage pendant cet écart n'est pas fixé",
+   "test": "test_A29_trou_decalage_pendant_ecart_heure_ete",
+   "présumé": "Une ressource située à Paris propose un créneau à 15h00 heure de Paris le 18 mars ; un utilisateur dont le fuseau est New York voit ce créneau affiché à 10h00 | observé: heure affichée | conditions: fuseau ressource, fuseau utilisateur",
+   "attaque": 1
+  },
+  {
+   "cas": "A36 : A35 dit que l'occurrence pleine « passe au statut refusée » (elle existe donc) tandis qu'A36 dit que 3 occurrences sont créées ; la visibilité de l'occurrence refusée n'est pas tranchée",
+   "test": "test_A36_trou_occurrence_refusee_visible_non_comptee",
+   "présumé": "Un utilisateur crée une réservation récurrente de 4 occurrences dont une est refusée ; la série expose 4 demandes dont une au statut « refusée », non comptée parmi les occurrences créées | observé: occurrences créées | conditions: règle récurrence, statut réservation",
+   "attaque": 1
+  },
+  {
+   "cas": "A07 : on ne sait pas si une demande en attente compte dans le quota (A09 parle de réservations actives, A07 dit que l'attente n'en est pas une)",
+   "test": "test_A07_trou_attente_ne_compte_pas_dans_quota",
+   "présumé": "Un utilisateur de quota 1 dont la seule demande est en attente demande un créneau disponible ; sa demande passe au statut « confirmée » | observé: statut réservation | conditions: quota utilisateur, réservations actives, statut réservation",
+   "attaque": 1
+  }
+ ],
+ "modeles": {
+  "red": "opus"
+ }
+}

@@ -1,0 +1,41 @@
+ÉTATS: recette; nom; ingrédient; quantité; unité; catégorie; requête; résultats; portions; liste; note; favori; photo
+ASSERTIONS:
+- Enregistrer une nouvelle recette dont le nom est non vide ajoute cette recette à la collection | observé: recette | conditions: nom
+- Enregistrer une nouvelle recette dont le nom est vide n'ajoute aucune recette à la collection | observé: recette | conditions: nom
+- Après l'enregistrement d'une recette, le nom affiché est exactement le nom saisi | observé: nom | conditions: aucune
+- Ajouter un ingrédient à une recette fait apparaître cet ingrédient dans la recette | observé: ingrédient | conditions: aucune
+- Retirer un ingrédient d'une recette le fait disparaître de la recette | observé: ingrédient | conditions: aucune
+- Saisir une quantité négative ou non numérique pour un ingrédient est refusé et la quantité précédente reste affichée | observé: quantité | conditions: quantité
+- Assigner une catégorie à une recette affiche cette catégorie sur la recette | observé: catégorie | conditions: aucune
+- Une recette sans catégorie assignée affiche la mention « sans catégorie » | observé: catégorie | conditions: catégorie
+- Filtrer par une catégorie ne laisse dans les résultats que les recettes de cette catégorie | observé: résultats | conditions: catégorie
+- Rechercher un mot contenu dans le nom d'une recette fait apparaître cette recette dans les résultats | observé: résultats | conditions: requête, nom
+- Rechercher le nom d'un ingrédient fait apparaître dans les résultats les recettes contenant cet ingrédient | observé: résultats | conditions: requête, ingrédient
+- La recherche ne tient pas compte des majuscules et minuscules de la requête | observé: résultats | conditions: requête
+- Une requête sans aucune correspondance produit des résultats vides | observé: résultats | conditions: requête
+- Une requête vide fait apparaître toutes les recettes dans les résultats | observé: résultats | conditions: requête
+- Filtrer sur les favoris ne laisse dans les résultats que les recettes marquées favorites | observé: résultats | conditions: favori
+- Supprimer une recette la retire des résultats | observé: résultats | conditions: aucune
+- Supprimer une recette la retire de la collection | observé: recette | conditions: aucune
+- Doubler les portions d'une recette double la quantité affichée de chaque ingrédient | observé: quantité | conditions: portions
+- Diviser les portions par deux divise par deux la quantité affichée de chaque ingrédient | observé: quantité | conditions: portions
+- Une quantité ajustée est affichée arrondie à deux décimales au maximum | observé: quantité | conditions: portions
+- Ajuster les portions ne change pas l'unité affichée des ingrédients | observé: unité | conditions: aucune
+- Saisir un nombre de portions nul ou négatif est refusé et la valeur précédente reste affichée | observé: portions | conditions: portions
+- Rouvrir une recette après un ajustement affiche le nombre de portions d'origine | observé: portions | conditions: aucune
+- Ajouter une recette à la liste de courses y ajoute chacun de ses ingrédients | observé: liste | conditions: ingrédient
+- Ajouter à la liste de courses une recette aux portions ajustées y inscrit les quantités ajustées | observé: liste | conditions: portions
+- Ajouter deux recettes partageant un même ingrédient dans la même unité produit une seule ligne avec la somme des quantités | observé: liste | conditions: ingrédient, unité
+- Ajouter deux recettes partageant un même ingrédient dans des unités différentes produit deux lignes distinctes | observé: liste | conditions: ingrédient, unité
+- Cocher une ligne de la liste de courses la marque comme achetée | observé: liste | conditions: aucune
+- Vider la liste de courses la laisse sans aucune ligne | observé: liste | conditions: aucune
+- Supprimer une recette déjà ajoutée à la liste de courses conserve ses lignes dans la liste | observé: liste | conditions: aucune
+- Ajouter une note à une recette affiche cette note sur la recette | observé: note | conditions: aucune
+- Modifier la note d'une recette remplace l'ancienne note par la nouvelle | observé: note | conditions: aucune
+- La note d'une recette est toujours affichée après fermeture et réouverture de l'application | observé: note | conditions: aucune
+- Marquer une recette comme favorite l'affiche comme favorite | observé: favori | conditions: aucune
+- Retirer une recette des favoris ne l'affiche plus comme favorite | observé: favori | conditions: favori
+- Le statut favori d'une recette est conservé après fermeture et réouverture de l'application | observé: favori | conditions: aucune
+- Ajouter un fichier image valide à une recette affiche cette photo sur la recette | observé: photo | conditions: aucune
+- Ajouter un fichier qui n'est pas une image est refusé et la photo précédente reste affichée | observé: photo | conditions: aucune
+- Une recette sans photo affiche une image par défaut | observé: photo | conditions: photo

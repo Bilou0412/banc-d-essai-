@@ -1,0 +1,40 @@
+ÉTATS: capacité; places restantes; horaires; durée minimale; durée maximale; préavis; horizon; quota; compteur; statut; liste attente; position; délai annulation; pénalité; fuseau ressource; fuseau utilisateur; heure début; heure affichée; récurrence; occurrences
+ASSERTIONS:
+- Sur un créneau sans aucune réservation, les places restantes sont égales à la capacité de la ressource | observé: places restantes | conditions: capacité
+- Une demande dans les horaires, de durée comprise entre la durée minimale et la durée maximale, respectant le préavis et l'horizon, faite par un utilisateur dont le compteur est inférieur au quota, sur un créneau ayant au moins une place restante, obtient le statut « confirmée » | observé: statut | conditions: places restantes, horaires, durée minimale, durée maximale, préavis, horizon, quota, compteur
+- La confirmation d'une réservation diminue de 1 les places restantes du créneau | observé: places restantes | conditions: aucune
+- La confirmation d'une réservation augmente de 1 le compteur de l'utilisateur | observé: compteur | conditions: aucune
+- Une demande valide sur un créneau dont les places restantes valent 0 obtient le statut « en attente » | observé: statut | conditions: places restantes
+- Une demande valide sur un créneau dont les places restantes valent 0 reçoit une position égale à la longueur de la liste attente plus 1 | observé: position | conditions: places restantes, liste attente
+- Une demande placée en liste attente laisse les places restantes à 0 | observé: places restantes | conditions: places restantes
+- Une demande dont l'heure de début précède l'ouverture obtient le statut « refusée » | observé: statut | conditions: horaires
+- Une demande dont l'heure de fin dépasse la fermeture obtient le statut « refusée » | observé: statut | conditions: horaires
+- Une demande de durée inférieure à la durée minimale obtient le statut « refusée » | observé: statut | conditions: durée minimale
+- Une demande de durée supérieure à la durée maximale obtient le statut « refusée » | observé: statut | conditions: durée maximale
+- Une demande dont le début est plus proche de l'instant présent que le préavis obtient le statut « refusée » | observé: statut | conditions: préavis
+- Une demande dont le début est plus éloigné de l'instant présent que l'horizon obtient le statut « refusée » | observé: statut | conditions: horizon
+- Une demande faite par un utilisateur dont le compteur est égal au quota obtient le statut « refusée » | observé: statut | conditions: quota, compteur
+- Une demande refusée ne modifie pas le compteur de l'utilisateur | observé: compteur | conditions: statut
+- Une demande refusée ne modifie pas les places restantes du créneau | observé: places restantes | conditions: statut
+- L'annulation d'une réservation confirmée lui donne le statut « annulée » | observé: statut | conditions: aucune
+- L'annulation d'une réservation confirmée diminue de 1 le compteur de l'utilisateur | observé: compteur | conditions: aucune
+- L'annulation d'une réservation confirmée sur un créneau dont la liste attente est vide augmente de 1 les places restantes | observé: places restantes | conditions: liste attente
+- L'annulation d'une réservation confirmée sur un créneau dont la liste attente est non vide donne le statut « confirmée » à la demande en position 1 | observé: statut | conditions: liste attente
+- L'annulation d'une réservation confirmée sur un créneau dont la liste attente est non vide laisse les places restantes à 0 | observé: places restantes | conditions: liste attente
+- La promotion d'une demande depuis la liste attente diminue de 1 la position de chaque demande restant en attente | observé: position | conditions: aucune
+- La promotion d'une demande depuis la liste attente augmente de 1 le compteur de l'utilisateur promu | observé: compteur | conditions: aucune
+- Lors d'une libération de place, une demande en attente dont l'utilisateur a un compteur égal au quota conserve le statut « en attente » | observé: statut | conditions: quota, compteur
+- Le retrait volontaire d'une demande de la liste attente diminue de 1 la position de chaque demande située derrière elle | observé: position | conditions: aucune
+- L'annulation d'une réservation confirmée moins longtemps avant son début que le délai annulation applique une pénalité | observé: pénalité | conditions: délai annulation
+- L'annulation d'une réservation confirmée plus longtemps avant son début que le délai annulation n'applique aucune pénalité | observé: pénalité | conditions: délai annulation
+- L'heure affichée d'une réservation est son heure début convertie du fuseau ressource vers le fuseau utilisateur | observé: heure affichée | conditions: heure début, fuseau ressource, fuseau utilisateur
+- Le changement du fuseau utilisateur modifie l'heure affichée d'une réservation existante | observé: heure affichée | conditions: fuseau utilisateur, fuseau ressource
+- Le changement du fuseau utilisateur ne modifie pas l'heure début d'une réservation existante | observé: heure début | conditions: aucune
+- Une demande dont l'heure saisie est dans les horaires une fois lue dans le fuseau utilisateur mais hors des horaires une fois convertie dans le fuseau ressource obtient le statut « refusée » | observé: statut | conditions: horaires, fuseau ressource, fuseau utilisateur
+- Une demande avec récurrence hebdomadaire sur N semaines crée N occurrences | observé: occurrences | conditions: récurrence
+- Chaque occurrence d'une récurrence conserve la même heure début dans le fuseau ressource, y compris après un changement d'heure saisonnier | observé: heure début | conditions: récurrence, fuseau ressource
+- Une occurrence d'une récurrence tombant sur un créneau dont les places restantes valent 0 obtient le statut « en attente » | observé: statut | conditions: places restantes
+- Une occurrence d'une récurrence qui ferait dépasser le quota obtient le statut « refusée » | observé: statut | conditions: quota, compteur
+- Chaque occurrence confirmée d'une récurrence augmente de 1 le compteur de l'utilisateur | observé: compteur | conditions: aucune
+- L'annulation d'une seule occurrence ne modifie pas le statut des autres occurrences de la même récurrence | observé: statut | conditions: récurrence
+- La réduction de la capacité en dessous du nombre de réservations confirmées fixe les places restantes à 0 | observé: places restantes | conditions: capacité

@@ -1,0 +1,40 @@
+ÉTATS: article; quantité; disponible; emplacement; prêt; emprunteur; échéance; retard; statut; historique; filtre; affichage; export
+ASSERTIONS:
+- Quand l'utilisateur ajoute un article avec un nom et une quantité positive, l'article apparaît dans l'inventaire | observé: article | conditions: aucune
+- Quand l'utilisateur ajoute un article avec une quantité négative, l'article n'est pas créé | observé: article | conditions: quantité
+- Juste après sa création, le nombre d'unités disponibles d'un article est égal à sa quantité | observé: disponible | conditions: quantité
+- Quand l'utilisateur modifie l'emplacement d'un article, le nouvel emplacement est affiché pour cet article | observé: emplacement | conditions: aucune
+- Quand l'utilisateur réduit la quantité d'un article en dessous du nombre d'unités actuellement prêtées, la quantité reste inchangée | observé: quantité | conditions: prêt
+- Quand l'utilisateur prête 2 unités d'un article ayant 5 unités disponibles, le nombre d'unités disponibles passe à 3 | observé: disponible | conditions: disponible
+- Quand l'utilisateur tente de prêter plus d'unités qu'il n'y en a de disponibles, aucun prêt n'est créé | observé: prêt | conditions: disponible
+- Quand l'utilisateur tente de prêter un article hors service, aucun prêt n'est créé | observé: prêt | conditions: statut
+- Quand l'utilisateur tente de créer un prêt sans emprunteur, aucun prêt n'est créé | observé: prêt | conditions: emprunteur
+- Quand l'utilisateur tente de créer un prêt sans date de retour, aucun prêt n'est créé | observé: prêt | conditions: échéance
+- Quand l'utilisateur tente de créer un prêt avec une date de retour antérieure à la date du jour, aucun prêt n'est créé | observé: prêt | conditions: échéance | frontière: oui
+- Quand l'utilisateur crée un prêt, le nom de l'emprunteur est affiché sur ce prêt | observé: emprunteur | conditions: aucune
+- Quand l'utilisateur crée un prêt, la date de retour saisie est affichée sur ce prêt | observé: échéance | conditions: aucune
+- Un prêt non rendu dont la date de retour est dépassée est marqué en retard | observé: retard | conditions: échéance | frontière: oui
+- Un prêt non rendu dont la date de retour n'est pas dépassée n'est pas marqué en retard | observé: retard | conditions: échéance | frontière: oui
+- Quand l'utilisateur enregistre le retour d'un prêt de 2 unités, le nombre d'unités disponibles de l'article augmente de 2 | observé: disponible | conditions: statut
+- Quand l'utilisateur enregistre le retour d'un prêt, ce prêt n'apparaît plus parmi les prêts en cours | observé: prêt | conditions: aucune
+- Quand l'utilisateur enregistre le retour d'un prêt en retard, ce prêt n'est plus marqué en retard | observé: retard | conditions: aucune
+- Quand l'utilisateur crée un prêt, une entrée de prêt est ajoutée à l'historique de l'article | observé: historique | conditions: aucune
+- Quand l'utilisateur enregistre un retour, une entrée de retour est ajoutée à l'historique de l'article | observé: historique | conditions: aucune
+- Quand l'utilisateur modifie la quantité d'un article, une entrée de modification est ajoutée à l'historique de l'article | observé: historique | conditions: aucune
+- Quand l'utilisateur met un article hors service, une entrée de changement de statut est ajoutée à l'historique de l'article | observé: historique | conditions: aucune
+- Quand l'utilisateur met un article en service hors service, son statut affiché devient « hors service » | observé: statut | conditions: aucune
+- Quand l'utilisateur met un article hors service, son nombre d'unités disponibles devient 0 | observé: disponible | conditions: aucune
+- Quand l'utilisateur met hors service un article ayant un prêt en cours, ce prêt reste en cours | observé: prêt | conditions: aucune
+- Quand l'utilisateur remet en service un article dont 2 unités sur 5 sont prêtées, son nombre d'unités disponibles devient 3 | observé: disponible | conditions: prêt, quantité
+- Quand l'utilisateur tente de supprimer un article ayant un prêt en cours, l'article reste dans l'inventaire | observé: article | conditions: prêt
+- Quand l'utilisateur supprime un article sans prêt en cours, l'article disparaît de l'inventaire | observé: article | conditions: prêt
+- Quand l'utilisateur supprime un article, les entrées d'historique de cet article restent consultables | observé: historique | conditions: aucune
+- Quand l'utilisateur filtre sur un emplacement, seuls les articles situés à cet emplacement sont affichés | observé: affichage | conditions: filtre, emplacement
+- Quand l'utilisateur filtre sur le statut « hors service », seuls les articles hors service sont affichés | observé: affichage | conditions: filtre, statut
+- Quand l'utilisateur filtre sur les prêts en retard, seuls les articles ayant au moins un prêt en retard sont affichés | observé: affichage | conditions: filtre, retard
+- Quand aucun article ne correspond au filtre actif, la liste affichée est vide | observé: affichage | conditions: filtre
+- Quand l'utilisateur réinitialise les filtres, tous les articles de l'inventaire sont affichés | observé: affichage | conditions: aucune
+- Quand l'utilisateur exporte avec un filtre actif, le fichier exporté ne contient que les articles correspondant au filtre | observé: export | conditions: filtre
+- Quand l'utilisateur exporte l'inventaire, le fichier exporté contient la quantité de chaque article | observé: export | conditions: aucune
+- Quand l'utilisateur exporte l'inventaire, le fichier exporté contient l'emplacement de chaque article | observé: export | conditions: aucune
+- Quand l'utilisateur exporte un inventaire sans article, le fichier exporté ne contient que la ligne d'en-têtes | observé: export | conditions: article

@@ -1,0 +1,42 @@
+{
+ "modele": "haiku",
+ "tours": 3,
+ "tout_passe": true,
+ "tokens": {
+  "neufs": 601216,
+  "cache": 1745186,
+  "usd": 0.42547813999999995
+ },
+ "journal": [
+  {
+   "tour": 1,
+   "passent": 0,
+   "total": 252,
+   "tokens": {
+    "neufs": 0,
+    "cache": 0,
+    "usd": 0
+   }
+  },
+  {
+   "tour": 2,
+   "passent": 251,
+   "total": 252,
+   "tokens": {
+    "neufs": 500868,
+    "cache": 1174440,
+    "usd": 0.39593987999999997
+   }
+  },
+  {
+   "tour": 3,
+   "passent": 252,
+   "total": 252,
+   "tokens": {
+    "neufs": 100348,
+    "cache": 570746,
+    "usd": 0.029538260000000004
+   }
+  }
+ ]
+}

@@ -1,0 +1,86 @@
+{
+ "sonde": "P07",
+ "passes": "strict-v2",
+ "passe": "A",
+ "k_passes": [
+  1.8,
+  1.91
+ ],
+ "k_retenu": 1.85,
+ "concordance": "concordante",
+ "assertions": 35,
+ "frontieres": 3,
+ "tests": 46,
+ "trous_a_priori": 10,
+ "trous_par_assertion": 0.286,
+ "tokens_decoupe": {
+  "neufs": 53714,
+  "cache": 16836,
+  "usd": 0.7244832
+ },
+ "lacunes": [
+  {
+   "cas": "A07 : A07 parle de modification ; il ne dit pas si une note créée hors ligne affiche « en attente »",
+   "test": "test_A07_trou_creation_hors_ligne_en_attente",
+   "présumé": "Sur un appareil hors ligne, l'utilisateur crée une note : la note affiche l'indicateur « en attente » | observé: indicateur | conditions: connexion",
+   "attaque": 1
+  },
+  {
+   "cas": "A11 : A11 ne dit pas si une modification en attente survit à la fermeture de l'application et part ensuite au retour du réseau",
+   "test": "test_A11_trou_attente_survit_au_redemarrage",
+   "présumé": "Après une modification faite hors ligne, l'utilisateur ferme puis rouvre l'application puis retrouve le réseau avec une session ouverte : l'appareil B affiche le texte modifié | observé: contenu | conditions: connexion, session",
+   "attaque": 1
+  },
+  {
+   "cas": "A14 : A14 suppose B en ligne ; rien ne dit ce que voit B s'il était hors ligne pendant l'envoi de A puis revient",
+   "test": "test_A14_trou_b_hors_ligne_rattrape_au_retour",
+   "présumé": "Le texte d'une note a été modifié sur A pendant que B était hors ligne ; B retrouve le réseau : l'appareil B affiche le nouveau texte | observé: contenu | conditions: connexion, session",
+   "attaque": 1
+  },
+  {
+   "cas": "A16 : aucune assertion ne fixe le cas où l'envoi arrive mais son accusé est perdu, puis l'envoi est réessayé (« sans doublon » n'est que dans le contexte)",
+   "test": "test_A16_trou_accuse_perdu_sans_doublon",
+   "présumé": "L'accusé de réception d'une création faite sur A est perdu et l'envoi est réessayé : la note apparaît une seule fois dans la liste de B | observé: présence | conditions: connexion, session",
+   "attaque": 1
+  },
+  {
+   "cas": "A24 : « l'application signale un conflit » ne dit pas sur quel appareil",
+   "test": "test_A24_trou_conflit_signale_sur_les_deux_appareils",
+   "présumé": "La même note a été modifiée hors ligne sur A et sur B avec des textes différents ; les deux appareils retrouvent le réseau : A et B signalent tous deux un conflit sur cette note | observé: conflit | conditions: contenu",
+   "attaque": 1
+  },
+  {
+   "cas": "A24 : rien ne distingue deux modifications concurrentes de deux modifications successives (B modifie après avoir reçu la version de A)",
+   "test": "test_A24_trou_modifications_successives_sans_conflit",
+   "présumé": "Une note modifiée sur A a été reçue par B, puis B la modifie (en ligne ou hors ligne) : l'application ne signale aucun conflit | observé: conflit | conditions: connexion",
+   "attaque": 1
+  },
+  {
+   "cas": "A28 : A28 ne tranche pas quand les deux modifications portent la même heure d'appareil",
+   "test": "test_A28_trou_heures_egales_meme_version_partout",
+   "présumé": "Un conflit est signalé sur une note dont les deux versions portent la même heure : A et B affichent la même version sur la note d'origine et la même copie de conflit | observé: contenu | conditions: conflit",
+   "attaque": 1
+  },
+  {
+   "cas": "A29 : A29 ne dit pas si le conflit levé sur A l'est aussi sur B",
+   "test": "test_A29_trou_conflit_leve_sur_b",
+   "présumé": "Un conflit est signalé sur une note ; l'utilisateur choisit une version sur A en ligne : l'appareil B ne signale plus de conflit sur cette note | observé: conflit | conditions: connexion",
+   "attaque": 1
+  },
+  {
+   "cas": "A29 : A27 crée une « copie de conflit », mais rien ne dit ce qu'elle devient après le choix d'une version",
+   "test": "test_A29_trou_copie_disparait_apres_choix",
+   "présumé": "Un conflit est signalé sur une note ; l'utilisateur choisit une version : la « copie de conflit » n'apparaît plus dans la liste d'aucun appareil | observé: présence | conditions: connexion",
+   "attaque": 1
+  },
+  {
+   "cas": "A33 : A33 (« passe en tête » à la réception) et A28 (ordre selon l'heure des appareils) se croisent quand l'horloge de B est en retard sur celle de A",
+   "test": "test_A33_trou_horloge_de_b_en_retard",
+   "présumé": "Une note est modifiée sur l'appareil B dont l'horloge est en retard sur celle de A ; l'appareil A en ligne reçoit la modification : cette note passe en tête de la liste de A | observé: ordre | conditions: connexion",
+   "attaque": 1
+  }
+ ],
+ "modeles": {
+  "red": "opus"
+ }
+}
