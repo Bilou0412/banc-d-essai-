@@ -34,27 +34,34 @@ Bilel, développeur freelance. Il pense par **intuitions structurelles et parall
 ```
 CLAUDE.md                      ce fichier
 docs/SPEC-banc.md              spec fonctionnelle du banc (45 assertions strictes)
-docs/theses.md                 registre des thèses H1-H19
+docs/theses.md                 registre des thèses H1-H20
 docs/HISTORIQUE.md             la conversation d'origine, résumée
 prompts/decompositeur-strict.md  consigne exacte des passes aveugles (v1)
 prompts/decompositeur-strict-v2.md  v1 + règle 5 (assertions frontière, « | frontière: oui »)
 prompts/decompositeur-strict-v3.md  v2 avec la règle 5 précisée (6 mécanismes nommés + test d'exclusion)
+prompts/decompositeur-strict-v2-xl.md, -v3-xl.md  mêmes consignes pour 100 à 160 assertions (grosse sonde)
+data/predictions/<sonde>.md    prédictions figées avant les passes (commit qui fait foi)
 data/sondes.md                 les 10 sondes, leur description et leur k
 data/passes/strict/            23 passes aveugles strictes (P01_A ... P10_D)
 data/passes/strict-v2/         passes v2 des 10 sondes (jamais comparées aux v1)
 data/passes/strict-v3/         passes v3 de P02, P07, P08, P10 (frontières)
+data/passes/strict-v2-xl/, strict-v3-xl/  passes de la grosse sonde P11
 data/passes/aveugle-libre/     4 passes aveugles sans la règle stricte (historique)
 data/passes/claude-libre/      passes écrites par Claude (biaisées, historique)
 outils/mesure.py               calcule k, réseau, champ et concordance
 outils/passe_aveugle.py        lance une passe aveugle stricte (claude -p neuf, dossier vide)
 outils/duel.py                 fait tourner le protocole adversarial sur une sonde, tour par tour (--attaque-seule : trous a priori)
 outils/causes.py               champ local compté par cause d'échec (même message = une cause)
+outils/differentiel.py         test différentiel (H20) : générateur, greens indépendants, traces, paires, juge
+outils/quatre.py               accord entre N greens sur les mêmes situations (qui s'écarte seul, sur quelle action)
 runs/<sonde>/                  duel V0 (passes v1, green sonnet, une attaque)
 runs-v1/<sonde>/               duel V1 (passes v2, green haiku, deux attaques, mécanismes réels)
 runs-v2/<sonde>/               duel V2 (P02, P06, P07 : H18)
 runs-v2-apriori/<sonde>/       attaque 1 du red seule (H15, H16)
 runs-v3-apriori-B/<sonde>/     même attaque par un red neuf (reproductibilité du red)
-docs/duel-V0.md … V3           rapports des duels
+runs-v4/<sonde>/               test différentiel : generateur.py, greens/, paires/, accord-*.json (traces/ non versionné)
+runs-v4-duel/P11/              duel complet de la grosse sonde
+docs/duel-V0.md … V4           rapports des duels
 protocol/, .claude/agents/     le protocole adversarial attaché (tools/link.py), ne pas éditer protocol/
 ```
 

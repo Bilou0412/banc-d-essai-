@@ -1,0 +1,59 @@
+{
+ "sonde": "P11",
+ "greens": [
+  "H1",
+  "H2",
+  "S1",
+  "S2"
+ ],
+ "situations": 300,
+ "tous_identiques": 4,
+ "au_moins_n_moins_1": 26,
+ "formes_premier_ecart": {
+  "3 contre 1": 240,
+  "2 contre 2": 24,
+  "2 contre 1 contre 1": 32
+ },
+ "ecart_seul_par_green": {
+  "S2": 25,
+  "H1": 131,
+  "S1": 23,
+  "H2": 61
+ },
+ "ecart_seul_par_action": {
+  "H1 / alice.resolve_conflict": 26,
+  "H2 / bob.set_cell": 22,
+  "S2 / alice.add_sheet": 17,
+  "H1 / bob.resolve_conflict": 16,
+  "H1 / bob.rename_sheet": 16,
+  "H1 / carol.rename_sheet": 16,
+  "H1 / alice.rename_sheet": 15,
+  "H2 / bob.import_csv": 15,
+  "S1 / carol.set_right": 14,
+  "H2 / alice.set_cell": 14,
+  "H2 / alice.import_csv": 10,
+  "S1 / bob.set_right": 9,
+  "H1 / bob.set_cell": 6,
+  "H1 / alice.add_sheet": 5,
+  "H1 / bob.add_sheet": 5,
+  "H1 / alice.import_csv": 4,
+  "H1 / bob.undo": 4,
+  "H1 / carol.add_sheet": 3,
+  "H1 / alice.undo": 3,
+  "S2 / alice.set_right": 3,
+  "H1 / alice.history": 2,
+  "H1 / alice.set_cell": 2,
+  "H1 / réseau.reconnect": 2,
+  "H1 / alice.set_timezone": 1,
+  "H1 / bob.select": 1,
+  "H1 / carol.set_cell": 1,
+  "S2 / alice.set_cell": 1,
+  "S2 / horloge.advance": 1,
+  "S2 / alice.delete_sheet": 1,
+  "S2 / alice.clear": 1,
+  "H1 / réseau.deliver_all": 1,
+  "H1 / alice.select": 1,
+  "H1 / carol.history": 1,
+  "S2 / alice.redo": 1
+ }
+}

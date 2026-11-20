@@ -211,6 +211,21 @@ def rejouer(gen, app_py, n):
     return traces, p.stderr[-500:]
 
 
+def traces_de(base, nom, n):
+    """Les traces d'un green, calculées une fois (deux passages : une graine qui ne rejoue pas
+    pareil est écartée) et gardées dans traces/<nom>-<n>.json pour toutes ses paires."""
+    cache = base / "traces" / f"{nom}-{n}.json"
+    if cache.exists():
+        t1, t2, e1 = json.loads(cache.read_text(encoding="utf-8"))
+        return {int(k): v for k, v in t1.items()}, {int(k): v for k, v in t2.items()}, e1
+    app_py = base / "greens" / nom / "app.py"
+    t1, e1 = rejouer(base / "generateur.py", app_py, n)
+    t2, _ = rejouer(base / "generateur.py", app_py, n)
+    cache.parent.mkdir(exist_ok=True)
+    cache.write_text(json.dumps([t1, t2, e1], ensure_ascii=False), encoding="utf-8")
+    return t1, t2, e1
+
+
 def nom_action(action):
     return re.split(r"[(\s]", str(action), maxsplit=1)[0]
 
@@ -220,12 +235,7 @@ def comparer(a):
     gen = base / "generateur.py"
     paire = base / "paires" / f"{a.a}-{a.b}"
     paire.mkdir(parents=True, exist_ok=True)
-    traces = {}
-    for nom in (a.a, a.b):
-        app_py = base / "greens" / nom / "app.py"
-        t1, e1 = rejouer(gen, app_py, a.n)
-        t2, _ = rejouer(gen, app_py, a.n)  # deux fois : une graine qui ne rejoue pas pareil est écartée
-        traces[nom] = (t1, t2, e1)
+    traces = {nom: traces_de(base, nom, a.n) for nom in (a.a, a.b)}
     jouees, concordantes, non_det, err_gen = 0, 0, [], []
     divergences = []
     for g in range(a.n):
@@ -311,7 +321,7 @@ def apparier(a):
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("commande", choices=["generer", "green", "comparer", "apparier"])
+    ap.add_argument("commande", choices=["generer", "green", "traces", "comparer", "apparier"])
     ap.add_argument("sonde")
     ap.add_argument("--passes", default="strict-v2")
     ap.add_argument("--tests", help="dossier contenant test_app*.py (les tests rouges du duel)")
@@ -326,7 +336,8 @@ def main():
     ap.add_argument("--max-juge", type=int, default=12, help="groupes de divergences jugés au plus")
     ap.add_argument("--paires", nargs=2)
     a = ap.parse_args()
-    {"generer": generer, "green": green, "comparer": comparer, "apparier": apparier}[a.commande](a)
+    traces = lambda a: print(a.nom, len(traces_de(dossier_sonde(a.sonde), a.nom, a.n)[0]), "graines")
+    {"generer": generer, "green": green, "traces": traces, "comparer": comparer, "apparier": apparier}[a.commande](a)
 
 
 if __name__ == "__main__":
