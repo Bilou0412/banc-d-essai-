@@ -1,0 +1,248 @@
+{
+ "test_C07_online_edit_undone_before_confirmation_pending_back_to_zero": [
+  "H1✗ AssertionError: C07 : annuler une modification en attente doit la retirer : attendu 0, obtenu 2\nassert 2 == 0\n +  where ",
+  "H2✗ AssertionError: C07 : annuler une modification en attente doit la retirer : attendu 0, obtenu 2\nassert 2 == 0\n +  where ",
+  "S1✗ AssertionError: C07 : annuler une modification en attente doit la retirer : attendu 0, obtenu 2\nassert 2 == 0\n +  where ",
+  "S2✗ AssertionError: C07 : annuler une modification en attente doit la retirer : attendu 0, obtenu 2\nassert 2 == 0\n +  where "
+ ],
+ "test_C07_undo_removes_only_the_last_pending_edit": [
+  "H1✗ AssertionError: C07 : une annulation retire une seule modification en attente : attendu 1, obtenu 3\nassert 3 == 1\n +  wh",
+  "H2✗ AssertionError: C07 : une annulation retire une seule modification en attente : attendu 1, obtenu 3\nassert 3 == 1\n +  wh",
+  "S1✗ AssertionError: C07 : une annulation retire une seule modification en attente : attendu 1, obtenu 3\nassert 3 == 1\n +  wh",
+  "S2✗ AssertionError: C07 : une annulation retire une seule modification en attente : attendu 1, obtenu 3\nassert 3 == 1\n +  wh"
+ ],
+ "test_C15_clear_empty_cell_on_fresh_client_leaves_no_trace": [
+  "H1✗ AssertionError: C15 : effacer une cellule vide ne doit rien mettre en attente, obtenu 1\nassert 1 == 0\n +  where 1 = pend",
+  "H2✗ AssertionError: C15 : effacer une cellule vide ne doit rien mettre en attente, obtenu 1\nassert 1 == 0\n +  where 1 = pend",
+  "S1",
+  "S2✗ AssertionError: C15 : effacer une cellule vide ne doit rien mettre en attente, obtenu 1\nassert 1 == 0\n +  where 1 = pend"
+ ],
+ "test_C15_clear_cell_already_cleared_and_confirmed_leaves_no_trace": [
+  "H1✗ AssertionError: C15 : second effacement d'une cellule déjà vide, attendu 0 en attente, obtenu 1\nassert 1 == 0\n +  where ",
+  "H2✗ AssertionError: C15 : second effacement d'une cellule déjà vide, attendu 0 en attente, obtenu 1\nassert 1 == 0\n +  where ",
+  "S1",
+  "S2✗ AssertionError: C15 : second effacement d'une cellule déjà vide, attendu 0 en attente, obtenu 1\nassert 1 == 0\n +  where "
+ ],
+ "test_C15_clear_empty_cell_offline_does_not_increase_pending": [
+  "H1✗ AssertionError: C15 : effacer une cellule vide hors ligne ne doit pas ajouter d'attente : attendu 1, obtenu 2\nassert 2 =",
+  "H2✗ AssertionError: C15 : effacer une cellule vide hors ligne ne doit pas ajouter d'attente : attendu 1, obtenu 2\nassert 2 =",
+  "S1",
+  "S2✗ AssertionError: C15 : effacer une cellule vide hors ligne ne doit pas ajouter d'attente : attendu 1, obtenu 2\nassert 2 ="
+ ],
+ "test_C21_retyping_same_number_leaves_no_trace": [
+  "H1✗ AssertionError: C21 : ressaisir le même contenu ne doit rien mettre en attente, obtenu 1\nassert 1 == 0\n +  where 1 = pen",
+  "H2✗ AssertionError: C21 : ressaisir le même contenu ne doit rien mettre en attente, obtenu 1\nassert 1 == 0\n +  where 1 = pen",
+  "S1✗ AssertionError: C21 : ressaisir le même contenu ne doit rien mettre en attente, obtenu 1\nassert 1 == 0\n +  where 1 = pen",
+  "S2✗ AssertionError: C21 : ressaisir le même contenu ne doit rien mettre en attente, obtenu 1\nassert 1 == 0\n +  where 1 = pen"
+ ],
+ "test_C21_retyping_same_formula_leaves_no_trace": [
+  "H1✗ AssertionError: C21 : ressaisir la même formule, attendu 0 en attente, obtenu 1\nassert 1 == 0\n +  where 1 = pending_coun",
+  "H2✗ AssertionError: C21 : ressaisir la même formule, attendu 0 en attente, obtenu 1\nassert 1 == 0\n +  where 1 = pending_coun",
+  "S1✗ AssertionError: C21 : ressaisir la même formule, attendu 0 en attente, obtenu 1\nassert 1 == 0\n +  where 1 = pending_coun",
+  "S2✗ AssertionError: C21 : ressaisir la même formule, attendu 0 en attente, obtenu 1\nassert 1 == 0\n +  where 1 = pending_coun"
+ ],
+ "test_C21_retyping_same_content_while_first_still_pending_counts_once": [
+  "H1✗ AssertionError: C21 : la seconde saisie identique ne change rien : attendu 1 en attente, obtenu 2\nassert 2 == 1\n +  wher",
+  "H2✗ AssertionError: C21 : la seconde saisie identique ne change rien : attendu 1 en attente, obtenu 2\nassert 2 == 1\n +  wher",
+  "S1✗ AssertionError: C21 : la seconde saisie identique ne change rien : attendu 1 en attente, obtenu 2\nassert 2 == 1\n +  wher",
+  "S2✗ AssertionError: C21 : la seconde saisie identique ne change rien : attendu 1 en attente, obtenu 2\nassert 2 == 1\n +  wher"
+ ],
+ "test_C21_retyping_same_content_offline_does_not_increase_pending": [
+  "H1✗ AssertionError: C21 : saisie identique hors ligne, attendu 0 en attente, obtenu 1\nassert 1 == 0\n +  where 1 = pending_co",
+  "H2✗ AssertionError: C21 : saisie identique hors ligne, attendu 0 en attente, obtenu 1\nassert 1 == 0\n +  where 1 = pending_co",
+  "S1✗ AssertionError: C21 : saisie identique hors ligne, attendu 0 en attente, obtenu 1\nassert 1 == 0\n +  where 1 = pending_co",
+  "S2✗ AssertionError: C21 : saisie identique hors ligne, attendu 0 en attente, obtenu 1\nassert 1 == 0\n +  where 1 = pending_co"
+ ],
+ "test_C21_refused_write_by_reader_leaves_no_trace": [
+  "H1",
+  "H2",
+  "S1",
+  "S2"
+ ],
+ "test_C21_setting_right_to_current_level_leaves_no_trace": [
+  "H1✗ AssertionError: C21 : droit identique, attente attendue 0, obtenu 1\nassert 1 == 0\n +  where 1 = pending_count()\n +    wh",
+  "H2",
+  "S1",
+  "S2✗ AssertionError: C21 : droit identique, attente attendue 0, obtenu 1\nassert 1 == 0\n +  where 1 = pending_count()\n +    wh"
+ ],
+ "test_C21_undo_with_nothing_to_undo_leaves_no_trace": [
+  "H1",
+  "H2",
+  "S1",
+  "S2"
+ ],
+ "test_C21_redo_with_nothing_to_redo_leaves_no_trace": [
+  "H1",
+  "H2",
+  "S1",
+  "S2"
+ ],
+ "test_C21_refused_delete_of_last_sheet_leaves_no_trace": [
+  "H1",
+  "H2",
+  "S1",
+  "S2"
+ ],
+ "test_C21_rename_to_same_name_offline_does_not_increase_pending": [
+  "H1",
+  "H2",
+  "S1",
+  "S2"
+ ],
+ "test_C21_selecting_a_cell_leaves_no_trace": [
+  "H1",
+  "H2",
+  "S1",
+  "S2"
+ ],
+ "test_C22_resolve_on_cell_without_conflict_use_discarded_true_changes_nothing": [
+  "H1",
+  "H2",
+  "S1",
+  "S2"
+ ],
+ "test_C22_resolve_on_cell_without_conflict_use_discarded_false_changes_nothing": [
+  "H1",
+  "H2",
+  "S1",
+  "S2"
+ ],
+ "test_C22_resolve_on_empty_cell_without_conflict_changes_nothing": [
+  "H1",
+  "H2",
+  "S1",
+  "S2"
+ ],
+ "test_C22_resolve_without_conflict_offline_keeps_pending_count": [
+  "H1",
+  "H2",
+  "S1",
+  "S2"
+ ],
+ "test_C22_second_resolve_after_conflict_resolved_changes_nothing": [
+  "H1",
+  "H2",
+  "S1",
+  "S2"
+ ],
+ "test_C23_rename_refused_for_reader_keeps_sheets_and_empty_cells_empty": [
+  "H1",
+  "H2",
+  "S1",
+  "S2"
+ ],
+ "test_C23_rename_refused_for_duplicate_name_keeps_sheets_and_cells": [
+  "H1",
+  "H2",
+  "S1",
+  "S2"
+ ],
+ "test_C24_online_import_undone_before_confirmation_pending_back_to_zero": [
+  "H1✗ AssertionError: C24 : import annulé avant confirmation, attendu 0, obtenu 2\nassert 2 == 0\n +  where 2 = pending_count()\n",
+  "H2✗ AssertionError: C24 : import annulé avant confirmation, attendu 0, obtenu 2\nassert 2 == 0\n +  where 2 = pending_count()\n",
+  "S1✗ AssertionError: C24 : import annulé avant confirmation, attendu 0, obtenu 2\nassert 2 == 0\n +  where 2 = pending_count()\n",
+  "S2✗ AssertionError: C24 : import annulé avant confirmation, attendu 0, obtenu 2\nassert 2 == 0\n +  where 2 = pending_count()\n"
+ ],
+ "test_C24_import_undone_after_earlier_pending_edit_leaves_earlier_edit_pending": [
+  "H1✗ AssertionError: C24 : l'annulation de l'import retire l'import seul, attendu 1, obtenu 3\nassert 3 == 1\n +  where 3 = pen",
+  "H2✗ AssertionError: C24 : l'annulation de l'import retire l'import seul, attendu 1, obtenu 3\nassert 3 == 1\n +  where 3 = pen",
+  "S1✗ AssertionError: C24 : l'annulation de l'import retire l'import seul, attendu 1, obtenu 3\nassert 3 == 1\n +  where 3 = pen",
+  "S2✗ AssertionError: C24 : l'annulation de l'import retire l'import seul, attendu 1, obtenu 3\nassert 3 == 1\n +  where 3 = pen"
+ ],
+ "test_C25_undo_of_confirmed_edit_online_adds_one_pending_inverse": [
+  "H1",
+  "H2",
+  "S1",
+  "S2"
+ ],
+ "test_C25_mixed_confirmed_then_pending_edits_undone_in_order": [
+  "H1✗ AssertionError: C25 : la modification encore en attente est retirée, attendu 0, obtenu 2\nassert 2 == 0\n +  where 2 = pen",
+  "H2✗ AssertionError: C25 : la modification encore en attente est retirée, attendu 0, obtenu 2\nassert 2 == 0\n +  where 2 = pen",
+  "S1✗ AssertionError: C25 : la modification encore en attente est retirée, attendu 0, obtenu 2\nassert 2 == 0\n +  where 2 = pen",
+  "S2✗ AssertionError: C25 : la modification encore en attente est retirée, attendu 0, obtenu 2\nassert 2 == 0\n +  where 2 = pen"
+ ],
+ "test_C25_undo_of_confirmed_formula_input_recomputes_dependents_elsewhere": [
+  "H1",
+  "H2",
+  "S1",
+  "S2"
+ ],
+ "test_C26_offline_undo_of_edit_confirmed_before_cut_adds_one_pending": [
+  "H1",
+  "H2",
+  "S1",
+  "S2"
+ ],
+ "test_C26_offline_undo_inverse_reaches_others_after_reconnection": [
+  "H1",
+  "H2",
+  "S1",
+  "S2"
+ ],
+ "test_C26_offline_undo_survives_reopen_as_pending": [
+  "H1",
+  "H2",
+  "S1",
+  "S2"
+ ],
+ "test_C27_reader_set_cell_refused_with_alert": [
+  "H1",
+  "H2",
+  "S1",
+  "S2"
+ ],
+ "test_C27_reader_clear_refused_with_alert": [
+  "H1",
+  "H2",
+  "S1",
+  "S2"
+ ],
+ "test_C27_reader_import_refused_with_alert": [
+  "H1",
+  "H2",
+  "S1",
+  "S2"
+ ],
+ "test_C27_reader_rename_refused_with_alert_citing_old_name": [
+  "H1",
+  "H2",
+  "S1",
+  "S2"
+ ],
+ "test_C27_reader_delete_sheet_refused_with_alert": [
+  "H1",
+  "H2",
+  "S1",
+  "S2"
+ ],
+ "test_C27_reader_add_sheet_refused_with_alert": [
+  "H1✗ AssertionError: C27 : ajout refusé, attendu ['Feuille1'], obtenu ['Feuille1', 'Nouvelle']\nassert ['Feuille1', 'Nouvelle'",
+  "H2✗ AssertionError: C27 : ajout refusé, attendu ['Feuille1'], obtenu ['Feuille1', 'Nouvelle']\nassert ['Feuille1', 'Nouvelle'",
+  "S1✗ AssertionError: C27 : ajout refusé, attendu ['Feuille1'], obtenu ['Feuille1', 'Nouvelle']\nassert ['Feuille1', 'Nouvelle'",
+  "S2✗ AssertionError: C27 : ajout refusé, attendu ['Feuille1'], obtenu ['Feuille1', 'Nouvelle']\nassert ['Feuille1', 'Nouvelle'"
+ ],
+ "test_C27_reader_resolve_conflict_refused_with_alert_both_choices": [
+  "H1✗ AssertionError: C27 (résolution de conflit use_discarded=True) : alerte 'droit_insuffisant' attendue, obtenu []\nassert [",
+  "H2",
+  "S1",
+  "S2"
+ ],
+ "test_C28_rename_delivered_to_all_online_updates_formulas_everywhere": [
+  "H1",
+  "H2",
+  "S1",
+  "S2"
+ ],
+ "test_C28_formula_citing_old_name_typed_concurrently_with_rename": [
+  "H1✗ AssertionError: C28 (alice) : Feuille1!C1 attendu '=Ventes!A1*2', obtenu '=Feuille2!A1*2'\nassert '=Feuille2!A1*2' == '=V",
+  "H2✗ AssertionError: C28 (alice) : Feuille1!C1 attendu '=Ventes!A1*2', obtenu '=Feuille2!A1*2'\nassert '=Feuille2!A1*2' == '=V",
+  "S1✗ AssertionError: C28 (alice) : Feuille1!C1 attendu '=Ventes!A1*2', obtenu '=Feuille2!A1*2'\nassert '=Feuille2!A1*2' == '=V",
+  "S2✗ AssertionError: C28 (alice) : Feuille1!C1 attendu '=Ventes!A1*2', obtenu '=Feuille2!A1*2'\nassert '=Feuille2!A1*2' == '=V"
+ ],
+ "test_C28_formula_citing_old_name_typed_offline_during_rename": [
+  "H1✗ AssertionError: C28 (alice) : Feuille1!C2 attendu '=Ventes!A1+1', obtenu '=Feuille2!A1+1'\nassert '=Feuille2!A1+1' == '=V",
+  "H2✗ AssertionError: C28 (alice) : Feuille1!C2 attendu '=Ventes!A1+1', obtenu '=Feuille2!A1+1'\nassert '=Feuille2!A1+1' == '=V",
+  "S1✗ AssertionError: C28 (alice) : Feuille1!C2 attendu '=Ventes!A1+1', obtenu '=Feuille2!A1+1'\nassert '=Feuille2!A1+1' == '=V",
+  "S2✗ AssertionError: C28 (alice) : Feuille1!C2 attendu '=Ventes!A1+1', obtenu '=Feuille2!A1+1'\nassert '=Feuille2!A1+1' == '=V"
+ ]
+}

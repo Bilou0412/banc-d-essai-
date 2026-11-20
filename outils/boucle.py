@@ -522,6 +522,83 @@ def ajouter(a):
     print(json.dumps({k: v for k, v in bilan.items() if k not in ("ajouts", "passages")}, ensure_ascii=False))
 
 
+ARBITRE = """Couche : code. Tu écris les tests rouges de règles que l'arbitre vient de trancher.
+
+{tech}
+{reel}
+Spécification complète (assertions) :
+{assertions}
+
+Interface publique de `app` (fixée par les tests existants, tu ne vois aucun code) :
+```
+{interface}
+```
+
+Règles à protéger (décisions de l'arbitre, à respecter à la lettre) :
+{regles}
+
+Pour chacune, écris au moins un test pytest qui la vérifie de l'extérieur, nommé `test_<id>_...`.
+Pour un principe général, écris un test par situation concrète qu'il couvre et que les autres règles
+ne testent pas déjà. N'utilise que l'interface ci-dessus.
+
+Écris exactement un fichier, avec l'outil Write : {dossier}/tests/{fichier} (il importe `app` comme les tests existants).
+Réponds ensuite seulement « ok ».
+"""
+
+
+def decider(a):
+    """Applique les décisions de l'arbitre (it<i>/arbitre.json) à la spec v_i avant que son lot ne tourne."""
+    i = a.it
+    d = it_dir(i)
+    if (d / "lots").exists():
+        sys.exit("le lot de cette itération a déjà commencé : décider avant")
+    arb = json.loads((d / "arbitre.json").read_text(encoding="utf-8"))
+    s = spec(i)
+    a_tester = {}
+    for k, v in arb["remplace"].items():
+        if v["texte"]:
+            s[k] = v["texte"]
+        if v["tests"] == "réécrire":
+            a_tester[k] = s[k]
+            for f in (d / "tests").glob("*.py"):
+                arbre = ast.parse(f.read_text(encoding="utf-8"))
+                noms = {n.name for n in arbre.body if isinstance(n, ast.FunctionDef) and n.name.startswith(f"test_{k}_")}
+                if noms:
+                    retirer_tests(f, noms)
+                    print(f"  {f.name} : {len(noms)} test(s) de {k} retiré(s)")
+    for k, v in arb["ajouts"].items():
+        s[k] = v["texte"]
+        a_tester[k] = v["texte"]
+    garde(ESTIME["red"], "tests des décisions de l'arbitre")
+    travail = Path(tempfile.mkdtemp(prefix="boucle-arbitre-"))
+    shutil.copytree(RACINE / ".claude" / "agents", travail / ".claude" / "agents")
+    (travail / "tests").mkdir()
+    fichier = f"test_app_arbitre{i}.py"
+    r, t = appel("red", ARBITRE.format(tech=TECH, reel=REEL[SONDE], assertions=formater(s), interface=interface(),
+                                       regles="\n".join(f"{k} : {v}" for k, v in a_tester.items()),
+                                       dossier=travail, fichier=fichier), "opus", "Write", travail)
+    noter(f"it{i}/arbitre", t)
+    tf = travail / "tests" / fichier
+    if not tf.exists():
+        sys.exit(f"pas de tests écrits : {str(r.get('result'))[:300]}")
+    shutil.copy(tf, d / "tests" / fichier)
+    (d / "spec.json").write_text(json.dumps(s, ensure_ascii=False, indent=1), encoding="utf-8")
+    # contrôle : sur les greens de l'itération précédente (écrits avant les décisions), qui passe quoi
+    passages = {}
+    for g in GREENS:
+        app_py = it_dir(i - 1) / "lots" / "A" / "greens" / g / "app.py"
+        essai = Path(tempfile.mkdtemp(prefix="boucle-valide-"))
+        (essai / "tests").mkdir()
+        shutil.copy(tf, essai / "tests" / fichier)
+        shutil.copy(app_py, essai / "app.py")
+        for nom, (ok, msg) in executer(essai).items():
+            passages.setdefault(nom, []).append(g if ok else f"{g}✗ {msg[:120]}")
+    (d / "arbitre-controle.json").write_text(json.dumps(passages, ensure_ascii=False, indent=1), encoding="utf-8")
+    for nom, v in sorted(passages.items()):
+        print(f"  {sum('✗' not in x for x in v)}/4  {nom}")
+    print(f"spec v{i} : {len(s)} assertions")
+
+
 def iteration(a):
     i = a.it
     if not (it_dir(i) / "lots" / "A" / "greens").exists():
@@ -547,13 +624,13 @@ def bilan(a):
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("commande", choices=["init", "lot", "analyser", "apparier", "ajouter", "iteration", "bilan"])
+    ap.add_argument("commande", choices=["init", "lot", "analyser", "apparier", "ajouter", "iteration", "bilan", "decider"])
     ap.add_argument("--it", type=int, default=0)
     ap.add_argument("--lot", default="A")
     a = ap.parse_args()
     BASE.mkdir(parents=True, exist_ok=True)
     {"init": init, "lot": lot, "analyser": analyser, "apparier": apparier, "ajouter": ajouter,
-     "iteration": iteration, "bilan": bilan}[a.commande](a)
+     "iteration": iteration, "bilan": bilan, "decider": decider}[a.commande](a)
 
 
 if __name__ == "__main__":

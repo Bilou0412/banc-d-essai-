@@ -1,0 +1,80 @@
+{
+ "date": "2026-11-20",
+ "source": "Bilel, message du 20/11 10:03 (fil du projet)",
+ "remplace": {
+  "A99": {
+   "texte": "Quand une personne annule hors ligne une modification encore en attente, la modification est retirée des modifications en attente : leur nombre diminue de un (principe P2) | observé: attente | conditions: connexion",
+   "origine": "P2",
+   "type": "décision IA possible (convention)",
+   "tests": "garder"
+  },
+  "C07": {
+   "texte": "Quand une personne en ligne modifie une cellule puis annule cette modification avant la confirmation de l'envoi, la modification est retirée des modifications en attente : leur nombre revient à zéro (principe P2) | observé: attente | conditions: connexion, annulation",
+   "origine": "P2",
+   "type": "décision IA possible (convention)",
+   "tests": "réécrire"
+  },
+  "C15": {
+   "texte": "Quand une personne efface une cellule déjà vide, rien ne change : aucune entrée n'apparaît dans l'historique des versions, le nombre de modifications en attente reste inchangé et la commande annuler ne devient pas disponible (principe P1) | observé: versions, attente, annulation | conditions: contenu",
+   "origine": "P1, cas 5",
+   "type": "décision IA possible (convention)",
+   "tests": "réécrire"
+  },
+  "C14": {
+   "texte": null,
+   "origine": "cas 2",
+   "type": "question client (droits)",
+   "tests": "garder"
+  },
+  "C10": {
+   "texte": null,
+   "origine": "cas 7",
+   "type": "décision IA possible (convention)",
+   "tests": "garder"
+  }
+ },
+ "ajouts": {
+  "C21": {
+   "texte": "Principe P1 : une action qui ne change rien ne laisse aucune trace ; aucune valeur ne change, aucune entrée n'apparaît dans l'historique des versions et le nombre de modifications en attente reste inchangé | observé: valeur, versions, attente | conditions: aucune",
+   "origine": "P1",
+   "type": "décision IA possible (convention)"
+  },
+  "C22": {
+   "texte": "Quand une personne ayant le droit écriture demande de résoudre un conflit sur une cellule qui n'en montre aucun, quelle que soit la valeur choisie, rien ne change : le contenu de la cellule reste le même et le nombre de modifications en attente reste inchangé (principe P1) | observé: contenu, attente | conditions: conflit, droit",
+   "origine": "P1, cas 1",
+   "type": "décision IA possible (convention)"
+  },
+  "C23": {
+   "texte": "Quand le renommage d'une feuille est refusé, rien ne change : la liste des feuilles reste la même et les cellules vides de cette feuille restent vides, sans valeur ni erreur (principe P1) | observé: feuilles, valeur, erreur | conditions: droit",
+   "origine": "P1, cas 3",
+   "type": "décision IA possible (convention)"
+  },
+  "C24": {
+   "texte": "Quand une personne en ligne importe un CSV puis annule l'import avant la confirmation de l'envoi, le nombre de modifications en attente revient à zéro (principes P1 et P2) | observé: attente | conditions: connexion, annulation",
+   "origine": "P1, cas 6",
+   "type": "décision IA possible (convention)"
+  },
+  "C25": {
+   "texte": "Principe P2 : annuler une modification encore en attente (envoi pas encore confirmé) la retire des modifications en attente ; annuler une modification dont l'envoi est déjà confirmé crée la modification inverse, qui s'ajoute aux modifications en attente | observé: attente | conditions: connexion, annulation",
+   "origine": "P2",
+   "type": "décision IA possible (convention)"
+  },
+  "C26": {
+   "texte": "Quand une personne hors ligne annule une modification dont l'envoi avait été confirmé avant la coupure, le nombre de modifications en attente augmente de un (principe P2) | observé: attente | conditions: connexion, annulation",
+   "origine": "P2",
+   "type": "décision IA possible (convention)"
+  },
+  "C27": {
+   "texte": "Quand une personne ayant seulement le droit lecture tente une écriture, quelle qu'elle soit (saisie, effacement, import, renommage ou suppression de feuille, résolution de conflit), l'écriture est refusée et une alerte « droit insuffisant » cite la feuille en cause | observé: alerte | conditions: droit",
+   "origine": "cas 2",
+   "type": "question client (droits)"
+  },
+  "C28": {
+   "texte": "Quand le renommage d'une feuille a été livré à toutes les personnes, chez chacune les formules qui citaient l'ancien nom citent le nouveau, aucune cellule n'affiche d'erreur de référence et les cellules vides restent vides | observé: contenu, erreur, valeur | conditions: connexion",
+   "origine": "cas 4",
+   "type": "décision IA possible (convention)"
+  }
+ },
+ "lecture": "« Pas encore envoyée » est lu comme « envoi pas encore confirmé » : c'est la seule lecture où le cas 6 (import annulé avant confirmation : 0 en attente) et P2 disent la même chose. C07 passe donc de 2 à 0. C15 (effacer une cellule vide compte comme une modification, ajouté à l'itération 1) contredisait P1 : il est remplacé.",
+ "retouches": "Après écriture des tests : retiré test_C27_reader_add_sheet (ajouter une feuille quand on est en lecture sur Feuille1 n'est pas une écriture sur une feuille existante, A38 ne le refuse pas : hors de la décision) et les deux tests C28 de formules saisies pendant un renommage concurrent (extrapolation hors du cas 4). « ajout » retiré du texte de C27."
+}
