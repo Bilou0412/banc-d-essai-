@@ -1,0 +1,25 @@
+ETAPE lot B fini
+budget : 7.22 $ dépensés, double juge de 16 groupes (it0, lot B) estimé à 4.16 $
+  add_sheet [annuler] (56) → trou  [trou / trou]
+  set_cell [cellules.*.contenu] (42) → trou  [trou / trou]
+  set_right [alertes] (33) → trou  [trou / trou]
+  resolve_conflict [alertes] (28) → à trancher  [invalide / trou]
+  rename_sheet [cellules.*.erreur, cellules.*.valeur, droits.alice] (23) → invalide  [invalide / invalide]
+  undo [en_attente] (18) → à trancher  [trou / bug V1]
+  delete_sheet [alertes] (13) → trou  [trou / trou]
+  set_cell [cellules.*.erreur, cellules.*.valeur, droits.alice] (10) → invalide  [invalide / invalide]
+  set_cell [cellules.*.erreur, cellules.*.valeur] (5) → à trancher  [bug V2 / trou]
+  import_csv [cellules.*.contenu] (5) → bug S1+S2  [bug V2 / bug V2]
+  history [(tout)] (5) → trou  [trou / trou]
+  deliver_all [alice.*.erreur, alice.*.valeur, bob.*.erreur] (4) → à trancher  [bug V2 / trou]
+  set_right [alertes, droits.alice] (4) → invalide  [invalide / invalide]
+  rename_sheet [alertes, en_attente] (4) → trou  [trou / trou]
+  export_csv [lignes] (3) → trou  [trou / trou]
+  clear [cellules.*.erreur, cellules.*.valeur, droits.alice] (3) → invalide  [invalide / invalide]
+{"situations": 300, "paires": {"H1-H2": 0.243, "H1-S1": 0.063, "H1-S2": 0.053, "H2-S1": 0.133, "H2-S2": 0.073, "S1-S2": 0.437}, "taux_moyen": 0.167, "accord_4": 14, "accord_4_part": 0.047, "groupes": 38, "juges": 16, "classes": {"trou": 7, "à trancher": 4, "invalide": 4, "bug S1+S2": 1}, "accord_juges": 0.75}
+budget : 9.81 $ dépensés, appariement H20b estimé à 0.13 $
+{"trous_A": 11, "trous_B": 7, "cas_distincts": 14, "communs": 4, "seulement_A": 7, "seulement_B": 3, "jaccard": 0.286, "appariement": [["1", "2"], ["4", "3"], ["6", "1"], ["10", "7"]], "tokens": {"neufs": 3495, "cache": 1741, "usd": 0.0331242}}
+budget : 9.84 $ dépensés, écriture des assertions et tests de it1 estimé à 1.20 $
+{"iteration": 0, "trous_juges": 18, "assertions_ajoutees": 13, "bugs": 2, "a_trancher": 8, "tests_ajoutes": 17, "tests_retires": []}
+ETAPE it0 finie
+budget : 10.32 $ dépensés, lot A de it1 (4 greens) estimé à 5.80 $

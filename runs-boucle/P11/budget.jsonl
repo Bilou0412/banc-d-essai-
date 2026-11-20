@@ -1,0 +1,72 @@
+{"etape": "it0/A/juge1/set_cell [cellules.*.contenu]", "usd": 0.145148, "neufs": 16436}
+{"etape": "it0/A/juge1/rename_sheet [droits.alice, droits.bob, droits.carol]", "usd": 0.14122, "neufs": 16056}
+{"etape": "it0/A/juge1/resolve_conflict [en_attente]", "usd": 0.147372, "neufs": 16177}
+{"etape": "it0/A/juge1/add_sheet [annuler, droits.alice]", "usd": 0.157644, "neufs": 16864}
+{"etape": "it0/A/juge2/set_cell [cellules.*.contenu]", "usd": 0.0311088, "neufs": 1944}
+{"etape": "it0/A/juge2/rename_sheet [droits.alice, droits.bob, droits.carol]", "usd": 0.0321358, "neufs": 2002}
+{"etape": "it0/A/juge2/resolve_conflict [en_attente]", "usd": 0.0367214, "neufs": 2232}
+{"etape": "it0/A/juge1/set_right [alertes]", "usd": 0.1216642, "neufs": 13706}
+{"etape": "it0/A/juge2/add_sheet [annuler, droits.alice]", "usd": 0.0427876, "neufs": 2536}
+{"etape": "it0/A/juge1/import_csv [en_attente]", "usd": 0.1250602, "neufs": 14168}
+{"etape": "it0/A/juge1/add_sheet [annuler]", "usd": 0.1196922, "neufs": 13758}
+{"etape": "it0/A/juge2/set_right [alertes]", "usd": 0.030275800000000005, "neufs": 1916}
+{"etape": "it0/A/juge1/resolve_conflict [alertes]", "usd": 0.12562020000000002, "neufs": 14070}
+{"etape": "it0/A/juge2/import_csv [en_attente]", "usd": 0.0307704, "neufs": 1934}
+{"etape": "it0/A/juge2/add_sheet [annuler]", "usd": 0.028398000000000003, "neufs": 1819}
+{"etape": "it0/A/juge1/add_sheet [alertes]", "usd": 0.1277122, "neufs": 14195}
+{"etape": "it0/A/juge1/rename_sheet [cellules.*.erreur, cellules.*.valeur]", "usd": 0.1425962, "neufs": 15472}
+{"etape": "it0/A/juge2/resolve_conflict [alertes]", "usd": 0.0402396, "neufs": 2412}
+{"etape": "it0/A/juge1/undo [en_attente]", "usd": 0.1399802, "neufs": 14998}
+{"etape": "it0/A/juge2/add_sheet [alertes]", "usd": 0.026622800000000002, "neufs": 1726}
+{"etape": "it0/A/juge1/import_csv [cellules.*.contenu]", "usd": 0.1328802, "neufs": 14868}
+{"etape": "it0/A/juge1/import_csv [alertes]", "usd": 0.12145220000000001, "neufs": 14020}
+{"etape": "it0/A/juge2/rename_sheet [cellules.*.erreur, cellules.*.valeur]", "usd": 0.050649, "neufs": 2919}
+{"etape": "it0/A/juge2/undo [en_attente]", "usd": 0.038964200000000004, "neufs": 2343}
+{"etape": "it0/A/juge2/import_csv [alertes]", "usd": 0.025981600000000004, "neufs": 1697}
+{"etape": "it0/A/juge2/import_csv [cellules.*.contenu]", "usd": 0.036585200000000005, "neufs": 2216}
+{"etape": "it0/A/juge1/export_csv [lignes]", "usd": 0.1219842, "neufs": 14016}
+{"etape": "it0/A/juge1/history [(tout)]", "usd": 0.1415002, "neufs": 15056}
+{"etape": "it0/A/juge1/set_cell [cellules.*.erreur, cellules.*.valeur]", "usd": 0.14351619999999998, "neufs": 15905}
+{"etape": "it0/A/juge2/export_csv [lignes]", "usd": 0.030638200000000004, "neufs": 1925}
+{"etape": "it0/A/juge2/history [(tout)]", "usd": 0.031842999999999996, "neufs": 1986}
+{"etape": "it0/A/juge2/set_cell [cellules.*.erreur, cellules.*.valeur]", "usd": 0.0405452, "neufs": 2411}
+{"etape": "it0/B/S1/tour1", "usd": 1.7265028000000002, "neufs": 271282}
+{"etape": "it0/B/S2/tour1", "usd": 1.8538888, "neufs": 287261}
+{"etape": "it0/B/H1/tour1", "usd": 0.43256649999999996, "neufs": 507175}
+{"etape": "it0/B/H2/tour1", "usd": 0.40356508, "neufs": 518847}
+{"etape": "it0/B/H2/tour2", "usd": 0.02462784, "neufs": 93089}
+{"etape": "it0/B/H1/tour2", "usd": 0.06598844000000001, "neufs": 111610}
+{"etape": "it0/B/juge1/set_right [alertes]", "usd": 0.1208602, "neufs": 13682}
+{"etape": "it0/B/juge1/add_sheet [annuler]", "usd": 0.1243322, "neufs": 14002}
+{"etape": "it0/B/juge1/set_cell [cellules.*.contenu]", "usd": 0.13236019999999998, "neufs": 14752}
+{"etape": "it0/B/juge1/resolve_conflict [alertes]", "usd": 0.1315482, "neufs": 14352}
+{"etape": "it0/B/juge2/set_right [alertes]", "usd": 0.030021199999999998, "neufs": 1900}
+{"etape": "it0/B/juge2/set_cell [cellules.*.contenu]", "usd": 0.033954200000000004, "neufs": 2089}
+{"etape": "it0/B/juge2/add_sheet [annuler]", "usd": 0.0337674, "neufs": 2086}
+{"etape": "it0/B/juge2/resolve_conflict [alertes]", "usd": 0.03919020000000001, "neufs": 2358}
+{"etape": "it0/B/juge1/delete_sheet [alertes]", "usd": 0.1252802, "neufs": 14191}
+{"etape": "it0/B/juge1/undo [en_attente]", "usd": 0.1338562, "neufs": 14678}
+{"etape": "it0/B/juge1/rename_sheet [cellules.*.erreur, cellules.*.valeur, droits.alice]", "usd": 0.1476122, "neufs": 15739}
+{"etape": "it0/B/juge1/set_cell [cellules.*.erreur, cellules.*.valeur, droits.alice]", "usd": 0.1353002, "neufs": 15202}
+{"etape": "it0/B/juge2/delete_sheet [alertes]", "usd": 0.032778, "neufs": 2036}
+{"etape": "it0/B/juge2/undo [en_attente]", "usd": 0.038137800000000006, "neufs": 2303}
+{"etape": "it0/B/juge2/set_cell [cellules.*.erreur, cellules.*.valeur, droits.alice]", "usd": 0.030310399999999998, "neufs": 1903}
+{"etape": "it0/B/juge2/rename_sheet [cellules.*.erreur, cellules.*.valeur, droits.alice]", "usd": 0.04673440000000001, "neufs": 2720}
+{"etape": "it0/B/juge1/set_cell [cellules.*.erreur, cellules.*.valeur]", "usd": 0.037965200000000004, "neufs": 2279}
+{"etape": "it0/B/juge1/history [(tout)]", "usd": 0.1226842, "neufs": 13934}
+{"etape": "it0/B/juge1/import_csv [cellules.*.contenu]", "usd": 0.1352122, "neufs": 14990}
+{"etape": "it0/B/juge1/deliver_all [alice.*.erreur, alice.*.valeur, bob.*.erreur]", "usd": 0.1370402, "neufs": 15655}
+{"etape": "it0/B/juge2/history [(tout)]", "usd": 0.0276908, "neufs": 1782}
+{"etape": "it0/B/juge2/set_cell [cellules.*.erreur, cellules.*.valeur]", "usd": 0.034445199999999995, "neufs": 2103}
+{"etape": "it0/B/juge2/import_csv [cellules.*.contenu]", "usd": 0.0317258, "neufs": 1976}
+{"etape": "it0/B/juge2/deliver_all [alice.*.erreur, alice.*.valeur, bob.*.erreur]", "usd": 0.0386106, "neufs": 2313}
+{"etape": "it0/B/juge1/export_csv [lignes]", "usd": 0.1229562, "neufs": 14049}
+{"etape": "it0/B/juge1/set_right [alertes, droits.alice]", "usd": 0.1320722, "neufs": 14350}
+{"etape": "it0/B/juge1/rename_sheet [alertes, en_attente]", "usd": 0.1444562, "neufs": 15883}
+{"etape": "it0/B/juge2/export_csv [lignes]", "usd": 0.0251128, "neufs": 1652}
+{"etape": "it0/B/juge1/clear [cellules.*.erreur, cellules.*.valeur, droits.alice]", "usd": 0.14840420000000001, "neufs": 16120}
+{"etape": "it0/B/juge2/rename_sheet [alertes, en_attente]", "usd": 0.0374458, "neufs": 2256}
+{"etape": "it0/B/juge2/set_right [alertes, droits.alice]", "usd": 0.0416372, "neufs": 2479}
+{"etape": "it0/B/juge2/clear [cellules.*.erreur, cellules.*.valeur, droits.alice]", "usd": 0.0393714, "neufs": 2354}
+{"etape": "it0/apparier", "usd": 0.0331242, "neufs": 3495}
+{"etape": "it0/ajouts", "usd": 0.47854260000000004, "neufs": 45390}
