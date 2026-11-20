@@ -195,3 +195,42 @@
 {"etape": "it3/A/juge2/reconnect [cellules.*.conflit, cellules.*.contenu, cellules.*.erreur]", "usd": 0.04817880000000001, "neufs": 2760}
 {"etape": "it3/A/juge2/rename_sheet [présence.carol]", "usd": 0.0369362, "neufs": 2199}
 {"etape": "it3/ajouts", "usd": 0.3041662, "neufs": 31796}
+{"etape": "it4/A/S2/tour1", "usd": 2.3522043999999998, "neufs": 364925}
+{"etape": "it4/A/H2/tour1", "usd": 0.85489673, "neufs": 497290}
+{"etape": "it4/A/H2/tour2", "usd": 0.45429092000000004, "neufs": 321662}
+{"etape": "it4/A/S1/tour1", "usd": 3.078785, "neufs": 407149}
+{"etape": "it4/A/H1/tour1", "usd": 0.44972977, "neufs": 656345}
+{"etape": "it4/A/H1/tour2", "usd": 0.026348470000000006, "neufs": 81273}
+{"etape": "it4/A/juge1/rename_sheet [cellules.*.erreur]", "usd": 0.1486562, "neufs": 17551}
+{"etape": "it4/A/juge1/set_cell [cellules.*.erreur]", "usd": 0.1564762, "neufs": 18014}
+{"etape": "it4/A/juge1/resolve_conflict [alertes]", "usd": 0.1545802, "neufs": 17519}
+{"etape": "it4/A/juge2/rename_sheet [cellules.*.erreur]", "usd": 0.0259644, "neufs": 1657}
+{"etape": "it4/A/juge1/set_right [droits.bob]", "usd": 0.1684282, "neufs": 18209}
+{"etape": "it4/A/juge2/set_cell [cellules.*.erreur]", "usd": 0.0339244, "neufs": 2055}
+{"etape": "it4/A/juge2/resolve_conflict [alertes]", "usd": 0.0300712, "neufs": 1872}
+{"etape": "it4/A/juge1/deliver_all [alice.*.erreur, bob.*.erreur, carol.*.erreur]", "usd": 0.15510420000000003, "neufs": 18510}
+{"etape": "it4/A/juge2/deliver_all [alice.*.erreur, bob.*.erreur, carol.*.erreur]", "usd": 0.022227999999999998, "neufs": 1462}
+{"etape": "it4/A/juge2/set_right [droits.bob]", "usd": 0.0356692, "neufs": 2149}
+{"etape": "it4/A/juge1/delete_sheet [cellules.*.erreur]", "usd": 0.1870762, "neufs": 19631}
+{"etape": "it4/A/juge1/set_right [droits.carol]", "usd": 0.1749602, "neufs": 18367}
+{"etape": "it4/A/juge1/set_cell [cellules.*.erreur, cellules.*.valeur]", "usd": 0.17253620000000003, "neufs": 19546}
+{"etape": "it4/A/juge1/history [(tout)]", "usd": 0.18506820000000002, "neufs": 20016}
+{"etape": "it4/A/juge2/set_cell [cellules.*.erreur, cellules.*.valeur]", "usd": 0.0313914, "neufs": 1915}
+{"etape": "it4/A/juge2/delete_sheet [cellules.*.erreur]", "usd": 0.063345, "neufs": 3521}
+{"etape": "it4/A/juge2/set_right [droits.carol]", "usd": 0.062629, "neufs": 3498}
+{"etape": "it4/A/juge1/deliver_all [alice.*.conflit, alice.*.contenu, alice.*.valeur]", "usd": 0.1920362, "neufs": 21046}
+{"etape": "it4/A/juge2/history [(tout)]", "usd": 0.061403200000000005, "neufs": 3417}
+{"etape": "it4/A/juge1/rename_sheet [alertes]", "usd": 0.1631402, "neufs": 18256}
+{"etape": "it4/A/juge1/set_cell [cellules.*.conflit]", "usd": 0.1667922, "neufs": 19155}
+{"etape": "it4/A/juge1/reconnect [cellules.*.conflit, cellules.*.contenu, cellules.*.valeur]", "usd": 0.17729219999999998, "neufs": 20286}
+{"etape": "it4/A/juge2/set_cell [cellules.*.conflit]", "usd": 0.0296634, "neufs": 1828}
+{"etape": "it4/A/juge2/deliver_all [alice.*.conflit, alice.*.contenu, alice.*.valeur]", "usd": 0.050701600000000006, "neufs": 2873}
+{"etape": "it4/A/juge2/rename_sheet [alertes]", "usd": 0.0405452, "neufs": 2387}
+{"etape": "it4/A/juge2/reconnect [cellules.*.conflit, cellules.*.contenu, cellules.*.valeur]", "usd": 0.0325582, "neufs": 1965}
+{"etape": "it4/A/juge1/clear [cellules.*.erreur]", "usd": 0.1659162, "neufs": 18759}
+{"etape": "it4/A/juge1/reopen [présence.bob]", "usd": 0.15534820000000002, "neufs": 18116}
+{"etape": "it4/A/juge1/rename_sheet [présence.bob]", "usd": 0.1709442, "neufs": 18915}
+{"etape": "it4/A/juge2/reopen [présence.bob]", "usd": 0.0263374, "neufs": 1673}
+{"etape": "it4/A/juge2/clear [cellules.*.erreur]", "usd": 0.0479454, "neufs": 2751}
+{"etape": "it4/A/juge2/rename_sheet [présence.bob]", "usd": 0.0389116, "neufs": 2299}
+{"etape": "it4/ajouts", "usd": 0.32307199999999997, "neufs": 30931}
