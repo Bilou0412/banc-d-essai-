@@ -76,5 +76,5 @@
   }
  },
  "lecture": "« Pas encore envoyée » est lu comme « envoi pas encore confirmé » : c'est la seule lecture où le cas 6 (import annulé avant confirmation : 0 en attente) et P2 disent la même chose. C07 passe donc de 2 à 0. C15 (effacer une cellule vide compte comme une modification, ajouté à l'itération 1) contredisait P1 : il est remplacé.",
- "retouches": "Après écriture des tests : retiré test_C27_reader_add_sheet (ajouter une feuille quand on est en lecture sur Feuille1 n'est pas une écriture sur une feuille existante, A38 ne le refuse pas : hors de la décision) et les deux tests C28 de formules saisies pendant un renommage concurrent (extrapolation hors du cas 4). « ajout » retiré du texte de C27."
+ "retouches": "Après écriture des tests : retiré test_C27_reader_add_sheet (ajouter une feuille quand on est en lecture sur Feuille1 n'est pas une écriture sur une feuille existante, A38 ne le refuse pas : hors de la décision) et les deux tests C28 de formules saisies pendant un renommage concurrent (extrapolation hors du cas 4). « ajout » retiré du texte de C27. Pendant l'itération 2 : H1 et H2 ont levé une réclamation (contradiction) fondée sur test_C17_changer_un_droit_apres_modification_non_confirmee_laisse_le_compte, qui attendait 2 après l'annulation (ancien C07). Corrigé à 0 (P2) ; les deux greens passent alors 315/315."
 }

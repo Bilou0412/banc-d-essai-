@@ -1,0 +1,38 @@
+budget : 19.73 $ dépensés, lot A de it2 (4 greens) estimé à 5.80 $
+  it2 lot A H2 (haiku) tour 1 : 278/315
+  it2 lot A H2 (haiku) tour 2 : 314/315
+  it2 lot A H2 (haiku) tour 3 : 314/315
+  it2 lot A H2 (haiku) tour 4 : 314/315
+  it2 lot A S1 (sonnet) tour 1 : 315/315
+  it2 lot A H1 (haiku) tour 1 : 190/315
+  it2 lot A S2 (sonnet) tour 1 : 229/315
+  it2 lot A S2 (sonnet) tour 2 : 315/315
+  it2 lot A H1 (haiku) tour 2 : 314/315
+  it2 lot A H1 (haiku) tour 3 : 314/315
+  it2 lot A H1 (haiku) tour 4 : 314/315
+  fini : ('H1', False, 1.12530883)
+  fini : ('H2', False, 1.1158621100000001)
+  fini : ('S1', True, 2.9801148)
+  fini : ('S2', True, 3.2747003000000006)
+budget : 28.22 $ dépensés, double juge de 16 groupes (it2, lot A) estimé à 4.16 $
+  add_sheet [droits.alice] (71) → trou  [trou / trou]
+  resolve_conflict [alertes] (50) → bug H2  [bug V2 / bug V2]
+  history [(tout)] (15) → à trancher  [trou / bug V2]
+  set_right [droits.alice] (12) → trou  [trou / trou]
+  set_right [droits.bob] (9) → à trancher  [bug V2 / trou]
+  rename_sheet [alertes] (6) → à trancher  [trou / bug V1]
+  reconnect [cellules.*.conflit, cellules.*.contenu, cellules.*.erreur] (6) → à trancher  [bug V1 / bug V2]
+  deliver_all [alice.*.conflit, alice.*.contenu, alice.*.erreur] (5) → à trancher  [bug V2 / trou]
+  set_timezone [historique] (5) → à trancher  [trou / bug V2]
+  set_cell [cellules.*.valeur] (5) → trou  [trou / trou]
+  set_cell [cellules.*.erreur, cellules.*.valeur] (4) → trou  [trou / trou]
+  set_right [droits.carol] (4) → bug H2  [bug V2 / bug V2]
+  rename_sheet [présence.alice] (3) → à trancher  [trou / bug V1]
+  set_cell [cellules.*.conflit] (2) → bug H2  [bug V2 / bug V2]
+  rename_sheet [présence.carol] (2) → à trancher  [trou / bug V1]
+  reconnect [cellules.*.conflit, cellules.*.contenu, cellules.*.valeur] (2) → bug H2+S1+S2  [bug V1 / bug V1]
+{"situations": 300, "paires": {"H1-H2": 0.273, "H1-S1": 0.343, "H1-S2": 0.333, "H2-S1": 0.467, "H2-S2": 0.43, "S1-S2": 0.85}, "taux_moyen": 0.449, "accord_4": 70, "accord_4_part": 0.233, "groupes": 35, "juges": 16, "classes": {"trou": 4, "bug H2": 3, "à trancher": 8, "bug H2+S1+S2": 1}, "accord_juges": 0.5}
+budget : 31.48 $ dépensés, écriture des assertions et tests de it3 estimé à 1.20 $
+{"iteration": 2, "trous_juges": 4, "assertions_ajoutees": 3, "bugs": 4, "a_trancher": 8, "tests_ajoutes": 7, "tests_retires": []}
+ETAPE it2 finie
+budget : 31.77 $ dépensés, lot A de it3 (4 greens) estimé à 5.80 $

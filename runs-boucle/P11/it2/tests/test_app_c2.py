@@ -65,7 +65,7 @@ def test_C17_changer_un_droit_apres_modification_non_confirmee_laisse_le_compte(
     alice.set_right('carol', 'Feuille1', 'écriture')
     assert alice.pending_count() == 1, f'C17 : attendu 1 modification en attente, obtenu {alice.pending_count()}'
     alice.undo()
-    assert alice.pending_count() == 2, f'C17+C07 : attendu 2 (modification + annulation), obtenu {alice.pending_count()}'
+    assert alice.pending_count() == 0, f'C17+C07 (P2) : attendu 0 (modification non confirmée retirée par l annulation), obtenu {alice.pending_count()}'
 
 def test_C18_date_heure_hiver_contenu_identique_chez_autre_fuseau(env):
     alice, bob, net = (env['alice'], env['bob'], env['net'])

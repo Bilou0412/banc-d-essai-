@@ -111,3 +111,47 @@
 {"etape": "it1/ajouts", "usd": 0.3588204, "neufs": 33699}
 {"etape": "it2/arbitre", "usd": 0.7087713999999999, "neufs": 57756}
 {"etape": "principes P1 P2", "usd": 0.0926322, "neufs": 8811}
+{"etape": "it2/A/H2/tour1", "usd": 0.71860479, "neufs": 528184}
+{"etape": "it2/A/H2/tour2", "usd": 0.26450079000000004, "neufs": 216605}
+{"etape": "it2/A/H2/tour3", "usd": 0.10712928, "neufs": 140271}
+{"etape": "it2/A/H2/tour4", "usd": 0.02562725, "neufs": 96944}
+{"etape": "it2/A/S1/tour1", "usd": 2.9801148, "neufs": 400923}
+{"etape": "it2/A/H1/tour1", "usd": 0.54533536, "neufs": 623310}
+{"etape": "it2/A/S2/tour1", "usd": 3.0848993000000005, "neufs": 401087}
+{"etape": "it2/A/S2/tour2", "usd": 0.189801, "neufs": 42714}
+{"etape": "it2/A/H1/tour2", "usd": 0.3876865300000001, "neufs": 286089}
+{"etape": "it2/A/H1/tour3", "usd": 0.10341332, "neufs": 132262}
+{"etape": "it2/A/H1/tour4", "usd": 0.08887362, "neufs": 129761}
+{"etape": "it2/A/juge1/add_sheet [droits.alice]", "usd": 0.1480762, "neufs": 16763}
+{"etape": "it2/A/juge1/resolve_conflict [alertes]", "usd": 0.1522242, "neufs": 16962}
+{"etape": "it2/A/juge1/set_right [droits.alice]", "usd": 0.1565242, "neufs": 17045}
+{"etape": "it2/A/juge2/add_sheet [droits.alice]", "usd": 0.036095, "neufs": 2175}
+{"etape": "it2/A/juge2/resolve_conflict [alertes]", "usd": 0.0327092, "neufs": 2007}
+{"etape": "it2/A/juge1/history [(tout)]", "usd": 0.1937322, "neufs": 19395}
+{"etape": "it2/A/juge2/set_right [droits.alice]", "usd": 0.038244, "neufs": 2286}
+{"etape": "it2/A/juge1/set_right [droits.bob]", "usd": 0.1462962, "neufs": 16680}
+{"etape": "it2/A/juge1/rename_sheet [alertes]", "usd": 0.17260019999999998, "neufs": 18303}
+{"etape": "it2/A/juge2/history [(tout)]", "usd": 0.0493718, "neufs": 2833}
+{"etape": "it2/A/juge2/set_right [droits.bob]", "usd": 0.0366448, "neufs": 2203}
+{"etape": "it2/A/juge1/reconnect [cellules.*.conflit, cellules.*.contenu, cellules.*.erreur]", "usd": 0.18640020000000002, "neufs": 19635}
+{"etape": "it2/A/juge1/deliver_all [alice.*.conflit, alice.*.contenu, alice.*.erreur]", "usd": 0.1640402, "neufs": 18946}
+{"etape": "it2/A/juge2/rename_sheet [alertes]", "usd": 0.04262880000000001, "neufs": 2497}
+{"etape": "it2/A/juge1/set_timezone [historique]", "usd": 0.1727842, "neufs": 19061}
+{"etape": "it2/A/juge2/deliver_all [alice.*.conflit, alice.*.contenu, alice.*.erreur]", "usd": 0.0394286, "neufs": 2318}
+{"etape": "it2/A/juge2/reconnect [cellules.*.conflit, cellules.*.contenu, cellules.*.erreur]", "usd": 0.054385600000000006, "neufs": 3076}
+{"etape": "it2/A/juge1/set_cell [cellules.*.valeur]", "usd": 0.1587042, "neufs": 17814}
+{"etape": "it2/A/juge2/set_timezone [historique]", "usd": 0.0381056, "neufs": 2256}
+{"etape": "it2/A/juge1/set_right [droits.carol]", "usd": 0.1426482, "neufs": 16329}
+{"etape": "it2/A/juge1/set_cell [cellules.*.erreur, cellules.*.valeur]", "usd": 0.1656562, "neufs": 18674}
+{"etape": "it2/A/juge2/set_cell [cellules.*.valeur]", "usd": 0.037927999999999996, "neufs": 2261}
+{"etape": "it2/A/juge1/rename_sheet [présence.alice]", "usd": 0.1676042, "neufs": 18670}
+{"etape": "it2/A/juge2/set_right [droits.carol]", "usd": 0.0324326, "neufs": 1997}
+{"etape": "it2/A/juge2/set_cell [cellules.*.erreur, cellules.*.valeur]", "usd": 0.032090400000000005, "neufs": 1957}
+{"etape": "it2/A/juge1/set_cell [cellules.*.conflit]", "usd": 0.1664322, "neufs": 18711}
+{"etape": "it2/A/juge1/reconnect [cellules.*.conflit, cellules.*.contenu, cellules.*.valeur]", "usd": 0.16390020000000002, "neufs": 18579}
+{"etape": "it2/A/juge2/rename_sheet [présence.alice]", "usd": 0.043045, "neufs": 2507}
+{"etape": "it2/A/juge2/set_cell [cellules.*.conflit]", "usd": 0.030183, "neufs": 1864}
+{"etape": "it2/A/juge1/rename_sheet [présence.carol]", "usd": 0.1761402, "neufs": 19017}
+{"etape": "it2/A/juge2/reconnect [cellules.*.conflit, cellules.*.contenu, cellules.*.valeur]", "usd": 0.0390178, "neufs": 2304}
+{"etape": "it2/A/juge2/rename_sheet [présence.carol]", "usd": 0.042175000000000004, "neufs": 2466}
+{"etape": "it2/ajouts", "usd": 0.2903284, "neufs": 28361}
