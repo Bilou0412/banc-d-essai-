@@ -1,0 +1,7 @@
+```python
+def add_ingredient(self, rid: int, name: str, quantity: Any, unit: str) -> None:
+    if not isinstance(quantity, (int, float)) or quantity <= 0:
+        raise InvalidInput('La quantité doit être un nombre positif')
+    recipe = self.recipe(rid)
+    recipe['ingredients'].append({'name': name, 'quantity': str(quantity), 'unit': unit})
+```

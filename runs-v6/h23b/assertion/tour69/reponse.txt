@@ -1,0 +1,17 @@
+```python
+def delete_recipe(self, rid: int) -> None:
+    with open(self.path, 'r+') as f:
+        data = json.load(f)
+        data = [r for r in data if r['id'] != rid]
+        f.seek(0)
+        json.dump(data, f)
+
+    # Supprimer les ingrédients de la recette de la liste de courses
+    shopping_list_path = os.path.join(os.path.dirname(self.path), 'shopping_list.json')
+    if os.path.exists(shopping_list_path):
+        with open(shopping_list_path, 'r+') as slf:
+            sl_data = json.load(slf)
+            sl_data = [item for item in sl_data if not any(item['name'] == ingr['name'] and item['unit'] == ingr['unit'] for ingr in data[0]['ingredients'])]
+            slf.seek(0)
+            json.dump(sl_data, slf)
+```

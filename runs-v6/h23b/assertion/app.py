@@ -4,9 +4,20 @@ from typing import Any, Dict, List
 import unicodedata
 import io
 from typing import Dict, List
+import re
+import hashlib
 DEFAULT_PHOTO = b'\x89PNG\r\n\x1a\n\x00\x00\x00\rIHDR\x00\x00\x00\x01\x00\x00\x00\x01\x08\x02\x00\x00\x00\x90wS\xde\x00\x00\x00\nIDATx\xdac\xf8\xff?\x00\x01\x01\xfe\x00\x00\x00\x00IEND\xaeB`\x82'
 
 class InvalidInput(ValueError):
+    pass
+    pass
+    pass
+    pass
+    pass
+    pass
+    pass
+    pass
+    pass
     pass
     pass
     pass
@@ -37,7 +48,7 @@ class App:
     def save_recipe(self, title: str, servings: int=4) -> int:
         if not title.strip():
             raise InvalidInput('Le titre ne peut pas être vide')
-        if not isinstance(servings, (int, float)) or servings <= 0:
+        if not is_valid_quantity(servings):
             raise InvalidInput('Le nombre de portions doit être un nombre positif')
         with open(self.path, 'r+') as f:
             data = json.load(f)
@@ -64,7 +75,7 @@ class App:
         recipe = next((r for r in recipes if r['id'] == rid), None)
         if not recipe:
             raise ValueError('Recette non trouvée')
-        if servings is not None:
+        if servings is not None and is_valid_quantity(servings):
             recipe['servings'] = servings
             for i in recipe['ingredients']:
                 i['quantity'] = str(round(qty(i['quantity']) / servings, 2))
@@ -111,7 +122,7 @@ class App:
 
     def add_to_shopping_list(self, rid: int, servings: int=None) -> None:
         recipe = self.recipe(rid)
-        if servings is not None:
+        if servings is not None and is_valid_quantity(servings):
             recipe['servings'] = servings
         for i in recipe['ingredients']:
             item = (i['name'], i['unit'])
@@ -133,13 +144,16 @@ class App:
             del shop(self)[item]
 
 def is_valid_quantity(quantity: Any) -> bool:
-    return isinstance(quantity, (int, float)) and quantity > 0
+    return isinstance(quantity, (int, float)) and quantity > 0 and re.match('^-?\\d+(\\.\\d+)?$', str(quantity))
 
 def search(self, query: str='', category: str=None, favorites_only: bool=False) -> Dict[str, Any]:
     recipes = self.list_recipes()
     normalized_query = unicodedata.normalize('NFD', query.strip().lower())
     results = [r for r in recipes if (not normalized_query or normalized_query in unicodedata.normalize('NFD', r['title'].lower())) and (category is None or r.get('category') == category) and (not favorites_only or r['favorite'])]
-    return {'results': sorted((r['title'] for r in results)), 'message': None}
+    ingredients_results = [r for r in recipes if any((normalized_query in unicodedata.normalize('NFD', i['name'].lower()) for i in r['ingredients']))]
+    results.extend(ingredients_results)
+    message = 'Aucun résultat' if not results else None
+    return {'results': sorted((r['title'] for r in set(results))), 'message': message}
 
 def set_photo(self, rid: int, data: bytes) -> None:
     recipe = self.recipe(rid)
@@ -151,4 +165,43 @@ def shop(inst):
     return {(i['name'], i['unit']): i for i in inst.shopping_list()}
 
 def qty(s):
-    return float(s)
+    return float(re.sub(',', '.', s))
+
+def add_to_shopping_list(self, rid: int, servings: int=None) -> None:
+    recipe = self.recipe(rid)
+    if servings is not None and is_valid_quantity(servings):
+        recipe['servings'] = servings
+    for i in recipe['ingredients']:
+        item = (i['name'], i['unit'])
+        if item in shop(self):
+            shop(self)[item]['quantity'] = str(round(qty(shop(self)[item]['quantity']) + qty(i['quantity']), 2))
+        else:
+            shop(self)[item] = {'name': i['name'], 'quantity': i['quantity'], 'unit': i['unit'], 'checked': False}
+
+def add_ingredient(self, rid: int, name: str, quantity: Any, unit: str) -> None:
+    if not isinstance(quantity, (int, float)) or quantity <= 0:
+        raise InvalidInput('La quantité doit être un nombre positif')
+    recipe = self.recipe(rid)
+    recipe['ingredients'].append({'name': name, 'quantity': str(quantity), 'unit': unit})
+
+def recipe(self, rid: int, servings: int=None) -> Dict[str, Any]:
+    recipes = self.list_recipes()
+    recipe = next((r for r in recipes if r['id'] == rid), None)
+    if not recipe:
+        raise ValueError('Recette non trouvée')
+    if servings is not None and is_valid_quantity(servings):
+        recipe['servings'] = servings
+        for i in recipe['ingredients']:
+            i['quantity'] = str(round(qty(i['quantity']) / servings, 2))
+    return recipe
+
+def remove_checked(self) -> None:
+    for item in [i for i in shop(self) if shop(self)[i]['checked']]:
+        del shop(self)[item]
+
+def delete_recipe(self, rid: int) -> None:
+    with open(self.path, 'r+') as f:
+        data = json.load(f)
+        data = [r for r in data if r['id'] != rid]
+        f.seek(0)
+        json.dump(data, f)

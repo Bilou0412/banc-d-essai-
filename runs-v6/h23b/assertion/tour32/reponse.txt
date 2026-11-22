@@ -1,0 +1,12 @@
+```python
+def add_to_shopping_list(self, rid: int, servings: int=None) -> None:
+    recipe = self.recipe(rid)
+    if servings is not None:
+        recipe['servings'] = servings
+    for i in recipe['ingredients']:
+        item = (i['name'], i['unit'])
+        if item in shop(self):
+            shop(self)[item]['quantity'] = str(round(qty(shop(self)[item]['quantity']) + qty(i['quantity']), 2))
+        else:
+            shop(self)[item] = {'name': i['name'], 'quantity': i['quantity'], 'unit': i['unit'], 'checked': False}
+```

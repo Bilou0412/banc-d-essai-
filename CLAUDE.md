@@ -83,6 +83,9 @@ docs/audit-BuildForge.md       ce que le banc a trouvé dans le code de BuildFor
 outils/v5/                     V5 : générateur de RC, boucle_v5.py, H23 (h23_passer.py, h23.py, shim_sonnet.py), bilel.py
 adaptateurs/bilel/             appelle le code BuildForge tel quel (Rust) sur des pages
 runs-v5/, runs-v5-duel/        données de V5 (boucle, H23, budget)
+docs/V6.md                     rapport de V6 : part déterministe et carte des organes (H30), petit modèle local qui écrit le code (H23b)
+outils/v6/                     V6 : carte.py (piste A), h23b.py (piste B, llama.cpp local)
+data/v6/, runs-v6/             V6 : vérité des 5 RC publics (à la main), table assertion → fait, résultats
 protocol/, .claude/agents/     le protocole adversarial attaché (tools/link.py), ne pas éditer protocol/
 ```
 
