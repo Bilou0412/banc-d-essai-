@@ -1,0 +1,8 @@
+```python
+    def set_note(self, rid: int, text: str) -> None:
+        recipe = self.recipe(rid)
+        if not text.strip():
+            recipe['note'] = None
+        else:
+            recipe['note'] = text
+```

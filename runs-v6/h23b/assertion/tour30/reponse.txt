@@ -1,0 +1,7 @@
+```python
+from typing import Dict, List
+
+# Ajout de la fonction shop pour simuler la liste de courses
+def shop(inst):
+    return {(i["name"], i["unit"]): i for i in inst.shopping_list()}
+```

@@ -276,10 +276,22 @@ def tour_commun(dossier, num, texte, max_tokens, construire, code, res, journal,
     td = dossier / f"tour{num:02d}"
     td.mkdir(parents=True, exist_ok=True)
     (td / "prompt.txt").write_text(texte, encoding="utf-8")
-    try:
-        rep, timings, usage = llm(texte, max_tokens)
-    except Exception as e:  # noqa: BLE001
-        rep, timings, usage = f"ERREUR {e}", {}, {}
+    for essai in range(4):
+        try:
+            rep, timings, usage = llm(texte, max_tokens)
+            break
+        except Exception as e:  # noqa: BLE001  serveur tombé : on attend qu'il revienne, le tour ne compte pas
+            print(f"serveur indisponible ({e}), essai {essai + 1}", flush=True)
+            if essai == 3:
+                sys.exit("serveur llama.cpp indisponible : arrêt sans compter le tour")
+            for _ in range(120):
+                time.sleep(30)
+                try:
+                    urllib.request.urlopen(URL.replace("/v1/chat/completions", "/health"), timeout=5)
+                    break
+                except Exception:  # noqa: BLE001
+                    pass
+            t0 = time.time()
     (td / "reponse.txt").write_text(rep, encoding="utf-8")
     t_llm = time.time() - t0
     try:
@@ -337,12 +349,22 @@ def assertion(a):
     entete, par = entete_et_tests()
     ordre = list(spec)
     code, res, rejet, num = "", {}, None, 0
+    faits_ = set()
+    jf = dossier / "journal.jsonl"
+    if jf.exists():  # reprise après un arrêt : le code gardé et les tours déjà faits
+        for l in jf.read_text(encoding="utf-8").splitlines():
+            if l.strip():
+                x = json.loads(l)
+                faits_.add((x["passage"], x["assertion"]))
+                num = x["tour"]
+        code = (dossier / "app.py").read_text(encoding="utf-8")
+        res = tests_passes(code)
     with open(dossier / "journal.jsonl", "a", encoding="utf-8") as journal:
         for passage in (1, 2):
             for i in ordre:
                 if num >= a.max:
                     return
-                if passage == 2 and res and not echecs(res, i):
+                if (passage, i) in faits_ or (passage == 2 and res and not echecs(res, i)):
                     continue
                 vois = voisines(spec, i)
                 num += 1
