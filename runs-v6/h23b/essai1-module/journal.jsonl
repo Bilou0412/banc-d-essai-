@@ -1,0 +1,1 @@
+{"tour": 1, "garde": false, "rejet": "SyntaxError: unterminated string literal (detected at line 9) (app.py, line 9)", "essai_passe": -1, "passe": 0, "total": 104, "taux": {"S1": 0.0, "S2": 0.0, "moyenne": 0.0}, "secondes_modele": 4695, "secondes": 4708, "jetons_prompt": 15777, "jetons_sortie": 7000, "jetons_caches": 0}

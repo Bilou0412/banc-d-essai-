@@ -33,6 +33,7 @@ from differentiel import rejouer, spec_de  # noqa: E402
 from duel import REEL, TECH, executer, formater  # noqa: E402
 
 URL = "http://127.0.0.1:8081/v1/chat/completions"
+REPETITION = 1.1  # ajouté après le tour 1 de l'essai 1 (boucle de 6 000 jetons à température 0), voir data/predictions/V6.md
 P02 = RACINE / "runs-v4" / "P02"
 TESTS = sorted((RACINE / "runs-v2" / "P02").glob("test_app*.py"))
 SORTIE = RACINE / "runs-v6" / "h23b"
@@ -87,13 +88,43 @@ Ce que tu rends remplace l'élément de même nom ; le reste du code est gardé 
 
 # ------------------------------------------------------------------ modèle local
 
+def boucle(texte):
+    """Vrai si la fin du texte répète le même motif court (≤ 40 caractères) sur plus de 400 caractères."""
+    fin = texte[-600:]
+    if len(fin) < 600:
+        return False
+    for n in range(1, 41):
+        m = fin[-n:]
+        if m * (400 // n) in fin[-(400 // n) * n - n:]:
+            return True
+    return False
+
+
 def llm(texte, max_tokens):
+    """Génération en flux ; une génération qui boucle sur un motif est coupée (la réponse est gardée telle quelle)."""
     corps = json.dumps({"messages": [{"role": "system", "content": SYSTEME}, {"role": "user", "content": texte}],
-                        "temperature": 0, "max_tokens": max_tokens, "cache_prompt": True}).encode()
+                        "temperature": 0, "repeat_penalty": REPETITION, "max_tokens": max_tokens, "cache_prompt": True,
+                        "stream": True, "stream_options": {"include_usage": True}, "timings_per_token": True}).encode()
     req = urllib.request.Request(URL, corps, {"content-type": "application/json"})
+    morceaux, timings, usage, coupe = [], {}, {}, False
     with urllib.request.urlopen(req, timeout=7200) as r:
-        d = json.load(r)
-    return d["choices"][0]["message"]["content"], d.get("timings", {}), d.get("usage", {})
+        for ligne in r:
+            ligne = ligne.decode("utf-8", "replace").strip()
+            if not ligne.startswith("data:") or ligne == "data: [DONE]":
+                continue
+            d = json.loads(ligne[5:])
+            timings = d.get("timings", timings)
+            usage = d.get("usage") or usage
+            for c in d.get("choices", []):
+                morceaux.append((c.get("delta") or {}).get("content") or "")
+            if len(morceaux) % 50 == 0 and boucle("".join(morceaux)):
+                coupe = True
+                break
+    rep = "".join(morceaux)
+    if coupe:
+        usage = {"prompt_tokens": timings.get("prompt_n"), "completion_tokens": timings.get("predicted_n")}
+    timings["boucle_coupee"] = coupe
+    return rep, timings, usage
 
 
 def bloc(reponse):
@@ -273,7 +304,7 @@ def tour_commun(dossier, num, texte, max_tokens, construire, code, res, journal,
              "passe": sum(v for v, _ in res.values()), "total": len(res) or 104, "taux": tx,
              "secondes_modele": round(t_llm), "secondes": round(time.time() - t0),
              "jetons_prompt": usage.get("prompt_tokens"), "jetons_sortie": usage.get("completion_tokens"),
-             "jetons_caches": timings.get("cache_n")}
+             "jetons_caches": timings.get("cache_n"), "boucle_coupee": timings.get("boucle_coupee")}
     journal.write(json.dumps(ligne, ensure_ascii=False) + "\n")
     journal.flush()
     (dossier / "app.py").write_text(code, encoding="utf-8")
@@ -294,7 +325,7 @@ def module(a):
                 code=f"Le app.py actuel :\n```python\n{code}\n```" if code else "Premier tour : app.py n'existe pas encore.",
                 resultats=(("Échecs du app.py actuel :\n" + echecs(res)) if res else "")
                 + (f"\nNote : {rejet}." if rejet else ""))
-            code, res, rejet = tour_commun(dossier, num, texte, 7000, lambda c, b: b, code, res, journal, {})
+            code, res, rejet = tour_commun(dossier, num, texte, 6000, lambda c, b: b, code, res, journal, {})
             if res and all(v for v, _ in res.values()):
                 break
 
