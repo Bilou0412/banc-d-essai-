@@ -1,0 +1,1153 @@
+{
+ "definitions": "data/predictions/V6.md",
+ "par_fait": {
+  "synthetiques": {
+   "offer_deadline": {
+    "regle": 1.0,
+    "greens": [
+     1.0,
+     1.0,
+     1.0,
+     1.0
+    ],
+    "satisfait": true
+   },
+   "questions_deadline": {
+    "regle": 1.0,
+    "greens": [
+     1.0,
+     1.0,
+     1.0,
+     1.0
+    ],
+    "satisfait": true
+   },
+   "procedure": {
+    "regle": 0.881,
+    "greens": [
+     0.881,
+     0.881,
+     1.0,
+     0.881
+    ],
+    "satisfait": false
+   },
+   "lots": {
+    "regle": 0.969,
+    "greens": [
+     1.0,
+     0.969,
+     0.969,
+     0.969
+    ],
+    "satisfait": true
+   },
+   "site_visit": {
+    "regle": 1.0,
+    "greens": [
+     1.0,
+     1.0,
+     1.0,
+     1.0
+    ],
+    "satisfait": true
+   },
+   "site_visit_dates": {
+    "regle": 0.99,
+    "greens": [
+     0.99,
+     0.99,
+     0.99,
+     0.99
+    ],
+    "satisfait": true
+   },
+   "submission_mode": {
+    "regle": 1.0,
+    "greens": [
+     1.0,
+     1.0,
+     1.0,
+     1.0
+    ],
+    "satisfait": true
+   },
+   "offer_validity": {
+    "regle": 1.0,
+    "greens": [
+     1.0,
+     1.0,
+     1.0,
+     1.0
+    ],
+    "satisfait": true
+   },
+   "variants": {
+    "regle": 1.0,
+    "greens": [
+     1.0,
+     0.925,
+     1.0,
+     1.0
+    ],
+    "satisfait": true
+   },
+   "award_criteria": {
+    "regle": 0.986,
+    "greens": [
+     0.986,
+     0.898,
+     0.986,
+     0.986
+    ],
+    "satisfait": true
+   },
+   "documents_to_return": {
+    "regle": 1.0,
+    "greens": [
+     1.0,
+     1.0,
+     1.0,
+     1.0
+    ],
+    "satisfait": true
+   }
+  },
+  "publics": {
+   "offer_deadline": {
+    "regle": 0.2,
+    "greens": [
+     0.4,
+     0.6,
+     0.6,
+     0.2
+    ],
+    "satisfait": false
+   },
+   "questions_deadline": {
+    "regle": 0.2,
+    "greens": [
+     0.6,
+     0.6,
+     1.0,
+     0.0
+    ],
+    "satisfait": false
+   },
+   "procedure": {
+    "regle": 1.0,
+    "greens": [
+     1.0,
+     1.0,
+     1.0,
+     1.0
+    ],
+    "satisfait": true
+   },
+   "lots": {
+    "regle": 0.6,
+    "greens": [
+     0.4,
+     0.6,
+     0.6,
+     0.6
+    ],
+    "satisfait": false
+   },
+   "site_visit": {
+    "regle": 0.4,
+    "greens": [
+     0.4,
+     0.4,
+     0.4,
+     0.4
+    ],
+    "satisfait": false
+   },
+   "site_visit_dates": {
+    "regle": 1.0,
+    "greens": [
+     1.0,
+     1.0,
+     1.0,
+     1.0
+    ],
+    "satisfait": true
+   },
+   "submission_mode": {
+    "regle": 1.0,
+    "greens": [
+     1.0,
+     1.0,
+     1.0,
+     1.0
+    ],
+    "satisfait": true
+   },
+   "offer_validity": {
+    "regle": 0.6,
+    "greens": [
+     0.6,
+     0.6,
+     0.6,
+     0.6
+    ],
+    "satisfait": false
+   },
+   "variants": {
+    "regle": 0.8,
+    "greens": [
+     0.8,
+     0.8,
+     0.8,
+     1.0
+    ],
+    "satisfait": false
+   },
+   "award_criteria": {
+    "regle": 0.0,
+    "greens": [
+     0.0,
+     0.0,
+     0.0,
+     0.0
+    ],
+    "satisfait": false
+   },
+   "documents_to_return": {
+    "regle": 0.0,
+    "greens": [
+     0.0,
+     0.0,
+     0.0,
+     0.0
+    ],
+    "satisfait": false
+   }
+  }
+ },
+ "accord": {
+  "synthetiques": {
+   "@controle": {
+    "accord_3_sur_4": 0.997,
+    "satisfait": true
+   },
+   "@limite_pages": {
+    "accord_3_sur_4": 1.0,
+    "satisfait": true
+   },
+   "@obligation": {
+    "accord_3_sur_4": 1.0,
+    "satisfait": true
+   },
+   "@pages": {
+    "accord_3_sur_4": 0.695,
+    "satisfait": false
+   },
+   "@plan": {
+    "accord_3_sur_4": 1.0,
+    "satisfait": true
+   },
+   "@type_ponderation": {
+    "accord_3_sur_4": 1.0,
+    "satisfait": true
+   }
+  },
+  "publics": {
+   "@controle": {
+    "accord_3_sur_4": 0.6,
+    "satisfait": false
+   },
+   "@limite_pages": {
+    "accord_3_sur_4": 1.0,
+    "satisfait": true
+   },
+   "@obligation": {
+    "accord_3_sur_4": 0.0,
+    "satisfait": false
+   },
+   "@pages": {
+    "accord_3_sur_4": 0.0,
+    "satisfait": false
+   },
+   "@plan": {
+    "accord_3_sur_4": 0.2,
+    "satisfait": false
+   },
+   "@type_ponderation": {
+    "accord_3_sur_4": 0.6,
+    "satisfait": false
+   }
+  }
+ },
+ "carte": {
+  "synthetiques": {
+   "rc": 100,
+   "global": {
+    "regle suffit": {
+     "n": 1085,
+     "part": 0.986
+    },
+    "personne ne sait": {
+     "n": 14,
+     "part": 0.013
+    },
+    "petit modele necessaire": {
+     "n": 1,
+     "part": 0.001
+    }
+   },
+   "par_fait": {
+    "offer_deadline": {
+     "regle suffit": 100
+    },
+    "questions_deadline": {
+     "regle suffit": 100
+    },
+    "procedure": {
+     "regle suffit": 90,
+     "personne ne sait": 10
+    },
+    "lots": {
+     "regle suffit": 96,
+     "personne ne sait": 4
+    },
+    "site_visit": {
+     "regle suffit": 100
+    },
+    "site_visit_dates": {
+     "regle suffit": 100
+    },
+    "submission_mode": {
+     "regle suffit": 100
+    },
+    "offer_validity": {
+     "regle suffit": 100
+    },
+    "variants": {
+     "regle suffit": 100
+    },
+    "award_criteria": {
+     "regle suffit": 99,
+     "petit modele necessaire": 1
+    },
+    "documents_to_return": {
+     "regle suffit": 100
+    }
+   },
+   "justesse": {
+    "offer_deadline": {
+     "regle": 1.0,
+     "nuextract": 0.89,
+     "sonnet": 0.89
+    },
+    "questions_deadline": {
+     "regle": 1.0,
+     "nuextract": 1.0,
+     "sonnet": 1.0
+    },
+    "procedure": {
+     "regle": 0.9,
+     "nuextract": 0.9,
+     "sonnet": 0.9
+    },
+    "lots": {
+     "regle": 0.96,
+     "nuextract": 0.96,
+     "sonnet": 0.64
+    },
+    "site_visit": {
+     "regle": 1.0,
+     "nuextract": 1.0,
+     "sonnet": 1.0
+    },
+    "site_visit_dates": {
+     "regle": 1.0,
+     "nuextract": 1.0,
+     "sonnet": 1.0
+    },
+    "submission_mode": {
+     "regle": 1.0,
+     "nuextract": 1.0,
+     "sonnet": 1.0
+    },
+    "offer_validity": {
+     "regle": 1.0,
+     "nuextract": 1.0,
+     "sonnet": 0.99
+    },
+    "variants": {
+     "regle": 1.0,
+     "nuextract": 1.0,
+     "sonnet": 1.0
+    },
+    "award_criteria": {
+     "regle": 0.99,
+     "nuextract": 0.72,
+     "sonnet": 0.92
+    },
+    "documents_to_return": {
+     "regle": 1.0,
+     "nuextract": 0.24,
+     "sonnet": 0.25
+    }
+   }
+  },
+  "publics": {
+   "rc": 5,
+   "global": {
+    "petit modele necessaire": {
+     "n": 9,
+     "part": 0.164
+    },
+    "regle suffit": {
+     "n": 29,
+     "part": 0.527
+    },
+    "personne ne sait": {
+     "n": 17,
+     "part": 0.309
+    }
+   },
+   "par_fait": {
+    "offer_deadline": {
+     "petit modele necessaire": 4,
+     "regle suffit": 1
+    },
+    "questions_deadline": {
+     "petit modele necessaire": 4,
+     "regle suffit": 1
+    },
+    "procedure": {
+     "regle suffit": 5
+    },
+    "lots": {
+     "regle suffit": 3,
+     "petit modele necessaire": 1,
+     "personne ne sait": 1
+    },
+    "site_visit": {
+     "personne ne sait": 3,
+     "regle suffit": 2
+    },
+    "site_visit_dates": {
+     "regle suffit": 5
+    },
+    "submission_mode": {
+     "regle suffit": 5
+    },
+    "offer_validity": {
+     "regle suffit": 3,
+     "personne ne sait": 2
+    },
+    "variants": {
+     "regle suffit": 4,
+     "personne ne sait": 1
+    },
+    "award_criteria": {
+     "personne ne sait": 5
+    },
+    "documents_to_return": {
+     "personne ne sait": 5
+    }
+   },
+   "justesse": {
+    "offer_deadline": {
+     "regle": 0.2,
+     "nuextract": 1.0,
+     "sonnet": 1.0
+    },
+    "questions_deadline": {
+     "regle": 0.2,
+     "nuextract": 1.0,
+     "sonnet": 1.0
+    },
+    "procedure": {
+     "regle": 1.0,
+     "nuextract": 1.0,
+     "sonnet": 1.0
+    },
+    "lots": {
+     "regle": 0.6,
+     "nuextract": 0.4,
+     "sonnet": 0.4
+    },
+    "site_visit": {
+     "regle": 0.4,
+     "nuextract": 0.4,
+     "sonnet": 0.4
+    },
+    "site_visit_dates": {
+     "regle": 1.0,
+     "nuextract": 0.8,
+     "sonnet": 0.8
+    },
+    "submission_mode": {
+     "regle": 1.0,
+     "nuextract": 1.0,
+     "sonnet": 1.0
+    },
+    "offer_validity": {
+     "regle": 0.6,
+     "nuextract": 0.6,
+     "sonnet": 0.6
+    },
+    "variants": {
+     "regle": 0.8,
+     "nuextract": 0.8,
+     "sonnet": 0.8
+    },
+    "award_criteria": {
+     "regle": 0.0,
+     "nuextract": 0.0,
+     "sonnet": 0.0
+    },
+    "documents_to_return": {
+     "regle": 0.0,
+     "nuextract": 0.0,
+     "sonnet": 0.0
+    }
+   }
+  }
+ },
+ "part_deterministe": {
+  "synthetiques": {
+   "assertions": 175,
+   "satisfaites": 161,
+   "part": 0.92,
+   "part_sur_les_11_faits": 0.926,
+   "non_satisfaites_par_champ": {
+    "procedure": 10,
+    "@pages": 4
+   }
+  },
+  "publics": {
+   "assertions": 175,
+   "satisfaites": 36,
+   "part": 0.206,
+   "part_sur_les_11_faits": 0.2,
+   "non_satisfaites_par_champ": {
+    "lots": 10,
+    "offer_deadline": 21,
+    "questions_deadline": 10,
+    "site_visit": 8,
+    "variants": 8,
+    "offer_validity": 11,
+    "documents_to_return": 12,
+    "@obligation": 6,
+    "award_criteria": 28,
+    "@type_ponderation": 5,
+    "@plan": 8,
+    "@controle": 8,
+    "@pages": 4
+   }
+  }
+ },
+ "cases_publics": {
+  "RC1/offer_deadline": {
+   "greens": [
+    false,
+    true,
+    true,
+    false
+   ],
+   "regle": false,
+   "nux": true,
+   "son": true
+  },
+  "RC1/questions_deadline": {
+   "greens": [
+    false,
+    true,
+    true,
+    false
+   ],
+   "regle": false,
+   "nux": true,
+   "son": true
+  },
+  "RC1/procedure": {
+   "greens": [
+    true,
+    true,
+    true,
+    true
+   ],
+   "regle": true,
+   "nux": true,
+   "son": true
+  },
+  "RC1/lots": {
+   "greens": [
+    true,
+    true,
+    true,
+    true
+   ],
+   "regle": true,
+   "nux": false,
+   "son": false
+  },
+  "RC1/site_visit": {
+   "greens": [
+    false,
+    false,
+    false,
+    false
+   ],
+   "regle": false,
+   "nux": false,
+   "son": false
+  },
+  "RC1/site_visit_dates": {
+   "greens": [
+    true,
+    true,
+    true,
+    true
+   ],
+   "regle": true,
+   "nux": true,
+   "son": true
+  },
+  "RC1/submission_mode": {
+   "greens": [
+    true,
+    true,
+    true,
+    true
+   ],
+   "regle": true,
+   "nux": true,
+   "son": true
+  },
+  "RC1/offer_validity": {
+   "greens": [
+    true,
+    true,
+    true,
+    true
+   ],
+   "regle": true,
+   "nux": true,
+   "son": true
+  },
+  "RC1/variants": {
+   "greens": [
+    true,
+    true,
+    true,
+    true
+   ],
+   "regle": true,
+   "nux": true,
+   "son": true
+  },
+  "RC1/award_criteria": {
+   "greens": [
+    false,
+    false,
+    false,
+    false
+   ],
+   "regle": false,
+   "nux": false,
+   "son": false
+  },
+  "RC1/documents_to_return": {
+   "greens": [
+    false,
+    false,
+    false,
+    false
+   ],
+   "regle": false,
+   "nux": false,
+   "son": false
+  },
+  "RC2/offer_deadline": {
+   "greens": [
+    false,
+    true,
+    true,
+    false
+   ],
+   "regle": false,
+   "nux": true,
+   "son": true
+  },
+  "RC2/questions_deadline": {
+   "greens": [
+    false,
+    true,
+    true,
+    false
+   ],
+   "regle": false,
+   "nux": true,
+   "son": true
+  },
+  "RC2/procedure": {
+   "greens": [
+    true,
+    true,
+    true,
+    true
+   ],
+   "regle": true,
+   "nux": true,
+   "son": true
+  },
+  "RC2/lots": {
+   "greens": [
+    false,
+    false,
+    false,
+    false
+   ],
+   "regle": false,
+   "nux": true,
+   "son": false
+  },
+  "RC2/site_visit": {
+   "greens": [
+    false,
+    false,
+    false,
+    false
+   ],
+   "regle": false,
+   "nux": false,
+   "son": false
+  },
+  "RC2/site_visit_dates": {
+   "greens": [
+    true,
+    true,
+    true,
+    true
+   ],
+   "regle": true,
+   "nux": true,
+   "son": true
+  },
+  "RC2/submission_mode": {
+   "greens": [
+    true,
+    true,
+    true,
+    true
+   ],
+   "regle": true,
+   "nux": true,
+   "son": true
+  },
+  "RC2/offer_validity": {
+   "greens": [
+    true,
+    true,
+    true,
+    true
+   ],
+   "regle": true,
+   "nux": true,
+   "son": true
+  },
+  "RC2/variants": {
+   "greens": [
+    true,
+    true,
+    true,
+    true
+   ],
+   "regle": true,
+   "nux": true,
+   "son": true
+  },
+  "RC2/award_criteria": {
+   "greens": [
+    false,
+    false,
+    false,
+    false
+   ],
+   "regle": false,
+   "nux": false,
+   "son": false
+  },
+  "RC2/documents_to_return": {
+   "greens": [
+    false,
+    false,
+    false,
+    false
+   ],
+   "regle": false,
+   "nux": false,
+   "son": false
+  },
+  "RC3/offer_deadline": {
+   "greens": [
+    false,
+    false,
+    false,
+    false
+   ],
+   "regle": false,
+   "nux": true,
+   "son": true
+  },
+  "RC3/questions_deadline": {
+   "greens": [
+    true,
+    true,
+    true,
+    false
+   ],
+   "regle": true,
+   "nux": true,
+   "son": true
+  },
+  "RC3/procedure": {
+   "greens": [
+    true,
+    true,
+    true,
+    true
+   ],
+   "regle": true,
+   "nux": true,
+   "son": true
+  },
+  "RC3/lots": {
+   "greens": [
+    false,
+    false,
+    false,
+    false
+   ],
+   "regle": false,
+   "nux": false,
+   "son": false
+  },
+  "RC3/site_visit": {
+   "greens": [
+    false,
+    false,
+    false,
+    false
+   ],
+   "regle": false,
+   "nux": false,
+   "son": false
+  },
+  "RC3/site_visit_dates": {
+   "greens": [
+    true,
+    true,
+    true,
+    true
+   ],
+   "regle": true,
+   "nux": true,
+   "son": true
+  },
+  "RC3/submission_mode": {
+   "greens": [
+    true,
+    true,
+    true,
+    true
+   ],
+   "regle": true,
+   "nux": true,
+   "son": true
+  },
+  "RC3/offer_validity": {
+   "greens": [
+    false,
+    false,
+    false,
+    false
+   ],
+   "regle": false,
+   "nux": false,
+   "son": false
+  },
+  "RC3/variants": {
+   "greens": [
+    true,
+    true,
+    true,
+    true
+   ],
+   "regle": true,
+   "nux": true,
+   "son": true
+  },
+  "RC3/award_criteria": {
+   "greens": [
+    false,
+    false,
+    false,
+    false
+   ],
+   "regle": false,
+   "nux": false,
+   "son": false
+  },
+  "RC3/documents_to_return": {
+   "greens": [
+    false,
+    false,
+    false,
+    false
+   ],
+   "regle": false,
+   "nux": false,
+   "son": false
+  },
+  "RC4/offer_deadline": {
+   "greens": [
+    true,
+    true,
+    true,
+    true
+   ],
+   "regle": true,
+   "nux": true,
+   "son": true
+  },
+  "RC4/questions_deadline": {
+   "greens": [
+    true,
+    false,
+    true,
+    false
+   ],
+   "regle": false,
+   "nux": true,
+   "son": true
+  },
+  "RC4/procedure": {
+   "greens": [
+    true,
+    true,
+    true,
+    true
+   ],
+   "regle": true,
+   "nux": true,
+   "son": true
+  },
+  "RC4/lots": {
+   "greens": [
+    true,
+    true,
+    true,
+    true
+   ],
+   "regle": true,
+   "nux": true,
+   "son": true
+  },
+  "RC4/site_visit": {
+   "greens": [
+    true,
+    true,
+    true,
+    true
+   ],
+   "regle": true,
+   "nux": true,
+   "son": true
+  },
+  "RC4/site_visit_dates": {
+   "greens": [
+    true,
+    true,
+    true,
+    true
+   ],
+   "regle": true,
+   "nux": false,
+   "son": false
+  },
+  "RC4/submission_mode": {
+   "greens": [
+    true,
+    true,
+    true,
+    true
+   ],
+   "regle": true,
+   "nux": true,
+   "son": true
+  },
+  "RC4/offer_validity": {
+   "greens": [
+    true,
+    true,
+    true,
+    true
+   ],
+   "regle": true,
+   "nux": true,
+   "son": true
+  },
+  "RC4/variants": {
+   "greens": [
+    true,
+    true,
+    true,
+    true
+   ],
+   "regle": true,
+   "nux": true,
+   "son": true
+  },
+  "RC4/award_criteria": {
+   "greens": [
+    false,
+    false,
+    false,
+    false
+   ],
+   "regle": false,
+   "nux": false,
+   "son": false
+  },
+  "RC4/documents_to_return": {
+   "greens": [
+    false,
+    false,
+    false,
+    false
+   ],
+   "regle": false,
+   "nux": false,
+   "son": false
+  },
+  "RC5/offer_deadline": {
+   "greens": [
+    true,
+    false,
+    false,
+    false
+   ],
+   "regle": false,
+   "nux": true,
+   "son": true
+  },
+  "RC5/questions_deadline": {
+   "greens": [
+    true,
+    false,
+    true,
+    false
+   ],
+   "regle": false,
+   "nux": true,
+   "son": true
+  },
+  "RC5/procedure": {
+   "greens": [
+    true,
+    true,
+    true,
+    true
+   ],
+   "regle": true,
+   "nux": true,
+   "son": true
+  },
+  "RC5/lots": {
+   "greens": [
+    false,
+    true,
+    true,
+    true
+   ],
+   "regle": true,
+   "nux": false,
+   "son": true
+  },
+  "RC5/site_visit": {
+   "greens": [
+    true,
+    true,
+    true,
+    true
+   ],
+   "regle": true,
+   "nux": true,
+   "son": true
+  },
+  "RC5/site_visit_dates": {
+   "greens": [
+    true,
+    true,
+    true,
+    true
+   ],
+   "regle": true,
+   "nux": true,
+   "son": true
+  },
+  "RC5/submission_mode": {
+   "greens": [
+    true,
+    true,
+    true,
+    true
+   ],
+   "regle": true,
+   "nux": true,
+   "son": true
+  },
+  "RC5/offer_validity": {
+   "greens": [
+    false,
+    false,
+    false,
+    false
+   ],
+   "regle": false,
+   "nux": false,
+   "son": false
+  },
+  "RC5/variants": {
+   "greens": [
+    false,
+    false,
+    false,
+    true
+   ],
+   "regle": false,
+   "nux": false,
+   "son": false
+  },
+  "RC5/award_criteria": {
+   "greens": [
+    false,
+    false,
+    false,
+    false
+   ],
+   "regle": false,
+   "nux": false,
+   "son": false
+  },
+  "RC5/documents_to_return": {
+   "greens": [
+    false,
+    false,
+    false,
+    false
+   ],
+   "regle": false,
+   "nux": false,
+   "son": false
+  }
+ }
+}
