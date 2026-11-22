@@ -1,0 +1,90 @@
+{
+ "situations": 300,
+ "egales": 138,
+ "taux": 0.46,
+ "taux_synth": 0.468,
+ "taux_publics": 0.0,
+ "groupes": {
+  "criteres.liste": 106,
+  "pieces.liste": 40,
+  "procedure.statut": 35,
+  "procedure.valeurs": 35,
+  "lots.liste": 12,
+  "plan": 5,
+  "mode_remise.valeurs": 4,
+  "heure_limite.conflit": 3,
+  "heure_limite.valeurs": 3,
+  "controle.alertes": 3,
+  "type_ponderation.valeurs": 3,
+  "date_questions.statut": 2,
+  "date_questions.valeurs": 2,
+  "mode_remise.conflit": 2,
+  "lots.statut": 1,
+  "type_ponderation.statut": 1,
+  "pieces.statut": 1,
+  "date_limite.valeurs": 1,
+  "criteres.statut": 1,
+  "date_limite.conflit": 1
+ },
+ "paires": {
+  "H-S": {
+   "taux": 0.46,
+   "taux_spec_approche": 0.84
+  },
+  "H-H2": {
+   "taux": 0.75,
+   "taux_spec_approche": 0.853
+  },
+  "H-S2": {
+   "taux": 0.577,
+   "taux_spec_approche": 0.867
+  },
+  "S-H2": {
+   "taux": 0.423,
+   "taux_spec_approche": 0.777
+  },
+  "S-S2": {
+   "taux": 0.683,
+   "taux_spec_approche": 0.783
+  },
+  "H2-S2": {
+   "taux": 0.54,
+   "taux_spec_approche": 0.803
+  }
+ },
+ "accord_tous": 0.38,
+ "juges": 12,
+ "non_juges": [
+  "date_questions.valeurs (2)",
+  "mode_remise.conflit (2)",
+  "lots.statut (1)",
+  "type_ponderation.statut (1)",
+  "pieces.statut (1)",
+  "date_limite.valeurs (1)",
+  "criteres.statut (1)",
+  "date_limite.conflit (1)"
+ ],
+ "classes": {
+  "bug H": 5,
+  "trou": 3,
+  "bug S": 4
+ },
+ "accord_juges": 1.0,
+ "taux_spec": 0.84,
+ "porte": {
+  "convention": 2,
+  "client": 1
+ },
+ "principes": [
+  {
+   "principe": "Traitement d'un RC qui se contredit sur l'allotissement",
+   "cas": [
+    2
+   ],
+   "A": "Lister le lot unique et les lots numérotés tels que le RC les écrit, sans rien signaler.",
+   "B": "Lister le lot unique et les lots numérotés, mais signaler l'incohérence pour que le client vérifie.",
+   "exemple": "Une page indique « marché non alloti, lot unique » et cite aussi « Lot 01 – Gros œuvre » et « Lot 02 – Charpente ».",
+   "recommande": "B"
+  }
+ ]
+}
