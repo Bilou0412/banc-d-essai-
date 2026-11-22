@@ -43,8 +43,13 @@ SONDE = "P12"
 BASE = RACINE / "runs-v5" / "boucle"
 BUDGET = RACINE / "runs-v5" / "budget.jsonl"
 DUEL = RACINE / "runs-v5-duel" / SONDE
-PLAFOND, ALERTE = 70.0, 55.0
+PLAFOND, ALERTE = 120.0, 100.0  # 22/11 : Bilel lève le plafond de 70 $ (garde-fou 120 $, comme P11)
 GREENS = {"H": "haiku", "S": "sonnet"}
+# Vérification d'un taux spec > 0,8 (cadrage §10) : V5_GREENS=H:haiku,S:sonnet,H2:haiku,S2:sonnet.
+# Les groupes et les juges portent toujours sur la paire H-S ; les autres paires ont leur taux brut, et un taux
+# spec approché (une situation compte si chacun de ses champs divergents tombe dans un groupe jugé bug sur H-S).
+if os.environ.get("V5_GREENS"):
+    GREENS = dict(x.split(":") for x in os.environ["V5_GREENS"].split(","))
 MAX_TOURS = 4
 DELAI = 3600
 MAX_GROUPES = 12
@@ -222,8 +227,8 @@ def un_green(i, nom, modele):
 
 
 def lot(i):
-    garde(ESTIME["haiku"] + ESTIME["sonnet"], f"lot de it{i}")
-    with ThreadPoolExecutor(2) as ex:
+    garde(sum(ESTIME[m] for m in GREENS.values()), f"lot de it{i}")
+    with ThreadPoolExecutor(len(GREENS)) as ex:
         for f in [ex.submit(un_green, i, n, m) for n, m in GREENS.items()]:
             print("  fini :", f.result(), flush=True)
 
@@ -261,7 +266,7 @@ def sorties(i):
         f.write_text(json.dumps(bonnes, ensure_ascii=False), encoding="utf-8")
         return nom, bonnes
 
-    with ThreadPoolExecutor(2) as ex:
+    with ThreadPoolExecutor(len(GREENS)) as ex:
         return dict(ex.map(une, GREENS))
 
 
@@ -321,6 +326,24 @@ def extraire(o, chemin):
     return cur[0] if len(cur) == 1 else cur
 
 
+def montrer(vh, vs):
+    """Les deux variantes. Une liste longue est montrée par sa différence (corrigé à it3 : à it1 et it2, les
+    variantes étaient coupées à 1 500 caractères et les juges ne voyaient pas l'écart d'une longue liste)."""
+    j = lambda x: json.dumps(x, ensure_ascii=False)  # noqa: E731
+    if isinstance(vh, list) and isinstance(vs, list) and len(j(vh)) + len(j(vs)) > 3000:
+        sh = [j(x) for x in vs]
+        hh = [j(x) for x in vh]
+        seul_h = [x for x in vh if j(x) not in sh]
+        seul_s = [x for x in vs if j(x) not in hh]
+        communs = [x for x in vh if j(x) in sh]
+        return (f"  Les deux codes rendent une liste ; {len(communs)} éléments identiques chez les deux "
+                f"(par exemple : {j(communs[:2])[:600]}).\n"
+                f"  V1 (code H) a {len(vh)} éléments ; seulement chez V1 : {j(seul_h)[:2500]}\n"
+                f"  V2 (code S) a {len(vs)} éléments ; seulement chez V2 : {j(seul_s)[:2500]}")
+    return (f"  V1 (code H) rend : {j(vh)[:3000]}\n"
+            f"  V2 (code S) rend : {j(vs)[:3000]}")
+
+
 def representant(sits):
     """La situation la plus courte (synthétique de préférence) d'un groupe."""
     synth = [k for k in sits if k.startswith("S")]
@@ -332,8 +355,7 @@ def juger(i, champ, sits, so):
     k = representant(sits)
     pages = situation(k)["pages"]
     vh, vs = extraire(so["H"][k], champ), extraire(so["S"][k], champ)
-    variantes = (f"  V1 (code H) rend : {json.dumps(vh, ensure_ascii=False)[:1500]}\n"
-                 f"  V2 (code S) rend : {json.dumps(vs, ensure_ascii=False)[:1500]}")
+    variantes = montrer(vh, vs)
     texte = JUGE.format(assertions=formater(spec(i)), champ=champ, variantes=variantes,
                         pages="\n".join(f"──── page {n} ────\n{p}" for n, p in enumerate(pages, 1))[:24000])
     verdicts = []
@@ -389,6 +411,21 @@ def analyser(i):
     for j in jug:
         print(f"  {j['champ']} ({j['situations']}) → {j['final']}  [{j['juges'][0]['classe']} / {j['juges'][1]['classe']}]", flush=True)
     trous = [j for j in jug if j["final"] == "trou"]
+    if len(GREENS) > 2:
+        finals_hs = {j["champ"]: j["final"] for j in jug}
+        noms = list(GREENS)
+        paires = {}
+        for x in range(len(noms)):
+            for y in range(x + 1, len(noms)):
+                a_, b_ = so[noms[x]], so[noms[y]]
+                cs = [k for k in set(a_) & set(b_)]
+                eg = sum(a_[k] == b_[k] for k in cs)
+                sp = sum(1 for k in cs if a_[k] != b_[k] and all(finals_hs.get(c, "").startswith("bug")
+                                                                for c in champs_differents(a_[k], b_[k])))
+                paires[f"{noms[x]}-{noms[y]}"] = {"taux": round(eg / len(cs), 3), "taux_spec_approche": round((eg + sp) / len(cs), 3)}
+        tous = set.intersection(*(set(so[n]) for n in noms))
+        res["paires"] = paires
+        res["accord_tous"] = round(sum(1 for k in tous if all(so[n][k] == so[noms[0]][k] for n in noms)) / len(tous), 3)
     p = porte(i, trous)
     for n, g in enumerate(trous, 1):
         c = next((x for x in p.get("cas", []) if x.get("n") == n), {})
@@ -512,7 +549,7 @@ def ajouter(i):
 
 def iteration(a):
     i = a.it
-    if not (it_dir(i) / "greens" / "S" / "bilan.json").exists():
+    if not all((it_dir(i) / "greens" / g / "bilan.json").exists() for g in GREENS):
         lot(i)
     if not (it_dir(i) / "accord.json").exists():
         analyser(i)

@@ -1,0 +1,38 @@
+{
+ "journal": [
+  {
+   "champ": "controle.alertes",
+   "cas": "Le RC pondère en pourcentages deux jeux de critères distincts, l'un pour les lots 1 à 3 et l'autre pour le lot 4 ; chacun totalise 100 %, mais leur somme confondue vaut 200 %.",
+   "porte": "convention",
+   "raison": "En marchés publics, chaque lot est attribué séparément avec ses propres critères (CCP art. R2113-1, R2152-7) : la somme de 100 % se vérifie à l'intérieur de chaque jeu de critères par lot, jamais en additionnant les lots ; l'alerte à 200 % est un faux positif, sans choix de produit en jeu.",
+   "decision": "V1",
+   "proposee": "Quand le type pondération vaut « pourcentage », que le RC donne des critères ou des pondérations différents selon le lot et que, pour chaque lot, la somme des pondérations de ses critères vaut 100 %, après le lancement de l'analyse, le contrôle n'affiche pas l'alerte « total différent de 100 % » | observé: alerte | conditions: pondération, lot critère, type pondération"
+  },
+  {
+   "champ": "heure_limite.conflit",
+   "cas": "Une seule page écrit l'heure limite de remise des offres (« 8h00 »), et une autre page y renvoie (« indiquées en page de garde ») sans écrire d'heure.",
+   "porte": "convention",
+   "raison": "Un renvoi (« indiquées en page de garde ») ne donne aucune valeur : il n'y a qu'une seule heure écrite (08:00), sourcée sur la page qui l'écrit ; un conflit suppose deux valeurs différentes, ce qui relève du bon sens du format et ne dépend pas de la vie de l'arbitre.",
+   "decision": "V2",
+   "proposee": "Quand une seule page écrit l'heure limite de remise des offres et qu'une autre page y renvoie sans écrire d'heure, après le lancement de l'analyse, l'heure limite est trouvée avec cette seule valeur, au format hh:mm, avec pour page valeur seulement la page qui l'écrit, et aucun conflit valeurs n'est signalé pour l'heure limite | observé: conflit valeurs | conditions: texte pages"
+  }
+ ],
+ "ajouts": {
+  "C12": "Quand le type pondération vaut « pourcentage », que le RC donne des critères ou des pondérations différents selon le lot et que, pour chaque lot, la somme des pondérations de ses critères vaut 100 %, après le lancement de l'analyse, le contrôle n'affiche pas l'alerte « total différent de 100 % », même si la somme confondue de tous les critères diffère de 100 % | observé: alerte | conditions: pondération, lot critère, type pondération",
+  "C13": "Quand une seule page écrit l'heure limite de remise des offres et qu'une autre page y renvoie sans écrire d'heure, après le lancement de l'analyse, l'heure limite est trouvée avec cette seule valeur, au format hh:mm, avec pour page valeur seulement la page qui l'écrit, et aucun conflit valeurs n'est signalé pour l'heure limite | observé: conflit valeurs | conditions: texte pages"
+ },
+ "bilan": {
+  "iteration": 3,
+  "trous": 2,
+  "bugs": 9,
+  "tests_trous": 3,
+  "tests_trous_retires": [
+   "test_C12_ponderations_par_lot_totalisant_100_chacune_pas_d_alerte_total"
+  ],
+  "tests_bugs": 8,
+  "tests_bugs_retires": [
+   "test_A50_reg_page_valeur_du_lot_unique_cite_les_pages_qui_l_ecrivent"
+  ],
+  "assertions_ajoutees": 2
+ }
+}

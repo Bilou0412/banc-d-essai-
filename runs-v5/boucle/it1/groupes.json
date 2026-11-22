@@ -1,0 +1,1184 @@
+[
+ {
+  "champ": "pieces.liste",
+  "situations": 246,
+  "representant": "S103",
+  "V1_H": [
+   {
+    "nom": "Liste des travaux exécutés au cours des cinq dernières années",
+    "pages": [
+     1
+    ],
+    "phase": {
+     "statut": "trouvé",
+     "valeurs": [
+      {
+       "valeur": "candidature",
+       "pages": [
+        1
+       ]
+      }
+     ],
+     "conflit": false
+    },
+    "obligation": {
+     "statut": "non trouvé",
+     "valeurs": [],
+     "conflit": false
+    }
+   },
+   {
+    "nom": "Lettre de candidature (formulaire DC1) ou DUME",
+    "pages": [
+     1
+    ],
+    "phase": {
+     "statut": "trouvé",
+     "valeurs": [
+      {
+       "valeur": "candidature",
+       "pages": [
+        1
+       ]
+      }
+     ],
+     "conflit": false
+    },
+    "obligation": {
+     "statut": "trouvé",
+     "valeurs": [
+      {
+       "valeur": "non obligatoire",
+       "pages": [
+        1
+       ]
+      }
+     ],
+     "conflit": false
+    }
+   },
+   {
+    "nom": "Certificats de qualification professionnelle (Qualibat ou équivalent)",
+    "pages": [
+     1
+    ],
+    "phase": {
+     "statut": "trouvé",
+     "valeurs": [
+      {
+       "valeur": "candidature",
+       "pages": [
+        1
+       ]
+      }
+     ],
+     "conflit": false
+    },
+    "obligation": {
+     "statut": "trouvé",
+     "valeurs": [
+      {
+       "valeur": "non obligatoire",
+       "pages": [
+        1
+       ]
+      }
+     ],
+     "conflit": false
+    }
+   },
+   {
+    "nom": "Acte d'engagement (AE) complété et signé",
+    "pages": [
+     1
+    ],
+    "phase": {
+     "statut": "trouvé",
+     "valeurs": [
+      {
+       "valeur": "offre",
+       "pages": [
+        1
+       ]
+      }
+     ],
+     "conflit": false
+    },
+    "obligation": {
+     "statut": "non trouvé",
+     "valeurs": [],
+     "conflit": false
+    }
+   },
+   {
+    "nom": "Détail quantitatif estimatif (DQE)",
+    "pages": [
+     1
+    ],
+    "phase": {
+     "statut": "trouvé",
+     "valeurs": [
+      {
+       "valeur": "offre",
+       "pages": [
+        1
+       ]
+      }
+     ],
+     "conflit": false
+    },
+    "obligation": {
+     "statut": "non trouvé",
+     "valeurs": [],
+     "conflit": false
+    }
+   },
+   {
+    "nom": "Planning prévisionnel d'exécution",
+    "pages": [
+     1
+    ],
+    "phase": {
+     "statut": "trouvé",
+     "valeurs": [
+      {
+       "valeur": "offre",
+       "pages": [
+        1
+       ]
+      }
+     ],
+     "conflit": false
+    },
+    "obligation": {
+     "statut": "non trouvé",
+     "valeurs": [],
+     "conflit": false
+    }
+   },
+   {
+    "nom": "Décomposition du prix global et forfaitaire (DPGF)",
+    "pages": [
+     1
+    ],
+    "phase": {
+     "statut": "trouvé",
+     "valeurs": [
+      {
+       "valeur": "offre",
+       "pages": [
+        1
+       ]
+      }
+     ],
+     "conflit": false
+    },
+    "obligation": {
+     "statut": "non trouvé",
+     "valeurs": [],
+     "conflit": false
+    }
+   },
+   {
+    "nom": "Bordereau des prix unitaires (BPU)",
+    "pages": [
+     1
+    ],
+    "phase": {
+     "statut": "trouvé",
+     "valeurs": [
+      {
+       "valeur": "offre",
+       "pages": [
+        1
+       ]
+      }
+     ],
+     "conflit": false
+    },
+    "obligation": {
+     "statut": "non trouvé",
+     "valeurs": [],
+     "conflit": false
+    }
+   },
+   {
+    "nom": "Attestation de visite",
+    "pages": [
+     1
+    ],
+    "phase": {
+     "statut": "trouvé",
+     "valeurs": [
+      {
+       "valeur": "offre",
+       "pages": [
+        1
+       ]
+      }
+     ],
+     "conflit": false
+    },
+    "obligation": {
+     "statut": "non trouvé",
+     "valeurs": [],
+     "conflit": false
+    }
+   },
+   {
+    "nom": "Mémoire technique",
+    "pages": [
+     1
+    ],
+    "phase": {
+     "statut": "trouvé",
+     "valeurs": [
+      {
+       "valeur": "offre",
+       "pages": [
+        1
+       ]
+      }
+     ],
+     "conflit": false
+    },
+    "obligation": {
+     "statut": "non trouvé",
+     "valeurs": [],
+     "conflit": false
+    }
+   },
+   {
+    "nom": "Gestion des déchets de chantier",
+    "pages": [
+     2
+    ],
+    "phase": {
+     "statut": "trouvé",
+     "valeurs": [
+      {
+       "valeur": "offre",
+       "pages": [
+        2
+       ]
+      }
+     ],
+     "conflit": false
+    },
+    "obligation": {
+     "statut": "non trouvé",
+     "valeurs": [],
+     "conflit": false
+    }
+   },
+   {
+    "nom": "Méthodologie et organisation du chantier",
+    "pages": [
+     2
+    ],
+    "phase": {
+     "statut": "trouvé",
+     "valeurs": [
+      {
+       "valeur": "offre",
+       "pages": [
+        2
+       ]
+      }
+     ],
+     "conflit": false
+    },
+    "obligation": {
+     "statut": "non trouvé",
+     "valeurs": [],
+     "conflit": false
+    }
+   },
+   {
+    "nom": "Moyens humains affectés au chantier",
+    "pages": [
+     2
+    ],
+    "phase": {
+     "statut": "trouvé",
+     "valeurs": [
+      {
+       "valeur": "offre",
+       "pages": [
+        2
+       ]
+      }
+     ],
+     "conflit": false
+    },
+    "obligation": {
+     "statut": "non trouvé",
+     "valeurs": [],
+     "conflit": false
+    }
+   }
+  ],
+  "V2_S": [
+   {
+    "nom": "Liste des travaux exécutés au cours des cinq dernières années",
+    "pages": [
+     1
+    ],
+    "phase": {
+     "statut": "trouvé",
+     "valeurs": [
+      {
+       "valeur": "candidature",
+       "pages": [
+        1
+       ]
+      }
+     ],
+     "conflit": false
+    },
+    "obligation": {
+     "statut": "non trouvé",
+     "valeurs": [],
+     "conflit": false
+    }
+   },
+   {
+    "nom": "Lettre de candidature (formulaire DC1) ou DUME",
+    "pages": [
+     1
+    ],
+    "phase": {
+     "statut": "trouvé",
+     "valeurs": [
+      {
+       "valeur": "candidature",
+       "pages": [
+        1
+       ]
+      }
+     ],
+     "conflit": false
+    },
+    "obligation": {
+     "statut": "trouvé",
+     "valeurs": [
+      {
+       "valeur": "non obligatoire",
+       "pages": [
+        1
+       ]
+      }
+     ],
+     "conflit": false
+    }
+   },
+   {
+    "nom": "Certificats de qualification professionnelle (Qualibat ou équivalent)",
+    "pages": [
+     1
+    ],
+    "phase": {
+     "statut": "trouvé",
+     "valeurs": [
+      {
+       "valeur": "candidature",
+       "pages": [
+        1
+       ]
+      }
+     ],
+     "conflit": false
+    },
+    "obligation": {
+     "statut": "trouvé",
+     "valeurs": [
+      {
+       "valeur": "non obligatoire",
+       "pages": [
+        1
+       ]
+      }
+     ],
+     "conflit": false
+    }
+   },
+   {
+    "nom": "Acte d'engagement (AE) complété et signé",
+    "pages": [
+     1
+    ],
+    "phase": {
+     "statut": "trouvé",
+     "valeurs": [
+      {
+       "valeur": "offre",
+       "pages": [
+        1
+       ]
+      }
+     ],
+     "conflit": false
+    },
+    "obligation": {
+     "statut": "non trouvé",
+     "valeurs": [],
+     "conflit": false
+    }
+   },
+   {
+    "nom": "Détail quantitatif estimatif (DQE)",
+    "pages": [
+     1
+    ],
+    "phase": {
+     "statut": "trouvé",
+     "valeurs": [
+      {
+       "valeur": "offre",
+       "pages": [
+        1
+       ]
+      }
+     ],
+     "conflit": false
+    },
+    "obligation": {
+     "statut": "non trouvé",
+     "valeurs": [],
+     "conflit": false
+    }
+   },
+   {
+    "nom": "Planning prévisionnel d'exécution",
+    "pages": [
+     1
+    ],
+    "phase": {
+     "statut": "trouvé",
+     "valeurs": [
+      {
+       "valeur": "offre",
+       "pages": [
+        1
+       ]
+      }
+     ],
+     "conflit": false
+    },
+    "obligation": {
+     "statut": "non trouvé",
+     "valeurs": [],
+     "conflit": false
+    }
+   },
+   {
+    "nom": "Décomposition du prix global et forfaitaire (DPGF)",
+    "pages": [
+     1
+    ],
+    "phase": {
+     "statut": "trouvé",
+     "valeurs": [
+      {
+       "valeur": "offre",
+       "pages": [
+        1
+       ]
+      }
+     ],
+     "conflit": false
+    },
+    "obligation": {
+     "statut": "non trouvé",
+     "valeurs": [],
+     "conflit": false
+    }
+   },
+   {
+    "nom": "Bordereau des prix unitaires (BPU)",
+    "pages": [
+     1
+    ],
+    "phase": {
+     "statut": "trouvé",
+     "valeurs": [
+      {
+       "valeur": "offre",
+       "pages": [
+        1
+       ]
+      }
+     ],
+     "conflit": false
+    },
+    "obligation": {
+     "statut": "non trouvé",
+     "valeurs": [],
+     "conflit": false
+    }
+   },
+   {
+    "nom": "Attestation de visite",
+    "pages": [
+     1
+    ],
+    "phase": {
+     "statut": "trouvé",
+     "valeurs": [
+      {
+       "valeur": "offre",
+       "pages": [
+        1
+       ]
+      }
+     ],
+     "conflit": false
+    },
+    "obligation": {
+     "statut": "non trouvé",
+     "valeurs": [],
+     "conflit": false
+    }
+   },
+   {
+    "nom": "Mémoire technique",
+    "pages": [
+     1
+    ],
+    "phase": {
+     "statut": "trouvé",
+     "valeurs": [
+      {
+       "valeur": "offre",
+       "pages": [
+        1
+       ]
+      }
+     ],
+     "conflit": false
+    },
+    "obligation": {
+     "statut": "non trouvé",
+     "valeurs": [],
+     "conflit": false
+    }
+   }
+  ],
+  "final": "à trancher",
+  "juges": [
+   {
+    "classe": "non classé",
+    "assertion": "A15",
+    "cas": "Le RC énumère en page 1 des pièces de candidature et d'offre, dont plusieurs ne sont qualifiées ni d'obligatoires ni de facultatives, et la partie de la liste où se trouve l'écart n'est pas fournie.",
+    "choix": "aucun",
+    "nouvelle": "aucune",
+    "usd": 0.1714882,
+    "texte": "ttestation de visite » et « Mémoire technique ». Rien de ce que je peux lire ne viole A15, A16, A123, A18 ou A128, ni ne laisse un cas non couvert.\ncertainty: firm\n```\n\n- **Ce qui manque :** la valeur complète de `pieces.liste` pour V1 et pour V2, au moins à partir de l'objet « Planning prévisionnel d'exécution ».\n- **Qui doit le fournir :** le dossier peut contenir ce fait. Il faut donc renvoyer la demande à celui qui exécute les variantes, pas à l'arbitre.\n- **Comment je trancherais avec la suite :**\n  - **Une pièce de l'article 5 manque dans une variante, par exemple « Attestation de visite » parce que le RC ne parle jamais de visite :** bug de cette variante, au titre d'A15 (la pièce figure en page 1, donc A121 ne s'applique pas).\n  - **Une variante qualifie d'« obligatoire » une pièce de l'offre à cause de la mention « datées et signées » :** c'est probablement un trou entre A127 et A128. La variante qui rend « non trouvé » serait alors la plus fidèle au RC.\n\nLe format impose une classe, mais je ne peux pas en choisir une sans inventer. J'indique donc « non classable » dans la ligne CLASSE plutôt qu'une valeur que je ne peux pas justifier.\n\nCLASSE: non classable — sorties tronquées avant la divergence (à renvoyer au chercheur)\nASSERTION: A15\nCAS: Le RC énumère en page 1 des pièces de candidature et d'offre, dont plusieurs ne sont qualifiées ni d'obligatoires ni de facultatives, et la partie de la liste où se trouve l'écart n'est pas fournie.\nCHOIX: aucun\nNOUVELLE: aucune"
+   },
+   {
+    "classe": "non classé",
+    "assertion": "aucune",
+    "cas": "Le RC énumère 10 pièces à l'article 5 de la page 1, réparties entre candidature et offre, puis la page 2 commence par une liste à puces de sous-critères qui prolonge visuellement cette énumération.",
+    "choix": "aucun",
+    "nouvelle": "aucune",
+    "usd": 0.0485556,
+    "texte": " puces de la page 2 (« • Gestion des déchets de chantier… »), qui prolonge l'article 5 visuellement. Ce sont pourtant des sous-critères de l'article 6, pas des pièces. Je n'ai rien vu qui le confirme.\ncertainty: firm\n```\n\nPour trancher, il faut la fin complète de pieces.liste pour V1 et pour V2. Ce fait peut se trouver dans le dossier, la question repart donc vers le chercheur, pas vers l'arbitre. Une fois la fin connue :\n- **Une variante liste des sous-critères de la page 2 comme pièces :** c'est probablement un trou. A15 et A121 n'interdisent pas d'ajouter des éléments qui figurent dans le texte. La règle à ajouter : un élément listé hors de l'énumération des pièces ne doit pas être compté comme pièce.\n- **Les variantes ne donnent pas la même obligation à une pièce sans mention :** A128 tranche. La variante qui ne rend pas « non trouvé » est en bug.\n- **Une variante omet l'Attestation de visite ou le Mémoire technique :** A15 tranche (« liste chacune de ces pièces »). La variante qui omet la pièce est en bug.\n\nLe format demande une classe parmi trois. Je n'en choisis aucune, parce que choisir sans avoir vu l'écart reviendrait à inventer.\n\nCLASSE: non classable en l'état — la partie où les sorties divergent n'a pas été transmise\nASSERTION: aucune\nCAS: Le RC énumère 10 pièces à l'article 5 de la page 1, réparties entre candidature et offre, puis la page 2 commence par une liste à puces de sous-critères qui prolonge visuellement cette énumération.\nCHOIX: aucun\nNOUVELLE: aucune"
+   }
+  ]
+ },
+ {
+  "champ": "criteres.liste",
+  "situations": 189,
+  "representant": "S020",
+  "V1_H": [
+   {
+    "libelle": "Mérite technique",
+    "pages": [
+     1
+    ],
+    "lot": {
+     "statut": "trouvé",
+     "valeurs": [
+      {
+       "valeur": 1,
+       "pages": [
+        1
+       ]
+      }
+     ],
+     "conflit": false
+    },
+    "ponderation": {
+     "statut": "trouvé",
+     "valeurs": [
+      {
+       "valeur": 40,
+       "unite": "pourcentage",
+       "lot": null,
+       "pages": [
+        1
+       ]
+      }
+     ],
+     "conflit": false
+    },
+    "sous_criteres": []
+   },
+   {
+    "libelle": "Prix de l'offre",
+    "pages": [
+     1
+    ],
+    "lot": {
+     "statut": "trouvé",
+     "valeurs": [
+      {
+       "valeur": 1,
+       "pages": [
+        1
+       ]
+      }
+     ],
+     "conflit": false
+    },
+    "ponderation": {
+     "statut": "trouvé",
+     "valeurs": [
+      {
+       "valeur": 60,
+       "unite": "pourcentage",
+       "lot": null,
+       "pages": [
+        1
+       ]
+      }
+     ],
+     "conflit": false
+    },
+    "sous_criteres": []
+   }
+  ],
+  "V2_S": [
+   {
+    "libelle": "Mérite technique",
+    "pages": [
+     1
+    ],
+    "lot": {
+     "statut": "trouvé",
+     "valeurs": [
+      {
+       "valeur": null,
+       "pages": [
+        1
+       ]
+      }
+     ],
+     "conflit": false
+    },
+    "ponderation": {
+     "statut": "trouvé",
+     "valeurs": [
+      {
+       "valeur": 40,
+       "unite": "pourcentage",
+       "lot": null,
+       "pages": [
+        1
+       ]
+      }
+     ],
+     "conflit": false
+    },
+    "sous_criteres": []
+   },
+   {
+    "libelle": "Prix de l'offre",
+    "pages": [
+     1
+    ],
+    "lot": {
+     "statut": "trouvé",
+     "valeurs": [
+      {
+       "valeur": null,
+       "pages": [
+        1
+       ]
+      }
+     ],
+     "conflit": false
+    },
+    "ponderation": {
+     "statut": "trouvé",
+     "valeurs": [
+      {
+       "valeur": 60,
+       "unite": "pourcentage",
+       "lot": null,
+       "pages": [
+        1
+       ]
+      }
+     ],
+     "conflit": false
+    },
+    "sous_criteres": []
+   }
+  ],
+  "final": "trou",
+  "juges": [
+   {
+    "classe": "trou",
+    "assertion": "A161",
+    "cas": "Le RC déclare un marché en lot unique sans jamais donner de numéro à ce lot, et énumère des critères d'attribution.",
+    "choix": "V2",
+    "nouvelle": "Quand le marché comporte un lot unique auquel aucune page ne donne de numéro, après le lancement de l'analyse, le lot critère de chaque critère est trouvé, désigne ce lot unique sans numéro et n'affiche aucun numéro de lot absent du texte des pages | observé: lot critère | conditions: lots, texte pages",
+    "usd": 0.16416019999999998,
+    "texte": "as. La page 1 ne dit que « Les travaux sont traités en lot unique » : aucun « lot 1 » n'y est écrit. Les deux variantes passent A161, donc la spec ne tranche pas. La règle de fidélité au texte (A39, A49 : seule une valeur retrouvée dans une page est affichée) va contre le « 1 » de V1, qui n'est écrit nulle part. Elle donne l'avantage à V2, qui n'invente pas de numéro.\ncertainty: close\n```\n\nLimite de cette décision : je ne vois pas le champ `lots` des deux variantes. Si l'une d'elles y désigne le lot unique par le numéro 1 et l'autre par null, chacune est cohérente avec elle-même. La question qui manque à la spec, et qui revient au rédacteur de la spec, est donc la suivante : quel identifiant donner à un lot unique non numéroté, à la fois dans `lots` et dans `lot critère` ?\n\nCe qui m'empêche d'être sûr : V2 rend `\"valeur\": null` avec le statut « trouvé ». Un lecteur peut trouver ce couple étrange. Ce n'est pourtant pas une contradiction : le lot est bien trouvé (page 1), seul son numéro n'existe pas dans le RC.\n\nCLASSE: trou\nASSERTION: A161\nCAS: Le RC déclare un marché en lot unique sans jamais donner de numéro à ce lot, et énumère des critères d'attribution.\nCHOIX: V2\nNOUVELLE: Quand le marché comporte un lot unique auquel aucune page ne donne de numéro, après le lancement de l'analyse, le lot critère de chaque critère est trouvé, désigne ce lot unique sans numéro et n'affiche aucun numéro de lot absent du texte des pages | observé: lot critère | conditions: lots, texte pages"
+   },
+   {
+    "classe": "trou",
+    "assertion": "A161",
+    "cas": "Le RC traite le marché en lot unique sans jamais donner de numéro à ce lot, et énumère deux critères sans les rattacher à un lot.",
+    "choix": "V2",
+    "nouvelle": "Quand le marché comporte un lot unique que le RC ne numérote pas, après le lancement de l'analyse, le lot critère de chaque critère est trouvé et vaut ce lot unique sans numéro, aucun numéro de lot absent du texte des pages n'étant affiché | observé: lot critère | conditions: lots, texte pages",
+    "usd": 0.047589,
+    "texte": " » et de « Critère n° 1 ». Aucun des deux ne numérote un lot.\n- **V1** rend `valeur: 1`. C'est une convention courante, mais ce numéro n'est pas écrit dans le RC. Les assertions sur les valeurs absentes du texte (A49, A14, A56…) vont toutes vers « ne pas afficher ce que le texte ne dit pas ».\n- **V2** rend `statut: trouvé, valeur: null`, sur la page 1. Le lot est bien trouvé, et il ne porte pas de numéro. Ce n'est pas un « non trouvé » au sens de A41, puisque le statut et la page sont présents.\n- **Pourquoi c'est serré** : pour l'utilisateur, `valeur: null` avec le statut « trouvé » peut sembler pauvre, et un lecteur pourrait juger que « lot 1 » est l'identité normale d'un lot unique. Pour lever le doute, il faut savoir comment le champ `lots` représente ce lot (avec un numéro 1 ou sans numéro). La sortie `lots` des deux variantes pourrait le dire, mais je ne l'ai pas reçue. Si les deux variantes listent dans `lots` un lot sans numéro, V1 deviendrait incohérente et le verdict pencherait vers un bug de V1.\n\nCLASSE: trou\nASSERTION: A161\nCAS: Le RC traite le marché en lot unique sans jamais donner de numéro à ce lot, et énumère deux critères sans les rattacher à un lot.\nCHOIX: V2\nNOUVELLE: Quand le marché comporte un lot unique que le RC ne numérote pas, après le lancement de l'analyse, le lot critère de chaque critère est trouvé et vaut ce lot unique sans numéro, aucun numéro de lot absent du texte des pages n'étant affiché | observé: lot critère | conditions: lots, texte pages"
+   }
+  ],
+  "porte": "convention",
+  "porte_raison": "Un lot unique porte tous les critères ; ne pas inventer de numéro absent du texte relève du bon sens, deux experts répondraient pareil."
+ },
+ {
+  "champ": "dates_visite.valeurs",
+  "situations": 131,
+  "representant": "S020",
+  "V1_H": [],
+  "V2_S": [
+   {
+    "valeur": "15/09/2026",
+    "pages": [
+     1
+    ]
+   },
+   {
+    "valeur": "22/09/2026",
+    "pages": [
+     1
+    ]
+   }
+  ],
+  "final": "bug H",
+  "juges": [
+   {
+    "classe": "bug V1",
+    "assertion": "A10",
+    "cas": "Une page indique que la visite du site, facultative, aura lieu à deux dates, l'une écrite en chiffres et l'autre en lettres.",
+    "choix": "aucun",
+    "nouvelle": "aucune",
+    "usd": 0.1394202,
+    "texte": "Les dates de visite figurent bien sur la page 1 du RC : V1 viole la spec et V2 la respecte. La spec tranche ce cas, ce n'est donc pas un trou.\n\n```\nclaim:     Sur ce RC, dates_visite.valeurs doit lister 15/09/2026 et 22/09/2026 (page 1), et non une liste vide.\nruling:    upheld\nbecause:   La page 1 écrit « Elle aura lieu aux dates suivantes : 15/09/2026, mardi 22 septembre 2026. ». A10 (« Quand une page indique des dates de visite du site, […] le dossier liste ces dates visite ») impose de les lister. A92 et A91 imposent le format jj/mm/aaaa, que la date soit écrite en chiffres ou en lettres. A97 impose la page valeur 1. Aucune assertion ne fait dépendre cette liste du caractère facultatif de la visite. A96 ne s'applique pas, puisque les deux dates figurent dans le texte.\ncertainty: firm\n```\n\nCLASSE: bug V1\nASSERTION: A10\nCAS: Une page indique que la visite du site, facultative, aura lieu à deux dates, l'une écrite en chiffres et l'autre en lettres.\nCHOIX: aucun\nNOUVELLE: aucune"
+   },
+   {
+    "classe": "bug V1",
+    "assertion": "A10",
+    "cas": "Une seule page déclare la visite du site facultative et donne deux dates de visite, l'une en chiffres (15/09/2026), l'autre en lettres (mardi 22 septembre 2026).",
+    "choix": "aucun",
+    "nouvelle": "aucune",
+    "usd": 0.022401,
+    "texte": "```\nclaim:     Sur ce RC, dates_visite.valeurs doit contenir 15/09/2026 et 22/09/2026, page 1 (V2), et non une liste vide (V1).\nruling:    upheld\nbecause:   L'article 5 de la page 1 dit « Elle aura lieu aux dates suivantes : 15/09/2026, mardi 22 septembre 2026. » A10 s'applique donc : « Quand une page indique des dates de visite du site, […] le dossier liste ces dates visite ». A92 fixe le format pour la date en chiffres, A91 pour celle en lettres (« au format jj/mm/aaaa »), et A97 fixe la page valeur à 1. Aucune assertion ne fait dépendre les dates de visite du caractère obligatoire de la visite. Qu'elle soit « facultative » ne permet donc pas de rendre une liste vide.\ncertainty: firm\n```\n\nCLASSE: bug V1\nASSERTION: A10\nCAS: Une seule page déclare la visite du site facultative et donne deux dates de visite, l'une en chiffres (15/09/2026), l'autre en lettres (mardi 22 septembre 2026).\nCHOIX: aucun\nNOUVELLE: aucune"
+   }
+  ]
+ },
+ {
+  "champ": "dates_visite.statut",
+  "situations": 131,
+  "representant": "S020",
+  "V1_H": "non trouvé",
+  "V2_S": "trouvé",
+  "final": "bug H",
+  "juges": [
+   {
+    "classe": "bug V1",
+    "assertion": "A10",
+    "cas": "Une page déclare la visite facultative et indique deux dates de visite, l'une en chiffres (15/09/2026), l'autre en lettres (mardi 22 septembre 2026).",
+    "choix": "aucun",
+    "nouvelle": "aucune",
+    "usd": 0.1395322,
+    "texte": "**Verdict : bug V1.** La spec tranche ce cas, et V1 la viole.\n\n```\nclaim:     dates_visite.statut doit valoir « trouvé » sur ce RC (V2) plutôt que « non trouvé » (V1)\nruling:    upheld\nbecause:   Page 1, article 5 : « Elle aura lieu aux dates suivantes : 15/09/2026, mardi 22 septembre 2026. » A10 dit : « Quand une page indique des dates de visite du site, […] le dossier liste ces dates visite ». A92 couvre la date écrite en chiffres et A91 celle écrite en lettres. Une page indique donc des dates de visite, et le statut « non trouvé » contredit ces assertions. A90 ne s'applique pas, car sa condition « aucune page n'indique de date de visite » est fausse ici. A96 ne s'applique pas non plus : les deux dates figurent mot pour mot dans le texte. Enfin, une visite facultative ne fait pas disparaître ses dates : A09 traite le caractère de la visite, A10 traite les dates, et ce sont deux champs séparés.\ncertainty: firm\n```\n\nCLASSE: bug V1\nASSERTION: A10\nCAS: Une page déclare la visite facultative et indique deux dates de visite, l'une en chiffres (15/09/2026), l'autre en lettres (mardi 22 septembre 2026).\nCHOIX: aucun\nNOUVELLE: aucune"
+   },
+   {
+    "classe": "bug V1",
+    "assertion": "A10",
+    "cas": "Une page déclare la visite facultative et indique deux dates de visite, l'une en chiffres et l'autre en lettres.",
+    "choix": "aucun",
+    "nouvelle": "aucune",
+    "usd": 0.0215776,
+    "texte": "Le RC indique bien des dates de visite. Pour ce champ, la spec impose donc « trouvé », et V1 la viole en rendant « non trouvé ». Je n'ai écrit aucun fichier.\n\n```\nclaim:     Sur ce RC, dates_visite.statut doit valoir « trouvé » (V2) et non « non trouvé » (V1).\nruling:    upheld\nbecause:   La page 1 écrit « Elle aura lieu aux dates suivantes : 15/09/2026, mardi 22 septembre 2026. » Or A10 dit : « Quand une page indique des dates de visite du site, […] le dossier liste ces dates visite ». A92 (date en chiffres) et A91 (date en lettres) couvrent chacune des deux dates. Aucune assertion n'écarte les dates quand la visite est facultative, et A90 ne permet « non trouvées » que si « aucune page n'indique de date de visite ».\ncertainty: firm\n```\n\nCLASSE: bug V1\nASSERTION: A10\nCAS: Une page déclare la visite facultative et indique deux dates de visite, l'une en chiffres et l'autre en lettres.\nCHOIX: aucun\nNOUVELLE: aucune"
+   }
+  ]
+ },
+ {
+  "champ": "lots.liste",
+  "situations": 117,
+  "representant": "S020",
+  "V1_H": [
+   {
+    "numero": 1,
+    "intitules": [
+     {
+      "valeur": "lot unique",
+      "pages": [
+       1
+      ]
+     }
+    ],
+    "pages": [
+     1
+    ],
+    "conflit": false
+   }
+  ],
+  "V2_S": [
+   {
+    "numero": null,
+    "intitules": [],
+    "pages": [
+     1
+    ],
+    "conflit": false
+   }
+  ],
+  "final": "trou",
+  "juges": [
+   {
+    "classe": "trou",
+    "assertion": "A43",
+    "cas": "Le RC déclare que le marché est traité en lot unique sans jamais écrire de numéro ni d'intitulé de lot.",
+    "choix": "V2",
+    "nouvelle": "Quand une page déclare le marché traité en lot unique sans écrire de numéro ni d'intitulé de lot, après le lancement de l'analyse, le dossier liste exactement un lot sans numéro et sans intitulé | observé: lots | conditions: texte pages",
+    "usd": 0.1501042,
+    "texte": "\": [{\"valeur\": \"lot unique\", …}], …}], soit V2 [{\"numero\": null, \"intitules\": [], …}].\nruling:    not resolvable (par la spec) → trou\nbecause:   A43 exige seulement « le dossier liste exactement un lot », et A50 exige que « la page valeur de ce lot [soit] le numéro de cette page ». Les deux variantes donnent un seul lot, page [1], sans conflit. Aucune assertion ne dit quel numéro ni quel intitulé donner à un lot unique que le RC ne numérote ni n'intitule. Le RC écrit seulement « Les travaux sont traités en lot unique. » : « lot unique » dit comment le marché est découpé, ce n'est pas un intitulé. Le chiffre « 1 » n'est écrit nulle part. Par l'esprit de A49 (une valeur absente du texte n'est pas rendue), V2 est la plus fidèle au RC et la plus simple.\ncertainty: firm sur le trou ; close sur le choix de V2 (on peut soutenir que la chaîne « lot unique » figure bien dans le texte)\n```\n\nCe qui trancherait : une assertion de la spec sur le numéro et l'intitulé d'un lot unique implicite. C'est une règle de spécification, pas une question pour l'arbitre. L'assertion proposée ci-dessous la fournit.\n\nCLASSE: trou\nASSERTION: A43\nCAS: Le RC déclare que le marché est traité en lot unique sans jamais écrire de numéro ni d'intitulé de lot.\nCHOIX: V2\nNOUVELLE: Quand une page déclare le marché traité en lot unique sans écrire de numéro ni d'intitulé de lot, après le lancement de l'analyse, le dossier liste exactement un lot sans numéro et sans intitulé | observé: lots | conditions: texte pages"
+   },
+   {
+    "classe": "trou",
+    "assertion": "A43",
+    "cas": "Une page déclare que le marché est traité en lot unique sans donner ni numéro ni intitulé de lot.",
+    "choix": "V2",
+    "nouvelle": "Quand une page déclare un lot unique sans lui donner de numéro ni d'intitulé, après le lancement de l'analyse, le dossier liste exactement un lot, sans numéro et sans intitulé, avec pour page valeur cette page | observé: lots | conditions: texte pages",
+    "usd": 0.030530599999999998,
+    "texte": "```\nclaim:     Sur ce RC, qui dit « Les travaux sont traités en lot unique. » sans numéro ni intitulé de lot, lots.liste doit valoir soit un lot n° 1 intitulé « lot unique » (V1), soit un lot sans numéro et sans intitulé (V2).\nruling:    not resolvable — la spec ne tranche pas (trou)\nbecause:   A43 exige seulement que « le dossier liste exactement un lot ». Les deux variantes le font, avec « pages »: [1] et sans conflit. Aucune assertion ne fixe le numéro ni l'intitulé d'un lot unique qui n'en a pas dans le texte. A49 ne vaut que pour un lot « qui ne figure dans le texte d'aucune page » : elle ne s'applique pas, puisque « lot unique » figure bien page 1. Le RC tranche en revanche sur le fond. Le numéro 1 n'est écrit nulle part, et « lot unique » décrit l'allotissement, ce n'est pas un intitulé. Le cas revient donc au searcher sous forme d'assertion, pas à l'arbitre.\ncertainty: close\n```\n\nCLASSE: trou\nASSERTION: A43\nCAS: Une page déclare que le marché est traité en lot unique sans donner ni numéro ni intitulé de lot.\nCHOIX: V2\nNOUVELLE: Quand une page déclare un lot unique sans lui donner de numéro ni d'intitulé, après le lancement de l'analyse, le dossier liste exactement un lot, sans numéro et sans intitulé, avec pour page valeur cette page | observé: lots | conditions: texte pages"
+   }
+  ],
+  "porte": "convention",
+  "porte_raison": "« Lot unique » signifie exactement un lot ; on ne fabrique ni numéro ni intitulé absents des pages."
+ },
+ {
+  "champ": "plan[]",
+  "situations": 69,
+  "representant": "S070",
+  "V1_H": {
+   "titre": "Valeur technique de l'offre | noté sur",
+   "critere": "Valeur technique de l'offre | noté sur",
+   "sous_critere": null,
+   "ponderation": 7,
+   "page_source": 2,
+   "contenu": ""
+  },
+  "V2_S": {
+   "titre": "Valeur technique de l'offre | noté sur 7 points",
+   "critere": "Valeur technique de l'offre | noté sur 7 points",
+   "sous_critere": null,
+   "ponderation": null,
+   "page_source": 2,
+   "contenu": ""
+  },
+  "final": "bug S",
+  "juges": [
+   {
+    "classe": "bug V2",
+    "assertion": "A31",
+    "cas": "Dans un tableau de critères du RC, la cellule de pondération d'un critère technique indique « noté sur 7 points ».",
+    "choix": "aucun",
+    "nouvelle": "aucune",
+    "usd": 0.1550882,
+    "texte": "```\nclaim:     Pour le critère « Valeur technique de l'offre | noté sur 7 points » (RC p. 2), la section du plan doit porter ponderation = 7 (V1) plutôt que null (V2).\nruling:    upheld — bug V2\nbecause:   Le RC donne bien une pondération en points à ce critère : p. 2, « Valeur technique de l'offre | noté sur 7 points » (le tableau dit « Critères | Pondération »). A145 dit alors « ce critère affiche sa pondération en points ». A31 exige « une pondération section égale à la pondération de son critère ». La section doit donc valoir 7, et le null de V2 viole ces deux assertions. Le texte « noté sur 7 points » est la valeur de la colonne Pondération, pas une partie du libellé. V2 l'a laissé dans le titre au lieu de le lire comme une pondération.\ncertainty: close\n```\n\nJe mets `close` parce que V1 n'a pas raison sur toute la ligne. Son titre « Valeur technique de l'offre | noté sur » coupe la cellule de pondération en plein milieu. Le titre de V2 non plus n'est pas le libellé tel qu'il est écrit dans le RC, comme le demande A140 : ce libellé est « Valeur technique de l'offre ». C'est un défaut distinct, présent dans les deux versions, qui doit faire l'objet d'une autre réclamation. Ici, le point qui sépare les deux versions est la pondération, et la spécification la tranche en faveur de V1.\n\nCLASSE: bug V2\nASSERTION: A31\nCAS: Dans un tableau de critères du RC, la cellule de pondération d'un critère technique indique « noté sur 7 points ».\nCHOIX: aucun\nNOUVELLE: aucune"
+   },
+   {
+    "classe": "bug V2",
+    "assertion": "A145",
+    "cas": "Le RC présente les critères sous forme de tableau. La cellule de pondération du critère technique est écrite « noté sur 7 points », et la section du plan correspondante doit porter cette pondération de 7 points.",
+    "choix": "aucun",
+    "nouvelle": "aucune",
+    "usd": 0.042777800000000005,
+    "texte": " ?\nruling:    upheld — bug V2\nbecause:   La page 2 donne bien un poids en points à ce critère (« noté sur 7 points »). La spec tranche donc avec A145 : « Quand le RC donne la pondération d'un critère en points, […] ce critère affiche sa pondération en points ». Elle tranche aussi avec A31 : « chaque section affiche une pondération section égale à la pondération de son critère ». V2 rend ponderation null, ce qui revient à déclarer non trouvée une valeur que le texte contient. V2 viole donc A145 et, par suite, A31.\n           Réserve : l'intitulé de V1 n'est pas juste non plus. « Valeur technique de l'offre | noté sur » ne reprend pas « son libellé tel qu'il est écrit dans le RC » (A140). Le libellé de la colonne Critères est « Valeur technique de l'offre » ; le texte « | noté sur 7 points » appartient à la colonne Pondération. L'intitulé de V2 a le même défaut. Les deux variantes violent A140 sur le titre et le critère : c'est un défaut à part, à corriger dans les deux.\ncertainty: close — sur la pondération, la spec tranche nettement. La certitude est seulement « close » parce que V1, qui a raison sur ce point, a tort sur l'intitulé. L'expression « l'autre a raison » ne vaut que pour la pondération.\n```\n\nCLASSE: bug V2\nASSERTION: A145\nCAS: Le RC présente les critères sous forme de tableau. La cellule de pondération du critère technique est écrite « noté sur 7 points », et la section du plan correspondante doit porter cette pondération de 7 points.\nCHOIX: aucun\nNOUVELLE: aucune"
+   }
+  ]
+ },
+ {
+  "champ": "type_ponderation.valeurs",
+  "situations": 39,
+  "representant": "S069",
+  "V1_H": [
+   {
+    "valeur": "pourcentage",
+    "pages": [
+     1
+    ]
+   },
+   {
+    "valeur": "points",
+    "pages": [
+     2
+    ]
+   }
+  ],
+  "V2_S": [
+   {
+    "valeur": "points",
+    "pages": [
+     1
+    ]
+   }
+  ],
+  "final": "trou",
+  "juges": [
+   {
+    "classe": "trou",
+    "assertion": "C01",
+    "cas": "Le RC pondère les critères en points et les sous-critères d'un critère en pourcentages, sur deux pages.",
+    "choix": "V2",
+    "nouvelle": "Quand le RC exprime les pondérations des critères en points et celles des sous-critères d'un critère en pourcentages, après le lancement de l'analyse, le type pondération est trouvé avec la seule valeur « points » et aucun conflit valeurs n'est signalé pour le type pondération | observé: type pondération | conditions: texte pages, pondération",
+    "usd": 0.1761962,
+    "texte": "l type, donc elles ne tranchent pas ce mélange. C01 ne vise que le cas inverse sur une même page : « critères en pourcentages et […] sous-critères en points ». Elle donne l'esprit de la règle (une seule valeur, pas de conflit), mais sa lettre ne couvre pas ce cas.\ncertainty: close\n```\n\nC'est un cas limite : si on étend C01 par analogie (le type de pondération suit le niveau des critères, et les sous-critères ne créent ni une seconde valeur ni un conflit), on obtient « bug V1 ». Mais la condition écrite de C01 ne correspond pas à ce RC : ici les critères sont en points et les sous-critères en pourcentages, et ce mélange s'étale sur deux pages.\n\nL'assertion ci-dessous retient V2 pour sa valeur : un seul type, « points », comme le montrent les trois critères du RC. Cette valeur unique est aussi la plus simple. Elle ne fixe pas les pages, car V2 ne cite que la page 1 alors que la page 2 pondère elle aussi en points. Ce point relève d'A40 et pourrait faire l'objet d'une autre divergence.\n\nCLASSE: trou\nASSERTION: C01\nCAS: Le RC pondère les critères en points et les sous-critères d'un critère en pourcentages, sur deux pages.\nCHOIX: V2\nNOUVELLE: Quand le RC exprime les pondérations des critères en points et celles des sous-critères d'un critère en pourcentages, après le lancement de l'analyse, le type pondération est trouvé avec la seule valeur « points » et aucun conflit valeurs n'est signalé pour le type pondération | observé: type pondération | conditions: texte pages, pondération"
+   },
+   {
+    "classe": "trou",
+    "assertion": "C01",
+    "cas": "Les critères sont pondérés en points sur deux pages, alors que les sous-critères du critère technique sont pondérés en pourcentages sur la première page.",
+    "choix": "V2",
+    "nouvelle": "Quand le RC exprime les pondérations des critères en points et celles de leurs sous-critères en pourcentages, après le lancement de l'analyse, le type pondération est trouvé avec la seule valeur « points » et aucun conflit valeurs n'est signalé pour le type pondération | observé: type pondération | conditions: texte pages, pondération",
+    "usd": 0.0572658,
+    "texte": "au des critères, et l'unité des sous-critères ne crée pas une seconde valeur.\n- Le RC dit la même chose : « La note finale est la somme des notes obtenues pour chaque critère », soit 55 + 35 + 10 = 100 points.\n- Le mélange observé ne vient pas d'une contradiction du RC. Il vient de la hiérarchie entre critères et sous-critères. Le compter comme deux valeurs fabrique un faux conflit.\n\n**Deux réserves, hors du champ tranché**\n\n1. **Pages de V2 incomplètes.** V2 indique seulement la page 1. Or « points » est aussi écrit en page 2 (35 et 10 points). Selon A40, cette page devrait donc figurer aussi. Ce défaut relève de A40, pas du type. La nouvelle assertion ne porte que sur la valeur.\n2. **Alerte possible sur les sous-critères.** Leurs poids font 8 + 26 + 66 = 100 %, alors que leur critère parent vaut 55 points. Selon A35, l'alerte « pondérations incohérentes » pourrait donc se déclencher. C'est une question distincte, que je ne tranche pas ici.\n\nCLASSE: trou\nASSERTION: C01\nCAS: Les critères sont pondérés en points sur deux pages, alors que les sous-critères du critère technique sont pondérés en pourcentages sur la première page.\nCHOIX: V2\nNOUVELLE: Quand le RC exprime les pondérations des critères en points et celles de leurs sous-critères en pourcentages, après le lancement de l'analyse, le type pondération est trouvé avec la seule valeur « points » et aucun conflit valeurs n'est signalé pour le type pondération | observé: type pondération | conditions: texte pages, pondération"
+   }
+  ],
+  "porte": "convention",
+  "porte_raison": "La pondération du marché porte sur les critères (CCP R2152-11 et suivants) ; les pourcentages de sous-critères répartissent la note à l'intérieur d'un critère et ne forment pas un second type de pondération."
+ },
+ {
+  "champ": "procedure.valeurs",
+  "situations": 35,
+  "representant": "S271",
+  "V1_H": [
+   {
+    "valeur": "appel d'offres restreint",
+    "pages": [
+     1
+    ]
+   },
+   {
+    "valeur": "procédure adaptée",
+    "pages": [
+     1
+    ]
+   }
+  ],
+  "V2_S": [
+   {
+    "valeur": "appel d'offres restreint",
+    "pages": [
+     1
+    ]
+   }
+  ],
+  "final": "trou",
+  "juges": [
+   {
+    "classe": "trou",
+    "assertion": "A77",
+    "cas": "Le sigle « MAPA » n'apparaît que dans le numéro de référence du dossier (« 2026-MAPA-71 »), alors que la même page nomme en toutes lettres la procédure « appel d'offres restreint ».",
+    "choix": "V2",
+    "nouvelle": "Quand le sigle « MAPA » n'apparaît que dans une référence ou un identifiant du dossier et qu'une page nomme la procédure en toutes lettres, après le lancement de l'analyse, le dossier affiche seulement la procédure nommée en toutes lettres, sans « procédure adaptée » | observé: procédure | conditions: texte pages",
+    "usd": 0.1559762,
+    "texte": "26-MAPA-71 »), et la même page nomme la procédure en toutes lettres : « passée selon la appel d'offres restreint en application des articles R2161-6 à R2161-11 ». Aucune assertion ne dit si un sigle pris dans un identifiant compte comme le nom de la procédure. Les deux sorties respectent donc la spec, et c'est la spec qui doit trancher (pas le dossier ni l'arbitre). La lecture la plus fidèle au RC est que la référence ne nomme pas la procédure : les articles cités relèvent de l'appel d'offres restreint.\ncertainty: close\n```\n\nJe classe ce désaccord comme un trou de la spec, pas comme un bug de V1. Si une référence avec « MAPA » comptait comme le nom de la procédure, A80 et A81 obligeraient en plus à afficher deux procédures et à signaler un conflit. Cette lecture est défendable avec A77 tel qu'il est écrit, mais elle produit un faux conflit sur un RC dont le texte est cohérent. Je retiens donc V2, la plus simple et la plus fidèle au RC.\n\nCLASSE: trou\nASSERTION: A77\nCAS: Le sigle « MAPA » n'apparaît que dans le numéro de référence du dossier (« 2026-MAPA-71 »), alors que la même page nomme en toutes lettres la procédure « appel d'offres restreint ».\nCHOIX: V2\nNOUVELLE: Quand le sigle « MAPA » n'apparaît que dans une référence ou un identifiant du dossier et qu'une page nomme la procédure en toutes lettres, après le lancement de l'analyse, le dossier affiche seulement la procédure nommée en toutes lettres, sans « procédure adaptée » | observé: procédure | conditions: texte pages"
+   },
+   {
+    "classe": "trou",
+    "assertion": "A77",
+    "cas": "Le sigle « MAPA » n'apparaît que dans le numéro de référence de la consultation, tandis que l'article « Procédure » du RC nomme explicitement l'appel d'offres restreint.",
+    "choix": "V2",
+    "nouvelle": "Quand le sigle « MAPA » n'apparaît que dans la référence de la consultation et qu'une page nomme une autre procédure, après le lancement de l'analyse, le dossier affiche seulement la procédure nommée | observé: procédure | conditions: texte pages",
+    "usd": 0.035276800000000004,
+    "texte": " non aussi « procédure adaptée » tirée de « 2026-MAPA-71 » (V1).\nruling:    not resolvable\nbecause:   La spec ne permet pas de choisir entre les deux variantes. A77 dit « Quand une page nomme la procédure par son sigle « MAPA » […] le dossier affiche la procédure « procédure adaptée » ». Le RC, lui, n'écrit « MAPA » qu'à l'intérieur du numéro de référence « 2026-MAPA-71 », alors que l'article 2 nomme la procédure : « passée selon la appel d'offres restreint ». Aucune assertion ne dit si un sigle placé dans une référence compte comme une page qui « nomme la procédure ». C'est un fait de spécification, pas un fait de la vie de l'arbitre. L'assertion ci-dessous le tranche. Je retiens V2 : c'est la lecture la plus fidèle au RC, puisque la procédure y est nommée explicitement à l'article 2, et la plus simple.\ncertainty: close\n```\n\nLe document est bien un RC et le champ a un sens pour l'utilisateur, donc la classe « invalide » ne s'applique pas. La tournure fautive « selon la appel d'offres » ne change rien à l'analyse.\n\nCLASSE: trou\nASSERTION: A77\nCAS: Le sigle « MAPA » n'apparaît que dans le numéro de référence de la consultation, tandis que l'article « Procédure » du RC nomme explicitement l'appel d'offres restreint.\nCHOIX: V2\nNOUVELLE: Quand le sigle « MAPA » n'apparaît que dans la référence de la consultation et qu'une page nomme une autre procédure, après le lancement de l'analyse, le dossier affiche seulement la procédure nommée | observé: procédure | conditions: texte pages"
+   }
+  ],
+  "porte": "convention",
+  "porte_raison": "Un numéro de référence est un identifiant, pas l'énoncé de la procédure ; la mention en toutes lettres fait foi."
+ },
+ {
+  "champ": "mode_remise.valeurs",
+  "situations": 34,
+  "representant": "S079",
+  "V1_H": [
+   {
+    "valeur": "électronique",
+    "pages": [
+     1,
+     2
+    ]
+   }
+  ],
+  "V2_S": [
+   {
+    "valeur": "électronique",
+    "pages": [
+     1
+    ]
+   }
+  ],
+  "final": "bug H",
+  "juges": [
+   {
+    "classe": "bug V1",
+    "assertion": "A118",
+    "cas": "Le mode de remise électronique n'est écrit qu'en page 1 ; la page 2 donne l'échéance de remise et parle d'une plateforme seulement pour les questions, sans nommer de mode de remise.",
+    "choix": "aucun",
+    "nouvelle": "aucune",
+    "usd": 0.14566420000000002,
+    "texte": "Le désaccord est un bug de V1. L'assertion qui tranche est A118, appuyée par A40.\n\n```\nclaim:     Sur mode_remise.valeurs, la page valeur de « électronique » est [1, 2] (V1) ou [1] (V2).\nruling:    upheld — en faveur de V2 ; V1 viole A118\nbecause:   A118 dit « Quand le mode de remise est retrouvé dans le texte d'une page, […] la page valeur du mode remise est le numéro de cette page ». La page 1 est la seule à donner le mode de remise : « Les offres sont transmises par voie électronique sur le profil d'acheteur ». La page 2 ne parle de la remise des offres que pour l'échéance (« Les plis doivent parvenir avant le 17 août 2026 à 11 heures »). Son seul « sur la plateforme » concerne l'envoi des questions (article 8), pas la remise des offres. A40 ne permet deux pages que si la valeur est « écrite sur deux pages », ce qui n'est pas le cas ici.\ncertainty: firm\n```\n\nCLASSE: bug V1\nASSERTION: A118\nCAS: Le mode de remise électronique n'est écrit qu'en page 1 ; la page 2 donne l'échéance de remise et parle d'une plateforme seulement pour les questions, sans nommer de mode de remise.\nCHOIX: aucun\nNOUVELLE: aucune"
+   },
+   {
+    "classe": "bug V1",
+    "assertion": "A118",
+    "cas": "Le mode de remise électronique n'est écrit que sur la page 1 ; la page 2 donne seulement l'échéance de remise des plis et parle de la plateforme pour les questions.",
+    "choix": "aucun",
+    "nouvelle": "aucune",
+    "usd": 0.0266528,
+    "texte": "claim:     mode_remise.valeurs — pour le mode « électronique », la page valeur est [1, 2] (V1) ou [1] (V2).\nruling:    upheld — bug V1\nbecause:   Seule la page 1 donne le mode de remise : « Les offres sont transmises par voie électronique sur le profil d'acheteur ». La page 2 donne seulement une date et une heure (« Les plis doivent parvenir avant le 17 août 2026 à 11 heures »). Sa seule mention d'un canal, « poser leurs questions par écrit sur la plateforme », porte sur l'envoi des questions, pas sur la remise des offres. A118 donne comme page valeur « le numéro de cette page », celle où le mode est retrouvé. A40 n'ajoute une deuxième page que si « une même valeur est écrite sur deux pages », ce qui n'est pas le cas. V1 cite donc à tort la page 2.\ncertainty: firm\n\nCLASSE: bug V1\nASSERTION: A118\nCAS: Le mode de remise électronique n'est écrit que sur la page 1 ; la page 2 donne seulement l'échéance de remise des plis et parle de la plateforme pour les questions.\nCHOIX: aucun\nNOUVELLE: aucune"
+   }
+  ]
+ },
+ {
+  "champ": "procedure.conflit",
+  "situations": 29,
+  "representant": "S271",
+  "V1_H": true,
+  "V2_S": false,
+  "final": "trou",
+  "juges": [
+   {
+    "classe": "trou",
+    "assertion": "A81",
+    "cas": "Le sigle « MAPA » n'apparaît que dans le numéro de référence de la consultation, alors que le corps du RC nomme explicitement une autre procédure (appel d'offres restreint), sur la même page.",
+    "choix": "V2",
+    "nouvelle": "Quand le sigle « MAPA » n'apparaît que dans la référence de la consultation et qu'une page nomme une autre procédure, après le lancement de l'analyse, le dossier affiche seulement la procédure nommée et aucun conflit valeurs n'est signalé pour la procédure | observé: conflit valeurs | conditions: texte pages",
+    "usd": 0.1492122,
+    "texte": "```\nclaim:     Sur ce RC, le champ procedure.conflit doit valoir true (V1, code H) ou false (V2, code S).\nruling:    not resolvable (trou)\nbecause:   La seule procédure nommée est à l'article 2 : « passée selon la appel d'offres restreint en application des articles R2161-6 à R2161-11 ». « MAPA » n'apparaît que dans l'identifiant « Référence : 2026-MAPA-71 », sur la même page. A77 (« une page nomme la procédure par son sigle « MAPA » ») ne dit pas si un sigle pris dans un code de référence nomme la procédure. A81 ne prévoit un conflit que lorsque « deux pages nomment deux procédures différentes ». Aucune assertion ne tranche donc ce cas, et chacune des deux sorties la respecte. Il faut choisir le sens par une nouvelle assertion. Je retiens V2 : c'est la lecture la plus fidèle au RC, qui nomme une seule procédure (les articles R2161-6 à R2161-11 sont ceux de l'appel d'offres restreint), et la plus simple.\ncertainty: close\n```\n\nCLASSE: trou\nASSERTION: A81\nCAS: Le sigle « MAPA » n'apparaît que dans le numéro de référence de la consultation, alors que le corps du RC nomme explicitement une autre procédure (appel d'offres restreint), sur la même page.\nCHOIX: V2\nNOUVELLE: Quand le sigle « MAPA » n'apparaît que dans la référence de la consultation et qu'une page nomme une autre procédure, après le lancement de l'analyse, le dossier affiche seulement la procédure nommée et aucun conflit valeurs n'est signalé pour la procédure | observé: conflit valeurs | conditions: texte pages"
+   },
+   {
+    "classe": "trou",
+    "assertion": "A81",
+    "cas": "Le sigle « MAPA » apparaît seulement dans la référence de la consultation, alors que la même page nomme explicitement la procédure « appel d'offres restreint ».",
+    "choix": "V2",
+    "nouvelle": "Quand un sigle de procédure figure seulement dans la référence de la consultation et qu'une page nomme une autre procédure en toutes lettres, après le lancement de l'analyse, le dossier affiche seulement la procédure nommée en toutes lettres et aucun conflit valeurs n'est signalé pour la procédure | observé: conflit valeurs | conditions: texte pages",
+    "usd": 0.0368494,
+    "texte": "el d'offres restreint » à l'article 2 (page 1).\nruling:    rejected\nbecause:   A81 ne prévoit le conflit que lorsque « deux pages nomment deux procédures différentes ». Ici, une seule page nomme la procédure en toutes lettres : « La présente consultation est passée selon la appel d'offres restreint ». « MAPA » n'apparaît que dans un identifiant, « Référence : 2026-MAPA-71 », qui ne déclare pas la procédure au sens d'A77. Aucune assertion ne traite le cas d'un sigle caché dans une référence, ni celui de deux procédures sur la même page. Les deux variantes respectent donc la spec.\ncertainty: close\n```\n\nLe jugement est serré pour une raison précise. On peut lire « 2026-MAPA-71 » comme une trace réelle d'incohérence dans le RC, que l'utilisateur voudrait voir. Mais l'article 2 est la seule déclaration explicite de la procédure, et ne pas signaler de conflit est à la fois le choix le plus simple et le plus fidèle à ce texte.\n\nCLASSE: trou\nASSERTION: A81\nCAS: Le sigle « MAPA » apparaît seulement dans la référence de la consultation, alors que la même page nomme explicitement la procédure « appel d'offres restreint ».\nCHOIX: V2\nNOUVELLE: Quand un sigle de procédure figure seulement dans la référence de la consultation et qu'une page nomme une autre procédure en toutes lettres, après le lancement de l'analyse, le dossier affiche seulement la procédure nommée en toutes lettres et aucun conflit valeurs n'est signalé pour la procédure | observé: conflit valeurs | conditions: texte pages"
+   }
+  ],
+  "porte": "client",
+  "porte_raison": "La valeur est tranchée au cas 4 ; décider s'il faut signaler à l'utilisateur l'écart entre la référence et la procédure nommée relève de la façon dont le logiciel traite un RC douteux, donc d'un choix de produit (certitude incertaine)."
+ },
+ {
+  "champ": "plan",
+  "situations": 25,
+  "representant": "S226",
+  "V1_H": [
+   {
+    "titre": "Valeur technique | noté sur",
+    "critere": "Valeur technique | noté sur",
+    "sous_critere": null,
+    "ponderation": 27,
+    "page_source": 1,
+    "contenu": ""
+   }
+  ],
+  "V2_S": [
+   {
+    "titre": "Valeur technique | noté sur 27 points – Gestion des déchets de chantier",
+    "critere": "Valeur technique | noté sur 27 points",
+    "sous_critere": "Gestion des déchets de chantier",
+    "ponderation": null,
+    "page_source": 1,
+    "contenu": ""
+   },
+   {
+    "titre": "Valeur technique | noté sur 27 points – Moyens matériels affectés au chantier",
+    "critere": "Valeur technique | noté sur 27 points",
+    "sous_critere": "Moyens matériels affectés au chantier",
+    "ponderation": null,
+    "page_source": 1,
+    "contenu": ""
+   },
+   {
+    "titre": "Valeur technique | noté sur 27 points – Planning détaillé des travaux",
+    "critere": "Valeur technique | noté sur 27 points",
+    "sous_critere": "Planning détaillé des travaux",
+    "ponderation": null,
+    "page_source": 1,
+    "contenu": ""
+   }
+  ],
+  "final": "bug H",
+  "juges": [
+   {
+    "classe": "bug V1",
+    "assertion": "A29",
+    "cas": "Un critère de valeur technique noté sur 27 points est détaillé dans le RC en trois sous-critères sans pondération propre.",
+    "choix": "aucun",
+    "nouvelle": "aucune",
+    "usd": 0.15934820000000002,
+    "texte": "-critères, après le lancement de l'analyse, le plan du mémoire contient une section par sous-critère ». Le RC rattache bien trois sous-critères à « 1. Valeur technique » (« Gestion des déchets de chantier », « Moyens matériels affectés au chantier », « Planning détaillé des travaux »). V1 ne rend qu'une section, au titre tronqué (« Valeur technique | noté sur »), et ne rend aucune section pour ces sous-critères : elle viole A29. V2 rend exactement une section par sous-critère, sur la page source 1, sans texte rédigé : elle respecte A29, A32 et A33.\ncertainty: firm\n```\n\n**Deux défauts de V2 que ce verdict ne tranche pas :**\n- **La pondération de V2 est vide (`null`) dans chaque section.** A31 demande une pondération « égale à la pondération de son critère ». Pour une section de sous-critère, le texte ne dit pas si « son critère » désigne le parent (27 points) ou le sous-critère, qui n'a pas de pondération dans le RC (non trouvée, A148). V2 viole A31 seulement si on retient la première lecture. Ce point ne change pas le classement : V1 viole A29 de toute façon.\n- **Le libellé du critère chez V2 reprend des restes du tableau** (« Valeur technique | noté sur 27 points »). Ce libellé relève d'A140 (« libellé tel qu'il est écrit dans le RC ») et du champ critères, pas de la divergence sur le plan.\n\nCLASSE: bug V1\nASSERTION: A29\nCAS: Un critère de valeur technique noté sur 27 points est détaillé dans le RC en trois sous-critères sans pondération propre.\nCHOIX: aucun\nNOUVELLE: aucune"
+   },
+   {
+    "classe": "bug V1",
+    "assertion": "A29",
+    "cas": "Le RC donne au critère « Valeur technique » (27 points) trois sous-critères non pondérés, et le plan du mémoire doit en tirer ses sections.",
+    "choix": "aucun",
+    "nouvelle": "aucune",
+    "usd": 0.0462114,
+    "texte": "hnique a des sous-critères, […] le plan du mémoire contient une section par sous-critère ». Or le RC (page 1) détaille le critère « 1. Valeur technique » en trois sous-critères : « Gestion des déchets de chantier », « Moyens matériels affectés au chantier » et « Planning détaillé des travaux ». V1 ne rend qu'une section avec \"sous_critere\": null, ce qui viole A29. V2 rend les trois sections et respecte A29.\ncertainty: close\n```\n\nPourquoi `close` : V2 n'est pas parfaite non plus.\n- **Pondération à null.** A31 dit : « chaque section affiche une pondération section égale à la pondération de son critère ». Le RC donne 27 points au critère parent. Si cette pondération est bien 27 dans le dossier (A145), le null de V2 enfreint A31. Mais la spec ne dit pas quelle pondération porte une section de sous-critère quand le sous-critère n'a pas de pondération propre. Ce point est un trou à part, qui ne joue pas dans ce désaccord.\n- **Intitulés abîmés dans les deux variantes.** V1 écrit « Valeur technique | noté sur » et V2 « Valeur technique | noté sur 27 points ». Les deux gardent le séparateur de tableau « | » et s'écartent d'A140. Ce défaut est commun aux deux et ne départage rien.\n\nLe seul écart que la spec tranche sans ambiguïté est le nombre de sections, et c'est V1 qui l'enfreint.\n\nCLASSE: bug V1\nASSERTION: A29\nCAS: Le RC donne au critère « Valeur technique » (27 points) trois sous-critères non pondérés, et le plan du mémoire doit en tirer ses sections.\nCHOIX: aucun\nNOUVELLE: aucune"
+   }
+  ]
+ },
+ {
+  "champ": "type_ponderation.conflit",
+  "situations": 7,
+  "representant": "S069",
+  "V1_H": true,
+  "V2_S": false,
+  "final": "trou",
+  "juges": [
+   {
+    "classe": "trou",
+    "assertion": "C01",
+    "cas": "Une même page exprime les pondérations des critères en points et celles de leurs sous-critères en pourcentages, et l'autre page donne les critères restants, eux aussi en points.",
+    "choix": "V2",
+    "nouvelle": "Quand une même page exprime les pondérations des critères en points et celles de leurs sous-critères en pourcentages, après le lancement de l'analyse, le type pondération est trouvé avec la seule valeur « points » et aucun conflit valeurs n'est signalé pour le type pondération | observé: conflit valeurs | conditions: texte pages, type pondération",
+    "usd": 0.1644362,
+    "texte": "ne tranche le cas présent. La spec ne dit donc pas lequel a raison : c'est un trou. Il faut le combler en faveur de V2, qui est fidèle au RC : au niveau des critères, l'unité est la même sur les deux pages.\ncertainty: close\n```\n\nPourquoi « close » : C01 ne s'applique pas à la lettre, puisque les unités y sont inversées. On pourrait pourtant la lire comme un principe général (l'unité des sous-critères ne crée pas de conflit sur le type), et alors V1 serait en tort. Je classe ce cas en trou plutôt qu'en bug, parce que la condition de C01 n'est pas remplie telle qu'elle est écrite. Aucune assertion ne crée de conflit sur le type pondération. Les assertions de conflit ne portent que sur une même valeur écrite différemment sur deux pages. Ici, au niveau des critères, les pages 1 et 2 disent toutes les deux « points ». Le mélange des unités est sur la page 1 seulement, et il est hiérarchique, pas contradictoire.\n\nCLASSE: trou\nASSERTION: C01\nCAS: Une même page exprime les pondérations des critères en points et celles de leurs sous-critères en pourcentages, et l'autre page donne les critères restants, eux aussi en points.\nCHOIX: V2\nNOUVELLE: Quand une même page exprime les pondérations des critères en points et celles de leurs sous-critères en pourcentages, après le lancement de l'analyse, le type pondération est trouvé avec la seule valeur « points » et aucun conflit valeurs n'est signalé pour le type pondération | observé: conflit valeurs | conditions: texte pages, type pondération"
+   },
+   {
+    "classe": "trou",
+    "assertion": "C01",
+    "cas": "Sur une même page, le RC donne les pondérations des critères en points et celles des sous-critères d'un critère en pourcentages. Une autre page donne aussi les critères en points.",
+    "choix": "V2",
+    "nouvelle": "Quand une même page exprime les pondérations des critères en points et celles de leurs sous-critères en pourcentages, après le lancement de l'analyse, le type pondération est trouvé avec la seule valeur « points » et aucun conflit valeurs n'est signalé pour le type pondération | observé: conflit valeurs | conditions: texte pages, type pondération",
+    "usd": 0.03717,
+    "texte": "e, so it is a gap in the spec, not a violation by either version. The nearest assertion, C01, covers \"les pondérations des critères en pourcentages et celles de leurs sous-critères en points\". This RC has the opposite mix. The criteria are in points (\"55 points\", \"noté sur 35 points\", \"noté sur 10 points\"), and the sub-criteria of criterion 1 are in % (\"8 %\", \"26 %\", \"66 %\", which sum to 100 % of the parent). A42 (\"même valeur sur deux pages → aucun conflit\") only applies if the % on page 1 do not count as a value of type pondération. That is the very point in dispute, so A42 cannot decide it. The fact that resolves it is the spec author's intent: does the weighting type follow only the criteria level? The spec can hold that fact, through the assertion below. Siding with V2 follows C01 and the RC: both pages weight the criteria in points, and the % only split up the parent criterion.\ncertainty: close\n```\n\nCLASSE: trou\nASSERTION: C01\nCAS: Sur une même page, le RC donne les pondérations des critères en points et celles des sous-critères d'un critère en pourcentages. Une autre page donne aussi les critères en points.\nCHOIX: V2\nNOUVELLE: Quand une même page exprime les pondérations des critères en points et celles de leurs sous-critères en pourcentages, après le lancement de l'analyse, le type pondération est trouvé avec la seule valeur « points » et aucun conflit valeurs n'est signalé pour le type pondération | observé: conflit valeurs | conditions: texte pages, type pondération"
+   }
+  ],
+  "porte": "convention",
+  "porte_raison": "Même raisonnement qu'au cas 3, quelle que soit la répartition sur les pages : les critères sont en points, les sous-critères en pourcentages à l'intérieur de leur critère, et le RC ne se contredit pas."
+ }
+]

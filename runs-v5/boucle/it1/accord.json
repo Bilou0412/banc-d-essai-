@@ -1,0 +1,76 @@
+{
+ "situations": 300,
+ "egales": 6,
+ "taux": 0.02,
+ "taux_synth": 0.02,
+ "taux_publics": 0.0,
+ "groupes": {
+  "pieces.liste": 246,
+  "criteres.liste": 189,
+  "dates_visite.valeurs": 131,
+  "dates_visite.statut": 131,
+  "lots.liste": 117,
+  "plan[]": 69,
+  "type_ponderation.valeurs": 39,
+  "procedure.valeurs": 35,
+  "mode_remise.valeurs": 34,
+  "procedure.conflit": 29,
+  "plan": 25,
+  "type_ponderation.conflit": 7,
+  "controle.alertes": 6,
+  "procedure.statut": 6,
+  "type_ponderation.statut": 5,
+  "date_limite.valeurs": 4,
+  "variantes.valeurs": 3,
+  "criteres.statut": 2,
+  "lots.statut": 2,
+  "mode_remise.conflit": 2,
+  "heure_limite.valeurs": 1,
+  "date_limite.statut": 1,
+  "heure_limite.conflit": 1,
+  "date_questions.conflit": 1,
+  "date_questions.valeurs": 1,
+  "variantes.statut": 1
+ },
+ "juges": 12,
+ "non_juges": [
+  "controle.alertes (6)",
+  "procedure.statut (6)",
+  "type_ponderation.statut (5)",
+  "date_limite.valeurs (4)",
+  "variantes.valeurs (3)",
+  "criteres.statut (2)",
+  "lots.statut (2)",
+  "mode_remise.conflit (2)",
+  "heure_limite.valeurs (1)",
+  "date_limite.statut (1)",
+  "heure_limite.conflit (1)",
+  "date_questions.conflit (1)",
+  "date_questions.valeurs (1)",
+  "variantes.statut (1)"
+ ],
+ "classes": {
+  "à trancher": 1,
+  "trou": 6,
+  "bug H": 4,
+  "bug S": 1
+ },
+ "accord_juges": 1.0,
+ "taux_spec": 0.04,
+ "porte": {
+  "convention": 5,
+  "client": 1
+ },
+ "principes": [
+  {
+   "principe": "Un indice secondaire (référence, identifiant) qui contredit une mention explicite doit-il être signalé comme conflit ?",
+   "cas": [
+    5
+   ],
+   "A": "Afficher seulement la mention explicite, sans conflit, le signalement étant réservé aux cas où deux mentions de la procédure se contredisent.",
+   "B": "Afficher la mention explicite mais signaler l'écart pour que le client vérifie auprès de l'acheteur.",
+   "exemple": "Référence « 2026-MAPA-71 » alors que le corps du RC, sur la même page, nomme « appel d'offres restreint ».",
+   "recommande": "A"
+  }
+ ]
+}

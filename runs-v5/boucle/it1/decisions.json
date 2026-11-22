@@ -1,0 +1,70 @@
+{
+ "journal": [
+  {
+   "champ": "criteres.liste",
+   "cas": "Le RC déclare un marché en lot unique sans jamais donner de numéro à ce lot, et énumère des critères d'attribution.",
+   "porte": "convention",
+   "raison": "Un lot unique porte tous les critères ; ne pas inventer de numéro absent du texte relève du bon sens, deux experts répondraient pareil.",
+   "decision": "V2",
+   "proposee": "Quand le marché comporte un lot unique auquel aucune page ne donne de numéro, après le lancement de l'analyse, le lot critère de chaque critère est trouvé, désigne ce lot unique sans numéro et n'affiche aucun numéro de lot absent du texte des pages | observé: lot critère | conditions: lots, texte pages"
+  },
+  {
+   "champ": "lots.liste",
+   "cas": "Le RC déclare que le marché est traité en lot unique sans jamais écrire de numéro ni d'intitulé de lot.",
+   "porte": "convention",
+   "raison": "« Lot unique » signifie exactement un lot ; on ne fabrique ni numéro ni intitulé absents des pages.",
+   "decision": "V2",
+   "proposee": "Quand une page déclare le marché traité en lot unique sans écrire de numéro ni d'intitulé de lot, après le lancement de l'analyse, le dossier liste exactement un lot sans numéro et sans intitulé | observé: lots | conditions: texte pages"
+  },
+  {
+   "champ": "type_ponderation.valeurs",
+   "cas": "Le RC pondère les critères en points et les sous-critères d'un critère en pourcentages, sur deux pages.",
+   "porte": "convention",
+   "raison": "La pondération du marché porte sur les critères (CCP R2152-11 et suivants) ; les pourcentages de sous-critères répartissent la note à l'intérieur d'un critère et ne forment pas un second type de pondération.",
+   "decision": "V2",
+   "proposee": "Quand le RC exprime les pondérations des critères en points et celles des sous-critères d'un critère en pourcentages, après le lancement de l'analyse, le type pondération est trouvé avec la seule valeur « points » et aucun conflit valeurs n'est signalé pour le type pondération | observé: type pondération | conditions: texte pages, pondération"
+  },
+  {
+   "champ": "procedure.valeurs",
+   "cas": "Le sigle « MAPA » n'apparaît que dans le numéro de référence du dossier (« 2026-MAPA-71 »), alors que la même page nomme en toutes lettres la procédure « appel d'offres restreint ».",
+   "porte": "convention",
+   "raison": "Un numéro de référence est un identifiant, pas l'énoncé de la procédure ; la mention en toutes lettres fait foi.",
+   "decision": "V2",
+   "proposee": "Quand le sigle « MAPA » n'apparaît que dans une référence ou un identifiant du dossier et qu'une page nomme la procédure en toutes lettres, après le lancement de l'analyse, le dossier affiche seulement la procédure nommée en toutes lettres, sans « procédure adaptée » | observé: procédure | conditions: texte pages"
+  },
+  {
+   "champ": "procedure.conflit",
+   "cas": "Le sigle « MAPA » n'apparaît que dans le numéro de référence de la consultation, alors que le corps du RC nomme explicitement une autre procédure (appel d'offres restreint), sur la même page.",
+   "porte": "client",
+   "raison": "La valeur est tranchée au cas 4 ; décider s'il faut signaler à l'utilisateur l'écart entre la référence et la procédure nommée relève de la façon dont le logiciel traite un RC douteux, donc d'un choix de produit (certitude incertaine).",
+   "decision": "V2",
+   "proposee": "Quand le sigle « MAPA » n'apparaît que dans la référence de la consultation et qu'une page nomme une autre procédure, après le lancement de l'analyse, le dossier affiche seulement la procédure nommée et aucun conflit valeurs n'est signalé pour la procédure | observé: conflit valeurs | conditions: texte pages"
+  },
+  {
+   "champ": "type_ponderation.conflit",
+   "cas": "Une même page exprime les pondérations des critères en points et celles de leurs sous-critères en pourcentages, et l'autre page donne les critères restants, eux aussi en points.",
+   "porte": "convention",
+   "raison": "Même raisonnement qu'au cas 3, quelle que soit la répartition sur les pages : les critères sont en points, les sous-critères en pourcentages à l'intérieur de leur critère, et le RC ne se contredit pas.",
+   "decision": "V2",
+   "proposee": "Quand une même page exprime les pondérations des critères en points et celles de leurs sous-critères en pourcentages, après le lancement de l'analyse, le type pondération est trouvé avec la seule valeur « points » et aucun conflit valeurs n'est signalé pour le type pondération | observé: conflit valeurs | conditions: texte pages, type pondération"
+  }
+ ],
+ "ajouts": {
+  "C05": "Quand le marché comporte un lot unique auquel aucune page ne donne de numéro, après le lancement de l'analyse, le lot critère de chaque critère est trouvé avec la seule valeur « lot unique sans numéro » (valeur nulle), sans aucun numéro de lot, et aucun conflit valeurs n'est signalé pour le lot critère | observé: lot critère | conditions: lots, texte pages",
+  "C06": "Quand une page déclare le marché traité en lot unique sans écrire de numéro ni d'intitulé de lot, après le lancement de l'analyse, le dossier liste exactement un lot, sans numéro et sans intitulé, dont la page valeur est la page qui fait cette déclaration | observé: lots | conditions: texte pages",
+  "C07": "Quand le RC exprime les pondérations des critères en points et celles des sous-critères d'un critère en pourcentages, sur une même page ou sur deux pages, après le lancement de l'analyse, le type pondération est trouvé avec la seule valeur « points », dont la page valeur ne compte que les pages qui pondèrent des critères, et aucun conflit valeurs n'est signalé pour le type pondération | observé: type pondération | conditions: texte pages, pondération",
+  "C08": "Quand le sigle « MAPA » n'apparaît que dans une référence ou un identifiant du dossier et qu'une page nomme une autre procédure en toutes lettres, après le lancement de l'analyse, la procédure est trouvée avec la seule procédure nommée en toutes lettres, sans « procédure adaptée », et aucun conflit valeurs n'est signalé pour la procédure | observé: procédure | conditions: texte pages"
+ },
+ "bilan": {
+  "iteration": 1,
+  "trous": 6,
+  "bugs": 5,
+  "tests_trous": 7,
+  "tests_trous_retires": [
+   "test_C08_mapa_dans_identifiant_page_1_procedure_page_2"
+  ],
+  "tests_bugs": 4,
+  "tests_bugs_retires": [],
+  "assertions_ajoutees": 4
+ }
+}
