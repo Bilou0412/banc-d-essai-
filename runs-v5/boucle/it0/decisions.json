@@ -1,0 +1,62 @@
+{
+ "journal": [
+  {
+   "champ": "type_ponderation.conflit",
+   "cas": "Sur une seule page, le RC exprime les pondérations des critères en pourcentages et celles des sous-critères en points.",
+   "porte": "convention",
+   "raison": "Un conflit, c'est deux valeurs pour le même objet ; critères en pourcentages et sous-critères en points sont deux niveaux distincts, un usage courant des RC et non une contradiction (serré).",
+   "decision": "V1",
+   "proposee": "Quand une même page exprime les pondérations des critères en pourcentages et celles de leurs sous-critères en points, après le lancement de l'analyse, aucun conflit valeurs n'est signalé pour le type pondération | observé: conflit valeurs | conditions: texte pages, type pondération"
+  },
+  {
+   "champ": "controle.alertes",
+   "cas": "Le RC exprime les pondérations en pourcentages (40 % + 65 % = 105 %) et le contrôle affiche l'alerte « total différent de 100 % » sans que la spec fixe à quel objet cette alerte se rattache.",
+   "porte": "convention",
+   "raison": "L'alerte porte sur une somme de pondérations des critères ; elle se rattache donc à l'objet « critères », par bon sens du format.",
+   "decision": "V2",
+   "proposee": "Quand le type pondération vaut « pourcentage » et que la somme des critères diffère de 100 %, après le lancement de l'analyse, l'alerte « total différent de 100 % » porte sur l'objet « critères » | observé: objet alerte | conditions: pondération, type pondération"
+  },
+  {
+   "champ": "validite_offres.valeurs",
+   "cas": "Le RC indique, en plus de la durée de validité des offres, d'autres délais chiffrés (délai de recours, délai de production des attestations par l'attributaire) qui ne portent pas sur la validité des offres.",
+   "porte": "convention",
+   "raison": "Le délai de recours et le délai de production des attestations sont distincts de la durée de validité des offres selon le code de la commande publique et l'usage.",
+   "decision": "V2",
+   "proposee": "Quand une page indique un délai qui ne porte pas sur la validité des offres, après le lancement de l'analyse, la validité offres ne contient pas ce délai | observé: validité offres | conditions: texte pages"
+  },
+  {
+   "champ": "validite_offres.conflit",
+   "cas": "Le RC fixe la durée de validité des offres sur une seule page (« 4 mois ») et nulle part ailleurs.",
+   "porte": "convention",
+   "raison": "Une seule valeur sur une seule page ne peut pas créer de conflit.",
+   "decision": "V2",
+   "proposee": "Quand une seule page fixe la durée de validité des offres, après le lancement de l'analyse, aucun conflit valeurs n'est signalé pour la validité offres | observé: conflit valeurs | conditions: texte pages"
+  },
+  {
+   "champ": "mode_remise.valeurs",
+   "cas": "Une page nomme le mode de remise (« exclusivement par voie dématérialisée ») ; une autre page se contente d'exclure un autre mode (« Aucune offre papier ne sera acceptée ») sans nommer le mode retenu.",
+   "porte": "convention",
+   "raison": "La page de la valeur est celle qui écrit la valeur ; une page qui exclut seulement le papier ne nomme pas le mode retenu (serré : afficher aussi les pages qui confirment serait un choix d'affichage distinct).",
+   "decision": "V2 retenue",
+   "proposee": "Quand une page nomme le mode de remise des offres et qu'une autre page se borne à exclure un autre mode sans nommer le mode retenu, après le lancement de l'analyse, la page valeur du mode remise indique seulement la page qui nomme le mode | observé: page valeur | conditions: texte pages"
+  }
+ ],
+ "ajouts": {
+  "C01": "Quand une même page exprime les pondérations des critères en pourcentages et celles de leurs sous-critères en points, après le lancement de l'analyse, le type pondération est trouvé avec une seule valeur et aucun conflit valeurs n'est signalé pour le type pondération | observé: conflit valeurs | conditions: texte pages, type pondération",
+  "C02": "Quand le type pondération vaut « pourcentage » et que la somme des critères diffère de 100 %, après le lancement de l'analyse, l'alerte « total différent de 100 % » est affichée une seule fois et porte sur l'objet « critères » | observé: objet alerte | conditions: pondération, type pondération",
+  "C03": "Quand une seule page fixe la durée de validité des offres, une seule fois, après le lancement de l'analyse, la validité offres est trouvée avec cette seule valeur et aucun conflit valeurs n'est signalé pour la validité offres | observé: conflit valeurs | conditions: texte pages",
+  "C04": "Quand une page nomme le mode de remise des offres et qu'une autre page se borne à exclure un autre mode sans nommer le mode retenu, après le lancement de l'analyse, le mode remise affiche seulement le mode nommé, avec pour page valeur seulement la page qui le nomme | observé: page valeur | conditions: texte pages"
+ },
+ "bilan": {
+  "iteration": 0,
+  "trous": 5,
+  "bugs": 7,
+  "tests_trous": 7,
+  "tests_trous_retires": [
+   "test_C03_validite_en_lettres_une_seule_page_pas_de_conflit"
+  ],
+  "tests_bugs": 7,
+  "tests_bugs_retires": [],
+  "assertions_ajoutees": 4
+ }
+}

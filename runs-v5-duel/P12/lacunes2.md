@@ -1,0 +1,16 @@
+- A03 : liste de pages vide, ou pages ne contenant que des blancs | test: test_A03_trou_aucune_page_ou_pages_vides | présumé: tous les faits et listes « non trouvé », plan vide, aucune alerte, aucune exception
+- A02 : libellé « date limite de réception des offres » coupé par un saut de ligne (texte extrait d'un PDF) | test: test_A02_trou_cesure_de_ligne_dans_le_libelle | présumé: la date et l'heure sont lues malgré la coupure
+- A51 : mois écrit sans accent (« aout », « fevrier », « decembre »), fréquent après extraction de texte | test: test_A51_trou_mois_sans_accent | présumé: reconnu comme le mois accentué
+- A52 : année sur deux chiffres (« 14/03/25 ») | test: test_A52_trou_annee_sur_deux_chiffres | présumé: rendue sur quatre chiffres (20aa)
+- A60 : heure sans minutes (« 12h », « 12 h ») ou avec deux-points (« 12:00 ») | test: test_A60_trou_autres_notations | présumé: rendue « 12:00 »
+- A44 : mot contenant « lot » sans désigner un lot (« lotissement ») | test: test_A44_trou_lotissement_n_est_pas_un_lot | présumé: lots non trouvés
+- A47 : même intitulé de lot suivi d'une ponctuation finale (« ; ») sur une autre page | test: test_A47_trou_ponctuation_finale_meme_intitule | présumé: un seul intitulé, sans conflit
+- A48 : simple mention d'un lot dans une phrase (« Pour le lot n°1, ... ») | test: test_A48_trou_simple_mention_d_un_lot | présumé: ce n'est pas un intitulé, aucun conflit
+- A07 : procédures autres que procédure adaptée / appel d'offres ouvert | test: test_A07_trou_autres_procedures | présumé: le nom de la procédure en minuscules (« appel d'offres restreint », « dialogue compétitif »)
+- A16 : partie candidature commencée sur une page et dont la liste se poursuit sur la page suivante sans nouveau titre | test: test_A16_trou_partie_continue_sur_la_page_suivante | présumé: la pièce de la page suivante reste en phase « candidature »
+- A149 : même pondération écrite en lettres sur une page et en chiffres sur une autre | test: test_A149_trou_lettres_et_chiffres_meme_ponderation | présumé: une seule valeur 60 portant les deux pages, sans conflit
+- A27 : critère technique nommé autrement que « valeur technique » (« Qualité technique de l'offre ») | test: test_A27_trou_qualite_technique | présumé: il porte sur la valeur technique et reçoit une section
+- A39 : valeur proposée avec une page fausse alors qu'elle est écrite sur une autre page | test: test_A39_trou_verifier_page_annoncee_fausse | présumé: la page fausse n'est jamais rendue (valeur retirée ou page corrigée)
+- A103 : valeur « autorisées » proposée alors que la page ne contient ce mot que sous une négation | test: test_A103_trou_verifier_negation_n_est_pas_une_preuve | présumé: « figurer dans le texte » s'entend du fait énoncé, pas d'une sous-chaîne ; la valeur est retirée
+- A88 : visite « oui » proposée alors que la page dit « n'est pas obligatoire » | test: test_A88_trou_verifier_negation_visite | présumé: « oui » est retiré
+- A117 : mode « papier » proposé alors que la page refuse le papier | test: test_A117_trou_verifier_papier_refuse | présumé: « papier » est retiré

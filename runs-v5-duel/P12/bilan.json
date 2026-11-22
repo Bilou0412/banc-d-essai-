@@ -1,0 +1,466 @@
+{
+ "sonde": "P12",
+ "passes": "../v5/spec-v0",
+ "passe": "A",
+ "k_passes": [
+  2.05
+ ],
+ "k_retenu": 2.05,
+ "concordance": "une seule passe",
+ "convergent": true,
+ "tours": 2,
+ "attaques": 2,
+ "assertions": 162,
+ "frontieres": 1,
+ "champ_local": {
+  "tout": 1.0,
+  "frontiere": 1.0,
+  "autres": 1.0
+ },
+ "essais": {
+  "A01": 1,
+  "A02": 1,
+  "A03": 1,
+  "A04": 1,
+  "A05": 1,
+  "A06": 1,
+  "A07": 1,
+  "A08": 1,
+  "A09": 1,
+  "A10": 1,
+  "A100": 1,
+  "A101": 1,
+  "A102": 1,
+  "A103": 1,
+  "A104": 1,
+  "A105": 1,
+  "A106": 1,
+  "A107": 1,
+  "A108": 1,
+  "A109": 1,
+  "A11": 1,
+  "A110": 1,
+  "A111": 1,
+  "A112": 1,
+  "A113": 1,
+  "A114": 1,
+  "A115": 1,
+  "A116": 1,
+  "A117": 1,
+  "A118": 1,
+  "A119": 1,
+  "A12": 1,
+  "A120": 1,
+  "A121": 1,
+  "A122": 1,
+  "A123": 1,
+  "A124": 1,
+  "A125": 1,
+  "A126": 1,
+  "A127": 1,
+  "A128": 1,
+  "A129": 1,
+  "A13": 1,
+  "A130": 1,
+  "A131": 1,
+  "A132": 1,
+  "A133": 1,
+  "A134": 1,
+  "A135": 1,
+  "A136": 1,
+  "A137": 1,
+  "A138": 1,
+  "A139": 1,
+  "A14": 1,
+  "A140": 1,
+  "A141": 1,
+  "A142": 1,
+  "A143": 1,
+  "A144": 1,
+  "A145": 1,
+  "A146": 1,
+  "A147": 1,
+  "A148": 1,
+  "A149": 1,
+  "A15": 1,
+  "A150": 1,
+  "A151": 1,
+  "A152": 1,
+  "A153": 1,
+  "A154": 1,
+  "A155": 1,
+  "A156": 1,
+  "A157": 1,
+  "A158": 1,
+  "A159": 1,
+  "A16": 1,
+  "A160": 1,
+  "A161": 1,
+  "A162": 1,
+  "A17": 1,
+  "A18": 1,
+  "A19": 1,
+  "A20": 1,
+  "A21": 1,
+  "A22": 1,
+  "A23": 1,
+  "A24": 1,
+  "A25": 1,
+  "A26": 1,
+  "A27": 1,
+  "A28": 1,
+  "A29": 1,
+  "A30": 1,
+  "A31": 1,
+  "A32": 1,
+  "A33": 1,
+  "A34": 1,
+  "A35": 1,
+  "A36": 1,
+  "A37": 1,
+  "A38": 1,
+  "A39": 1,
+  "A40": 1,
+  "A41": 1,
+  "A42": 1,
+  "A43": 1,
+  "A44": 1,
+  "A45": 1,
+  "A46": 1,
+  "A47": 1,
+  "A48": 1,
+  "A49": 1,
+  "A50": 1,
+  "A51": 1,
+  "A52": 1,
+  "A53": 1,
+  "A54": 1,
+  "A55": 1,
+  "A56": 1,
+  "A57": 1,
+  "A58": 1,
+  "A59": 1,
+  "A60": 1,
+  "A61": 1,
+  "A62": 1,
+  "A63": 1,
+  "A64": 1,
+  "A65": 1,
+  "A66": 1,
+  "A67": 1,
+  "A68": 1,
+  "A69": 1,
+  "A70": 1,
+  "A71": 1,
+  "A72": 1,
+  "A73": 1,
+  "A74": 1,
+  "A75": 1,
+  "A76": 1,
+  "A77": 1,
+  "A78": 1,
+  "A79": 1,
+  "A80": 1,
+  "A81": 1,
+  "A82": 1,
+  "A83": 1,
+  "A84": 1,
+  "A85": 1,
+  "A86": 1,
+  "A87": 1,
+  "A88": 1,
+  "A89": 1,
+  "A90": 1,
+  "A91": 1,
+  "A92": 1,
+  "A93": 1,
+  "A94": 1,
+  "A95": 1,
+  "A96": 1,
+  "A97": 1,
+  "A98": 1,
+  "A99": 1
+ },
+ "non_passees": [],
+ "trous_a_priori": 41,
+ "echecs_par_type": {},
+ "nouvelles_assertions": {},
+ "lacunes": [
+  {
+   "cas": "A14 : la « valeur proposée par l'extraction » n'est pas observable par analyser seul ; l'injection passe par une vérification publique",
+   "test": "test_A14_trou_verifier_validite_fabriquee",
+   "présumé": "Quand un dossier soumis à app.verifier porte une validité des offres absente du texte des pages, après la vérification, la validité offres est déclarée non trouvée | observé: validité offres | conditions: texte pages",
+   "attaque": 1
+  },
+  {
+   "cas": "A14 : une valeur fabriquée à côté d'une vraie ne doit pas effacer la vraie",
+   "test": "test_A14_trou_verifier_garde_la_vraie_validite",
+   "présumé": "Quand un dossier soumis à app.verifier porte une vraie et une fausse validité des offres, après la vérification, seule la vraie validité offres est affichée | observé: validité offres | conditions: texte pages",
+   "attaque": 1
+  },
+  {
+   "cas": "A49 : lot proposé non observable par analyser seul",
+   "test": "test_A49_trou_verifier_lot_fabrique",
+   "présumé": "Quand un dossier soumis à app.verifier porte un lot absent du texte des pages, après la vérification, le dossier ne liste pas ce lot | observé: lots | conditions: texte pages",
+   "attaque": 1
+  },
+  {
+   "cas": "A56 : date limite proposée non observable par analyser seul, et sort du conflit quand la fausse valeur disparaît",
+   "test": "test_A56_trou_verifier_date_limite_fabriquee",
+   "présumé": "Quand un dossier soumis à app.verifier porte une date limite absente du texte à côté de la vraie, après la vérification, seule la vraie date limite est affichée et aucun conflit n'est signalé | observé: date limite | conditions: texte pages",
+   "attaque": 1
+  },
+  {
+   "cas": "A56 : date limite proposée seule et absente du texte",
+   "test": "test_A56_trou_verifier_date_limite_seule_fabriquee",
+   "présumé": "Quand un dossier soumis à app.verifier porte une date limite absente du texte des pages, après la vérification, la date limite est déclarée non trouvée | observé: date limite | conditions: texte pages",
+   "attaque": 1
+  },
+  {
+   "cas": "A65 : heure limite proposée non observable par analyser seul",
+   "test": "test_A65_trou_verifier_heure_fabriquee",
+   "présumé": "Quand un dossier soumis à app.verifier porte une heure limite absente du texte des pages, après la vérification, l'heure limite est déclarée non trouvée | observé: heure limite | conditions: texte pages",
+   "attaque": 1
+  },
+  {
+   "cas": "A74 : date questions proposée non observable par analyser seul",
+   "test": "test_A74_trou_verifier_date_questions_fabriquee",
+   "présumé": "Quand un dossier soumis à app.verifier porte une date questions absente du texte des pages, après la vérification, la date questions est déclarée non trouvée | observé: date questions | conditions: texte pages",
+   "attaque": 1
+  },
+  {
+   "cas": "A82 : procédure proposée non observable par analyser seul",
+   "test": "test_A82_trou_verifier_procedure_fabriquee",
+   "présumé": "Quand un dossier soumis à app.verifier porte une procédure absente du texte des pages, après la vérification, cette procédure n'est pas affichée | observé: procédure | conditions: texte pages",
+   "attaque": 1
+  },
+  {
+   "cas": "A88 : valeur de visite proposée non observable par analyser seul",
+   "test": "test_A88_trou_verifier_visite_fabriquee",
+   "présumé": "Quand un dossier soumis à app.verifier porte une visite obligatoire qu'aucune page ne mentionne, après la vérification, la visite obligatoire est déclarée non trouvée | observé: visite obligatoire | conditions: texte pages",
+   "attaque": 1
+  },
+  {
+   "cas": "A96 : date de visite proposée non observable par analyser seul",
+   "test": "test_A96_trou_verifier_date_visite_fabriquee",
+   "présumé": "Quand un dossier soumis à app.verifier porte une date de visite absente du texte des pages, après la vérification, le dossier ne liste pas cette date visite | observé: dates visite | conditions: texte pages",
+   "attaque": 1
+  },
+  {
+   "cas": "A103 : valeur de variantes proposée non observable par analyser seul",
+   "test": "test_A103_trou_verifier_variantes_fabriquees",
+   "présumé": "Quand un dossier soumis à app.verifier porte une valeur de variantes qu'aucune page ne mentionne, après la vérification, les variantes sont déclarées non trouvées | observé: variantes | conditions: texte pages",
+   "attaque": 1
+  },
+  {
+   "cas": "A117 : mode de remise proposé non observable par analyser seul",
+   "test": "test_A117_trou_verifier_mode_fabrique",
+   "présumé": "Quand un dossier soumis à app.verifier porte un mode de remise absent du texte des pages, après la vérification, ce mode remise n'est pas affiché | observé: mode remise | conditions: texte pages",
+   "attaque": 1
+  },
+  {
+   "cas": "A121 : pièce proposée non observable par analyser seul",
+   "test": "test_A121_trou_verifier_piece_fabriquee",
+   "présumé": "Quand un dossier soumis à app.verifier porte une pièce absente du texte des pages, après la vérification, le dossier ne liste pas cette pièce | observé: pièces | conditions: texte pages",
+   "attaque": 1
+  },
+  {
+   "cas": "A137 : limite de pages proposée non observable par analyser seul",
+   "test": "test_A137_trou_verifier_limite_fabriquee",
+   "présumé": "Quand un dossier soumis à app.verifier porte une limite de pages absente du texte des pages, après la vérification, la limite pages est déclarée non trouvée | observé: limite pages | conditions: texte pages",
+   "attaque": 1
+  },
+  {
+   "cas": "A142 : critère proposé non observable par analyser seul",
+   "test": "test_A142_trou_verifier_critere_fabrique",
+   "présumé": "Quand un dossier soumis à app.verifier porte un critère absent du texte des pages, après la vérification, l'arbre n'affiche pas ce critère | observé: critères | conditions: texte pages",
+   "attaque": 1
+  },
+  {
+   "cas": "A152 : pondération proposée non observable par analyser seul",
+   "test": "test_A152_trou_verifier_ponderation_fabriquee",
+   "présumé": "Quand un dossier soumis à app.verifier porte pour un critère une pondération absente du texte des pages, après la vérification, la pondération de ce critère est déclarée non trouvée | observé: pondération | conditions: texte pages",
+   "attaque": 1
+  },
+  {
+   "cas": "A157 : sous-critère proposé non observable par analyser seul",
+   "test": "test_A157_trou_verifier_sous_critere_fabrique",
+   "présumé": "Quand un dossier soumis à app.verifier porte un sous-critère absent du texte des pages, après la vérification, l'arbre ne rattache pas ce sous-critère | observé: sous-critères | conditions: texte pages",
+   "attaque": 1
+  },
+  {
+   "cas": "A34 : le plan étant dérivé des critères par l'analyse, un critère technique sans section ne peut naître de analyser seul ; le contrôle doit pouvoir être rejoué sur un plan amputé",
+   "test": "test_A34_trou_controler_section_retiree",
+   "présumé": "Quand app.controler reçoit un dossier dont le plan a perdu la section d'un critère de valeur technique, après le contrôle, l'alerte « critère sans section » est affichée | observé: alerte | conditions: sections",
+   "attaque": 1
+  },
+  {
+   "cas": "A31 : la pondération d'une section de sous-critère n'est pas fixée (celle du critère parent ou celle du sous-critère)",
+   "test": "test_A31_trou_section_sous_critere_ponderation_propre",
+   "présumé": "Quand une section du plan correspond à un sous-critère, après le lancement de l'analyse, sa pondération section est égale à la pondération de ce sous-critère | observé: pondération section | conditions: pondération",
+   "attaque": 1
+  },
+  {
+   "cas": "A13 : le vocabulaire du mode remise n'est pas fixé",
+   "test": "test_A13_trou_mode_remise_papier",
+   "présumé": "Quand une page indique une remise des offres sur support papier, après le lancement de l'analyse, le mode remise vaut « papier » (et « électronique » pour une remise dématérialisée) | observé: mode remise | conditions: texte pages",
+   "attaque": 1
+  },
+  {
+   "cas": "A53 : la même date limite écrite en lettres sur une page et en chiffres sur une autre n'est pas dite « la même »",
+   "test": "test_A53_trou_notations_differentes",
+   "présumé": "Quand deux pages écrivent la même date limite dans deux notations différentes, après le lancement de l'analyse, le dossier affiche cette date limite une seule fois, sans conflit valeurs | observé: date limite | conditions: texte pages",
+   "attaque": 1
+  },
+  {
+   "cas": "A159 : A26 et A159 se croisent quand un critère s'applique à tous les lots avec des pondérations différentes",
+   "test": "test_A159_trou_ponderation_par_lot_tous_les_lots",
+   "présumé": "Quand le RC applique un critère à tous les lots avec des pondérations différentes selon le lot, après le lancement de l'analyse, le lot critère de ce critère vaut « tous les lots » | observé: lot critère | conditions: texte pages, pondération lot",
+   "attaque": 1
+  },
+  {
+   "cas": "A36 : A26 et A36 se croisent ; la somme à 100 % se compte-t-elle sur tous les critères ou lot par lot",
+   "test": "test_A36_trou_somme_par_lot",
+   "présumé": "Quand le RC donne des pondérations en pourcentage par lot et que chaque lot totalise 100 %, après le lancement de l'analyse, le contrôle n'affiche pas l'alerte « total différent de 100 % » | observé: alerte | conditions: pondération lot, type pondération",
+   "attaque": 1
+  },
+  {
+   "cas": "A25 : une liste de critères sans valeur chiffrée ni mention d'ordre d'importance n'est ni un classement ni une pondération",
+   "test": "test_A25_trou_liste_sans_ordre_ni_valeur",
+   "présumé": "Quand le RC énumère des critères sans valeur chiffrée et sans les déclarer classés, après le lancement de l'analyse, le type pondération est déclaré non trouvé | observé: type pondération | conditions: texte pages",
+   "attaque": 1
+  },
+  {
+   "cas": "A40 : l'ordre des pages dans la page valeur n'est pas fixé",
+   "test": "test_A40_trou_pages_ordre_croissant",
+   "présumé": "Quand une même valeur est écrite sur plusieurs pages, après le lancement de l'analyse, la page valeur liste ces pages en ordre croissant | observé: page valeur | conditions: texte pages",
+   "attaque": 1
+  },
+  {
+   "cas": "A03 : liste de pages vide, ou pages ne contenant que des blancs",
+   "test": "test_A03_trou_aucune_page_ou_pages_vides",
+   "présumé": "tous les faits et listes « non trouvé », plan vide, aucune alerte, aucune exception",
+   "attaque": 2
+  },
+  {
+   "cas": "A02 : libellé « date limite de réception des offres » coupé par un saut de ligne (texte extrait d'un PDF)",
+   "test": "test_A02_trou_cesure_de_ligne_dans_le_libelle",
+   "présumé": "la date et l'heure sont lues malgré la coupure",
+   "attaque": 2
+  },
+  {
+   "cas": "A51 : mois écrit sans accent (« aout », « fevrier », « decembre »), fréquent après extraction de texte",
+   "test": "test_A51_trou_mois_sans_accent",
+   "présumé": "reconnu comme le mois accentué",
+   "attaque": 2
+  },
+  {
+   "cas": "A52 : année sur deux chiffres (« 14/03/25 »)",
+   "test": "test_A52_trou_annee_sur_deux_chiffres",
+   "présumé": "rendue sur quatre chiffres (20aa)",
+   "attaque": 2
+  },
+  {
+   "cas": "A60 : heure sans minutes (« 12h », « 12 h ») ou avec deux-points (« 12:00 »)",
+   "test": "test_A60_trou_autres_notations",
+   "présumé": "rendue « 12:00 »",
+   "attaque": 2
+  },
+  {
+   "cas": "A44 : mot contenant « lot » sans désigner un lot (« lotissement »)",
+   "test": "test_A44_trou_lotissement_n_est_pas_un_lot",
+   "présumé": "lots non trouvés",
+   "attaque": 2
+  },
+  {
+   "cas": "A47 : même intitulé de lot suivi d'une ponctuation finale (« ; ») sur une autre page",
+   "test": "test_A47_trou_ponctuation_finale_meme_intitule",
+   "présumé": "un seul intitulé, sans conflit",
+   "attaque": 2
+  },
+  {
+   "cas": "A48 : simple mention d'un lot dans une phrase (« Pour le lot n°1, ... »)",
+   "test": "test_A48_trou_simple_mention_d_un_lot",
+   "présumé": "ce n'est pas un intitulé, aucun conflit",
+   "attaque": 2
+  },
+  {
+   "cas": "A07 : procédures autres que procédure adaptée / appel d'offres ouvert",
+   "test": "test_A07_trou_autres_procedures",
+   "présumé": "le nom de la procédure en minuscules (« appel d'offres restreint », « dialogue compétitif »)",
+   "attaque": 2
+  },
+  {
+   "cas": "A16 : partie candidature commencée sur une page et dont la liste se poursuit sur la page suivante sans nouveau titre",
+   "test": "test_A16_trou_partie_continue_sur_la_page_suivante",
+   "présumé": "la pièce de la page suivante reste en phase « candidature »",
+   "attaque": 2
+  },
+  {
+   "cas": "A149 : même pondération écrite en lettres sur une page et en chiffres sur une autre",
+   "test": "test_A149_trou_lettres_et_chiffres_meme_ponderation",
+   "présumé": "une seule valeur 60 portant les deux pages, sans conflit",
+   "attaque": 2
+  },
+  {
+   "cas": "A27 : critère technique nommé autrement que « valeur technique » (« Qualité technique de l'offre »)",
+   "test": "test_A27_trou_qualite_technique",
+   "présumé": "il porte sur la valeur technique et reçoit une section",
+   "attaque": 2
+  },
+  {
+   "cas": "A39 : valeur proposée avec une page fausse alors qu'elle est écrite sur une autre page",
+   "test": "test_A39_trou_verifier_page_annoncee_fausse",
+   "présumé": "la page fausse n'est jamais rendue (valeur retirée ou page corrigée)",
+   "attaque": 2
+  },
+  {
+   "cas": "A103 : valeur « autorisées » proposée alors que la page ne contient ce mot que sous une négation",
+   "test": "test_A103_trou_verifier_negation_n_est_pas_une_preuve",
+   "présumé": "« figurer dans le texte » s'entend du fait énoncé, pas d'une sous-chaîne ; la valeur est retirée",
+   "attaque": 2
+  },
+  {
+   "cas": "A88 : visite « oui » proposée alors que la page dit « n'est pas obligatoire »",
+   "test": "test_A88_trou_verifier_negation_visite",
+   "présumé": "« oui » est retiré",
+   "attaque": 2
+  },
+  {
+   "cas": "A117 : mode « papier » proposé alors que la page refuse le papier",
+   "test": "test_A117_trou_verifier_papier_refuse",
+   "présumé": "« papier » est retiré",
+   "attaque": 2
+  }
+ ],
+ "modeles": {
+  "red": "opus",
+  "green": "sonnet",
+  "juge": "opus"
+ },
+ "tokens_decoupe": {
+  "neufs": 283631,
+  "cache": 80556,
+  "usd": 3.5728352
+ },
+ "tokens_execution": {
+  "neufs": 313018,
+  "cache": 323203,
+  "usd": 1.8932563
+ },
+ "part_decoupe": 0.475,
+ "causes": {
+  "causes_distinctes": 0,
+  "causes_par_tour": [
+   0,
+   0
+  ],
+  "champ_local": {
+   "tout": 0.0,
+   "frontiere": 0.0,
+   "autres": 0.0
+  },
+  "par_assertion": {},
+  "liste": []
+ }
+}
