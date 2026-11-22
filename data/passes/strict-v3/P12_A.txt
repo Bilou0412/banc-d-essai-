@@ -1,0 +1,39 @@
+ÉTATS: texte_pages; lots; date_limite; heure_limite; date_questions; procédure; visite; dates_visite; variantes; validité_offres; mode_remise; nature_pièce; obligation_pièce; limite_pages; critères; pondération; type_pondération; plan_mémoire; ordre_sections; pondération_section; page_source; contenu_section; alerte
+ASSERTIONS:
+- Une page du RC énumère « Lot 1 : Gros œuvre » et « Lot 2 : Charpente » ; après l'analyse, le dossier liste exactement ces deux lots | observé: lots | conditions: texte_pages
+- Aucune page du RC ne mentionne de lot ; après l'analyse, les lots sont déclarés non trouvés | observé: lots | conditions: texte_pages
+- Une page indique « remise des offres au plus tard le 15/03/2027 » ; après l'analyse, la date limite de remise des offres vaut 15/03/2027 | observé: date_limite | conditions: texte_pages
+- Une page indique « au plus tard à 12h00 » pour la remise des offres ; après l'analyse, l'heure limite de remise des offres vaut 12h00 | observé: heure_limite | conditions: texte_pages
+- Une page donne la date limite de remise des offres sans aucune heure ; après l'analyse, l'heure limite est déclarée non trouvée | observé: heure_limite | conditions: texte_pages
+- Aucune page ne fixe de date limite pour poser des questions ; après l'analyse, la date limite des questions est déclarée non trouvée | observé: date_questions | conditions: texte_pages
+- Une page indique « procédure adaptée » ; après l'analyse, la procédure vaut « procédure adaptée » | observé: procédure | conditions: texte_pages
+- Une page indique « la visite du site est obligatoire » ; après l'analyse, la visite vaut obligatoire | observé: visite | conditions: texte_pages
+- Une page indique « une visite facultative peut être organisée » ; après l'analyse, la visite vaut non obligatoire | observé: visite | conditions: texte_pages
+- Une page propose des visites le 02/03/2027 et le 05/03/2027 ; après l'analyse, les dates de visite sont exactement ces deux dates | observé: dates_visite | conditions: texte_pages
+- La visite est obligatoire mais aucune page ne donne de date de visite ; après l'analyse, les dates de visite sont déclarées non trouvées | observé: dates_visite | conditions: texte_pages
+- Une page indique « les variantes ne sont pas autorisées » ; après l'analyse, les variantes valent non autorisées | observé: variantes | conditions: texte_pages
+- Une page indique « délai de validité des offres : 120 jours » ; après l'analyse, la validité des offres vaut 120 jours | observé: validité_offres | conditions: texte_pages
+- Une valeur de mode de remise est proposée par l'extraction mais ne figure dans le texte d'aucune page ; après l'analyse, le mode de remise est déclaré non trouvé | observé: mode_remise | conditions: texte_pages
+- Une page indique « remise exclusivement sur le profil d'acheteur » ; après l'analyse, le mode de remise vaut « remise exclusivement sur le profil d'acheteur » | observé: mode_remise | conditions: texte_pages
+- Le formulaire DC1 figure dans la liste des pièces de candidature du RC ; après l'analyse, la pièce DC1 est rangée en candidature | observé: nature_pièce | conditions: texte_pages
+- L'attestation d'assurance est demandée au seul attributaire ; après l'analyse, cette pièce est rangée en attributaire | observé: nature_pièce | conditions: texte_pages
+- Une pièce est marquée « à fournir obligatoirement » ; après l'analyse, cette pièce vaut obligatoire | observé: obligation_pièce | conditions: texte_pages
+- Une pièce est marquée « facultative » ; après l'analyse, cette pièce vaut non obligatoire | observé: obligation_pièce | conditions: texte_pages
+- Une page indique « mémoire technique limité à 20 pages » ; après l'analyse, la limite de pages vaut 20 | observé: limite_pages | conditions: texte_pages
+- Aucune page ne limite la longueur du mémoire technique ; après l'analyse, la limite de pages est déclarée non trouvée | observé: limite_pages | conditions: texte_pages
+- Le RC détaille le critère « valeur technique » en deux sous-critères ; après l'analyse, l'arbre place ces deux sous-critères sous « valeur technique » | observé: critères | conditions: texte_pages
+- Le RC note le critère prix « 40 % » ; après l'analyse, le type de pondération de ce critère vaut pourcentage | observé: type_pondération | conditions: texte_pages
+- Le RC note un sous-critère « sur 20 points » ; après l'analyse, le type de pondération de ce sous-critère vaut points | observé: type_pondération | conditions: texte_pages
+- Le RC cite les critères « par ordre décroissant d'importance » sans chiffre ; après l'analyse, le type de pondération vaut classement | observé: type_pondération | conditions: texte_pages
+- Le RC donne à la valeur technique 60 % pour le lot 1 et 50 % pour le lot 2 ; après l'analyse, la pondération de la valeur technique est différente pour chaque lot | observé: pondération | conditions: lots, texte_pages
+- L'arbre contient trois sous-critères notés sous la valeur technique ; après la construction du plan, le plan du mémoire contient exactement trois sections, une par sous-critère | observé: plan_mémoire | conditions: critères
+- L'arbre contient le critère prix ; après la construction du plan, aucune section du plan ne porte sur le prix | observé: plan_mémoire | conditions: critères
+- Le RC cite les sous-critères techniques dans l'ordre B puis A ; après la construction du plan, la section de B précède la section de A | observé: ordre_sections | conditions: critères
+- Le sous-critère « méthodologie » est pondéré 30 % ; après la construction du plan, la section « méthodologie » affiche 30 % | observé: pondération_section | conditions: pondération
+- Le sous-critère « méthodologie » est énoncé en page 7 ; après la construction du plan, la section « méthodologie » indique la page source 7 | observé: page_source | conditions: texte_pages
+- Le plan est construit ; la section « méthodologie » ne contient aucun texte rédigé du mémoire | observé: contenu_section | conditions: aucune
+- Chaque critère technique a sa section et les pondérations se recoupent ; après le contrôle de conformité, aucune alerte n'est affichée | observé: alerte | conditions: plan_mémoire, pondération
+- Un sous-critère technique n'a pas de section dans le plan ; après le contrôle de conformité, une alerte « critère sans section » nomme ce sous-critère | observé: alerte | conditions: plan_mémoire
+- Les sous-critères de la valeur technique totalisent 50 % alors que la valeur technique vaut 60 % ; après le contrôle de conformité, une alerte « pondérations incohérentes » nomme la valeur technique | observé: alerte | conditions: pondération
+- Les critères d'un lot totalisent 90 % ; après le contrôle de conformité, une alerte « total différent de 100 % » nomme ce lot | observé: alerte | conditions: pondération, type_pondération
+- Les critères sont seulement classés sans chiffre ; après le contrôle de conformité, aucune alerte de pondération n'est affichée | observé: alerte | conditions: type_pondération

@@ -113,8 +113,19 @@ REEL = {
   objet partagé que tout le monde lit.
 - Dates : les fuseaux passent par `zoneinfo` (vraies règles d'heure d'été), jamais par un décalage fixe.
 """,
+    "P12": """Ce que le module doit faire pour de vrai (interdit de le simuler) : lire un règlement de la consultation.
+- Point d'entrée unique : `app.analyser(pages)`, où `pages` est une liste de chaînes (le texte de chaque
+  page du RC, page 1 en premier). Il rend un dictionnaire sérialisable en JSON (chaînes, nombres,
+  booléens, None, listes, dictionnaires), toujours le même pour les mêmes pages.
+- Le code est déterministe : expressions régulières, règles écrites, bibliothèque standard. Aucun modèle
+  de langage, aucun appel réseau, aucun hasard au moment de l'exécution.
+- Les RC sont des textes libres d'acheteurs français : tournures, formats de date et mises en page variés.
+  Une règle qui ne marche que sur l'exemple exact d'un test (texte recopié, numéro de page codé en dur)
+  est une simulation.
+- Une valeur rendue doit être retrouvée dans le texte d'une page, sinon elle n'est pas rendue.
+""",
 }
-REEL_DEFAUT = """Aucun mécanisme ne doit être simulé par un raccourci qui renvoie directement le
+REEL_DEFAUT ="""Aucun mécanisme ne doit être simulé par un raccourci qui renvoie directement le
 résultat attendu ; ce qui dépend du temps passe par l'horloge que les tests font avancer.
 """
 

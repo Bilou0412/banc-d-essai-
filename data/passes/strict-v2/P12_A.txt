@@ -1,0 +1,40 @@
+ÉTATS: texte pages; lots; date limite; heure limite; date questions; procédure; visite obligatoire; dates visite; variantes; validité offres; mode remise; pièces; phase pièce; obligation pièce; limite pages; critères; sous-critères; nature critère; pondération; type pondération; pondération lot; sections; ordre sections; pondération section; page source; contenu sections; alerte
+ASSERTIONS:
+- Quand le texte des pages décrit deux lots, après le lancement de l'analyse, le dossier liste exactement ces deux lots | observé: lots | conditions: texte pages
+- Quand une page indique la date limite de remise des offres, après le lancement de l'analyse, le dossier affiche cette date limite | observé: date limite | conditions: texte pages
+- Quand aucune page n'indique de date limite de remise des offres, après le lancement de l'analyse, la date limite est déclarée non trouvée | observé: date limite | conditions: texte pages
+- Quand une page indique l'heure limite de remise des offres, après le lancement de l'analyse, le dossier affiche cette heure limite | observé: heure limite | conditions: texte pages
+- Quand une page indique la date limite de remise mais aucune heure, après le lancement de l'analyse, l'heure limite est déclarée non trouvée | observé: heure limite | conditions: texte pages
+- Quand une page indique la date limite d'envoi des questions, après le lancement de l'analyse, le dossier affiche cette date questions | observé: date questions | conditions: texte pages
+- Quand une page nomme la procédure de passation, après le lancement de l'analyse, le dossier affiche cette procédure | observé: procédure | conditions: texte pages
+- Quand une page déclare la visite du site obligatoire, après le lancement de l'analyse, la visite obligatoire vaut « oui » | observé: visite obligatoire | conditions: texte pages
+- Quand une page déclare la visite du site facultative, après le lancement de l'analyse, la visite obligatoire vaut « non » | observé: visite obligatoire | conditions: texte pages
+- Quand une page indique des dates de visite du site, après le lancement de l'analyse, le dossier liste ces dates visite | observé: dates visite | conditions: texte pages
+- Quand une page interdit les variantes, après le lancement de l'analyse, les variantes sont affichées comme non autorisées | observé: variantes | conditions: texte pages
+- Quand une page fixe la durée de validité des offres, après le lancement de l'analyse, le dossier affiche cette validité offres | observé: validité offres | conditions: texte pages
+- Quand une page indique le mode de remise des offres, après le lancement de l'analyse, le dossier affiche ce mode remise | observé: mode remise | conditions: texte pages
+- Quand une valeur proposée par l'extraction ne figure dans le texte d'aucune page, après le lancement de l'analyse, la validité offres est déclarée non trouvée | observé: validité offres | conditions: texte pages | frontière: oui
+- Quand une page énumère des pièces à remettre, après le lancement de l'analyse, le dossier liste chacune de ces pièces | observé: pièces | conditions: texte pages
+- Quand une pièce est demandée dans la partie candidature du RC, après le lancement de l'analyse, sa phase pièce vaut « candidature » | observé: phase pièce | conditions: texte pages
+- Quand une pièce est demandée au seul attributaire, après le lancement de l'analyse, sa phase pièce vaut « attributaire » | observé: phase pièce | conditions: texte pages
+- Quand une pièce est qualifiée de facultative dans le RC, après le lancement de l'analyse, son obligation pièce vaut « non obligatoire » | observé: obligation pièce | conditions: texte pages
+- Quand une page limite le mémoire technique à un nombre de pages, après le lancement de l'analyse, le dossier affiche cette limite pages | observé: limite pages | conditions: texte pages
+- Quand aucune page ne limite le mémoire technique, après le lancement de l'analyse, la limite pages est déclarée non trouvée | observé: limite pages | conditions: texte pages
+- Quand le RC énumère des critères d'attribution, après le lancement de l'analyse, l'arbre affiche ces critères dans l'ordre du RC | observé: critères | conditions: texte pages
+- Quand le RC détaille un critère en sous-critères, après le lancement de l'analyse, l'arbre rattache ces sous-critères à leur critère parent | observé: sous-critères | conditions: texte pages
+- Quand le RC exprime les pondérations en pourcentages, après le lancement de l'analyse, le type pondération vaut « pourcentage » | observé: type pondération | conditions: texte pages
+- Quand le RC exprime les pondérations en points, après le lancement de l'analyse, le type pondération vaut « points » | observé: type pondération | conditions: texte pages
+- Quand le RC classe les critères sans valeur chiffrée, après le lancement de l'analyse, le type pondération vaut « classement » | observé: type pondération | conditions: texte pages
+- Quand le RC donne des pondérations différentes selon le lot, après le lancement de l'analyse, chaque critère affiche une pondération par lot | observé: pondération | conditions: pondération lot
+- Quand un critère porte sur la valeur technique, après le lancement de l'analyse, le plan du mémoire contient une section pour ce critère | observé: sections | conditions: nature critère
+- Quand un critère porte sur le prix, après le lancement de l'analyse, le plan du mémoire ne contient aucune section pour ce critère | observé: sections | conditions: nature critère
+- Quand un critère de valeur technique a des sous-critères, après le lancement de l'analyse, le plan du mémoire contient une section par sous-critère | observé: sections | conditions: sous-critères
+- Après le lancement de l'analyse, l'ordre des sections du plan suit l'ordre des critères dans le RC | observé: ordre sections | conditions: critères
+- Après le lancement de l'analyse, chaque section affiche une pondération section égale à la pondération de son critère | observé: pondération section | conditions: pondération
+- Après le lancement de l'analyse, chaque section affiche comme page source la page où son critère est écrit | observé: page source | conditions: texte pages
+- Après le lancement de l'analyse, les sections du plan ne contiennent aucun texte rédigé du mémoire | observé: contenu sections | conditions: aucune
+- Quand un critère de valeur technique n'a pas de section dans le plan, après le lancement de l'analyse, le contrôle affiche l'alerte « critère sans section » | observé: alerte | conditions: sections
+- Quand la somme des pondérations des sous-critères diffère de la pondération du critère parent, après le lancement de l'analyse, le contrôle affiche l'alerte « pondérations incohérentes » | observé: alerte | conditions: pondération
+- Quand le type pondération vaut « pourcentage » et que la somme des critères diffère de 100 %, après le lancement de l'analyse, le contrôle affiche l'alerte « total différent de 100 % » | observé: alerte | conditions: pondération, type pondération
+- Quand le type pondération vaut « classement », après le lancement de l'analyse, le contrôle n'affiche aucune alerte de somme des pondérations | observé: alerte | conditions: type pondération
+- Quand chaque critère technique a sa section et que les pondérations se recoupent, après le lancement de l'analyse, le contrôle n'affiche aucune alerte | observé: alerte | conditions: sections, pondération
