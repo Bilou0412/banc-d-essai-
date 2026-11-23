@@ -1,0 +1,20 @@
+- A04 : la portée de la « compromission d'une clé_message » n'est pas fixée (la seule clé du message, ou aussi l'état de chaîne / l'appareil qui l'a produite), alors que la réponse attendue en dépend.
+- A05 : le délai de rétablissement n'est pas fixé — si l'attaquant détient l'état de session et non la seule clé, combien de messages (ou d'échanges aller-retour) peuvent rester lisibles avant que la confidentialité revienne.
+- A18 : la spec ne dit pas que des contacts dont les clés ONT été substituées (homme du milieu) voient des empreintes différentes ; seul le cas sans substitution est tranché, donc une empreinte constante n'est écartée que par A20.
+- A22 : le contenu de l'alerte n'est pas fixé, ni si une alerte apparaît aussi au premier contact ou quand aucune conversation n'existe encore avec ce contact.
+- A21 : la spec ne dit pas si un contact jamais marqué est « non vérifié » par défaut (seul le retour à « non vérifié » après un changement est tranché).
+- A08 : « reçu avant la liaison » n'est pas tranché pour un message envoyé avant la liaison mais encore en file sur le serveur (destinataire hors ligne) au moment de la liaison.
+- A10 : la spec ne dit pas si les messages reçus AVANT le retrait restent lisibles (ou présents) sur l'appareil retiré.
+- A15 : la spec ne dit pas qui peut retirer un membre (n'importe quel membre, ou seulement un administrateur / le créateur).
+- A17 : la spec ne dit pas si A17 s'applique aussi à un membre qui a quitté le groupe de lui-même (A16).
+- A23 : l'unité « sans réseau » n'est pas fixée (l'appareil d'envoi ou tous les appareils de l'expéditeur), ni ce qu'il advient de l'accusé quand le réseau revient.
+- A26 : la spec ne dit pas si l'accusé reste « remis » ou peut revenir en arrière quand le destinataire lie un nouvel appareil qui n'a pas reçu le message.
+- A27 : la spec ne dit pas qui compte parmi « tous les membres » pour un membre ajouté ou retiré pendant que le message est en transit, ni pour un membre ayant plusieurs appareils (un seul suffit-il, comme en A26 ?).
+- A27 : l'accusé « lu » d'un message de groupe n'est pas tranché (un membre, ou tous les membres, doivent-ils l'avoir ouvert ?).
+- A28 : la spec ne dit pas si l'ouverture d'un message par l'expéditeur lui-même (sur un autre de ses appareils, A11) compte comme une lecture.
+- A29 : les durées autorisées pour le minuteur ne sont pas fixées (valeurs libres ou liste fermée, minimum, maximum).
+- A29 : la spec ne dit pas si, dans une conversation à deux, le changement du minuteur par un contact s'applique aussi au minuteur de l'autre (A30 ne le tranche que pour les groupes).
+- A31 : la spec ne dit pas à partir de quand la durée court (envoi, réception ou lecture), ni si le message disparaît aussi chez l'expéditeur ou seulement chez le destinataire.
+- A31 : A31 et A33 se croisent sans que la spec dise si la disparition chez l'expéditeur dépend de l'accusé « lu » du destinataire.
+- A33 : dans un groupe, la spec ne dit pas quel accusé « lu » compte (celui du destinataire concerné, ou celui de tous les membres).
+- A35 : A35 et A33 se croisent sans que la spec dise ce qui se passe quand le message a été ouvert sur un appareil du destinataire mais jamais affiché sur un autre (l'accusé « lu » est-il propre au message ou à l'appareil ?).

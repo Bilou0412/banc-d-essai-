@@ -1,0 +1,38 @@
+ÉTATS: lisibilité; historique; appareils; membres; vérification; empreinte; avertissement; envoi; accusé; connexion expéditeur; connexion destinataire; minuterie; présence
+ASSERTIONS:
+- Quand un utilisateur envoie un message à un contact, le message s'affiche en clair dans la conversation sur l'appareil du destinataire | observé: lisibilité | conditions: aucune
+- Quand un utilisateur envoie un message à un contact qui a deux appareils liés, le message s'affiche en clair sur chacun des deux appareils | observé: lisibilité | conditions: appareils
+- Quand un utilisateur envoie un message, un appareil absent de la liste des appareils liés du destinataire ne peut pas afficher ce message en clair | observé: lisibilité | conditions: appareils | frontière: oui
+- Quand un message transite par le serveur, le serveur ne peut pas en afficher le contenu en clair | observé: lisibilité | conditions: aucune | frontière: oui
+- Si la clé d'un message est divulguée, les messages précédents de la conversation restent illisibles avec cette clé | observé: lisibilité | conditions: aucune | frontière: oui
+- Si la clé d'un message est divulguée, les messages suivants de la conversation restent illisibles avec cette clé | observé: lisibilité | conditions: aucune | frontière: oui
+- Quand un message chiffré est altéré pendant le transit, il ne s'affiche pas en clair chez le destinataire | observé: lisibilité | conditions: aucune | frontière: oui
+- Quand un utilisateur lie un nouvel appareil à son compte, cet appareil apparaît dans la liste des appareils | observé: appareils | conditions: aucune
+- Quand un utilisateur retire un appareil de son compte, cet appareil disparaît de la liste des appareils | observé: appareils | conditions: aucune
+- Quand un contact envoie un message après le retrait d'un appareil, ce message ne s'affiche pas en clair sur l'appareil retiré | observé: lisibilité | conditions: appareils
+- Quand un utilisateur ouvre une conversation sur un appareil nouvellement lié, les messages reçus avant la liaison ne s'affichent pas | observé: historique | conditions: appareils
+- Un contact nouvellement ajouté a l'état de vérification « non vérifié » | observé: vérification | conditions: aucune
+- Quand un utilisateur scanne un code de sécurité correspondant à l'empreinte du contact, le contact passe à l'état « vérifié » | observé: vérification | conditions: empreinte
+- Quand un utilisateur scanne un code de sécurité ne correspondant pas à l'empreinte du contact, le contact reste à l'état « non vérifié » | observé: vérification | conditions: empreinte
+- Quand un contact réinstalle l'application, son empreinte affichée change | observé: empreinte | conditions: aucune
+- Quand l'empreinte d'un contact « vérifié » change, le contact repasse à l'état « non vérifié » | observé: vérification | conditions: empreinte
+- Quand l'empreinte d'un contact « vérifié » change, un avertissement s'affiche dans la conversation | observé: avertissement | conditions: vérification
+- Quand l'empreinte d'un contact « non vérifié » change, aucun avertissement ne s'affiche dans la conversation | observé: avertissement | conditions: vérification
+- Quand un utilisateur envoie un message à un contact précédemment « vérifié » dont l'empreinte a changé, l'envoi reste bloqué jusqu'à confirmation de l'utilisateur | observé: envoi | conditions: vérification, empreinte
+- Quand un utilisateur envoie un message alors que son appareil est hors ligne, l'envoi affiche « en attente » | observé: envoi | conditions: connexion expéditeur
+- Quand l'appareil de l'expéditeur revient en ligne, l'envoi d'un message « en attente » passe à « envoyé » | observé: envoi | conditions: connexion expéditeur
+- Quand un utilisateur envoie un message à un destinataire dont tous les appareils sont hors ligne, l'accusé n'indique pas « remis » | observé: accusé | conditions: connexion destinataire
+- Quand un appareil du destinataire revient en ligne et reçoit le message, l'accusé passe à « remis » | observé: accusé | conditions: connexion destinataire
+- Quand un utilisateur ajoute un contact à un groupe, ce contact apparaît dans la liste des membres | observé: membres | conditions: aucune
+- Quand un utilisateur retire un contact d'un groupe, ce contact disparaît de la liste des membres | observé: membres | conditions: aucune
+- Quand un utilisateur envoie un message à un groupe, le message s'affiche en clair chez chaque membre du groupe | observé: lisibilité | conditions: membres
+- Quand un utilisateur envoie un message à un groupe, un contact retiré du groupe ne peut pas afficher ce message en clair | observé: lisibilité | conditions: membres | frontière: oui
+- Quand un contact est ajouté à un groupe, les messages envoyés avant son ajout ne s'affichent pas chez lui | observé: historique | conditions: membres
+- Quand un utilisateur envoie un message à un groupe dont un membre est hors ligne, l'accusé n'indique pas « remis » pour ce membre | observé: accusé | conditions: membres, connexion destinataire
+- Quand un utilisateur règle la minuterie d'une conversation sur une heure, la minuterie affichée vaut une heure | observé: minuterie | conditions: aucune
+- Quand un participant modifie la minuterie d'une conversation, la nouvelle valeur de minuterie s'affiche chez l'autre participant | observé: minuterie | conditions: aucune
+- Quand la durée de la minuterie s'est écoulée depuis la lecture d'un message, ce message disparaît de l'appareil du destinataire | observé: présence | conditions: minuterie
+- Quand la durée de la minuterie s'est écoulée depuis la lecture d'un message, ce message disparaît de l'appareil de l'expéditeur | observé: présence | conditions: minuterie
+- Quand la minuterie est désactivée, un message lu reste affiché sans limite de durée | observé: présence | conditions: minuterie
+- Quand un utilisateur modifie la minuterie, les messages envoyés avant la modification conservent leur durée d'origine | observé: présence | conditions: minuterie
+- Quand un message éphémère est reçu sur un appareil hors ligne, il ne disparaît pas avant d'avoir été lu | observé: présence | conditions: minuterie, connexion destinataire

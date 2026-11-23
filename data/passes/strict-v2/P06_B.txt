@@ -1,0 +1,41 @@
+ÉTATS: phase; temps restant; marche; durée travail; durée pause; durée longue; intervalle; cycles; tâche; historique; total jour; total tâche; série; date
+ASSERTIONS:
+- À l'ouverture sans aucune action, la phase affichée est « travail » | observé: phase | conditions: aucune
+- À l'ouverture sans aucune action, le temps restant affiché est égal à la durée travail | observé: temps restant | conditions: durée travail
+- Lorsque la marche est « arrêté », l'action « démarrer » fait passer la marche à « en cours » | observé: marche | conditions: marche
+- Lorsque la marche est « en cours », l'action « pause » fait passer la marche à « suspendu » | observé: marche | conditions: marche
+- Lorsque la marche est « suspendu », l'action « reprendre » fait passer la marche à « en cours » | observé: marche | conditions: marche
+- Lorsque la marche est « en cours », l'écoulement d'une seconde diminue le temps restant d'une seconde | observé: temps restant | conditions: marche
+- Lorsque la marche est « suspendu », l'écoulement d'une seconde laisse le temps restant inchangé | observé: temps restant | conditions: marche
+- Lorsque le temps restant atteint zéro, la marche passe à « arrêté » | observé: marche | conditions: temps restant
+- Lorsque le temps restant d'une phase « travail » atteint zéro, les cycles augmentent de 1 | observé: cycles | conditions: phase, temps restant
+- Lorsque le temps restant d'une phase « pause » atteint zéro, les cycles restent inchangés | observé: cycles | conditions: phase, temps restant
+- Lorsqu'une phase « travail » se termine et que les cycles obtenus ne sont pas un multiple de l'intervalle, la phase passe à « pause » | observé: phase | conditions: phase, cycles, intervalle
+- Lorsqu'une phase « travail » se termine et que les cycles obtenus sont un multiple de l'intervalle, la phase passe à « longue » | observé: phase | conditions: phase, cycles, intervalle
+- Lorsqu'une phase « pause » se termine, la phase passe à « travail » | observé: phase | conditions: phase
+- Lorsqu'une phase « longue » se termine, la phase passe à « travail » | observé: phase | conditions: phase
+- Lorsque la phase passe à « pause », le temps restant est égal à la durée pause | observé: temps restant | conditions: phase, durée pause
+- Lorsque la phase passe à « longue », le temps restant est égal à la durée longue | observé: temps restant | conditions: phase, durée longue
+- Lorsqu'une phase « travail » se termine, l'historique gagne une session | observé: historique | conditions: phase
+- Lorsqu'une phase « pause » se termine, l'historique reste inchangé | observé: historique | conditions: phase
+- Lorsqu'une session est ajoutée à l'historique, elle est rattachée à la tâche active au moment de la fin de la phase | observé: historique | conditions: tâche
+- L'action « réinitialiser » remet le temps restant à la durée correspondant à la phase courante | observé: temps restant | conditions: phase, durée travail, durée pause, durée longue
+- L'action « réinitialiser » fait passer la marche à « arrêté » | observé: marche | conditions: aucune
+- L'action « réinitialiser » pendant une phase « travail » laisse l'historique inchangé | observé: historique | conditions: phase
+- L'action « passer » pendant une phase « travail » laisse les cycles inchangés | observé: cycles | conditions: phase
+- L'action « passer » pendant une phase « travail » laisse l'historique inchangé | observé: historique | conditions: phase
+- Modifier la durée travail lorsque la marche est « en cours » laisse le temps restant inchangé | observé: temps restant | conditions: marche
+- Modifier la durée travail lorsque la phase est « travail » et la marche « arrêté » remet le temps restant à la nouvelle durée travail | observé: temps restant | conditions: phase, marche
+- Saisir une durée travail égale à zéro est refusé et la durée travail reste à sa valeur précédente | observé: durée travail | conditions: aucune
+- Le total jour est égal à la somme des durées des sessions de l'historique datées de la date courante | observé: total jour | conditions: historique, date
+- Lorsque la date change, le total jour affiché revient à zéro | observé: total jour | conditions: date
+- Lorsque la date change, les cycles reviennent à zéro | observé: cycles | conditions: date
+- Le total tâche d'une tâche est égal à la somme des durées des sessions de l'historique rattachées à cette tâche | observé: total tâche | conditions: historique
+- Lorsqu'une phase « travail » se termine sans tâche active, le total tâche de chaque tâche reste inchangé | observé: total tâche | conditions: tâche
+- Lorsque la première session de la date courante est ajoutée et que la veille contient au moins une session, la série augmente de 1 | observé: série | conditions: historique, date
+- Lorsque la première session de la date courante est ajoutée et que la veille ne contient aucune session, la série vaut 1 | observé: série | conditions: historique, date
+- Lorsqu'une deuxième session est ajoutée à la même date, la série reste inchangée | observé: série | conditions: historique, date
+- Lorsque la date change et que ni la date courante ni la veille ne contiennent de session, la série affichée vaut 0 | observé: série | conditions: historique, date
+- Après fermeture puis réouverture de l'application, l'historique est identique à celui d'avant la fermeture | observé: historique | conditions: aucune | frontière: oui
+- Après fermeture puis réouverture de l'application, la durée travail est identique à celle d'avant la fermeture | observé: durée travail | conditions: aucune | frontière: oui
+- Après fermeture puis réouverture de l'application, l'intervalle est identique à celui d'avant la fermeture | observé: intervalle | conditions: aucune | frontière: oui

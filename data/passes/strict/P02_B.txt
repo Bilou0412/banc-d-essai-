@@ -1,0 +1,39 @@
+ÉTATS: recettes; titre; ingrédients; quantités; unités; portions; catégorie; requête; résultats; filtre catégorie; filtre favoris; liste courses; notes; favori; photo
+ASSERTIONS:
+- Enregistrer une nouvelle recette avec un titre non vide ajoute cette recette à la collection | observé: recettes | conditions: titre
+- Enregistrer une nouvelle recette avec un titre vide n'ajoute aucune recette à la collection | observé: recettes | conditions: titre
+- Modifier le titre d'une recette existante remplace son titre affiché par le nouveau titre | observé: titre | conditions: aucune
+- Supprimer une recette la retire de la collection | observé: recettes | conditions: aucune
+- Ajouter un ingrédient à une recette fait apparaître cet ingrédient dans la liste de ses ingrédients | observé: ingrédients | conditions: aucune
+- Retirer un ingrédient d'une recette le fait disparaître de la liste de ses ingrédients | observé: ingrédients | conditions: aucune
+- Saisir une quantité négative pour un ingrédient est refusé et la quantité précédente reste affichée | observé: quantités | conditions: aucune
+- Saisir une quantité positive pour un ingrédient affiche cette quantité pour cet ingrédient | observé: quantités | conditions: aucune
+- Choisir une unité pour un ingrédient affiche cette unité à côté de sa quantité | observé: unités | conditions: aucune
+- Doubler le nombre de portions d'une recette double la quantité affichée de chaque ingrédient | observé: quantités | conditions: portions
+- Réduire le nombre de portions de moitié divise par deux la quantité affichée de chaque ingrédient | observé: quantités | conditions: portions
+- Ajuster le nombre de portions ne change pas l'unité affichée des ingrédients | observé: unités | conditions: aucune
+- Saisir zéro portion est refusé et le nombre de portions précédent reste affiché | observé: portions | conditions: aucune
+- Attribuer une catégorie à une recette affiche cette catégorie sur la recette | observé: catégorie | conditions: aucune
+- Une recette sans catégorie attribuée affiche la mention « Sans catégorie » | observé: catégorie | conditions: aucune
+- Une requête contenant un mot du titre d'une recette fait apparaître cette recette dans les résultats | observé: résultats | conditions: requête, titre
+- Une requête contenant le nom d'un ingrédient d'une recette fait apparaître cette recette dans les résultats | observé: résultats | conditions: requête, ingrédients
+- La recherche ignore la différence entre majuscules et minuscules dans la requête | observé: résultats | conditions: requête
+- Une requête ne correspondant à aucune recette affiche une liste de résultats vide | observé: résultats | conditions: requête
+- Une requête vide affiche toutes les recettes dans les résultats | observé: résultats | conditions: requête, recettes
+- Activer un filtre catégorie limite les résultats aux recettes de cette catégorie | observé: résultats | conditions: filtre catégorie, catégorie
+- Activer le filtre favoris limite les résultats aux recettes marquées favorites | observé: résultats | conditions: filtre favoris, favori
+- Marquer une recette comme favorite affiche l'indicateur favori sur cette recette | observé: favori | conditions: aucune
+- Retirer une recette des favoris masque l'indicateur favori sur cette recette | observé: favori | conditions: aucune
+- Ajouter une recette à la liste de courses y ajoute chacun de ses ingrédients | observé: liste courses | conditions: ingrédients
+- Ajouter une recette à la liste de courses y reporte les quantités correspondant au nombre de portions affiché | observé: liste courses | conditions: portions, quantités
+- Ajouter deux recettes partageant un ingrédient de même unité affiche une seule ligne avec la somme des quantités | observé: liste courses | conditions: ingrédients, unités
+- Ajouter deux recettes partageant un ingrédient d'unités différentes affiche deux lignes distinctes pour cet ingrédient | observé: liste courses | conditions: ingrédients, unités
+- Cocher un article de la liste de courses l'affiche comme acheté | observé: liste courses | conditions: aucune
+- Vider la liste de courses retire tous ses articles | observé: liste courses | conditions: aucune
+- Supprimer une recette déjà ajoutée ne retire pas ses articles de la liste de courses | observé: liste courses | conditions: aucune
+- Enregistrer une note sur une recette affiche cette note sur la recette | observé: notes | conditions: aucune
+- Effacer la note d'une recette ne laisse aucune note affichée sur la recette | observé: notes | conditions: aucune
+- Joindre une photo à une recette affiche cette photo sur la recette | observé: photo | conditions: aucune
+- Une recette sans photo affiche une image par défaut | observé: photo | conditions: aucune
+- Joindre un fichier qui n'est pas une image est refusé et la photo précédente reste affichée | observé: photo | conditions: aucune
+- Remplacer la photo d'une recette affiche uniquement la nouvelle photo | observé: photo | conditions: aucune

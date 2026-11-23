@@ -1,0 +1,42 @@
+ÉTATS: recette; titre; ingrédient; quantité; unité; catégorie; portions; requête; résultats; courses; note; favori; photo
+ASSERTIONS:
+- Quand l'utilisateur crée une recette avec le titre « Crêpes », la liste des recettes contient « Crêpes » | observé: recette | conditions: titre
+- Quand l'utilisateur tente de créer une recette avec un titre vide, aucune recette n'est ajoutée à la liste des recettes | observé: recette | conditions: titre
+- Quand l'utilisateur supprime la recette « Crêpes », la liste des recettes ne contient plus « Crêpes » | observé: recette | conditions: aucune
+- Quand l'utilisateur ajoute l'ingrédient « farine » à une recette, la recette affiche l'ingrédient « farine » | observé: ingrédient | conditions: aucune
+- Quand l'utilisateur ajoute l'ingrédient « farine » avec la quantité 250, la quantité affichée pour la farine est 250 | observé: quantité | conditions: aucune
+- Quand l'utilisateur ajoute l'ingrédient « farine » avec l'unité « g », l'unité affichée pour la farine est « g » | observé: unité | conditions: aucune
+- Quand l'utilisateur tente d'ajouter un ingrédient avec une quantité négative, l'ingrédient n'est pas ajouté à la recette | observé: ingrédient | conditions: quantité
+- Quand l'utilisateur supprime l'ingrédient « farine » d'une recette, la recette n'affiche plus l'ingrédient « farine » | observé: ingrédient | conditions: aucune
+- Quand l'utilisateur attribue la catégorie « Dessert » à une recette, la recette affiche la catégorie « Dessert » | observé: catégorie | conditions: aucune
+- Quand l'utilisateur filtre sur la catégorie « Dessert », les résultats ne contiennent que des recettes de la catégorie « Dessert » | observé: résultats | conditions: catégorie
+- Quand l'utilisateur recherche « crêpe », les résultats contiennent la recette dont le titre est « Crêpes » | observé: résultats | conditions: requête, titre
+- Quand l'utilisateur recherche « CRÊPES » en majuscules, les résultats contiennent la recette dont le titre est « Crêpes » | observé: résultats | conditions: requête, titre
+- Quand l'utilisateur recherche « farine », les résultats contiennent les recettes qui ont l'ingrédient « farine » | observé: résultats | conditions: requête, ingrédient
+- Quand l'utilisateur recherche un texte qui ne correspond à aucun titre ni ingrédient, les résultats sont vides | observé: résultats | conditions: requête
+- Quand la requête est vide, les résultats contiennent toutes les recettes | observé: résultats | conditions: requête
+- Pour une recette de 4 portions avec 250 de farine, quand l'utilisateur règle les portions à 8, la quantité affichée de farine est 500 | observé: quantité | conditions: portions
+- Pour une recette de 4 portions avec 250 de farine, quand l'utilisateur règle les portions à 2, la quantité affichée de farine est 125 | observé: quantité | conditions: portions
+- Quand l'utilisateur règle les portions de 4 à 8, l'unité affichée de la farine reste « g » | observé: unité | conditions: aucune
+- Quand l'utilisateur tente de régler les portions à 0, le nombre de portions affiché reste le précédent | observé: portions | conditions: aucune
+- Pour une recette de 4 portions avec 250 de farine réglée à 8 portions, quand l'utilisateur revient à 4 portions, la quantité affichée de farine est 250 | observé: quantité | conditions: portions
+- Quand l'utilisateur ajoute une recette contenant de la farine à la liste de courses, la liste de courses contient la farine | observé: courses | conditions: ingrédient
+- Quand l'utilisateur ajoute à la liste de courses deux recettes contenant 250 g et 100 g de farine, la liste de courses affiche une seule ligne « farine 350 g » | observé: courses | conditions: ingrédient, quantité, unité
+- Quand l'utilisateur ajoute à la liste de courses deux recettes contenant de la farine l'une en « g » l'autre en « tasse », la liste de courses affiche deux lignes distinctes pour la farine | observé: courses | conditions: unité
+- Pour une recette de 4 portions avec 250 g de farine réglée à 8 portions, quand l'utilisateur l'ajoute à la liste de courses, la liste de courses affiche 500 g de farine | observé: courses | conditions: portions, quantité
+- Quand l'utilisateur ajoute à la liste de courses une recette sans ingrédient, la liste de courses reste inchangée | observé: courses | conditions: ingrédient
+- Quand l'utilisateur retire la farine de la liste de courses, la liste de courses ne contient plus la farine | observé: courses | conditions: aucune
+- Quand l'utilisateur supprime une recette déjà ajoutée à la liste de courses, la liste de courses contient toujours ses ingrédients | observé: courses | conditions: aucune
+- Quand l'utilisateur écrit la note « moins de sucre » sur une recette, la recette affiche la note « moins de sucre » | observé: note | conditions: aucune
+- Quand l'utilisateur efface tout le texte de la note, la recette n'affiche plus de note | observé: note | conditions: aucune
+- Quand l'utilisateur marque une recette comme favorite, la recette est affichée comme favorite | observé: favori | conditions: aucune
+- Quand l'utilisateur retire une recette des favoris, la recette n'est plus affichée comme favorite | observé: favori | conditions: aucune
+- Quand l'utilisateur filtre sur les favoris, les résultats ne contiennent que les recettes marquées comme favorites | observé: résultats | conditions: favori
+- Quand l'utilisateur supprime une recette favorite, les résultats du filtre favoris ne contiennent plus cette recette | observé: résultats | conditions: favori
+- Quand l'utilisateur ajoute une photo à une recette, la recette affiche cette photo | observé: photo | conditions: aucune
+- Quand l'utilisateur supprime la photo d'une recette, la recette affiche l'image par défaut | observé: photo | conditions: aucune
+- Quand l'utilisateur tente d'ajouter un fichier qui n'est pas une image, la recette n'affiche pas de nouvelle photo | observé: photo | conditions: aucune
+- Après fermeture puis réouverture de l'application, la liste des recettes contient toujours « Crêpes » | observé: recette | conditions: aucune | frontière: oui
+- Après fermeture puis réouverture de l'application, une recette marquée favorite est toujours affichée comme favorite | observé: favori | conditions: aucune | frontière: oui
+- Après fermeture puis réouverture de l'application, la liste de courses contient toujours la farine | observé: courses | conditions: aucune | frontière: oui
+- Après fermeture puis réouverture de l'application, la recette affiche toujours la note « moins de sucre » | observé: note | conditions: aucune | frontière: oui

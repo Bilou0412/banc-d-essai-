@@ -1,0 +1,87 @@
+{
+ "sonde": "P10",
+ "passes": "strict-v2",
+ "passe": "A",
+ "k_passes": [
+  1.72,
+  1.68,
+  1.81
+ ],
+ "k_retenu": 1.72,
+ "concordance": "concordante",
+ "assertions": 36,
+ "frontieres": 6,
+ "tests": 70,
+ "trous_a_priori": 10,
+ "trous_par_assertion": 0.278,
+ "tokens_decoupe": {
+  "neufs": 68135,
+  "cache": 16669,
+  "usd": 0.9273457999999999
+ },
+ "lacunes": [
+  {
+   "cas": "A03 : la « liste des appareils liés » ne dit pas qui en fait foi ; un appareil publié par le serveur sous le compte du destinataire sans liaison n'est pas tranché",
+   "test": "test_A03_trou_appareil_fantome_injecte_par_serveur",
+   "présumé": "Quand le serveur publie un appareil sous le compte du destinataire sans que celui-ci l'ait lié, cet appareil ne peut pas afficher le message en clair | observé: lisibilité | conditions: appareils",
+   "attaque": 1
+  },
+  {
+   "cas": "A07 : l'assertion ne dit pas si l'altération d'un octet d'en-tête (hors corps chiffré) doit aussi être détectée",
+   "test": "test_A07_trou_toute_position_alteree",
+   "présumé": "Quand un octet quelconque d'un message chiffré est altéré pendant le transit, il ne s'affiche pas en clair chez le destinataire | observé: lisibilité | conditions: aucune",
+   "attaque": 1
+  },
+  {
+   "cas": "A15 : le moment où l'empreinte change chez l'observateur (immédiatement ou au prochain message) n'est pas fixé",
+   "test": "test_A15_trou_changement_visible_sans_nouveau_message",
+   "présumé": "Quand un contact réinstalle l'application, son empreinte affichée change chez un utilisateur en ligne sans attendre de nouveau message | observé: empreinte | conditions: connexion",
+   "attaque": 1
+  },
+  {
+   "cas": "A15 : avec plusieurs appareils, l'empreinte du contact n'est pas définie ; lier un appareil la change-t-elle ?",
+   "test": "test_A15_trou_liaison_ne_change_pas_empreinte",
+   "présumé": "Quand un contact lie un nouvel appareil, son empreinte affichée ne change pas | observé: empreinte | conditions: appareils",
+   "attaque": 1
+  },
+  {
+   "cas": "A16 : l'état de vérification après confirmation du changement (A19) n'est pas tranché",
+   "test": "test_A16_trou_confirmation_ne_reverifie_pas",
+   "présumé": "Quand un utilisateur confirme le changement d'empreinte d'un contact, le contact reste à l'état « non vérifié » | observé: vérification | conditions: empreinte",
+   "attaque": 1
+  },
+  {
+   "cas": "A19 : le sort du message bloqué après confirmation (envoyé automatiquement ou à renvoyer) n'est pas fixé",
+   "test": "test_A19_trou_confirmation_envoie_le_message_bloque",
+   "présumé": "Quand l'utilisateur confirme le changement d'empreinte, le message bloqué passe à « envoyé » et s'affiche en clair chez le destinataire | observé: envoi | conditions: vérification, empreinte",
+   "attaque": 1
+  },
+  {
+   "cas": "A19 : l'envoi à un contact « non vérifié » dont l'empreinte a changé n'est pas tranché",
+   "test": "test_A19_trou_non_verifie_pas_bloque",
+   "présumé": "Quand un utilisateur envoie un message à un contact « non vérifié » dont l'empreinte a changé, l'envoi n'est pas bloqué | observé: envoi | conditions: vérification, empreinte",
+   "attaque": 1
+  },
+  {
+   "cas": "A23 : avec plusieurs appareils, il n'est pas dit si un seul appareil suffit pour « remis »",
+   "test": "test_A23_trou_un_seul_appareil_suffit",
+   "présumé": "Quand un seul des appareils du destinataire revient en ligne et reçoit le message, l'accusé passe à « remis » | observé: accusé | conditions: connexion destinataire, appareils",
+   "attaque": 1
+  },
+  {
+   "cas": "A27 : l'assertion ne précise pas si l'expéditeur après retrait peut être un autre membre que celui qui a retiré",
+   "test": "test_A27_trou_autre_membre_apres_retrait",
+   "présumé": "Quand un membre quelconque du groupe envoie un message après le retrait d'un contact, ce contact ne peut pas afficher ce message en clair | observé: lisibilité | conditions: membres",
+   "attaque": 1
+  },
+  {
+   "cas": "A33 : le point de départ de la minuterie côté expéditeur (envoi ou lecture par le destinataire) n'est pas fixé",
+   "test": "test_A33_trou_depart_a_la_lecture_par_destinataire",
+   "présumé": "Quand la durée de la minuterie s'est écoulée depuis la lecture du message par le destinataire, ce message disparaît de l'appareil de l'expéditeur, et pas avant | observé: présence | conditions: minuterie",
+   "attaque": 1
+  }
+ ],
+ "modeles": {
+  "red": "opus"
+ }
+}

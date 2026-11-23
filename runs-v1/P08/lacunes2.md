@@ -1,0 +1,17 @@
+- A21 : deux participants tapent caractère par caractère au même endroit en même temps (pas une insertion en bloc) | test: test_A21_trou_frappe_caractere_par_caractere_non_entrelacee | présumé: chaque saisie reste d'un seul tenant, sans entrelacement
+- A26 : reconnexion après une absence plus longue que le délai de détection de présence | test: test_A26_trou_reconnexion_apres_longue_absence | présumé: les modifications en attente sont publiées et fusionnées
+- A24 : participant hors connexion qui n'a rien saisi | test: test_A24_trou_hors_connexion_sans_saisie | présumé: indicateur d'attente absent
+- A06 : participant de retour après une perte de connexion (reconnexion, pas réouverture) | test: test_A06_trou_reapparait_apres_reconnexion | présumé: son nom réapparaît
+- A06 : participant sans aucune permission qui ouvre le document (conditions: aucune) | test: test_A06_trou_sans_permission_apparait | présumé: son nom apparaît dans la présence
+- A06 : même participant ouvert deux fois, un seul onglet fermé | test: test_A06_trou_double_onglet | présumé: son nom reste affiché
+- A10 : fermeture du document (et non perte de connexion) | test: test_A10_trou_fermeture_retire_le_curseur | présumé: le curseur distant disparaît aussi
+- A12 : insertion concurrente exactement à la position d'un curseur distant | test: test_A12_trou_fuzz_curseur_distant_suit_son_caractere | présumé: le curseur reste devant le même caractère (l'insertion passe avant lui)
+- A14 : annuler sa propre suppression | test: test_A14_trou_annuler_une_suppression | présumé: le passage supprimé revient, la modification ultérieure d'autrui reste
+- A02 : participant sans aucune permission qui tape ou supprime | test: test_A02_trou_sans_permission_ne_modifie_pas | présumé: le contenu ne change chez personne
+- A03 : historique consulté par un participant sans permission | test: test_A03_trou_historique_non_divulgue | présumé: aucun texte de version ne lui est affiché
+- A28 : changements de permission successifs du propriétaire livrés dans le désordre | test: test_A28_trou_changements_successifs_livres_dans_le_desordre | présumé: le dernier changement émis l'emporte partout
+- A28 : participant concerné hors connexion au moment du changement | test: test_A28_trou_cible_hors_connexion | présumé: à la reconnexion, il voit sa nouvelle permission
+- A27 : participant rétrogradé hors connexion puis repromu en écriture | test: test_A27_trou_repromu_ne_rejoue_pas | présumé: les modifications rejetées ne sont jamais rejouées
+- A30 : deux enregistrements de version concurrents | test: test_A30_trou_historique_meme_ordre_partout | présumé: l'historique (et donc ses indices) est identique chez tous
+- A38 : deux annulations successives après une restauration | test: test_A38_trou_deux_annulations | présumé: la seconde annule l'action précédant la restauration
+- A18 : rétablir après l'annulation d'une restauration | test: test_A18_trou_retablir_une_restauration | présumé: le contenu redevient celui de la version restaurée

@@ -1,0 +1,26 @@
+{
+ "modele": "haiku",
+ "tours": 2,
+ "tout_passe": true,
+ "passent": 269,
+ "total": 269,
+ "tokens": {
+  "neufs": 605409,
+  "cache": 2507360,
+  "usd": 0.45246456
+ },
+ "journal": [
+  {
+   "tour": 1,
+   "passent": 267,
+   "total": 269,
+   "usd": 0.42378728000000004
+  },
+  {
+   "tour": 2,
+   "passent": 269,
+   "total": 269,
+   "usd": 0.02867728
+  }
+ ]
+}

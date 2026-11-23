@@ -1,0 +1,29 @@
+{
+ "paires": [
+  "H1-H2",
+  "S1-S2"
+ ],
+ "trous": [
+  11,
+  10
+ ],
+ "communs": 2,
+ "jaccard": 0.105,
+ "appariement": [
+  [
+   "3",
+   "9"
+  ],
+  [
+   "11",
+   "1"
+  ]
+ ],
+ "l1": "1.1 Quand une personne saisit une date-heure sans décalage horaire, la spec ne dit pas si la cellule garde le texte saisi ou une forme normalisée avec fuseau. (action bob.set_cell, aucune)\n1.2 Une personne en ligne résout un conflit en gardant la valeur retenue, et la spec ne dit pas si ce choix sans changement de contenu compte comme une modification en attente avant la confirmation du serveur. (action alice.resolve_conflict, A89)\n1.3 Une personne renomme une feuille avec le nom que cette feuille porte déjà, et la spec ne dit pas si c'est un nom déjà utilisé qui déclenche une alerte ou une modification enregistrée et annulable. (action alice.rename_sheet, A43)\n1.4 Quand une personne saisit une date-heure sans décalage dans une cellule, la spécification ne dit pas si le contenu de la cellule reste le texte saisi ou devient la date-heure normalisée avec le décalage du fuseau de la personne. (action alice.set_cell, aucune)\n1.5 Quand une personne ajoute une feuille, la spec ne dit pas quel droit les autres personnes du classeur obtiennent sur cette nouvelle feuille. (action carol.add_sheet, A38)\n1.6 Quand une personne ayant le droit écriture renomme une feuille, la spec ne dit pas si les droits de chacun sur cette feuille sont conservés ou perdus. (action bob.rename_sheet, aucune)\n1.7 Quand une personne ajoute une feuille à un classeur partagé, la spec ne dit pas quel droit les autres membres du classeur obtiennent sur cette nouvelle feuille. (action bob.add_sheet, A38)\n1.8 When someone online with write access imports a CSV that fills two cells, the spec doesn't say whether the pending count before send confirmation is one (the whole import) or one per changed cell. (action alice.import_csv, aucune)\n1.9 Une personne sans droit écriture tente de renommer une feuille. Le renommage est refusé avec une alerte, mais la vue passe au nouveau nom, et la spec ne dit pas si les cellules vides de cette vue doivent rester vides ou afficher une erreur de référence. (action carol.rename_sheet, aucune)\n1.10 Quand un import CSV est rejeté parce qu'un guillemet n'est jamais fermé, la spec exige que l'alerte indique la ligne invalide, mais elle ne dit pas si l'alerte doit aussi nommer la feuille visée. (action bob.import_csv, A156)\n1.11 A person with only read access tries to resolve a conflict by keeping the retained value, and the spec says the conflict indicator stays but does not say whether a missing-write-access alert must appear. (action carol.resolve_conflict, A75)",
+ "l2": "2.1 Une personne qui n'a que le droit lecture choisit de garder la valeur retenue dans un indicateur de conflit, et la spec ne dit pas si une alerte de droit doit apparaître. (action carol.resolve_conflict, A75)\n2.2 Juste après qu'une personne a ajouté une feuille, la spec ne dit pas si la commande annuler doit être disponible pour défaire cet ajout. (action carol.add_sheet, A104)\n2.3 Quand une personne non propriétaire tente de changer le droit d'une autre personne, la spec n'exige ni n'interdit une alerte qui signale le refus. (action carol.set_right, A51)\n2.4 Quand une personne non propriétaire tente de modifier le droit d'une autre personne, le droit reste inchangé, mais la spec ne dit pas si une alerte doit l'indiquer. (action bob.set_right, A51)\n2.5 Right after a person adds a sheet online, the spec does not say whether the undo command becomes available. (action alice.add_sheet, A104)\n2.6 Right after a person adds a sheet, as their first action since opening, the spec doesn't say whether undo is available. (action bob.add_sheet, A104)\n2.7 Quand une personne revient en ligne après qu'une autre, dans un autre fuseau, a saisi une date-heure, la spec ne dit pas si le contenu de la cellule garde le texte saisi ou s'affiche converti dans le fuseau de la personne qui regarde ; elle fixe seulement la valeur. (action réseau.reconnect, A61)\n2.8 A person gives another person the écriture right on a sheet where that person had only lecture, and the spec only says what happens when a right is lowered from écriture to lecture, not raised. (action alice.set_right, A50)\n2.9 Une personne renomme une feuille en lui donnant exactement son nom actuel. La spec ne dit pas si ce renommage compte comme une action, à annuler et à envoyer, ou comme une opération sans effet. (action alice.rename_sheet, A42)\n2.10 Une personne saisit dans une cellule une heure qui n'existe pas dans son fuseau (02:30 le jour du passage à l'heure d'été). La valeur affichée devient 03:30, mais la spec ne dit pas si le contenu garde le texte saisi ou prend l'heure corrigée. (action alice.set_cell, A30)",
+ "tokens": {
+  "neufs": 3636,
+  "cache": 1741,
+  "usd": 0.0323202
+ }
+}

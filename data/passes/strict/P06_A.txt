@@ -1,0 +1,39 @@
+ÉTATS: phase; temps restant; marche; durée travail; durée pause; durée longue; intervalle long; compteur cycles; tâche active; sessions jour; minutes jour; sessions tâche; minutes tâche; série
+ASSERTIONS:
+- Au premier lancement de l'application, la phase est « travail » | observé: phase | conditions: aucune
+- Au premier lancement de l'application, le temps restant est égal à la durée travail | observé: temps restant | conditions: durée travail
+- Appuyer sur « démarrer » alors que le minuteur est arrêté fait passer la marche à « en cours » | observé: marche | conditions: marche
+- Appuyer sur « pause » alors que le minuteur est en cours fait passer la marche à « en pause » | observé: marche | conditions: marche
+- Pendant que la marche est « en cours », chaque seconde écoulée diminue le temps restant d'une seconde | observé: temps restant | conditions: marche
+- Pendant que la marche est « en pause », le temps restant ne diminue pas | observé: temps restant | conditions: marche
+- Quand le temps restant atteint zéro en phase travail, le compteur cycles augmente de 1 | observé: compteur cycles | conditions: phase
+- Quand le temps restant atteint zéro en phase travail et que le nouveau compteur cycles n'est pas un multiple de l'intervalle long, la phase devient « pause courte » | observé: phase | conditions: phase, compteur cycles, intervalle long
+- Quand le temps restant atteint zéro en phase travail et que le nouveau compteur cycles est un multiple de l'intervalle long, la phase devient « pause longue » | observé: phase | conditions: phase, compteur cycles, intervalle long
+- Au début d'une phase « pause courte », le temps restant est égal à la durée pause | observé: temps restant | conditions: phase, durée pause
+- Au début d'une phase « pause longue », le temps restant est égal à la durée longue | observé: temps restant | conditions: phase, durée longue
+- Quand le temps restant atteint zéro pendant une pause, la phase devient « travail » | observé: phase | conditions: phase
+- Quand le temps restant atteint zéro pendant une pause, le compteur cycles ne change pas | observé: compteur cycles | conditions: phase
+- Quand le temps restant atteint zéro, la marche devient « arrêtée » | observé: marche | conditions: aucune
+- Appuyer sur « réinitialiser » remet le temps restant à la durée de la phase en cours | observé: temps restant | conditions: phase
+- Appuyer sur « réinitialiser » fait passer la marche à « arrêtée » | observé: marche | conditions: aucune
+- Appuyer sur « passer » pendant une phase travail n'augmente pas le compteur cycles | observé: compteur cycles | conditions: phase
+- Appuyer sur « passer » pendant une phase travail ne modifie pas les minutes jour | observé: minutes jour | conditions: phase
+- Modifier la durée travail pendant une phase travail arrêtée met le temps restant à la nouvelle durée travail | observé: temps restant | conditions: phase, marche
+- Modifier la durée travail pendant que la marche est « en cours » ne modifie pas le temps restant | observé: temps restant | conditions: marche
+- Saisir une durée travail inférieure à 1 minute est refusé et la valeur précédente reste affichée | observé: durée travail | conditions: aucune
+- Saisir un intervalle long inférieur à 2 est refusé et la valeur précédente reste affichée | observé: intervalle long | conditions: aucune
+- Quand le temps restant atteint zéro en phase travail, les sessions jour augmentent de 1 | observé: sessions jour | conditions: phase
+- Quand le temps restant atteint zéro en phase travail, les minutes jour augmentent de la durée travail | observé: minutes jour | conditions: phase, durée travail
+- Quand le temps restant atteint zéro pendant une pause, les minutes jour ne changent pas | observé: minutes jour | conditions: phase
+- Quand le temps restant atteint zéro en phase travail avec une tâche active, les sessions tâche de cette tâche augmentent de 1 | observé: sessions tâche | conditions: phase, tâche active
+- Quand le temps restant atteint zéro en phase travail avec une tâche active, les minutes tâche de cette tâche augmentent de la durée travail | observé: minutes tâche | conditions: phase, tâche active, durée travail
+- Quand le temps restant atteint zéro en phase travail sans tâche active, les sessions tâche d'aucune tâche ne changent | observé: sessions tâche | conditions: phase, tâche active
+- Une session de travail terminée est attribuée à la tâche active au moment où elle se termine | observé: sessions tâche | conditions: tâche active
+- Au passage à minuit, les sessions jour affichées pour le nouveau jour valent 0 | observé: sessions jour | conditions: aucune
+- Au passage à minuit, les minutes jour affichées pour le nouveau jour valent 0 | observé: minutes jour | conditions: aucune
+- La première session de travail terminée d'un jour augmente la série de 1 si les sessions jour de la veille sont supérieures à 0 | observé: série | conditions: sessions jour
+- La première session de travail terminée d'un jour met la série à 1 si les sessions jour de la veille valent 0 | observé: série | conditions: sessions jour
+- Une deuxième session de travail terminée le même jour ne modifie pas la série | observé: série | conditions: sessions jour
+- Au passage à minuit, si les sessions jour du jour écoulé valent 0, la série devient 0 | observé: série | conditions: sessions jour
+- Après fermeture puis réouverture de l'application, la durée travail conserve la dernière valeur enregistrée | observé: durée travail | conditions: aucune
+- Après fermeture puis réouverture de l'application, les minutes tâche de chaque tâche conservent leur valeur | observé: minutes tâche | conditions: aucune

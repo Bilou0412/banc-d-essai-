@@ -1,0 +1,38 @@
+ÉTATS: liste; titre; contenu; corbeille; recherche; connexion; statut; conflit; date
+ASSERTIONS:
+- Créer une note, avec ou sans connexion, ajoute cette note à la liste | observé: liste | conditions: aucune
+- Une note créée sans titre est affichée dans la liste sous le titre « Sans titre » | observé: titre | conditions: titre
+- Modifier le titre d'une note, avec ou sans connexion, affiche le nouveau titre | observé: titre | conditions: aucune
+- Modifier le contenu d'une note, avec ou sans connexion, affiche le nouveau contenu | observé: contenu | conditions: aucune
+- Quitter une note dont le titre et le contenu sont vides retire cette note de la liste | observé: liste | conditions: titre, contenu
+- La note modifiée le plus récemment apparaît en tête de la liste | observé: liste | conditions: aucune
+- Supprimer une note la retire de la liste | observé: liste | conditions: aucune
+- Supprimer une note la place dans la corbeille | observé: corbeille | conditions: aucune
+- Restaurer une note depuis la corbeille la remet dans la liste | observé: liste | conditions: corbeille
+- Restaurer une note depuis la corbeille la retire de la corbeille | observé: corbeille | conditions: corbeille
+- Une note restaurée depuis la corbeille affiche le contenu qu'elle avait avant sa suppression | observé: contenu | conditions: corbeille
+- Tenter de modifier le contenu d'une note placée dans la corbeille laisse son contenu inchangé | observé: contenu | conditions: corbeille
+- Saisir un mot dans la recherche limite la liste aux notes dont le titre ou le contenu contient ce mot | observé: liste | conditions: recherche
+- Vider la recherche affiche toutes les notes hors corbeille dans la liste | observé: liste | conditions: recherche
+- Modifier une note sans connexion affiche le statut « en attente » pour cette note | observé: statut | conditions: connexion
+- Quand la connexion revient, le statut d'une note « en attente » passe à « synchronisée » | observé: statut | conditions: connexion, statut | frontière: oui
+- Une note créée sans connexion sur un appareil apparaît dans la liste d'un autre appareil de l'utilisateur après le retour de la connexion | observé: liste | conditions: connexion | frontière: oui
+- Un titre modifié sur un appareil s'affiche sur un autre appareil de l'utilisateur après synchronisation | observé: titre | conditions: connexion | frontière: oui
+- Un contenu modifié sur un appareil s'affiche sur un autre appareil de l'utilisateur après synchronisation | observé: contenu | conditions: connexion | frontière: oui
+- Une note supprimée sur un appareil disparaît de la liste d'un autre appareil de l'utilisateur après synchronisation | observé: liste | conditions: connexion | frontière: oui
+- Une note supprimée sur un appareil apparaît dans la corbeille d'un autre appareil de l'utilisateur après synchronisation | observé: corbeille | conditions: connexion | frontière: oui
+- Une note restaurée sur un appareil réapparaît dans la liste d'un autre appareil de l'utilisateur après synchronisation | observé: liste | conditions: connexion, corbeille | frontière: oui
+- Une note reçue d'un autre appareil affiche le statut « synchronisée » | observé: statut | conditions: connexion | frontière: oui
+- Quand le contenu d'une même note a été modifié sans connexion sur deux appareils, la synchronisation signale un conflit sur cette note | observé: conflit | conditions: contenu, connexion | frontière: oui
+- Quand le titre est modifié sur un appareil et le contenu sur un autre, la synchronisation ne signale aucun conflit | observé: conflit | conditions: titre, contenu | frontière: oui
+- Quand le titre est modifié sur un appareil et le contenu sur un autre, la note synchronisée affiche le titre modifié | observé: titre | conditions: titre, contenu | frontière: oui
+- Quand le titre est modifié sur un appareil et le contenu sur un autre, la note synchronisée affiche le contenu modifié | observé: contenu | conditions: titre, contenu | frontière: oui
+- Quand une note est modifiée sur un appareil alors qu'elle a été supprimée sur un autre, la synchronisation la remet dans la liste | observé: liste | conditions: corbeille, contenu | frontière: oui
+- Choisir une version pour résoudre un conflit affiche le contenu de cette version | observé: contenu | conditions: conflit
+- Choisir une version pour résoudre un conflit retire le signalement du conflit | observé: conflit | conditions: conflit
+- Une note créée sans connexion figure encore dans la liste après fermeture puis réouverture de l'application | observé: liste | conditions: aucune | frontière: oui
+- Un contenu modifié sans connexion est encore affiché après fermeture puis réouverture de l'application | observé: contenu | conditions: aucune | frontière: oui
+- Une note au statut « en attente » garde ce statut après fermeture puis réouverture de l'application sans connexion | observé: statut | conditions: statut, connexion | frontière: oui
+- Modifier une note affiche comme date de modification l'heure courante de l'appareil | observé: date | conditions: aucune | frontière: oui
+- La date de modification d'une note est affichée dans le fuseau horaire de l'appareil qui l'affiche | observé: date | conditions: aucune | frontière: oui
+- Une note restée 30 jours dans la corbeille en est retirée définitivement | observé: corbeille | conditions: corbeille | frontière: oui

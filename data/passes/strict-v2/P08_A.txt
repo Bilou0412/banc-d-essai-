@@ -1,0 +1,40 @@
+ÉTATS: contenu; permission; propriété; connexion; présence; curseur; curseur distant; annulation; rétablissement; attente; historique
+ASSERTIONS:
+- Quand un participant ayant la permission écriture insère du texte, le contenu affiché chez un autre participant connecté contient ce texte | observé: contenu | conditions: permission, connexion
+- Quand un participant ayant la permission lecture tape au clavier dans le document, le contenu ne change pas | observé: contenu | conditions: permission
+- Quand un participant sans aucune permission ouvre le lien du document, le contenu ne lui est pas affiché | observé: contenu | conditions: permission
+- Quand un participant ayant la permission lecture ouvre le document, le contenu courant lui est affiché | observé: contenu | conditions: permission
+- Quand un participant ayant la permission écriture supprime un passage, le contenu affiché chez un autre participant connecté ne contient plus ce passage | observé: contenu | conditions: permission, connexion
+- Quand un participant ouvre le document, son nom apparaît dans la présence affichée chez les autres participants | observé: présence | conditions: aucune
+- Quand un participant ferme le document, son nom disparaît de la présence affichée chez les autres participants | observé: présence | conditions: aucune
+- Quand la connexion d'un participant est perdue, son nom disparaît de la présence affichée chez les autres participants | observé: présence | conditions: connexion
+- Quand un participant connecté déplace son curseur, le curseur distant qui le représente chez les autres participants se déplace à la nouvelle position | observé: curseur distant | conditions: connexion
+- Quand la connexion d'un participant est perdue, son curseur distant disparaît chez les autres participants | observé: curseur distant | conditions: connexion
+- Quand un autre participant insère du texte avant la position de mon curseur, mon curseur reste devant le même caractère | observé: curseur | conditions: aucune
+- Quand un participant insère du texte avant la position d'un curseur distant, ce curseur distant reste devant le même caractère | observé: curseur distant | conditions: aucune
+- Quand un participant supprime un passage contenant un curseur distant, ce curseur distant se place à l'endroit de la suppression | observé: curseur distant | conditions: aucune
+- Quand un participant annule juste après sa propre saisie, le texte saisi est retiré du contenu | observé: contenu | conditions: annulation
+- Quand un participant annule alors qu'un autre participant a modifié le document après lui, la modification de l'autre participant reste dans le contenu | observé: contenu | conditions: annulation | frontière: oui
+- Quand un participant annule sans aucune action annulable, le contenu ne change pas | observé: contenu | conditions: annulation
+- Quand un participant ayant la permission lecture déclenche annuler, le contenu ne change pas | observé: contenu | conditions: permission
+- Quand un participant rétablit juste après une annulation, le texte annulé réapparaît dans le contenu | observé: contenu | conditions: rétablissement
+- Quand un participant saisit du texte après une annulation, le rétablissement devient vide | observé: rétablissement | conditions: aucune
+- Quand un participant rétablit avec un rétablissement vide, le contenu ne change pas | observé: contenu | conditions: rétablissement
+- Quand deux participants connectés insèrent du texte au même endroit en même temps, le contenu contient les deux insertions | observé: contenu | conditions: connexion | frontière: oui
+- Quand deux participants insèrent du texte au même endroit en même temps, l'ordre des deux insertions dans le contenu est identique chez tous les participants | observé: contenu | conditions: aucune | frontière: oui
+- Quand un participant ayant la permission écriture saisit du texte hors connexion, ce texte apparaît dans son propre contenu | observé: contenu | conditions: permission, connexion
+- Quand un participant saisit du texte hors connexion, l'indicateur d'attente de synchronisation s'affiche chez lui | observé: attente | conditions: connexion
+- Quand un participant ayant des modifications en attente retrouve la connexion, l'indicateur d'attente disparaît | observé: attente | conditions: connexion | frontière: oui
+- Quand un participant ayant des modifications en attente retrouve la connexion, ces modifications apparaissent dans le contenu des autres participants | observé: contenu | conditions: attente, permission | frontière: oui
+- Quand un participant passé en lecture pendant qu'il était hors connexion retrouve la connexion, ses modifications en attente n'apparaissent pas dans le contenu des autres participants | observé: contenu | conditions: permission, attente | frontière: oui
+- Quand le propriétaire passe la permission d'un participant de écriture à lecture, la permission affichée de ce participant devient lecture | observé: permission | conditions: propriété
+- Quand un participant non propriétaire tente de modifier la permission d'un autre participant, cette permission ne change pas | observé: permission | conditions: propriété
+- Quand un participant ayant la permission écriture enregistre une version, une nouvelle entrée apparaît dans l'historique | observé: historique | conditions: permission
+- Quand un participant ayant la permission lecture tente d'enregistrer une version, l'historique ne change pas | observé: historique | conditions: permission
+- Quand un participant enregistre une version, l'entrée ajoutée à l'historique porte le nom de ce participant | observé: historique | conditions: aucune
+- Quand un participant consulte une version de l'historique, le contenu du document ne change pas | observé: contenu | conditions: aucune
+- Quand un participant ayant la permission écriture restaure une version, le contenu devient celui de cette version | observé: contenu | conditions: permission
+- Quand un participant ayant la permission lecture tente de restaurer une version, le contenu ne change pas | observé: contenu | conditions: permission
+- Quand un participant restaure une version, le contenu affiché chez un autre participant connecté devient celui de cette version | observé: contenu | conditions: connexion
+- Quand un participant restaure une version, une nouvelle entrée apparaît dans l'historique | observé: historique | conditions: aucune
+- Quand un participant annule juste après une restauration, le contenu redevient celui d'avant la restauration | observé: contenu | conditions: annulation

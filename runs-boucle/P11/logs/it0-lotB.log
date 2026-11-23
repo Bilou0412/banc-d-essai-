@@ -1,0 +1,11 @@
+budget : 0.00 $ dépensés, lot B de it0 (4 greens) estimé à 5.80 $
+  it0 lot B S1 (sonnet) tour 1 : 252/252
+  it0 lot B S2 (sonnet) tour 1 : 252/252
+  it0 lot B H1 (haiku) tour 1 : 250/252
+  it0 lot B H2 (haiku) tour 1 : 251/252
+  it0 lot B H2 (haiku) tour 2 : 252/252
+  it0 lot B H1 (haiku) tour 2 : 252/252
+  fini : ('H1', True, 0.49855494)
+  fini : ('H2', True, 0.42819292000000003)
+  fini : ('S1', True, 1.7265028000000002)
+  fini : ('S2', True, 1.8538888)

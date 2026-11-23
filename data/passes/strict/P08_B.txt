@@ -1,0 +1,38 @@
+ÉTATS: contenu; permission; connexion; présence; curseurs; annulation; historique; synchronisation
+ASSERTIONS:
+- Quand un utilisateur avec permission écriture tape un caractère, le caractère apparaît dans le contenu à la position de son curseur | observé: contenu | conditions: permission
+- Quand un utilisateur avec permission lecture tente de taper un caractère, le contenu reste inchangé | observé: contenu | conditions: permission
+- Quand un utilisateur connecté avec permission écriture modifie le texte, la modification apparaît dans le contenu affiché chez les autres utilisateurs connectés | observé: contenu | conditions: permission, connexion
+- Quand deux utilisateurs insèrent du texte au même moment à des positions différentes, le contenu final contient les deux insertions | observé: contenu | conditions: aucune
+- Quand deux utilisateurs insèrent du texte au même moment à la même position, le contenu final est identique chez tous les utilisateurs | observé: contenu | conditions: aucune
+- Quand un utilisateur supprime un passage pendant qu'un autre en modifie une partie, le contenu final est identique chez tous les utilisateurs | observé: contenu | conditions: aucune
+- Quand un utilisateur hors ligne avec permission écriture modifie le texte, la modification apparaît dans son contenu local | observé: contenu | conditions: permission, connexion
+- Quand un utilisateur hors ligne modifie le texte, la synchronisation indique des modifications en attente | observé: synchronisation | conditions: connexion
+- Quand un utilisateur ayant des modifications en attente se reconnecte, ses modifications apparaissent dans le contenu des autres utilisateurs | observé: contenu | conditions: synchronisation
+- Quand un utilisateur ayant des modifications en attente se reconnecte, la synchronisation indique que tout est envoyé | observé: synchronisation | conditions: aucune
+- Quand un utilisateur ouvre le document, son nom apparaît dans la présence affichée chez les autres utilisateurs | observé: présence | conditions: connexion
+- Quand un utilisateur ferme le document, son nom disparaît de la présence affichée chez les autres utilisateurs | observé: présence | conditions: aucune
+- Quand un utilisateur perd la connexion, son nom disparaît de la présence affichée chez les autres utilisateurs | observé: présence | conditions: aucune
+- Un utilisateur avec permission lecture apparaît dans la présence affichée chez les autres utilisateurs | observé: présence | conditions: permission
+- Quand un utilisateur déplace son curseur, son curseur apparaît à la nouvelle position chez les autres utilisateurs | observé: curseurs | conditions: connexion
+- Chaque curseur distant affiche le nom de son utilisateur | observé: curseurs | conditions: aucune
+- Quand un utilisateur quitte le document, son curseur disparaît chez les autres utilisateurs | observé: curseurs | conditions: aucune
+- Quand un autre utilisateur insère du texte avant mon curseur, mon curseur reste devant le même caractère | observé: curseurs | conditions: aucune
+- Quand un utilisateur sélectionne un passage, la sélection apparaît surlignée chez les autres utilisateurs | observé: curseurs | conditions: connexion
+- Quand un utilisateur annule, sa dernière modification disparaît du contenu | observé: contenu | conditions: annulation
+- Quand un utilisateur annule, les modifications des autres utilisateurs restent dans le contenu | observé: contenu | conditions: aucune
+- Quand un utilisateur dont la pile d'annulation est vide annule, le contenu reste inchangé | observé: contenu | conditions: annulation
+- Quand un utilisateur rétablit juste après une annulation, la modification annulée réapparaît dans le contenu | observé: contenu | conditions: annulation
+- Quand un utilisateur fait une nouvelle modification après une annulation, l'action rétablir devient indisponible | observé: annulation | conditions: aucune
+- Un utilisateur avec permission lecture n'a pas accès à l'action annuler | observé: annulation | conditions: permission
+- Quand un utilisateur enregistre une version, une nouvelle entrée apparaît dans l'historique | observé: historique | conditions: permission
+- Chaque entrée de l'historique affiche sa date | observé: historique | conditions: aucune
+- Chaque entrée de l'historique affiche son auteur | observé: historique | conditions: aucune
+- Quand un utilisateur ouvre une version de l'historique, le contenu de cette version s'affiche en lecture seule | observé: contenu | conditions: aucune
+- Quand un utilisateur avec permission écriture restaure une version, le contenu du document devient celui de cette version | observé: contenu | conditions: permission
+- Quand un utilisateur avec permission lecture tente de restaurer une version, le contenu reste inchangé | observé: contenu | conditions: permission
+- Quand un utilisateur restaure une version, une nouvelle entrée de restauration apparaît dans l'historique | observé: historique | conditions: permission
+- Quand un utilisateur restaure une version, les versions plus récentes restent dans l'historique | observé: historique | conditions: aucune
+- Quand le propriétaire passe un utilisateur de lecture à écriture, cet utilisateur peut modifier le contenu sans recharger | observé: permission | conditions: aucune
+- Quand le propriétaire passe un utilisateur d'écriture à lecture, les frappes suivantes de cet utilisateur ne modifient pas le contenu | observé: contenu | conditions: permission
+- Quand un utilisateur sans permission ouvre le lien du document, le contenu ne s'affiche pas | observé: contenu | conditions: permission

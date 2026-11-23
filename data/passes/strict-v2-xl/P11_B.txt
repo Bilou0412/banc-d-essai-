@@ -1,0 +1,168 @@
+ÉTATS: contenu; résultat; alerte circularité; liste feuilles; nom feuille; feuille active; rôle; droit; message refus; connexion; attente locale; présence; marqueur conflit; propositions conflit; annulation disponible; rétablissement disponible; liste versions; auteur version; horodatage version; fuseau; fichier CSV; séparateur
+ASSERTIONS:
+- Quand une personne ayant le droit écriture saisit le nombre 5 dans une cellule vide, le contenu de la cellule devient 5 | observé: contenu | conditions: droit
+- Quand une personne ayant le droit écriture saisit le nombre 5 dans une cellule vide, le résultat affiché de la cellule est 5 | observé: résultat | conditions: droit
+- Quand une personne ayant le droit écriture saisit le texte « bonjour » dans une cellule, le résultat affiché de la cellule est « bonjour » | observé: résultat | conditions: droit
+- Quand une personne ayant le droit écriture saisit « =2+3 » dans une cellule, le contenu de la cellule est la formule « =2+3 » | observé: contenu | conditions: droit
+- Quand une personne ayant le droit écriture saisit « =2+3 » dans une cellule, le résultat affiché de la cellule est 5 | observé: résultat | conditions: droit
+- Quand une personne efface une cellule qui contenait 5, le résultat affiché de la cellule est vide | observé: résultat | conditions: droit
+- Si A1 contient 4 et B1 contient « =A1*2 », le résultat affiché de B1 est 8 | observé: résultat | conditions: contenu
+- Quand le contenu de A1 passe de 4 à 10 alors que B1 contient « =A1*2 », le résultat affiché de B1 devient 20 | observé: résultat | conditions: contenu
+- Quand le contenu de A1 change alors que B1 contient « =A1*2 », le contenu de B1 reste la formule « =A1*2 » | observé: contenu | conditions: aucune
+- Quand le contenu de A1 change alors que C1 contient « =7 » sans référence à A1, le résultat affiché de C1 reste 7 | observé: résultat | conditions: contenu
+- Si B1 contient « =A1+1 » et C1 contient « =B1+1 », quand A1 passe de 1 à 5, le résultat affiché de C1 devient 7 | observé: résultat | conditions: contenu
+- Si B1 de la feuille Ventes contient « =Stock!A1 », quand A1 de la feuille Stock change, le résultat affiché de B1 de Ventes est recalculé | observé: résultat | conditions: contenu
+- Si B1 contient « =A1+1 » et que A1 est vide, le résultat affiché de B1 est 1 | observé: résultat | conditions: contenu
+- Si B1 contient « =A1+1 » et que A1 contient le texte « abc », le résultat affiché de B1 est l'erreur de type | observé: résultat | conditions: contenu
+- Quand une personne saisit « =1/0 », le résultat affiché de la cellule est l'erreur de division par zéro | observé: résultat | conditions: contenu
+- Quand une personne saisit « =2+ », le résultat affiché de la cellule est l'erreur de syntaxe | observé: résultat | conditions: contenu
+- Quand une personne saisit « =2+ », le contenu de la cellule conserve le texte saisi « =2+ » | observé: contenu | conditions: aucune
+- Si A1, A2 et A3 contiennent 1, 2 et 3 et que B1 contient « =SOMME(A1:A3) », le résultat affiché de B1 est 6 | observé: résultat | conditions: contenu
+- Quand A2 passe de 2 à 10 alors que B1 contient « =SOMME(A1:A3) », le résultat affiché de B1 devient 14 | observé: résultat | conditions: contenu
+- Si A1 affiche l'erreur de division par zéro et que B1 contient « =A1+1 », le résultat affiché de B1 est l'erreur de division par zéro | observé: résultat | conditions: contenu
+- Quand une autre personne modifie A1 alors que B1 contient « =A1*2 », le résultat affiché de B1 sur l'écran de la première personne est recalculé dès réception de la modification | observé: résultat | conditions: connexion
+- Quand une personne modifie A1 hors connexion alors que B1 contient « =A1*2 », le résultat affiché de B1 est recalculé immédiatement sur son appareil | observé: résultat | conditions: contenu
+- Si A1 contient « =B1 » et B1 contient « =A1 », l'alerte de circularité est affichée sur A1 | observé: alerte circularité | conditions: contenu
+- Si A1 contient « =B1 » et B1 contient « =A1 », le résultat affiché de A1 est l'erreur de référence circulaire | observé: résultat | conditions: contenu
+- Quand une personne saisit « =A1+1 » dans A1, l'alerte de circularité est affichée sur A1 | observé: alerte circularité | conditions: contenu
+- Si A1, B1 et C1 forment une boucle de références, l'alerte de circularité nomme les trois cellules de la boucle | observé: alerte circularité | conditions: contenu
+- Si A1 et B1 forment une boucle de références et que D1 contient « =A1 », le résultat affiché de D1 est l'erreur de référence circulaire | observé: résultat | conditions: contenu
+- Si A1 et B1 forment une boucle de références et que D1 contient « =A1 », l'alerte de circularité ne nomme pas D1 | observé: alerte circularité | conditions: contenu
+- Quand une personne remplace la formule de B1 par le nombre 3 alors que A1 contient « =B1 », l'alerte de circularité disparaît | observé: alerte circularité | conditions: contenu
+- Quand une personne remplace la formule de B1 par le nombre 3 alors que A1 contient « =B1 », le résultat affiché de A1 devient 3 | observé: résultat | conditions: contenu
+- Quand une personne saisit une formule qui crée une boucle de références, le contenu saisi est conservé dans la cellule | observé: contenu | conditions: aucune
+- Si A1 de la feuille Ventes contient « =Stock!A1 » et A1 de Stock contient « =Ventes!A1 », l'alerte de circularité est affichée | observé: alerte circularité | conditions: contenu
+- Si B1 contient « =A1 » et que A1 contient une valeur, aucune alerte de circularité n'est affichée sur B1 | observé: alerte circularité | conditions: contenu
+- Quand le propriétaire ajoute une feuille, la liste des feuilles compte une feuille de plus | observé: liste feuilles | conditions: rôle
+- Quand un participant non propriétaire tente d'ajouter une feuille, la liste des feuilles reste inchangée | observé: liste feuilles | conditions: rôle
+- Quand un participant non propriétaire tente d'ajouter une feuille, un message de refus s'affiche | observé: message refus | conditions: rôle
+- Quand le propriétaire ajoute une feuille alors que la liste contient trois feuilles, la nouvelle feuille porte le nom « Feuille4 » | observé: nom feuille | conditions: liste feuilles
+- Quand une personne ayant le droit écriture sur une feuille la renomme « Budget », le nom de la feuille devient « Budget » | observé: nom feuille | conditions: droit
+- Quand une personne ayant seulement le droit lecture sur une feuille tente de la renommer, le nom de la feuille reste inchangé | observé: nom feuille | conditions: droit
+- Quand une personne renomme une feuille avec un nom déjà porté par une autre feuille, le nom de la feuille reste inchangé | observé: nom feuille | conditions: liste feuilles
+- Quand une personne renomme une feuille avec un nom déjà porté par une autre feuille, un message de refus s'affiche | observé: message refus | conditions: liste feuilles
+- Quand la feuille Stock est renommée « Inventaire », le contenu d'une cellule contenant « =Stock!A1 » devient « =Inventaire!A1 » | observé: contenu | conditions: contenu
+- Quand la feuille Stock est renommée « Inventaire », le résultat affiché d'une cellule contenant « =Stock!A1 » reste inchangé | observé: résultat | conditions: aucune
+- Quand une personne renomme une feuille, les autres personnes connectées voient le nouveau nom de la feuille | observé: nom feuille | conditions: connexion
+- Quand le propriétaire supprime une feuille, la liste des feuilles compte une feuille de moins | observé: liste feuilles | conditions: rôle
+- Quand un participant non propriétaire tente de supprimer une feuille, la liste des feuilles reste inchangée | observé: liste feuilles | conditions: rôle
+- Quand le propriétaire supprime la feuille Stock, le résultat affiché d'une cellule d'une autre feuille contenant « =Stock!A1 » devient l'erreur de référence | observé: résultat | conditions: contenu
+- Quand le propriétaire tente de supprimer la seule feuille du classeur, la liste des feuilles reste inchangée | observé: liste feuilles | conditions: liste feuilles
+- Quand une personne clique sur l'onglet d'une feuille, cette feuille devient sa feuille active | observé: feuille active | conditions: liste feuilles
+- Quand une personne change de feuille active, la feuille active d'une autre personne reste inchangée | observé: feuille active | conditions: aucune
+- Si une personne n'a aucun droit sur une feuille, cette feuille est absente de sa liste des feuilles | observé: liste feuilles | conditions: droit
+- Quand le propriétaire supprime la feuille qui est la feuille active d'une autre personne, la feuille active de cette personne devient la première feuille de la liste | observé: feuille active | conditions: liste feuilles
+- Quand une personne ayant seulement le droit lecture sur une feuille tente de saisir une valeur dans une cellule, le contenu de la cellule reste inchangé | observé: contenu | conditions: droit
+- Quand une personne ayant seulement le droit lecture sur une feuille tente de saisir une valeur dans une cellule, un message de refus s'affiche | observé: message refus | conditions: droit
+- Quand une personne ayant le droit écriture sur une feuille saisit une valeur dans une cellule, aucun message de refus ne s'affiche | observé: message refus | conditions: droit
+- Quand une autre personne modifie une cellule source, une personne ayant seulement le droit lecture voit le résultat affiché de la formule dépendante recalculé | observé: résultat | conditions: contenu
+- Quand le propriétaire passe le droit d'une personne sur une feuille de lecture à écriture, le droit de cette personne sur cette feuille devient écriture | observé: droit | conditions: rôle
+- Quand un participant non propriétaire tente de modifier le droit d'une personne, ce droit reste inchangé | observé: droit | conditions: rôle
+- Quand le propriétaire modifie le droit d'une personne sur la feuille Ventes, le droit de cette personne sur la feuille Stock reste inchangé | observé: droit | conditions: aucune
+- Quand le propriétaire retire tout droit à une personne sur une feuille, cette feuille disparaît de la liste des feuilles de cette personne | observé: liste feuilles | conditions: droit
+- Quand le propriétaire retire le droit écriture d'une personne pendant qu'elle a la feuille ouverte, sa saisie suivante sur cette feuille est refusée | observé: message refus | conditions: droit
+- Si le propriétaire consulte ses droits, son droit sur chaque feuille est écriture | observé: droit | conditions: rôle
+- Si une personne modifie une cellule hors connexion et que son droit écriture est retiré avant son retour, à la reconnexion le contenu partagé de la cellule reste celui d'avant sa modification | observé: contenu | conditions: droit | frontière: oui
+- Si une personne modifie une cellule hors connexion et que son droit écriture est retiré avant son retour, à la reconnexion un message de refus s'affiche | observé: message refus | conditions: droit | frontière: oui
+- Si une personne n'a aucun droit sur la feuille Stock, le résultat affiché pour elle d'une cellule contenant « =Stock!A1 » est l'erreur d'accès | observé: résultat | conditions: droit
+- Quand une personne connectée modifie A1, le contenu de A1 est mis à jour sur l'écran des autres personnes connectées | observé: contenu | conditions: connexion
+- Quand une autre personne sélectionne une cellule de la feuille active d'une personne, cette personne voit le marqueur de présence de l'autre sur cette cellule | observé: présence | conditions: feuille active
+- Quand une autre personne sélectionne une cellule d'une feuille qui n'est pas la feuille active d'une personne, aucun marqueur de présence n'apparaît sur sa feuille active | observé: présence | conditions: feuille active
+- Quand une autre personne perd la connexion, son marqueur de présence disparaît pour les personnes connectées | observé: présence | conditions: connexion
+- Quand deux personnes modifient au même moment deux cellules différentes, la modification de la première sur sa cellule est conservée | observé: contenu | conditions: aucune
+- Quand deux personnes modifient au même moment deux cellules différentes, aucun marqueur de conflit n'apparaît | observé: marqueur conflit | conditions: aucune
+- Quand deux personnes modifient la même cellule sans avoir vu la modification de l'autre, un marqueur de conflit apparaît sur la cellule | observé: marqueur conflit | conditions: connexion | frontière: oui
+- Quand deux personnes modifient la même cellule sans avoir vu la modification de l'autre, le contenu affiché provisoirement est celui reçu en dernier par le serveur | observé: contenu | conditions: aucune | frontière: oui
+- Quand deux personnes modifient la même cellule sans avoir vu la modification de l'autre, les propositions du conflit listent les deux contenus saisis | observé: propositions conflit | conditions: aucune
+- Si chaque proposition du conflit est affichée, elle indique le nom de la personne qui l'a saisie | observé: propositions conflit | conditions: aucune
+- Quand une personne modifie une cellule après avoir reçu la modification d'une autre personne sur cette cellule, aucun marqueur de conflit n'apparaît | observé: marqueur conflit | conditions: aucune | frontière: oui
+- Quand deux personnes saisissent simultanément le même contenu dans la même cellule, aucun marqueur de conflit n'apparaît | observé: marqueur conflit | conditions: contenu
+- Quand une personne ayant le droit écriture choisit une proposition du conflit, le contenu de la cellule devient la proposition choisie | observé: contenu | conditions: droit
+- Quand une personne ayant le droit écriture choisit une proposition du conflit, le marqueur de conflit disparaît | observé: marqueur conflit | conditions: droit
+- Quand une personne ayant seulement le droit lecture tente de choisir une proposition du conflit, le marqueur de conflit reste affiché | observé: marqueur conflit | conditions: droit
+- Si un marqueur de conflit existe sur une cellule, il est visible par chaque personne ayant au moins le droit lecture sur la feuille | observé: marqueur conflit | conditions: droit
+- Quand une personne saisit un nouveau contenu dans une cellule en conflit, le marqueur de conflit disparaît | observé: marqueur conflit | conditions: droit
+- Quand la proposition choisie pour résoudre un conflit est une formule, le résultat affiché de la cellule est le résultat de cette formule | observé: résultat | conditions: contenu
+- Quand le réseau est perdu, l'indicateur de connexion affiche « hors connexion » | observé: connexion | conditions: aucune
+- Quand le réseau revient, l'indicateur de connexion affiche « en ligne » | observé: connexion | conditions: aucune
+- Quand une personne ayant le droit écriture modifie une cellule hors connexion, le contenu de la cellule change sur son appareil | observé: contenu | conditions: droit
+- Quand une personne modifie une cellule hors connexion, le nombre de modifications en attente locale augmente de un | observé: attente locale | conditions: connexion
+- Quand une personne modifie une cellule en ligne, le nombre de modifications en attente locale reste à zéro une fois l'envoi confirmé | observé: attente locale | conditions: connexion
+- Quand la connexion revient, le nombre de modifications en attente locale revient à zéro après la fusion | observé: attente locale | conditions: connexion
+- Quand la connexion revient, les modifications faites par les autres pendant la déconnexion apparaissent dans le contenu des cellules concernées | observé: contenu | conditions: connexion
+- Quand la connexion revient, une modification faite hors connexion sur une cellule que personne d'autre n'a modifiée est conservée | observé: contenu | conditions: aucune | frontière: oui
+- Quand la connexion revient, une modification faite hors connexion sur une cellule modifiée par une autre personne pendant la déconnexion fait apparaître un marqueur de conflit | observé: marqueur conflit | conditions: contenu | frontière: oui
+- Tant qu'une personne est hors connexion, les modifications faites par les autres ne changent pas le contenu des cellules sur son appareil | observé: contenu | conditions: connexion
+- Quand la connexion revient, le résultat affiché d'une formule est recalculé à partir des contenus fusionnés | observé: résultat | conditions: contenu
+- Quand une personne ferme puis rouvre l'application hors connexion, ses modifications faites hors connexion sont toujours présentes dans le contenu des cellules | observé: contenu | conditions: aucune
+- Quand une personne ferme puis rouvre l'application hors connexion, le nombre de modifications en attente locale est inchangé | observé: attente locale | conditions: aucune
+- Tant qu'une personne est hors connexion, aucun marqueur de présence des autres personnes n'est affiché | observé: présence | conditions: connexion
+- Quand une personne modifie une cellule hors connexion, la liste des versions ne reçoit pas de nouvelle entrée avant le retour de la connexion | observé: liste versions | conditions: connexion
+- Quand le propriétaire ajoute une feuille hors connexion, la nouvelle feuille apparaît dans sa liste des feuilles | observé: liste feuilles | conditions: rôle
+- Quand deux feuilles portant le même nom ont été créées hors connexion par deux appareils, après fusion l'une d'elles reçoit un suffixe numérique dans son nom | observé: nom feuille | conditions: liste feuilles | frontière: oui
+- Quand le propriétaire a supprimé une feuille pendant qu'une autre personne la modifiait hors connexion, après fusion la feuille reste absente de la liste des feuilles | observé: liste feuilles | conditions: rôle | frontière: oui
+- Quand le propriétaire a supprimé une feuille pendant qu'une autre personne la modifiait hors connexion, après fusion un message de refus informe cette personne que ses modifications n'ont pas été appliquées | observé: message refus | conditions: liste feuilles | frontière: oui
+- Quand une personne annule après avoir modifié A1 de 4 à 10, le contenu de A1 redevient 4 | observé: contenu | conditions: annulation disponible
+- Quand une personne annule sa dernière modification, la modification faite ensuite par une autre personne sur une autre cellule est conservée | observé: contenu | conditions: aucune
+- Quand une personne annule sa modification sur A1 alors qu'une autre personne a modifié A1 depuis, le contenu de A1 reste celui de l'autre personne | observé: contenu | conditions: contenu
+- Quand une personne annule sa modification sur A1 alors qu'une autre personne a modifié A1 depuis, un message de refus s'affiche | observé: message refus | conditions: contenu
+- Quand une personne annule une modification, l'action rétablir devient disponible pour elle | observé: rétablissement disponible | conditions: annulation disponible
+- Quand une personne rétablit une modification annulée, le contenu de la cellule redevient le contenu annulé | observé: contenu | conditions: rétablissement disponible
+- Quand une personne fait une nouvelle modification après une annulation, l'action rétablir devient indisponible pour elle | observé: rétablissement disponible | conditions: aucune
+- Si une personne n'a fait aucune modification depuis l'ouverture du classeur, l'action annuler est indisponible pour elle | observé: annulation disponible | conditions: aucune
+- Quand une personne modifie une cellule, l'action annuler d'une autre personne reste dans son état précédent | observé: annulation disponible | conditions: aucune
+- Quand une personne annule le remplacement de « =A1*2 » par « =A1*3 », le résultat affiché de la cellule redevient celui de « =A1*2 » | observé: résultat | conditions: contenu
+- Quand une personne annule une modification hors connexion, le nombre de modifications en attente locale change pour refléter l'annulation | observé: attente locale | conditions: connexion | frontière: oui
+- Quand une personne annule le renommage d'une feuille, le nom de la feuille redevient l'ancien nom | observé: nom feuille | conditions: annulation disponible
+- Quand une personne ferme puis rouvre le classeur, l'action annuler est indisponible pour elle | observé: annulation disponible | conditions: aucune
+- Si une personne a seulement le droit lecture sur la feuille active, l'action annuler est indisponible pour elle sur cette feuille | observé: annulation disponible | conditions: droit
+- Quand une personne tente d'annuler une modification faite sur une feuille où son droit écriture a été retiré depuis, le contenu de la cellule reste inchangé | observé: contenu | conditions: droit
+- Quand une modification est enregistrée en ligne, la liste des versions de la feuille reçoit une nouvelle entrée | observé: liste versions | conditions: connexion
+- Si une entrée de la liste des versions est affichée, elle indique le nom de la personne qui a fait la modification | observé: auteur version | conditions: aucune
+- Si une entrée de la liste des versions est affichée, son horodatage est exprimé dans le fuseau horaire local de la personne qui consulte | observé: horodatage version | conditions: fuseau
+- Si la liste des versions est affichée, les entrées sont classées de la plus récente à la plus ancienne | observé: liste versions | conditions: aucune
+- Quand une modification faite hors connexion est fusionnée, son entrée dans la liste des versions porte l'heure de la modification et non l'heure de la fusion | observé: horodatage version | conditions: aucune
+- Quand une personne consulte une version ancienne, la feuille affiche le contenu des cellules de cette version | observé: contenu | conditions: aucune
+- Quand une personne consulte une version ancienne, le contenu actuel vu par les autres personnes reste inchangé | observé: contenu | conditions: aucune
+- Quand une personne consulte une version ancienne et tente de saisir dans une cellule, le contenu affiché reste celui de la version | observé: contenu | conditions: aucune
+- Quand une personne ayant le droit écriture restaure une version ancienne, le contenu des cellules de la feuille redevient celui de cette version | observé: contenu | conditions: droit
+- Quand une personne ayant le droit écriture restaure une version ancienne, la liste des versions reçoit une nouvelle entrée de restauration | observé: liste versions | conditions: droit
+- Quand une personne restaure une version ancienne, les entrées plus récentes restent présentes dans la liste des versions | observé: liste versions | conditions: aucune
+- Quand une personne ayant seulement le droit lecture tente de restaurer une version, un message de refus s'affiche | observé: message refus | conditions: droit
+- Quand une version ancienne est restaurée, le résultat affiché des formules est recalculé à partir des contenus restaurés | observé: résultat | conditions: contenu
+- Quand une version ancienne est restaurée, les autres personnes connectées voient le contenu restauré | observé: contenu | conditions: connexion
+- Quand une personne restaure une version ancienne, l'action annuler devient disponible pour elle | observé: annulation disponible | conditions: aucune
+- Quand une personne restaure une version ancienne, les droits des personnes sur la feuille restent inchangés | observé: droit | conditions: aucune
+- Quand une personne restaure une version ancienne de la feuille Ventes, le contenu des cellules de la feuille Stock reste inchangé | observé: contenu | conditions: aucune
+- Si une cellule contient la date-heure saisie 14:00 par une personne à Paris, une personne à New York voit 08:00 dans le résultat affiché | observé: résultat | conditions: fuseau
+- Quand une personne change le fuseau horaire de son appareil, le résultat affiché d'une cellule date-heure change selon le nouveau fuseau | observé: résultat | conditions: fuseau
+- Quand une personne change le fuseau horaire de son appareil, le contenu partagé d'une cellule date-heure reste inchangé | observé: contenu | conditions: aucune | frontière: oui
+- Si une cellule contient une date sans heure, le résultat affiché est la même date quel que soit le fuseau de la personne qui consulte | observé: résultat | conditions: contenu
+- Quand une personne saisit une heure sans fuseau, cette heure est interprétée dans le fuseau local de la personne qui saisit | observé: résultat | conditions: fuseau | frontière: oui
+- Si une cellule contient « =MAINTENANT() », le résultat affiché est l'heure courante dans le fuseau local de la personne qui consulte | observé: résultat | conditions: fuseau
+- Si une cellule calcule la différence entre deux date-heures, le résultat affiché est identique pour toutes les personnes | observé: résultat | conditions: contenu
+- Quand une personne change le fuseau horaire de son appareil, l'horodatage des entrées de la liste des versions change selon le nouveau fuseau | observé: horodatage version | conditions: fuseau
+- Quand une personne exporte la feuille active en CSV, le fichier CSV contient une ligne par ligne non vide de la feuille active | observé: fichier CSV | conditions: feuille active
+- Quand une personne exporte une feuille contenant « =2+3 », le fichier CSV contient 5 et non la formule | observé: fichier CSV | conditions: contenu
+- Quand une personne exporte une cellule dont le texte contient le séparateur choisi, ce texte est entouré de guillemets dans le fichier CSV | observé: fichier CSV | conditions: séparateur
+- Quand une personne exporte avec le séparateur point-virgule, les valeurs d'une ligne du fichier CSV sont séparées par des points-virgules | observé: fichier CSV | conditions: séparateur
+- Quand une personne exporte une cellule affichant une erreur, le fichier CSV contient le code de cette erreur | observé: fichier CSV | conditions: résultat
+- Quand une personne ayant seulement le droit lecture exporte une feuille, le fichier CSV est produit | observé: fichier CSV | conditions: droit
+- Quand une personne exporte une feuille hors connexion, le fichier CSV est produit | observé: fichier CSV | conditions: aucune
+- Quand une personne exporte une cellule date-heure, le fichier CSV contient cette date-heure dans son fuseau local avec le décalage horaire indiqué | observé: fichier CSV | conditions: fuseau
+- Quand une personne exporte une cellule contenant des lettres accentuées, le fichier CSV conserve les accents | observé: fichier CSV | conditions: aucune
+- Quand une personne ayant le droit écriture importe un fichier CSV dans la feuille active, le contenu des cellules à partir de A1 devient celui du fichier | observé: contenu | conditions: droit
+- Quand une personne ayant le droit écriture importe un fichier CSV, les cellules de la feuille active hors de la zone importée deviennent vides | observé: contenu | conditions: droit
+- Quand une personne ayant seulement le droit lecture tente d'importer un fichier CSV, un message de refus s'affiche | observé: message refus | conditions: droit
+- Quand une personne ayant seulement le droit lecture tente d'importer un fichier CSV, le contenu des cellules reste inchangé | observé: contenu | conditions: droit
+- Quand une personne importe un fichier CSV dont un champ commence par « = », le contenu de la cellule est ce texte et non une formule | observé: contenu | conditions: aucune
+- Quand une personne importe un fichier CSV contenant le nombre 12, le résultat affiché d'une formule « =A1+1 » utilisant cette cellule est 13 | observé: résultat | conditions: contenu
+- Quand une personne importe un fichier CSV avec un séparateur différent de celui du fichier, chaque ligne du fichier est placée entière dans la colonne A | observé: contenu | conditions: séparateur
+- Quand une personne importe un champ entre guillemets contenant le séparateur, ce champ occupe une seule cellule | observé: contenu | conditions: séparateur
+- Quand une personne importe un fichier CSV, le résultat affiché d'une formule d'une autre feuille référençant une cellule importée est recalculé | observé: résultat | conditions: contenu
+- Quand une personne annule juste après un import CSV, le contenu de la feuille redevient celui d'avant l'import | observé: contenu | conditions: annulation disponible
+- Quand une personne importe un fichier CSV en ligne, la liste des versions reçoit une seule nouvelle entrée | observé: liste versions | conditions: connexion
+- Quand une personne importe un fichier CSV hors connexion, le nombre de modifications en attente locale augmente de un | observé: attente locale | conditions: connexion
+- Quand une personne importe une date-heure avec décalage horaire, le résultat affiché est cette date-heure convertie dans son fuseau local | observé: résultat | conditions: fuseau
+- Quand une personne importe un fichier CSV encodé en UTF-8 contenant des lettres accentuées, le contenu des cellules conserve les accents | observé: contenu | conditions: aucune
+- Quand une personne importe un fichier CSV, la liste des feuilles reste inchangée | observé: liste feuilles | conditions: aucune

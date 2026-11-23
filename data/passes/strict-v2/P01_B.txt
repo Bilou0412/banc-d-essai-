@@ -1,0 +1,40 @@
+ÉTATS: nom; téléphone; email; étiquettes; favori; liste; recherche; tri; filtre; confirmation; fichier CSV; doublon; erreur
+ASSERTIONS:
+- Quand l'utilisateur crée un contact avec un nom non vide, le contact apparaît dans la liste | observé: liste | conditions: nom
+- Quand l'utilisateur crée un contact avec un nom vide, un message d'erreur s'affiche | observé: erreur | conditions: nom
+- Quand l'utilisateur crée un contact avec un nom vide, aucun nouveau contact n'apparaît dans la liste | observé: liste | conditions: nom
+- Quand l'utilisateur crée un contact avec un email sans « @ », un message d'erreur s'affiche | observé: erreur | conditions: email
+- Quand l'utilisateur crée un contact avec un nom non vide et un email vide, le contact apparaît dans la liste | observé: liste | conditions: nom, email
+- Un contact qui vient d'être créé n'est pas marqué comme favori | observé: favori | conditions: aucune
+- Quand l'utilisateur modifie le téléphone d'un contact, la fiche affiche le nouveau téléphone | observé: téléphone | conditions: aucune
+- Quand l'utilisateur modifie le téléphone d'un contact, l'email du contact reste inchangé | observé: email | conditions: aucune
+- Quand l'utilisateur remplace le nom d'un contact par un nom vide, un message d'erreur s'affiche | observé: erreur | conditions: nom
+- Quand l'utilisateur remplace le nom d'un contact par un nom vide, la fiche affiche toujours l'ancien nom | observé: nom | conditions: nom
+- Quand l'utilisateur supprime un contact et accepte la confirmation, le contact disparaît de la liste | observé: liste | conditions: confirmation
+- Quand l'utilisateur supprime un contact et refuse la confirmation, le contact reste dans la liste | observé: liste | conditions: confirmation
+- Quand la recherche contient un texte présent dans le nom d'un contact, ce contact apparaît dans la liste | observé: liste | conditions: recherche, nom
+- Quand la recherche diffère du nom d'un contact uniquement par la casse, ce contact apparaît dans la liste | observé: liste | conditions: recherche, nom
+- Quand la recherche contient une suite de chiffres présente dans le téléphone d'un contact, ce contact apparaît dans la liste | observé: liste | conditions: recherche, téléphone
+- Quand la recherche ne correspond à aucun contact, la liste est vide | observé: liste | conditions: recherche
+- Quand l'utilisateur efface la recherche, la liste affiche tous les contacts | observé: liste | conditions: recherche
+- Quand le tri est « nom croissant », la liste présente les contacts par ordre alphabétique du nom | observé: liste | conditions: tri
+- Quand le tri est « nom décroissant », la liste présente les contacts par ordre alphabétique inverse du nom | observé: liste | conditions: tri
+- Quand le tri est « nom croissant », un nom commençant par « É » est placé parmi les noms commençant par « E » | observé: liste | conditions: tri, nom
+- Quand l'utilisateur crée un contact alors que le tri est « nom croissant », le nouveau contact apparaît à sa position alphabétique dans la liste | observé: liste | conditions: tri, nom
+- Quand l'utilisateur ajoute une étiquette à un contact, la fiche affiche cette étiquette | observé: étiquettes | conditions: aucune
+- Quand l'utilisateur ajoute à un contact une étiquette qu'il porte déjà, la fiche affiche cette étiquette une seule fois | observé: étiquettes | conditions: étiquettes
+- Quand l'utilisateur retire une étiquette d'un contact, la fiche n'affiche plus cette étiquette | observé: étiquettes | conditions: aucune
+- Quand le filtre est une étiquette, seuls les contacts portant cette étiquette apparaissent dans la liste | observé: liste | conditions: filtre, étiquettes
+- Quand le filtre est une étiquette et que la recherche ne correspond pas à un contact portant cette étiquette, ce contact n'apparaît pas dans la liste | observé: liste | conditions: filtre, recherche
+- Quand l'utilisateur marque un contact comme favori, le contact est indiqué comme favori | observé: favori | conditions: aucune
+- Quand l'utilisateur retire un contact des favoris, le contact n'est plus indiqué comme favori | observé: favori | conditions: aucune
+- Quand le filtre est « favoris », seuls les contacts marqués favoris apparaissent dans la liste | observé: liste | conditions: filtre, favori
+- Quand l'utilisateur exporte en CSV, le fichier CSV contient une ligne par contact | observé: fichier CSV | conditions: aucune
+- Quand l'utilisateur exporte en CSV alors qu'un filtre est actif, le fichier CSV contient aussi les contacts masqués par le filtre | observé: fichier CSV | conditions: filtre
+- Quand l'utilisateur exporte en CSV un contact portant des étiquettes, la ligne de ce contact contient ses étiquettes | observé: fichier CSV | conditions: étiquettes
+- Quand l'utilisateur exporte en CSV un contact dont le nom contient une virgule, ce nom est entouré de guillemets dans le fichier CSV | observé: fichier CSV | conditions: nom
+- Quand l'utilisateur importe un fichier CSV valide, les contacts du fichier apparaissent dans la liste | observé: liste | conditions: fichier CSV
+- Quand l'utilisateur importe un fichier CSV contenant une ligne sans nom, cette ligne n'apparaît pas dans la liste | observé: liste | conditions: fichier CSV
+- Quand l'utilisateur importe un fichier qui n'est pas un CSV lisible, un message d'erreur s'affiche | observé: erreur | conditions: fichier CSV
+- Quand l'utilisateur importe une ligne qui est un doublon d'un contact existant (même nom et même email), aucun second exemplaire n'apparaît dans la liste | observé: liste | conditions: doublon | frontière: oui
+- Quand l'utilisateur ferme puis rouvre l'application, les contacts créés auparavant apparaissent dans la liste | observé: liste | conditions: aucune | frontière: oui

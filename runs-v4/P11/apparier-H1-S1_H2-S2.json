@@ -1,0 +1,37 @@
+{
+ "paires": [
+  "H1-S1",
+  "H2-S2"
+ ],
+ "trous": [
+  9,
+  12
+ ],
+ "communs": 2,
+ "jaccard": 0.105,
+ "appariement": [
+  [
+   "8",
+   "1"
+  ],
+  [
+   "8",
+   "3"
+  ],
+  [
+   "9",
+   "1"
+  ],
+  [
+   "9",
+   "3"
+  ]
+ ],
+ "l1": "1.1 Quand une personne ajoute une feuille, la spécification ne dit pas si les autres personnes du classeur obtiennent un droit sur cette nouvelle feuille ou n'en ont aucun. (action bob.add_sheet, A38)\n1.2 Après le renommage d'une feuille par une personne qui a le droit écriture, les droits de chacun sur cette feuille doivent-ils être conservés ou peuvent-ils disparaître ? (action bob.rename_sheet, aucune)\n1.3 Quand une personne ajoute une feuille, la spec ne dit pas quel droit les autres personnes du classeur (dont l'éventuel propriétaire) reçoivent sur cette nouvelle feuille. (action carol.add_sheet, A38)\n1.4 Une personne renomme une feuille avec le nom qu'elle porte déjà ; la spec ne dit pas si ce cas déclenche l'alerte « le nom existe déjà » ou s'il doit être ignoré sans alerte. (action alice.rename_sheet, A43)\n1.5 Quand une personne non propriétaire tente de modifier le droit d'une autre personne, la spec ne dit pas si une alerte de droit insuffisant doit apparaître. (action carol.set_right, A51)\n1.6 Une personne sans aucun droit sur la feuille tente de la renommer ; le refus laisse la liste des feuilles intacte, mais la spec ne dit pas ce que doivent afficher les cellules vides de la feuille vue. (action carol.rename_sheet, A41)\n1.7 Quand une personne non propriétaire tente de retirer le droit écriture d'une autre personne, le droit reste inchangé, mais la spec ne dit pas si une alerte de droit insuffisant doit apparaître. (action bob.set_right, A51)\n1.8 Quand une date-heure saisie à 12:00 dans le fuseau UTC+1 est reçue par une personne en UTC, la spec fixe la valeur affichée (11:00) mais ne dit pas si le contenu reste le texte saisi ou est converti dans le fuseau de cette personne. (action réseau.deliver_all, aucune)\n1.9 Quand une personne revient en ligne après qu'une autre, dans un autre fuseau, a saisi une date-heure, la spec ne dit pas si le contenu de la cellule garde le texte saisi ou est converti dans le fuseau de la personne qui regarde ; seule la valeur affichée doit l'être. (action réseau.reconnect, A61)",
+ "l2": "2.1 When someone types a date-time without an offset into a cell, the spec does not say whether the cell's content keeps the typed text or becomes a normalised date-time with its offset; it only says what the cell displays. (action bob.set_cell, A30)\n2.2 Quand un import CSV est rejeté parce qu'un guillemet n'est jamais fermé, la spec ne dit pas si l'alerte doit nommer la feuille visée en plus de la ligne invalide. (action bob.import_csv, A156)\n2.3 Pour une date-heure saisie sans décalage, la spec n'impose pas que le contenu enregistré soit le texte saisi ou la date-heure normalisée avec le décalage du fuseau de la personne. (action alice.set_cell, aucune)\n2.4 Quand une personne en ligne importe un CSV qui remplit deux cellules, la spec ne dit pas si le nombre de modifications en attente avant confirmation compte une modification par cellule ou une seule pour tout l'import. (action alice.import_csv, aucune)\n2.5 A person who has made no other change since opening adds a sheet while online; the spec does not say whether that addition can be undone, so it does not say whether the undo command becomes available. (action carol.add_sheet, A104)\n2.6 Right after a person adds a sheet, the spec does not say whether the undo command is available. (action alice.add_sheet, A104)\n2.7 Juste après qu'une personne a ajouté une feuille, la spec ne dit pas si la commande annuler doit être disponible. (action bob.add_sheet, aucune)\n2.8 La spec ne dit pas si le renommage, la suppression d'une feuille ou l'annulation de cette suppression créent des entrées dans l'historique des versions, à côté des modifications de cellule. (action alice.history, A119)\n2.9 Le propriétaire fait passer le droit d'une personne de lecture à écriture sur une feuille, et la spec ne dit pas si ce droit doit devenir écriture. (action alice.set_right, A50)\n2.10 À l'export CSV d'une feuille dont une ligne se termine par une cellule vide alors qu'une autre ligne a une valeur dans cette colonne, la spec ne dit pas si la ligne courte doit garder un champ vide final pour que toutes les lignes aient le même nombre de colonnes. (action alice.export_csv, A136)\n2.11 The spec does not say whether a CSV export line whose last cells are empty keeps those empty fields so all lines have the same width, or stops at its last non-empty cell. (action bob.export_csv, A136)\n2.12 Le renommage d'une feuille, sans aucune modification de cellule, ajoute-t-il une entrée dans l'historique des versions de cette feuille ? (action bob.history, aucune)",
+ "tokens": {
+  "neufs": 4087,
+  "cache": 1741,
+  "usd": 0.0410762
+ }
+}

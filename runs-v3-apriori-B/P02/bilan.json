@@ -1,0 +1,80 @@
+{
+ "sonde": "P02",
+ "passes": "strict-v2",
+ "passe": "A",
+ "k_passes": [
+  1.54,
+  1.68
+ ],
+ "k_retenu": 1.61,
+ "concordance": "concordante",
+ "assertions": 39,
+ "frontieres": 3,
+ "tests": 85,
+ "trous_a_priori": 9,
+ "trous_par_assertion": 0.231,
+ "tokens_decoupe": {
+  "neufs": 48261,
+  "cache": 16225,
+  "usd": 0.6516850000000001
+ },
+ "lacunes": [
+  {
+   "cas": "A01 : un titre composé uniquement d'espaces n'est pas « vide » au sens strict",
+   "test": "test_A01_trou_titre_espaces",
+   "présumé": "Avec un titre composé uniquement d'espaces, l'action « enregistrer » ne crée pas la recette | observé: recette | conditions: titre",
+   "attaque": 1
+  },
+  {
+   "cas": "A05 : une quantité « nan » ou « inf » est lisible comme nombre par l'ordinateur mais pas par l'utilisateur",
+   "test": "test_A05_trou_nan_infini",
+   "présumé": "La saisie d'une quantité « nan » ou infinie est refusée | observé: quantité | conditions: aucune",
+   "attaque": 1
+  },
+  {
+   "cas": "A05 : une quantité saisie avec une virgule décimale (« 1,5 ») n'est pas dite numérique ou non",
+   "test": "test_A05_trou_virgule_decimale",
+   "présumé": "La saisie d'une quantité avec une virgule décimale est acceptée comme nombre décimal | observé: quantité | conditions: aucune",
+   "attaque": 1
+  },
+  {
+   "cas": "A14 : une requête combinée à un filtre de catégorie, A14 et A15 ne disent pas lequel l'emporte",
+   "test": "test_A14_trou_requete_et_categorie",
+   "présumé": "Une requête combinée à un filtre de catégorie ne montre que les recettes de cette catégorie qui correspondent à la requête | observé: résultats | conditions: catégorie, requête",
+   "attaque": 1
+  },
+  {
+   "cas": "A15 : une requête de plusieurs mots dont un seul figure dans un titre",
+   "test": "test_A15_trou_requete_plusieurs_mots",
+   "présumé": "Une requête de plusieurs mots fait apparaître toute recette dont le titre contient l'un de ces mots | observé: résultats | conditions: requête, titre",
+   "attaque": 1
+  },
+  {
+   "cas": "A18 : une requête composée uniquement d'espaces n'est pas « vide » au sens strict",
+   "test": "test_A18_trou_requete_espaces",
+   "présumé": "Une requête composée uniquement d'espaces affiche toutes les recettes dans les résultats | observé: résultats | conditions: requête",
+   "attaque": 1
+  },
+  {
+   "cas": "A24 : un texte de note réduit à des espaces n'est pas « effacé » au sens strict",
+   "test": "test_A24_trou_note_espaces",
+   "présumé": "Le remplacement du texte d'une note par des espaces retire la note de la fiche de la recette | observé: note | conditions: aucune",
+   "attaque": 1
+  },
+  {
+   "cas": "A31 : le même ingrédient écrit avec une casse différente (« Farine » / « farine ») est-il le même ingrédient",
+   "test": "test_A31_trou_casse_nom",
+   "présumé": "L'ajout de deux recettes contenant le même ingrédient à la casse près dans la même unité produit une seule ligne avec la somme des quantités | observé: courses | conditions: ingrédient, unité",
+   "attaque": 1
+  },
+  {
+   "cas": "A35 : une recette supprimée doit-elle disparaître aussi des résultats de recherche",
+   "test": "test_A35_trou_absente_des_resultats",
+   "présumé": "La suppression d'une recette la fait disparaître des résultats | observé: résultats | conditions: aucune",
+   "attaque": 1
+  }
+ ],
+ "modeles": {
+  "red": "opus"
+ }
+}

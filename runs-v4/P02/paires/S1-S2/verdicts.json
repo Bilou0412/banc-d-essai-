@@ -1,0 +1,54 @@
+[
+ {
+  "groupe": "remove_ingredient",
+  "divergences": 5,
+  "graine": 96,
+  "etape": 8,
+  "action": "remove_ingredient(Omelette#1, 'farine')",
+  "x": {
+   "titre": "Omelette",
+   "portions": 2,
+   "catégorie": null,
+   "favori": false,
+   "note": null,
+   "photo": {
+    "image": true,
+    "taille": 69
+   },
+   "ingrédients": [
+    [
+     "Farine",
+     "0.35",
+     "g"
+    ],
+    [
+     "oeufs",
+     "0.5",
+     "pièce"
+    ]
+   ]
+  },
+  "y": {
+   "titre": "Omelette",
+   "portions": 2,
+   "catégorie": null,
+   "favori": false,
+   "note": null,
+   "photo": {
+    "image": true,
+    "taille": 69
+   },
+   "ingrédients": [
+    [
+     "oeufs",
+     "0.5",
+     "pièce"
+    ]
+   ]
+  },
+  "classe": "trou",
+  "assertion": "A04",
+  "cas": "Deleting an ingredient by a name that differs from the stored name only in upper/lower case (« farine » vs « Farine »): the spec does not say whether this deletes the ingredient or does nothing.",
+  "verdict": "claim:     When `remove_ingredient(Omelette#1, 'farine')` is called on a recipe that holds the ingredient « Farine », the spec settles whether that ingredient must disappear.\nruling:    rejected\nbecause:   A04 says « La suppression d'un ingrédient le fait disparaître de la liste des ingrédients de la recette ». That assumes the deleted ingredient has already been identified. Nothing in the spec says a name with different capitals points to that ingredient. The only rule about upper and lower case is A17, « Une requête en majuscules donne les mêmes résultats que la même requête en minuscules », and it covers search requests, not editing a recipe. So reading 'farine' as « Farine » (Y's behaviour) and treating it as an ingredient that isn't there (X's behaviour) both fit the spec.\ncertainty: close. A user would probably expect 'farine' to mean « Farine », but no assertion says so. Only the arbiter can say whether A17's case rule was meant to apply to ingredient names too.\n\nCLASSE: trou\nASSERTION: A04\nCAS: Deleting an ingredient by a name that differs from the stored name only in upper/lower case (« farine » vs « Farine »): the spec does not say whether this deletes the ingredient or does nothing."
+ }
+]

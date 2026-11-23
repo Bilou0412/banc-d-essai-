@@ -1,0 +1,9 @@
+- A07 : un blob authentique d'un autre expéditeur (carol→bob) substitué en transit à un message alice→bob | test: test_A07_trou_substitution_par_blob_d_un_autre_expediteur | présumé: le texte de carol ne s'affiche pas dans la conversation avec alice
+- A07 : rejeu en transit d'un blob déjà remis | test: test_A07_trou_rejeu_ne_duplique_pas | présumé: le message rejoué ne s'affiche qu'une fois
+- A17 : seconde réinstallation d'un contact anciennement vérifié, sans confirmation entre les deux | test: test_A17_trou_second_changement_sans_confirmation | présumé: le contact étant « non vérifié » (A16), aucun nouvel avertissement (A18)
+- A19 : ordre des messages bloqués libérés par la confirmation | test: test_A19_trou_plusieurs_bloques_liberes_dans_l_ordre | présumé: affichés chez le destinataire dans l'ordre d'envoi
+- A21 : ordre des messages « en attente » au retour en ligne | test: test_A21_trou_ordre_des_messages_en_attente | présumé: affichés chez le destinataire dans l'ordre d'envoi
+- A24 : ajout en double d'un même contact au groupe | test: test_A24_trou_ajout_en_double | présumé: le contact apparaît une seule fois et reçoit chaque message une seule fois
+- A26 : membre du groupe ayant deux appareils liés | test: test_A26_trou_membre_a_deux_appareils | présumé: le message de groupe s'affiche en clair sur chacun de ses appareils (comme A02)
+- A27 : contact jamais ajouté au groupe | test: test_A27_trou_non_membre_ne_dechiffre_pas | présumé: il ne peut pas déchiffrer les messages du groupe
+- A30 : valeur par défaut et portée de la minuterie | test: test_A30_trou_minuterie_propre_a_la_conversation | présumé: désactivée (None) par défaut, et propre à chaque conversation

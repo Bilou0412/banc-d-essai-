@@ -1,0 +1,42 @@
+ÉTATS: listes; nom_liste; liste_active; tâches; titre; appartenance; statut; échéance; date_du_jour; retard; filtre; affichage; tri; ordre; compteur
+ASSERTIONS:
+- Créer une liste avec un nom non vide ajoute cette liste aux listes | observé: listes | conditions: nom_liste
+- Créer une liste avec un nom vide ou composé uniquement d'espaces n'ajoute aucune liste | observé: listes | conditions: nom_liste
+- Créer une liste avec un nom déjà porté par une autre liste n'ajoute aucune liste | observé: listes | conditions: nom_liste
+- Une liste qui vient d'être créée devient la liste active | observé: liste_active | conditions: aucune
+- Renommer une liste avec un nom non vide remplace le nom affiché de cette liste | observé: nom_liste | conditions: nom_liste
+- Supprimer une liste la retire des listes | observé: listes | conditions: aucune
+- Supprimer une liste supprime les tâches qui lui appartiennent | observé: tâches | conditions: appartenance
+- Supprimer la liste active rend active une autre liste restante | observé: liste_active | conditions: liste_active
+- Sélectionner une liste en fait la liste active | observé: liste_active | conditions: aucune
+- Seules les tâches appartenant à la liste active sont affichées | observé: affichage | conditions: liste_active, appartenance
+- Ajouter une tâche avec un titre non vide la rattache à la liste active | observé: appartenance | conditions: liste_active
+- Ajouter une tâche avec un titre vide ou composé uniquement d'espaces ne crée aucune tâche | observé: tâches | conditions: titre
+- Une tâche qui vient d'être ajoutée est non cochée | observé: statut | conditions: aucune
+- Une tâche qui vient d'être ajoutée n'a pas d'échéance | observé: échéance | conditions: aucune
+- En tri manuel, une tâche qui vient d'être ajoutée est placée en dernière position de sa liste | observé: ordre | conditions: tri
+- Cocher une tâche non cochée la rend cochée | observé: statut | conditions: statut
+- Décocher une tâche cochée la rend non cochée | observé: statut | conditions: statut
+- Cocher une tâche non cochée diminue le compteur de un | observé: compteur | conditions: statut
+- Le compteur indique le nombre de tâches non cochées appartenant à la liste active | observé: compteur | conditions: liste_active, appartenance, statut
+- Modifier le titre d'une tâche avec un texte non vide remplace son titre | observé: titre | conditions: titre
+- Modifier le titre d'une tâche avec un texte vide laisse le titre précédent inchangé | observé: titre | conditions: titre
+- Déplacer une tâche vers une autre liste la rattache à la liste cible | observé: appartenance | conditions: aucune
+- Déplacer une tâche vers une autre liste laisse son statut inchangé | observé: statut | conditions: aucune
+- Déplacer une tâche vers une autre liste laisse son échéance inchangée | observé: échéance | conditions: aucune
+- Supprimer une tâche la retire des tâches | observé: tâches | conditions: aucune
+- Définir une date d'échéance sur une tâche lui attribue cette échéance | observé: échéance | conditions: aucune
+- Retirer l'échéance d'une tâche la laisse sans échéance | observé: échéance | conditions: aucune
+- Une tâche non cochée dont l'échéance est antérieure à la date du jour est marquée en retard | observé: retard | conditions: statut, échéance, date_du_jour
+- Une tâche cochée dont l'échéance est antérieure à la date du jour n'est pas marquée en retard | observé: retard | conditions: statut, échéance, date_du_jour
+- Une tâche non cochée dont l'échéance est égale à la date du jour n'est pas marquée en retard | observé: retard | conditions: échéance, date_du_jour
+- Lorsque la date du jour dépasse l'échéance d'une tâche non cochée pendant que l'application est ouverte, la tâche devient marquée en retard sans action de l'utilisateur | observé: retard | conditions: date_du_jour, échéance, statut | frontière: oui
+- Avec le filtre « actives », seules les tâches non cochées sont affichées | observé: affichage | conditions: filtre, statut
+- Avec le filtre « terminées », seules les tâches cochées sont affichées | observé: affichage | conditions: filtre, statut
+- Avec le filtre « en retard », seules les tâches marquées en retard sont affichées | observé: affichage | conditions: filtre, retard
+- Avec le filtre « actives », cocher une tâche la retire de l'affichage | observé: affichage | conditions: filtre
+- En tri manuel, glisser une tâche à une nouvelle position la place à cette position | observé: ordre | conditions: tri
+- En tri par échéance, glisser une tâche à une nouvelle position laisse l'ordre inchangé | observé: ordre | conditions: tri
+- En tri par échéance, les tâches sont ordonnées par échéance croissante et les tâches sans échéance sont placées après les autres | observé: ordre | conditions: tri, échéance
+- Après rechargement de l'application, les tâches existantes sont toujours présentes | observé: tâches | conditions: aucune | frontière: oui
+- Après rechargement de l'application, l'ordre manuel des tâches est inchangé | observé: ordre | conditions: tri | frontière: oui

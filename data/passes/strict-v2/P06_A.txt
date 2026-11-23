@@ -1,0 +1,42 @@
+ÉTATS: phase; temps restant; statut minuteur; cycles complétés; durée travail; durée pause; durée longue; intervalle longue; démarrage auto; tâche active; historique sessions; total jour; total tâche; série jours; date courante
+ASSERTIONS:
+- Au premier lancement de l'application, la phase vaut « travail ». | observé: phase | conditions: aucune
+- Au premier lancement de l'application, le statut minuteur vaut « arrêté ». | observé: statut minuteur | conditions: aucune
+- Au premier lancement de l'application, les cycles complétés valent 0. | observé: cycles complétés | conditions: aucune
+- Lorsque le statut minuteur est « arrêté » et que la phase est « travail », le temps restant affiché est égal à la durée travail. | observé: temps restant | conditions: statut minuteur, phase, durée travail
+- Lorsque le statut minuteur est « arrêté », l'action « démarrer » fait passer le statut minuteur à « en cours ». | observé: statut minuteur | conditions: statut minuteur
+- Lorsque le statut minuteur est « en cours », l'écoulement d'une seconde diminue le temps restant d'une seconde. | observé: temps restant | conditions: statut minuteur
+- Lorsque le statut minuteur est « en pause », l'écoulement d'une seconde laisse le temps restant inchangé. | observé: temps restant | conditions: statut minuteur
+- Lorsque le statut minuteur est « en cours », l'action « pause » fait passer le statut minuteur à « en pause ». | observé: statut minuteur | conditions: statut minuteur
+- Lorsque le statut minuteur est « en pause », l'action « reprendre » fait passer le statut minuteur à « en cours ». | observé: statut minuteur | conditions: statut minuteur
+- Lorsque le statut minuteur est « en cours » et que l'application reste 60 secondes en arrière-plan, le temps restant a diminué de 60 secondes au retour. | observé: temps restant | conditions: statut minuteur | frontière: oui
+- L'action « réinitialiser » fait passer le statut minuteur à « arrêté ». | observé: statut minuteur | conditions: aucune
+- Lorsque la phase est « travail », l'action « réinitialiser » remet le temps restant à la durée travail. | observé: temps restant | conditions: phase, durée travail
+- Lorsque la phase est « travail », l'action « réinitialiser » laisse l'historique sessions inchangé. | observé: historique sessions | conditions: phase
+- Lorsque la phase est « travail », l'arrivée du temps restant à zéro augmente les cycles complétés de 1. | observé: cycles complétés | conditions: phase
+- Lorsque la phase est « travail » et que les cycles complétés, après incrément, ne sont pas un multiple de l'intervalle longue, l'arrivée du temps restant à zéro fait passer la phase à « pause courte ». | observé: phase | conditions: phase, cycles complétés, intervalle longue
+- Lorsque la phase est « travail » et que les cycles complétés, après incrément, sont un multiple de l'intervalle longue, l'arrivée du temps restant à zéro fait passer la phase à « pause longue ». | observé: phase | conditions: phase, cycles complétés, intervalle longue
+- Lorsque la phase est « pause courte », l'arrivée du temps restant à zéro fait passer la phase à « travail ». | observé: phase | conditions: phase
+- Lorsque la phase est « pause longue », l'arrivée du temps restant à zéro fait passer la phase à « travail ». | observé: phase | conditions: phase
+- Au passage à la phase « pause courte », le temps restant devient égal à la durée pause. | observé: temps restant | conditions: phase, durée pause
+- Au passage à la phase « pause longue », le temps restant devient égal à la durée longue. | observé: temps restant | conditions: phase, durée longue
+- Lorsque le démarrage auto est désactivé, l'arrivée du temps restant à zéro fait passer le statut minuteur à « arrêté ». | observé: statut minuteur | conditions: démarrage auto
+- Lorsque le démarrage auto est activé, l'arrivée du temps restant à zéro laisse le statut minuteur à « en cours ». | observé: statut minuteur | conditions: démarrage auto
+- Lorsque la phase est « travail », l'action « passer » fait passer la phase à « pause courte » ou « pause longue » selon les cycles complétés. | observé: phase | conditions: phase, cycles complétés, intervalle longue
+- Lorsque la phase est « travail », l'action « passer » laisse les cycles complétés inchangés. | observé: cycles complétés | conditions: phase
+- Lorsque le statut minuteur est « arrêté » et que la phase est « travail », modifier la durée travail met le temps restant à la nouvelle durée travail. | observé: temps restant | conditions: statut minuteur, phase
+- Lorsque le statut minuteur est « en cours », modifier la durée travail laisse le temps restant inchangé. | observé: temps restant | conditions: statut minuteur
+- Saisir une durée travail de 0 minute est refusé et la durée travail reste à sa valeur précédente. | observé: durée travail | conditions: aucune
+- Lorsque la phase est « travail », l'arrivée du temps restant à zéro ajoute une session à l'historique sessions. | observé: historique sessions | conditions: phase
+- Lorsque la phase est « pause courte » ou « pause longue », l'arrivée du temps restant à zéro laisse l'historique sessions inchangé. | observé: historique sessions | conditions: phase
+- Une session ajoutée à l'historique sessions est rattachée à la tâche active au moment où la session a été démarrée. | observé: historique sessions | conditions: tâche active
+- Lorsque la tâche active vaut « aucune », la session ajoutée à l'historique sessions est rattachée à « sans tâche ». | observé: historique sessions | conditions: tâche active
+- Lorsque la phase est « travail », l'arrivée du temps restant à zéro augmente le total jour de la durée travail. | observé: total jour | conditions: phase, durée travail
+- Lorsque la phase est « travail », l'arrivée du temps restant à zéro augmente le total tâche de la tâche active de la durée travail. | observé: total tâche | conditions: phase, tâche active, durée travail
+- Lorsque la date courante change, le total jour affiché vaut 0 tant qu'aucune session n'est ajoutée ce jour-là. | observé: total jour | conditions: date courante
+- Lorsque l'historique sessions contient au moins une session à la veille de la date courante, l'ajout de la première session du jour augmente la série jours de 1. | observé: série jours | conditions: historique sessions, date courante
+- Lorsque l'historique sessions ne contient aucune session à la veille de la date courante, l'ajout de la première session du jour met la série jours à 1. | observé: série jours | conditions: historique sessions, date courante
+- Lorsque l'historique sessions contient déjà une session à la date courante, l'ajout d'une session laisse la série jours inchangée. | observé: série jours | conditions: historique sessions, date courante
+- Lorsque l'historique sessions ne contient aucune session ni à la date courante ni à la veille, la série jours affichée vaut 0. | observé: série jours | conditions: historique sessions, date courante
+- Supprimer la tâche qui est la tâche active met la tâche active à « aucune ». | observé: tâche active | conditions: tâche active
+- Après fermeture puis réouverture de l'application, l'historique sessions est identique à celui d'avant la fermeture. | observé: historique sessions | conditions: aucune | frontière: oui

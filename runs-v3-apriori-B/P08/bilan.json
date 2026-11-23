@@ -1,0 +1,68 @@
+{
+ "sonde": "P08",
+ "passes": "strict-v2",
+ "passe": "A",
+ "k_passes": [
+  1.87,
+  1.79
+ ],
+ "k_retenu": 1.83,
+ "concordance": "concordante",
+ "assertions": 38,
+ "frontieres": 6,
+ "tests": 54,
+ "trous_a_priori": 7,
+ "trous_par_assertion": 0.184,
+ "tokens_decoupe": {
+  "neufs": 45364,
+  "cache": 16526,
+  "usd": 0.6093932
+ },
+ "lacunes": [
+  {
+   "cas": "A01 : l'assertion ne dit pas où atterrit un texte inséré quand une édition concurrente a décalé les positions",
+   "test": "test_A01_trou_positions_preservees",
+   "présumé": "Quand deux participants ayant la permission écriture insèrent en même temps à des endroits différents, chaque insertion apparaît chez tous à côté des caractères qui l'entouraient chez son auteur | observé: contenu | conditions: permission, connexion",
+   "attaque": 1
+  },
+  {
+   "cas": "A05 : l'assertion ne tranche pas entre la suppression d'un passage et une insertion concurrente à l'intérieur de ce passage (A21 voudrait que l'insertion reste)",
+   "test": "test_A05_trou_suppression_contre_insertion_concurrente_dedans",
+   "présumé": "Quand un participant supprime un passage pendant qu'un autre insère du texte à l'intérieur, le passage supprimé disparaît et le texte inséré reste, chez tous | observé: contenu | conditions: permission, connexion",
+   "attaque": 1
+  },
+  {
+   "cas": "A08 : l'assertion ne fixe pas en combien de temps la perte de connexion est constatée",
+   "test": "test_A08_trou_perte_connexion_disparait_de_presence",
+   "présumé": "Quand la connexion d'un participant est perdue, son nom disparaît de la présence affichée chez les autres au plus tard 30 secondes après, et aucun participant connecté ne disparaît | observé: présence | conditions: connexion",
+   "attaque": 1
+  },
+  {
+   "cas": "A14 : l'assertion ne fixe pas l'unité annulée quand le participant a fait plusieurs saisies successives",
+   "test": "test_A14_trou_annule_seulement_la_derniere_saisie",
+   "présumé": "Quand un participant annule après deux saisies successives, seule la dernière saisie est retirée du contenu | observé: contenu | conditions: annulation",
+   "attaque": 1
+  },
+  {
+   "cas": "A19 : l'assertion ne dit pas si une modification faite par un autre participant vide mon rétablissement",
+   "test": "test_A19_trou_edition_distante_ne_vide_pas_le_retablissement",
+   "présumé": "Quand un autre participant modifie le document après mon annulation, mon rétablissement reste non vide | observé: rétablissement | conditions: rétablissement",
+   "attaque": 1
+  },
+  {
+   "cas": "A27 : l'assertion ne dit pas ce que devient le contenu de l'auteur dont les modifications en attente sont refusées",
+   "test": "test_A27_trou_auteur_rejete_reconverge",
+   "présumé": "Quand un participant passé en lecture hors connexion retrouve la connexion, son contenu redevient identique à celui des autres participants | observé: contenu | conditions: permission, attente",
+   "attaque": 1
+  },
+  {
+   "cas": "A36 : A36 (le contenu devient celui de la version) et A21 (les éditions concurrentes sont conservées) se croisent sur une édition concurrente à la restauration sans dire qui l'emporte",
+   "test": "test_A36_trou_edition_concurrente_a_la_restauration_converge",
+   "présumé": "Quand un participant restaure une version pendant qu'un autre édite, le contenu final est identique chez tous les participants | observé: contenu | conditions: connexion",
+   "attaque": 1
+  }
+ ],
+ "modeles": {
+  "red": "opus"
+ }
+}

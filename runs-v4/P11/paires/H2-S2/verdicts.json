@@ -1,0 +1,828 @@
+[
+ {
+  "groupe": "bob.set_cell",
+  "divergences": 34,
+  "graine": 127,
+  "etape": 1,
+  "action": "bob.set_cell('B1', '2026-01-15 12:00', sheet='Feuille1')",
+  "x": {
+   "personne": "bob",
+   "feuilles": [
+    "Feuille1"
+   ],
+   "feuille_vue": "Feuille1",
+   "cellules": {
+    "A1": {
+     "contenu": null,
+     "valeur": null,
+     "erreur": null
+    },
+    "A2": {
+     "contenu": null,
+     "valeur": null,
+     "erreur": null
+    },
+    "A3": {
+     "contenu": null,
+     "valeur": null,
+     "erreur": null
+    },
+    "B1": {
+     "contenu": "2026-01-15T12:00:00+00:00",
+     "valeur": "2026-01-15 12:00",
+     "erreur": null
+    },
+    "B2": {
+     "contenu": null,
+     "valeur": null,
+     "erreur": null
+    },
+    "C1": {
+     "contenu": null,
+     "valeur": null,
+     "erreur": null
+    }
+   },
+   "connexion": "en ligne",
+   "en_attente": 1,
+   "annuler": true,
+   "rétablir": false,
+   "alertes": [],
+   "présence": {},
+   "droits": {
+    "alice": "écriture",
+    "bob": "écriture",
+    "carol": "lecture"
+   }
+  },
+  "y": {
+   "personne": "bob",
+   "feuilles": [
+    "Feuille1"
+   ],
+   "feuille_vue": "Feuille1",
+   "cellules": {
+    "A1": {
+     "contenu": null,
+     "valeur": null,
+     "erreur": null
+    },
+    "A2": {
+     "contenu": null,
+     "valeur": null,
+     "erreur": null
+    },
+    "A3": {
+     "contenu": null,
+     "valeur": null,
+     "erreur": null
+    },
+    "B1": {
+     "contenu": "2026-01-15 12:00",
+     "valeur": "2026-01-15 12:00",
+     "erreur": null
+    },
+    "B2": {
+     "contenu": null,
+     "valeur": null,
+     "erreur": null
+    },
+    "C1": {
+     "contenu": null,
+     "valeur": null,
+     "erreur": null
+    }
+   },
+   "connexion": "en ligne",
+   "en_attente": 1,
+   "annuler": true,
+   "rétablir": false,
+   "alertes": [],
+   "présence": {},
+   "droits": {
+    "alice": "écriture",
+    "bob": "écriture",
+    "carol": "lecture"
+   }
+  },
+  "classe": "trou",
+  "assertion": "A30",
+  "cas": "When someone types a date-time without an offset into a cell, the spec does not say whether the cell's content keeps the typed text or becomes a normalised date-time with its offset; it only says what the cell displays.",
+  "verdict": "```\nclaim:     After bob.set_cell('B1', '2026-01-15 12:00'), the spec requires B1's content to be either the normalised instant \"2026-01-15T12:00:00+00:00\" or the text exactly as typed, \"2026-01-15 12:00\".\nruling:    not resolvable\nbecause:   The only assertions about a date-time cell talk about what it displays or exports: A30 \"la cellule affiche cette date-heure dans le fuseau de la personne\", plus A31, A33 and A145. Both implementations display \"2026-01-15 12:00\", and the observations are identical apart from B1's content. The rules on content cover only a number (A01, \"le contenu de la cellule devient 42\"), a formula (A05) and an invalid formula (A14, \"conserve le texte saisi\"). None of them covers a date-time. A31 does treat the cell as a fixed point in time, but it does not say how the content must be written, so a stored offset cannot be required and keeping the typed text is not a violation. The missing fact is what the formula bar should show for a typed date-time: the instant with its offset, or the text as typed. Only the arbiter's intent can settle that, so it goes to the arbiter, not back to the searcher.\ncertainty: close\n```\n\nCLASSE: trou\nASSERTION: A30\nCAS: When someone types a date-time without an offset into a cell, the spec does not say whether the cell's content keeps the typed text or becomes a normalised date-time with its offset; it only says what the cell displays."
+ },
+ {
+  "groupe": "bob.import_csv",
+  "divergences": 32,
+  "graine": 252,
+  "etape": 1,
+  "action": "bob.import_csv('a,b\\nc,\"d\\ne,f\\n')",
+  "x": {
+   "personne": "bob",
+   "feuilles": [
+    "Feuille1"
+   ],
+   "feuille_vue": "Feuille1",
+   "cellules": {
+    "A1": {
+     "contenu": null,
+     "valeur": null,
+     "erreur": null
+    },
+    "A2": {
+     "contenu": null,
+     "valeur": null,
+     "erreur": null
+    },
+    "A3": {
+     "contenu": null,
+     "valeur": null,
+     "erreur": null
+    },
+    "B1": {
+     "contenu": null,
+     "valeur": null,
+     "erreur": null
+    },
+    "B2": {
+     "contenu": null,
+     "valeur": null,
+     "erreur": null
+    },
+    "C1": {
+     "contenu": null,
+     "valeur": null,
+     "erreur": null
+    }
+   },
+   "connexion": "en ligne",
+   "en_attente": 0,
+   "annuler": false,
+   "rétablir": false,
+   "alertes": [
+    [
+     "csv_invalide",
+     null,
+     null,
+     2
+    ]
+   ],
+   "présence": {},
+   "droits": {
+    "alice": "écriture",
+    "bob": "écriture",
+    "carol": "lecture"
+   }
+  },
+  "y": {
+   "personne": "bob",
+   "feuilles": [
+    "Feuille1"
+   ],
+   "feuille_vue": "Feuille1",
+   "cellules": {
+    "A1": {
+     "contenu": null,
+     "valeur": null,
+     "erreur": null
+    },
+    "A2": {
+     "contenu": null,
+     "valeur": null,
+     "erreur": null
+    },
+    "A3": {
+     "contenu": null,
+     "valeur": null,
+     "erreur": null
+    },
+    "B1": {
+     "contenu": null,
+     "valeur": null,
+     "erreur": null
+    },
+    "B2": {
+     "contenu": null,
+     "valeur": null,
+     "erreur": null
+    },
+    "C1": {
+     "contenu": null,
+     "valeur": null,
+     "erreur": null
+    }
+   },
+   "connexion": "en ligne",
+   "en_attente": 0,
+   "annuler": false,
+   "rétablir": false,
+   "alertes": [
+    [
+     "csv_invalide",
+     "Feuille1",
+     null,
+     2
+    ]
+   ],
+   "présence": {},
+   "droits": {
+    "alice": "écriture",
+    "bob": "écriture",
+    "carol": "lecture"
+   }
+  },
+  "classe": "trou",
+  "assertion": "A156",
+  "cas": "Quand un import CSV est rejeté parce qu'un guillemet n'est jamais fermé, la spec ne dit pas si l'alerte doit nommer la feuille visée en plus de la ligne invalide.",
+  "verdict": "claim:     Pour un import CSV dont un guillemet n'est jamais fermé, une seule des deux alertes `csv_invalide` est conforme : celle qui laisse la feuille vide (`null`), ou celle qui nomme la feuille (`\"Feuille1\"`).\nruling:    rejected\nbecause:   A156 exige seulement qu'« une alerte indique la ligne invalide ». Les deux alertes indiquent la ligne 2, celle où s'ouvre le guillemet de `c,\"d`. Le contenu reste inchangé chez les deux, comme le demande A155. Aucune assertion ne dit si une alerte d'import doit nommer la feuille. L'import se fait toujours dans la feuille active (A147), donc ce champ n'apporte rien que la spec vérifie.\ncertainty: firm\n\nCLASSE: trou\nASSERTION: A156\nCAS: Quand un import CSV est rejeté parce qu'un guillemet n'est jamais fermé, la spec ne dit pas si l'alerte doit nommer la feuille visée en plus de la ligne invalide."
+ },
+ {
+  "groupe": "alice.set_cell",
+  "divergences": 31,
+  "graine": 99,
+  "etape": 1,
+  "action": "alice.set_cell('C1', '2026-01-15 12:00', sheet='Feuille1')",
+  "x": {
+   "personne": "alice",
+   "feuilles": [
+    "Feuille1"
+   ],
+   "feuille_vue": "Feuille1",
+   "cellules": {
+    "A1": {
+     "contenu": null,
+     "valeur": null,
+     "erreur": null
+    },
+    "A2": {
+     "contenu": null,
+     "valeur": null,
+     "erreur": null
+    },
+    "A3": {
+     "contenu": null,
+     "valeur": null,
+     "erreur": null
+    },
+    "B1": {
+     "contenu": null,
+     "valeur": null,
+     "erreur": null
+    },
+    "B2": {
+     "contenu": null,
+     "valeur": null,
+     "erreur": null
+    },
+    "C1": {
+     "contenu": "2026-01-15T12:00:00+01:00",
+     "valeur": "2026-01-15 12:00",
+     "erreur": null
+    }
+   },
+   "connexion": "en ligne",
+   "en_attente": 1,
+   "annuler": true,
+   "rétablir": false,
+   "alertes": [],
+   "présence": {},
+   "droits": {
+    "alice": "écriture",
+    "bob": "écriture",
+    "carol": "lecture"
+   }
+  },
+  "y": {
+   "personne": "alice",
+   "feuilles": [
+    "Feuille1"
+   ],
+   "feuille_vue": "Feuille1",
+   "cellules": {
+    "A1": {
+     "contenu": null,
+     "valeur": null,
+     "erreur": null
+    },
+    "A2": {
+     "contenu": null,
+     "valeur": null,
+     "erreur": null
+    },
+    "A3": {
+     "contenu": null,
+     "valeur": null,
+     "erreur": null
+    },
+    "B1": {
+     "contenu": null,
+     "valeur": null,
+     "erreur": null
+    },
+    "B2": {
+     "contenu": null,
+     "valeur": null,
+     "erreur": null
+    },
+    "C1": {
+     "contenu": "2026-01-15 12:00",
+     "valeur": "2026-01-15 12:00",
+     "erreur": null
+    }
+   },
+   "connexion": "en ligne",
+   "en_attente": 1,
+   "annuler": true,
+   "rétablir": false,
+   "alertes": [],
+   "présence": {},
+   "droits": {
+    "alice": "écriture",
+    "bob": "écriture",
+    "carol": "lecture"
+   }
+  },
+  "classe": "trou",
+  "assertion": "aucune",
+  "cas": "Pour une date-heure saisie sans décalage, la spec n'impose pas que le contenu enregistré soit le texte saisi ou la date-heure normalisée avec le décalage du fuseau de la personne.",
+  "verdict": "heure « 2026-01-15 12:00 » dans C1, le contenu enregistré est soit le texte saisi tel quel, soit la date-heure normalisée avec son décalage (« 2026-01-15T12:00:00+01:00 »). La spec impose-t-elle l'une de ces formes ?\nruling:    rejected — trou, la spec ne tranche pas\nbecause:   Sur cette cellule, les deux affichent la même valeur, « 2026-01-15 12:00 », ce que demande A30 (« la cellule affiche cette date-heure dans le fuseau de la personne »). Aucune assertion ne fixe le contenu d'une cellule date-heure. A01 fixe le contenu d'un nombre (« devient 42 »), A05 celui d'une formule. A14 (« conserve le texte saisi ») ne vise que les formules de syntaxe invalide.\ncertainty: close\n```\n\nPourquoi `close` : A31 (« une même cellule date-heure saisie à 12:00 à Paris (UTC+1) affiche 11:00 chez une personne dont le fuseau est UTC ») demande que l'instant soit conservé quelque part. Un contenu sans décalage, comme « 2026-01-15 12:00 », pourrait donc échouer plus tard chez une personne dans un autre fuseau. Mais cette étape ne le montre pas : le décalage peut être gardé ailleurs que dans le champ contenu, et les deux implémentations passent A31. Un seul fait trancherait : l'affichage de C1 chez une personne en UTC. On peut le vérifier en jouant la scène, sans interroger l'arbitre.\n\nCLASSE: trou\nASSERTION: aucune\nCAS: Pour une date-heure saisie sans décalage, la spec n'impose pas que le contenu enregistré soit le texte saisi ou la date-heure normalisée avec le décalage du fuseau de la personne."
+ },
+ {
+  "groupe": "alice.import_csv",
+  "divergences": 28,
+  "graine": 8,
+  "etape": 1,
+  "action": "alice.import_csv('\"12,5\",x\\n')",
+  "x": {
+   "personne": "alice",
+   "feuilles": [
+    "Feuille1"
+   ],
+   "feuille_vue": "Feuille1",
+   "cellules": {
+    "A1": {
+     "contenu": "12,5",
+     "valeur": "12,5",
+     "erreur": null
+    },
+    "A2": {
+     "contenu": null,
+     "valeur": null,
+     "erreur": null
+    },
+    "A3": {
+     "contenu": null,
+     "valeur": null,
+     "erreur": null
+    },
+    "B1": {
+     "contenu": "x",
+     "valeur": "x",
+     "erreur": null
+    },
+    "B2": {
+     "contenu": null,
+     "valeur": null,
+     "erreur": null
+    },
+    "C1": {
+     "contenu": null,
+     "valeur": null,
+     "erreur": null
+    }
+   },
+   "connexion": "en ligne",
+   "en_attente": 2,
+   "annuler": true,
+   "rétablir": false,
+   "alertes": [],
+   "présence": {},
+   "droits": {
+    "alice": "écriture",
+    "bob": "écriture",
+    "carol": "lecture"
+   }
+  },
+  "y": {
+   "personne": "alice",
+   "feuilles": [
+    "Feuille1"
+   ],
+   "feuille_vue": "Feuille1",
+   "cellules": {
+    "A1": {
+     "contenu": "12,5",
+     "valeur": "12,5",
+     "erreur": null
+    },
+    "A2": {
+     "contenu": null,
+     "valeur": null,
+     "erreur": null
+    },
+    "A3": {
+     "contenu": null,
+     "valeur": null,
+     "erreur": null
+    },
+    "B1": {
+     "contenu": "x",
+     "valeur": "x",
+     "erreur": null
+    },
+    "B2": {
+     "contenu": null,
+     "valeur": null,
+     "erreur": null
+    },
+    "C1": {
+     "contenu": null,
+     "valeur": null,
+     "erreur": null
+    }
+   },
+   "connexion": "en ligne",
+   "en_attente": 1,
+   "annuler": true,
+   "rétablir": false,
+   "alertes": [],
+   "présence": {},
+   "droits": {
+    "alice": "écriture",
+    "bob": "écriture",
+    "carol": "lecture"
+   }
+  },
+  "classe": "trou",
+  "assertion": "aucune",
+  "cas": "Quand une personne en ligne importe un CSV qui remplit deux cellules, la spec ne dit pas si le nombre de modifications en attente avant confirmation compte une modification par cellule ou une seule pour tout l'import.",
+  "verdict": "The disagreement is only about the pending-changes count after a CSV import done online. Both cell grids are identical and match A149: the quoted field `12,5` stays in A1 as one cell. X shows 2 pending changes, which suggests it counts each imported cell. Y shows 1, which suggests it counts the whole import once.\n\n```\nclaim:     Après alice.import_csv('\"12,5\",x\\n') en ligne, avant confirmation de l'envoi, la spécification impose un nombre de modifications en attente (2 ou 1).\nruling:    rejected\nbecause:   A88 sets the \"+1\" only for a change to one cell made offline (\"Quand une personne modifie une cellule hors ligne, le nombre de modifications en attente augmente de un\"). A89 only sets the end state online (\"reste à zéro une fois l'envoi confirmé\"). A158 (\"une seule annulation suffit à défaire tout l'import\") is about undo, not the pending count. So no assertion says how many pending changes an import of two cells creates before the send is confirmed, and both 2 and 1 respect the spec.\ncertainty: firm\n```\n\nCLASSE: trou\nASSERTION: aucune\nCAS: Quand une personne en ligne importe un CSV qui remplit deux cellules, la spec ne dit pas si le nombre de modifications en attente avant confirmation compte une modification par cellule ou une seule pour tout l'import."
+ },
+ {
+  "groupe": "carol.add_sheet",
+  "divergences": 27,
+  "graine": 90,
+  "etape": 2,
+  "action": "carol.add_sheet('Ventes')",
+  "x": {
+   "personne": "carol",
+   "feuilles": [
+    "Feuille1",
+    "Ventes"
+   ],
+   "feuille_vue": "Ventes",
+   "cellules": {
+    "A1": {
+     "contenu": null,
+     "valeur": null,
+     "erreur": null
+    },
+    "B2": {
+     "contenu": null,
+     "valeur": null,
+     "erreur": null
+    }
+   },
+   "connexion": "en ligne",
+   "en_attente": 1,
+   "annuler": true,
+   "rétablir": false,
+   "alertes": [],
+   "présence": {},
+   "droits": {
+    "alice": "écriture",
+    "bob": null,
+    "carol": "écriture"
+   }
+  },
+  "y": {
+   "personne": "carol",
+   "feuilles": [
+    "Feuille1",
+    "Ventes"
+   ],
+   "feuille_vue": "Ventes",
+   "cellules": {
+    "A1": {
+     "contenu": null,
+     "valeur": null,
+     "erreur": null
+    },
+    "B2": {
+     "contenu": null,
+     "valeur": null,
+     "erreur": null
+    }
+   },
+   "connexion": "en ligne",
+   "en_attente": 1,
+   "annuler": false,
+   "rétablir": false,
+   "alertes": [],
+   "présence": {},
+   "droits": {
+    "alice": "écriture",
+    "bob": null,
+    "carol": "écriture"
+   }
+  },
+  "classe": "trou",
+  "assertion": "A104",
+  "cas": "A person who has made no other change since opening adds a sheet while online; the spec does not say whether that addition can be undone, so it does not say whether the undo command becomes available.",
+  "verdict": "r=true) or must stay unavailable (Y: annuler=false).\nruling:    not resolvable\nbecause:   A104 only says that \"Quand une personne n'a fait aucune modification depuis l'ouverture, la commande annuler est indisponible\". It does not say that every action makes undo available. The spec lists which actions can be undone: A110 (suppression d'une feuille), A112 (renommage), A113/A158 (import CSV), A134 (restauration) and cell edits (A100). Adding a sheet is not on that list, so the spec allows either behaviour.\ncertainty: close\n```\n\n**What would settle it:** a fact the spec could hold, so the question goes back to the spec author. They need to say whether adding a sheet counts as an action that can be undone, the same way deleting or renaming a sheet does. If yes, X is right. If no, Y is right.\n\n**Why it's close:** one reading of A104 treats adding a sheet as a \"modification\". On that reading, Y keeps undo unavailable after a modification. But A104 is worded one way only: \"no modification → no undo\". It does not say \"a modification → undo available\", so Y doesn't break it.\n\n**Side note, not ruled on:** both X and Y show `en_attente: 1` while carol is online. That looks odd against A89, but both behave the same way, so it isn't part of this divergence.\n\nCLASSE: trou\nASSERTION: A104\nCAS: A person who has made no other change since opening adds a sheet while online; the spec does not say whether that addition can be undone, so it does not say whether the undo command becomes available."
+ },
+ {
+  "groupe": "alice.add_sheet",
+  "divergences": 26,
+  "graine": 57,
+  "etape": 1,
+  "action": "alice.add_sheet('Feuille2')",
+  "x": {
+   "personne": "alice",
+   "feuilles": [
+    "Feuille1",
+    "Feuille2"
+   ],
+   "feuille_vue": "Feuille2",
+   "cellules": {
+    "A1": {
+     "contenu": null,
+     "valeur": null,
+     "erreur": null
+    },
+    "B2": {
+     "contenu": null,
+     "valeur": null,
+     "erreur": null
+    }
+   },
+   "connexion": "en ligne",
+   "en_attente": 1,
+   "annuler": true,
+   "rétablir": false,
+   "alertes": [],
+   "présence": {},
+   "droits": {
+    "alice": "écriture",
+    "bob": null,
+    "carol": null
+   }
+  },
+  "y": {
+   "personne": "alice",
+   "feuilles": [
+    "Feuille1",
+    "Feuille2"
+   ],
+   "feuille_vue": "Feuille2",
+   "cellules": {
+    "A1": {
+     "contenu": null,
+     "valeur": null,
+     "erreur": null
+    },
+    "B2": {
+     "contenu": null,
+     "valeur": null,
+     "erreur": null
+    }
+   },
+   "connexion": "en ligne",
+   "en_attente": 1,
+   "annuler": false,
+   "rétablir": false,
+   "alertes": [],
+   "présence": {},
+   "droits": {
+    "alice": "écriture",
+    "bob": null,
+    "carol": null
+   }
+  },
+  "classe": "trou",
+  "assertion": "A104",
+  "cas": "Right after a person adds a sheet, the spec does not say whether the undo command is available.",
+  "verdict": "claim:     After `alice.add_sheet('Feuille2')`, the undo command is available (`annuler: true`). The opposing claim is that it is unavailable (`annuler: false`).\nruling:    not resolvable\nbecause:   No assertion says whether adding a sheet can be undone. A104 says the reverse case only: \"Quand une personne n'a fait aucune modification depuis l'ouverture, la commande annuler est indisponible\". It does not say that undo becomes available after a change. The spec names other sheet actions that can be undone: deleting (A110), renaming (A112), importing (A113) and restoring a version (A134). That pattern favours `true`, but it is not a rule the spec states. To settle it, the arbiter must say whether adding a sheet belongs among the actions that can be undone. The dossier cannot hold that fact.\ncertainty: close\n\nCLASSE: trou\nASSERTION: A104\nCAS: Right after a person adds a sheet, the spec does not say whether the undo command is available."
+ },
+ {
+  "groupe": "bob.add_sheet",
+  "divergences": 19,
+  "graine": 60,
+  "etape": 1,
+  "action": "bob.add_sheet('Feuille2')",
+  "x": {
+   "personne": "bob",
+   "feuilles": [
+    "Feuille1",
+    "Feuille2"
+   ],
+   "feuille_vue": "Feuille2",
+   "cellules": {
+    "A1": {
+     "contenu": null,
+     "valeur": null,
+     "erreur": null
+    },
+    "B2": {
+     "contenu": null,
+     "valeur": null,
+     "erreur": null
+    }
+   },
+   "connexion": "en ligne",
+   "en_attente": 1,
+   "annuler": true,
+   "rétablir": false,
+   "alertes": [],
+   "présence": {},
+   "droits": {
+    "alice": "écriture",
+    "bob": "écriture",
+    "carol": null
+   }
+  },
+  "y": {
+   "personne": "bob",
+   "feuilles": [
+    "Feuille1",
+    "Feuille2"
+   ],
+   "feuille_vue": "Feuille2",
+   "cellules": {
+    "A1": {
+     "contenu": null,
+     "valeur": null,
+     "erreur": null
+    },
+    "B2": {
+     "contenu": null,
+     "valeur": null,
+     "erreur": null
+    }
+   },
+   "connexion": "en ligne",
+   "en_attente": 1,
+   "annuler": false,
+   "rétablir": false,
+   "alertes": [],
+   "présence": {},
+   "droits": {
+    "alice": "écriture",
+    "bob": "écriture",
+    "carol": null
+   }
+  },
+  "classe": "trou",
+  "assertion": "aucune",
+  "cas": "Juste après qu'une personne a ajouté une feuille, la spec ne dit pas si la commande annuler doit être disponible.",
+  "verdict": "Juste après bob.add_sheet('Feuille2'), la commande annuler de bob doit être disponible (X : annuler=true), et non indisponible (Y : annuler=false).\nruling:    not resolvable\nbecause:   Aucune assertion ne dit si l'ajout d'une feuille peut être annulé. A104 (« Quand une personne n'a fait aucune modification depuis l'ouverture, la commande annuler est indisponible ») ne couvre que le cas sans aucune modification, et ne dit pas que la commande devient disponible après. Les autres assertions ne parlent que d'autres actions : la suppression d'une feuille (A110), le renommage (A112), l'import CSV (A158), la restauration (A134) et la modification d'une cellule (A100). L'ajout d'une feuille n'y figure pas, et A36 à A38 ne parlent pas d'annulation.\ncertainty: close\n```\n\nJe classe ce cas comme un trou parce que rien dans la spec ne relie l'ajout d'une feuille à la commande annuler, ni d'un côté ni de l'autre. Je mets `close` pour une raison précise : comme la suppression et le renommage d'une feuille s'annulent, on pourrait en déduire que l'ajout aussi. Mais ce n'est qu'une déduction, la spec ne le dit pas.\n\nPour trancher, il faut savoir si l'auteur de la spec voulait que l'ajout d'une feuille compte parmi les actions annulables. Le dossier ne peut pas fournir cette réponse : c'est une question d'intention, donc elle revient à l'arbitre.\n\nCLASSE: trou\nASSERTION: aucune\nCAS: Juste après qu'une personne a ajouté une feuille, la spec ne dit pas si la commande annuler doit être disponible."
+ },
+ {
+  "groupe": "alice.history",
+  "divergences": 11,
+  "graine": 152,
+  "etape": 8,
+  "action": "alice.history()",
+  "x": [
+   [
+    "alice",
+    "2026-10-25 02:30",
+    "modification"
+   ]
+  ],
+  "y": [
+   [
+    "bob",
+    "2026-10-25 02:30",
+    "renommage"
+   ],
+   [
+    "alice",
+    "2026-10-25 02:30",
+    "modification"
+   ],
+   [
+    "bob",
+    "2026-10-25 02:30",
+    "renommage"
+   ]
+  ],
+  "classe": "trou",
+  "assertion": "A119",
+  "cas": "La spec ne dit pas si le renommage, la suppression d'une feuille ou l'annulation de cette suppression créent des entrées dans l'historique des versions, à côté des modifications de cellule.",
+  "verdict": "```\nclaim:     À l'étape alice.history(), une seule des deux observations respecte la spec : X montre seulement la modification de cellule d'alice, Y y ajoute deux entrées « renommage » de bob.\nruling:    rejected\nbecause:   La seule assertion qui dit ce qui crée une entrée est A119 : « Quand une modification de cellule est enregistrée par le serveur, une nouvelle entrée apparaît dans l'historique des versions ». Elle demande l'entrée d'alice, que X et Y montrent toutes les deux. Elle n'interdit pas d'autres entrées, et A131 montre qu'une action autre qu'une modification de cellule peut en créer une. Aucune assertion ne dit si un renommage, une suppression ou l'annulation d'une suppression de feuille crée une entrée, ni comment elle s'appelle. A121 (ordre de la plus récente à la plus ancienne) ne départage pas des entrées qui ont le même horodatage.\ncertainty: close\n```\n\nCe qui ferait pencher la décision : l'étiquette « renommage » sur l'entrée qui correspond à `bob.undo()` d'une suppression. Ce serait un défaut seulement si la spec définissait les libellés ou disait quelles actions sur les feuilles entrent dans l'historique. Elle ne le fait pas. Un chercheur peut vérifier ce point dans la spec, sans demander à l'arbitre.\n\nCLASSE: trou\nASSERTION: A119\nCAS: La spec ne dit pas si le renommage, la suppression d'une feuille ou l'annulation de cette suppression créent des entrées dans l'historique des versions, à côté des modifications de cellule."
+ },
+ {
+  "groupe": "alice.set_right",
+  "divergences": 9,
+  "graine": 159,
+  "etape": 1,
+  "action": "alice.set_right('carol', 'Feuille1', 'écriture')",
+  "x": {
+   "droits": {
+    "alice": "écriture",
+    "bob": "écriture",
+    "carol": "lecture"
+   },
+   "alertes": []
+  },
+  "y": {
+   "droits": {
+    "alice": "écriture",
+    "bob": "écriture",
+    "carol": "écriture"
+   },
+   "alertes": []
+  },
+  "classe": "trou",
+  "assertion": "A50",
+  "cas": "Le propriétaire fait passer le droit d'une personne de lecture à écriture sur une feuille, et la spec ne dit pas si ce droit doit devenir écriture.",
+  "verdict": "```\nclaim:     alice.set_right('carol', 'Feuille1', 'écriture') must change carol's right on Feuille1 to « écriture » (Y), and X, which keeps « lecture », breaks the spec.\nruling:    not resolvable\nbecause:   A50 only covers lowering a right: « le propriétaire passe le droit d'une personne de écriture à lecture … devient lecture ». A51 only says that « une personne non propriétaire » leaves the right unchanged. No assertion covers raising a right from lecture to écriture, and the shortened situation never says whether alice is the owner.\ncertainty: close\n```\n\n**Two facts settle this, and both can be found in the spec or the situation:**\n- **Whether alice is the owner.** If she isn't, A51 applies. X is then right and Y has a bug.\n- **Whether the spec meant A50 to cover raising a right as well.** Its wording only covers lowering one.\n\n**My classification:** if alice is the owner, which is the likely reading because she opens the workbook first, no assertion says what raising carol from lecture to écriture should do. Both behaviours then pass all 159 assertions, so it's a gap. In no reading does the spec rule against X. I chose « trou » over « bug Y » because ownership is likely, but it's a close call.\n\nCLASSE: trou\nASSERTION: A50\nCAS: Le propriétaire fait passer le droit d'une personne de lecture à écriture sur une feuille, et la spec ne dit pas si ce droit doit devenir écriture."
+ },
+ {
+  "groupe": "alice.export_csv",
+  "divergences": 5,
+  "graine": 204,
+  "etape": 5,
+  "action": "alice.export_csv()",
+  "x": {
+   "lignes": [
+    [
+     "#CIRC!",
+     ""
+    ],
+    [
+     "",
+     "0"
+    ]
+   ]
+  },
+  "y": {
+   "lignes": [
+    [
+     "#CIRC!"
+    ],
+    [
+     "",
+     "0"
+    ]
+   ]
+  },
+  "classe": "trou",
+  "assertion": "A136",
+  "cas": "À l'export CSV d'une feuille dont une ligne se termine par une cellule vide alors qu'une autre ligne a une valeur dans cette colonne, la spec ne dit pas si la ligne courte doit garder un champ vide final pour que toutes les lignes aient le même nombre de colonnes.",
+  "verdict": "Aucun fichier n'a été écrit.\n\n```\nclaim:     À l'export CSV, la première ligne (A1 en #CIRC!, B1 vide) doit contenir un champ vide final pour la colonne B, comme la ligne 2 qui a besoin de la colonne B (B2 = 0) ; l'autre comportement s'arrête au dernier champ non vide de la ligne.\nruling:    not resolvable (trou de spec)\nbecause:   Les assertions CSV fixent le nombre de lignes, pas leur largeur. A136 dit « le fichier CSV contient une ligne par ligne non vide de la feuille », et les deux sorties ont bien deux lignes. A138 (« contient le code d'erreur affiché dans la cellule ») est respectée des deux côtés avec \"#CIRC!\". A139 et A140 (guillemets) ne s'appliquent pas ici. Aucune assertion n'impose un export rectangulaire ni n'interdit de couper les champs vides en fin de ligne. Pour trancher, il faut savoir si le format d'export doit avoir le même nombre de champs sur chaque ligne. C'est un choix de produit : il revient à l'auteur de la spec, pas aux recherches dans le dossier.\ncertainty: firm\n```\n\nCLASSE: trou\nASSERTION: A136\nCAS: À l'export CSV d'une feuille dont une ligne se termine par une cellule vide alors qu'une autre ligne a une valeur dans cette colonne, la spec ne dit pas si la ligne courte doit garder un champ vide final pour que toutes les lignes aient le même nombre de colonnes."
+ },
+ {
+  "groupe": "bob.export_csv",
+  "divergences": 4,
+  "graine": 1,
+  "etape": 17,
+  "action": "bob.export_csv()",
+  "x": {
+   "lignes": [
+    [
+     "7",
+     ""
+    ],
+    [
+     "",
+     "2.5"
+    ]
+   ]
+  },
+  "y": {
+   "lignes": [
+    [
+     "7"
+    ],
+    [
+     "",
+     "2.5"
+    ]
+   ]
+  },
+  "classe": "trou",
+  "assertion": "A136",
+  "cas": "The spec does not say whether a CSV export line whose last cells are empty keeps those empty fields so all lines have the same width, or stops at its last non-empty cell.",
+  "verdict": "claim:     When Bob exports to CSV, one implementation writes row 1 (A1 = 7, B1 empty) as `[\"7\", \"\"]` and the other as `[\"7\"]`. Does the spec decide which is right?\nruling:    not resolvable\nbecause:   A136 only says \"le fichier CSV contient une ligne par ligne non vide de la feuille\". Both outputs have one line for row 1 and one for row 2, with the correct values (`7`, then empty and `2.5`). No assertion (A136 to A146) says whether a line's trailing empty field must be written to keep every line the same width or dropped. A139 and A140 cover quoting, not the number of fields. Settling it needs a choice the spec does not hold: is the export rectangular (each line as wide as the widest used column) or trimmed at the last non-empty cell? Whoever owns the spec has to make that product choice; the dossier cannot supply it.\ncertainty: firm\n\nCLASSE: trou\nASSERTION: A136\nCAS: The spec does not say whether a CSV export line whose last cells are empty keeps those empty fields so all lines have the same width, or stops at its last non-empty cell."
+ },
+ {
+  "groupe": "bob.history",
+  "divergences": 4,
+  "graine": 178,
+  "etape": 7,
+  "action": "bob.history(sheet='Ventes')",
+  "x": [],
+  "y": [
+   [
+    "bob",
+    "2026-10-25 00:30",
+    "renommage"
+   ]
+  ],
+  "classe": "trou",
+  "assertion": "aucune",
+  "cas": "Le renommage d'une feuille, sans aucune modification de cellule, ajoute-t-il une entrée dans l'historique des versions de cette feuille ?",
+  "verdict": "`\nclaim:     After bob renames Feuille1 to « Ventes » (and the later set_cell calls target « Feuille1 » and leave the shown cells empty), bob.history(sheet='Ventes') returns either [] or one « renommage » entry dated 2026-10-25 00:30. The claim is that the spec decides between these two outputs.\nruling:    rejected\nbecause:   The spec creates history entries in only two cases: A119 « Quand une modification de cellule est enregistrée par le serveur, une nouvelle entrée apparaît dans l'historique des versions » and A131 for a restore. A rename is neither, and no assertion says one adds or skips an entry. A135 (« la liste des feuilles affiche le nom de la version restaurée ») says versions remember the sheet name. It doesn't say the rename itself is an entry. No cell content changed in the shown observations (A2 and A3 stay null), so A119 doesn't require any entry either. Both outputs respect the spec.\ncertainty: close\n```\n\nMy certainty is « close » because the snapshots are cut off. If they hid a cell change the server recorded, A119 would require an entry. That would make [] wrong, and so would Y's output, since a « renommage » entry is not a cell change. Writing to the old name « Feuille1 » after the rename is odd too, but the step that diverges is the history read, so I don't rule the situation invalid.\n\nCLASSE: trou\nASSERTION: aucune\nCAS: Le renommage d'une feuille, sans aucune modification de cellule, ajoute-t-il une entrée dans l'historique des versions de cette feuille ?"
+ }
+]

@@ -1,0 +1,113 @@
+[
+ {
+  "groupe": "check_item",
+  "divergences": 194,
+  "graine": 0,
+  "etape": 1,
+  "action": "check_item('beurre', 'c. à s.', checked=True)",
+  "x": "refusé",
+  "y": [],
+  "classe": "invalide",
+  "assertion": "A33",
+  "cas": "Checking an item that isn't in the shopping list, when the list is empty and no recipe exists.",
+  "verdict": "```\nclaim:     Checking 'beurre' (c. à s.) on an empty shopping list in a new app gives \"refusé\" on one side and an empty list [] on the other.\nruling:    not resolvable (classed invalide)\nbecause:   A33 covers only \"Le cochage d'un article de la liste de courses\", so it assumes the item is already in the list. Here the list is empty ({\"recettes\": []}, with nothing ever added), so a user has nothing to tick. No assertion covers checking an item that isn't there, and a user can't do it in the app. \"refusé\" and an empty list are both possible results of an action the spec never allows.\ncertainty: close\n```\n\nI call this close because it could also be read as a gap (*trou*): if the app allows checking by name, the spec simply doesn't say what should happen then. The fact that would settle it is whether the app has any way to check an item that isn't in the list. The spec doesn't say, so it goes back to whoever wrote the spec.\n\nCLASSE: invalide\nASSERTION: A33\nCAS: Checking an item that isn't in the shopping list, when the list is empty and no recipe exists."
+ },
+ {
+  "groupe": "add_ingredient",
+  "divergences": 25,
+  "graine": 32,
+  "etape": 5,
+  "action": "add_ingredient(Omelette#1, 'crème', 3, 'cl')",
+  "x": {
+   "titre": "Omelette",
+   "portions": 4,
+   "catégorie": null,
+   "favori": false,
+   "note": null,
+   "photo": "image par défaut",
+   "ingrédients": [
+    [
+     "crème",
+     "3",
+     "cl"
+    ]
+   ]
+  },
+  "y": {
+   "titre": "Omelette",
+   "portions": 4,
+   "catégorie": null,
+   "favori": false,
+   "note": null,
+   "photo": "image par défaut",
+   "ingrédients": [
+    [
+     "crème",
+     "0.1",
+     "cl"
+    ],
+    [
+     "crème",
+     "3",
+     "cl"
+    ]
+   ]
+  },
+  "classe": "trou",
+  "assertion": "A03",
+  "cas": "Quand on ajoute à une recette un ingrédient qui y figure déjà sous le même nom et dans la même unité, la spec ne dit pas si la nouvelle saisie remplace l'ancienne ligne, s'ajoute comme seconde ligne ou s'additionne à elle.",
+  "verdict": "```\nclaim:     À l'ajout d'un ingrédient déjà présent sous le même nom ('crème', 'cl') à la même recette, la spec impose soit le remplacement de la ligne existante (X), soit l'ajout d'une seconde ligne (Y).\nruling:    rejected\nbecause:   La seule assertion qui porte sur l'ajout, A03 (« L'ajout d'un ingrédient à une recette fait apparaître cet ingrédient dans la liste des ingrédients de la recette »), est respectée par les deux, puisque [\"crème\", \"3\", \"cl\"] apparaît chez l'une comme chez l'autre. Aucune assertion ne dit qu'un ajout conserve les lignes existantes, ni qu'un même nom est unique dans une recette. A04 ne traite que d'une suppression explicite, et A31 ne fusionne les lignes que dans la liste de courses, pas dans la fiche de la recette.\ncertainty: firm\n```\n\nCLASSE: trou\nASSERTION: A03\nCAS: Quand on ajoute à une recette un ingrédient qui y figure déjà sous le même nom et dans la même unité, la spec ne dit pas si la nouvelle saisie remplace l'ancienne ligne, s'ajoute comme seconde ligne ou s'additionne à elle."
+ },
+ {
+  "groupe": "remove_ingredient",
+  "divergences": 5,
+  "graine": 96,
+  "etape": 8,
+  "action": "remove_ingredient(Omelette#1, 'farine')",
+  "x": {
+   "titre": "Omelette",
+   "portions": 2,
+   "catégorie": null,
+   "favori": false,
+   "note": null,
+   "photo": {
+    "image": true,
+    "taille": 69
+   },
+   "ingrédients": [
+    [
+     "Farine",
+     "0.35",
+     "g"
+    ],
+    [
+     "oeufs",
+     "0.5",
+     "pièce"
+    ]
+   ]
+  },
+  "y": {
+   "titre": "Omelette",
+   "portions": 2,
+   "catégorie": null,
+   "favori": false,
+   "note": null,
+   "photo": {
+    "image": true,
+    "taille": 69
+   },
+   "ingrédients": [
+    [
+     "oeufs",
+     "0.5",
+     "pièce"
+    ]
+   ]
+  },
+  "classe": "trou",
+  "assertion": "A04",
+  "cas": "On demande de supprimer un ingrédient en écrivant son nom avec une autre casse que celle de l'enregistrement (« farine » au lieu de « Farine »), et la spec ne dit pas si cela désigne le même ingrédient.",
+  "verdict": "claim:     A04 dit si `remove_ingredient(Omelette#1, 'farine')` doit retirer l'ingrédient enregistré sous le nom « Farine ».\nruling:    not resolvable\nbecause:   A04 dit seulement que « La suppression d'un ingrédient le fait disparaître de la liste des ingrédients de la recette ». Elle ne dit pas si 'farine' désigne bien « Farine ». La seule règle sur la casse est A17 (« Une requête en majuscules donne les mêmes résultats que la même requête en minuscules »), et elle ne vaut que pour les requêtes de recherche, pas pour désigner un ingrédient. Les deux lectures respectent donc la spec. Le dossier ne peut pas trancher : il faut que l'arbitre dise si un ingrédient se désigne sans tenir compte de la casse.\ncertainty: close\n\nCLASSE: trou\nASSERTION: A04\nCAS: On demande de supprimer un ingrédient en écrivant son nom avec une autre casse que celle de l'enregistrement (« farine » au lieu de « Farine »), et la spec ne dit pas si cela désigne le même ingrédient."
+ }
+]

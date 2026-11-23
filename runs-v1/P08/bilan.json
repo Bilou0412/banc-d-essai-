@@ -1,0 +1,275 @@
+{
+ "sonde": "P08",
+ "passes": "strict-v2",
+ "passe": "A",
+ "k_passes": [
+  1.87,
+  1.79
+ ],
+ "k_retenu": 1.83,
+ "concordance": "concordante",
+ "convergent": true,
+ "tours": 3,
+ "attaques": 2,
+ "assertions": 38,
+ "frontieres": 6,
+ "champ_local": {
+  "tout": 1.03,
+  "frontiere": 1.0,
+  "autres": 1.03
+ },
+ "essais": {
+  "A01": 1,
+  "A02": 1,
+  "A03": 1,
+  "A04": 1,
+  "A05": 1,
+  "A06": 1,
+  "A07": 1,
+  "A08": 1,
+  "A09": 1,
+  "A10": 1,
+  "A11": 1,
+  "A12": 1,
+  "A13": 1,
+  "A14": 1,
+  "A15": 1,
+  "A16": 1,
+  "A17": 1,
+  "A18": 1,
+  "A19": 1,
+  "A20": 1,
+  "A21": 1,
+  "A22": 1,
+  "A23": 1,
+  "A24": 1,
+  "A25": 1,
+  "A26": 1,
+  "A27": 1,
+  "A28": 2,
+  "A29": 1,
+  "A30": 1,
+  "A31": 1,
+  "A32": 1,
+  "A33": 1,
+  "A34": 1,
+  "A35": 1,
+  "A36": 1,
+  "A37": 1,
+  "A38": 1
+ },
+ "non_passees": [],
+ "trous_a_priori": 30,
+ "echecs_par_type": {
+  "trou": 1
+ },
+ "nouvelles_assertions": {
+  "N01": "le dernier changement émis l'emporte partout"
+ },
+ "lacunes": [
+  {
+   "cas": "A03 : une version de l'historique est-elle affichée à un participant sans permission ?",
+   "test": "test_A03_trou_version_non_affichee",
+   "présumé": "Quand un participant sans aucune permission consulte une version de l'historique, le contenu de cette version ne lui est pas affiché | observé: contenu | conditions: permission",
+   "attaque": 1
+  },
+  {
+   "cas": "A06 : la présence d'un participant connecté qui reste inactif longtemps n'est pas fixée",
+   "test": "test_A06_trou_presence_au_repos",
+   "présumé": "Quand un participant connecté reste inactif 300 secondes, son nom reste dans la présence affichée chez les autres participants | observé: présence | conditions: connexion",
+   "attaque": 1
+  },
+  {
+   "cas": "A08 : le délai entre la perte de connexion et la disparition du nom n'est pas fixé",
+   "test": "test_A08_trou_delai_detection",
+   "présumé": "Quand la connexion d'un participant est perdue, son nom disparaît de la présence affichée chez les autres participants en 60 secondes au plus | observé: présence | conditions: connexion",
+   "attaque": 1
+  },
+  {
+   "cas": "A11 : une insertion exactement à la position de mon curseur compte-t-elle comme « avant » mon curseur ?",
+   "test": "test_A11_trou_insertion_a_la_position_du_curseur",
+   "présumé": "Quand un autre participant insère du texte exactement à la position de mon curseur, mon curseur reste devant le même caractère | observé: curseur | conditions: aucune",
+   "attaque": 1
+  },
+  {
+   "cas": "A14 : la granularité de l'annulation (une saisie = un appel d'insertion ?) n'est pas fixée",
+   "test": "test_A14_trou_granularite",
+   "présumé": "Quand un participant annule après deux saisies successives, seule la dernière saisie est retirée du contenu | observé: contenu | conditions: annulation",
+   "attaque": 1
+  },
+  {
+   "cas": "A19 : une saisie d'un autre participant après mon annulation vide-t-elle mon rétablissement ?",
+   "test": "test_A19_trou_saisie_d_autrui",
+   "présumé": "Quand un autre participant saisit du texte après mon annulation, mon rétablissement n'est pas vide | observé: rétablissement | conditions: aucune",
+   "attaque": 1
+  },
+  {
+   "cas": "A27 : le contenu propre du participant rétrogradé après rejet de ses modifications en attente n'est pas fixé",
+   "test": "test_A27_trou_contenu_local_rejete",
+   "présumé": "Quand un participant passé en lecture pendant qu'il était hors connexion retrouve la connexion, ses modifications en attente disparaissent de son propre contenu et l'indicateur d'attente disparaît | observé: contenu | conditions: permission, attente",
+   "attaque": 1
+  },
+  {
+   "cas": "A28 : où la permission est affichée (chez le propriétaire seulement, ou aussi chez le participant concerné) n'est pas fixé",
+   "test": "test_A28_trou_affichee_chez_le_concerne",
+   "présumé": "Quand le propriétaire passe la permission d'un participant de écriture à lecture, la permission affichée chez ce participant devient lecture | observé: permission | conditions: propriété",
+   "attaque": 1
+  },
+  {
+   "cas": "A29 : un non-propriétaire qui modifie sa propre permission n'est pas couvert (A29 ne parle que d'« un autre participant »)",
+   "test": "test_A29_trou_auto_promotion",
+   "présumé": "Quand un participant non propriétaire tente de modifier sa propre permission, cette permission ne change pas | observé: permission | conditions: propriété",
+   "attaque": 1
+  },
+  {
+   "cas": "A30 : l'historique est-il partagé avec les autres participants ou propre à chacun ?",
+   "test": "test_A30_trou_historique_partage",
+   "présumé": "Quand un participant ayant la permission écriture enregistre une version, une nouvelle entrée apparaît dans l'historique affiché chez les autres participants connectés | observé: historique | conditions: permission, connexion",
+   "attaque": 1
+  },
+  {
+   "cas": "A36 : une restauration concurrente d'une édition d'un autre participant n'est pas tranchée (A34 et A36 contre A21 et A22)",
+   "test": "test_A36_trou_restauration_concurrente",
+   "présumé": "Quand un participant restaure une version pendant qu'un autre participant édite, le contenu final est identique chez tous les participants | observé: contenu | conditions: connexion",
+   "attaque": 1
+  },
+  {
+   "cas": "A37 : l'auteur de l'entrée ajoutée par une restauration n'est pas fixé (A32 ne parle que de l'enregistrement)",
+   "test": "test_A37_trou_auteur_de_la_restauration",
+   "présumé": "Quand un participant restaure une version, l'entrée ajoutée à l'historique porte le nom de ce participant | observé: historique | conditions: aucune",
+   "attaque": 1
+  },
+  {
+   "cas": "A38 : annuler une restauration après une modification d'un autre participant : A38 (contenu d'avant la restauration) et A15 (la modification d'autrui reste) se croisent",
+   "test": "test_A38_trou_annuler_restauration_apres_modification_d_autrui",
+   "présumé": "Quand un participant annule une restauration alors qu'un autre participant a modifié le document après elle, le contenu redevient celui d'avant la restauration et la modification de l'autre participant y reste | observé: contenu | conditions: annulation",
+   "attaque": 1
+  },
+  {
+   "cas": "A21 : deux participants tapent caractère par caractère au même endroit en même temps (pas une insertion en bloc)",
+   "test": "test_A21_trou_frappe_caractere_par_caractere_non_entrelacee",
+   "présumé": "chaque saisie reste d'un seul tenant, sans entrelacement",
+   "attaque": 2
+  },
+  {
+   "cas": "A26 : reconnexion après une absence plus longue que le délai de détection de présence",
+   "test": "test_A26_trou_reconnexion_apres_longue_absence",
+   "présumé": "les modifications en attente sont publiées et fusionnées",
+   "attaque": 2
+  },
+  {
+   "cas": "A24 : participant hors connexion qui n'a rien saisi",
+   "test": "test_A24_trou_hors_connexion_sans_saisie",
+   "présumé": "indicateur d'attente absent",
+   "attaque": 2
+  },
+  {
+   "cas": "A06 : participant de retour après une perte de connexion (reconnexion, pas réouverture)",
+   "test": "test_A06_trou_reapparait_apres_reconnexion",
+   "présumé": "son nom réapparaît",
+   "attaque": 2
+  },
+  {
+   "cas": "A06 : participant sans aucune permission qui ouvre le document (conditions: aucune)",
+   "test": "test_A06_trou_sans_permission_apparait",
+   "présumé": "son nom apparaît dans la présence",
+   "attaque": 2
+  },
+  {
+   "cas": "A06 : même participant ouvert deux fois, un seul onglet fermé",
+   "test": "test_A06_trou_double_onglet",
+   "présumé": "son nom reste affiché",
+   "attaque": 2
+  },
+  {
+   "cas": "A10 : fermeture du document (et non perte de connexion)",
+   "test": "test_A10_trou_fermeture_retire_le_curseur",
+   "présumé": "le curseur distant disparaît aussi",
+   "attaque": 2
+  },
+  {
+   "cas": "A12 : insertion concurrente exactement à la position d'un curseur distant",
+   "test": "test_A12_trou_fuzz_curseur_distant_suit_son_caractere",
+   "présumé": "le curseur reste devant le même caractère (l'insertion passe avant lui)",
+   "attaque": 2
+  },
+  {
+   "cas": "A14 : annuler sa propre suppression",
+   "test": "test_A14_trou_annuler_une_suppression",
+   "présumé": "le passage supprimé revient, la modification ultérieure d'autrui reste",
+   "attaque": 2
+  },
+  {
+   "cas": "A02 : participant sans aucune permission qui tape ou supprime",
+   "test": "test_A02_trou_sans_permission_ne_modifie_pas",
+   "présumé": "le contenu ne change chez personne",
+   "attaque": 2
+  },
+  {
+   "cas": "A03 : historique consulté par un participant sans permission",
+   "test": "test_A03_trou_historique_non_divulgue",
+   "présumé": "aucun texte de version ne lui est affiché",
+   "attaque": 2
+  },
+  {
+   "cas": "A28 : changements de permission successifs du propriétaire livrés dans le désordre",
+   "test": "test_A28_trou_changements_successifs_livres_dans_le_desordre",
+   "présumé": "le dernier changement émis l'emporte partout",
+   "attaque": 2
+  },
+  {
+   "cas": "A28 : participant concerné hors connexion au moment du changement",
+   "test": "test_A28_trou_cible_hors_connexion",
+   "présumé": "à la reconnexion, il voit sa nouvelle permission",
+   "attaque": 2
+  },
+  {
+   "cas": "A27 : participant rétrogradé hors connexion puis repromu en écriture",
+   "test": "test_A27_trou_repromu_ne_rejoue_pas",
+   "présumé": "les modifications rejetées ne sont jamais rejouées",
+   "attaque": 2
+  },
+  {
+   "cas": "A30 : deux enregistrements de version concurrents",
+   "test": "test_A30_trou_historique_meme_ordre_partout",
+   "présumé": "l'historique (et donc ses indices) est identique chez tous",
+   "attaque": 2
+  },
+  {
+   "cas": "A38 : deux annulations successives après une restauration",
+   "test": "test_A38_trou_deux_annulations",
+   "présumé": "la seconde annule l'action précédant la restauration",
+   "attaque": 2
+  },
+  {
+   "cas": "A18 : rétablir après l'annulation d'une restauration",
+   "test": "test_A18_trou_retablir_une_restauration",
+   "présumé": "le contenu redevient celui de la version restaurée",
+   "attaque": 2
+  }
+ ],
+ "modeles": {
+  "red": "opus",
+  "green": "haiku",
+  "juge": "opus"
+ },
+ "causes": {
+  "causes_distinctes": 1,
+  "causes_par_tour": [
+   0,
+   1,
+   0
+  ],
+  "champ_local": {
+   "tout": 0.03,
+   "frontiere": 0.0,
+   "autres": 0.03
+  },
+  "par_assertion": {
+   "A28": 1
+  },
+  "liste": [
+   "AssertionError: seed=3 : attendu 'read', obtenu 'write'"
+  ]
+ }
+}

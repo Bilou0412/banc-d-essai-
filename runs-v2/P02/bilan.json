@@ -1,0 +1,188 @@
+{
+ "sonde": "P02",
+ "passes": "strict-v2",
+ "passe": "A",
+ "k_passes": [
+  1.54,
+  1.68
+ ],
+ "k_retenu": 1.61,
+ "concordance": "concordante",
+ "convergent": true,
+ "tours": 2,
+ "attaques": 2,
+ "assertions": 39,
+ "frontieres": 3,
+ "champ_local": {
+  "tout": 1.0,
+  "frontiere": 1.0,
+  "autres": 1.0
+ },
+ "essais": {
+  "A01": 1,
+  "A02": 1,
+  "A03": 1,
+  "A04": 1,
+  "A05": 1,
+  "A06": 1,
+  "A07": 1,
+  "A08": 1,
+  "A09": 1,
+  "A10": 1,
+  "A11": 1,
+  "A12": 1,
+  "A13": 1,
+  "A14": 1,
+  "A15": 1,
+  "A16": 1,
+  "A17": 1,
+  "A18": 1,
+  "A19": 1,
+  "A20": 1,
+  "A21": 1,
+  "A22": 1,
+  "A23": 1,
+  "A24": 1,
+  "A25": 1,
+  "A26": 1,
+  "A27": 1,
+  "A28": 1,
+  "A29": 1,
+  "A30": 1,
+  "A31": 1,
+  "A32": 1,
+  "A33": 1,
+  "A34": 1,
+  "A35": 1,
+  "A36": 1,
+  "A37": 1,
+  "A38": 1,
+  "A39": 1
+ },
+ "non_passees": [],
+ "trous_a_priori": 15,
+ "echecs_par_type": {},
+ "nouvelles_assertions": {},
+ "lacunes": [
+  {
+   "cas": "A01 : un titre composé uniquement d'espaces n'est ni « vide » ni vraiment « non vide »",
+   "test": "test_A01_trou_titre_blanc_refuse",
+   "présumé": "Avec un titre composé uniquement d'espaces, l'action « enregistrer » ne crée pas la recette | observé: recette | conditions: titre",
+   "attaque": 1
+  },
+  {
+   "cas": "A05 : « nan », « inf », « -inf » sont acceptés par une conversion en flottant mais ne sont pas des quantités",
+   "test": "test_A05_trou_nan_inf_refuses",
+   "présumé": "La saisie d'une quantité « nan » ou « inf » est refusée comme non numérique | observé: quantité | conditions: aucune",
+   "attaque": 1
+  },
+  {
+   "cas": "A05 : la virgule décimale française (« 1,5 ») n'est ni dite numérique ni dite non numérique",
+   "test": "test_A05_trou_virgule_decimale_acceptee",
+   "présumé": "La saisie d'une quantité avec virgule décimale est acceptée comme le nombre correspondant | observé: quantité | conditions: aucune",
+   "attaque": 1
+  },
+  {
+   "cas": "A18 : une requête composée uniquement d'espaces n'est ni dite vide ni dite sans correspondance (A18 et A19 se croisent)",
+   "test": "test_A18_trou_requete_blanche_equivaut_a_vide",
+   "présumé": "Une requête composée uniquement d'espaces affiche toutes les recettes dans les résultats | observé: résultats | conditions: requête",
+   "attaque": 1
+  },
+  {
+   "cas": "A19 : le message « Aucun résultat » n'est fixé que pour une requête, pas pour un filtre (catégorie, favoris) qui ne laisse rien",
+   "test": "test_A19_trou_filtre_sans_resultat_affiche_aucun_resultat",
+   "présumé": "Un filtre qui ne laisse aucune recette affiche le message « Aucun résultat » | observé: résultats | conditions: favori",
+   "attaque": 1
+  },
+  {
+   "cas": "A24 : une note réduite à des espaces n'est ni dite effacée ni dite conservée",
+   "test": "test_A24_trou_note_blanche_retiree",
+   "présumé": "Le remplacement du texte d'une note par des espaces seuls retire la note de la fiche de la recette | observé: note | conditions: aucune",
+   "attaque": 1
+  },
+  {
+   "cas": "A26 : un fichier portant la signature d'une image mais au contenu invalide n'est ni dit image ni dit non-image",
+   "test": "test_A26_trou_signature_png_suivie_de_dechets_refusee",
+   "présumé": "L'ajout d'un fichier dont seule la signature est celle d'une image est refusé | observé: photo | conditions: aucune",
+   "attaque": 1
+  },
+  {
+   "cas": "A31 : l'ajout deux fois de la même recette n'est pas couvert (A31 parle de deux recettes)",
+   "test": "test_A31_trou_meme_recette_ajoutee_deux_fois_sommee",
+   "présumé": "L'ajout deux fois de la même recette à la liste de courses produit une seule ligne par ingrédient avec la somme des quantités | observé: courses | conditions: ingrédient, unité",
+   "attaque": 1
+  },
+  {
+   "cas": "A31 : « même ingrédient » ne dit pas si deux noms qui ne diffèrent que par la casse sont le même ingrédient",
+   "test": "test_A31_trou_noms_differant_par_la_casse_fusionnes",
+   "présumé": "L'ajout de deux recettes contenant le même ingrédient écrit avec une casse différente dans la même unité produit une seule ligne avec la somme des quantités | observé: courses | conditions: ingrédient, unité",
+   "attaque": 1
+  },
+  {
+   "cas": "A31 : A31 et A33 se croisent quand une ligne cochée reçoit une nouvelle quantité — l'état coché n'est pas tranché",
+   "test": "test_A31_trou_ligne_cochee_recevant_une_quantite_est_decochee",
+   "présumé": "L'ajout d'une recette dont un ingrédient correspond à une ligne cochée produit une seule ligne sommée affichée non cochée | observé: coché | conditions: ingrédient, unité, coché",
+   "attaque": 1
+  },
+  {
+   "cas": "A09 : valeur ajustée exactement à mi-chemin entre deux centièmes (0.625, 1.005, 2.675)",
+   "test": "test_A09_trou_arrondi_demi_superieur",
+   "présumé": "arrondi au plus proche, la moitié vers le haut (0.63, 1.01, 2.68), calculé sans erreur de représentation binaire",
+   "attaque": 2
+  },
+  {
+   "cas": "A09 : quantité ajustée non entière reportée dans la liste de courses",
+   "test": "test_A09_trou_quantite_ajustee_dans_la_liste_de_courses_arrondie",
+   "présumé": "la liste de courses l'affiche elle aussi arrondie à deux décimales (\"1.33\")",
+   "attaque": 2
+  },
+  {
+   "cas": "A37 : photo, note et catégorie d'une recette après fermeture et réouverture",
+   "test": "test_A37_trou_photo_note_categorie_conservees",
+   "présumé": "la recette « toujours présente » est la fiche complète, photo binaire intacte comprise",
+   "attaque": 2
+  },
+  {
+   "cas": "A37 : photo relue par un autre processus",
+   "test": "test_A37_trou_photo_relue_par_un_autre_processus",
+   "présumé": "les octets de la photo sont relus à l'identique depuis le seul fichier",
+   "attaque": 2
+  },
+  {
+   "cas": "A37 : deux instances ouvertes sur le même fichier, chacune enregistre une recette puis se ferme",
+   "test": "test_A37_trou_deux_instances_meme_fichier",
+   "présumé": "aucune écriture n'écrase l'autre, les deux recettes sont présentes à la réouverture",
+   "attaque": 2
+  }
+ ],
+ "modeles": {
+  "red": "opus",
+  "green": "haiku",
+  "juge": "opus"
+ },
+ "tokens_decoupe": {
+  "neufs": 100409,
+  "cache": 46846,
+  "usd": 1.2743452
+ },
+ "tokens_execution": {
+  "neufs": 192010,
+  "cache": 383086,
+  "usd": 0.06176936
+ },
+ "part_decoupe": 0.343,
+ "causes": {
+  "causes_distinctes": 0,
+  "causes_par_tour": [
+   0,
+   0
+  ],
+  "champ_local": {
+   "tout": 0.0,
+   "frontiere": 0.0,
+   "autres": 0.0
+  },
+  "par_assertion": {},
+  "liste": []
+ }
+}

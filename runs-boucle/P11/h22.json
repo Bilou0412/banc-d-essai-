@@ -1,0 +1,296 @@
+{
+ "regles": [
+  {
+   "id": "C01",
+   "texte": "Quand une personne saisit une date-heure sans décalage horaire dans une cellule, le contenu de la cellule chez cette personne est exactement le texte saisi, sans décalage horaire ajouté | observé: contenu | conditions: droit, fuseau",
+   "source": "it0 (majorité des greens)",
+   "classe": "convention",
+   "bilel": null
+  },
+  {
+   "id": "C02",
+   "texte": "Quand une personne ayant le droit écriture renomme une feuille, le droit de chaque personne sur la feuille renommée reste celui qu'elle avait avant le renommage | observé: droit | conditions: droit",
+   "source": "it0 (majorité des greens)",
+   "classe": "convention",
+   "bilel": null
+  },
+  {
+   "id": "C03",
+   "texte": "Quand une personne ajoute une feuille, l'ajout fait partie des actions qu'elle peut annuler : la commande annuler devient disponible, même si c'est sa première action depuis l'ouverture | observé: annulation | conditions: aucune",
+   "source": "it0 (majorité des greens)",
+   "classe": "convention",
+   "bilel": null
+  },
+  {
+   "id": "C04",
+   "texte": "Quand une personne non propriétaire tente de modifier le droit d'une autre personne, aucune alerte n'apparaît | observé: alerte | conditions: rôle",
+   "source": "it0 (majorité des greens)",
+   "classe": "client",
+   "bilel": null
+  },
+  {
+   "id": "C05",
+   "texte": "Quand une personne ayant le droit écriture importe un CSV avant que l'envoi soit confirmé, le nombre de modifications en attente augmente de un, quel que soit le nombre de champs du fichier | observé: attente | conditions: connexion, droit",
+   "source": "it0 (majorité des greens)",
+   "classe": "convention",
+   "bilel": null
+  },
+  {
+   "id": "C06",
+   "texte": "Quand une personne ajoute une feuille avec un nom déjà utilisé par une autre feuille, une alerte « nom existant » cite ce nom comme feuille en cause et la liste des feuilles reste inchangée | observé: alerte | conditions: feuilles",
+   "source": "it0 (majorité des greens)",
+   "classe": "convention",
+   "bilel": null
+  },
+  {
+   "id": "C07",
+   "texte": "Quand une personne en ligne modifie une cellule puis annule cette modification avant la confirmation de l'envoi, la modification est retirée des modifications en attente : leur nombre revient à zéro (principe P2) | observé: attente | conditions: connexion, annulation",
+   "source": "arbitre (P2)",
+   "classe": "convention",
+   "bilel": "décision IA possible (convention)"
+  },
+  {
+   "id": "C08",
+   "texte": "Quand une personne importe un CSV dont un guillemet n'est jamais fermé, l'alerte d'import invalide indique la feuille active visée par l'import en plus de la ligne invalide | observé: alerte | conditions: aucune",
+   "source": "it0 (majorité des greens)",
+   "classe": "convention",
+   "bilel": null
+  },
+  {
+   "id": "C09",
+   "texte": "Quand une personne exporte la feuille active en CSV, chaque ligne du fichier CSV a autant de champs qu'il y a de colonnes jusqu'à la dernière colonne non vide de la feuille, les cellules vides donnant un champ vide | observé: fichier CSV | conditions: contenu",
+   "source": "it0 (majorité des greens)",
+   "classe": "convention",
+   "bilel": null
+  },
+  {
+   "id": "C10",
+   "texte": "Quand une personne saisit dans A3 la formule =SOMME(A1:A3) alors que A1 contient le texte « abc », A3 affiche une erreur de référence circulaire et non une erreur de type | observé: erreur | conditions: contenu",
+   "source": "arbitre (cas 7)",
+   "classe": "convention",
+   "bilel": "décision IA possible (convention)"
+  },
+  {
+   "id": "C11",
+   "texte": "Quand une personne ayant seulement le droit lecture tente de supprimer une feuille, une alerte « droit insuffisant » cite cette feuille | observé: alerte | conditions: droit",
+   "source": "it0 (majorité des greens)",
+   "classe": "convention",
+   "bilel": null
+  },
+  {
+   "id": "C12",
+   "texte": "Quand une personne importe un CSV, l'historique des versions gagne une seule entrée, de type « modification », au nom de cette personne | observé: versions | conditions: aucune",
+   "source": "it0 (majorité des greens)",
+   "classe": "convention",
+   "bilel": null
+  },
+  {
+   "id": "C13",
+   "texte": "Quand une personne en ligne renomme une feuille avec le nom qu'elle porte déjà, aucune alerte n'apparaît et le nombre de modifications en attente reste à zéro | observé: alerte, attente | conditions: connexion",
+   "source": "it0 (majorité des greens)",
+   "classe": "convention",
+   "bilel": null
+  },
+  {
+   "id": "C14",
+   "texte": "Quand une personne ayant seulement le droit lecture tente de résoudre le conflit d'une cellule, quelle que soit la valeur choisie, une alerte « droit insuffisant » cite la feuille et la cellule en cause | observé: alerte | conditions: droit",
+   "source": "arbitre (cas 2)",
+   "classe": "convention",
+   "bilel": "question client (droits)"
+  },
+  {
+   "id": "C15",
+   "texte": "Quand une personne efface une cellule déjà vide, rien ne change : aucune entrée n'apparaît dans l'historique des versions, le nombre de modifications en attente reste inchangé et la commande annuler ne devient pas disponible (principe P1) | observé: versions, attente, annulation | conditions: contenu",
+   "source": "arbitre (P1, cas 5)",
+   "classe": "convention",
+   "bilel": "décision IA possible (convention)"
+  },
+  {
+   "id": "C16",
+   "texte": "Quand une personne saisit dans A1 la formule =B1-A1 alors que B1 contient une formule de syntaxe invalide, A1 affiche une erreur de référence circulaire et non une erreur de syntaxe | observé: erreur | conditions: contenu",
+   "source": "it1 (majorité des greens)",
+   "classe": "convention",
+   "bilel": null
+  },
+  {
+   "id": "C17",
+   "texte": "Quand le propriétaire en ligne modifie le droit d'une personne sur une feuille, le nombre de modifications en attente reste inchangé | observé: attente | conditions: connexion, rôle",
+   "source": "it1 (majorité des greens)",
+   "classe": "convention",
+   "bilel": null
+  },
+  {
+   "id": "C18",
+   "texte": "Quand une personne saisit une date-heure sans décalage horaire dans une cellule, le contenu de cette cellule chez une autre personne d'un autre fuseau, après réception, est exactement le texte saisi, sans conversion ni décalage ajouté : seule la valeur affichée est convertie dans le fuseau de celle qui regarde | observé: contenu | conditions: fuseau, connexion",
+   "source": "it1 (majorité des greens)",
+   "classe": "client",
+   "bilel": null
+  },
+  {
+   "id": "C19",
+   "texte": "Quand une personne ayant seulement le droit lecture importe un CSV dans la feuille active, même un CSV vide, une alerte « droit insuffisant » cite la feuille active | observé: alerte | conditions: droit",
+   "source": "it1 (majorité des greens)",
+   "classe": "convention",
+   "bilel": null
+  },
+  {
+   "id": "C20",
+   "texte": "Quand le propriétaire passe le droit d'une autre personne de lecture à écriture sur une feuille, le droit affiché pour cette personne sur cette feuille devient écriture et aucune alerte n'apparaît | observé: droit, alerte | conditions: rôle, droit",
+   "source": "it1 (majorité des greens)",
+   "classe": "convention",
+   "bilel": null
+  },
+  {
+   "id": "C21",
+   "texte": "Principe P1 : une action qui ne change rien ne laisse aucune trace ; aucune valeur ne change, aucune entrée n'apparaît dans l'historique des versions et le nombre de modifications en attente reste inchangé | observé: valeur, versions, attente | conditions: aucune",
+   "source": "arbitre (P1)",
+   "classe": "convention",
+   "bilel": "décision IA possible (convention)"
+  },
+  {
+   "id": "C22",
+   "texte": "Quand une personne ayant le droit écriture demande de résoudre un conflit sur une cellule qui n'en montre aucun, quelle que soit la valeur choisie, rien ne change : le contenu de la cellule reste le même et le nombre de modifications en attente reste inchangé (principe P1) | observé: contenu, attente | conditions: conflit, droit",
+   "source": "arbitre (P1, cas 1)",
+   "classe": "convention",
+   "bilel": "décision IA possible (convention)"
+  },
+  {
+   "id": "C23",
+   "texte": "Quand le renommage d'une feuille est refusé, rien ne change : la liste des feuilles reste la même et les cellules vides de cette feuille restent vides, sans valeur ni erreur (principe P1) | observé: feuilles, valeur, erreur | conditions: droit",
+   "source": "arbitre (P1, cas 3)",
+   "classe": "convention",
+   "bilel": "décision IA possible (convention)"
+  },
+  {
+   "id": "C24",
+   "texte": "Quand une personne en ligne importe un CSV puis annule l'import avant la confirmation de l'envoi, le nombre de modifications en attente revient à zéro (principes P1 et P2) | observé: attente | conditions: connexion, annulation",
+   "source": "arbitre (P1, cas 6)",
+   "classe": "convention",
+   "bilel": "décision IA possible (convention)"
+  },
+  {
+   "id": "C25",
+   "texte": "Principe P2 : annuler une modification encore en attente (envoi pas encore confirmé) la retire des modifications en attente ; annuler une modification dont l'envoi est déjà confirmé crée la modification inverse, qui s'ajoute aux modifications en attente | observé: attente | conditions: connexion, annulation",
+   "source": "arbitre (P2)",
+   "classe": "convention",
+   "bilel": "décision IA possible (convention)"
+  },
+  {
+   "id": "C26",
+   "texte": "Quand une personne hors ligne annule une modification dont l'envoi avait été confirmé avant la coupure, le nombre de modifications en attente augmente de un (principe P2) | observé: attente | conditions: connexion, annulation",
+   "source": "arbitre (P2)",
+   "classe": "convention",
+   "bilel": "décision IA possible (convention)"
+  },
+  {
+   "id": "C27",
+   "texte": "Quand une personne ayant seulement le droit lecture tente une écriture, quelle qu'elle soit (saisie, effacement, import, renommage ou suppression de feuille, résolution de conflit), l'écriture est refusée et une alerte « droit insuffisant » cite la feuille en cause | observé: alerte | conditions: droit",
+   "source": "arbitre (cas 2)",
+   "classe": "convention",
+   "bilel": "question client (droits)"
+  },
+  {
+   "id": "C28",
+   "texte": "Quand le renommage d'une feuille a été livré à toutes les personnes, chez chacune les formules qui citaient l'ancien nom citent le nouveau, aucune cellule n'affiche d'erreur de référence et les cellules vides restent vides | observé: contenu, erreur, valeur | conditions: connexion",
+   "source": "arbitre (cas 4)",
+   "classe": "convention",
+   "bilel": "décision IA possible (convention)"
+  },
+  {
+   "id": "C29",
+   "texte": "Quand une personne qui n'est pas propriétaire ajoute une feuille, le propriétaire du classeur obtient le droit écriture sur cette feuille, la personne qui l'ajoute aussi, et toute autre personne n'obtient aucun droit sur cette feuille | observé: droit | conditions: rôle",
+   "source": "it2 (majorité des greens)",
+   "classe": "client",
+   "bilel": null
+  },
+  {
+   "id": "C30",
+   "texte": "Quand une personne saisit une date-heure sans décalage horaire qui n'existe pas dans son fuseau (heure sautée au passage à l'heure d'été, par exemple 2026-03-29 02:30 à Paris), la cellule affiche chez cette personne exactement la date-heure saisie, sans la décaler, sans erreur et sans alerte | observé: valeur, erreur, alerte | conditions: fuseau",
+   "source": "it2 (majorité des greens)",
+   "classe": "client",
+   "bilel": null
+  },
+  {
+   "id": "C31",
+   "texte": "Quand une personne saisit =SOMME(A1:A3) alors qu'une cellule de la plage contient un texte non numérique et qu'aucune référence circulaire n'est en jeu, la cellule affiche la somme des seules cellules numériques de la plage (0 si aucune), sans erreur de type | observé: valeur, erreur | conditions: contenu",
+   "source": "it2 (majorité des greens)",
+   "classe": "convention",
+   "bilel": null
+  },
+  {
+   "id": "C32",
+   "texte": "Quand une personne ajoute une feuille, en ligne ou hors ligne, l'historique des versions de chaque feuille déjà existante reste inchangé chez toutes les personnes, même après livraison : aucune entrée n'y apparaît pour cet ajout | observé: versions | conditions: connexion, droit",
+   "source": "it3 (majorité des greens)",
+   "classe": "convention",
+   "bilel": null
+  },
+  {
+   "id": "C33",
+   "texte": "Quand le propriétaire tente de passer son propre droit sur une feuille de écriture à lecture, le droit affiché pour lui sur cette feuille reste écriture chez toutes les personnes, même après livraison, et aucune alerte n'apparaît | observé: droit, alerte | conditions: rôle, connexion",
+   "source": "it3 (majorité des greens)",
+   "classe": "client",
+   "bilel": null
+  },
+  {
+   "id": "C34",
+   "texte": "Quand une personne ferme puis rouvre le classeur, aucun indicateur de présence des autres personnes n'apparaît tant qu'elles n'ont pas de nouveau sélectionné une cellule après la réouverture | observé: présence | conditions: connexion",
+   "source": "it3 (majorité des greens)",
+   "classe": "convention",
+   "bilel": null
+  },
+  {
+   "id": "C35",
+   "texte": "Quand une personne ayant le droit écriture tente de supprimer la dernière feuille du classeur, même juste après l'avoir renommée et alors qu'une modification d'une autre personne sur cette feuille n'est pas encore livrée, la suppression est refusée et rien ne change : la liste des feuilles garde cette feuille sous son nom courant, les cellules vides restent vides sans valeur ni erreur, le nombre de modifications en attente reste inchangé et aucune alerte n'apparaît (principe P1) | observé: feuilles, valeur, erreur, attente, alerte | conditions: feuilles, droit, connexion",
+   "source": "it4 (majorité des greens)",
+   "classe": "convention",
+   "bilel": null
+  },
+  {
+   "id": "C36",
+   "texte": "Quand une personne saisit =A1*2 alors que A1 contient une date-heure (saisie ou importée avec décalage horaire), la cellule affiche une erreur de type : son erreur est « #TYPE! » et sa valeur affichée est ce code d'erreur, jamais un nombre | observé: erreur, valeur | conditions: contenu",
+   "source": "it4 (majorité des greens)",
+   "classe": "client",
+   "bilel": null
+  },
+  {
+   "id": "C37",
+   "texte": "Quand une personne renomme une feuille alors qu'une autre personne a un indicateur de présence sur une cellule de cette feuille, l'indicateur garde le nom de feuille sous lequel cette autre personne a sélectionné la cellule, avant comme après livraison du renommage, jusqu'à la prochaine sélection de cette autre personne | observé: présence | conditions: connexion, feuilles",
+   "source": "it4 (majorité des greens)",
+   "classe": "convention",
+   "bilel": null
+  },
+  {
+   "id": "C38",
+   "texte": "Quand deux personnes en ligne font l'une après l'autre deux modifications que le serveur enregistre lors d'une même livraison, l'historique des versions les ordonne selon le moment de la modification locale, la plus récente en premier, même si leurs horodatages affichés sont identiques à la minute près | observé: versions | conditions: connexion",
+   "source": "it5 (majorité des greens)",
+   "classe": "convention",
+   "bilel": null
+  },
+  {
+   "id": "C39",
+   "texte": "Quand une personne revient en ligne alors qu'une autre personne restée en ligne a sélectionné une cellule pendant son absence et la garde sélectionnée, un indicateur de présence portant le nom de cette autre personne apparaît sur cette cellule chez elle après la livraison, sans que l'autre personne ait à sélectionner de nouveau | observé: présence | conditions: connexion",
+   "source": "it5 (majorité des greens)",
+   "classe": "convention",
+   "bilel": null
+  },
+  {
+   "id": "C40",
+   "texte": "Quand une personne en ligne rétablit une action qu'elle avait annulée alors que l'annulation est encore en attente (envoi pas encore confirmé), le rétablissement crée une nouvelle modification qui s'ajoute aux modifications en attente : leur nombre augmente de un, sans retirer l'annulation en attente (un import compte pour une seule modification) | observé: attente | conditions: connexion, annulation, rétablissement",
+   "source": "it5 (majorité des greens)",
+   "classe": "convention",
+   "bilel": null
+  },
+  {
+   "id": "C41",
+   "texte": "Quand une personne sélectionne une cellule pendant qu'elle est hors ligne puis revient en ligne, aucun indicateur de présence à son nom n'apparaît chez les autres personnes après la livraison, même si elle saisit ensuite une valeur, tant qu'elle n'a pas de nouveau sélectionné une cellule une fois en ligne | observé: présence | conditions: connexion",
+   "source": "it5 (majorité des greens)",
+   "classe": "convention",
+   "bilel": null
+  }
+ ],
+ "tokens": {
+  "neufs": 6672,
+  "cache": 1741,
+  "usd": 0.0698442
+ }
+}

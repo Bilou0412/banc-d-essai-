@@ -1,0 +1,12 @@
+- A04 : formule contenant des espaces entre opérandes et opérateurs | test: test_A04_trou2_espaces_et_decimaux | présumé: les espaces sont ignorés, « = A1 + 0.5 » vaut A1+0,5
+- A08 : chaîne de dépendances plus profonde que la pile d'appels (1200 cellules) | test: test_A08_trou2_chaine_profonde | présumé: le recalcul aboutit sans erreur, quelle que soit la profondeur
+- A10 : formule dépendant d'une cellule en erreur de type | test: test_A10_trou2_erreur_type_propagee | présumé: l'erreur se propage aux dépendants
+- A22 : nom de feuille non ASCII dans une référence | test: test_A22_trou2_nom_de_feuille_accentue | présumé: =Dépenses!A1 est une référence valide
+- A38 : une personne en lecture sur Feuille1 ajoute une feuille | test: test_A38_trou2_lecteur_cree_sa_feuille | présumé: l'ajout est permis et donne l'écriture sur la nouvelle feuille seulement
+- A42 : renommage et ajout concurrents vers le même nom | test: test_A42_trou2_renommage_et_ajout_concurrents | présumé: aucun nom en double, toutes les copies convergent
+- A45 : deux personnes suppriment en même temps les deux dernières feuilles | test: test_A45_trou2_suppressions_concurrentes | présumé: il reste au moins une feuille, la même liste chez tous
+- A64 : la personne revient en ligne alors qu'une autre a toujours une cellule sélectionnée | test: test_A64_trou2_presence_revient | présumé: l'indicateur de présence réapparaît
+- A136 : cellules vides en début ou au milieu d'une ligne exportée | test: test_A136_trou2_colonnes_preservees | présumé: les champs vides sont émis, les colonnes restent alignées
+- A149 : saut de ligne à l'intérieur d'un champ entre guillemets | test: test_A149_trou2_saut_de_ligne_dans_un_champ | présumé: le champ entier va dans une seule cellule
+- A152 : fichier UTF-8 commençant par une marque d'ordre d'octets | test: test_A152_trou2_bom_utf8 | présumé: la marque est retirée, elle n'apparaît pas dans A1
+- N01 : écart entre deux dates seules qui encadrent le passage à l'heure d'été | test: test_N01_trou2_dates_seules | présumé: l'écart vaut 1 jour exactement

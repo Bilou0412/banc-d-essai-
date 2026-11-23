@@ -1,0 +1,489 @@
+{
+ "items": [
+  {
+   "it": 0,
+   "lot": "A",
+   "groupe": "resolve_conflict [en_attente]",
+   "final": "à trancher",
+   "div": 42,
+   "cas": "Une personne en ligne avec le droit écriture demande de résoudre, avec la valeur écartée, un conflit sur une cellule vide qui ne montre aucun conflit ; le contenu ne change pas.",
+   "action": "bob.resolve_conflict('A3', use_discarded=True)",
+   "principe": "P1"
+  },
+  {
+   "it": 0,
+   "lot": "A",
+   "groupe": "set_cell [cellules.*.contenu]",
+   "final": "trou",
+   "div": 37,
+   "cas": "Une personne saisit une date-heure sans décalage horaire dans une cellule, et la spec ne dit pas si le contenu de la cellule garde le texte saisi tel quel ou devient une date-heure normalisée avec le décalage du fuseau.",
+   "action": "alice.set_cell('C1', '2026-01-15 12:00', sheet='Feuille1')",
+   "principe": "aucun"
+  },
+  {
+   "it": 0,
+   "lot": "A",
+   "groupe": "rename_sheet [droits.alice, droits.bob, droits.carol]",
+   "final": "trou",
+   "div": 31,
+   "cas": "Une personne ayant le droit écriture renomme une feuille, et on observe les droits de chaque personne sur cette feuille juste après.",
+   "action": "bob.rename_sheet('Feuille1', 'Brouillon')",
+   "principe": "aucun"
+  },
+  {
+   "it": 0,
+   "lot": "A",
+   "groupe": "add_sheet [annuler, droits.alice]",
+   "final": "trou",
+   "div": 26,
+   "cas": "Juste après qu'une personne a ajouté une feuille, on ne sait pas si cet ajout peut s'annuler, ni quel droit les autres personnes ont sur la nouvelle feuille.",
+   "action": "bob.add_sheet('Feuille2')",
+   "principe": "aucun"
+  },
+  {
+   "it": 0,
+   "lot": "A",
+   "groupe": "set_right [alertes]",
+   "final": "trou",
+   "div": 23,
+   "cas": "Une personne non propriétaire, avec le droit lecture, tente de passer en lecture le droit d'une autre personne sur une feuille : le droit ne change pas, mais la spec ne dit pas si une alerte doit apparaître.",
+   "action": "carol.set_right('bob', 'Feuille1', 'lecture')",
+   "principe": "aucun"
+  },
+  {
+   "it": 0,
+   "lot": "A",
+   "groupe": "import_csv [en_attente]",
+   "final": "trou",
+   "div": 21,
+   "cas": "Une personne avec le droit écriture importe un CSV de deux champs avant que l'envoi soit confirmé ; on regarde de combien augmente le nombre de modifications en attente.",
+   "action": "alice.import_csv('\"12,5\",x\\n')",
+   "principe": "aucun"
+  },
+  {
+   "it": 0,
+   "lot": "A",
+   "groupe": "add_sheet [annuler]",
+   "final": "trou",
+   "div": 17,
+   "cas": "Juste après qu'une personne a ajouté une feuille au classeur, la spec ne dit pas si la commande annuler est disponible.",
+   "action": "alice.add_sheet('Feuille2')",
+   "principe": "aucun"
+  },
+  {
+   "it": 0,
+   "lot": "A",
+   "groupe": "resolve_conflict [alertes]",
+   "final": "à trancher",
+   "div": 15,
+   "cas": "Une personne en lecture seule tente de résoudre un conflit sur une cellule en gardant la valeur retenue, et la question est de savoir si une alerte doit apparaître.",
+   "action": "carol.resolve_conflict('A1', use_discarded=False)",
+   "principe": "aucun"
+  },
+  {
+   "it": 0,
+   "lot": "A",
+   "groupe": "rename_sheet [cellules.*.erreur, cellules.*.valeur]",
+   "final": "à trancher",
+   "div": 15,
+   "cas": "Une personne sans droit écriture tente de renommer la feuille, le renommage est refusé, et la question est de savoir si les cellules vides de cette feuille affichent alors une erreur de référence.",
+   "action": "carol.rename_sheet('Feuille1', 'Brouillon')",
+   "principe": "P1"
+  },
+  {
+   "it": 0,
+   "lot": "A",
+   "groupe": "add_sheet [alertes]",
+   "final": "trou",
+   "div": 10,
+   "cas": "Une personne ajoute une feuille sous un nom déjà porté par une autre feuille du classeur, et l'alerte « nom existant » ne dit pas forcément quel nom est en cause.",
+   "action": "alice.add_sheet('Feuille1')",
+   "principe": "aucun"
+  },
+  {
+   "it": 0,
+   "lot": "A",
+   "groupe": "undo [en_attente]",
+   "final": "trou",
+   "div": 9,
+   "cas": "Une personne en ligne modifie une cellule puis annule aussitôt cette modification, avant toute confirmation d'envoi par le serveur, et on observe le nombre de modifications en attente.",
+   "action": "alice.undo()",
+   "principe": "P2"
+  },
+  {
+   "it": 0,
+   "lot": "A",
+   "groupe": "import_csv [cellules.*.contenu]",
+   "final": "bug H1+S2",
+   "div": 4,
+   "cas": "A person in UTC+1 with write access imports a CSV whose only field is a date-time with a UTC offset, and the cell's content must be set.",
+   "action": "alice.import_csv('2026-01-15T12:00:00+00:00\\n')",
+   "principe": "aucun"
+  },
+  {
+   "it": 0,
+   "lot": "A",
+   "groupe": "import_csv [alertes]",
+   "final": "trou",
+   "div": 4,
+   "cas": "Une personne ayant le droit écriture importe un CSV dont un guillemet n'est jamais fermé à partir de la ligne 2, et l'alerte d'import invalide peut nommer ou non la feuille visée.",
+   "action": "bob.import_csv('a,b\\nc,\"d\\ne,f\\n')",
+   "principe": "aucun"
+  },
+  {
+   "it": 0,
+   "lot": "A",
+   "groupe": "history [(tout)]",
+   "final": "à trancher",
+   "div": 3,
+   "cas": "Bob efface une cellule B1 déjà vide puis se reconnecte, et alice, passée hors ligne ensuite, consulte l'historique des versions.",
+   "action": "alice.history()",
+   "principe": "P1"
+  },
+  {
+   "it": 0,
+   "lot": "A",
+   "groupe": "export_csv [lignes]",
+   "final": "trou",
+   "div": 3,
+   "cas": "Lors d'un export CSV, une ligne non vide qui se termine par des cellules vides est plus courte qu'une autre ligne de la feuille.",
+   "action": "alice.export_csv()",
+   "principe": "aucun"
+  },
+  {
+   "it": 0,
+   "lot": "A",
+   "groupe": "set_cell [cellules.*.erreur, cellules.*.valeur]",
+   "final": "trou",
+   "div": 3,
+   "cas": "Une formule SOMME dont la plage contient sa propre cellule et une cellule de texte cumule une référence circulaire et une possible erreur de type, et la spec ne dit pas laquelle s'affiche.",
+   "action": "alice.set_cell('A3', '=SOMME(A1:A3)', sheet='Feuille1')",
+   "principe": "aucun"
+  },
+  {
+   "it": 0,
+   "lot": "B",
+   "groupe": "add_sheet [annuler]",
+   "final": "trou",
+   "div": 56,
+   "cas": "Une personne qui vient d'ouvrir le classeur et dont la seule action est d'ajouter une feuille : la commande annuler est-elle disponible ?",
+   "action": "alice.add_sheet('Feuille2')",
+   "principe": "aucun"
+  },
+  {
+   "it": 0,
+   "lot": "B",
+   "groupe": "set_cell [cellules.*.contenu]",
+   "final": "trou",
+   "div": 42,
+   "cas": "Quand une personne saisit une date-heure sans décalage horaire dans une cellule, la spec ne dit pas si le contenu de la cellule reste le texte saisi ou devient l'instant normalisé avec son décalage.",
+   "action": "alice.set_cell('C1', '2026-01-15 12:00', sheet='Feuille1')",
+   "principe": "aucun"
+  },
+  {
+   "it": 0,
+   "lot": "B",
+   "groupe": "set_right [alertes]",
+   "final": "trou",
+   "div": 33,
+   "cas": "Une personne non propriétaire tente de passer en lecture le droit d'une autre personne sur une feuille ; le droit ne change pas, mais la spec ne dit pas si une alerte doit apparaître.",
+   "action": "carol.set_right('bob', 'Feuille1', 'lecture')",
+   "principe": "aucun"
+  },
+  {
+   "it": 0,
+   "lot": "B",
+   "groupe": "resolve_conflict [alertes]",
+   "final": "à trancher",
+   "div": 28,
+   "cas": "Une personne qui a seulement le droit lecture tente de résoudre, en gardant la valeur retenue, un conflit sur une cellule vide qui ne montre aucun indicateur de conflit.",
+   "action": "carol.resolve_conflict('A1', use_discarded=False)",
+   "principe": "aucun"
+  },
+  {
+   "it": 0,
+   "lot": "B",
+   "groupe": "rename_sheet [cellules.*.erreur, cellules.*.valeur, droits.alice]",
+   "final": "invalide",
+   "div": 23,
+   "cas": "Une personne sans droit écriture tente de renommer la feuille Feuille1 en « Brouillon ». Le renommage est refusé, mais l'observation est faite sur une feuille « Brouillon » qui n'existe pas.",
+   "action": "carol.rename_sheet('Feuille1', 'Brouillon')",
+   "principe": "aucun"
+  },
+  {
+   "it": 0,
+   "lot": "B",
+   "groupe": "undo [en_attente]",
+   "final": "à trancher",
+   "div": 18,
+   "cas": "Une personne en ligne importe un CSV puis annule aussitôt l'import, avant que le serveur ait confirmé l'envoi, et on lit le nombre de modifications en attente.",
+   "action": "alice.undo()",
+   "principe": "P2"
+  },
+  {
+   "it": 0,
+   "lot": "B",
+   "groupe": "delete_sheet [alertes]",
+   "final": "trou",
+   "div": 13,
+   "cas": "Une personne qui n'a que le droit lecture tente de supprimer l'unique feuille du classeur, et la spec ne dit pas si une alerte doit lui indiquer qu'elle n'a pas le droit écriture.",
+   "action": "carol.delete_sheet('Feuille1')",
+   "principe": "aucun"
+  },
+  {
+   "it": 0,
+   "lot": "B",
+   "groupe": "set_cell [cellules.*.erreur, cellules.*.valeur, droits.alice]",
+   "final": "invalide",
+   "div": 10,
+   "cas": "Une personne saisit un texte dans une cellule d'une feuille Feuille2 qui ne figure pas dans la liste des feuilles du classeur.",
+   "action": "carol.set_cell('C1', 'abc', sheet='Feuille2')",
+   "principe": "aucun"
+  },
+  {
+   "it": 0,
+   "lot": "B",
+   "groupe": "set_cell [cellules.*.erreur, cellules.*.valeur]",
+   "final": "à trancher",
+   "div": 5,
+   "cas": "Une personne saisit dans A3 la formule =SOMME(A1:A3), dont la plage contient A3 elle-même, alors que A1 contient le texte « abc ».",
+   "action": "alice.set_cell('A3', '=SOMME(A1:A3)', sheet='Feuille1')",
+   "principe": "aucun"
+  },
+  {
+   "it": 0,
+   "lot": "B",
+   "groupe": "import_csv [cellules.*.contenu]",
+   "final": "bug S1+S2",
+   "div": 5,
+   "cas": "Une personne en écriture importe un CSV contenant une date-heure avec décalage horaire, et le contenu de la cellule doit rester le champ du fichier pendant que la valeur affichée est convertie dans son fuseau.",
+   "action": "alice.import_csv('2026-01-15T12:00:00+00:00\\n')",
+   "principe": "aucun"
+  },
+  {
+   "it": 0,
+   "lot": "B",
+   "groupe": "history [(tout)]",
+   "final": "trou",
+   "div": 5,
+   "cas": "Une personne hors ligne consulte l'historique des versions après un import CSV fait par une autre personne, et l'entrée de cet import doit avoir un type.",
+   "action": "carol.history()",
+   "principe": "aucun"
+  },
+  {
+   "it": 0,
+   "lot": "B",
+   "groupe": "deliver_all [alice.*.erreur, alice.*.valeur, bob.*.erreur]",
+   "final": "à trancher",
+   "div": 4,
+   "cas": "Après qu'une personne a renommé l'unique feuille et que tout a été livré par le réseau, les cellules vides de cette feuille affichent-elles une erreur de référence chez chacun ?",
+   "action": "réseau.deliver_all()",
+   "principe": "aucun"
+  },
+  {
+   "it": 0,
+   "lot": "B",
+   "groupe": "set_right [alertes, droits.alice]",
+   "final": "invalide",
+   "div": 4,
+   "cas": "Une personne attribue un droit d'écriture à une autre personne sur une feuille « FEUILLE2 » qui n'existe pas dans le classeur.",
+   "action": "carol.set_right('bob', 'FEUILLE2', 'écriture')",
+   "principe": "aucun"
+  },
+  {
+   "it": 0,
+   "lot": "B",
+   "groupe": "rename_sheet [alertes, en_attente]",
+   "final": "trou",
+   "div": 4,
+   "cas": "Une personne en ligne renomme une feuille avec le nom que cette feuille porte déjà.",
+   "action": "alice.rename_sheet('Feuille1', 'Feuille1')",
+   "principe": "aucun"
+  },
+  {
+   "it": 0,
+   "lot": "B",
+   "groupe": "export_csv [lignes]",
+   "final": "trou",
+   "div": 3,
+   "cas": "À l'export CSV d'une feuille où une ligne a moins de cellules non vides à droite qu'une autre ligne, faut-il compléter cette ligne par des champs vides jusqu'à la dernière colonne utilisée ?",
+   "action": "alice.export_csv()",
+   "principe": "aucun"
+  },
+  {
+   "it": 0,
+   "lot": "B",
+   "groupe": "clear [cellules.*.erreur, cellules.*.valeur, droits.alice]",
+   "final": "invalide",
+   "div": 3,
+   "cas": "Après avoir renommé Feuille1 en « Brouillon », Alice efface B2 alors que sa feuille vue est encore « Feuille1 », une feuille qui ne figure plus dans sa liste des feuilles.",
+   "action": "alice.clear('B2')",
+   "principe": "aucun"
+  },
+  {
+   "it": 1,
+   "lot": "A",
+   "groupe": "resolve_conflict [alertes]",
+   "final": "trou",
+   "div": 42,
+   "cas": "Une personne ayant seulement le droit lecture tente de résoudre le conflit d'une cellule en choisissant la valeur retenue.",
+   "action": "carol.resolve_conflict('A1', use_discarded=False)",
+   "principe": "aucun"
+  },
+  {
+   "it": 1,
+   "lot": "A",
+   "groupe": "clear [annuler, en_attente]",
+   "final": "trou",
+   "div": 37,
+   "cas": "Une personne en ligne ayant le droit écriture efface une cellule déjà vide, avant que l'envoi soit confirmé.",
+   "action": "bob.clear('B1')",
+   "principe": "P1"
+  },
+  {
+   "it": 1,
+   "lot": "A",
+   "groupe": "clear [en_attente]",
+   "final": "trou",
+   "div": 34,
+   "cas": "Une personne en ligne efface une cellule déjà vide alors que sa modification précédente attend encore la confirmation de l'envoi, et il faut savoir si cet effacement compte dans les modifications en attente.",
+   "action": "alice.clear('C1')",
+   "principe": "P1"
+  },
+  {
+   "it": 1,
+   "lot": "A",
+   "groupe": "set_right [droits.bob]",
+   "final": "à trancher",
+   "div": 9,
+   "cas": "La propriétaire, en ligne, passe le droit d'une personne de écriture à lecture sur une feuille, juste après une résolution de conflit et un rétablissement.",
+   "action": "alice.set_right('bob', 'Feuille1', 'lecture')",
+   "principe": "aucun"
+  },
+  {
+   "it": 1,
+   "lot": "A",
+   "groupe": "set_cell [cellules.*.erreur, cellules.*.valeur]",
+   "final": "trou",
+   "div": 8,
+   "cas": "A person enters in A1 a formula that refers to A1 itself and also to B1, while B1 holds a formula with invalid syntax.",
+   "action": "bob.set_cell('A1', '=B1-A1', sheet='Feuille1')",
+   "principe": "aucun"
+  },
+  {
+   "it": 1,
+   "lot": "A",
+   "groupe": "reconnect [cellules.*.contenu]",
+   "final": "bug S2",
+   "div": 6,
+   "cas": "Une personne revient en ligne après qu'une autre a saisi une date-heure sans décalage horaire depuis un autre fuseau ; on regarde le contenu de la cellule chez la personne qui revient.",
+   "action": "réseau.reconnect('alice'); deliver_all()",
+   "principe": "aucun"
+  },
+  {
+   "it": 1,
+   "lot": "A",
+   "groupe": "undo [en_attente]",
+   "final": "trou",
+   "div": 6,
+   "cas": "Une personne en ligne modifie une cellule, change le droit d'une autre personne, puis annule la modification de cellule avant que l'envoi soit confirmé ; combien de modifications sont en attente ?",
+   "action": "alice.undo()",
+   "principe": "P2"
+  },
+  {
+   "it": 1,
+   "lot": "A",
+   "groupe": "import_csv [en_attente]",
+   "final": "bug S1+S2",
+   "div": 5,
+   "cas": "Une personne ayant le droit écriture, en ligne et avec une modification non confirmée, importe un CSV vide ; le nombre de modifications en attente doit augmenter de un.",
+   "action": "alice.import_csv('')",
+   "principe": "P1"
+  },
+  {
+   "it": 1,
+   "lot": "A",
+   "groupe": "rename_sheet [alertes]",
+   "final": "bug H1+S1+S2",
+   "div": 5,
+   "cas": "Une personne en ligne qui n'a que le droit lecture renomme une feuille avec le nom que cette feuille porte déjà.",
+   "action": "carol.rename_sheet('Feuille1', 'Feuille1')",
+   "principe": "aucun"
+  },
+  {
+   "it": 1,
+   "lot": "A",
+   "groupe": "deliver_all [alice.*.contenu]",
+   "final": "trou",
+   "div": 5,
+   "cas": "Une date-heure saisie sans décalage horaire par une personne est livrée à une personne d'un autre fuseau ; la question est de savoir si le contenu de la cellule chez celle-ci reste le texte saisi ou devient l'heure convertie dans son fuseau.",
+   "action": "réseau.deliver_all()",
+   "principe": "aucun"
+  },
+  {
+   "it": 1,
+   "lot": "A",
+   "groupe": "history [(tout)]",
+   "final": "à trancher",
+   "div": 5,
+   "cas": "Deux personnes modifient la même cellule avec des valeurs différentes. Une valeur est retenue, l'autre est écartée avec un indicateur de conflit. Il faut décider si la valeur écartée ajoute sa propre entrée à l'historique des versions.",
+   "action": "alice.history()",
+   "principe": "aucun"
+  },
+  {
+   "it": 1,
+   "lot": "A",
+   "groupe": "import_csv [cellules.*.contenu, cellules.*.valeur, en_attente]",
+   "final": "bug H1",
+   "div": 5,
+   "cas": "Une personne ayant le droit écriture sur la feuille active, renommée juste avant, importe un CSV d'une ligne de deux champs accentués, et les cellules A1 et B1 doivent contenir ces champs.",
+   "action": "alice.import_csv('Café,Noël\\n')",
+   "principe": "aucun"
+  },
+  {
+   "it": 1,
+   "lot": "A",
+   "groupe": "deliver_all [bob.*.contenu, carol.*.contenu]",
+   "final": "trou",
+   "div": 5,
+   "cas": "Une personne saisit une date-heure sans décalage horaire, et sa saisie est transmise à d'autres personnes d'un autre fuseau : la spec ne dit pas si le contenu chez ces personnes est le texte saisi ou le texte converti dans leur fuseau.",
+   "action": "réseau.deliver_all()",
+   "principe": "aucun"
+  },
+  {
+   "it": 1,
+   "lot": "A",
+   "groupe": "import_csv [alertes]",
+   "final": "trou",
+   "div": 5,
+   "cas": "Une personne qui n'a que le droit lecture sur la feuille active y importe un fichier CSV vide.",
+   "action": "carol.import_csv('')",
+   "principe": "aucun"
+  },
+  {
+   "it": 1,
+   "lot": "A",
+   "groupe": "import_csv [cellules.*.contenu]",
+   "final": "bug S2",
+   "div": 4,
+   "cas": "Quand une personne ayant le droit écriture importe un CSV contenant une date-heure avec décalage horaire, le contenu de la cellule est le champ du fichier ou sa conversion dans le fuseau de la personne.",
+   "action": "alice.import_csv('2026-01-15T12:00:00+00:00\\n')",
+   "principe": "aucun"
+  },
+  {
+   "it": 1,
+   "lot": "A",
+   "groupe": "set_right [droits.carol]",
+   "final": "trou",
+   "div": 4,
+   "cas": "Alice, la première personne à ouvrir le classeur, passe le droit de carol sur Feuille1 de lecture à écriture.",
+   "action": "alice.set_right('carol', 'Feuille1', 'écriture')",
+   "principe": "aucun"
+  }
+ ],
+ "tokens": {
+  "neufs": 8811,
+  "cache": 1741,
+  "usd": 0.0926322
+ }
+}

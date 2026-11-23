@@ -1,0 +1,104 @@
+{
+ "sonde": "P06",
+ "passes": "strict-v2",
+ "passe": "A",
+ "k_passes": [
+  2.1,
+  2.1
+ ],
+ "k_retenu": 2.1,
+ "concordance": "concordante",
+ "assertions": 40,
+ "frontieres": 2,
+ "tests": 67,
+ "trous_a_priori": 13,
+ "trous_par_assertion": 0.325,
+ "tokens_decoupe": {
+  "neufs": 49482,
+  "cache": 10998,
+  "usd": 0.6280196
+ },
+ "lacunes": [
+  {
+   "cas": "A10 : le temps restant atteint zéro pendant l'arrière-plan (60 s demandées mais moins de 60 s restantes) ; A10 ne dit pas si les transitions de fin de phase ont lieu",
+   "test": "test_A10_trou_zero_atteint_en_arriere_plan",
+   "présumé": "Lorsque le statut minuteur est « en cours » et que le temps restant atteint zéro pendant que l'application est en arrière-plan, au retour la fin de phase a été appliquée comme au premier plan. | observé: phase, cycles complétés, statut minuteur, temps restant | conditions: statut minuteur, phase",
+   "attaque": 1
+  },
+  {
+   "cas": "A12 : réinitialiser pendant une pause (courte ou longue) ; A12 ne fixe ni la phase ni le temps restant",
+   "test": "test_A12_trou_reinitialiser_en_pause_courte",
+   "présumé": "Lorsque la phase est « pause courte », l'action « réinitialiser » laisse la phase inchangée et remet le temps restant à la durée pause. | observé: temps restant | conditions: phase, durée pause",
+   "attaque": 1
+  },
+  {
+   "cas": "A22 : avec démarrage auto, le temps écoulé au-delà de zéro n'est pas dit reporté sur la phase suivante",
+   "test": "test_A22_trou_debordement_reporte_sur_phase_suivante",
+   "présumé": "Lorsque le démarrage auto est activé, le temps écoulé au-delà de l'arrivée à zéro est décompté de la phase suivante. | observé: temps restant | conditions: démarrage auto, statut minuteur",
+   "attaque": 1
+  },
+  {
+   "cas": "A23 : avec 0 cycle complété, 0 est un multiple de l'intervalle longue ; « selon les cycles complétés » enverrait alors en pause longue",
+   "test": "test_A23_trou_zero_cycles_pause_courte",
+   "présumé": "Lorsque la phase est « travail » et que les cycles complétés valent 0, l'action « passer » fait passer la phase à « pause courte ». | observé: phase | conditions: phase, cycles complétés",
+   "attaque": 1
+  },
+  {
+   "cas": "A23 : la règle de choix courte/longue n'est pas fixée (cycles complétés tels quels, ou + 1 comme en A15/A16)",
+   "test": "test_A23_trou_multiple_non_nul_pause_longue",
+   "présumé": "Lorsque la phase est « travail » et que les cycles complétés sont un multiple non nul de l'intervalle longue, l'action « passer » fait passer la phase à « pause longue ». | observé: phase | conditions: phase, cycles complétés, intervalle longue",
+   "attaque": 1
+  },
+  {
+   "cas": "A28 : l'action « passer » en phase travail ne dit pas si elle ajoute une session ou du total jour",
+   "test": "test_A28_trou_passer_najoute_pas_de_session",
+   "présumé": "Lorsque la phase est « travail », l'action « passer » laisse l'historique sessions et le total jour inchangés. | observé: historique sessions, total jour | conditions: phase",
+   "attaque": 1
+  },
+  {
+   "cas": "A25 : minuteur arrêté en phase de pause, modifier la durée travail ; A25 ne couvre que la phase travail",
+   "test": "test_A25_trou_arrete_en_pause_courte_modifier_duree_travail",
+   "présumé": "Lorsque le statut minuteur est « arrêté » et que la phase est « pause courte », modifier la durée travail laisse le temps restant inchangé. | observé: temps restant | conditions: statut minuteur, phase",
+   "attaque": 1
+  },
+  {
+   "cas": "A26 : modifier la durée travail quand le minuteur est « en pause » ; ni A25 ni A26 ne couvrent ce statut",
+   "test": "test_A26_trou_en_pause_modifier_duree_laisse_temps_restant",
+   "présumé": "Lorsque le statut minuteur est « en pause », modifier la durée travail laisse le temps restant inchangé. | observé: temps restant | conditions: statut minuteur",
+   "attaque": 1
+  },
+  {
+   "cas": "A27 : seule la valeur 0 est dite refusée ; une durée négative n'est pas tranchée",
+   "test": "test_A27_trou_duree_negative_refusee",
+   "présumé": "Saisir une durée travail négative est refusé et la durée travail reste à sa valeur précédente. | observé: durée travail | conditions: aucune",
+   "attaque": 1
+  },
+  {
+   "cas": "A33 : A30 rattache la session à la tâche active au démarrage, A33 crédite « la tâche active » sans dire à quel moment ; la tâche change en cours de session",
+   "test": "test_A33_trou_total_credite_tache_du_demarrage",
+   "présumé": "Lorsque la phase est « travail », l'arrivée du temps restant à zéro augmente le total tâche de la tâche active au démarrage de la session de la durée travail. | observé: total tâche | conditions: phase, tâche active, durée travail",
+   "attaque": 1
+  },
+  {
+   "cas": "A34 : une session démarrée la veille et terminée après minuit n'a pas de jour fixé",
+   "test": "test_A34_trou_session_a_cheval_sur_minuit_comptee_le_jour_de_fin",
+   "présumé": "Une session est datée du jour où le temps restant arrive à zéro, et le total jour de ce jour augmente de la durée travail. | observé: total jour, historique sessions | conditions: date courante",
+   "attaque": 1
+  },
+  {
+   "cas": "A38 : session la veille et aucune session aujourd'hui ; ni A35 ni A38 ne fixent la série affichée avant la première session du jour",
+   "test": "test_A38_trou_serie_affichee_le_lendemain_avant_session",
+   "présumé": "Lorsque l'historique sessions contient une session à la veille et aucune à la date courante, la série jours affichée vaut la série atteinte la veille. | observé: série jours | conditions: historique sessions, date courante",
+   "attaque": 1
+  },
+  {
+   "cas": "A36 : les tests de saut de jours supposent que la série repart à 1 même après une série antérieure supérieure",
+   "test": "test_A36_trou_dans_les_jours_serie_repart_a_1",
+   "présumé": "Lorsque l'historique sessions ne contient aucune session à la veille, l'ajout de la première session du jour met la série jours à 1 quelle que soit la série antérieure. | observé: série jours | conditions: historique sessions, date courante",
+   "attaque": 1
+  }
+ ],
+ "modeles": {
+  "red": "opus"
+ }
+}

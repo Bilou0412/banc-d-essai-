@@ -1,0 +1,42 @@
+{"passe": "P10_C.txt", "modele": "opus", "tokens": {"claude-opus-5-5": 20323}, "usd": 0.23142419999999997}
+{"passe": "P09_C.txt", "modele": "opus", "tokens": {"claude-opus-5-5": 20871}, "usd": 0.23908480000000004}
+{"passe": "P10_D.txt", "modele": "opus", "tokens": {"claude-opus-5-5": 19339}, "usd": 0.2249268}
+{"passe": "P05_A.txt", "consigne": "decompositeur-strict-v2.md", "modele": "opus", "tokens": {"claude-opus-5-5": 18781}, "usd": 0.2166974}
+{"passe": "P10_B.txt", "consigne": "decompositeur-strict-v2.md", "modele": "opus", "tokens": {"claude-opus-5-5": 18745}, "usd": 0.216112}
+{"passe": "P05_B.txt", "consigne": "decompositeur-strict-v2.md", "modele": "opus", "tokens": {"claude-opus-5-5": 20299}, "usd": 0.23794939999999998}
+{"passe": "P10_A.txt", "consigne": "decompositeur-strict-v2.md", "modele": "opus", "tokens": {"claude-opus-5-5": 19971}, "usd": 0.23328759999999998}
+{"passe": "P08_A.txt", "consigne": "decompositeur-strict-v2.md", "modele": "opus", "tokens": {"claude-opus-5-5": 20089}, "usd": 0.2349514}
+{"passe": "P08_B.txt", "consigne": "decompositeur-strict-v2.md", "modele": "opus", "tokens": {"claude-opus-5-5": 21594}, "usd": 0.2560156}
+{"passe": "P05_C.txt", "consigne": "decompositeur-strict-v2.md", "modele": "opus", "tokens": {"claude-opus-5-5": 20388}, "usd": 0.239236}
+{"passe": "P10_C.txt", "consigne": "decompositeur-strict-v2.md", "modele": "opus", "tokens": {"claude-opus-5-5": 20672}, "usd": 0.2431192}
+{"passe": "P07_B.txt", "consigne": "decompositeur-strict-v2.md", "modele": "opus", "tokens": {"claude-opus-5-5": 16512}, "usd": 0.1775312}
+{"passe": "P02_A.txt", "consigne": "decompositeur-strict-v2.md", "modele": "opus", "tokens": {"claude-opus-5-5": 18568}, "usd": 0.2063268}
+{"passe": "P06_B.txt", "consigne": "decompositeur-strict-v2.md", "modele": "opus", "tokens": {"claude-opus-5-5": 18987}, "usd": 0.2121286}
+{"passe": "P03_A.txt", "consigne": "decompositeur-strict-v2.md", "modele": "opus", "tokens": {"claude-opus-5-5": 19445}, "usd": 0.21863359999999998}
+{"passe": "P01_A.txt", "consigne": "decompositeur-strict-v2.md", "modele": "opus", "tokens": {"claude-opus-5-5": 19214}, "usd": 0.2154284}
+{"passe": "P01_B.txt", "consigne": "decompositeur-strict-v2.md", "modele": "opus", "tokens": {"claude-opus-5-5": 19775}, "usd": 0.2233116}
+{"passe": "P03_B.txt", "consigne": "decompositeur-strict-v2.md", "modele": "opus", "tokens": {"claude-opus-5-5": 19548}, "usd": 0.22003479999999997}
+{"passe": "P02_B.txt", "consigne": "decompositeur-strict-v2.md", "modele": "opus", "tokens": {"claude-opus-5-5": 19902}, "usd": 0.22499080000000002}
+{"passe": "P06_A.txt", "consigne": "decompositeur-strict-v2.md", "modele": "opus", "tokens": {"claude-opus-5-5": 20630}, "usd": 0.23511320000000002}
+{"passe": "P04_B.txt", "consigne": "decompositeur-strict-v2.md", "modele": "opus", "tokens": {"claude-opus-5-5": 20574}, "usd": 0.2343758}
+{"passe": "P09_B.txt", "consigne": "decompositeur-strict-v2.md", "modele": "opus", "tokens": {"claude-opus-5-5": 20508}, "usd": 0.23342859999999999}
+{"passe": "P04_A.txt", "consigne": "decompositeur-strict-v2.md", "modele": "opus", "tokens": {"claude-opus-5-5": 21040}, "usd": 0.24088800000000002}
+{"passe": "P09_A.txt", "consigne": "decompositeur-strict-v2.md", "modele": "opus", "tokens": {"claude-opus-5-5": 22546}, "usd": 0.2619374}
+{"passe": "P07_A.txt", "consigne": "decompositeur-strict-v2.md", "modele": "opus", "tokens": {"claude-opus-5-5": 21700}, "usd": 0.2501164}
+{"passe": "P03_C.txt", "consigne": "decompositeur-strict-v2.md", "modele": "opus", "tokens": {"claude-opus-5-5": 16394}, "usd": 0.18316900000000003}
+{"passe": "P09_C.txt", "consigne": "decompositeur-strict-v2.md", "modele": "opus", "tokens": {"claude-opus-5-5": 20898}, "usd": 0.24615579999999998}
+{"passe": "P02_B.txt", "consigne": "decompositeur-strict-v3.md", "modele": "opus", "tokens": {"claude-opus-5-5": 19302}, "usd": 0.22182780000000002}
+{"passe": "P07_B.txt", "consigne": "decompositeur-strict-v3.md", "modele": "opus", "tokens": {"claude-opus-5-5": 18907}, "usd": 0.216269}
+{"passe": "P02_A.txt", "consigne": "decompositeur-strict-v3.md", "modele": "opus", "tokens": {"claude-opus-5-5": 19641}, "usd": 0.2266032}
+{"passe": "P07_A.txt", "consigne": "decompositeur-strict-v3.md", "modele": "opus", "tokens": {"claude-opus-5-5": 20369}, "usd": 0.23672520000000002}
+{"passe": "P10_B.txt", "consigne": "decompositeur-strict-v3.md", "modele": "opus", "tokens": {"claude-opus-5-5": 21098}, "usd": 0.2469374}
+{"passe": "P08_B.txt", "consigne": "decompositeur-strict-v3.md", "modele": "opus", "tokens": {"claude-opus-5-5": 20498}, "usd": 0.2385258}
+{"passe": "P08_A.txt", "consigne": "decompositeur-strict-v3.md", "modele": "opus", "tokens": {"claude-opus-5-5": 20828}, "usd": 0.24311080000000002}
+{"passe": "P10_A.txt", "consigne": "decompositeur-strict-v3.md", "modele": "opus", "tokens": {"claude-opus-5-5": 23484}, "usd": 0.28031799999999996}
+{"passe": "P02_C.txt", "consigne": "decompositeur-strict-v3.md", "modele": "opus", "tokens": {"claude-opus-5-5": 18633}, "usd": 0.2124678}
+{"passe": "P07_C.txt", "consigne": "decompositeur-strict-v3.md", "modele": "opus", "tokens": {"claude-opus-5-5": 19749}, "usd": 0.22806880000000002}
+{"passe": "P08_C.txt", "consigne": "decompositeur-strict-v3.md", "modele": "opus", "tokens": {"claude-opus-5-5": 20082}, "usd": 0.23268999999999998}
+{"passe": "P11_B.txt", "consigne": "decompositeur-strict-v3-xl.md", "modele": "opus", "tokens": {"claude-opus-5-5": 42904}, "usd": 0.551525}
+{"passe": "P11_A.txt", "consigne": "decompositeur-strict-v2-xl.md", "modele": "opus", "tokens": {"claude-opus-5-5": 43876}, "usd": 0.5672098}
+{"passe": "P11_A.txt", "consigne": "decompositeur-strict-v3-xl.md", "modele": "opus", "tokens": {"claude-opus-5-5": 47710}, "usd": 0.6188558}
+{"passe": "P11_B.txt", "consigne": "decompositeur-strict-v2-xl.md", "modele": "opus", "tokens": {"claude-opus-5-5": 48663}, "usd": 0.6342102000000001}

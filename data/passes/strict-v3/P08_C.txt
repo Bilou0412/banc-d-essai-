@@ -1,0 +1,40 @@
+ÉTATS: contenu; curseur; curseur distant; présence; permission; rôle; annulation; rétablissement; versions; aperçu; connexion; alerte
+ASSERTIONS:
+- Un utilisateur dont la permission est « écriture » tape un caractère : le contenu contient ce caractère à la position du curseur | observé: contenu | conditions: permission, curseur
+- Un utilisateur dont la permission est « lecture » tape un caractère : le contenu reste inchangé | observé: contenu | conditions: permission
+- Un utilisateur dont la permission est « lecture » tape un caractère : l'alerte affiche « document en lecture seule » | observé: alerte | conditions: permission
+- Un utilisateur dont la permission est « écriture » appuie sur Retour arrière : le contenu perd le caractère situé juste avant le curseur | observé: contenu | conditions: permission, curseur
+- Un utilisateur dont la permission est « écriture » tape un caractère : le curseur avance d'une position | observé: curseur | conditions: permission
+- Un utilisateur déplace son curseur avec les flèches : le curseur se trouve à la nouvelle position | observé: curseur | conditions: aucune
+- Un utilisateur dont la permission est « écriture » tape un caractère : l'annulation contient cette frappe comme dernière action | observé: annulation | conditions: permission
+- L'annulation n'est pas vide et l'utilisateur choisit « Annuler » : le contenu revient à son état d'avant la dernière action de l'annulation | observé: contenu | conditions: annulation
+- L'annulation est vide et l'utilisateur choisit « Annuler » : le contenu reste inchangé | observé: contenu | conditions: annulation
+- L'annulation n'est pas vide et l'utilisateur choisit « Annuler » : le rétablissement contient l'action annulée | observé: rétablissement | conditions: annulation
+- Le rétablissement n'est pas vide et l'utilisateur choisit « Rétablir » : le contenu contient de nouveau l'action rétablie | observé: contenu | conditions: rétablissement
+- Le rétablissement n'est pas vide et un utilisateur dont la permission est « écriture » tape un caractère : le rétablissement devient vide | observé: rétablissement | conditions: rétablissement, permission
+- L'utilisateur A a tapé un mot, puis l'utilisateur B choisit « Annuler » : le contenu contient toujours le mot de A | observé: contenu | conditions: annulation | frontière: oui
+- L'utilisateur A tape un caractère : le contenu affiché chez l'utilisateur B contient ce caractère | observé: contenu | conditions: aucune | frontière: oui
+- Les utilisateurs A et B insèrent chacun un mot au même moment à deux positions différentes : le contenu contient les deux mots | observé: contenu | conditions: aucune | frontière: oui
+- Les utilisateurs A et B insèrent chacun un mot au même moment à la même position : le contenu affiché chez A est identique au contenu affiché chez B | observé: contenu | conditions: aucune | frontière: oui
+- L'utilisateur B insère du texte avant la position du curseur de A : le curseur de A reste devant le même caractère qu'avant l'insertion | observé: curseur | conditions: aucune | frontière: oui
+- L'utilisateur A déplace son curseur : le curseur distant de A s'affiche chez B à la nouvelle position | observé: curseur distant | conditions: aucune | frontière: oui
+- L'utilisateur A ouvre le document : la présence affichée chez B inclut A | observé: présence | conditions: aucune | frontière: oui
+- L'utilisateur A ferme le document : la présence affichée chez B n'inclut plus A | observé: présence | conditions: aucune | frontière: oui
+- L'utilisateur A n'a fait aucune action depuis 5 minutes : la présence affichée chez B marque A comme « inactif » | observé: présence | conditions: aucune | frontière: oui
+- La liaison réseau de l'utilisateur est coupée : la connexion affiche « hors ligne » | observé: connexion | conditions: aucune | frontière: oui
+- L'utilisateur A a tapé un mot pendant que sa connexion était « hors ligne », puis la connexion revient : le contenu affiché chez B contient ce mot | observé: contenu | conditions: connexion | frontière: oui
+- Un utilisateur dont le rôle est « propriétaire » passe la permission de B à « lecture » : la permission de B vaut « lecture » | observé: permission | conditions: rôle
+- Un utilisateur dont le rôle n'est pas « propriétaire » tente de changer la permission de B : la permission de B reste inchangée | observé: permission | conditions: rôle
+- Le propriétaire passe la permission de B à « lecture » pendant que B a le document ouvert : B ne peut plus modifier le contenu sans avoir rechargé le document | observé: contenu | conditions: permission | frontière: oui
+- Un utilisateur dont la permission est « écriture » choisit « Enregistrer une version » : les versions contiennent une nouvelle entrée | observé: versions | conditions: permission
+- Un utilisateur enregistre une version : la nouvelle entrée des versions affiche l'heure de son enregistrement | observé: versions | conditions: aucune | frontière: oui
+- Le document a été modifié pendant 10 minutes sans enregistrement manuel : les versions contiennent une entrée automatique | observé: versions | conditions: aucune | frontière: oui
+- Un utilisateur sélectionne une version dans l'historique : l'aperçu affiche le texte de cette version | observé: aperçu | conditions: aucune
+- Un utilisateur sélectionne une version dans l'historique : le contenu reste inchangé | observé: contenu | conditions: aucune
+- Un utilisateur dont la permission est « écriture » restaure une version : le contenu est égal au texte de cette version | observé: contenu | conditions: permission
+- Un utilisateur dont la permission est « lecture » tente de restaurer une version : le contenu reste inchangé | observé: contenu | conditions: permission
+- Un utilisateur dont la permission est « écriture » restaure une version : les versions contiennent une nouvelle entrée correspondant au texte d'avant la restauration | observé: versions | conditions: permission
+- Un utilisateur dont la permission est « écriture » restaure une version : l'annulation contient la restauration comme dernière action | observé: annulation | conditions: permission
+- L'utilisateur ferme l'application puis rouvre le document : le contenu est identique à celui d'avant la fermeture | observé: contenu | conditions: aucune | frontière: oui
+- L'utilisateur ferme l'application puis rouvre le document : les versions contiennent les mêmes entrées qu'avant la fermeture | observé: versions | conditions: aucune | frontière: oui
+- L'utilisateur ferme l'application puis rouvre le document : l'annulation est vide | observé: annulation | conditions: aucune | frontière: oui

@@ -1,0 +1,18 @@
+budget : 0.00 $ dépensés, double juge de 16 groupes (it0, lot A) estimé à 4.16 $
+  resolve_conflict [en_attente] (42) → à trancher  [trou / bug V2]
+  set_cell [cellules.*.contenu] (37) → trou  [trou / trou]
+  rename_sheet [droits.alice, droits.bob, droits.carol] (31) → trou  [trou / trou]
+  add_sheet [annuler, droits.alice] (26) → trou  [trou / trou]
+  set_right [alertes] (23) → trou  [trou / trou]
+  import_csv [en_attente] (21) → trou  [trou / trou]
+  add_sheet [annuler] (17) → trou  [trou / trou]
+  resolve_conflict [alertes] (15) → à trancher  [trou / invalide]
+  rename_sheet [cellules.*.erreur, cellules.*.valeur] (15) → à trancher  [trou / invalide]
+  add_sheet [alertes] (10) → trou  [trou / trou]
+  undo [en_attente] (9) → trou  [trou / trou]
+  import_csv [cellules.*.contenu] (4) → bug H1+S2  [bug V1 / bug V1]
+  import_csv [alertes] (4) → trou  [trou / trou]
+  history [(tout)] (3) → à trancher  [trou / bug V2]
+  export_csv [lignes] (3) → trou  [trou / trou]
+  set_cell [cellules.*.erreur, cellules.*.valeur] (3) → trou  [trou / trou]
+{"situations": 300, "paires": {"H1-H2": 0.02, "H1-S1": 0.037, "H1-S2": 0.05, "H2-S1": 0.163, "H2-S2": 0.123, "S1-S2": 0.143}, "taux_moyen": 0.089, "accord_4": 4, "accord_4_part": 0.013, "groupes": 39, "juges": 16, "classes": {"à trancher": 4, "trou": 11, "bug H1+S2": 1}, "accord_juges": 0.75}

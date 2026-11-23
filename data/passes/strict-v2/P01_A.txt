@@ -1,0 +1,41 @@
+ÉTATS: liste; nom; téléphone; email; étiquette; favori; recherche; tri; filtre; confirmation; erreur; fichier
+ASSERTIONS:
+- Valider la création d'un contact avec un nom non vide ajoute ce contact à la liste | observé: liste | conditions: nom
+- Valider la création d'un contact avec un nom vide affiche l'erreur « Le nom est obligatoire » | observé: erreur | conditions: nom
+- Valider la création d'un contact avec un nom vide n'ajoute aucun contact à la liste | observé: liste | conditions: nom
+- Valider la création d'un contact avec un email sans « @ » affiche l'erreur « Email invalide » | observé: erreur | conditions: email
+- Valider la création d'un contact avec un téléphone contenant des lettres affiche l'erreur « Téléphone invalide » | observé: erreur | conditions: téléphone
+- Valider la création d'un contact avec un email vide n'affiche aucune erreur | observé: erreur | conditions: email
+- Valider la modification du nom d'un contact affiche le nouveau nom sur sa fiche | observé: nom | conditions: aucune
+- Valider la modification d'un contact avec un nom vide affiche l'erreur « Le nom est obligatoire » | observé: erreur | conditions: nom
+- Annuler la modification d'un contact laisse l'ancien nom affiché sur sa fiche | observé: nom | conditions: aucune
+- Demander la suppression d'un contact affiche une demande de confirmation | observé: confirmation | conditions: aucune
+- Confirmer la suppression retire le contact de la liste | observé: liste | conditions: confirmation
+- Refuser la confirmation de suppression laisse le contact dans la liste | observé: liste | conditions: confirmation
+- Saisir un texte de recherche n'affiche dans la liste que les contacts dont le nom contient ce texte, sans tenir compte de la casse | observé: liste | conditions: recherche
+- Saisir un texte de recherche présent uniquement dans l'email d'un contact affiche ce contact dans la liste | observé: liste | conditions: recherche, email
+- Saisir un texte de recherche ne correspondant à aucun contact affiche une liste vide avec le message « Aucun contact » | observé: liste | conditions: recherche
+- Effacer le texte de recherche affiche tous les contacts dans la liste | observé: liste | conditions: recherche
+- Choisir le tri par nom croissant ordonne la liste de A à Z | observé: liste | conditions: tri
+- Choisir le tri par nom décroissant ordonne la liste de Z à A | observé: liste | conditions: tri
+- Avec le tri par nom croissant, « élodie » est placée entre « Denis » et « Fabien » dans la liste | observé: liste | conditions: tri, nom | frontière: oui
+- Créer un contact place ce contact dans la liste à la position correspondant au tri choisi | observé: liste | conditions: tri
+- Avec des favoris présents, les contacts favoris apparaissent en tête de la liste quel que soit le tri | observé: liste | conditions: favori
+- Ajouter une étiquette à un contact affiche cette étiquette sur sa fiche | observé: étiquette | conditions: aucune
+- Ajouter à un contact une étiquette qu'il porte déjà laisse cette étiquette affichée une seule fois sur sa fiche | observé: étiquette | conditions: étiquette
+- Retirer une étiquette d'un contact fait disparaître cette étiquette de sa fiche | observé: étiquette | conditions: aucune
+- Choisir un filtre par étiquette n'affiche dans la liste que les contacts portant cette étiquette | observé: liste | conditions: filtre
+- Saisir un texte de recherche alors qu'un filtre par étiquette est actif n'affiche dans la liste que les contacts satisfaisant les deux critères | observé: liste | conditions: filtre, recherche
+- Marquer un contact comme favori affiche l'icône favori sur ce contact | observé: favori | conditions: aucune
+- Retirer un contact des favoris fait disparaître l'icône favori de ce contact | observé: favori | conditions: favori
+- Exporter en CSV produit un fichier dont la première ligne est « nom,téléphone,email,étiquettes,favori » | observé: fichier | conditions: aucune
+- Exporter en CSV produit un fichier contenant une ligne par contact enregistré, même si une recherche ou un filtre est actif | observé: fichier | conditions: aucune
+- Exporter en CSV un contact dont le nom contient une virgule produit un fichier où ce nom est entouré de guillemets | observé: fichier | conditions: nom
+- Importer un fichier CSV valide ajoute à la liste un contact par ligne de données | observé: liste | conditions: fichier
+- Importer un fichier CSV contenant une ligne sans nom affiche une erreur indiquant le numéro de cette ligne | observé: erreur | conditions: fichier
+- Importer un fichier CSV contenant une ligne sans nom n'ajoute pas cette ligne à la liste | observé: liste | conditions: fichier
+- Importer un fichier sans la ligne d'en-tête attendue affiche l'erreur « Format CSV invalide » | observé: erreur | conditions: fichier
+- Importer un fichier CSV contenant un contact dont l'email existe déjà dans la liste n'ajoute pas de doublon à la liste | observé: liste | conditions: fichier, email | frontière: oui
+- Importer un fichier CSV dont la colonne étiquettes contient « travail;famille » affiche ces deux étiquettes sur la fiche du contact importé | observé: étiquette | conditions: fichier
+- Importer un fichier CSV dont la colonne favori vaut « oui » affiche l'icône favori sur le contact importé | observé: favori | conditions: fichier
+- Recharger l'application affiche dans la liste les contacts créés avant le rechargement | observé: liste | conditions: aucune | frontière: oui

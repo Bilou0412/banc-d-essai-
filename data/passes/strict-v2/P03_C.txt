@@ -1,0 +1,41 @@
+ÉTATS: nom; quantité; disponible; emplacement; statut; emprunteur; retour; retard; historique; filtre; liste; export; message
+ASSERTIONS:
+- Créer un article avec un nom vide affiche un message d'erreur | observé: message | conditions: nom
+- Créer un article avec une quantité négative affiche un message d'erreur | observé: message | conditions: quantité
+- Créer un article avec une quantité valide affiche cette quantité sur la fiche de l'article | observé: quantité | conditions: aucune
+- Créer un article fixe le nombre d'unités disponibles à la quantité saisie | observé: disponible | conditions: quantité
+- Créer un article affiche l'emplacement saisi sur la fiche de l'article | observé: emplacement | conditions: aucune
+- Un article nouvellement créé a le statut « en service » | observé: statut | conditions: aucune
+- Prêter n unités d'un article diminue de n le nombre d'unités disponibles | observé: disponible | conditions: disponible
+- Prêter un nombre d'unités supérieur au nombre d'unités disponibles affiche un message d'erreur | observé: message | conditions: disponible
+- Prêter un article au statut « hors service » affiche un message d'erreur | observé: message | conditions: statut
+- Prêter un article sans indiquer d'emprunteur affiche un message d'erreur | observé: message | conditions: emprunteur
+- Prêter un article avec une date de retour antérieure à la date du jour affiche un message d'erreur | observé: message | conditions: retour | frontière: oui
+- Un prêt enregistré affiche le nom de l'emprunteur saisi | observé: emprunteur | conditions: aucune
+- Un prêt enregistré affiche la date de retour saisie | observé: retour | conditions: aucune
+- Prêter des unités d'un article ne modifie pas sa quantité | observé: quantité | conditions: aucune
+- Enregistrer un prêt ajoute une entrée « prêt » à l'historique de l'article | observé: historique | conditions: aucune
+- Enregistrer le retour d'un prêt de n unités augmente de n le nombre d'unités disponibles | observé: disponible | conditions: aucune
+- Enregistrer le retour d'un prêt ajoute une entrée « retour » à l'historique de l'article | observé: historique | conditions: aucune
+- Un prêt non rendu dont la date de retour est dépassée est marqué en retard | observé: retard | conditions: retour | frontière: oui
+- Un prêt non rendu dont la date de retour n'est pas dépassée n'est pas marqué en retard | observé: retard | conditions: retour | frontière: oui
+- Enregistrer le retour d'un prêt en retard retire la marque de retard | observé: retard | conditions: retard
+- Mettre un article hors service change son statut en « hors service » | observé: statut | conditions: aucune
+- Un article au statut « hors service » affiche zéro unité disponible | observé: disponible | conditions: statut
+- Remettre en service un article sans prêt en cours rétablit un nombre d'unités disponibles égal à sa quantité | observé: disponible | conditions: quantité, statut
+- Mettre un article hors service ajoute une entrée « hors service » à son historique | observé: historique | conditions: aucune
+- Réduire la quantité d'un article en dessous du nombre d'unités prêtées affiche un message d'erreur | observé: message | conditions: quantité, disponible
+- Modifier l'emplacement d'un article affiche le nouvel emplacement sur sa fiche | observé: emplacement | conditions: aucune
+- Modifier l'emplacement d'un article ajoute une entrée « déplacement » à son historique | observé: historique | conditions: aucune
+- L'historique d'un article affiche les entrées de la plus récente à la plus ancienne | observé: historique | conditions: aucune
+- Supprimer un article ayant un prêt en cours affiche un message d'erreur | observé: message | conditions: quantité, disponible
+- Appliquer un filtre par emplacement n'affiche dans la liste que les articles de cet emplacement | observé: liste | conditions: filtre, emplacement
+- Appliquer un filtre par statut « hors service » n'affiche dans la liste que les articles hors service | observé: liste | conditions: filtre, statut
+- Appliquer le filtre « en retard » n'affiche dans la liste que les articles ayant au moins un prêt en retard | observé: liste | conditions: filtre, retard
+- Appliquer un filtre par texte n'affiche dans la liste que les articles dont le nom contient ce texte | observé: liste | conditions: filtre, nom
+- Appliquer un filtre sans correspondance affiche une liste vide | observé: liste | conditions: filtre
+- Effacer le filtre affiche tous les articles dans la liste | observé: liste | conditions: aucune
+- Exporter produit un fichier contenant uniquement les articles présents dans la liste affichée | observé: export | conditions: liste
+- Exporter produit un fichier contenant la quantité de chaque article exporté | observé: export | conditions: aucune
+- Exporter produit un fichier contenant le statut de chaque article exporté | observé: export | conditions: aucune
+- Exporter une liste vide produit un fichier ne contenant que la ligne d'en-tête | observé: export | conditions: liste

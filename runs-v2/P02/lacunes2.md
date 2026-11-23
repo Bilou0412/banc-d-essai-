@@ -1,0 +1,5 @@
+- A09 : valeur ajustée exactement à mi-chemin entre deux centièmes (0.625, 1.005, 2.675) | test: test_A09_trou_arrondi_demi_superieur | présumé: arrondi au plus proche, la moitié vers le haut (0.63, 1.01, 2.68), calculé sans erreur de représentation binaire
+- A09 : quantité ajustée non entière reportée dans la liste de courses | test: test_A09_trou_quantite_ajustee_dans_la_liste_de_courses_arrondie | présumé: la liste de courses l'affiche elle aussi arrondie à deux décimales ("1.33")
+- A37 : photo, note et catégorie d'une recette après fermeture et réouverture | test: test_A37_trou_photo_note_categorie_conservees | présumé: la recette « toujours présente » est la fiche complète, photo binaire intacte comprise
+- A37 : photo relue par un autre processus | test: test_A37_trou_photo_relue_par_un_autre_processus | présumé: les octets de la photo sont relus à l'identique depuis le seul fichier
+- A37 : deux instances ouvertes sur le même fichier, chacune enregistre une recette puis se ferme | test: test_A37_trou_deux_instances_meme_fichier | présumé: aucune écriture n'écrase l'autre, les deux recettes sont présentes à la réouverture

@@ -1,0 +1,244 @@
+{
+ "sonde": "P07",
+ "passes": "strict-v2",
+ "passe": "A",
+ "k_passes": [
+  1.8,
+  1.91
+ ],
+ "k_retenu": 1.85,
+ "concordance": "concordante",
+ "convergent": true,
+ "tours": 2,
+ "attaques": 2,
+ "assertions": 35,
+ "frontieres": 3,
+ "champ_local": {
+  "tout": 1.0,
+  "frontiere": 1.0,
+  "autres": 1.0
+ },
+ "essais": {
+  "A01": 1,
+  "A02": 1,
+  "A03": 1,
+  "A04": 1,
+  "A05": 1,
+  "A06": 1,
+  "A07": 1,
+  "A08": 1,
+  "A09": 1,
+  "A10": 1,
+  "A11": 1,
+  "A12": 1,
+  "A13": 1,
+  "A14": 1,
+  "A15": 1,
+  "A16": 1,
+  "A17": 1,
+  "A18": 1,
+  "A19": 1,
+  "A20": 1,
+  "A21": 1,
+  "A22": 1,
+  "A23": 1,
+  "A24": 1,
+  "A25": 1,
+  "A26": 1,
+  "A27": 1,
+  "A28": 1,
+  "A29": 1,
+  "A30": 1,
+  "A31": 1,
+  "A32": 1,
+  "A33": 1,
+  "A34": 1,
+  "A35": 1
+ },
+ "non_passees": [],
+ "trous_a_priori": 25,
+ "echecs_par_type": {},
+ "nouvelles_assertions": {},
+ "lacunes": [
+  {
+   "cas": "A11 : l'assertion ne dit pas si la modification en attente survit au redémarrage pour être envoyée ensuite, ni si l'indicateur « en attente » est conservé",
+   "test": "test_A11_trou_modification_en_attente_survit_au_redemarrage",
+   "présumé": "Après une modification faite hors ligne, l'utilisateur ferme puis rouvre l'application sans réseau puis retrouve le réseau : la note affiche « en attente » puis « synchronisée », et l'appareil B affiche le texte modifié | observé: indicateur, contenu | conditions: connexion, session",
+   "attaque": 1
+  },
+  {
+   "cas": "A24 : « l'application signale un conflit » ne dit pas sur quel appareil (A, B ou les deux)",
+   "test": "test_A24_trou_conflit_signale_sur_les_deux_appareils",
+   "présumé": "La même note a été modifiée hors ligne sur A et sur B avec des textes différents ; les deux appareils retrouvent le réseau : chacun des deux appareils signale un conflit sur cette note | observé: conflit | conditions: contenu",
+   "attaque": 1
+  },
+  {
+   "cas": "A24 : l'assertion ne dit pas qu'une modification faite sur B après avoir reçu celle de A n'est pas un conflit (seule la concurrence en est un)",
+   "test": "test_A24_trou_modifications_successives_pas_de_conflit",
+   "présumé": "A modifie une note, B reçoit cette modification puis modifie la note à son tour : l'application ne signale aucun conflit et aucune copie de conflit n'apparaît | observé: conflit | conditions: connexion, session",
+   "attaque": 1
+  },
+  {
+   "cas": "A27 : « une seconde note » ne fixe pas qu'il y en a exactement une, la même sur tous les appareils, même quand les envois sont dupliqués ou réessayés",
+   "test": "test_A27_trou_une_seule_copie_identique_sur_les_deux_appareils",
+   "présumé": "Un conflit est signalé sur une note : exactement une copie de conflit, de même identifiant et de même contenu, apparaît sur chaque appareil, même si des envois ont été dupliqués | observé: présence | conditions: conflit",
+   "attaque": 1
+  },
+  {
+   "cas": "A29 : l'assertion ne dit pas si le choix fait sur un appareil lève aussi le conflit sur l'autre",
+   "test": "test_A29_trou_conflit_leve_aussi_sur_l_autre_appareil",
+   "présumé": "Un conflit est signalé sur une note ; l'utilisateur choisit une version sur A en ligne : l'appareil B ne signale plus de conflit sur cette note | observé: conflit | conditions: connexion, session",
+   "attaque": 1
+  },
+  {
+   "cas": "A33 : A28 ordonne par l'heure des appareils, A33 dit « passe en tête » à réception ; elles se croisent quand l'horloge de B est en retard sur celle de A",
+   "test": "test_A33_trou_en_tete_meme_si_horloge_de_B_en_retard",
+   "présumé": "Une note est modifiée sur l'appareil B dont l'horloge est en retard ; l'appareil A en ligne reçoit la modification : cette note passe en tête de la liste de A | observé: ordre | conditions: connexion",
+   "attaque": 1
+  },
+  {
+   "cas": "A13 : modification faite en ligne sur A, aucun message encore livré à B",
+   "test": "test_A13_trou_B_ne_voit_rien_avant_livraison",
+   "présumé": "B affiche l'ancien texte tant qu'aucun message ne lui a été livré, et le rattrape au retour en ligne",
+   "attaque": 2
+  },
+  {
+   "cas": "A13 : l'appelant modifie le dict renvoyé par note()/list_notes()",
+   "test": "test_A13_trou_dicts_renvoyes_sont_des_copies",
+   "présumé": "ni la copie de l'appareil ni celle de l'autre appareil ne changent",
+   "attaque": 2
+  },
+  {
+   "cas": "A16 : deux appareils hors ligne créent une note à la même heure",
+   "test": "test_A16_trou_creations_simultanees_ids_distincts",
+   "présumé": "identifiants distincts, deux notes sur chaque appareil, aucun conflit",
+   "attaque": 2
+  },
+  {
+   "cas": "A12 : création après fermeture/réouverture de l'application",
+   "test": "test_A12_trou_identifiant_unique_apres_redemarrage",
+   "présumé": "l'identifiant n'est jamais recyclé",
+   "attaque": 2
+  },
+  {
+   "cas": "A08 : l'acquittement de v1 arrive alors que v2 n'a pas été acquittée",
+   "test": "test_A08_trou_acquittement_ancien_ne_marque_pas_synchronisee",
+   "présumé": "la note reste « en attente »",
+   "attaque": 2
+  },
+  {
+   "cas": "A22 : le serveur a reçu la modification, l'acquittement est perdu, A réessaie",
+   "test": "test_A22_trou_acquittement_perdu_reessai_sans_conflit",
+   "présumé": "aucun conflit, aucune copie, aucun doublon, « synchronisée »",
+   "attaque": 2
+  },
+  {
+   "cas": "A22 : le réessai arrive après une modification de B faite en ayant vu celle de A (horloge de A en avance)",
+   "test": "test_A22_trou_reessai_tardif_n_ecrase_pas_modification_posterieure",
+   "présumé": "le texte de B reste, sans conflit",
+   "attaque": 2
+  },
+  {
+   "cas": "A17 : un rejeu tardif de la création arrive après la suppression",
+   "test": "test_A17_trou_creation_rejouee_apres_suppression_ne_ressuscite_pas",
+   "présumé": "la note ne réapparaît nulle part",
+   "attaque": 2
+  },
+  {
+   "cas": "A19 : un rejeu tardif de v1 arrive après v2",
+   "test": "test_A19_trou_modification_rejouee_n_ecrase_pas_la_derniere",
+   "présumé": "v2 reste affichée, sans conflit",
+   "attaque": 2
+  },
+  {
+   "cas": "A14 : le relais du serveur vers B est perdu",
+   "test": "test_A14_trou_relais_perdu_vers_B_rattrape",
+   "présumé": "B rattrape la modification",
+   "attaque": 2
+  },
+  {
+   "cas": "A11 : l'application est fermée pendant un envoi en cours",
+   "test": "test_A11_trou_fermeture_pendant_envoi",
+   "présumé": "après réouverture, la note est synchronisée, sans conflit",
+   "attaque": 2
+  },
+  {
+   "cas": "A28 : les deux versions en conflit portent exactement la même heure",
+   "test": "test_A28_trou_horloges_egales_les_appareils_convergent",
+   "présumé": "les deux appareils affichent la même version et la même copie",
+   "attaque": 2
+  },
+  {
+   "cas": "A24 : titre modifié sur A, texte modifié sur B, même note",
+   "test": "test_A24_trou_titre_sur_A_texte_sur_B_pas_de_conflit",
+   "présumé": "aucun conflit, les deux modifications sont conservées",
+   "attaque": 2
+  },
+  {
+   "cas": "A17 : la même note est supprimée hors ligne sur A et sur B",
+   "test": "test_A17_trou_supprimee_des_deux_cotes_sans_conflit",
+   "présumé": "aucun conflit, la note est absente partout",
+   "attaque": 2
+  },
+  {
+   "cas": "A31 : modification/suppression livrées dans un ordre aléatoire",
+   "test": "test_A31_trou_ordre_aleatoire_une_seule_note_modifiee",
+   "présumé": "la note modifiée apparaît exactement une fois sur chaque appareil",
+   "attaque": 2
+  },
+  {
+   "cas": "A27 : trois appareils modifient la même note différemment",
+   "test": "test_A27_trou_trois_appareils_aucune_version_perdue",
+   "présumé": "aucune version perdue, la plus récente en original, copies identiques sur tous les appareils",
+   "attaque": 2
+  },
+  {
+   "cas": "A29 : modification de la note après la résolution",
+   "test": "test_A29_trou_modification_apres_resolution_sans_nouveau_conflit",
+   "présumé": "aucun nouveau conflit",
+   "attaque": 2
+  },
+  {
+   "cas": "A16 : bascules répétées hors ligne/en ligne avec envois dupliqués et partiels",
+   "test": "test_A16_trou_bascules_repetees_sans_doublon",
+   "présumé": "une seule note, dernier texte, synchronisée",
+   "attaque": 2
+  },
+  {
+   "cas": "A08 : plusieurs modifications en ligne avant toute livraison",
+   "test": "test_A08_trou_modifications_rapprochees_en_ligne_sans_conflit",
+   "présumé": "dernière version partout, aucun conflit",
+   "attaque": 2
+  }
+ ],
+ "modeles": {
+  "red": "opus",
+  "green": "haiku",
+  "juge": "opus"
+ },
+ "tokens_decoupe": {
+  "neufs": 125313,
+  "cache": 46710,
+  "usd": 1.623718
+ },
+ "tokens_execution": {
+  "neufs": 336576,
+  "cache": 342498,
+  "usd": 0.23997681999999998
+ },
+ "part_decoupe": 0.271,
+ "causes": {
+  "causes_distinctes": 0,
+  "causes_par_tour": [
+   0,
+   0
+  ],
+  "champ_local": {
+   "tout": 0.0,
+   "frontiere": 0.0,
+   "autres": 0.0
+  },
+  "par_assertion": {},
+  "liste": []
+ }
+}

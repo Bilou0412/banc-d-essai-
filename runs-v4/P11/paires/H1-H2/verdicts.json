@@ -1,0 +1,1150 @@
+[
+ {
+  "groupe": "bob.set_cell",
+  "divergences": 33,
+  "graine": 127,
+  "etape": 1,
+  "action": "bob.set_cell('B1', '2026-01-15 12:00', sheet='Feuille1')",
+  "x": {
+   "personne": "bob",
+   "feuilles": [
+    "Feuille1"
+   ],
+   "feuille_vue": "Feuille1",
+   "cellules": {
+    "A1": {
+     "contenu": null,
+     "valeur": null,
+     "erreur": null
+    },
+    "A2": {
+     "contenu": null,
+     "valeur": null,
+     "erreur": null
+    },
+    "A3": {
+     "contenu": null,
+     "valeur": null,
+     "erreur": null
+    },
+    "B1": {
+     "contenu": "2026-01-15 12:00",
+     "valeur": "2026-01-15 12:00",
+     "erreur": null
+    },
+    "B2": {
+     "contenu": null,
+     "valeur": null,
+     "erreur": null
+    },
+    "C1": {
+     "contenu": null,
+     "valeur": null,
+     "erreur": null
+    }
+   },
+   "connexion": "en ligne",
+   "en_attente": 1,
+   "annuler": true,
+   "rétablir": false,
+   "alertes": [],
+   "présence": {},
+   "droits": {
+    "alice": "écriture",
+    "bob": "écriture",
+    "carol": "lecture"
+   }
+  },
+  "y": {
+   "personne": "bob",
+   "feuilles": [
+    "Feuille1"
+   ],
+   "feuille_vue": "Feuille1",
+   "cellules": {
+    "A1": {
+     "contenu": null,
+     "valeur": null,
+     "erreur": null
+    },
+    "A2": {
+     "contenu": null,
+     "valeur": null,
+     "erreur": null
+    },
+    "A3": {
+     "contenu": null,
+     "valeur": null,
+     "erreur": null
+    },
+    "B1": {
+     "contenu": "2026-01-15T12:00:00+00:00",
+     "valeur": "2026-01-15 12:00",
+     "erreur": null
+    },
+    "B2": {
+     "contenu": null,
+     "valeur": null,
+     "erreur": null
+    },
+    "C1": {
+     "contenu": null,
+     "valeur": null,
+     "erreur": null
+    }
+   },
+   "connexion": "en ligne",
+   "en_attente": 1,
+   "annuler": true,
+   "rétablir": false,
+   "alertes": [],
+   "présence": {},
+   "droits": {
+    "alice": "écriture",
+    "bob": "écriture",
+    "carol": "lecture"
+   }
+  },
+  "classe": "trou",
+  "assertion": "aucune",
+  "cas": "Quand une personne saisit une date-heure sans décalage horaire, la spec ne dit pas si la cellule garde le texte saisi ou une forme normalisée avec fuseau.",
+  "verdict": "2:00', sheet='Feuille1'), le contenu de B1 est soit le texte saisi tel quel (« 2026-01-15 12:00 »), soit sa forme normalisée avec fuseau (« 2026-01-15T12:00:00+00:00 »). La valeur affichée est la même dans les deux cas : « 2026-01-15 12:00 ».\nruling:    not resolvable\nbecause:   Seule la valeur affichée d'une date-heure est encadrée : A30 dit « la cellule affiche cette date-heure dans le fuseau de la personne », et les deux comportements affichent la même valeur. Les seules assertions sur ce que devient le contenu après une saisie portent sur d'autres cas : un nombre (A01, « le contenu de la cellule devient 42 »), une formule (A05) et une formule invalide (A14). Aucune ne dit sous quelle forme une date-heure saisie est conservée. A31 exige seulement que la valeur stockée soit indépendante du fuseau de l'affichage, et les deux formes le permettent si Bob est en UTC. Pour trancher, il faut savoir si la barre de formule doit montrer le texte tel que la personne l'a tapé ou sa forme normalisée. Ce choix revient à l'auteur de la spec, pas au dossier.\ncertainty: firm\n```\n\n**En bref :** les deux implémentations respectent la spec. La valeur affichée est identique, et aucune assertion ne fixe la forme sous laquelle une date-heure saisie est conservée. C'est donc un trou dans la spec, pas un bug.\n\nCLASSE: trou\nASSERTION: aucune\nCAS: Quand une personne saisit une date-heure sans décalage horaire, la spec ne dit pas si la cellule garde le texte saisi ou une forme normalisée avec fuseau."
+ },
+ {
+  "groupe": "alice.resolve_conflict",
+  "divergences": 27,
+  "graine": 187,
+  "etape": 1,
+  "action": "alice.resolve_conflict('B2', use_discarded=False)",
+  "x": {
+   "personne": "alice",
+   "feuilles": [
+    "Feuille1"
+   ],
+   "feuille_vue": "Feuille1",
+   "cellules": {
+    "B2": {
+     "contenu": null,
+     "valeur": null,
+     "erreur": null
+    }
+   },
+   "connexion": "en ligne",
+   "en_attente": 1,
+   "annuler": false,
+   "rétablir": false,
+   "alertes": [],
+   "présence": {},
+   "droits": {
+    "alice": "écriture",
+    "bob": "écriture",
+    "carol": "lecture"
+   }
+  },
+  "y": {
+   "personne": "alice",
+   "feuilles": [
+    "Feuille1"
+   ],
+   "feuille_vue": "Feuille1",
+   "cellules": {
+    "B2": {
+     "contenu": null,
+     "valeur": null,
+     "erreur": null
+    }
+   },
+   "connexion": "en ligne",
+   "en_attente": 0,
+   "annuler": false,
+   "rétablir": false,
+   "alertes": [],
+   "présence": {},
+   "droits": {
+    "alice": "écriture",
+    "bob": "écriture",
+    "carol": "lecture"
+   }
+  },
+  "classe": "trou",
+  "assertion": "A89",
+  "cas": "Une personne en ligne résout un conflit en gardant la valeur retenue, et la spec ne dit pas si ce choix sans changement de contenu compte comme une modification en attente avant la confirmation du serveur.",
+  "verdict": "ions en attente vaut 1 (X) ou 0 (Y).\nruling:    not resolvable\nbecause:   L'assertion la plus proche est A89 : « Quand une personne en ligne modifie une cellule, le nombre de modifications en attente reste à zéro une fois l'envoi confirmé ». Elle ne couvre pas ce cas, pour deux raisons. D'abord, garder la valeur retenue ne change pas le contenu de B2 (il reste null). Ce n'est donc pas clairement une « modification de cellule ». Ensuite, A89 ne fixe pas le moment de l'observation, seulement « une fois l'envoi confirmé ». A73 dit seulement que l'indicateur disparaît, et rien sur le nombre en attente. Aucune assertion n'impose 0 ou 1 juste après cette action.\ncertainty: close\n```\n\nCe qui trancherait :\n- **Le nombre en attente juste avant l'étape.** Cette information est dans la situation complète, que le chercheur peut retrouver. S'il valait déjà 1 à cause d'une saisie faite hors ligne et pas encore fusionnée, la baisse chez Y devrait s'expliquer : par A90, il ne retombe à 0 qu'« après la fusion ».\n- **Le moment de l'observation par rapport à la confirmation du serveur.** Si l'envoi est déjà confirmé quand on observe, X reste bloqué à 1 et viole A89.\n\nEn l'état, les deux comportements respectent le texte de la spec, d'où le classement en trou.\n\nCLASSE: trou\nASSERTION: A89\nCAS: Une personne en ligne résout un conflit en gardant la valeur retenue, et la spec ne dit pas si ce choix sans changement de contenu compte comme une modification en attente avant la confirmation du serveur."
+ },
+ {
+  "groupe": "alice.rename_sheet",
+  "divergences": 24,
+  "graine": 146,
+  "etape": 1,
+  "action": "alice.rename_sheet('Feuille1', 'Feuille1')",
+  "x": {
+   "personne": "alice",
+   "feuilles": [
+    "Feuille1"
+   ],
+   "feuille_vue": "Feuille1",
+   "cellules": {
+    "A1": {
+     "contenu": null,
+     "valeur": null,
+     "erreur": null
+    },
+    "A2": {
+     "contenu": null,
+     "valeur": null,
+     "erreur": null
+    },
+    "A3": {
+     "contenu": null,
+     "valeur": null,
+     "erreur": null
+    },
+    "B1": {
+     "contenu": null,
+     "valeur": null,
+     "erreur": null
+    },
+    "B2": {
+     "contenu": null,
+     "valeur": null,
+     "erreur": null
+    },
+    "C1": {
+     "contenu": null,
+     "valeur": null,
+     "erreur": null
+    }
+   },
+   "connexion": "en ligne",
+   "en_attente": 0,
+   "annuler": false,
+   "rétablir": false,
+   "alertes": [
+    [
+     "nom_existant",
+     null,
+     null,
+     null
+    ]
+   ],
+   "présence": {},
+   "droits": {
+    "alice": "écriture",
+    "bob": "écriture",
+    "carol": "lecture"
+   }
+  },
+  "y": {
+   "personne": "alice",
+   "feuilles": [
+    "Feuille1"
+   ],
+   "feuille_vue": "Feuille1",
+   "cellules": {
+    "A1": {
+     "contenu": null,
+     "valeur": null,
+     "erreur": null
+    },
+    "A2": {
+     "contenu": null,
+     "valeur": null,
+     "erreur": null
+    },
+    "A3": {
+     "contenu": null,
+     "valeur": null,
+     "erreur": null
+    },
+    "B1": {
+     "contenu": null,
+     "valeur": null,
+     "erreur": null
+    },
+    "B2": {
+     "contenu": null,
+     "valeur": null,
+     "erreur": null
+    },
+    "C1": {
+     "contenu": null,
+     "valeur": null,
+     "erreur": null
+    }
+   },
+   "connexion": "en ligne",
+   "en_attente": 1,
+   "annuler": true,
+   "rétablir": false,
+   "alertes": [],
+   "présence": {},
+   "droits": {
+    "alice": "écriture",
+    "bob": "écriture",
+    "carol": "lecture"
+   }
+  },
+  "classe": "trou",
+  "assertion": "A43",
+  "cas": "Une personne renomme une feuille avec le nom que cette feuille porte déjà, et la spec ne dit pas si c'est un nom déjà utilisé qui déclenche une alerte ou une modification enregistrée et annulable.",
+  "verdict": "lice renomme Feuille1 en « Feuille1 », la spec impose-t-elle l'un des deux comportements : une alerte « nom existant » sans modification, ou une modification enregistrée et annulable, sans alerte ?\nruling:    not resolvable\nbecause:   A42 ne couvre que le cas d'un nom « déjà utilisé par une autre feuille », et ici le nom n'est porté que par la feuille elle-même. A43 dit seulement « un nom déjà utilisé » : lu au mot près, cela pourrait couvrir le nom actuel de la feuille. Mais A42 et A43 décrivent la même situation, l'une pour la liste des feuilles, l'autre pour l'alerte, donc A43 vise un nom porté par une autre feuille. Aucune autre assertion ne dit si renommer une feuille avec son propre nom est une modification à rien, une modification annulable, ou une erreur.\ncertainty: close\n```\n\nLe fait qui trancherait est l'intention de l'arbitre : renommer une feuille avec son propre nom doit-il compter comme un doublon, une action annulable (Y affiche aussi 1 modification en attente) ou une action sans effet ? Seul l'arbitre peut répondre, le dossier ne le peut pas. Les deux comportements respectent la spec telle qu'elle est écrite. Ma certitude est `close` parce qu'une lecture mot à mot de A43 donnerait raison à X et ferait de cette divergence un bug de Y.\n\nCLASSE: trou\nASSERTION: A43\nCAS: Une personne renomme une feuille avec le nom que cette feuille porte déjà, et la spec ne dit pas si c'est un nom déjà utilisé qui déclenche une alerte ou une modification enregistrée et annulable."
+ },
+ {
+  "groupe": "alice.set_cell",
+  "divergences": 22,
+  "graine": 99,
+  "etape": 1,
+  "action": "alice.set_cell('C1', '2026-01-15 12:00', sheet='Feuille1')",
+  "x": {
+   "personne": "alice",
+   "feuilles": [
+    "Feuille1"
+   ],
+   "feuille_vue": "Feuille1",
+   "cellules": {
+    "A1": {
+     "contenu": null,
+     "valeur": null,
+     "erreur": null
+    },
+    "A2": {
+     "contenu": null,
+     "valeur": null,
+     "erreur": null
+    },
+    "A3": {
+     "contenu": null,
+     "valeur": null,
+     "erreur": null
+    },
+    "B1": {
+     "contenu": null,
+     "valeur": null,
+     "erreur": null
+    },
+    "B2": {
+     "contenu": null,
+     "valeur": null,
+     "erreur": null
+    },
+    "C1": {
+     "contenu": "2026-01-15 12:00",
+     "valeur": "2026-01-15 12:00",
+     "erreur": null
+    }
+   },
+   "connexion": "en ligne",
+   "en_attente": 1,
+   "annuler": true,
+   "rétablir": false,
+   "alertes": [],
+   "présence": {},
+   "droits": {
+    "alice": "écriture",
+    "bob": "écriture",
+    "carol": "lecture"
+   }
+  },
+  "y": {
+   "personne": "alice",
+   "feuilles": [
+    "Feuille1"
+   ],
+   "feuille_vue": "Feuille1",
+   "cellules": {
+    "A1": {
+     "contenu": null,
+     "valeur": null,
+     "erreur": null
+    },
+    "A2": {
+     "contenu": null,
+     "valeur": null,
+     "erreur": null
+    },
+    "A3": {
+     "contenu": null,
+     "valeur": null,
+     "erreur": null
+    },
+    "B1": {
+     "contenu": null,
+     "valeur": null,
+     "erreur": null
+    },
+    "B2": {
+     "contenu": null,
+     "valeur": null,
+     "erreur": null
+    },
+    "C1": {
+     "contenu": "2026-01-15T12:00:00+01:00",
+     "valeur": "2026-01-15 12:00",
+     "erreur": null
+    }
+   },
+   "connexion": "en ligne",
+   "en_attente": 1,
+   "annuler": true,
+   "rétablir": false,
+   "alertes": [],
+   "présence": {},
+   "droits": {
+    "alice": "écriture",
+    "bob": "écriture",
+    "carol": "lecture"
+   }
+  },
+  "classe": "trou",
+  "assertion": "aucune",
+  "cas": "Quand une personne saisit une date-heure sans décalage dans une cellule, la spécification ne dit pas si le contenu de la cellule reste le texte saisi ou devient la date-heure normalisée avec le décalage du fuseau de la personne.",
+  "verdict": "s affichent la même : « 2026-01-15 12:00 ». Les seules assertions sur le contenu d'une saisie (A01 pour 42, A05 pour =A1+A2, A14 pour une syntaxe invalide) ne couvrent pas les dates-heures, et rien ne permet de les étendre à ce cas. Garder la saisie brute ou la normaliser respecte donc la spec dans les deux cas.\ncertainty: close\n```\n\n**Pourquoi c'est serré :** A31 traite une date-heure comme un instant, et l'heure qu'elle affiche change avec le fuseau de la personne qui regarde. Stocker le décalage, comme Y, va dans ce sens. Mais X peut très bien garder le fuseau ailleurs que dans le contenu, et l'étape ne montre aucune vue depuis un autre fuseau qui permettrait de les départager. Par ailleurs, A05 dit que le contenu est ce qu'on voit dans la barre de formule. Dans Y, la personne y verrait donc une forme ISO qu'elle n'a pas tapée, mais aucune assertion ne l'interdit.\n\n**Ce qui réglerait la question :** une décision sur ce que la barre de formule doit montrer après la saisie d'une date-heure : le texte saisi, ou l'instant normalisé avec son décalage. Le dossier ne contient pas ce fait ; c'est une décision de l'arbitre sur ce qu'il veut. Il faudra peut-être aussi une assertion de valeur testée depuis un autre fuseau.\n\nCLASSE: trou\nASSERTION: aucune\nCAS: Quand une personne saisit une date-heure sans décalage dans une cellule, la spécification ne dit pas si le contenu de la cellule reste le texte saisi ou devient la date-heure normalisée avec le décalage du fuseau de la personne."
+ },
+ {
+  "groupe": "carol.add_sheet",
+  "divergences": 21,
+  "graine": 90,
+  "etape": 2,
+  "action": "carol.add_sheet('Ventes')",
+  "x": {
+   "personne": "carol",
+   "feuilles": [
+    "Feuille1",
+    "Ventes"
+   ],
+   "feuille_vue": "Ventes",
+   "cellules": {
+    "A1": {
+     "contenu": null,
+     "valeur": null,
+     "erreur": null
+    },
+    "B2": {
+     "contenu": null,
+     "valeur": null,
+     "erreur": null
+    }
+   },
+   "connexion": "en ligne",
+   "en_attente": 1,
+   "annuler": true,
+   "rétablir": false,
+   "alertes": [],
+   "présence": {},
+   "droits": {
+    "alice": null,
+    "bob": null,
+    "carol": "écriture"
+   }
+  },
+  "y": {
+   "personne": "carol",
+   "feuilles": [
+    "Feuille1",
+    "Ventes"
+   ],
+   "feuille_vue": "Ventes",
+   "cellules": {
+    "A1": {
+     "contenu": null,
+     "valeur": null,
+     "erreur": null
+    },
+    "B2": {
+     "contenu": null,
+     "valeur": null,
+     "erreur": null
+    }
+   },
+   "connexion": "en ligne",
+   "en_attente": 1,
+   "annuler": true,
+   "rétablir": false,
+   "alertes": [],
+   "présence": {},
+   "droits": {
+    "alice": "écriture",
+    "bob": null,
+    "carol": "écriture"
+   }
+  },
+  "classe": "trou",
+  "assertion": "A38",
+  "cas": "Quand une personne ajoute une feuille, la spec ne dit pas quel droit les autres personnes du classeur obtiennent sur cette nouvelle feuille.",
+  "verdict": "```\nclaim:     Après carol.add_sheet('Ventes'), alice doit avoir un droit précis sur la nouvelle feuille (aucun droit d'un côté, « écriture » de l'autre).\nruling:    not resolvable\nbecause:   La seule assertion sur les droits d'une feuille ajoutée est A38 : « Quand une personne ajoute une feuille, elle obtient le droit écriture sur cette feuille ». Elle ne parle que de la personne qui crée la feuille, ici carol, et les deux implémentations lui donnent bien « écriture ». Aucune assertion ne dit quel droit reçoivent les autres personnes du classeur sur une nouvelle feuille. A50–A52 parlent d'un « propriétaire » sans dire qui il est ni qu'il aurait un droit implicite sur chaque feuille.\ncertainty: firm\n```\n\nCe qui trancherait : savoir si une nouvelle feuille donne un droit aux autres personnes du classeur, et lequel (aucun, lecture, écriture), et si le propriétaire, s'il s'agit d'alice, reçoit automatiquement « écriture ». C'est une décision de produit qui revient à l'auteur de la spec. Les assertions existantes ne permettent pas de la déduire.\n\nCLASSE: trou\nASSERTION: A38\nCAS: Quand une personne ajoute une feuille, la spec ne dit pas quel droit les autres personnes du classeur obtiennent sur cette nouvelle feuille."
+ },
+ {
+  "groupe": "bob.rename_sheet",
+  "divergences": 21,
+  "graine": 33,
+  "etape": 1,
+  "action": "bob.rename_sheet('Feuille1', 'Brouillon')",
+  "x": {
+   "personne": "bob",
+   "feuilles": [
+    "Brouillon"
+   ],
+   "feuille_vue": "Brouillon",
+   "cellules": {
+    "A1": {
+     "contenu": null,
+     "valeur": null,
+     "erreur": null
+    },
+    "A2": {
+     "contenu": null,
+     "valeur": null,
+     "erreur": null
+    },
+    "A3": {
+     "contenu": null,
+     "valeur": null,
+     "erreur": null
+    },
+    "B1": {
+     "contenu": null,
+     "valeur": null,
+     "erreur": null
+    },
+    "B2": {
+     "contenu": null,
+     "valeur": null,
+     "erreur": null
+    },
+    "C1": {
+     "contenu": null,
+     "valeur": null,
+     "erreur": null
+    }
+   },
+   "connexion": "en ligne",
+   "en_attente": 1,
+   "annuler": true,
+   "rétablir": false,
+   "alertes": [],
+   "présence": {},
+   "droits": {
+    "alice": null,
+    "bob": null,
+    "carol": null
+   }
+  },
+  "y": {
+   "personne": "bob",
+   "feuilles": [
+    "Brouillon"
+   ],
+   "feuille_vue": "Brouillon",
+   "cellules": {
+    "A1": {
+     "contenu": null,
+     "valeur": null,
+     "erreur": null
+    },
+    "A2": {
+     "contenu": null,
+     "valeur": null,
+     "erreur": null
+    },
+    "A3": {
+     "contenu": null,
+     "valeur": null,
+     "erreur": null
+    },
+    "B1": {
+     "contenu": null,
+     "valeur": null,
+     "erreur": null
+    },
+    "B2": {
+     "contenu": null,
+     "valeur": null,
+     "erreur": null
+    },
+    "C1": {
+     "contenu": null,
+     "valeur": null,
+     "erreur": null
+    }
+   },
+   "connexion": "en ligne",
+   "en_attente": 1,
+   "annuler": true,
+   "rétablir": false,
+   "alertes": [],
+   "présence": {},
+   "droits": {
+    "alice": "écriture",
+    "bob": "écriture",
+    "carol": "lecture"
+   }
+  },
+  "classe": "trou",
+  "assertion": "aucune",
+  "cas": "Quand une personne ayant le droit écriture renomme une feuille, la spec ne dit pas si les droits de chacun sur cette feuille sont conservés ou perdus.",
+  "verdict": ", 'Brouillon'), les droits affichés sur la feuille renommée doivent rester ceux d'avant le renommage (Y : alice écriture, bob écriture, carol lecture), et non passer à null pour tout le monde (X).\nruling:    not resolvable\nbecause:   Aucune assertion ne dit ce que deviennent les droits quand on renomme une feuille. A41 ne parle que de la liste des feuilles (« la liste des feuilles affiche « Ventes » »), A26/A27 que des formules qui pointent vers la feuille, et A51 (« ce droit reste inchangé ») ne vise qu'une personne non propriétaire qui tente de modifier un droit. Le fait que les références suivent le renommage (A26) laisse penser que la feuille garde son identité, donc ses droits, mais c'est une déduction, pas un texte. Il manque aussi l'état des droits avant le renommage : l'observation initiale est tronquée.\ncertainty: close\n```\n\nPour trancher, il faudrait une assertion du type « quand une personne renomme une feuille, les droits de chacun sur cette feuille restent inchangés ». C'est à l'arbitre de décider, car c'est son intention qu'il faut connaître : la spec actuelle ne permet pas de la déduire. Il y a un indice fort en faveur de Y : avec null, bob n'aurait plus de droit sur la feuille qu'il vient de renommer avec un droit écriture. Mais aucune assertion de la spec n'est violée par X.\n\nCLASSE: trou\nASSERTION: aucune\nCAS: Quand une personne ayant le droit écriture renomme une feuille, la spec ne dit pas si les droits de chacun sur cette feuille sont conservés ou perdus."
+ },
+ {
+  "groupe": "bob.add_sheet",
+  "divergences": 19,
+  "graine": 60,
+  "etape": 1,
+  "action": "bob.add_sheet('Feuille2')",
+  "x": {
+   "personne": "bob",
+   "feuilles": [
+    "Feuille1",
+    "Feuille2"
+   ],
+   "feuille_vue": "Feuille2",
+   "cellules": {
+    "A1": {
+     "contenu": null,
+     "valeur": null,
+     "erreur": null
+    },
+    "B2": {
+     "contenu": null,
+     "valeur": null,
+     "erreur": null
+    }
+   },
+   "connexion": "en ligne",
+   "en_attente": 1,
+   "annuler": true,
+   "rétablir": false,
+   "alertes": [],
+   "présence": {},
+   "droits": {
+    "alice": null,
+    "bob": "écriture",
+    "carol": null
+   }
+  },
+  "y": {
+   "personne": "bob",
+   "feuilles": [
+    "Feuille1",
+    "Feuille2"
+   ],
+   "feuille_vue": "Feuille2",
+   "cellules": {
+    "A1": {
+     "contenu": null,
+     "valeur": null,
+     "erreur": null
+    },
+    "B2": {
+     "contenu": null,
+     "valeur": null,
+     "erreur": null
+    }
+   },
+   "connexion": "en ligne",
+   "en_attente": 1,
+   "annuler": true,
+   "rétablir": false,
+   "alertes": [],
+   "présence": {},
+   "droits": {
+    "alice": "écriture",
+    "bob": "écriture",
+    "carol": null
+   }
+  },
+  "classe": "trou",
+  "assertion": "A38",
+  "cas": "Quand une personne ajoute une feuille à un classeur partagé, la spec ne dit pas quel droit les autres membres du classeur obtiennent sur cette nouvelle feuille.",
+  "verdict": "ec (null dans X, « écriture » dans Y).\nruling:    rejected\nbecause:   La seule assertion sur ce point est A38 : « Quand une personne ajoute une feuille, elle obtient le droit écriture sur cette feuille ». Elle ne vise que la personne qui ajoute (bob, « écriture » dans X comme dans Y). Aucune assertion ne fixe le droit des autres personnes sur une feuille créée par quelqu'un d'autre : ni A36–A38 sur l'ajout, ni A50–A51 sur la modification des droits par le propriétaire. Les deux observations respectent donc la spec.\ncertainty: firm\n```\n\nLes deux observations sont identiques sauf sur un point : `droits.alice`, qui vaut `null` (aucun droit) dans X et `\"écriture\"` dans Y. Les deux valent `null` pour carol.\n\nDeux points restent ouverts :\n- **L'état initial est tronqué.** On ne voit pas quels droits alice avait sur Feuille1. Si elle y avait l'écriture, Y suit peut-être une règle « hériter des droits du classeur ». Mais cette règle n'est écrite nulle part dans la spec, donc elle ne peut pas rendre X fautif.\n- **La réponse dépend de l'intention de l'arbitre.** Qui doit avoir accès à une nouvelle feuille : seulement son créateur, ou tous les membres du classeur avec leurs droits existants ? Le texte actuel ne le dit pas. C'est une question pour l'arbitre, pas pour celui qui fouille le dossier.\n\nCLASSE: trou\nASSERTION: A38\nCAS: Quand une personne ajoute une feuille à un classeur partagé, la spec ne dit pas quel droit les autres membres du classeur obtiennent sur cette nouvelle feuille."
+ },
+ {
+  "groupe": "alice.import_csv",
+  "divergences": 18,
+  "graine": 8,
+  "etape": 1,
+  "action": "alice.import_csv('\"12,5\",x\\n')",
+  "x": {
+   "personne": "alice",
+   "feuilles": [
+    "Feuille1"
+   ],
+   "feuille_vue": "Feuille1",
+   "cellules": {
+    "A1": {
+     "contenu": "12,5",
+     "valeur": "12,5",
+     "erreur": null
+    },
+    "A2": {
+     "contenu": null,
+     "valeur": null,
+     "erreur": null
+    },
+    "A3": {
+     "contenu": null,
+     "valeur": null,
+     "erreur": null
+    },
+    "B1": {
+     "contenu": "x",
+     "valeur": "x",
+     "erreur": null
+    },
+    "B2": {
+     "contenu": null,
+     "valeur": null,
+     "erreur": null
+    },
+    "C1": {
+     "contenu": null,
+     "valeur": null,
+     "erreur": null
+    }
+   },
+   "connexion": "en ligne",
+   "en_attente": 1,
+   "annuler": true,
+   "rétablir": false,
+   "alertes": [],
+   "présence": {},
+   "droits": {
+    "alice": "écriture",
+    "bob": "écriture",
+    "carol": "lecture"
+   }
+  },
+  "y": {
+   "personne": "alice",
+   "feuilles": [
+    "Feuille1"
+   ],
+   "feuille_vue": "Feuille1",
+   "cellules": {
+    "A1": {
+     "contenu": "12,5",
+     "valeur": "12,5",
+     "erreur": null
+    },
+    "A2": {
+     "contenu": null,
+     "valeur": null,
+     "erreur": null
+    },
+    "A3": {
+     "contenu": null,
+     "valeur": null,
+     "erreur": null
+    },
+    "B1": {
+     "contenu": "x",
+     "valeur": "x",
+     "erreur": null
+    },
+    "B2": {
+     "contenu": null,
+     "valeur": null,
+     "erreur": null
+    },
+    "C1": {
+     "contenu": null,
+     "valeur": null,
+     "erreur": null
+    }
+   },
+   "connexion": "en ligne",
+   "en_attente": 2,
+   "annuler": true,
+   "rétablir": false,
+   "alertes": [],
+   "présence": {},
+   "droits": {
+    "alice": "écriture",
+    "bob": "écriture",
+    "carol": "lecture"
+   }
+  },
+  "classe": "trou",
+  "assertion": "aucune",
+  "cas": "When someone online with write access imports a CSV that fills two cells, the spec doesn't say whether the pending count before send confirmation is one (the whole import) or one per changed cell.",
+  "verdict": "```\nclaim:     After alice imports the CSV '\"12,5\",x\\n' while online with write access, the pending-change count is 1 (X) versus 2 (Y). Is one of the two required by the spec?\nruling:    rejected — the spec does not settle it; this is a gap\nbecause:   The only assertion on the pending count while online is A89: \"le nombre de modifications en attente reste à zéro une fois l'envoi confirmé\". It only covers the count after confirmation, and both values are observed before confirmation. A88 (\"augmente de un\") is about a single cell edited offline, and A158 (\"une seule annulation suffit à défaire tout l'import\") is about undo, not the pending count. No assertion says whether an import counts as one pending change or as one per cell.\ncertainty: firm\n```\n\nCLASSE: trou\nASSERTION: aucune\nCAS: When someone online with write access imports a CSV that fills two cells, the spec doesn't say whether the pending count before send confirmation is one (the whole import) or one per changed cell."
+ },
+ {
+  "groupe": "carol.rename_sheet",
+  "divergences": 18,
+  "graine": 135,
+  "etape": 1,
+  "action": "carol.rename_sheet('Feuille1', 'Brouillon')",
+  "x": {
+   "personne": "carol",
+   "feuilles": [
+    "Feuille1"
+   ],
+   "feuille_vue": "Brouillon",
+   "cellules": {
+    "A1": {
+     "contenu": null,
+     "valeur": "#REF!",
+     "erreur": "#REF!"
+    },
+    "A2": {
+     "contenu": null,
+     "valeur": "#REF!",
+     "erreur": "#REF!"
+    },
+    "A3": {
+     "contenu": null,
+     "valeur": "#REF!",
+     "erreur": "#REF!"
+    },
+    "B1": {
+     "contenu": null,
+     "valeur": "#REF!",
+     "erreur": "#REF!"
+    },
+    "B2": {
+     "contenu": null,
+     "valeur": "#REF!",
+     "erreur": "#REF!"
+    },
+    "C1": {
+     "contenu": null,
+     "valeur": "#REF!",
+     "erreur": "#REF!"
+    }
+   },
+   "connexion": "en ligne",
+   "en_attente": 0,
+   "annuler": false,
+   "rétablir": false,
+   "alertes": [
+    [
+     "droit_insuffisant",
+     "Feuille1",
+     null,
+     null
+    ]
+   ],
+   "présence": {},
+   "droits": {
+    "alice": null,
+    "bob": null,
+    "carol": null
+   }
+  },
+  "y": {
+   "personne": "carol",
+   "feuilles": [
+    "Feuille1"
+   ],
+   "feuille_vue": "Brouillon",
+   "cellules": {
+    "A1": {
+     "contenu": null,
+     "valeur": null,
+     "erreur": null
+    },
+    "A2": {
+     "contenu": null,
+     "valeur": null,
+     "erreur": null
+    },
+    "A3": {
+     "contenu": null,
+     "valeur": null,
+     "erreur": null
+    },
+    "B1": {
+     "contenu": null,
+     "valeur": null,
+     "erreur": null
+    },
+    "B2": {
+     "contenu": null,
+     "valeur": null,
+     "erreur": null
+    },
+    "C1": {
+     "contenu": null,
+     "valeur": null,
+     "erreur": null
+    }
+   },
+   "connexion": "en ligne",
+   "en_attente": 0,
+   "annuler": false,
+   "rétablir": false,
+   "alertes": [
+    [
+     "droit_insuffisant",
+     "Feuille1",
+     null,
+     null
+    ]
+   ],
+   "présence": {},
+   "droits": {
+    "alice": null,
+    "bob": null,
+    "carol": null
+   }
+  },
+  "classe": "trou",
+  "assertion": "aucune",
+  "cas": "Une personne sans droit écriture tente de renommer une feuille. Le renommage est refusé avec une alerte, mais la vue passe au nouveau nom, et la spec ne dit pas si les cellules vides de cette vue doivent rester vides ou afficher une erreur de référence.",
+  "verdict": "l\": null »). A26 et A27 ne parlent que d'un renommage réussi, avec B1 contenant =Feuille2!A1. Ici aucune cellule ne contient de formule. A24 et A25 ne prévoient « une erreur de référence » que pour une formule qui vise une feuille absente. A48 (« voit les valeurs de ses cellules ») suppose le droit lecture, que carol n'a pas non plus. Les deux implémentations ont la même alerte « droit_insuffisant » et la même liste « [\"Feuille1\"] ». Toutes deux affichent aussi la vue « Brouillon », une feuille qui n'existe pas. La spec ne dit pas ce que les cellules affichent dans ce cas.\ncertainty: close\n```\n\nPourquoi c'est serré : une cellule sans contenu qui affiche « #REF! » va contre l'esprit de A24 et A25, où l'erreur de référence vient toujours d'une formule. Mais aucune assertion ne dit qu'une cellule vide n'a pas d'erreur. Et c'est l'affichage d'une vue sur une feuille inexistante qui provoque la divergence, défaut que X et Y partagent. Pour que l'un des deux devienne un bug, il faudrait une assertion dans la spec, par exemple : « après un renommage refusé, la feuille vue garde son nom et ses cellules ». Le dossier pourrait contenir cette règle ; la question n'a pas besoin de remonter à l'arbitre.\n\nCLASSE: trou\nASSERTION: aucune\nCAS: Une personne sans droit écriture tente de renommer une feuille. Le renommage est refusé avec une alerte, mais la vue passe au nouveau nom, et la spec ne dit pas si les cellules vides de cette vue doivent rester vides ou afficher une erreur de référence."
+ },
+ {
+  "groupe": "bob.import_csv",
+  "divergences": 18,
+  "graine": 252,
+  "etape": 1,
+  "action": "bob.import_csv('a,b\\nc,\"d\\ne,f\\n')",
+  "x": {
+   "personne": "bob",
+   "feuilles": [
+    "Feuille1"
+   ],
+   "feuille_vue": "Feuille1",
+   "cellules": {
+    "A1": {
+     "contenu": null,
+     "valeur": null,
+     "erreur": null
+    },
+    "A2": {
+     "contenu": null,
+     "valeur": null,
+     "erreur": null
+    },
+    "A3": {
+     "contenu": null,
+     "valeur": null,
+     "erreur": null
+    },
+    "B1": {
+     "contenu": null,
+     "valeur": null,
+     "erreur": null
+    },
+    "B2": {
+     "contenu": null,
+     "valeur": null,
+     "erreur": null
+    },
+    "C1": {
+     "contenu": null,
+     "valeur": null,
+     "erreur": null
+    }
+   },
+   "connexion": "en ligne",
+   "en_attente": 0,
+   "annuler": false,
+   "rétablir": false,
+   "alertes": [
+    [
+     "csv_invalide",
+     "Feuille1",
+     null,
+     2
+    ]
+   ],
+   "présence": {},
+   "droits": {
+    "alice": "écriture",
+    "bob": "écriture",
+    "carol": "lecture"
+   }
+  },
+  "y": {
+   "personne": "bob",
+   "feuilles": [
+    "Feuille1"
+   ],
+   "feuille_vue": "Feuille1",
+   "cellules": {
+    "A1": {
+     "contenu": null,
+     "valeur": null,
+     "erreur": null
+    },
+    "A2": {
+     "contenu": null,
+     "valeur": null,
+     "erreur": null
+    },
+    "A3": {
+     "contenu": null,
+     "valeur": null,
+     "erreur": null
+    },
+    "B1": {
+     "contenu": null,
+     "valeur": null,
+     "erreur": null
+    },
+    "B2": {
+     "contenu": null,
+     "valeur": null,
+     "erreur": null
+    },
+    "C1": {
+     "contenu": null,
+     "valeur": null,
+     "erreur": null
+    }
+   },
+   "connexion": "en ligne",
+   "en_attente": 0,
+   "annuler": false,
+   "rétablir": false,
+   "alertes": [
+    [
+     "csv_invalide",
+     null,
+     null,
+     2
+    ]
+   ],
+   "présence": {},
+   "droits": {
+    "alice": "écriture",
+    "bob": "écriture",
+    "carol": "lecture"
+   }
+  },
+  "classe": "trou",
+  "assertion": "A156",
+  "cas": "Quand un import CSV est rejeté parce qu'un guillemet n'est jamais fermé, la spec exige que l'alerte indique la ligne invalide, mais elle ne dit pas si l'alerte doit aussi nommer la feuille visée.",
+  "verdict": "```\nclaim:     Pour un import CSV dont un guillemet n'est jamais fermé, l'alerte doit nommer la feuille visée (Feuille1). Une alerte sans feuille (null) viole la spec.\nruling:    rejected\nbecause:   A156 demande seulement qu'« une alerte indique la ligne invalide ». Les deux alertes donnent `csv_invalide` et la ligne 2, qui est bien celle où le guillemet s'ouvre et n'est jamais fermé. A155 tient aussi des deux côtés : aucune cellule ne change. Aucune assertion ne dit que l'alerte d'import doit nommer la feuille. Ce n'est pas comme A56, qui exige « la cellule rejetée », ou A83, qui exige « cette feuille ».\ncertainty: firm\n```\n\nLa seule différence entre les deux observations est le deuxième champ de l'alerte : la feuille vaut `\"Feuille1\"` d'un côté et `null` de l'autre.\n\n- **Ce qui est conforme des deux côtés :** le contenu de la feuille ne change pas et l'alerte donne la bonne ligne invalide (2). Bob a le droit écriture, donc l'action est permise.\n- **Ce que la spec ne précise pas :** A147 dit que l'import vise la feuille active. Rien ne dit en revanche si l'alerte d'import doit répéter le nom de cette feuille. Les deux choix respectent la spec.\n\nC'est donc un trou dans la spec, et non un bug de l'une ou l'autre implémentation.\n\nCLASSE: trou\nASSERTION: A156\nCAS: Quand un import CSV est rejeté parce qu'un guillemet n'est jamais fermé, la spec exige que l'alerte indique la ligne invalide, mais elle ne dit pas si l'alerte doit aussi nommer la feuille visée."
+ },
+ {
+  "groupe": "carol.resolve_conflict",
+  "divergences": 17,
+  "graine": 92,
+  "etape": 1,
+  "action": "carol.resolve_conflict('A1', use_discarded=False)",
+  "x": {
+   "personne": "carol",
+   "feuilles": [
+    "Feuille1"
+   ],
+   "feuille_vue": "Feuille1",
+   "cellules": {
+    "A1": {
+     "contenu": null,
+     "valeur": null,
+     "erreur": null
+    }
+   },
+   "connexion": "en ligne",
+   "en_attente": 0,
+   "annuler": false,
+   "rétablir": false,
+   "alertes": [],
+   "présence": {},
+   "droits": {
+    "alice": "écriture",
+    "bob": "écriture",
+    "carol": "lecture"
+   }
+  },
+  "y": {
+   "personne": "carol",
+   "feuilles": [
+    "Feuille1"
+   ],
+   "feuille_vue": "Feuille1",
+   "cellules": {
+    "A1": {
+     "contenu": null,
+     "valeur": null,
+     "erreur": null
+    }
+   },
+   "connexion": "en ligne",
+   "en_attente": 0,
+   "annuler": false,
+   "rétablir": false,
+   "alertes": [
+    [
+     "droit_insuffisant",
+     "Feuille1",
+     "A1",
+     null
+    ]
+   ],
+   "présence": {},
+   "droits": {
+    "alice": "écriture",
+    "bob": "écriture",
+    "carol": "lecture"
+   }
+  },
+  "classe": "trou",
+  "assertion": "A75",
+  "cas": "A person with only read access tries to resolve a conflict by keeping the retained value, and the spec says the conflict indicator stays but does not say whether a missing-write-access alert must appear.",
+  "verdict": "claim:     When carol, who only has read access, tries to resolve the conflict on A1 by keeping the retained value (`use_discarded=False`), X shows no alert and Y shows `droit_insuffisant`. One of them breaks the spec.\nruling:    rejected — this is a gap in the spec, not a bug.\nbecause:   Only A75 covers this case, and it requires only that \"l'indicateur de conflit reste affiché\". It says nothing about an alert. A47 requires an alert when a read-only user \"tente d'y modifier une cellule\". Keeping the retained value changes no content, so A47 does not clearly cover it. Both outputs keep A1 the same, and neither breaks a stated assertion.\ncertainty: close. The case would tip if someone argued that resolving a conflict counts as modifying a cell under A47; that would make X the bug. The situation is cut off, and the observation does not show whether A1 really had a conflict.\n\nCLASSE: trou\nASSERTION: A75\nCAS: A person with only read access tries to resolve a conflict by keeping the retained value, and the spec says the conflict indicator stays but does not say whether a missing-write-access alert must appear."
+ },
+ {
+  "groupe": "bob.resolve_conflict",
+  "divergences": 17,
+  "graine": 17,
+  "etape": 1,
+  "action": "bob.resolve_conflict('A3', use_discarded=True)",
+  "x": {
+   "personne": "bob",
+   "feuilles": [
+    "Feuille1"
+   ],
+   "feuille_vue": "Feuille1",
+   "cellules": {
+    "A3": {
+     "contenu": null,
+     "valeur": null,
+     "erreur": null
+    }
+   },
+   "connexion": "en ligne",
+   "en_attente": 1,
+   "annuler": false,
+   "rétablir": false,
+   "alertes": [],
+   "présence": {},
+   "droits": {
+    "alice": "écriture",
+    "bob": "écriture",
+    "carol": "lecture"
+   }
+  },
+  "y": {
+   "personne": "bob",
+   "feuilles": [
+    "Feuille1"
+   ],
+   "feuille_vue": "Feuille1",
+   "cellules": {
+    "A3": {
+     "contenu": null,
+     "valeur": null,
+     "erreur": null
+    }
+   },
+   "connexion": "en ligne",
+   "en_attente": 0,
+   "annuler": false,
+   "rétablir": false,
+   "alertes": [],
+   "présence": {},
+   "droits": {
+    "alice": "écriture",
+    "bob": "écriture",
+    "carol": "lecture"
+   }
+  },
+  "classe": "bug H1",
+  "assertion": "A89",
+  "cas": "Une personne en ligne résout un conflit en choisissant la valeur écartée, et après la résolution le nombre de ses modifications en attente doit être revenu à zéro.",
+  "verdict": "```\nclaim:     Quand bob, en ligne, résout le conflit de A3 en choisissant la valeur écartée, son compteur de modifications en attente vaut 1 (X) ou 0 (Y). La spec tranche-t-elle entre les deux ?\nruling:    upheld — bug X : la spec tranche par A89, et le 1 de X la contredit.\nbecause:   A72 fait du choix de la valeur écartée une modification du contenu de la cellule. Pour une modification faite en ligne, A89 dit : « le nombre de modifications en attente reste à zéro une fois l'envoi confirmé ». Bob est « en ligne » et rien de ce qu'on observe n'indique un envoi encore en cours ou refusé : aucune alerte, connexion stable. Le 1 de X n'est donc qu'une modification envoyée dont la confirmation n'a jamais été comptée.\ncertainty: close — A89 parle de ce qui se passe « une fois l'envoi confirmé ». Si l'observation pouvait légitimement être prise avant cette confirmation, l'écart serait un trou de la spec. Ce qui trancherait : savoir si le banc observe l'état après confirmation par le serveur. C'est une question pour le chercheur (le dossier peut la contenir), pas pour l'arbitre.\n```\n\nCLASSE: bug X\nASSERTION: A89\nCAS: Une personne en ligne résout un conflit en choisissant la valeur écartée, et après la résolution le nombre de ses modifications en attente doit être revenu à zéro."
+ }
+]

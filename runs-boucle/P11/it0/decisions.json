@@ -1,0 +1,1079 @@
+{
+ "journal": [
+  {
+   "lot": "A",
+   "groupe": "set_cell [cellules.*.contenu]",
+   "cas": "Une personne saisit une date-heure sans décalage horaire dans une cellule, et la spec ne dit pas si le contenu de la cellule garde le texte saisi tel quel ou devient une date-heure normalisée avec le décalage du fuseau.",
+   "decision": "V1",
+   "proposee": "Quand une personne saisit une date-heure sans décalage horaire dans une cellule, le contenu de la cellule est exactement le texte saisi | observé: contenu | conditions: droit"
+  },
+  {
+   "lot": "A",
+   "groupe": "rename_sheet [droits.alice, droits.bob, droits.carol]",
+   "cas": "Une personne ayant le droit écriture renomme une feuille, et on observe les droits de chaque personne sur cette feuille juste après.",
+   "decision": "V1",
+   "proposee": "Quand une personne ayant le droit écriture renomme une feuille, le droit de chaque personne sur cette feuille reste celui qu'elle avait avant le renommage | observé: droit | conditions: droit"
+  },
+  {
+   "lot": "A",
+   "groupe": "add_sheet [annuler, droits.alice]",
+   "cas": "Juste après qu'une personne a ajouté une feuille, on ne sait pas si cet ajout peut s'annuler, ni quel droit les autres personnes ont sur la nouvelle feuille.",
+   "decision": "V1",
+   "proposee": "Quand une personne ajoute une feuille, l'ajout fait partie des actions qu'elle peut annuler : la commande annuler devient disponible | observé: annulation | conditions: aucune"
+  },
+  {
+   "lot": "A",
+   "groupe": "set_right [alertes]",
+   "cas": "Une personne non propriétaire, avec le droit lecture, tente de passer en lecture le droit d'une autre personne sur une feuille : le droit ne change pas, mais la spec ne dit pas si une alerte doit apparaître.",
+   "decision": "V1",
+   "proposee": "Quand une personne non propriétaire tente de modifier le droit d'une autre personne, aucune alerte n'apparaît | observé: alerte | conditions: rôle"
+  },
+  {
+   "lot": "A",
+   "groupe": "import_csv [en_attente]",
+   "cas": "Une personne avec le droit écriture importe un CSV de deux champs avant que l'envoi soit confirmé ; on regarde de combien augmente le nombre de modifications en attente.",
+   "decision": "V1",
+   "proposee": "Quand une personne importe un CSV, le nombre de modifications en attente augmente de un, quel que soit le nombre de champs du fichier | observé: attente | conditions: connexion, droit"
+  },
+  {
+   "lot": "A",
+   "groupe": "add_sheet [annuler]",
+   "cas": "Juste après qu'une personne a ajouté une feuille au classeur, la spec ne dit pas si la commande annuler est disponible.",
+   "decision": "V1",
+   "proposee": "Quand une personne ajoute une feuille, la commande annuler devient disponible | observé: annulation | conditions: aucune"
+  },
+  {
+   "lot": "A",
+   "groupe": "add_sheet [alertes]",
+   "cas": "Une personne ajoute une feuille sous un nom déjà porté par une autre feuille du classeur, et l'alerte « nom existant » ne dit pas forcément quel nom est en cause.",
+   "decision": "V1",
+   "proposee": "Quand une personne ajoute une feuille avec un nom déjà utilisé par une autre feuille, une alerte indique que le nom existe déjà en citant ce nom | observé: alerte | conditions: feuilles"
+  },
+  {
+   "lot": "A",
+   "groupe": "undo [en_attente]",
+   "cas": "Une personne en ligne modifie une cellule puis annule aussitôt cette modification, avant toute confirmation d'envoi par le serveur, et on observe le nombre de modifications en attente.",
+   "decision": "V1",
+   "proposee": "Quand une personne en ligne modifie une cellule puis annule cette modification avant la confirmation de l'envoi, le nombre de modifications en attente compte la modification et son annulation, soit deux | observé: attente | conditions: connexion, annulation"
+  },
+  {
+   "lot": "A",
+   "groupe": "import_csv [alertes]",
+   "cas": "Une personne ayant le droit écriture importe un CSV dont un guillemet n'est jamais fermé à partir de la ligne 2, et l'alerte d'import invalide peut nommer ou non la feuille visée.",
+   "decision": "V1",
+   "proposee": "Quand une personne importe un CSV dont un guillemet n'est jamais fermé, l'alerte indique la feuille active visée par l'import en plus de la ligne invalide | observé: alerte | conditions: aucune"
+  },
+  {
+   "lot": "A",
+   "groupe": "export_csv [lignes]",
+   "cas": "Lors d'un export CSV, une ligne non vide qui se termine par des cellules vides est plus courte qu'une autre ligne de la feuille.",
+   "decision": "V2",
+   "proposee": "Quand une personne exporte la feuille active en CSV, chaque ligne du fichier CSV a autant de champs que la colonne non vide la plus à droite de la feuille, les cellules vides donnant des champs vides | observé: fichier CSV | conditions: contenu"
+  },
+  {
+   "lot": "A",
+   "groupe": "set_cell [cellules.*.erreur, cellules.*.valeur]",
+   "cas": "Une formule SOMME dont la plage contient sa propre cellule et une cellule de texte cumule une référence circulaire et une possible erreur de type, et la spec ne dit pas laquelle s'affiche.",
+   "decision": "V1",
+   "proposee": "Quand une personne saisit dans A3 la formule =SOMME(A1:A3) alors que A1 contient le texte « abc », A3 affiche une erreur de référence circulaire et non une erreur de type | observé: erreur | conditions: contenu"
+  },
+  {
+   "lot": "B",
+   "groupe": "add_sheet [annuler]",
+   "cas": "Une personne qui vient d'ouvrir le classeur et dont la seule action est d'ajouter une feuille : la commande annuler est-elle disponible ?",
+   "decision": "V2",
+   "proposee": "Quand une personne ajoute une feuille sans avoir fait d'autre action depuis l'ouverture, la commande annuler reste indisponible | observé: annulation | conditions: aucune"
+  },
+  {
+   "lot": "B",
+   "groupe": "set_cell [cellules.*.contenu]",
+   "cas": "Quand une personne saisit une date-heure sans décalage horaire dans une cellule, la spec ne dit pas si le contenu de la cellule reste le texte saisi ou devient l'instant normalisé avec son décalage.",
+   "decision": "V2",
+   "proposee": "Quand une personne saisit une date-heure dans une cellule, le contenu de la cellule est le texte saisi, sans décalage horaire ajouté | observé: contenu | conditions: fuseau"
+  },
+  {
+   "lot": "B",
+   "groupe": "set_right [alertes]",
+   "cas": "Une personne non propriétaire tente de passer en lecture le droit d'une autre personne sur une feuille ; le droit ne change pas, mais la spec ne dit pas si une alerte doit apparaître.",
+   "decision": "V1",
+   "proposee": "Quand une personne non propriétaire tente de modifier le droit d'une autre personne, aucune alerte n'apparaît | observé: alerte | conditions: rôle"
+  },
+  {
+   "lot": "B",
+   "groupe": "delete_sheet [alertes]",
+   "cas": "Une personne qui n'a que le droit lecture tente de supprimer l'unique feuille du classeur, et la spec ne dit pas si une alerte doit lui indiquer qu'elle n'a pas le droit écriture.",
+   "decision": "V1",
+   "proposee": "Quand une personne ayant seulement le droit lecture tente de supprimer une feuille, une alerte indique qu'elle n'a pas le droit écriture sur cette feuille | observé: alerte | conditions: droit"
+  },
+  {
+   "lot": "B",
+   "groupe": "history [(tout)]",
+   "cas": "Une personne hors ligne consulte l'historique des versions après un import CSV fait par une autre personne, et l'entrée de cet import doit avoir un type.",
+   "decision": "V1",
+   "proposee": "Quand une personne importe un CSV, l'historique des versions contient une seule entrée de type « modification » au nom de cette personne | observé: versions | conditions: aucune"
+  },
+  {
+   "lot": "B",
+   "groupe": "rename_sheet [alertes, en_attente]",
+   "cas": "Une personne en ligne renomme une feuille avec le nom que cette feuille porte déjà.",
+   "decision": "V1",
+   "proposee": "Quand une personne en ligne renomme une feuille avec le nom qu'elle porte déjà, aucune alerte n'apparaît et le nombre de modifications en attente reste à zéro | observé: alerte, attente | conditions: connexion"
+  },
+  {
+   "lot": "B",
+   "groupe": "export_csv [lignes]",
+   "cas": "À l'export CSV d'une feuille où une ligne a moins de cellules non vides à droite qu'une autre ligne, faut-il compléter cette ligne par des champs vides jusqu'à la dernière colonne utilisée ?",
+   "decision": "V1",
+   "proposee": "Quand une personne exporte la feuille active en CSV, chaque ligne du fichier CSV a autant de champs qu'il y a de colonnes jusqu'à la dernière colonne non vide de la feuille, les cellules vides donnant un champ vide | observé: fichier CSV | conditions: contenu"
+  }
+ ],
+ "bugs": [
+  {
+   "lot": "A",
+   "groupe": "import_csv [cellules.*.contenu]",
+   "final": "bug H1+S2",
+   "cas": "A person in UTC+1 with write access imports a CSV whose only field is a date-time with a UTC offset, and the cell's content must be set."
+  },
+  {
+   "lot": "B",
+   "groupe": "import_csv [cellules.*.contenu]",
+   "final": "bug S1+S2",
+   "cas": "Une personne en écriture importe un CSV contenant une date-heure avec décalage horaire, et le contenu de la cellule doit rester le champ du fichier pendant que la valeur affichée est convertie dans son fuseau."
+  }
+ ],
+ "a_trancher": [
+  {
+   "lot": "A",
+   "groupe": "resolve_conflict [en_attente]",
+   "juges": [
+    "trou",
+    "bug V2"
+   ],
+   "cas": [
+    "Une personne en ligne avec le droit écriture demande de résoudre, avec la valeur écartée, un conflit sur une cellule vide qui ne montre aucun conflit ; le contenu ne change pas.",
+    "Une personne en ligne avec le droit écriture résout un conflit en choisissant la valeur écartée, puis on lit son nombre de modifications en attente."
+   ],
+   "variantes": [
+    {
+     "greens": [
+      "H2",
+      "S1",
+      "S2"
+     ],
+     "obs": {
+      "alertes": [],
+      "annuler": false,
+      "cellules": {
+       "A3": {
+        "contenu": null,
+        "erreur": null,
+        "valeur": null
+       }
+      },
+      "connexion": "en ligne",
+      "droits": {
+       "alice": "écriture",
+       "bob": "écriture",
+       "carol": "lecture"
+      },
+      "en_attente": 0,
+      "feuille_vue": "Feuille1",
+      "feuilles": [
+       "Feuille1"
+      ],
+      "personne": "bob",
+      "présence": {},
+      "rétablir": false
+     }
+    },
+    {
+     "greens": [
+      "H1"
+     ],
+     "obs": {
+      "alertes": [],
+      "annuler": false,
+      "cellules": {
+       "A3": {
+        "contenu": null,
+        "erreur": null,
+        "valeur": null
+       }
+      },
+      "connexion": "en ligne",
+      "droits": {
+       "alice": "écriture",
+       "bob": "écriture",
+       "carol": "lecture"
+      },
+      "en_attente": 1,
+      "feuille_vue": "Feuille1",
+      "feuilles": [
+       "Feuille1"
+      ],
+      "personne": "bob",
+      "présence": {},
+      "rétablir": false
+     }
+    }
+   ]
+  },
+  {
+   "lot": "A",
+   "groupe": "resolve_conflict [alertes]",
+   "juges": [
+    "trou",
+    "invalide"
+   ],
+   "cas": [
+    "Une personne en lecture seule tente de résoudre un conflit sur une cellule en gardant la valeur retenue, et la question est de savoir si une alerte doit apparaître.",
+    "Une personne ayant le droit lecture tente de résoudre, en gardant la valeur retenue, un conflit sur une cellule vide qui ne montre aucun indicateur de conflit."
+   ],
+   "variantes": [
+    {
+     "greens": [
+      "H1",
+      "S1"
+     ],
+     "obs": {
+      "alertes": [],
+      "annuler": false,
+      "cellules": {
+       "A1": {
+        "contenu": null,
+        "erreur": null,
+        "valeur": null
+       }
+      },
+      "connexion": "en ligne",
+      "droits": {
+       "alice": "écriture",
+       "bob": "écriture",
+       "carol": "lecture"
+      },
+      "en_attente": 0,
+      "feuille_vue": "Feuille1",
+      "feuilles": [
+       "Feuille1"
+      ],
+      "personne": "carol",
+      "présence": {},
+      "rétablir": false
+     }
+    },
+    {
+     "greens": [
+      "H2",
+      "S2"
+     ],
+     "obs": {
+      "alertes": [
+       [
+        "droit_insuffisant",
+        "Feuille1",
+        "A1",
+        null
+       ]
+      ],
+      "annuler": false,
+      "cellules": {
+       "A1": {
+        "contenu": null,
+        "erreur": null,
+        "valeur": null
+       }
+      },
+      "connexion": "en ligne",
+      "droits": {
+       "alice": "écriture",
+       "bob": "écriture",
+       "carol": "lecture"
+      },
+      "en_attente": 0,
+      "feuille_vue": "Feuille1",
+      "feuilles": [
+       "Feuille1"
+      ],
+      "personne": "carol",
+      "présence": {},
+      "rétablir": false
+     }
+    }
+   ]
+  },
+  {
+   "lot": "A",
+   "groupe": "rename_sheet [cellules.*.erreur, cellules.*.valeur]",
+   "juges": [
+    "trou",
+    "invalide"
+   ],
+   "cas": [
+    "Une personne sans droit écriture tente de renommer la feuille, le renommage est refusé, et la question est de savoir si les cellules vides de cette feuille affichent alors une erreur de référence.",
+    "Une personne sans droit écriture tente de renommer la feuille Feuille1 en « Brouillon ». Le renommage est refusé avec une alerte, mais la feuille vue est indiquée sous le nouveau nom alors qu'elle n'existe pas dans la liste des feuilles."
+   ],
+   "variantes": [
+    {
+     "greens": [
+      "H2",
+      "S1",
+      "S2"
+     ],
+     "obs": {
+      "alertes": [
+       [
+        "droit_insuffisant",
+        "Feuille1",
+        null,
+        null
+       ]
+      ],
+      "annuler": false,
+      "cellules": {
+       "A1": {
+        "contenu": null,
+        "erreur": null,
+        "valeur": null
+       },
+       "A2": {
+        "contenu": null,
+        "erreur": null,
+        "valeur": null
+       },
+       "A3": {
+        "contenu": null,
+        "erreur": null,
+        "valeur": null
+       },
+       "B1": {
+        "contenu": null,
+        "erreur": null,
+        "valeur": null
+       },
+       "B2": {
+        "contenu": null,
+        "erreur": null,
+        "valeur": null
+       },
+       "C1": {
+        "contenu": null,
+        "erreur": null,
+        "valeur": null
+       }
+      },
+      "connexion": "en ligne",
+      "droits": {
+       "alice": null,
+       "bob": null,
+       "carol": null
+      },
+      "en_attente": 0,
+      "feuille_vue": "Brouillon",
+      "feuilles": [
+       "Feuille1"
+      ],
+      "personne": "carol",
+      "présence": {},
+      "rétablir": false
+     }
+    },
+    {
+     "greens": [
+      "H1"
+     ],
+     "obs": {
+      "alertes": [
+       [
+        "droit_insuffisant",
+        "Feuille1",
+        null,
+        null
+       ]
+      ],
+      "annuler": false,
+      "cellules": {
+       "A1": {
+        "contenu": null,
+        "erreur": "#REF!",
+        "valeur": "#REF!"
+       },
+       "A2": {
+        "contenu": null,
+        "erreur": "#REF!",
+        "valeur": "#REF!"
+       },
+       "A3": {
+        "contenu": null,
+        "erreur": "#REF!",
+        "valeur": "#REF!"
+       },
+       "B1": {
+        "contenu": null,
+        "erreur": "#REF!",
+        "valeur": "#REF!"
+       },
+       "B2": {
+        "contenu": null,
+        "erreur": "#REF!",
+        "valeur": "#REF!"
+       },
+       "C1": {
+        "contenu": null,
+        "erreur": "#REF!",
+        "valeur": "#REF!"
+       }
+      },
+      "connexion": "en ligne",
+      "droits": {
+       "alice": null,
+       "bob": null,
+       "carol": null
+      },
+      "en_attente": 0,
+      "feuille_vue": "Brouillon",
+      "feuilles": [
+       "Feuille1"
+      ],
+      "personne": "carol",
+      "présence": {},
+      "rétablir": false
+     }
+    }
+   ]
+  },
+  {
+   "lot": "A",
+   "groupe": "history [(tout)]",
+   "juges": [
+    "trou",
+    "bug V2"
+   ],
+   "cas": [
+    "Bob efface une cellule B1 déjà vide puis se reconnecte, et alice, passée hors ligne ensuite, consulte l'historique des versions.",
+    "Une personne passée hors ligne consulte l'historique des versions, alors qu'une modification d'une autre personne a été enregistrée par le serveur pendant qu'elle était encore en ligne."
+   ],
+   "variantes": [
+    {
+     "greens": [
+      "H2",
+      "S1",
+      "S2"
+     ],
+     "obs": [
+      [
+       "bob",
+       "2026-01-15 11:00",
+       "modification"
+      ]
+     ]
+    },
+    {
+     "greens": [
+      "H1"
+     ],
+     "obs": []
+    }
+   ]
+  },
+  {
+   "lot": "B",
+   "groupe": "resolve_conflict [alertes]",
+   "juges": [
+    "invalide",
+    "trou"
+   ],
+   "cas": [
+    "Une personne qui a seulement le droit lecture tente de résoudre, en gardant la valeur retenue, un conflit sur une cellule vide qui ne montre aucun indicateur de conflit.",
+    "Une personne qui a seulement le droit lecture tente de résoudre le conflit d'une cellule en gardant la valeur retenue, et la spec ne dit pas si une alerte doit apparaître."
+   ],
+   "variantes": [
+    {
+     "greens": [
+      "H1",
+      "H2",
+      "S1"
+     ],
+     "obs": {
+      "alertes": [],
+      "annuler": false,
+      "cellules": {
+       "A1": {
+        "contenu": null,
+        "erreur": null,
+        "valeur": null
+       }
+      },
+      "connexion": "en ligne",
+      "droits": {
+       "alice": "écriture",
+       "bob": "écriture",
+       "carol": "lecture"
+      },
+      "en_attente": 0,
+      "feuille_vue": "Feuille1",
+      "feuilles": [
+       "Feuille1"
+      ],
+      "personne": "carol",
+      "présence": {},
+      "rétablir": false
+     }
+    },
+    {
+     "greens": [
+      "S2"
+     ],
+     "obs": {
+      "alertes": [
+       [
+        "droit_insuffisant",
+        "Feuille1",
+        "A1",
+        null
+       ]
+      ],
+      "annuler": false,
+      "cellules": {
+       "A1": {
+        "contenu": null,
+        "erreur": null,
+        "valeur": null
+       }
+      },
+      "connexion": "en ligne",
+      "droits": {
+       "alice": "écriture",
+       "bob": "écriture",
+       "carol": "lecture"
+      },
+      "en_attente": 0,
+      "feuille_vue": "Feuille1",
+      "feuilles": [
+       "Feuille1"
+      ],
+      "personne": "carol",
+      "présence": {},
+      "rétablir": false
+     }
+    }
+   ]
+  },
+  {
+   "lot": "B",
+   "groupe": "undo [en_attente]",
+   "juges": [
+    "trou",
+    "bug V1"
+   ],
+   "cas": [
+    "Une personne en ligne importe un CSV puis annule aussitôt l'import, avant que le serveur ait confirmé l'envoi, et on lit le nombre de modifications en attente.",
+    "Une personne en ligne annule un import CSV qui avait rempli deux cellules, et il faut savoir combien de modifications restent alors en attente."
+   ],
+   "variantes": [
+    {
+     "greens": [
+      "H2",
+      "S1",
+      "S2"
+     ],
+     "obs": {
+      "alertes": [],
+      "annuler": false,
+      "cellules": {
+       "A1": {
+        "contenu": null,
+        "erreur": null,
+        "valeur": null
+       },
+       "A2": {
+        "contenu": null,
+        "erreur": null,
+        "valeur": null
+       },
+       "A3": {
+        "contenu": null,
+        "erreur": null,
+        "valeur": null
+       },
+       "B1": {
+        "contenu": null,
+        "erreur": null,
+        "valeur": null
+       },
+       "B2": {
+        "contenu": null,
+        "erreur": null,
+        "valeur": null
+       },
+       "C1": {
+        "contenu": null,
+        "erreur": null,
+        "valeur": null
+       }
+      },
+      "connexion": "en ligne",
+      "droits": {
+       "alice": "écriture",
+       "bob": "écriture",
+       "carol": "lecture"
+      },
+      "en_attente": 2,
+      "feuille_vue": "Feuille1",
+      "feuilles": [
+       "Feuille1"
+      ],
+      "personne": "alice",
+      "présence": {},
+      "rétablir": true
+     }
+    },
+    {
+     "greens": [
+      "H1"
+     ],
+     "obs": {
+      "alertes": [],
+      "annuler": false,
+      "cellules": {
+       "A1": {
+        "contenu": null,
+        "erreur": null,
+        "valeur": null
+       },
+       "A2": {
+        "contenu": null,
+        "erreur": null,
+        "valeur": null
+       },
+       "A3": {
+        "contenu": null,
+        "erreur": null,
+        "valeur": null
+       },
+       "B1": {
+        "contenu": null,
+        "erreur": null,
+        "valeur": null
+       },
+       "B2": {
+        "contenu": null,
+        "erreur": null,
+        "valeur": null
+       },
+       "C1": {
+        "contenu": null,
+        "erreur": null,
+        "valeur": null
+       }
+      },
+      "connexion": "en ligne",
+      "droits": {
+       "alice": "écriture",
+       "bob": "écriture",
+       "carol": "lecture"
+      },
+      "en_attente": 0,
+      "feuille_vue": "Feuille1",
+      "feuilles": [
+       "Feuille1"
+      ],
+      "personne": "alice",
+      "présence": {},
+      "rétablir": true
+     }
+    }
+   ]
+  },
+  {
+   "lot": "B",
+   "groupe": "set_cell [cellules.*.erreur, cellules.*.valeur]",
+   "juges": [
+    "bug V2",
+    "trou"
+   ],
+   "cas": [
+    "Une personne saisit dans A3 la formule =SOMME(A1:A3), dont la plage contient A3 elle-même, alors que A1 contient le texte « abc ».",
+    "Une personne saisit dans A3 la formule =SOMME(A1:A3), dont la plage inclut A3 elle-même, alors que A1 contient le texte « abc »."
+   ],
+   "variantes": [
+    {
+     "greens": [
+      "H2",
+      "S1",
+      "S2"
+     ],
+     "obs": {
+      "alertes": [],
+      "annuler": true,
+      "cellules": {
+       "A1": {
+        "contenu": "abc",
+        "erreur": null,
+        "valeur": "abc"
+       },
+       "A2": {
+        "contenu": null,
+        "erreur": null,
+        "valeur": null
+       },
+       "A3": {
+        "contenu": "=SOMME(A1:A3)",
+        "erreur": "#CIRC!",
+        "valeur": "#CIRC!"
+       },
+       "B1": {
+        "contenu": null,
+        "erreur": null,
+        "valeur": null
+       },
+       "B2": {
+        "contenu": null,
+        "erreur": null,
+        "valeur": null
+       },
+       "C1": {
+        "contenu": null,
+        "erreur": null,
+        "valeur": null
+       }
+      },
+      "connexion": "en ligne",
+      "droits": {
+       "alice": "écriture",
+       "bob": "écriture",
+       "carol": "lecture"
+      },
+      "en_attente": 1,
+      "feuille_vue": "Feuille1",
+      "feuilles": [
+       "Feuille1"
+      ],
+      "personne": "alice",
+      "présence": {},
+      "rétablir": false
+     }
+    },
+    {
+     "greens": [
+      "H1"
+     ],
+     "obs": {
+      "alertes": [],
+      "annuler": true,
+      "cellules": {
+       "A1": {
+        "contenu": "abc",
+        "erreur": null,
+        "valeur": "abc"
+       },
+       "A2": {
+        "contenu": null,
+        "erreur": null,
+        "valeur": null
+       },
+       "A3": {
+        "contenu": "=SOMME(A1:A3)",
+        "erreur": "#TYPE!",
+        "valeur": "#TYPE!"
+       },
+       "B1": {
+        "contenu": null,
+        "erreur": null,
+        "valeur": null
+       },
+       "B2": {
+        "contenu": null,
+        "erreur": null,
+        "valeur": null
+       },
+       "C1": {
+        "contenu": null,
+        "erreur": null,
+        "valeur": null
+       }
+      },
+      "connexion": "en ligne",
+      "droits": {
+       "alice": "écriture",
+       "bob": "écriture",
+       "carol": "lecture"
+      },
+      "en_attente": 1,
+      "feuille_vue": "Feuille1",
+      "feuilles": [
+       "Feuille1"
+      ],
+      "personne": "alice",
+      "présence": {},
+      "rétablir": false
+     }
+    }
+   ]
+  },
+  {
+   "lot": "B",
+   "groupe": "deliver_all [alice.*.erreur, alice.*.valeur, bob.*.erreur]",
+   "juges": [
+    "bug V2",
+    "trou"
+   ],
+   "cas": [
+    "Après qu'une personne a renommé l'unique feuille et que tout a été livré par le réseau, les cellules vides de cette feuille affichent-elles une erreur de référence chez chacun ?",
+    "Une personne renomme la seule feuille du classeur ; une fois les messages livrés, les cellules vides de cette feuille sont-elles en erreur de référence chez les personnes connectées ?"
+   ],
+   "variantes": [
+    {
+     "greens": [
+      "H2",
+      "S1",
+      "S2"
+     ],
+     "obs": {
+      "alice": {
+       "A1": {
+        "contenu": null,
+        "erreur": null,
+        "valeur": null
+       },
+       "A2": {
+        "contenu": null,
+        "erreur": null,
+        "valeur": null
+       },
+       "A3": {
+        "contenu": null,
+        "erreur": null,
+        "valeur": null
+       },
+       "B1": {
+        "contenu": null,
+        "erreur": null,
+        "valeur": null
+       },
+       "B2": {
+        "contenu": null,
+        "erreur": null,
+        "valeur": null
+       },
+       "C1": {
+        "contenu": null,
+        "erreur": null,
+        "valeur": null
+       }
+      },
+      "bob": {
+       "A1": {
+        "contenu": null,
+        "erreur": null,
+        "valeur": null
+       },
+       "A2": {
+        "contenu": null,
+        "erreur": null,
+        "valeur": null
+       },
+       "A3": {
+        "contenu": null,
+        "erreur": null,
+        "valeur": null
+       },
+       "B1": {
+        "contenu": null,
+        "erreur": null,
+        "valeur": null
+       },
+       "B2": {
+        "contenu": null,
+        "erreur": null,
+        "valeur": null
+       },
+       "C1": {
+        "contenu": null,
+        "erreur": null,
+        "valeur": null
+       }
+      },
+      "carol": {
+       "A1": {
+        "contenu": null,
+        "erreur": null,
+        "valeur": null
+       },
+       "A2": {
+        "contenu": null,
+        "erreur": null,
+        "valeur": null
+       },
+       "A3": {
+        "contenu": null,
+        "erreur": null,
+        "valeur": null
+       },
+       "B1": {
+        "contenu": null,
+        "erreur": null,
+        "valeur": null
+       },
+       "B2": {
+        "contenu": null,
+        "erreur": null,
+        "valeur": null
+       },
+       "C1": {
+        "contenu": null,
+        "erreur": null,
+        "valeur": null
+       }
+      }
+     }
+    },
+    {
+     "greens": [
+      "H1"
+     ],
+     "obs": {
+      "alice": {
+       "A1": {
+        "contenu": null,
+        "erreur": "#REF!",
+        "valeur": "#REF!"
+       },
+       "A2": {
+        "contenu": null,
+        "erreur": "#REF!",
+        "valeur": "#REF!"
+       },
+       "A3": {
+        "contenu": null,
+        "erreur": "#REF!",
+        "valeur": "#REF!"
+       },
+       "B1": {
+        "contenu": null,
+        "erreur": "#REF!",
+        "valeur": "#REF!"
+       },
+       "B2": {
+        "contenu": null,
+        "erreur": "#REF!",
+        "valeur": "#REF!"
+       },
+       "C1": {
+        "contenu": null,
+        "erreur": "#REF!",
+        "valeur": "#REF!"
+       }
+      },
+      "bob": {
+       "A1": {
+        "contenu": null,
+        "erreur": "#REF!",
+        "valeur": "#REF!"
+       },
+       "A2": {
+        "contenu": null,
+        "erreur": "#REF!",
+        "valeur": "#REF!"
+       },
+       "A3": {
+        "contenu": null,
+        "erreur": "#REF!",
+        "valeur": "#REF!"
+       },
+       "B1": {
+        "contenu": null,
+        "erreur": "#REF!",
+        "valeur": "#REF!"
+       },
+       "B2": {
+        "contenu": null,
+        "erreur": "#REF!",
+        "valeur": "#REF!"
+       },
+       "C1": {
+        "contenu": null,
+        "erreur": "#REF!",
+        "valeur": "#REF!"
+       }
+      },
+      "carol": {
+       "A1": {
+        "contenu": null,
+        "erreur": "#REF!",
+        "valeur": "#REF!"
+       },
+       "A2": {
+        "contenu": null,
+        "erreur": "#REF!",
+        "valeur": "#REF!"
+       },
+       "A3": {
+        "contenu": null,
+        "erreur": "#REF!",
+        "valeur": "#REF!"
+       },
+       "B1": {
+        "contenu": null,
+        "erreur": "#REF!",
+        "valeur": "#REF!"
+       },
+       "B2": {
+        "contenu": null,
+        "erreur": "#REF!",
+        "valeur": "#REF!"
+       },
+       "C1": {
+        "contenu": null,
+        "erreur": "#REF!",
+        "valeur": "#REF!"
+       }
+      }
+     }
+    }
+   ]
+  }
+ ],
+ "bilan": {
+  "iteration": 0,
+  "trous_juges": 18,
+  "assertions_ajoutees": 13,
+  "bugs": 2,
+  "a_trancher": 8,
+  "tests_ajoutes": 17,
+  "tests_retires": [],
+  "passages": {
+   "test_C01_datetime_without_offset_content_is_exact_typed_text": 5,
+   "test_C02_rename_sheet_keeps_every_persons_right": 7,
+   "test_C03_add_sheet_as_first_action_makes_undo_available": 5,
+   "test_C03_add_sheet_by_non_owner_makes_undo_available": 5,
+   "test_C04_non_owner_changing_right_raises_no_alert": 5,
+   "test_C05_csv_import_adds_exactly_one_pending_modification": 7,
+   "test_C05_csv_import_many_fields_still_one_pending_modification": 7,
+   "test_C06_add_sheet_with_existing_name_alert_cites_the_name": 7,
+   "test_C07_online_edit_then_undo_before_ack_counts_two_pending": 6,
+   "test_C08_invalid_csv_alert_names_active_sheet_and_line": 7,
+   "test_C09_export_pads_rows_to_rightmost_non_empty_column": 5,
+   "test_C09_export_pads_rows_with_circular_error_cell": 5,
+   "test_C09_export_every_row_has_same_field_count": 5,
+   "test_C10_sum_over_own_cell_with_text_is_circular_not_type_error": 6,
+   "test_C11_read_only_delete_sheet_alert_cites_the_sheet": 7,
+   "test_C12_csv_import_adds_single_modification_entry_by_importer": 6,
+   "test_C13_rename_sheet_to_its_own_name_no_alert_no_pending": 3
+  },
+  "ajouts": {
+   "C01": "Quand une personne saisit une date-heure sans décalage horaire dans une cellule, le contenu de la cellule chez cette personne est exactement le texte saisi, sans décalage horaire ajouté | observé: contenu | conditions: droit, fuseau",
+   "C02": "Quand une personne ayant le droit écriture renomme une feuille, le droit de chaque personne sur la feuille renommée reste celui qu'elle avait avant le renommage | observé: droit | conditions: droit",
+   "C03": "Quand une personne ajoute une feuille, l'ajout fait partie des actions qu'elle peut annuler : la commande annuler devient disponible, même si c'est sa première action depuis l'ouverture | observé: annulation | conditions: aucune",
+   "C04": "Quand une personne non propriétaire tente de modifier le droit d'une autre personne, aucune alerte n'apparaît | observé: alerte | conditions: rôle",
+   "C05": "Quand une personne ayant le droit écriture importe un CSV avant que l'envoi soit confirmé, le nombre de modifications en attente augmente de un, quel que soit le nombre de champs du fichier | observé: attente | conditions: connexion, droit",
+   "C06": "Quand une personne ajoute une feuille avec un nom déjà utilisé par une autre feuille, une alerte « nom existant » cite ce nom comme feuille en cause et la liste des feuilles reste inchangée | observé: alerte | conditions: feuilles",
+   "C07": "Quand une personne en ligne modifie une cellule puis annule cette modification avant la confirmation de l'envoi, le nombre de modifications en attente compte la modification et son annulation, soit deux | observé: attente | conditions: connexion, annulation",
+   "C08": "Quand une personne importe un CSV dont un guillemet n'est jamais fermé, l'alerte d'import invalide indique la feuille active visée par l'import en plus de la ligne invalide | observé: alerte | conditions: aucune",
+   "C09": "Quand une personne exporte la feuille active en CSV, chaque ligne du fichier CSV a autant de champs qu'il y a de colonnes jusqu'à la dernière colonne non vide de la feuille, les cellules vides donnant un champ vide | observé: fichier CSV | conditions: contenu",
+   "C10": "Quand une personne saisit dans A3 la formule =SOMME(A1:A3) alors que A1 contient le texte « abc », A3 affiche une erreur de référence circulaire et non une erreur de type | observé: erreur | conditions: contenu",
+   "C11": "Quand une personne ayant seulement le droit lecture tente de supprimer une feuille, une alerte « droit insuffisant » cite cette feuille | observé: alerte | conditions: droit",
+   "C12": "Quand une personne importe un CSV, l'historique des versions gagne une seule entrée, de type « modification », au nom de cette personne | observé: versions | conditions: aucune",
+   "C13": "Quand une personne en ligne renomme une feuille avec le nom qu'elle porte déjà, aucune alerte n'apparaît et le nombre de modifications en attente reste à zéro | observé: alerte, attente | conditions: connexion"
+  }
+ }
+}

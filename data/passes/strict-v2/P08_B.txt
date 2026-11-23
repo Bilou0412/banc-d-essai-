@@ -1,0 +1,41 @@
+ÉTATS: contenu; curseur distant; présence; couleur; permission; propriétaire; connexion; synchronisation; annulation; historique
+ASSERTIONS:
+- Un utilisateur dont la permission est « écriture » tape un caractère : le caractère apparaît dans le contenu affiché sur son écran | observé: contenu | conditions: permission
+- Un utilisateur dont la permission est « lecture » tape un caractère : le contenu affiché sur son écran reste inchangé | observé: contenu | conditions: permission
+- Un utilisateur sans aucune permission ouvre le lien du document : le contenu ne lui est pas affiché | observé: contenu | conditions: permission
+- A, en écriture, tape un caractère alors que B est connecté au document : le caractère apparaît dans le contenu affiché chez B | observé: contenu | conditions: permission, connexion
+- A tape un caractère alors que B est hors ligne : le contenu affiché chez B ne montre pas ce caractère | observé: contenu | conditions: connexion
+- B, hors ligne pendant que A modifiait le document, se reconnecte : le contenu affiché chez B montre les modifications de A | observé: contenu | conditions: connexion
+- A, en écriture et hors ligne, tape un caractère : l'indicateur de synchronisation de A affiche « en attente » | observé: synchronisation | conditions: connexion, permission
+- A, dont l'indicateur de synchronisation affiche « en attente », se reconnecte : l'indicateur de synchronisation de A affiche « synchronisé » | observé: synchronisation | conditions: connexion
+- A, dont l'indicateur de synchronisation affiche « en attente », se reconnecte : le contenu affiché chez B montre les modifications faites par A hors ligne | observé: contenu | conditions: synchronisation
+- A et B insèrent chacun un texte au même endroit au même moment : le contenu affiché chez A est identique au contenu affiché chez B | observé: contenu | conditions: aucune | frontière: oui
+- A et B insèrent chacun un texte au même endroit au même moment : le texte inséré par A est présent dans le contenu | observé: contenu | conditions: aucune | frontière: oui
+- A et B insèrent chacun un texte au même endroit au même moment : le texte inséré par B est présent dans le contenu | observé: contenu | conditions: aucune | frontière: oui
+- A supprime un mot pendant que B tape au milieu de ce mot : le texte tapé par B est présent dans le contenu | observé: contenu | conditions: aucune | frontière: oui
+- B déplace son curseur alors qu'il est connecté : le curseur distant de B s'affiche chez A à la nouvelle position | observé: curseur distant | conditions: connexion
+- A insère du texte avant la position du curseur de B : le curseur distant de B reste affiché chez A devant le même caractère qu'avant l'insertion | observé: curseur distant | conditions: aucune
+- B ferme le document : le curseur distant de B n'est plus affiché chez A | observé: curseur distant | conditions: aucune
+- B ouvre le document avec une permission « lecture » ou « écriture » : B apparaît dans la présence affichée chez A | observé: présence | conditions: permission
+- Un utilisateur sans aucune permission ouvre le lien du document : il n'apparaît pas dans la présence affichée chez A | observé: présence | conditions: permission
+- B ferme le document : B n'apparaît plus dans la présence affichée chez A | observé: présence | conditions: aucune
+- B perd sa connexion sans fermer le document : B disparaît de la présence affichée chez A après un délai | observé: présence | conditions: connexion | frontière: oui
+- Deux participants figurent en même temps dans la présence : leurs couleurs sont différentes | observé: couleur | conditions: présence
+- B ouvre le document : la couleur du curseur distant de B chez A est la couleur de B dans la présence | observé: couleur | conditions: aucune
+- A n'a fait aucune modification depuis l'ouverture du document : le bouton Annuler de A est désactivé | observé: annulation | conditions: aucune
+- Un utilisateur dont la permission est « lecture » regarde la barre d'outils : son bouton Annuler est désactivé | observé: annulation | conditions: permission
+- A, en écriture, vient de taper « abc » et clique Annuler : « abc » disparaît du contenu | observé: contenu | conditions: permission
+- A clique Annuler alors que B a tapé du texte après la dernière modification de A : le texte tapé par B reste dans le contenu | observé: contenu | conditions: aucune | frontière: oui
+- A vient d'annuler la saisie de « abc » et clique Rétablir : « abc » réapparaît dans le contenu | observé: contenu | conditions: annulation
+- Le propriétaire passe la permission de B de « écriture » à « lecture » : la permission affichée pour B est « lecture » | observé: permission | conditions: propriétaire
+- Un utilisateur qui n'est pas le propriétaire tente de modifier la permission de B : la permission de B reste inchangée | observé: permission | conditions: propriétaire
+- Le propriétaire tente de passer sa propre permission en « lecture » : sa permission reste « écriture » | observé: permission | conditions: propriétaire
+- Le propriétaire passe B en « lecture » pendant que B édite, puis B tape un caractère : le contenu reste inchangé | observé: contenu | conditions: permission
+- A, en écriture, clique « Créer une version » : une nouvelle entrée apparaît dans l'historique | observé: historique | conditions: permission
+- Un utilisateur en « lecture » tente de créer une version : l'historique reste inchangé | observé: historique | conditions: permission
+- Un utilisateur en « lecture » ouvre l'historique : la liste des versions lui est affichée | observé: historique | conditions: permission
+- A, en écriture, restaure une version de l'historique : le contenu devient celui de cette version | observé: contenu | conditions: permission
+- A, en écriture, restaure une version de l'historique : une entrée « restauration » apparaît dans l'historique | observé: historique | conditions: permission
+- A restaure une version alors que B est connecté : le contenu affiché chez B devient celui de cette version | observé: contenu | conditions: connexion
+- Un utilisateur en « lecture » tente de restaurer une version : le contenu reste inchangé | observé: contenu | conditions: permission
+- A vient de restaurer une version et clique Annuler : le contenu redevient celui d'avant la restauration | observé: contenu | conditions: annulation

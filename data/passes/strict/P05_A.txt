@@ -1,0 +1,38 @@
+ÉTATS: statut; date planifiée; horloge; rôle; propriété; visibilité; ouverture; modération; affichage; tags; liste tag; flux; ordre flux; contenu
+ASSERTIONS:
+- Un article nouvellement créé a le statut brouillon | observé: statut | conditions: aucune
+- Un article en brouillon n'est pas visible par un visiteur | observé: visibilité | conditions: statut, rôle
+- Un article en brouillon est visible par son auteur | observé: visibilité | conditions: statut, propriété
+- Un article en brouillon d'un autre auteur n'est pas visible par un auteur | observé: visibilité | conditions: statut, rôle, propriété
+- Lorsque l'auteur publie son brouillon, l'article passe au statut publié | observé: statut | conditions: propriété
+- Lorsqu'un auteur tente de publier le brouillon d'un autre auteur, le statut reste brouillon | observé: statut | conditions: rôle, propriété
+- Un article publié est visible par un visiteur | observé: visibilité | conditions: statut
+- Lorsque l'auteur planifie son brouillon avec une date future, l'article passe au statut planifié | observé: statut | conditions: propriété, date planifiée, horloge
+- Lorsque l'auteur planifie son brouillon avec une date passée, le statut reste brouillon | observé: statut | conditions: date planifiée, horloge
+- Un article planifié dont la date planifiée n'est pas atteinte n'est pas visible par un visiteur | observé: visibilité | conditions: statut, date planifiée, horloge
+- Lorsque l'horloge atteint la date planifiée, l'article planifié passe au statut publié | observé: statut | conditions: date planifiée
+- Lorsque l'auteur repasse son article publié en brouillon, l'article n'est plus visible par un visiteur | observé: visibilité | conditions: propriété, rôle
+- Lorsque l'auteur annule la planification, l'article repasse au statut brouillon | observé: statut | conditions: propriété
+- Lorsque l'auteur modifie le texte de son article, le contenu affiché est le nouveau texte | observé: contenu | conditions: propriété
+- Lorsqu'un modérateur modifie le texte d'un article dont il n'est pas l'auteur, le contenu reste inchangé | observé: contenu | conditions: rôle, propriété
+- Lorsque l'auteur ajoute un tag à son article, ce tag figure dans les tags de l'article | observé: tags | conditions: propriété
+- Lorsque l'auteur retire un tag de son article, ce tag ne figure plus dans les tags de l'article | observé: tags | conditions: propriété
+- Un article publié portant un tag apparaît dans la liste tag de ce tag | observé: liste tag | conditions: statut, tags
+- Un article en brouillon portant un tag n'apparaît pas dans la liste tag de ce tag | observé: liste tag | conditions: statut
+- Un article publié apparaît dans le flux | observé: flux | conditions: statut
+- Un article en brouillon n'apparaît pas dans le flux | observé: flux | conditions: statut
+- Un article planifié n'apparaît pas dans le flux tant que la date planifiée n'est pas atteinte | observé: flux | conditions: statut, date planifiée, horloge
+- Les articles du flux sont triés du plus récent au plus ancien selon leur date de publication | observé: ordre flux | conditions: aucune
+- Lorsqu'un visiteur commente un article publié ouvert, le commentaire est en modération en attente | observé: modération | conditions: statut, ouverture
+- Lorsqu'un visiteur commente un article fermé aux commentaires, aucun commentaire n'est créé | observé: modération | conditions: ouverture
+- Lorsqu'un visiteur tente de commenter un article en brouillon, aucun commentaire n'est créé | observé: modération | conditions: statut
+- Un commentaire en attente n'est pas affiché aux visiteurs | observé: affichage | conditions: modération, rôle
+- Un commentaire en attente est affiché au modérateur | observé: affichage | conditions: modération, rôle
+- Lorsqu'un modérateur approuve un commentaire en attente, sa modération devient approuvé | observé: modération | conditions: rôle
+- Lorsqu'un auteur non modérateur tente d'approuver un commentaire, sa modération reste en attente | observé: modération | conditions: rôle
+- Un commentaire approuvé est affiché aux visiteurs | observé: affichage | conditions: modération
+- Lorsqu'un modérateur rejette un commentaire en attente, sa modération devient rejeté | observé: modération | conditions: rôle
+- Un commentaire rejeté n'est pas affiché aux visiteurs | observé: affichage | conditions: modération
+- Lorsqu'un article repasse en brouillon, ses commentaires approuvés ne sont plus affichés aux visiteurs | observé: affichage | conditions: modération
+- Lorsque l'auteur ferme les commentaires de son article, l'ouverture devient fermée | observé: ouverture | conditions: propriété
+- Lorsque l'auteur ferme les commentaires, les commentaires déjà approuvés restent affichés | observé: affichage | conditions: modération

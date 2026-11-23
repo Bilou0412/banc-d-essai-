@@ -1,0 +1,61 @@
+[
+ {
+  "groupe": "check_item",
+  "divergences": 195,
+  "graine": 0,
+  "etape": 1,
+  "action": "check_item('beurre', 'c. à s.', checked=True)",
+  "x": "refusé",
+  "y": [],
+  "classe": "invalide",
+  "assertion": "A33",
+  "cas": "On coche un article (« beurre », en c. à s.) alors que la liste de courses est vide et ne le contient donc pas.",
+  "verdict": "```\nclaim:     Au lancement, la liste de courses est vide. On appelle check_item('beurre', 'c. à s.', checked=True). X répond « refusé », Y renvoie [] : l'un des deux viole la spec.\nruling:    rejected\nbecause:   La spec ne prévoit le cochage que pour un article qui se trouve dans la liste : A33 dit « Le cochage d'un article de la liste de courses l'affiche comme coché ». Ici, aucune recette n'a été ajoutée et la liste est vide ({\"recettes\": []}). « beurre » n'est donc pas un article de la liste. Un utilisateur ne peut pas cocher une case qui ne s'affiche pas : l'action n'est pas permise par la spec, et aucune assertion ne fixe ce qu'elle doit produire.\ncertainty: close\n```\n\nJe retiens « invalide » plutôt que « trou », mais la décision est serrée. Si l'interface permettait de cocher un article par son nom, sans passer par la liste affichée, l'action deviendrait possible pour l'utilisateur. Le cas serait alors un trou : la spec ne dit pas s'il faut refuser cette action ou l'ignorer. Pour trancher, il faut savoir si l'interface permet de cocher un article autrement qu'en le touchant dans la liste. Seul l'arbitre peut le dire, car la spec ne le précise nulle part.\n\nCLASSE: invalide\nASSERTION: A33\nCAS: On coche un article (« beurre », en c. à s.) alors que la liste de courses est vide et ne le contient donc pas."
+ },
+ {
+  "groupe": "add_ingredient",
+  "divergences": 26,
+  "graine": 32,
+  "etape": 5,
+  "action": "add_ingredient(Omelette#1, 'crème', 3, 'cl')",
+  "x": {
+   "titre": "Omelette",
+   "portions": 4,
+   "catégorie": null,
+   "favori": false,
+   "note": null,
+   "photo": "image par défaut",
+   "ingrédients": [
+    [
+     "crème",
+     "3",
+     "cl"
+    ]
+   ]
+  },
+  "y": {
+   "titre": "Omelette",
+   "portions": 4,
+   "catégorie": null,
+   "favori": false,
+   "note": null,
+   "photo": "image par défaut",
+   "ingrédients": [
+    [
+     "crème",
+     "0.1",
+     "cl"
+    ],
+    [
+     "crème",
+     "3",
+     "cl"
+    ]
+   ]
+  },
+  "classe": "trou",
+  "assertion": "A03",
+  "cas": "Ajouter à une recette un ingrédient qui a le même nom et la même unité qu'un ingrédient déjà présent : la spec ne dit pas s'il remplace la ligne existante ou s'il s'ajoute comme une deuxième ligne.",
+  "verdict": "claim:     Ajouter un ingrédient (« crème », 3, cl) à une recette qui contient déjà « crème » en cl doit soit remplacer la ligne existante, soit ajouter une deuxième ligne. La spec imposerait l'un des deux.\nruling:    rejected\nbecause:   A03 dit seulement que l'ajout « fait apparaître cet ingrédient dans la liste des ingrédients de la recette ». « crème, 3, cl » apparaît dans les deux observations, donc X et Y respectent A03. Aucune assertion ne dit si une ligne existante avec le même nom est gardée ou remplacée. A04 ne parle que de la suppression explicite, et A31 parle de la liste de courses, pas de la fiche de la recette.\ncertainty: firm\n\nL'intention de l'arbitre tranche ce cas : un deuxième ajout du même ingrédient remplace-t-il le premier ou s'ajoute-t-il à côté ? La spec ne le dit pas, il faut donc lui poser la question.\n\nCLASSE: trou\nASSERTION: A03\nCAS: Ajouter à une recette un ingrédient qui a le même nom et la même unité qu'un ingrédient déjà présent : la spec ne dit pas s'il remplace la ligne existante ou s'il s'ajoute comme une deuxième ligne."
+ }
+]

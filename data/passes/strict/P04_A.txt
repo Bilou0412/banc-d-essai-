@@ -1,0 +1,40 @@
+- a | observé: listes | conditions: nom liste
+- a | observé: listes | conditions: nom liste
+- a | observé: listes | conditions: nom liste
+- a | observé: liste active | conditions: aucune
+- a | observé: nom liste | conditions: aucune
+- a | observé: nom liste | conditions: aucune
+- a | observé: listes | conditions: aucune
+- a | observé: tâches | conditions: aucune
+- a | observé: liste active | conditions: listes
+- a | observé: liste active | conditions: aucune
+- a | observé: tâches | conditions: titre, liste active
+- a | observé: tâches | conditions: titre
+- a | observé: statut | conditions: aucune
+- a | observé: échéance | conditions: aucune
+- a | observé: ordre | conditions: aucune
+- a | observé: titre | conditions: aucune
+- a | observé: titre | conditions: aucune
+- a | observé: tâches | conditions: aucune
+- a | observé: statut | conditions: statut
+- a | observé: statut | conditions: statut
+- a | observé: compteur | conditions: statut, liste active
+- a | observé: tâches | conditions: listes
+- a | observé: tâches | conditions: listes
+- a | observé: statut | conditions: aucune
+- a | observé: échéance | conditions: aucune
+- a | observé: ordre | conditions: aucune
+- a | observé: échéance | conditions: aucune
+- a | observé: échéance | conditions: aucune
+- a | observé: retard | conditions: statut, échéance, date courante
+- a | observé: retard | conditions: statut, échéance, date courante
+- a | observé: retard | conditions: statut, échéance, date courante
+- a | observé: retard | conditions: échéance
+- a | observé: ordre | conditions: aucune
+- a | observé: affichage | conditions: ordre
+- a | observé: affichage | conditions: liste active
+- a | observé: affichage | conditions: filtre
+- a | observé: affichage | conditions: filtre, statut
+- a | observé: affichage | conditions: filtre, statut
+- a | observé: affichage | conditions: filtre, retard
+- a | observé: filtre | conditions: aucune
