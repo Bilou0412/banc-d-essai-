@@ -37,6 +37,9 @@ REPETITION = 1.1  # ajouté après le tour 1 de l'essai 1 (boucle de 6 000 jeton
 P02 = RACINE / "runs-v4" / "P02"
 TESTS = sorted((RACINE / "runs-v2" / "P02").glob("test_app*.py"))
 SORTIE = RACINE / "runs-v6" / "h23b"
+RECUIT = RACINE / "runs-v7" / "recuit"
+CHAUD = 0.7  # V7 (H10) : température quand le modèle stagne, voir data/predictions/V7.md
+REGLAGE = {"temperature": 0, "seed": None}  # changé tour par tour par le recuit seulement
 N = 300
 
 SYSTEME = "Tu es un développeur Python précis. Tu réponds par un seul bloc de code ```python, sans explication."
@@ -103,7 +106,8 @@ def boucle(texte):
 def llm(texte, max_tokens):
     """Génération en flux ; une génération qui boucle sur un motif est coupée (la réponse est gardée telle quelle)."""
     corps = json.dumps({"messages": [{"role": "system", "content": SYSTEME}, {"role": "user", "content": texte}],
-                        "temperature": 0, "repeat_penalty": REPETITION, "max_tokens": max_tokens, "cache_prompt": True,
+                        "temperature": REGLAGE["temperature"], "repeat_penalty": REPETITION, "max_tokens": max_tokens, "cache_prompt": True,
+                        **({"seed": REGLAGE["seed"]} if REGLAGE["seed"] is not None else {}),
                         "stream": True, "stream_options": {"include_usage": True}, "timings_per_token": True}).encode()
     req = urllib.request.Request(URL, corps, {"content-type": "application/json"})
     morceaux, timings, usage, coupe = [], {}, {}, False
@@ -343,20 +347,30 @@ def module(a):
 
 
 def assertion(a):
-    dossier = SORTIE / "assertion"
+    recuit = getattr(a, "recuit", False)
+    dossier = RECUIT if recuit else SORTIE / "assertion"
     dossier.mkdir(parents=True, exist_ok=True)
     spec = spec_de("P02")
     entete, par = entete_et_tests()
     ordre = list(spec)
     code, res, rejet, num = "", {}, None, 0
     faits_ = set()
+    gains, vues = [], {}  # recuit : gain de chaque tour, réponses déjà rendues par assertion
     jf = dossier / "journal.jsonl"
     if jf.exists():  # reprise après un arrêt : le code gardé et les tours déjà faits
+        avant = 0
         for l in jf.read_text(encoding="utf-8").splitlines():
             if l.strip():
                 x = json.loads(l)
                 faits_.add((x["passage"], x["assertion"]))
                 num = x["tour"]
+                gains.append(x["passe"] > avant)
+                avant = x["passe"]
+                if recuit:
+                    rep = (dossier / f"tour{num:02d}" / "reponse.txt").read_text(encoding="utf-8")
+                    identique = rep in vues.get(x["assertion"], set())
+                    vues.setdefault(x["assertion"], set()).add(rep)
+                    REGLAGE["temperature"] = temperature_suivante(gains, identique)
         code = (dossier / "app.py").read_text(encoding="utf-8")
         res = tests_passes(code)
     with open(dossier / "journal.jsonl", "a", encoding="utf-8") as journal:
@@ -368,6 +382,8 @@ def assertion(a):
                     continue
                 vois = voisines(spec, i)
                 num += 1
+                if recuit:
+                    REGLAGE["seed"] = num
                 texte = UNE.format(
                     tech=TECH, reel=REEL["P02"], entete=entete, assertion=f"{i} : {spec[i]}",
                     voisines="\n".join(f"{j} : {t}" for j, t in vois.items()) or "(aucune)",
@@ -375,10 +391,29 @@ def assertion(a):
                     code=code or "# vide",
                     resultats=(("Échecs actuels des tests de cette règle :\n" + (echecs(res, i) or "(aucun)")) if res else "")
                     + (f"\nNote : {rejet}." if rejet else ""))
-                code, res, rejet = tour_commun(dossier, num, texte, 2500, fusionner, code, res, journal,
-                                               {"passage": passage, "assertion": i, "voisines": len(vois)})
+                extra = {"passage": passage, "assertion": i, "voisines": len(vois)}
+                if recuit:
+                    extra.update(temperature=REGLAGE["temperature"], graine=num)
+                avant = sum(v for v, _ in res.values()) if res else 0
+                code, res, rejet = tour_commun(dossier, num, texte, 2500, fusionner, code, res, journal, extra)
+                if recuit:
+                    rep = (dossier / f"tour{num:02d}" / "reponse.txt").read_text(encoding="utf-8")
+                    identique = rep in vues.get(i, set())
+                    vues.setdefault(i, set()).add(rep)
+                    gains.append(sum(v for v, _ in res.values()) > avant)
+                    REGLAGE["temperature"] = temperature_suivante(gains, identique)
                 if res and all(v for v, _ in res.values()):
                     return
+
+
+def temperature_suivante(gains, identique):
+    """Recuit (V7) : 0 dès qu'un tour gagne des tests ; 0,7 si les deux derniers tours n'ont rien gagné
+    ou si la réponse répète une réponse déjà rendue pour la même assertion ; sinon on garde la température."""
+    if gains and gains[-1]:
+        return 0
+    if identique or (len(gains) >= 2 and not gains[-1] and not gains[-2]):
+        return CHAUD
+    return REGLAGE["temperature"]
 
 
 def bilan(_):
@@ -401,6 +436,7 @@ if __name__ == "__main__":
     m.add_argument("--tours", type=int, default=12)
     s = sp.add_parser("assertion")
     s.add_argument("--max", type=int, default=78)
+    s.add_argument("--recuit", action="store_true", help="V7 (H10) : température 0 → 0,7 quand le modèle stagne")
     sp.add_parser("bilan")
     a = ap.parse_args()
     {"module": module, "assertion": assertion, "bilan": bilan}[a.cmd](a)
