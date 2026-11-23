@@ -1,0 +1,16 @@
+```python
+def delete_recipe(self, rid: int) -> None:
+    with open(self.path, 'r') as f:
+        data = json.load(f)
+    data = [r for r in data if r['id'] != rid]
+    with open(self.path, 'w') as f:
+        json.dump(data, f)
+    # Clear shopping list entries related to the deleted recipe
+    shop_list_path = os.path.join(os.path.dirname(self.path), "shopping_list.json")
+    if os.path.exists(shop_list_path):
+        with open(shop_list_path, 'r') as sf:
+            shop_data = json.load(sf)
+        shop_data = {k: v for k, v in shop_data.items() if rid not in [i['recipe_id'] for i in v]}
+        with open(shop_list_path, 'w') as sf:
+            json.dump(shop_data, sf)
+```

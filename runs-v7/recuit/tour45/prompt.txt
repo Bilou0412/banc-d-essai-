@@ -1,0 +1,417 @@
+Tu complètes le module Python `app.py`, une règle à la fois.
+
+Contexte technique (identique pour toutes les sondes) :
+- Python 3.13, bibliothèque standard + le paquet `cryptography` (déjà installé). Rien d'autre.
+- Tout le système tient dans un seul module `app.py`. Pas de réseau réel ni de disque : les
+  échanges entre machines passent par un réseau simulé en mémoire, et le temps est une valeur
+  que les tests font avancer.
+- Tests : pytest, dans `tests/`, qui importent `app`. Chaque test s'exécute en moins de 20 s.
+
+Mécanisme à réaliser pour de vrai (interdit de le simuler) : la persistance entre deux ouvertures.
+- Exception à « pas de disque » : l'application enregistre ses données dans un fichier dont le chemin
+  est donné par les tests (par ex. `tmp_path`) ; une nouvelle instance créée sur ce chemin relit tout.
+- Rien ne passe d'une instance à l'autre par la mémoire (pas de variable globale ni de cache partagé).
+
+L'interface et les fixtures (en-tête des tests) :
+```python
+"""Tests rouges -- sonde P02 (carnet de recettes).
+
+Interface publique fixee par ces tests (module `app`) :
+
+    app.InvalidInput                     exception (sous-classe de ValueError) levee pour toute saisie refusee
+    app.DEFAULT_PHOTO                    bytes : l'image par defaut affichee sur une fiche sans photo
+
+    a = app.App(path)                    path : str ou os.PathLike ; fichier de donnees (cree au besoin)
+    a.close()                            ferme l'application (les donnees doivent etre sur disque)
+
+    rid = a.save_recipe(title, servings=4)   -> identifiant opaque, stable apres reouverture
+    a.delete_recipe(rid)
+    a.list_recipes()                     -> list[dict] : {"id": rid, "title": str}
+    a.recipe(rid, servings=None)         -> dict (la fiche) :
+        {"title": str, "servings": int, "category": str|None, "favorite": bool,
+         "note": str|None, "photo": bytes,
+         "ingredients": [{"name": str, "quantity": str, "unit": str}, ...]}
+       `servings` donne : fiche affichee avec portions ajustees (rien n'est enregistre).
+       "quantity" est la quantite AFFICHEE, chaine, separateur decimal ".".
+
+    a.add_ingredient(rid, name, quantity, unit)   quantity : str ou nombre
+    a.remove_ingredient(rid, name)
+    a.set_category(rid, category)
+    a.set_favorite(rid, bool)
+    a.set_note(rid, text)
+    a.set_photo(rid, data: bytes)
+    a.remove_photo(rid)
+
+    a.search(query="", category=None, favorites_only=False)
+        -> dict {"results": list[str] (titres), "message": str|None}
+
+    a.add_to_shopping_list(rid, servings=None)
+    a.shopping_list()                    -> list[dict] {"name", "quantity" (str), "unit", "checked": bool}
+    a.check_item(name, unit, checked=True)
+    a.remove_checked()
+"""
+
+import json
+import os
+import shutil
+import struct
+import subprocess
+import sys
+import zlib
+
+import pytest
+
+import app
+
+
+# ----------------------------------------------------------------- utilitaires
+
+def _png():
+    def chunk(t, d):
+        return (struct.pack(">I", len(d)) + t + d
+                + struct.pack(">I", zlib.crc32(t + d) & 0xFFFFFFFF))
+    ihdr = struct.pack(">IIBBBBB", 1, 1, 8, 2, 0, 0, 0)
+    return (b"\x89PNG\r\n\x1a\n" + chunk(b"IHDR", ihdr)
+            + chunk(b"IDAT", zlib.compress(b"\x00\xff\x00\x00")) + chunk(b"IEND", b""))
+
+
+PNG = _png()
+GIF = (b"GIF89a\x01\x00\x01\x00\x80\x00\x00\x00\x00\x00\xff\xff\xff!\xf9\x04\x01\x00"
+       b"\x00\x00\x00,\x00\x00\x00\x00\x01\x00\x01\x00\x00\x02\x02D\x01\x00;")
+
+
+@pytest.fixture
+def db(tmp_path):
+    return tmp_path / "recettes.db"
+
+
+@pytest.fixture
+def a(db):
+    inst = app.App(db)
+    yield inst
+    try:
+        inst.close()
+    except Exception:
+        pass
+
+
+def titles(inst):
+    return sorted(r["title"] for r in inst.list_recipes())
+
+
+def ing(inst, rid, servings=None):
+    fiche = inst.recipe(rid) if servings is None else inst.recipe(rid, servings=servings)
+    return {i["name"]: i for i in fiche["ingredients"]}
+
+
+def qty(s):
+    return float(s)
+
+
+def shop(inst):
+    return {(i["name"], i["unit"]): i for i in inst.shopping_list()}
+
+
+def find_id(inst, title):
+    ids = [r["id"] for r in inst.list_recipes() if r["title"] == title]
+    assert len(ids) == 1, f"attendu une recette '{title}', obtenu {inst.list_recipes()!r}"
+    return ids[0]
+
+
+def run_fresh_process(path, code):
+    """Execute `code` dans un AUTRE processus Python : aucune memoire partagee possible."""
+    app_dir = os.path.dirname(os.path.abspath(app.__file__))
+    env = dict(os.environ)
+    env["PYTHONPATH"] = app_dir + os.pathsep + env.get("PYTHONPATH", "")
+    script = "import app, json, sys\na = app.App(sys.argv[1])\n" + code
+    out = subprocess.run([sys.executable, "-c", script, str(path)], capture_output=True,
+                         text=True, env=env, timeout=15)
+    assert out.returncode == 0, f"processus neuf en echec : {out.stderr}"
+    return json.loads(out.stdout.strip().splitlines()[-1])
+
+
+# ----------------------------------------------------------------- A01 / A02
+
+
+# --- test_app_2.py
+def _png():
+    def chunk(t, d):
+        return (struct.pack(">I", len(d)) + t + d
+                + struct.pack(">I", zlib.crc32(t + d) & 0xFFFFFFFF))
+    ihdr = struct.pack(">IIBBBBB", 1, 1, 8, 2, 0, 0, 0)
+    return (b"\x89PNG\r\n\x1a\n" + chunk(b"IHDR", ihdr)
+            + chunk(b"IDAT", zlib.compress(b"\x00\xff\x00\x00")) + chunk(b"IEND", b""))
+
+@pytest.fixture
+def db(tmp_path):
+    return tmp_path / "recettes.db"
+
+@pytest.fixture
+def a(db):
+    inst = app.App(db)
+    yield inst
+    try:
+        inst.close()
+    except Exception:
+        pass
+
+def titles(inst):
+    return sorted(r["title"] for r in inst.list_recipes())
+
+def ing(inst, rid, servings=None):
+    fiche = inst.recipe(rid) if servings is None else inst.recipe(rid, servings=servings)
+    return {i["name"]: i for i in fiche["ingredients"]}
+
+def shop(inst):
+    return {(i["name"], i["unit"]): i for i in inst.shopping_list()}
+
+def find_id(inst, title):
+    ids = [r["id"] for r in inst.list_recipes() if r["title"] == title]
+    assert len(ids) == 1, f"attendu une recette '{title}', obtenu {inst.list_recipes()!r}"
+    return ids[0]
+
+def run_fresh_process(path, code):
+    app_dir = os.path.dirname(os.path.abspath(app.__file__))
+    env = dict(os.environ)
+    env["PYTHONPATH"] = app_dir + os.pathsep + env.get("PYTHONPATH", "")
+    script = "import app, json, sys, hashlib\na = app.App(sys.argv[1])\n" + code
+    out = subprocess.run([sys.executable, "-c", script, str(path)], capture_output=True,
+                         text=True, env=env, timeout=15)
+    assert out.returncode == 0, f"processus neuf en echec : {out.stderr}"
+    return json.loads(out.stdout.strip().splitlines()[-1])
+
+def _crepes(inst):
+    rid = inst.save_recipe("Crêpes", servings=4)
+    inst.add_ingredient(rid, "farine", 250, "g")
+    inst.add_ingredient(rid, "lait", 500, "ml")
+    inst.add_ingredient(rid, "oeufs", 3, "pièce")
+    return rid
+```
+
+La règle à réaliser maintenant :
+A08 : Le passage des portions de 4 à 2 divise par deux la quantité affichée de chaque ingrédient | observé: quantité | conditions: portions
+
+Ses voisines (elles partagent un état avec elle ; le code doit rester compatible) :
+A05 : La saisie d'une quantité non numérique est refusée | observé: quantité | conditions: aucune
+A06 : La saisie d'une quantité négative ou nulle est refusée | observé: quantité | conditions: aucune
+A07 : Le passage des portions de 4 à 8 double la quantité affichée de chaque ingrédient | observé: quantité | conditions: portions
+A09 : Une quantité ajustée non entière s'affiche arrondie à deux décimales | observé: quantité | conditions: portions
+A10 : L'ajustement des portions ne modifie pas l'unité affichée d'un ingrédient | observé: unité | conditions: portions
+A11 : La saisie d'un nombre de portions inférieur à 1 est refusée | observé: portions | conditions: aucune
+A12 : La réouverture d'une recette après ajustement affiche le nombre de portions d'origine | observé: portions | conditions: aucune
+A30 : L'ajout d'une recette à la liste de courses avec des portions ajustées y reporte les quantités ajustées | observé: courses | conditions: portions
+
+Les tests qui vérifient cette règle :
+```python
+def test_A08_4_vers_2_divise_par_deux(a):
+    rid = _crepes(a)
+    got = ing(a, rid, servings=2)
+    assert {k: qty(v["quantity"]) for k, v in got.items()} == {"farine": 125, "lait": 250, "oeufs": 1.5}, got
+```
+
+Le code actuel de app.py :
+```python
+import json
+import os
+from typing import Any, Dict, List
+import unicodedata
+import base64
+import io
+from collections import defaultdict
+from typing import List, Dict
+from cryptography.fernet import Fernet
+import re
+DEFAULT_PHOTO = b'\x89PNG\r\n\x1a\n\x00\x00\x00\rIHDR\x00\x00\x00\x01\x00\x00\x00\x01\x08\x02\x00\x00\x00\x90wS\xde\x00\x00\x00\nIDATx\xdac\xf8\xff?\x00\x01\x01\xfe\x00\x00\x00\x00IEND\xaeB`\x82'
+
+class InvalidInput(ValueError):
+    pass
+    pass
+    pass
+    pass
+    pass
+    pass
+    pass
+    pass
+    pass
+
+class App:
+
+    def __init__(self, path: str):
+        self.path = path
+        if not os.path.exists(path):
+            with open(path, 'w') as f:
+                json.dump([], f)
+
+    def close(self) -> None:
+        pass
+
+    def save_recipe(self, title: str, servings: int=4) -> int:
+        if not title.strip():
+            raise InvalidInput('Le titre ne peut pas être vide')
+        with open(self.path, 'r') as f:
+            data = json.load(f)
+            rid = len(data) + 1
+            recipe = {'id': rid, 'title': title, 'servings': servings, 'category': None, 'favorite': False, 'note': None, 'photo': DEFAULT_PHOTO.decode('latin1'), 'ingredients': []}
+            data.append(recipe)
+        with open(self.path, 'w') as f:
+            json.dump(data, f)
+        return rid
+
+    def delete_recipe(self, rid: int) -> None:
+        with open(self.path, 'r') as f:
+            data = json.load(f)
+        data = [r for r in data if r['id'] != rid]
+        with open(self.path, 'w') as f:
+            json.dump(data, f)
+
+    def list_recipes(self) -> List[Dict[str, Any]]:
+        with open(self.path, 'r') as f:
+            return json.load(f)
+
+    def recipe(self, rid: int, servings: int=None) -> Dict[str, Any]:
+        recipes = self.list_recipes()
+        recipe = next((r for r in recipes if r['id'] == rid), None)
+        if not recipe:
+            raise ValueError('Recette non trouvée')
+        if servings is not None:
+            recipe['servings'] = servings
+            for i in recipe['ingredients']:
+                i['quantity'] = str(round(qty(i['quantity']) * (servings / 4), 2))
+        return recipe
+
+    def add_ingredient(self, rid: int, name: str, quantity: Any, unit: str) -> None:
+        if not isinstance(quantity, (int, float)) or quantity <= 0:
+            raise InvalidInput('La quantité doit être un nombre positif')
+        recipe = self.recipe(rid)
+        recipe['ingredients'].append({'name': name, 'quantity': str(round(float(quantity), 2)), 'unit': unit})
+
+    def remove_ingredient(self, rid: int, name: str) -> None:
+        recipe = self.recipe(rid)
+        recipe['ingredients'] = [i for i in recipe['ingredients'] if i['name'] != name]
+
+    def set_category(self, rid: int, category: str) -> None:
+        recipe = self.recipe(rid)
+        recipe['category'] = category
+
+    def set_favorite(self, rid: int, bool: bool) -> None:
+        recipe = self.recipe(rid)
+        recipe['favorite'] = bool
+
+    def set_note(self, rid: int, text: str) -> None:
+        recipe = self.recipe(rid)
+        recipe['note'] = text.strip() if text.strip() else None
+
+    def set_photo(self, rid: int, data: bytes) -> None:
+        if not isinstance(data, bytes):
+            raise InvalidInput("Le fichier n'est pas une image")
+        recipe = self.recipe(rid)
+        recipe['photo'] = base64.b64encode(data).decode('latin1')
+
+    def remove_photo(self, rid: int) -> None:
+        recipe = self.recipe(rid)
+        recipe['photo'] = DEFAULT_PHOTO.decode('latin1')
+
+    def search(self, query: str='', category: str=None, favorites_only: bool=False) -> Dict[str, Any]:
+        recipes = self.list_recipes()
+        results = [r for r in recipes if (not query or query.lower() in r['title'].lower()) and (category is None or r.get('category') == category) and (not favorites_only or r['favorite'])]
+        return {'results': sorted((r['title'] for r in results)), 'message': 'Aucun résultat' if not results else None}
+
+    def add_to_shopping_list(self, rid: int, servings: int=None) -> None:
+        recipe = self.recipe(rid)
+        if servings is not None:
+            recipe['servings'] = servings
+        for i in recipe['ingredients']:
+            item = (i['name'], i['unit'])
+            if item in shop(self):
+                shop(self)[item]['quantity'] = str(qty(shop(self)[item]['quantity']) + qty(i['quantity']))
+            else:
+                shop(self)[item] = {'name': i['name'], 'quantity': str(round(float(i['quantity']), 2)), 'unit': i['unit'], 'checked': False}
+
+    def shopping_list(self) -> List[Dict[str, Any]]:
+        return list(shop(self).values())
+
+    def check_item(self, name: str, unit: str, checked: bool=True) -> None:
+        item = (name.lower(), unit)
+        if item in shop(self):
+            shop(self)[item]['checked'] = checked
+
+    def remove_checked(self) -> None:
+        checked_items = [item for item in shop(self).values() if item['checked']]
+        for item in checked_items:
+            del shop(self)[item]
+
+def is_valid_quantity(quantity: Any) -> bool:
+    return isinstance(quantity, (int, float)) and quantity > 0 and re.match('^\\d+(\\.\\d+)?$', str(quantity))
+
+def qty(s):
+    return round(float(s), 2)
+
+def shop(a):
+    return {(i['name'], i['unit']): i for i in a.shopping_list()}
+
+def search(self, query: str='', category: str=None, favorites_only: bool=False) -> Dict[str, Any]:
+    recipes = self.list_recipes()
+    results = [r for r in recipes if (not query or query.lower() in r['title'].lower()) and (category is None or r.get('category') == category) and (not favorites_only or r['favorite'])]
+    ingredients_results = set()
+    for r in recipes:
+        for i in r['ingredients']:
+            if query.lower() in i['name'].lower():
+                ingredients_results.add(r['title'])
+    results.extend(ingredients_results)
+    return {'results': sorted(results), 'message': 'Aucun résultat' if not results else None}
+
+def set_note(self, rid: int, text: str) -> None:
+    recipe = self.recipe(rid)
+    recipe['note'] = text.strip() if text.strip() else None
+
+def recipe(self, rid: int, servings: int=None) -> Dict[str, Any]:
+    recipes = self.list_recipes()
+    recipe = next((r for r in recipes if r['id'] == rid), None)
+    if not recipe:
+        raise ValueError('Recette non trouvée')
+    if servings is not None:
+        recipe['servings'] = servings
+        for i in recipe['ingredients']:
+            quantity = qty(i['quantity'])
+            new_quantity = round(quantity * (servings / 4), 2)
+            i['quantity'] = str(new_quantity) if new_quantity.is_integer() else f'{new_quantity:.2f}'
+    return recipe
+
+def set_photo(self, rid: int, data: bytes) -> None:
+    if not (data.startswith(b'\x89PNG') or data.startswith(b'GIF87a') or data.startswith(b'GIF89a')):
+        raise InvalidInput("Le fichier n'est pas une image")
+    recipe = self.recipe(rid)
+    recipe['photo'] = base64.b64encode(data).decode('latin1')
+
+def add_to_shopping_list(self, rid: int, servings: int=None) -> None:
+    recipe = self.recipe(rid)
+    if servings is not None:
+        recipe['servings'] = servings
+    for i in recipe['ingredients']:
+        item = (i['name'], i['unit'])
+        if item in shop(self):
+            shop(self)[item]['quantity'] = str(qty(shop(self)[item]['quantity']) + qty(i['quantity']))
+        else:
+            shop(self)[item] = {'name': i['name'], 'quantity': i['quantity'], 'unit': i['unit'], 'checked': False}
+
+def add_ingredient(self, rid: int, name: str, quantity: Any, unit: str) -> None:
+    if not isinstance(quantity, (int, float)) or quantity <= 0:
+        raise InvalidInput('La quantité doit être un nombre positif')
+    recipe = self.recipe(rid)
+    recipe['ingredients'].append({'name': name, 'quantity': str(round(float(quantity), 2)), 'unit': unit})
+
+def remove_ingredient(self, rid: int, name: str) -> None:
+    recipe = self.recipe(rid)
+    recipe['ingredients'] = [i for i in recipe['ingredients'] if i['name'].lower() != name.lower()]
+
+```
+Échecs actuels des tests de cette règle :
+- test_A08_4_vers_2_divise_par_deux : AssertionError: {}
+assert {} == {'farine': 12... 'oeufs': 1.5}
+  
+  Right contains 3 more items:
+  {'farine': 125, 'lait': 250, 'oeufs': 1.5}
+  Use -v to get more diff
+Rends SEULEMENT ce qu'il faut ajouter ou changer pour cette règle : les imports, les constantes, les classes
+ou les méthodes concernées (une méthode se rend dans sa classe : `class App:` puis la méthode).
+Ce que tu rends remplace l'élément de même nom ; le reste du code est gardé tel quel. Un seul bloc ```python.

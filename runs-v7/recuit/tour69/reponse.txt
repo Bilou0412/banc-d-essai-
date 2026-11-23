@@ -1,0 +1,8 @@
+```python
+    def delete_recipe(self, rid: int) -> None:
+        with open(self.path, 'r') as f:
+            data = json.load(f)
+        data = [r for r in data if r['id'] != rid]
+        with open(self.path, 'w') as f:
+            json.dump(data, f)
+```

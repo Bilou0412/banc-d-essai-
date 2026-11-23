@@ -1,0 +1,8 @@
+```python
+class App:
+
+    def remove_checked(self) -> None:
+        checked_items = [item for item in shop(self).values() if item['checked']]
+        for item in checked_items:
+            del shop(self)[item]
+```

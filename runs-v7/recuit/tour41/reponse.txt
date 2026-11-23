@@ -1,0 +1,5 @@
+```python
+def remove_ingredient(self, rid: int, name: str) -> None:
+    recipe = self.recipe(rid)
+    recipe['ingredients'] = [i for i in recipe['ingredients'] if i['name'].lower() != name.lower()]
+```

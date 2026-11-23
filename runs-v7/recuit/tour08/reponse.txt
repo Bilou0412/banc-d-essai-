@@ -1,0 +1,15 @@
+```python
+    def recipe(self, rid: int, servings: int=None) -> Dict[str, Any]:
+        recipes = self.list_recipes()
+        recipe = next((r for r in recipes if r['id'] == rid), None)
+        if not recipe:
+            raise ValueError('Recette non trouvée')
+        if servings is not None and isinstance(servings, int) and servings > 0:
+            original_servings = recipe['servings']
+            factor = servings / original_servings
+            recipe['servings'] = servings
+            for ingredient in recipe['ingredients']:
+                quantity = float(ingredient['quantity'])
+                ingredient['quantity'] = str(round(quantity * factor, 2))
+        return recipe
+```

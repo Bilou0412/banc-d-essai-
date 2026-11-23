@@ -1,0 +1,6 @@
+```python
+import re
+
+def is_valid_quantity(quantity: Any) -> bool:
+    return isinstance(quantity, (int, float)) and quantity > 0 and re.match(r'^\d+(\.\d+)?$', str(quantity))
+```

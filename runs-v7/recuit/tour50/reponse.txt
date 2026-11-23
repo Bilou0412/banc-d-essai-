@@ -1,0 +1,10 @@
+```python
+class App:
+    def set_category(self, rid: int, category: str) -> None:
+        recipe = self.recipe(rid)
+        recipe['category'] = category
+
+    # ...
+```
+
+Ce changement ajoute la mise à jour de la catégorie de la recette dans le fichier JSON.

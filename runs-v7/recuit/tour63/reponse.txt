@@ -1,0 +1,16 @@
+```python
+from collections import defaultdict
+
+# ...
+
+def add_to_shopping_list(self, rid: int, servings: int=None) -> None:
+    recipe = self.recipe(rid)
+    if servings is not None:
+        recipe['servings'] = servings
+    for i in recipe['ingredients']:
+        item = (i['name'], i['unit'])
+        if item in shop(self):
+            shop(self)[item]['quantity'] = str(qty(shop(self)[item]['quantity']) + qty(i['quantity']))
+        else:
+            shop(self)[item] = {'name': i['name'], 'quantity': str(round(float(i['quantity']), 2)), 'unit': i['unit'], 'checked': False}
+```

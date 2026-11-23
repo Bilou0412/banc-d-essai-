@@ -1,0 +1,12 @@
+```python
+class App:
+
+    def check_item(self, name: str, unit: str, checked: bool=True) -> None:
+        item = (name.lower(), unit)
+        if item in shop(self):
+            shop(self)[item]['checked'] = checked
+
+    def remove_checked(self) -> None:
+        for item in [i for i in shop(self) if shop(self)[i]['checked']]:
+            del shop(self)[item]
+```
