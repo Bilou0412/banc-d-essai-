@@ -1,0 +1,724 @@
+[
+ {
+  "champ": "pieces.liste",
+  "situations": 298,
+  "representant": "S020",
+  "V1_H": [
+   {
+    "nom": "Déclaration du candidat (formulaire DC2)",
+    "pages": [
+     1
+    ],
+    "phase": {
+     "statut": "non trouvé",
+     "valeurs": [],
+     "conflit": false
+    },
+    "obligation": {
+     "statut": "non trouvé",
+     "valeurs": [],
+     "conflit": false
+    }
+   },
+   {
+    "nom": "Attestation d'assurance de responsabilité civile professionnelle et décennale en cours de validité",
+    "pages": [
+     1
+    ],
+    "phase": {
+     "statut": "non trouvé",
+     "valeurs": [],
+     "conflit": false
+    },
+    "obligation": {
+     "statut": "non trouvé",
+     "valeurs": [],
+     "conflit": false
+    }
+   },
+   {
+    "nom": "Acte d'engagement (AE) complété et signé",
+    "pages": [
+     1
+    ],
+    "phase": {
+     "statut": "non trouvé",
+     "valeurs": [],
+     "conflit": false
+    },
+    "obligation": {
+     "statut": "non trouvé",
+     "valeurs": [],
+     "conflit": false
+    }
+   },
+   {
+    "nom": "Mémoire technique de 15 pages au plus",
+    "pages": [
+     1
+    ],
+    "phase": {
+     "statut": "non trouvé",
+     "valeurs": [],
+     "conflit": false
+    },
+    "obligation": {
+     "statut": "non trouvé",
+     "valeurs": [],
+     "conflit": false
+    }
+   },
+   {
+    "nom": "Attestation de visite",
+    "pages": [
+     1
+    ],
+    "phase": {
+     "statut": "non trouvé",
+     "valeurs": [],
+     "conflit": false
+    },
+    "obligation": {
+     "statut": "non trouvé",
+     "valeurs": [],
+     "conflit": false
+    }
+   }
+  ],
+  "V2_S": [],
+  "final": "bug S",
+  "juges": [
+   {
+    "classe": "bug V2",
+    "assertion": "A15",
+    "cas": "Le RC énumère cinq pièces à remettre sur une seule page, réparties sous les rubriques candidature et offre.",
+    "choix": "aucun",
+    "nouvelle": "aucune",
+    "usd": 0.151483,
+    "texte": "Le texte de la page 1 et les deux sorties correspondent à ce qui est cité. Voici mon verdict.\n\n```\nclaim:     Sur ce RC, pieces.liste doit contenir les pièces énumérées à l'article 6 (V1), et non une liste vide (V2).\nruling:    upheld — bug V2\nbecause:   A15 tranche le cas : « Quand une page énumère des pièces à remettre, […] le dossier liste chacune de ces pièces ». La page 1 énumère cinq pièces à l'article 6 (« Les candidats remettent un dossier comprenant les pièces suivantes »), et le texte de chacune figure mot pour mot sur la page. Une liste vide viole donc A15. Elle viole aussi A122, car chaque pièce retrouvée doit avoir sa page.\ncertainty: firm\n```\n\nLe champ en litige est la liste des pièces, et sur ce point c'est V1 qui a raison. En revanche, V1 n'est pas juste sur les sous-champs. Elle rend « non trouvé » pour la phase des pièces, alors que le RC les classe sous « Au titre de la candidature » et « Au titre de l'offre ». C'est une violation de A16 et de A123, à traiter dans un autre litige. Pour l'obligation, « non trouvé » est défendable au titre de A128, puisque aucune pièce n'est qualifiée d'obligatoire ou de facultative.\n\nCLASSE: bug V2\nASSERTION: A15\nCAS: Le RC énumère cinq pièces à remettre sur une seule page, réparties sous les rubriques candidature et offre.\nCHOIX: aucun\nNOUVELLE: aucune"
+   },
+   {
+    "classe": "bug V2",
+    "assertion": "A15",
+    "cas": "Une page unique du RC énumère cinq pièces à remettre, rangées sous les intitulés « Au titre de la candidature » et « Au titre de l'offre ».",
+    "choix": "aucun",
+    "nouvelle": "aucune",
+    "usd": 0.030157200000000002,
+    "texte": "```\nclaim:     Sur pieces.liste, V1 rend les cinq pièces énumérées à l'article 6 et V2 rend une liste vide ; l'une des deux viole la spec.\nruling:    upheld — bug V2\nbecause:   A15 dit : « Quand une page énumère des pièces à remettre, […] le dossier liste chacune de ces pièces ». La page 1 dit : « Les candidats remettent un dossier comprenant les pièces suivantes » et énumère cinq pièces. La liste vide de V2 contredit donc directement A15, et aussi A121, car chaque pièce figure bien dans le texte de la page. V1 n'est pas exacte pour autant. Les intitulés « 1) Au titre de la candidature : » et « 2) Au titre de l'offre : » rattachent chaque pièce à une partie. A16 et A123 imposent donc une phase pièce « candidature » ou « offre », alors que V1 rend « non trouvé ». Ce défaut de V1 porte sur un autre sous-champ et ne change rien au fait que V2 viole A15. Pour l'obligation, « non trouvé » est conforme à A128 : « datées et signées » ne qualifie aucune pièce d'obligatoire ou de facultative.\ncertainty: firm\n```\n\nCLASSE: bug V2\nASSERTION: A15\nCAS: Une page unique du RC énumère cinq pièces à remettre, rangées sous les intitulés « Au titre de la candidature » et « Au titre de l'offre ».\nCHOIX: aucun\nNOUVELLE: aucune"
+   }
+  ]
+ },
+ {
+  "champ": "plan[]",
+  "situations": 208,
+  "representant": "S026",
+  "V1_H": {
+   "titre": "Qualité technique de l'offre",
+   "critere": "Qualité technique de l'offre",
+   "sous_critere": null,
+   "ponderation": 50,
+   "page_source": 2,
+   "contenu": ""
+  },
+  "V2_S": {
+   "titre": "Qualité technique de l'offre (pondération",
+   "critere": "Qualité technique de l'offre (pondération",
+   "sous_critere": null,
+   "ponderation": 50,
+   "page_source": 2,
+   "contenu": ""
+  },
+  "final": "bug S",
+  "juges": [
+   {
+    "classe": "bug V2",
+    "assertion": "A140",
+    "cas": "Le RC écrit chaque critère avec sa pondération entre parenthèses sur la même ligne (« Qualité technique de l'offre (pondération : 50 %) »), et la section du plan doit reprendre le libellé du critère.",
+    "choix": "aucun",
+    "nouvelle": "aucune",
+    "usd": 0.161643,
+    "texte": "**claim:** Pour la section du plan qui porte sur le critère n° 2, `titre` et `critere` doivent valoir « Qualité technique de l'offre » (V1). V2 rend « Qualité technique de l'offre (pondération ».\n\n**ruling:** upheld (bug V2)\n\n**because:** La spec tranche par A140 : « chaque critère de l'arbre affiche son libellé tel qu'il est écrit dans le RC ».\n- Page 2, le RC écrit « Critère n° 2 : Qualité technique de l'offre (pondération : 50 %) ». Le libellé est « Qualité technique de l'offre ». La parenthèse donne la pondération : c'est l'objet d'A144 et A31, pas une partie du nom.\n- La valeur de V2 n'est ni le libellé ni la ligne entière. Elle coupe la parenthèse au premier « : ». Ce texte figure bien en page 2, mais ce n'est pas un libellé « tel qu'il est écrit ».\n- A27 exige une section « pour ce critère ». Le champ `critere` de la section doit donc désigner le critère par son libellé. Le fragment de V2 ne le fait pas.\n- V1 est la lecture fidèle au RC.\n\n**certainty:** firm. Une seule réserve : A140 vise l'arbre, et le plan n'y est rattaché que par A27. Le libellé n'a pourtant qu'une lecture correcte.\n\nCLASSE: bug V2\nASSERTION: A140\nCAS: Le RC écrit chaque critère avec sa pondération entre parenthèses sur la même ligne (« Qualité technique de l'offre (pondération : 50 %) »), et la section du plan doit reprendre le libellé du critère.\nCHOIX: aucun\nNOUVELLE: aucune"
+   },
+   {
+    "classe": "bug V2",
+    "assertion": "A140",
+    "cas": "Le RC écrit la pondération entre parenthèses juste après le libellé du critère de valeur technique, sur la même ligne (« Qualité technique de l'offre (pondération : 50 %) »).",
+    "choix": "aucun",
+    "nouvelle": "aucune",
+    "usd": 0.0342896,
+    "texte": "Je classe ce désaccord comme un **bug de V2** : V1 a raison.\n\n```\nclaim:     Sur le champ plan[], la section du critère n° 2 a pour titre et critère « Qualité technique de l'offre » (V1) ou « Qualité technique de l'offre (pondération » (V2).\nruling:    upheld — bug V2\nbecause:   Le RC page 2 écrit « Critère n° 2 : Qualité technique de l'offre (pondération : 50 %) ». Le libellé est « Qualité technique de l'offre » ; la parenthèse donne la pondération, et V2 la coupe à moitié dans le nom. A140 exige que « chaque critère de l'arbre affiche son libellé tel qu'il est écrit dans le RC ». A27 exige que « le plan du mémoire contient une section pour ce critère ». Le champ critere d'une section renvoie donc au critère de l'arbre. Un libellé tronqué à « (pondération » n'est pas celui du RC, et la section ne porte plus sur ce critère.\ncertainty: firm\n```\n\nUne objection est possible : A142 ne retire que les critères absents du texte des pages, et la chaîne de V2 figure bien sur la page 2. Elle n'efface pas le problème : un morceau de texte présent sur la page n'est pas pour autant le libellé du critère. Le seul point discutable est le lien entre A140, qui vise l'arbre, et le champ du plan. Sur le fond, je reste sûr que V2 se trompe.\n\nCLASSE: bug V2\nASSERTION: A140\nCAS: Le RC écrit la pondération entre parenthèses juste après le libellé du critère de valeur technique, sur la même ligne (« Qualité technique de l'offre (pondération : 50 %) »).\nCHOIX: aucun\nNOUVELLE: aucune"
+   }
+  ]
+ },
+ {
+  "champ": "criteres.liste",
+  "situations": 141,
+  "representant": "S103",
+  "V1_H": [
+   {
+    "libelle": "Coût",
+    "pages": [
+     1
+    ],
+    "lot": {
+     "statut": "trouvé",
+     "valeurs": [
+      {
+       "valeur": null,
+       "pages": [
+        1
+       ]
+      }
+     ],
+     "conflit": false
+    },
+    "ponderation": {
+     "statut": "trouvé",
+     "valeurs": [
+      {
+       "valeur": 70,
+       "unite": "pourcentage",
+       "lot": null,
+       "pages": [
+        1
+       ]
+      }
+     ],
+     "conflit": false
+    },
+    "sous_criteres": []
+   },
+   {
+    "libelle": "Valeur technique de l'offre",
+    "pages": [
+     1
+    ],
+    "lot": {
+     "statut": "trouvé",
+     "valeurs": [
+      {
+       "valeur": null,
+       "pages": [
+        1
+       ]
+      }
+     ],
+     "conflit": false
+    },
+    "ponderation": {
+     "statut": "trouvé",
+     "valeurs": [
+      {
+       "valeur": 30,
+       "unite": "pourcentage",
+       "lot": null,
+       "pages": [
+        1
+       ]
+      }
+     ],
+     "conflit": false
+    },
+    "sous_criteres": [
+     {
+      "libelle": "Gestion des déchets de chantier",
+      "pages": [
+       2
+      ],
+      "ponderation": {
+       "statut": "non trouvé",
+       "valeurs": [],
+       "conflit": false
+      }
+     },
+     {
+      "libelle": "Méthodologie et organisation du chantier",
+      "pages": [
+       2
+      ],
+      "ponderation": {
+       "statut": "non trouvé",
+       "valeurs": [],
+       "conflit": false
+      }
+     },
+     {
+      "libelle": "Moyens humains affectés au chantier",
+      "pages": [
+       2
+      ],
+      "ponderation": {
+       "statut": "non trouvé",
+       "valeurs": [],
+       "conflit": false
+      }
+     }
+    ]
+   }
+  ],
+  "V2_S": [
+   {
+    "libelle": "Coût",
+    "pages": [
+     1
+    ],
+    "lot": {
+     "statut": "trouvé",
+     "valeurs": [
+      {
+       "valeur": null,
+       "pages": [
+        1
+       ]
+      }
+     ],
+     "conflit": false
+    },
+    "ponderation": {
+     "statut": "trouvé",
+     "valeurs": [
+      {
+       "valeur": 70,
+       "unite": "pourcentage",
+       "lot": null,
+       "pages": [
+        1
+       ]
+      }
+     ],
+     "conflit": false
+    },
+    "sous_criteres": []
+   },
+   {
+    "libelle": "Valeur technique de l'offre",
+    "pages": [
+     1
+    ],
+    "lot": {
+     "statut": "trouvé",
+     "valeurs": [
+      {
+       "valeur": null,
+       "pages": [
+        1
+       ]
+      }
+     ],
+     "conflit": false
+    },
+    "ponderation": {
+     "statut": "trouvé",
+     "valeurs": [
+      {
+       "valeur": 30,
+       "unite": "pourcentage",
+       "lot": null,
+       "pages": [
+        1
+       ]
+      }
+     ],
+     "conflit": false
+    },
+    "sous_criteres": []
+   }
+  ],
+  "final": "bug S",
+  "juges": [
+   {
+    "classe": "bug V2",
+    "assertion": "A22",
+    "cas": "Un critère de valeur technique est suivi, après un saut de page, de la liste des éléments au regard desquels il sera apprécié, sans pondération propre.",
+    "choix": "aucun",
+    "nouvelle": "aucune",
+    "usd": 0.15981900000000002,
+    "texte": "ésaccord sur `criteres.liste`**\n\n```\nclaim:     Sur ce RC, le critère « Valeur technique de l'offre » doit porter dans l'arbre les trois éléments listés en page 2 comme sous-critères (V1). V2 n'en rattache aucun.\nruling:    upheld (bug V2)\nbecause:   Le RC détaille le critère 2 en éléments : « Ce critère sera apprécié au regard des éléments suivants : • Gestion des déchets de chantier • Méthodologie et organisation du chantier • Moyens humains affectés au chantier ». A22 l'impose : « Quand le RC détaille un critère en sous-critères, […] l'arbre rattache ces sous-critères à leur critère parent ». V2 rend `sous_criteres: []`. Elle viole A22, et par effet A29, qui demande une section du plan par sous-critère. V1 reprend les libellés tels qu'ils sont écrits, avec page 2 (A158). Elle déclare leur pondération non trouvée, ce qui est juste puisque le RC n'en donne aucune (A148/A155).\ncertainty: close — la jurisprudence de la commande publique sépare parfois les « éléments d'appréciation » des « sous-critères ». Une lecture stricte de « sous-critères » au sens juridique pourrait donc placer ces éléments hors du champ d'A22. Mais rien dans la spec ne fait cette distinction. Et le RC « détaille » bien le critère en éléments nommés, que le plan du mémoire doit couvrir.\n```\n\nCLASSE: bug V2\nASSERTION: A22\nCAS: Un critère de valeur technique est suivi, après un saut de page, de la liste des éléments au regard desquels il sera apprécié, sans pondération propre.\nCHOIX: aucun\nNOUVELLE: aucune"
+   },
+   {
+    "classe": "bug V2",
+    "assertion": "A22",
+    "cas": "Le RC dit qu'un critère de valeur technique sera apprécié au regard de trois éléments, énumérés sans pondération en tête de la page suivante.",
+    "choix": "aucun",
+    "nouvelle": "aucune",
+    "usd": 0.0362648,
+    "texte": "ur ce RC, criteres.liste doit rattacher au critère « Valeur technique de l'offre » les trois éléments énumérés en page 2 (V1). Selon l'autre position, ce critère n'a aucun sous-critère (V2).\nruling:    upheld (bug V2)\nbecause:   Le RC découpe le critère 2 en trois éléments : « Ce critère sera apprécié au regard des éléments suivants : • Gestion des déchets… • Méthodologie… • Moyens humains… ». A22 s'applique donc : « Quand le RC détaille un critère en sous-critères, […] l'arbre rattache ces sous-critères à leur critère parent ». V2 rend « sous_criteres\": [] » pour un critère que le RC détaille. C'est le cas d'A154 (critère sans sous-critères), qui ne s'applique pas ici. Les trois libellés figurent bien dans le texte de la page 2 (A157 est satisfaite) et ils n'ont pas de pondération (non trouvée, A148/A155), ce que V1 rend correctement. Le saut de page entre le critère et ses éléments ne change rien à leur rattachement.\ncertainty: close — le RC parle d'« éléments » et non de « sous-critères », et en droit de la commande publique les éléments d'appréciation se distinguent parfois des sous-critères. Mais la spec ne fait pas cette distinction : elle dit « détaille un critère ». Pour l'utilisateur, ces éléments sont justement ceux qui donnent les sections du mémoire (A29).\n```\n\nCLASSE: bug V2\nASSERTION: A22\nCAS: Le RC dit qu'un critère de valeur technique sera apprécié au regard de trois éléments, énumérés sans pondération en tête de la page suivante.\nCHOIX: aucun\nNOUVELLE: aucune"
+   }
+  ]
+ },
+ {
+  "champ": "type_ponderation.valeurs",
+  "situations": 96,
+  "representant": "S271",
+  "V1_H": [
+   {
+    "valeur": "classement",
+    "pages": [
+     2
+    ]
+   }
+  ],
+  "V2_S": [],
+  "final": "bug S",
+  "juges": [
+   {
+    "classe": "bug V2",
+    "assertion": "A25",
+    "cas": "Le RC annonce que les critères sont classés par ordre décroissant d'importance et les liste sans aucune pondération chiffrée.",
+    "choix": "aucun",
+    "nouvelle": "aucune",
+    "usd": 0.147495,
+    "texte": "```\nclaim:     Sur ce RC, type_ponderation.valeurs doit contenir « classement » ; il ne peut pas être vide.\nruling:    upheld — bug V2\nbecause:   A25 couvre ce cas : « Quand le RC classe les critères sans valeur chiffrée, après le lancement de l'analyse, le type pondération vaut « classement » ». Le RC écrit page 1 « Les critères sont classés par ordre décroissant d'importance : ». Page 2, il donne « 1. Valeur technique de l'offre / 2. Prix des prestations », sans pourcentage ni points. Les conditions d'A25 sont donc réunies, et une liste vide revient à déclarer non trouvé un fait écrit dans le RC.\ncertainty: firm\n```\n\nUne réserve, qui ne change pas la classe : V1 donne la page [2], celle où se trouve la liste classée. Or la phrase qui annonce le classement est en page 1. La page attribuée peut donc se discuter au regard d'A39. Mais ce champ n'est pas celui qui diverge ici, et le désaccord porte sur la présence de la valeur, que la spec impose.\n\nCLASSE: bug V2\nASSERTION: A25\nCAS: Le RC annonce que les critères sont classés par ordre décroissant d'importance et les liste sans aucune pondération chiffrée.\nCHOIX: aucun\nNOUVELLE: aucune"
+   },
+   {
+    "classe": "bug V2",
+    "assertion": "A25",
+    "cas": "Le RC dit que les critères sont classés par ordre décroissant d'importance et les énumère sans pourcentage ni points.",
+    "choix": "aucun",
+    "nouvelle": "aucune",
+    "usd": 0.028402200000000002,
+    "texte": "Je ne note aucun fichier, comme demandé.\n\n```\nclaim:     Sur type_ponderation.valeurs, la spec tranche-t-elle entre [{\"valeur\": \"classement\", \"pages\": [2]}] (V1) et [] (V2) pour ce RC ?\nruling:    upheld — bug V2\nbecause:   Le RC classe les critères sans leur donner de valeur chiffrée. La page 1 dit « Les critères sont classés par ordre décroissant d'importance : », et la page 2 donne seulement « 1. Valeur technique de l'offre / 2. Prix des prestations », sans pourcentage ni points. C'est exactement la condition de A25 : « Quand le RC classe les critères sans valeur chiffrée, […] le type pondération vaut « classement » ». En rendant une liste vide, V2 viole A25. Une réserve sur la page de V1 : V1 cite seulement la page 2, alors que la phrase qui dit que les critères sont classés est en page 1. Selon A39, la page 1 devrait sans doute figurer. Ce point ne concerne pas la valeur sur laquelle les deux variantes divergent, et il ne donne pas raison à V2.\ncertainty: firm\n```\n\nCLASSE: bug V2\nASSERTION: A25\nCAS: Le RC dit que les critères sont classés par ordre décroissant d'importance et les énumère sans pourcentage ni points.\nCHOIX: aucun\nNOUVELLE: aucune"
+   }
+  ]
+ },
+ {
+  "champ": "type_ponderation.conflit",
+  "situations": 90,
+  "representant": "S153",
+  "V1_H": false,
+  "V2_S": true,
+  "final": "trou",
+  "juges": [
+   {
+    "classe": "trou",
+    "assertion": "A42",
+    "cas": "Sur une seule page, le RC exprime les pondérations des critères en pourcentages et celles des sous-critères en points.",
+    "choix": "V1",
+    "nouvelle": "Quand une même page exprime les pondérations des critères en pourcentages et celles de leurs sous-critères en points, après le lancement de l'analyse, aucun conflit valeurs n'est signalé pour le type pondération | observé: conflit valeurs | conditions: texte pages, type pondération",
+    "usd": 0.1554122,
+    "texte": "e 1. Les critères y sont exprimés en « 70 % / 30 % » et les sous-critères en « 10 points / 10 pts ». A23 et A24 couvrent chacune un seul format, jamais ce mélange à deux niveaux sur une même page. Les deux variantes respectent donc la spéc : c'est un trou.\ncertainty: close\n```\n\nPour combler ce trou, je retiens V1 (false). Le RC ne se contredit pas : il emploie des pourcentages pour les critères et des points pour les sous-critères, ce qui fait deux niveaux et non deux valeurs concurrentes pour un même fait. Dans la spéc, « conflit valeurs » désigne toujours deux pages qui disent des choses différentes. Signaler un conflit ici donnerait une fausse alerte à l'utilisateur. Le décalage entre les sous-critères et leur critère parent relève plutôt de l'alerte « pondérations incohérentes » (A35). Ici, elle ne se déclenche pas, puisque 3 × 10 = 30.\n\nMon degré de certitude est « close » : on pourrait aussi soutenir que des formats mélangés méritent d'être signalés. Mais rien dans la spéc ne relie le mot « conflit » à une telle situation.\n\nCLASSE: trou\nASSERTION: A42\nCAS: Sur une seule page, le RC exprime les pondérations des critères en pourcentages et celles des sous-critères en points.\nCHOIX: V1\nNOUVELLE: Quand une même page exprime les pondérations des critères en pourcentages et celles de leurs sous-critères en points, après le lancement de l'analyse, aucun conflit valeurs n'est signalé pour le type pondération | observé: conflit valeurs | conditions: texte pages, type pondération"
+   },
+   {
+    "classe": "trou",
+    "assertion": "A42",
+    "cas": "Sur une même page, le RC pondère les critères en pourcentages et les sous-critères en points.",
+    "choix": "V1",
+    "nouvelle": "Quand une même page exprime les pondérations des critères en pourcentages et celles de leurs sous-critères en points, après le lancement de l'analyse, aucun conflit valeurs n'est signalé pour le type pondération | observé: conflit valeurs | conditions: texte pages, type pondération",
+    "usd": 0.038061399999999995,
+    "texte": "```\nclaim:     Sur ce RC, la spec impose une valeur pour type_ponderation.conflit, et l'une des deux variantes la viole.\nruling:    rejected — c'est un trou\nbecause:   Toutes les assertions sur le conflit valeurs supposent deux pages en désaccord (« Quand deux pages… un conflit valeurs est signalé », A55, A64, A151 ; A42 « écrit sur deux pages avec la même valeur »). Ici, tout est sur la page 1 : « Prix des prestations | 70 % / Valeur technique | 30 % », puis les sous-critères en « 10 points » / « 10 pts ». A23 et A24 disent quel type rendre quand une seule unité est employée, mais aucune assertion ne dit si une même page qui mélange pourcentages (critères) et points (sous-critères) crée un conflit. Les deux variantes respectent donc la spec. La règle la plus simple et la plus fidèle au RC est « pas de conflit ». Le RC ne se contredit pas : il utilise une unité par niveau de l'arbre. Et l'écart réel, 30 points de sous-critères pour un parent à 30 %, relève déjà de l'alerte « pondérations incohérentes » (A35), pas du conflit valeurs.\ncertainty: close\n```\n\nCLASSE: trou\nASSERTION: A42\nCAS: Sur une même page, le RC pondère les critères en pourcentages et les sous-critères en points.\nCHOIX: V1\nNOUVELLE: Quand une même page exprime les pondérations des critères en pourcentages et celles de leurs sous-critères en points, après le lancement de l'analyse, aucun conflit valeurs n'est signalé pour le type pondération | observé: conflit valeurs | conditions: texte pages, type pondération"
+   }
+  ],
+  "porte": "convention",
+  "porte_raison": "Un conflit, c'est deux valeurs pour le même objet ; critères en pourcentages et sous-critères en points sont deux niveaux distincts, un usage courant des RC et non une contradiction (serré)."
+ },
+ {
+  "champ": "controle.alertes",
+  "situations": 86,
+  "representant": "S274",
+  "V1_H": [
+   {
+    "type": "total différent de 100 %",
+    "objet": "total"
+   }
+  ],
+  "V2_S": [
+   {
+    "type": "total différent de 100 %",
+    "objet": "critères"
+   }
+  ],
+  "final": "trou",
+  "juges": [
+   {
+    "classe": "trou",
+    "assertion": "A36",
+    "cas": "Le RC exprime les pondérations en pourcentages (40 % + 65 % = 105 %) et le contrôle affiche l'alerte « total différent de 100 % » sans que la spec fixe à quel objet cette alerte se rattache.",
+    "choix": "V2",
+    "nouvelle": "Quand le type pondération vaut « pourcentage » et que la somme des critères diffère de 100 %, après le lancement de l'analyse, l'alerte « total différent de 100 % » porte sur l'objet « critères » | observé: objet alerte | conditions: pondération, type pondération",
+    "usd": 0.14562819999999999,
+    "texte": "5 %. Elles ne divergent que sur le sous-champ `objet` de l'alerte. Or la spec ne fixe jamais l'objet d'une alerte, ni pour A36 ni pour les autres alertes : c'est donc un trou.\n\n```\nclaim:     Sur controle.alertes, l'alerte de somme des pondérations doit porter l'objet « total » (V1) plutôt que « critères » (V2), ou l'inverse.\nruling:    not resolvable\nbecause:   La règle la plus proche, A36, exige seulement que « le contrôle affiche l'alerte « total différent de 100 % » ». Elle porte sur le type de l'alerte et ne dit rien de son objet. Aucune autre assertion (A34, A35, A37, A38) ne fixe d'objet, donc les deux versions respectent la spec. Le fait qui manque est une décision de spécification : la spec peut la porter, il n'y a pas à interroger l'arbitre. Je propose de retenir « critères » : c'est l'élément du RC dont la somme est fausse (Article 6, critères n° 1 et n° 2), alors que « total » répète simplement le type de l'alerte et ne désigne rien dans le RC.\ncertainty: close\n```\n\nCLASSE: trou\nASSERTION: A36\nCAS: Le RC exprime les pondérations en pourcentages (40 % + 65 % = 105 %) et le contrôle affiche l'alerte « total différent de 100 % » sans que la spec fixe à quel objet cette alerte se rattache.\nCHOIX: V2\nNOUVELLE: Quand le type pondération vaut « pourcentage » et que la somme des critères diffère de 100 %, après le lancement de l'analyse, l'alerte « total différent de 100 % » porte sur l'objet « critères » | observé: objet alerte | conditions: pondération, type pondération"
+   },
+   {
+    "classe": "trou",
+    "assertion": "A36",
+    "cas": "Les pondérations des critères sont en pourcentage et leur somme fait 105 % ; l'alerte « total différent de 100 % » est levée, mais la spec ne dit pas sur quel objet elle porte.",
+    "choix": "V2",
+    "nouvelle": "Quand le type pondération vaut « pourcentage » et que la somme des critères diffère de 100 %, après le lancement de l'analyse, l'alerte « total différent de 100 % » a pour objet « critères » | observé: objet alerte | conditions: pondération, type pondération",
+    "usd": 0.0331698,
+    "texte": "différent de 100 % » doit avoir pour objet « total » (V1) ou « critères » (V2)\nruling:    not resolvable\nbecause:   A36 dit seulement que « le contrôle affiche l'alerte « total différent de 100 % » » ; aucune assertion ne fixe l'objet d'une alerte. Le cas se tranche par une assertion ajoutée à la spec, pas par le RC ni par l'arbitre.\ncertainty: close\n```\n\n**Pourquoi c'est un trou et pas un bug :** le RC donne « Critère n° 1 : Valeur technique (40 %) » et « Critère n° 2 : Prix des prestations (pondération : 65 %) ». Les pondérations sont bien en pourcentage (A23) et leur somme fait 105 %. Les conditions de A36 sont donc remplies, et les deux versions affichent la même alerte. Le seul écart est le champ `objet`, sur lequel aucune assertion (A34 à A38) ne dit rien.\n\n**Pourquoi V2 :** l'alerte porte sur ce que le RC écrit réellement, c'est-à-dire la liste des critères de l'article 6. « critères » désigne cet ensemble. « total » ne fait que répéter le nom de l'alerte sans dire à quoi elle s'applique.\n\nCLASSE: trou\nASSERTION: A36\nCAS: Les pondérations des critères sont en pourcentage et leur somme fait 105 % ; l'alerte « total différent de 100 % » est levée, mais la spec ne dit pas sur quel objet elle porte.\nCHOIX: V2\nNOUVELLE: Quand le type pondération vaut « pourcentage » et que la somme des critères diffère de 100 %, après le lancement de l'analyse, l'alerte « total différent de 100 % » a pour objet « critères » | observé: objet alerte | conditions: pondération, type pondération"
+   }
+  ],
+  "porte": "convention",
+  "porte_raison": "L'alerte porte sur une somme de pondérations des critères ; elle se rattache donc à l'objet « critères », par bon sens du format."
+ },
+ {
+  "champ": "validite_offres.valeurs",
+  "situations": 80,
+  "representant": "S070",
+  "V1_H": [
+   {
+    "valeur": {
+     "nombre": 2,
+     "unite": "mois"
+    },
+    "pages": [
+     1
+    ]
+   },
+   {
+    "valeur": {
+     "nombre": 90,
+     "unite": "jours"
+    },
+    "pages": [
+     1
+    ]
+   },
+   {
+    "valeur": {
+     "nombre": 8,
+     "unite": "jours"
+    },
+    "pages": [
+     1
+    ]
+   }
+  ],
+  "V2_S": [
+   {
+    "valeur": {
+     "nombre": 2,
+     "unite": "mois"
+    },
+    "pages": [
+     1
+    ]
+   },
+   {
+    "valeur": {
+     "nombre": 90,
+     "unite": "jours"
+    },
+    "pages": [
+     1
+    ]
+   }
+  ],
+  "final": "trou",
+  "juges": [
+   {
+    "classe": "trou",
+    "assertion": "A12",
+    "cas": "Le RC indique, en plus de la durée de validité des offres, d'autres délais chiffrés (délai de recours, délai de production des attestations par l'attributaire) qui ne portent pas sur la validité des offres.",
+    "choix": "V2",
+    "nouvelle": "Quand une page indique un délai qui ne porte pas sur la validité des offres, après le lancement de l'analyse, la validité offres ne contient pas ce délai | observé: validité offres | conditions: texte pages",
+    "usd": 0.1532122,
+    "texte": "t pas un bug de V1.** Le seul délai de validité des offres dans le RC est « Les offres restent valables pendant 90 jours ». Les 8 jours sont le délai donné à l'attributaire pour fournir ses attestations, à l'article 5. Pour l'utilisateur, V1 a donc tort. Mais aucune assertion ne le dit : les assertions de la famille « validité offres » (A12, A14, A105 à A112) ne contrôlent que la présence de la valeur et sa présence dans le texte. Aucune ne contrôle son sens. Je classe en « trou » parce que la spec ne tranche pas ce cas. Le choix reste serré, car on peut lire A12 comme limitant implicitement la liste à la seule validité des offres.\n\n**Une autre erreur, commune aux deux variantes.** V1 et V2 rendent toutes deux {2, mois}, page 1. Cette valeur vient de l'article 3 (« délai de deux mois » pour un recours en contestation), pas de la validité des offres. Ce n'est pas le point de désaccord, donc je ne le tranche pas ici. La règle ci-dessous l'écarterait aussi. Une fois appliquée, le résultat attendu est [{90, jours, [1]}].\n\nCLASSE: trou\nASSERTION: A12\nCAS: Le RC indique, en plus de la durée de validité des offres, d'autres délais chiffrés (délai de recours, délai de production des attestations par l'attributaire) qui ne portent pas sur la validité des offres.\nCHOIX: V2\nNOUVELLE: Quand une page indique un délai qui ne porte pas sur la validité des offres, après le lancement de l'analyse, la validité offres ne contient pas ce délai | observé: validité offres | conditions: texte pages"
+   },
+   {
+    "classe": "trou",
+    "assertion": "A14",
+    "cas": "Une page du RC contient, en plus de la durée de validité des offres, d'autres durées (délai de recours, délai de production des pièces par l'attributaire) qui ne portent pas sur la validité des offres.",
+    "choix": "V2",
+    "nouvelle": "Quand une page écrit une durée qui ne porte pas sur la validité des offres, après le lancement de l'analyse, la validité offres ne contient pas cette durée | observé: validité offres | conditions: texte pages",
+    "usd": 0.0437646,
+    "texte": "pas une validité d'offre.\n           La spécification ne permet pourtant pas d'écarter cette valeur.\n           - A12 (« le dossier affiche cette validité offres ») exige que la vraie valeur soit présente, mais n'interdit pas d'en ajouter d'autres.\n           - A14 n'écarte qu'une valeur qui « ne figure dans le texte d'aucune page ». Or « 8 jours » figure bien en page 1.\n           Les deux variantes respectent donc la spec. V2 est plus fidèle au RC.\ncertainty: close\n```\n\nJe mets « close » parce qu'on pourrait aussi lire « cette validité offres » dans A12 comme voulant dire « seulement cette validité ». Dans ce cas, ce serait un bug de V1. Mais l'énoncé ne dit pas « seulement ».\n\n**À signaler, hors du désaccord :** les deux variantes rendent aussi {2 mois, page 1}. Cette valeur vient de l'article 3 (« un délai de deux mois à compter de la publicité de l'attribution »), qui fixe le délai de recours et non la validité des offres. Les deux variantes partagent donc ce défaut, et la nouvelle assertion le rend testable aussi.\n\nCLASSE: trou\nASSERTION: A14\nCAS: Une page du RC contient, en plus de la durée de validité des offres, d'autres durées (délai de recours, délai de production des pièces par l'attributaire) qui ne portent pas sur la validité des offres.\nCHOIX: V2\nNOUVELLE: Quand une page écrit une durée qui ne porte pas sur la validité des offres, après le lancement de l'analyse, la validité offres ne contient pas cette durée | observé: validité offres | conditions: texte pages"
+   }
+  ],
+  "porte": "convention",
+  "porte_raison": "Le délai de recours et le délai de production des attestations sont distincts de la durée de validité des offres selon le code de la commande publique et l'usage."
+ },
+ {
+  "champ": "validite_offres.conflit",
+  "situations": 49,
+  "representant": "S092",
+  "V1_H": true,
+  "V2_S": false,
+  "final": "trou",
+  "juges": [
+   {
+    "classe": "trou",
+    "assertion": "A111",
+    "cas": "Le RC fixe la durée de validité des offres sur une seule page (« 4 mois ») et nulle part ailleurs.",
+    "choix": "V2",
+    "nouvelle": "Quand une seule page fixe la durée de validité des offres, après le lancement de l'analyse, aucun conflit valeurs n'est signalé pour la validité offres | observé: conflit valeurs | conditions: texte pages",
+    "usd": 0.14621620000000002,
+    "texte": "```\nclaim:     Sur ce RC, validite_offres.conflit doit valoir false (V2), et non true (V1).\nruling:    upheld — mais c'est un trou de la spec, pas un bug de V1.\nbecause:   Le RC ne fixe la validité des offres qu'une seule fois, en page 1 : « Délai de validité des offres : 4 mois. » La spec ne prévoit un conflit que quand « deux pages fixent deux durées de validité des offres différentes » (A111), et ne l'écarte que quand deux pages donnent la même valeur (A42). Aucune assertion ne dit qu'une valeur écrite une seule fois ne doit pas déclencher de conflit. V1 ne viole donc aucun texte, et V2, qui rend false, est la plus fidèle au RC. « Une période de préparation d'un mois » (article 3) parle de l'exécution des travaux, pas de la validité des offres.\ncertainty: firm\n```\n\nCLASSE: trou\nASSERTION: A111\nCAS: Le RC fixe la durée de validité des offres sur une seule page (« 4 mois ») et nulle part ailleurs.\nCHOIX: V2\nNOUVELLE: Quand une seule page fixe la durée de validité des offres, après le lancement de l'analyse, aucun conflit valeurs n'est signalé pour la validité offres | observé: conflit valeurs | conditions: texte pages"
+   },
+   {
+    "classe": "trou",
+    "assertion": "A111",
+    "cas": "La durée de validité des offres (« 4 mois ») n'est fixée qu'à un seul endroit d'une seule page, et le RC contient ailleurs d'autres durées qui ne concernent pas la validité des offres.",
+    "choix": "V2",
+    "nouvelle": "Quand une seule page fixe la durée de validité des offres, après le lancement de l'analyse, aucun conflit valeurs n'est signalé pour la validité offres | observé: conflit valeurs | conditions: texte pages",
+    "usd": 0.0366906,
+    "texte": "s offres n'est écrite qu'une fois, page 1 : « Délai de validité des offres : 4 mois. » Les assertions sur le conflit ne couvrent que deux pages, avec deux durées différentes (A111 : « Quand deux pages fixent deux durées de validité des offres différentes … un conflit valeurs est signalé ») ou avec la même valeur (A42). Aucune ne dit ce qu'il faut rendre quand la durée n'est écrite qu'une fois, donc la spec ne tranche pas. Le dossier peut combler ce manque par une nouvelle assertion, sans rien demander à l'arbitre.\ncertainty: firm\n```\n\nLe RC lui-même est clair : il n'y a qu'une seule valeur, « 4 mois », et rien ne la contredit. Les autres durées du texte (« une période de préparation d'un mois », « dans un délai de 8 jours ») ne parlent pas de la validité des offres. Signaler un conflit ici n'a donc pas de base dans le RC. Mais aucune assertion ne l'interdit : A111 dit seulement quand il faut signaler un conflit, pas quand il ne faut pas. Il faut donc une assertion qui tranche ce cas, en faveur de V2, la plus simple et la plus fidèle au RC.\n\nCLASSE: trou\nASSERTION: A111\nCAS: La durée de validité des offres (« 4 mois ») n'est fixée qu'à un seul endroit d'une seule page, et le RC contient ailleurs d'autres durées qui ne concernent pas la validité des offres.\nCHOIX: V2\nNOUVELLE: Quand une seule page fixe la durée de validité des offres, après le lancement de l'analyse, aucun conflit valeurs n'est signalé pour la validité offres | observé: conflit valeurs | conditions: texte pages"
+   }
+  ],
+  "porte": "convention",
+  "porte_raison": "Une seule valeur sur une seule page ne peut pas créer de conflit."
+ },
+ {
+  "champ": "pieces.statut",
+  "situations": 30,
+  "representant": "S020",
+  "V1_H": "trouvé",
+  "V2_S": "non trouvé",
+  "final": "bug S",
+  "juges": [
+   {
+    "classe": "bug V2",
+    "assertion": "A15",
+    "cas": "Une page unique énumère, sous des intitulés candidature et offre, cinq pièces à remettre écrites en toutes lettres, et le statut des pièces doit dire si elles ont été trouvées.",
+    "choix": "aucun",
+    "nouvelle": "aucune",
+    "usd": 0.1365082,
+    "texte": "Le RC énumère bien des pièces à remettre : l'article 6 de la page 1 en liste cinq, réparties entre « au titre de la candidature » et « au titre de l'offre ». La spec tranche ce cas. V2 la viole en rendant « non trouvé ».\n\n```\nclaim:     Sur ce RC, pieces.statut doit valoir « trouvé » (V1) et non « non trouvé » (V2).\nruling:    upheld\nbecause:   L'ancre A15 dit : « Quand une page énumère des pièces à remettre, après le lancement de l'analyse, le dossier liste chacune de ces pièces ». A119 réserve « non trouvées » au seul cas où « aucune page n'énumère de pièces à remettre ». Or la page 1 énumère cinq pièces, du « Déclaration du candidat (formulaire DC2) » à l'« Attestation de visite », et chacune figure mot pour mot dans le texte. Le filtre de A121 ne peut donc rien retirer, et « non trouvé » contredit A15 comme A119.\ncertainty: firm\n```\n\nCLASSE: bug V2\nASSERTION: A15\nCAS: Une page unique énumère, sous des intitulés candidature et offre, cinq pièces à remettre écrites en toutes lettres, et le statut des pièces doit dire si elles ont été trouvées.\nCHOIX: aucun\nNOUVELLE: aucune"
+   },
+   {
+    "classe": "bug V2",
+    "assertion": "A15",
+    "cas": "Une seule page du RC dresse, dans son article 6, la liste des pièces à remettre au titre de la candidature et de l'offre, et le statut des pièces doit dire si elles ont été trouvées.",
+    "choix": "aucun",
+    "nouvelle": "aucune",
+    "usd": 0.0268814,
+    "texte": "```\nclaim:     Sur ce RC, pieces.statut doit valoir « trouvé » (V1) et non « non trouvé » (V2).\nruling:    upheld — V2 est en faute\nbecause:   La page 1 dresse bien la liste des pièces : l'article 6 nomme cinq pièces sous « Au titre de la candidature » et « Au titre de l'offre », dont « Déclaration du candidat (formulaire DC2) » et « Acte d'engagement (AE) complété et signé ». A15 dit « Quand une page énumère des pièces à remettre, […] le dossier liste chacune de ces pièces ». Le seul cas où les pièces sont « déclarées non trouvées » est celui d'A119 : « Quand aucune page n'énumère de pièces à remettre ». Ce n'est pas le cas ici. Même si une pièce proposée par l'extraction était écartée au titre d'A121, les autres figurent mot pour mot dans le texte et doivent rester listées. Le statut « non trouvé » contredit donc A15.\ncertainty: firm\n```\n\nCLASSE: bug V2\nASSERTION: A15\nCAS: Une seule page du RC dresse, dans son article 6, la liste des pièces à remettre au titre de la candidature et de l'offre, et le statut des pièces doit dire si elles ont été trouvées.\nCHOIX: aucun\nNOUVELLE: aucune"
+   }
+  ]
+ },
+ {
+  "champ": "plan",
+  "situations": 29,
+  "representant": "S103",
+  "V1_H": [
+   {
+    "titre": "Valeur technique de l'offre – Gestion des déchets de chantier",
+    "critere": "Valeur technique de l'offre",
+    "sous_critere": "Gestion des déchets de chantier",
+    "ponderation": null,
+    "page_source": 2,
+    "contenu": ""
+   },
+   {
+    "titre": "Valeur technique de l'offre – Méthodologie et organisation du chantier",
+    "critere": "Valeur technique de l'offre",
+    "sous_critere": "Méthodologie et organisation du chantier",
+    "ponderation": null,
+    "page_source": 2,
+    "contenu": ""
+   },
+   {
+    "titre": "Valeur technique de l'offre – Moyens humains affectés au chantier",
+    "critere": "Valeur technique de l'offre",
+    "sous_critere": "Moyens humains affectés au chantier",
+    "ponderation": null,
+    "page_source": 2,
+    "contenu": ""
+   }
+  ],
+  "V2_S": [
+   {
+    "titre": "Valeur technique de l'offre",
+    "critere": "Valeur technique de l'offre",
+    "sous_critere": null,
+    "ponderation": 30,
+    "page_source": 1,
+    "contenu": ""
+   }
+  ],
+  "final": "bug S",
+  "juges": [
+   {
+    "classe": "bug V2",
+    "assertion": "A29",
+    "cas": "Un critère de valeur technique pondéré à 30 % est détaillé en trois sous-critères non pondérés, et le plan du mémoire doit en tenir compte.",
+    "choix": "aucun",
+    "nouvelle": "aucune",
+    "usd": 0.1485802,
+    "texte": "claim:     Sur le champ `plan`, pour un RC dont le critère « Valeur technique de l'offre (30 %) » se décompose en trois sous-critères, V1 rend une section par sous-critère et V2 rend une seule section pour le critère.\nruling:    upheld — bug V2\nbecause:   A29 tranche ce cas : « Quand un critère de valeur technique a des sous-critères, après le lancement de l'analyse, le plan du mémoire contient une section par sous-critère ». Le RC rattache trois puces au critère n° 2 (« Ce critère sera apprécié au regard des éléments suivants : » en page 1, puis « Gestion des déchets… », « Méthodologie… » et « Moyens humains… » en page 2). V2 ne rend qu'une section, sans sous-critère, et viole donc A29 ; V1 rend les trois sections attendues, sans section pour le critère « Coût », ce qui respecte A28.\ncertainty: firm sur la violation de V2. Il reste un point ouvert, qui ne sauve pas V2. Dans A31 et A32, « son critère » peut désigner, pour une section de sous-critère, soit le critère parent (pondération 30, page 1), soit le sous-critère lui-même (pondération non écrite, donc null ; page 2). V1 a choisi la seconde lecture. C'est défendable : le RC ne pondère pas les sous-critères (A148). Mais il faudra écrire une assertion pour trancher ce point.\n\nCLASSE: bug V2\nASSERTION: A29\nCAS: Un critère de valeur technique pondéré à 30 % est détaillé en trois sous-critères non pondérés, et le plan du mémoire doit en tenir compte.\nCHOIX: aucun\nNOUVELLE: aucune"
+   },
+   {
+    "classe": "bug V2",
+    "assertion": "A29",
+    "cas": "Un critère de valeur technique pondéré à 30 % est détaillé en trois éléments d'appréciation énumérés à la page suivante, et le plan du mémoire doit en être déduit.",
+    "choix": "aucun",
+    "nouvelle": "aucune",
+    "usd": 0.0398002,
+    "texte": "itère de valeur technique a des sous-critères, […] le plan du mémoire contient une section par sous-critère ». Le RC rattache trois sous-critères au critère 2 : « Ce critère sera apprécié au regard des éléments suivants : • Gestion des déchets de chantier • Méthodologie et organisation du chantier • Moyens humains affectés au chantier ». A22 les place donc sous ce critère parent. V2 ne rend qu'une section, pour le critère seul (« sous_critere\": null »), alors que V1 en rend une par sous-critère.\ncertainty: close\n```\n\nV2 viole clairement A29, mais V1 n'est pas irréprochable non plus. C'est pour cela que la certitude est « close » :\n- **Pondération des sections (A31) :** pour une section de sous-critère, on ne sait pas si sa « pondération section égale à la pondération de son critère » vaut 30 (la pondération du critère parent) ou « non trouvée » (le sous-critère n'a pas de pondération écrite). V1 rend null, ce qui se défend.\n- **Page source (A32) :** « la page où son critère est écrit » peut désigner la page 1 (critère parent) ou la page 2 (sous-critère). V1 rend la page 2.\n\nCes deux points sont de vrais trous de la spec, mais ce ne sont pas eux qui font diverger le plan. La spec tranche le désaccord principal, la découpe en sections, en faveur de V1.\n\nCLASSE: bug V2\nASSERTION: A29\nCAS: Un critère de valeur technique pondéré à 30 % est détaillé en trois éléments d'appréciation énumérés à la page suivante, et le plan du mémoire doit en être déduit.\nCHOIX: aucun\nNOUVELLE: aucune"
+   }
+  ]
+ },
+ {
+  "champ": "mode_remise.valeurs",
+  "situations": 15,
+  "representant": "S195",
+  "V1_H": [
+   {
+    "valeur": "électronique",
+    "pages": [
+     1,
+     2
+    ]
+   }
+  ],
+  "V2_S": [
+   {
+    "valeur": "électronique",
+    "pages": [
+     1
+    ]
+   }
+  ],
+  "final": "trou",
+  "juges": [
+   {
+    "classe": "trou",
+    "assertion": "A40",
+    "cas": "Une page nomme le mode de remise (« exclusivement par voie dématérialisée ») ; une autre page se contente d'exclure un autre mode (« Aucune offre papier ne sera acceptée ») sans nommer le mode retenu.",
+    "choix": "V2 retenue",
+    "nouvelle": "Quand une page nomme le mode de remise des offres et qu'une autre page se borne à exclure un autre mode sans nommer le mode retenu, après le lancement de l'analyse, la page valeur du mode remise indique seulement la page qui nomme le mode | observé: page valeur | conditions: texte pages",
+    "usd": 0.1533242,
+    "texte": "it exclusivement par voie dématérialisée ». La page 2 dit seulement « Aucune offre papier ne sera acceptée » : elle écarte un mode sans nommer celui qui est retenu. A40 (« une même valeur est écrite sur deux pages ») ne s'applique que si l'on compte cette exclusion comme une écriture de la valeur, et la spec ne le dit pas. A118 donne « le numéro de cette page » sans dire quelle page compte. Les deux variantes respectent donc la spec. Le fait qui tranche est une règle de spec, pas un fait du dossier ni de la vie de l'arbitre.\ncertainty: close\n```\n\nJe retiens V2 parce qu'elle colle au texte : sa page valeur ne cite que la page où le mode est réellement écrit. Si l'on comptait une simple exclusion comme une écriture de la valeur, toute phrase négative deviendrait une source, et la page valeur ne prouverait plus rien. Le classement reste serré : un lecteur de bonne foi peut voir dans la page 2 la suite de l'article 9, qui confirme le mode.\n\nCLASSE: trou\nASSERTION: A40\nCAS: Une page nomme le mode de remise (« exclusivement par voie dématérialisée ») ; une autre page se contente d'exclure un autre mode (« Aucune offre papier ne sera acceptée ») sans nommer le mode retenu.\nCHOIX: V2 retenue\nNOUVELLE: Quand une page nomme le mode de remise des offres et qu'une autre page se borne à exclure un autre mode sans nommer le mode retenu, après le lancement de l'analyse, la page valeur du mode remise indique seulement la page qui nomme le mode | observé: page valeur | conditions: texte pages"
+   },
+   {
+    "classe": "trou",
+    "assertion": "A40",
+    "cas": "Une page nomme le mode de remise (« voie dématérialisée ») et une autre page se contente d'écarter un autre mode (« Aucune offre papier ne sera acceptée ») sans nommer le mode retenu.",
+    "choix": "V2",
+    "nouvelle": "Quand une page nomme le mode de remise des offres et qu'une autre page se borne à exclure un autre mode sans nommer le mode retenu, après le lancement de l'analyse, la page valeur du mode remise est le seul numéro de la page qui nomme le mode | observé: page valeur | conditions: texte pages",
+    "usd": 0.0392826,
+    "texte": "alisée ». La page 2 ne nomme aucun mode, elle en écarte un : « Aucune offre papier ne sera acceptée ». A40 ne vaut que « quand une même valeur est écrite sur deux pages », et A118 que « quand le mode de remise est retrouvé dans le texte d'une page ». Aucune assertion ne dit si une phrase qui exclut un mode compte comme l'endroit où le mode retenu est écrit. Les deux variantes respectent donc la spec : c'est un trou, et la spec peut le combler sans rien demander à l'arbitre.\ncertainty: close\n```\n\nOn pourrait aussi y voir un bug de V1, si l'on considère que « Aucune offre papier » n'« indique » pas le mode au sens d'A118. C'est pour cela que la certitude est `close`.\n\nJe retiens V2. C'est la variante la plus simple, et la plus fidèle au RC : la page source est celle qui écrit le mode, pas celle qui en déduit un en écartant le papier. Une règle qui compterait les exclusions obligerait aussi à décider, pour chaque champ, quelles négations désignent une valeur.\n\nCLASSE: trou\nASSERTION: A40\nCAS: Une page nomme le mode de remise (« voie dématérialisée ») et une autre page se contente d'écarter un autre mode (« Aucune offre papier ne sera acceptée ») sans nommer le mode retenu.\nCHOIX: V2\nNOUVELLE: Quand une page nomme le mode de remise des offres et qu'une autre page se borne à exclure un autre mode sans nommer le mode retenu, après le lancement de l'analyse, la page valeur du mode remise est le seul numéro de la page qui nomme le mode | observé: page valeur | conditions: texte pages"
+   }
+  ],
+  "porte": "convention",
+  "porte_raison": "La page de la valeur est celle qui écrit la valeur ; une page qui exclut seulement le papier ne nomme pas le mode retenu (serré : afficher aussi les pages qui confirment serait un choix d'affichage distinct)."
+ },
+ {
+  "champ": "validite_offres.statut",
+  "situations": 7,
+  "representant": "S079",
+  "V1_H": "trouvé",
+  "V2_S": "non trouvé",
+  "final": "bug H",
+  "juges": [
+   {
+    "classe": "bug V1",
+    "assertion": "A105",
+    "cas": "Le RC parle de « validité » (une attestation d'assurance) et de « délai de 8 jours » (pièces de l'attributaire), mais ne fixe nulle part la durée de validité des offres.",
+    "choix": "aucun",
+    "nouvelle": "aucune",
+    "usd": 0.1416682,
+    "texte": "alidité des offres. A105 couvre exactement ce cas : V1 (« trouvé ») la viole, et V2 (« non trouvé ») la respecte.\n\n```\nclaim:     validite_offres.statut : « trouvé » (V1) contre « non trouvé » (V2), sur ce RC\nruling:    upheld (en faveur de V2) — V1 viole la spec\nbecause:   A105 dit : « Quand aucune page ne fixe la durée de validité des offres, […] la validité offres est déclarée non trouvée ». Aucune des deux pages ne fixe cette durée.\ncertainty: firm\n```\n\n**Pourquoi aucun passage du RC ne compte comme une validité des offres :**\n- **« Attestation d'assurance … en cours de validité »** (page 1, article 5) : c'est la validité d'une assurance, pas celle des offres.\n- **« produira dans un délai de 8 jours »** (page 1, article 5) : c'est le délai donné à l'attributaire pour remettre ses pièces. Ce n'est pas une durée pendant laquelle l'offre engage le candidat.\n- **L'article 4 « Dispositions relatives aux offres »** ne parle que des variantes.\n- **La page 2** ne contient que la date et l'heure limites de remise et la date limite des questions.\n\nLa spec tranche donc ce cas, et ce n'est pas un trou. Si V1 a rattaché l'un de ces passages au champ, elle a fait une erreur d'attribution, et le statut « trouvé » est faux quel que soit le passage retenu.\n\nCLASSE: bug V1\nASSERTION: A105\nCAS: Le RC parle de « validité » (une attestation d'assurance) et de « délai de 8 jours » (pièces de l'attributaire), mais ne fixe nulle part la durée de validité des offres.\nCHOIX: aucun\nNOUVELLE: aucune"
+   },
+   {
+    "classe": "bug V1",
+    "assertion": "A105",
+    "cas": "Le RC ne fixe la durée de validité des offres sur aucune page ; seuls y figurent « en cours de validité » (attestation d'assurance) et « délai de 8 jours » (pièces de l'attributaire).",
+    "choix": "aucun",
+    "nouvelle": "aucune",
+    "usd": 0.0286702,
+    "texte": "e contiennent aucune clause du type « délai de validité des offres ». Deux passages s'en approchent, mais ce n'en sont pas :\n  - « Attestation d'assurance … **en cours de validité** » parle de la validité d'une attestation, pas de celle des offres.\n  - « produira dans un **délai de 8 jours** » est le délai laissé à l'attributaire pour remettre ses pièces.\n- **Ce que dit la spec.** L'assertion A105 tranche ce cas : « Quand aucune page ne fixe la durée de validité des offres, … la validité offres est déclarée non trouvée ». L'assertion A14 va dans le même sens : une valeur proposée par l'extraction qui ne figure dans le texte d'aucune page doit être déclarée non trouvée.\n- **Conclusion.** V1 répond « trouvé » et viole donc A105. V2 répond « non trouvé » et a raison.\n\n```\nclaim:     validite_offres.statut — V1 rend « trouvé », V2 rend « non trouvé », sur un RC sans clause de validité des offres\nruling:    upheld (bug V1)\nbecause:   A105 : « Quand aucune page ne fixe la durée de validité des offres, … la validité offres est déclarée non trouvée » ; aucune page du RC ne fixe cette durée (« en cours de validité » vise une attestation d'assurance, « délai de 8 jours » vise la production des pièces de l'attributaire).\ncertainty: firm\n```\n\nCLASSE: bug V1\nASSERTION: A105\nCAS: Le RC ne fixe la durée de validité des offres sur aucune page ; seuls y figurent « en cours de validité » (attestation d'assurance) et « délai de 8 jours » (pièces de l'attributaire).\nCHOIX: aucun\nNOUVELLE: aucune"
+   }
+  ]
+ }
+]

@@ -1,0 +1,53 @@
+{
+ "situations": 300,
+ "egales": 73,
+ "taux": 0.243,
+ "taux_synth": 0.247,
+ "taux_publics": 0.0,
+ "groupes": {
+  "heure_limite.conflit": 134,
+  "heure_limite.valeurs": 134,
+  "plan": 108,
+  "validite_offres.valeurs": 100,
+  "validite_offres.conflit": 82,
+  "controle.alertes": 27,
+  "validite_offres.statut": 18,
+  "pieces.liste": 5,
+  "criteres.liste": 5,
+  "mode_remise.valeurs": 4,
+  "type_ponderation.valeurs": 4,
+  "plan[]": 3,
+  "dates_visite.statut": 3,
+  "dates_visite.valeurs": 3,
+  "variantes.valeurs": 3,
+  "pieces.statut": 3,
+  "date_questions.statut": 2,
+  "date_questions.valeurs": 2,
+  "type_ponderation.statut": 2,
+  "variantes.statut": 1,
+  "mode_remise.statut": 1
+ },
+ "juges": 12,
+ "non_juges": [
+  "dates_visite.statut (3)",
+  "dates_visite.valeurs (3)",
+  "variantes.valeurs (3)",
+  "pieces.statut (3)",
+  "date_questions.statut (2)",
+  "date_questions.valeurs (2)",
+  "type_ponderation.statut (2)",
+  "variantes.statut (1)",
+  "mode_remise.statut (1)"
+ ],
+ "classes": {
+  "bug H": 8,
+  "trou": 3,
+  "à trancher": 1
+ },
+ "accord_juges": 0.917,
+ "taux_spec": 0.563,
+ "porte": {
+  "convention": 3
+ },
+ "principes": []
+}

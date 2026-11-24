@@ -1,0 +1,2840 @@
+{
+ "notes": {
+  "methode": "Vérité écrite à la main par Claude, le 22/11/2026, à partir du seul texte des pages (data/v5/rc-publics), sans regarder aucune sortie de code. À relire par Bilel.",
+  "questions_deadline": "Les 5 RC donnent un délai relatif (« au plus tard 10 jours avant la date limite », 11 j, 6 j) et aucune date : not_found.",
+  "site_visit": "site_visit = la visite est obligatoire. RC1 et RC2 « Visite sur site : Sans », RC3 « Contact pour la visite des lieux : Sans objet », RC5 « pas obligatoire mais fortement recommandée » : false.",
+  "RC3": "La consultation porte sur les lots 01 à 24 (les lots 25 à 42 sont listés avec « date limite dépassée »). Les critères sont donnés par lot technique (A à H) ; A=lots 1, 9, 17, …, H=8, 16, 24. Prix : sous-critères 15 et 45 points ; valeur technique : I et II à 50 points chacun ; achats responsables : 2, 2 et 6 points. Validité : 6 mois.",
+  "RC4": "Aucune procédure nommée (seul l'article R2123-5 est cité) : not_found, selon P3 (le RC fait foi dans ses mentions explicites). « 1 lot unique : Lot n°1 Maçonnerie » : lot unique ou lot 1 sont acceptés. Critères en points (60 et 40).",
+  "RC5": "« lot unique intitulé Lot n°01 » : lot unique ou lot 01 acceptés. Validité 120 jours (les 30 jours des offres négociées ne comptent pas).",
+  "RC2": "« Pour tous les lots » : critères communs, lot null (des critères identiques répétés sur chacun des 20 lots sont acceptés aussi). Pondérations du tableau, en pourcentage.",
+  "documents_to_return": "Sur les publics, la liste exacte des pièces dépend trop du lecteur. On juge seulement des pièces repères : DC1 et DC2 en candidature, acte d'engagement et mémoire technique en offre, attestation d'assurance décennale en attributaire quand le RC la demande au seul candidat retenu (RC1, RC2, RC4, RC5)."
+ },
+ "verite": {
+  "RC1": {
+   "offer_deadline": {
+    "statut": "found",
+    "valeurs": [
+     {
+      "date": "2026-02-13",
+      "time": "12:00"
+     }
+    ]
+   },
+   "questions_deadline": {
+    "statut": "not_found",
+    "valeurs": []
+   },
+   "procedure": {
+    "statut": "found",
+    "valeurs": [
+     "procedure_adaptee"
+    ]
+   },
+   "lots": {
+    "statut": "found",
+    "valeurs": [
+     {
+      "number": null
+     }
+    ]
+   },
+   "site_visit": {
+    "statut": "found",
+    "valeurs": [
+     false
+    ]
+   },
+   "site_visit_dates": {
+    "statut": "not_found",
+    "valeurs": []
+   },
+   "submission_mode": {
+    "statut": "found",
+    "valeurs": [
+     "electronique"
+    ]
+   },
+   "offer_validity": {
+    "statut": "found",
+    "valeurs": [
+     {
+      "amount": 180,
+      "unit": "days"
+     }
+    ]
+   },
+   "variants": {
+    "statut": "found",
+    "valeurs": [
+     false
+    ]
+   },
+   "award_criteria": {
+    "statut": "found",
+    "valeurs": [
+     {
+      "lot": null,
+      "wording": "Prix des prestations",
+      "cle": "prix",
+      "weight": {
+       "amount": 60,
+       "unit": "percent"
+      },
+      "rank": null,
+      "sub_criteria": []
+     },
+     {
+      "lot": null,
+      "wording": "Valeur technique",
+      "cle": "technique",
+      "weight": {
+       "amount": 30,
+       "unit": "percent"
+      },
+      "rank": null,
+      "sub_criteria": [
+       {
+        "wording": "",
+        "weight": {
+         "amount": 20,
+         "unit": "points"
+        }
+       },
+       {
+        "wording": "",
+        "weight": {
+         "amount": 10,
+         "unit": "points"
+        }
+       }
+      ]
+     },
+     {
+      "lot": null,
+      "wording": "Performances en matière de protection de l'environnement",
+      "cle": "environnement",
+      "weight": {
+       "amount": 10,
+       "unit": "percent"
+      },
+      "rank": null,
+      "sub_criteria": [
+       {
+        "wording": "",
+        "weight": {
+         "amount": 10,
+         "unit": "points"
+        }
+       },
+       {
+        "wording": "",
+        "weight": {
+         "amount": 10,
+         "unit": "points"
+        }
+       },
+       {
+        "wording": "",
+        "weight": {
+         "amount": 10,
+         "unit": "points"
+        }
+       }
+      ]
+     }
+    ]
+   },
+   "documents_to_return": {
+    "statut": "found",
+    "valeurs": [
+     {
+      "cle": "dc1",
+      "part": "candidature"
+     },
+     {
+      "cle": "dc2",
+      "part": "candidature"
+     },
+     {
+      "cle": "acte d engagement",
+      "part": "offre"
+     },
+     {
+      "cle": "memoire",
+      "part": "offre"
+     },
+     {
+      "cle": "decennale",
+      "part": "attributaire"
+     }
+    ]
+   }
+  },
+  "RC2": {
+   "offer_deadline": {
+    "statut": "found",
+    "valeurs": [
+     {
+      "date": "2026-09-29",
+      "time": "12:00"
+     }
+    ]
+   },
+   "questions_deadline": {
+    "statut": "not_found",
+    "valeurs": []
+   },
+   "procedure": {
+    "statut": "found",
+    "valeurs": [
+     "appel_offres_ouvert"
+    ]
+   },
+   "lots": {
+    "statut": "found",
+    "valeurs": [
+     {
+      "number": "01"
+     },
+     {
+      "number": "02"
+     },
+     {
+      "number": "03"
+     },
+     {
+      "number": "04"
+     },
+     {
+      "number": "05"
+     },
+     {
+      "number": "06"
+     },
+     {
+      "number": "07"
+     },
+     {
+      "number": "08"
+     },
+     {
+      "number": "09"
+     },
+     {
+      "number": "10"
+     },
+     {
+      "number": "11"
+     },
+     {
+      "number": "12"
+     },
+     {
+      "number": "13"
+     },
+     {
+      "number": "14"
+     },
+     {
+      "number": "15"
+     },
+     {
+      "number": "16"
+     },
+     {
+      "number": "17"
+     },
+     {
+      "number": "18"
+     },
+     {
+      "number": "19"
+     },
+     {
+      "number": "20"
+     }
+    ]
+   },
+   "site_visit": {
+    "statut": "found",
+    "valeurs": [
+     false
+    ]
+   },
+   "site_visit_dates": {
+    "statut": "not_found",
+    "valeurs": []
+   },
+   "submission_mode": {
+    "statut": "found",
+    "valeurs": [
+     "electronique"
+    ]
+   },
+   "offer_validity": {
+    "statut": "found",
+    "valeurs": [
+     {
+      "amount": 180,
+      "unit": "days"
+     }
+    ]
+   },
+   "variants": {
+    "statut": "found",
+    "valeurs": [
+     false
+    ]
+   },
+   "award_criteria": {
+    "statut": "found",
+    "valeurs": [
+     {
+      "lot": null,
+      "wording": "Valeur technique",
+      "cle": "technique",
+      "weight": {
+       "amount": 50,
+       "unit": "percent"
+      },
+      "rank": null,
+      "sub_criteria": [
+       {
+        "wording": "",
+        "weight": {
+         "amount": 10,
+         "unit": "points"
+        }
+       },
+       {
+        "wording": "",
+        "weight": {
+         "amount": 20,
+         "unit": "points"
+        }
+       },
+       {
+        "wording": "",
+        "weight": {
+         "amount": 20,
+         "unit": "points"
+        }
+       }
+      ]
+     },
+     {
+      "lot": null,
+      "wording": "Prix des prestations",
+      "cle": "prix",
+      "weight": {
+       "amount": 40,
+       "unit": "percent"
+      },
+      "rank": null,
+      "sub_criteria": []
+     },
+     {
+      "lot": null,
+      "wording": "Performances en matière de protection de l'environnement",
+      "cle": "environnement",
+      "weight": {
+       "amount": 10,
+       "unit": "percent"
+      },
+      "rank": null,
+      "sub_criteria": []
+     }
+    ]
+   },
+   "documents_to_return": {
+    "statut": "found",
+    "valeurs": [
+     {
+      "cle": "dc1",
+      "part": "candidature"
+     },
+     {
+      "cle": "dc2",
+      "part": "candidature"
+     },
+     {
+      "cle": "acte d engagement",
+      "part": "offre"
+     },
+     {
+      "cle": "memoire",
+      "part": "offre"
+     },
+     {
+      "cle": "decennale",
+      "part": "attributaire"
+     }
+    ]
+   }
+  },
+  "RC3": {
+   "offer_deadline": {
+    "statut": "found",
+    "valeurs": [
+     {
+      "date": "2026-09-15",
+      "time": "12:00"
+     }
+    ]
+   },
+   "questions_deadline": {
+    "statut": "not_found",
+    "valeurs": []
+   },
+   "procedure": {
+    "statut": "found",
+    "valeurs": [
+     "appel_offres_ouvert"
+    ]
+   },
+   "lots": {
+    "statut": "found",
+    "valeurs": [
+     {
+      "number": "01"
+     },
+     {
+      "number": "02"
+     },
+     {
+      "number": "03"
+     },
+     {
+      "number": "04"
+     },
+     {
+      "number": "05"
+     },
+     {
+      "number": "06"
+     },
+     {
+      "number": "07"
+     },
+     {
+      "number": "08"
+     },
+     {
+      "number": "09"
+     },
+     {
+      "number": "10"
+     },
+     {
+      "number": "11"
+     },
+     {
+      "number": "12"
+     },
+     {
+      "number": "13"
+     },
+     {
+      "number": "14"
+     },
+     {
+      "number": "15"
+     },
+     {
+      "number": "16"
+     },
+     {
+      "number": "17"
+     },
+     {
+      "number": "18"
+     },
+     {
+      "number": "19"
+     },
+     {
+      "number": "20"
+     },
+     {
+      "number": "21"
+     },
+     {
+      "number": "22"
+     },
+     {
+      "number": "23"
+     },
+     {
+      "number": "24"
+     }
+    ]
+   },
+   "site_visit": {
+    "statut": "found",
+    "valeurs": [
+     false
+    ]
+   },
+   "site_visit_dates": {
+    "statut": "not_found",
+    "valeurs": []
+   },
+   "submission_mode": {
+    "statut": "found",
+    "valeurs": [
+     "electronique"
+    ]
+   },
+   "offer_validity": {
+    "statut": "found",
+    "valeurs": [
+     {
+      "amount": 6,
+      "unit": "months"
+     }
+    ]
+   },
+   "variants": {
+    "statut": "found",
+    "valeurs": [
+     false
+    ]
+   },
+   "award_criteria": {
+    "statut": "found",
+    "valeurs": [
+     {
+      "lot": "1",
+      "wording": "Prix des prestations",
+      "cle": "prix",
+      "weight": {
+       "amount": 60,
+       "unit": "percent"
+      },
+      "rank": null,
+      "sub_criteria": [
+       {
+        "wording": "",
+        "weight": {
+         "amount": 15,
+         "unit": "points"
+        }
+       },
+       {
+        "wording": "",
+        "weight": {
+         "amount": 45,
+         "unit": "points"
+        }
+       }
+      ]
+     },
+     {
+      "lot": "1",
+      "wording": "Valeur technique",
+      "cle": "technique",
+      "weight": {
+       "amount": 30,
+       "unit": "percent"
+      },
+      "rank": null,
+      "sub_criteria": [
+       {
+        "wording": "",
+        "weight": {
+         "amount": 50,
+         "unit": "points"
+        }
+       },
+       {
+        "wording": "",
+        "weight": {
+         "amount": 50,
+         "unit": "points"
+        }
+       }
+      ]
+     },
+     {
+      "lot": "1",
+      "wording": "Achats responsables",
+      "cle": "achat",
+      "weight": {
+       "amount": 10,
+       "unit": "percent"
+      },
+      "rank": null,
+      "sub_criteria": [
+       {
+        "wording": "",
+        "weight": {
+         "amount": 2,
+         "unit": "points"
+        }
+       },
+       {
+        "wording": "",
+        "weight": {
+         "amount": 2,
+         "unit": "points"
+        }
+       },
+       {
+        "wording": "",
+        "weight": {
+         "amount": 6,
+         "unit": "points"
+        }
+       }
+      ]
+     },
+     {
+      "lot": "2",
+      "wording": "Prix des prestations",
+      "cle": "prix",
+      "weight": {
+       "amount": 60,
+       "unit": "percent"
+      },
+      "rank": null,
+      "sub_criteria": [
+       {
+        "wording": "",
+        "weight": {
+         "amount": 15,
+         "unit": "points"
+        }
+       },
+       {
+        "wording": "",
+        "weight": {
+         "amount": 45,
+         "unit": "points"
+        }
+       }
+      ]
+     },
+     {
+      "lot": "2",
+      "wording": "Valeur technique",
+      "cle": "technique",
+      "weight": {
+       "amount": 30,
+       "unit": "percent"
+      },
+      "rank": null,
+      "sub_criteria": [
+       {
+        "wording": "",
+        "weight": {
+         "amount": 50,
+         "unit": "points"
+        }
+       },
+       {
+        "wording": "",
+        "weight": {
+         "amount": 50,
+         "unit": "points"
+        }
+       }
+      ]
+     },
+     {
+      "lot": "2",
+      "wording": "Achats responsables",
+      "cle": "achat",
+      "weight": {
+       "amount": 10,
+       "unit": "percent"
+      },
+      "rank": null,
+      "sub_criteria": [
+       {
+        "wording": "",
+        "weight": {
+         "amount": 2,
+         "unit": "points"
+        }
+       },
+       {
+        "wording": "",
+        "weight": {
+         "amount": 2,
+         "unit": "points"
+        }
+       },
+       {
+        "wording": "",
+        "weight": {
+         "amount": 6,
+         "unit": "points"
+        }
+       }
+      ]
+     },
+     {
+      "lot": "3",
+      "wording": "Prix des prestations",
+      "cle": "prix",
+      "weight": {
+       "amount": 60,
+       "unit": "percent"
+      },
+      "rank": null,
+      "sub_criteria": [
+       {
+        "wording": "",
+        "weight": {
+         "amount": 15,
+         "unit": "points"
+        }
+       },
+       {
+        "wording": "",
+        "weight": {
+         "amount": 45,
+         "unit": "points"
+        }
+       }
+      ]
+     },
+     {
+      "lot": "3",
+      "wording": "Valeur technique",
+      "cle": "technique",
+      "weight": {
+       "amount": 30,
+       "unit": "percent"
+      },
+      "rank": null,
+      "sub_criteria": [
+       {
+        "wording": "",
+        "weight": {
+         "amount": 50,
+         "unit": "points"
+        }
+       },
+       {
+        "wording": "",
+        "weight": {
+         "amount": 50,
+         "unit": "points"
+        }
+       }
+      ]
+     },
+     {
+      "lot": "3",
+      "wording": "Achats responsables",
+      "cle": "achat",
+      "weight": {
+       "amount": 10,
+       "unit": "percent"
+      },
+      "rank": null,
+      "sub_criteria": [
+       {
+        "wording": "",
+        "weight": {
+         "amount": 2,
+         "unit": "points"
+        }
+       },
+       {
+        "wording": "",
+        "weight": {
+         "amount": 2,
+         "unit": "points"
+        }
+       },
+       {
+        "wording": "",
+        "weight": {
+         "amount": 6,
+         "unit": "points"
+        }
+       }
+      ]
+     },
+     {
+      "lot": "4",
+      "wording": "Prix des prestations",
+      "cle": "prix",
+      "weight": {
+       "amount": 60,
+       "unit": "percent"
+      },
+      "rank": null,
+      "sub_criteria": [
+       {
+        "wording": "",
+        "weight": {
+         "amount": 15,
+         "unit": "points"
+        }
+       },
+       {
+        "wording": "",
+        "weight": {
+         "amount": 45,
+         "unit": "points"
+        }
+       }
+      ]
+     },
+     {
+      "lot": "4",
+      "wording": "Valeur technique",
+      "cle": "technique",
+      "weight": {
+       "amount": 35,
+       "unit": "percent"
+      },
+      "rank": null,
+      "sub_criteria": [
+       {
+        "wording": "",
+        "weight": {
+         "amount": 50,
+         "unit": "points"
+        }
+       },
+       {
+        "wording": "",
+        "weight": {
+         "amount": 50,
+         "unit": "points"
+        }
+       }
+      ]
+     },
+     {
+      "lot": "4",
+      "wording": "Achats responsables",
+      "cle": "achat",
+      "weight": {
+       "amount": 5,
+       "unit": "percent"
+      },
+      "rank": null,
+      "sub_criteria": [
+       {
+        "wording": "",
+        "weight": {
+         "amount": 2,
+         "unit": "points"
+        }
+       },
+       {
+        "wording": "",
+        "weight": {
+         "amount": 2,
+         "unit": "points"
+        }
+       },
+       {
+        "wording": "",
+        "weight": {
+         "amount": 6,
+         "unit": "points"
+        }
+       }
+      ]
+     },
+     {
+      "lot": "5",
+      "wording": "Prix des prestations",
+      "cle": "prix",
+      "weight": {
+       "amount": 60,
+       "unit": "percent"
+      },
+      "rank": null,
+      "sub_criteria": [
+       {
+        "wording": "",
+        "weight": {
+         "amount": 15,
+         "unit": "points"
+        }
+       },
+       {
+        "wording": "",
+        "weight": {
+         "amount": 45,
+         "unit": "points"
+        }
+       }
+      ]
+     },
+     {
+      "lot": "5",
+      "wording": "Valeur technique",
+      "cle": "technique",
+      "weight": {
+       "amount": 35,
+       "unit": "percent"
+      },
+      "rank": null,
+      "sub_criteria": [
+       {
+        "wording": "",
+        "weight": {
+         "amount": 50,
+         "unit": "points"
+        }
+       },
+       {
+        "wording": "",
+        "weight": {
+         "amount": 50,
+         "unit": "points"
+        }
+       }
+      ]
+     },
+     {
+      "lot": "5",
+      "wording": "Achats responsables",
+      "cle": "achat",
+      "weight": {
+       "amount": 5,
+       "unit": "percent"
+      },
+      "rank": null,
+      "sub_criteria": [
+       {
+        "wording": "",
+        "weight": {
+         "amount": 2,
+         "unit": "points"
+        }
+       },
+       {
+        "wording": "",
+        "weight": {
+         "amount": 2,
+         "unit": "points"
+        }
+       },
+       {
+        "wording": "",
+        "weight": {
+         "amount": 6,
+         "unit": "points"
+        }
+       }
+      ]
+     },
+     {
+      "lot": "6",
+      "wording": "Prix des prestations",
+      "cle": "prix",
+      "weight": {
+       "amount": 60,
+       "unit": "percent"
+      },
+      "rank": null,
+      "sub_criteria": [
+       {
+        "wording": "",
+        "weight": {
+         "amount": 15,
+         "unit": "points"
+        }
+       },
+       {
+        "wording": "",
+        "weight": {
+         "amount": 45,
+         "unit": "points"
+        }
+       }
+      ]
+     },
+     {
+      "lot": "6",
+      "wording": "Valeur technique",
+      "cle": "technique",
+      "weight": {
+       "amount": 35,
+       "unit": "percent"
+      },
+      "rank": null,
+      "sub_criteria": [
+       {
+        "wording": "",
+        "weight": {
+         "amount": 50,
+         "unit": "points"
+        }
+       },
+       {
+        "wording": "",
+        "weight": {
+         "amount": 50,
+         "unit": "points"
+        }
+       }
+      ]
+     },
+     {
+      "lot": "6",
+      "wording": "Achats responsables",
+      "cle": "achat",
+      "weight": {
+       "amount": 5,
+       "unit": "percent"
+      },
+      "rank": null,
+      "sub_criteria": [
+       {
+        "wording": "",
+        "weight": {
+         "amount": 2,
+         "unit": "points"
+        }
+       },
+       {
+        "wording": "",
+        "weight": {
+         "amount": 2,
+         "unit": "points"
+        }
+       },
+       {
+        "wording": "",
+        "weight": {
+         "amount": 6,
+         "unit": "points"
+        }
+       }
+      ]
+     },
+     {
+      "lot": "7",
+      "wording": "Prix des prestations",
+      "cle": "prix",
+      "weight": {
+       "amount": 60,
+       "unit": "percent"
+      },
+      "rank": null,
+      "sub_criteria": [
+       {
+        "wording": "",
+        "weight": {
+         "amount": 15,
+         "unit": "points"
+        }
+       },
+       {
+        "wording": "",
+        "weight": {
+         "amount": 45,
+         "unit": "points"
+        }
+       }
+      ]
+     },
+     {
+      "lot": "7",
+      "wording": "Valeur technique",
+      "cle": "technique",
+      "weight": {
+       "amount": 35,
+       "unit": "percent"
+      },
+      "rank": null,
+      "sub_criteria": [
+       {
+        "wording": "",
+        "weight": {
+         "amount": 50,
+         "unit": "points"
+        }
+       },
+       {
+        "wording": "",
+        "weight": {
+         "amount": 50,
+         "unit": "points"
+        }
+       }
+      ]
+     },
+     {
+      "lot": "7",
+      "wording": "Achats responsables",
+      "cle": "achat",
+      "weight": {
+       "amount": 5,
+       "unit": "percent"
+      },
+      "rank": null,
+      "sub_criteria": [
+       {
+        "wording": "",
+        "weight": {
+         "amount": 2,
+         "unit": "points"
+        }
+       },
+       {
+        "wording": "",
+        "weight": {
+         "amount": 2,
+         "unit": "points"
+        }
+       },
+       {
+        "wording": "",
+        "weight": {
+         "amount": 6,
+         "unit": "points"
+        }
+       }
+      ]
+     },
+     {
+      "lot": "8",
+      "wording": "Prix des prestations",
+      "cle": "prix",
+      "weight": {
+       "amount": 60,
+       "unit": "percent"
+      },
+      "rank": null,
+      "sub_criteria": [
+       {
+        "wording": "",
+        "weight": {
+         "amount": 15,
+         "unit": "points"
+        }
+       },
+       {
+        "wording": "",
+        "weight": {
+         "amount": 45,
+         "unit": "points"
+        }
+       }
+      ]
+     },
+     {
+      "lot": "8",
+      "wording": "Valeur technique",
+      "cle": "technique",
+      "weight": {
+       "amount": 35,
+       "unit": "percent"
+      },
+      "rank": null,
+      "sub_criteria": [
+       {
+        "wording": "",
+        "weight": {
+         "amount": 50,
+         "unit": "points"
+        }
+       },
+       {
+        "wording": "",
+        "weight": {
+         "amount": 50,
+         "unit": "points"
+        }
+       }
+      ]
+     },
+     {
+      "lot": "8",
+      "wording": "Achats responsables",
+      "cle": "achat",
+      "weight": {
+       "amount": 5,
+       "unit": "percent"
+      },
+      "rank": null,
+      "sub_criteria": [
+       {
+        "wording": "",
+        "weight": {
+         "amount": 2,
+         "unit": "points"
+        }
+       },
+       {
+        "wording": "",
+        "weight": {
+         "amount": 2,
+         "unit": "points"
+        }
+       },
+       {
+        "wording": "",
+        "weight": {
+         "amount": 6,
+         "unit": "points"
+        }
+       }
+      ]
+     },
+     {
+      "lot": "9",
+      "wording": "Prix des prestations",
+      "cle": "prix",
+      "weight": {
+       "amount": 60,
+       "unit": "percent"
+      },
+      "rank": null,
+      "sub_criteria": [
+       {
+        "wording": "",
+        "weight": {
+         "amount": 15,
+         "unit": "points"
+        }
+       },
+       {
+        "wording": "",
+        "weight": {
+         "amount": 45,
+         "unit": "points"
+        }
+       }
+      ]
+     },
+     {
+      "lot": "9",
+      "wording": "Valeur technique",
+      "cle": "technique",
+      "weight": {
+       "amount": 30,
+       "unit": "percent"
+      },
+      "rank": null,
+      "sub_criteria": [
+       {
+        "wording": "",
+        "weight": {
+         "amount": 50,
+         "unit": "points"
+        }
+       },
+       {
+        "wording": "",
+        "weight": {
+         "amount": 50,
+         "unit": "points"
+        }
+       }
+      ]
+     },
+     {
+      "lot": "9",
+      "wording": "Achats responsables",
+      "cle": "achat",
+      "weight": {
+       "amount": 10,
+       "unit": "percent"
+      },
+      "rank": null,
+      "sub_criteria": [
+       {
+        "wording": "",
+        "weight": {
+         "amount": 2,
+         "unit": "points"
+        }
+       },
+       {
+        "wording": "",
+        "weight": {
+         "amount": 2,
+         "unit": "points"
+        }
+       },
+       {
+        "wording": "",
+        "weight": {
+         "amount": 6,
+         "unit": "points"
+        }
+       }
+      ]
+     },
+     {
+      "lot": "10",
+      "wording": "Prix des prestations",
+      "cle": "prix",
+      "weight": {
+       "amount": 60,
+       "unit": "percent"
+      },
+      "rank": null,
+      "sub_criteria": [
+       {
+        "wording": "",
+        "weight": {
+         "amount": 15,
+         "unit": "points"
+        }
+       },
+       {
+        "wording": "",
+        "weight": {
+         "amount": 45,
+         "unit": "points"
+        }
+       }
+      ]
+     },
+     {
+      "lot": "10",
+      "wording": "Valeur technique",
+      "cle": "technique",
+      "weight": {
+       "amount": 30,
+       "unit": "percent"
+      },
+      "rank": null,
+      "sub_criteria": [
+       {
+        "wording": "",
+        "weight": {
+         "amount": 50,
+         "unit": "points"
+        }
+       },
+       {
+        "wording": "",
+        "weight": {
+         "amount": 50,
+         "unit": "points"
+        }
+       }
+      ]
+     },
+     {
+      "lot": "10",
+      "wording": "Achats responsables",
+      "cle": "achat",
+      "weight": {
+       "amount": 10,
+       "unit": "percent"
+      },
+      "rank": null,
+      "sub_criteria": [
+       {
+        "wording": "",
+        "weight": {
+         "amount": 2,
+         "unit": "points"
+        }
+       },
+       {
+        "wording": "",
+        "weight": {
+         "amount": 2,
+         "unit": "points"
+        }
+       },
+       {
+        "wording": "",
+        "weight": {
+         "amount": 6,
+         "unit": "points"
+        }
+       }
+      ]
+     },
+     {
+      "lot": "11",
+      "wording": "Prix des prestations",
+      "cle": "prix",
+      "weight": {
+       "amount": 60,
+       "unit": "percent"
+      },
+      "rank": null,
+      "sub_criteria": [
+       {
+        "wording": "",
+        "weight": {
+         "amount": 15,
+         "unit": "points"
+        }
+       },
+       {
+        "wording": "",
+        "weight": {
+         "amount": 45,
+         "unit": "points"
+        }
+       }
+      ]
+     },
+     {
+      "lot": "11",
+      "wording": "Valeur technique",
+      "cle": "technique",
+      "weight": {
+       "amount": 30,
+       "unit": "percent"
+      },
+      "rank": null,
+      "sub_criteria": [
+       {
+        "wording": "",
+        "weight": {
+         "amount": 50,
+         "unit": "points"
+        }
+       },
+       {
+        "wording": "",
+        "weight": {
+         "amount": 50,
+         "unit": "points"
+        }
+       }
+      ]
+     },
+     {
+      "lot": "11",
+      "wording": "Achats responsables",
+      "cle": "achat",
+      "weight": {
+       "amount": 10,
+       "unit": "percent"
+      },
+      "rank": null,
+      "sub_criteria": [
+       {
+        "wording": "",
+        "weight": {
+         "amount": 2,
+         "unit": "points"
+        }
+       },
+       {
+        "wording": "",
+        "weight": {
+         "amount": 2,
+         "unit": "points"
+        }
+       },
+       {
+        "wording": "",
+        "weight": {
+         "amount": 6,
+         "unit": "points"
+        }
+       }
+      ]
+     },
+     {
+      "lot": "12",
+      "wording": "Prix des prestations",
+      "cle": "prix",
+      "weight": {
+       "amount": 60,
+       "unit": "percent"
+      },
+      "rank": null,
+      "sub_criteria": [
+       {
+        "wording": "",
+        "weight": {
+         "amount": 15,
+         "unit": "points"
+        }
+       },
+       {
+        "wording": "",
+        "weight": {
+         "amount": 45,
+         "unit": "points"
+        }
+       }
+      ]
+     },
+     {
+      "lot": "12",
+      "wording": "Valeur technique",
+      "cle": "technique",
+      "weight": {
+       "amount": 35,
+       "unit": "percent"
+      },
+      "rank": null,
+      "sub_criteria": [
+       {
+        "wording": "",
+        "weight": {
+         "amount": 50,
+         "unit": "points"
+        }
+       },
+       {
+        "wording": "",
+        "weight": {
+         "amount": 50,
+         "unit": "points"
+        }
+       }
+      ]
+     },
+     {
+      "lot": "12",
+      "wording": "Achats responsables",
+      "cle": "achat",
+      "weight": {
+       "amount": 5,
+       "unit": "percent"
+      },
+      "rank": null,
+      "sub_criteria": [
+       {
+        "wording": "",
+        "weight": {
+         "amount": 2,
+         "unit": "points"
+        }
+       },
+       {
+        "wording": "",
+        "weight": {
+         "amount": 2,
+         "unit": "points"
+        }
+       },
+       {
+        "wording": "",
+        "weight": {
+         "amount": 6,
+         "unit": "points"
+        }
+       }
+      ]
+     },
+     {
+      "lot": "13",
+      "wording": "Prix des prestations",
+      "cle": "prix",
+      "weight": {
+       "amount": 60,
+       "unit": "percent"
+      },
+      "rank": null,
+      "sub_criteria": [
+       {
+        "wording": "",
+        "weight": {
+         "amount": 15,
+         "unit": "points"
+        }
+       },
+       {
+        "wording": "",
+        "weight": {
+         "amount": 45,
+         "unit": "points"
+        }
+       }
+      ]
+     },
+     {
+      "lot": "13",
+      "wording": "Valeur technique",
+      "cle": "technique",
+      "weight": {
+       "amount": 35,
+       "unit": "percent"
+      },
+      "rank": null,
+      "sub_criteria": [
+       {
+        "wording": "",
+        "weight": {
+         "amount": 50,
+         "unit": "points"
+        }
+       },
+       {
+        "wording": "",
+        "weight": {
+         "amount": 50,
+         "unit": "points"
+        }
+       }
+      ]
+     },
+     {
+      "lot": "13",
+      "wording": "Achats responsables",
+      "cle": "achat",
+      "weight": {
+       "amount": 5,
+       "unit": "percent"
+      },
+      "rank": null,
+      "sub_criteria": [
+       {
+        "wording": "",
+        "weight": {
+         "amount": 2,
+         "unit": "points"
+        }
+       },
+       {
+        "wording": "",
+        "weight": {
+         "amount": 2,
+         "unit": "points"
+        }
+       },
+       {
+        "wording": "",
+        "weight": {
+         "amount": 6,
+         "unit": "points"
+        }
+       }
+      ]
+     },
+     {
+      "lot": "14",
+      "wording": "Prix des prestations",
+      "cle": "prix",
+      "weight": {
+       "amount": 60,
+       "unit": "percent"
+      },
+      "rank": null,
+      "sub_criteria": [
+       {
+        "wording": "",
+        "weight": {
+         "amount": 15,
+         "unit": "points"
+        }
+       },
+       {
+        "wording": "",
+        "weight": {
+         "amount": 45,
+         "unit": "points"
+        }
+       }
+      ]
+     },
+     {
+      "lot": "14",
+      "wording": "Valeur technique",
+      "cle": "technique",
+      "weight": {
+       "amount": 35,
+       "unit": "percent"
+      },
+      "rank": null,
+      "sub_criteria": [
+       {
+        "wording": "",
+        "weight": {
+         "amount": 50,
+         "unit": "points"
+        }
+       },
+       {
+        "wording": "",
+        "weight": {
+         "amount": 50,
+         "unit": "points"
+        }
+       }
+      ]
+     },
+     {
+      "lot": "14",
+      "wording": "Achats responsables",
+      "cle": "achat",
+      "weight": {
+       "amount": 5,
+       "unit": "percent"
+      },
+      "rank": null,
+      "sub_criteria": [
+       {
+        "wording": "",
+        "weight": {
+         "amount": 2,
+         "unit": "points"
+        }
+       },
+       {
+        "wording": "",
+        "weight": {
+         "amount": 2,
+         "unit": "points"
+        }
+       },
+       {
+        "wording": "",
+        "weight": {
+         "amount": 6,
+         "unit": "points"
+        }
+       }
+      ]
+     },
+     {
+      "lot": "15",
+      "wording": "Prix des prestations",
+      "cle": "prix",
+      "weight": {
+       "amount": 60,
+       "unit": "percent"
+      },
+      "rank": null,
+      "sub_criteria": [
+       {
+        "wording": "",
+        "weight": {
+         "amount": 15,
+         "unit": "points"
+        }
+       },
+       {
+        "wording": "",
+        "weight": {
+         "amount": 45,
+         "unit": "points"
+        }
+       }
+      ]
+     },
+     {
+      "lot": "15",
+      "wording": "Valeur technique",
+      "cle": "technique",
+      "weight": {
+       "amount": 35,
+       "unit": "percent"
+      },
+      "rank": null,
+      "sub_criteria": [
+       {
+        "wording": "",
+        "weight": {
+         "amount": 50,
+         "unit": "points"
+        }
+       },
+       {
+        "wording": "",
+        "weight": {
+         "amount": 50,
+         "unit": "points"
+        }
+       }
+      ]
+     },
+     {
+      "lot": "15",
+      "wording": "Achats responsables",
+      "cle": "achat",
+      "weight": {
+       "amount": 5,
+       "unit": "percent"
+      },
+      "rank": null,
+      "sub_criteria": [
+       {
+        "wording": "",
+        "weight": {
+         "amount": 2,
+         "unit": "points"
+        }
+       },
+       {
+        "wording": "",
+        "weight": {
+         "amount": 2,
+         "unit": "points"
+        }
+       },
+       {
+        "wording": "",
+        "weight": {
+         "amount": 6,
+         "unit": "points"
+        }
+       }
+      ]
+     },
+     {
+      "lot": "16",
+      "wording": "Prix des prestations",
+      "cle": "prix",
+      "weight": {
+       "amount": 60,
+       "unit": "percent"
+      },
+      "rank": null,
+      "sub_criteria": [
+       {
+        "wording": "",
+        "weight": {
+         "amount": 15,
+         "unit": "points"
+        }
+       },
+       {
+        "wording": "",
+        "weight": {
+         "amount": 45,
+         "unit": "points"
+        }
+       }
+      ]
+     },
+     {
+      "lot": "16",
+      "wording": "Valeur technique",
+      "cle": "technique",
+      "weight": {
+       "amount": 35,
+       "unit": "percent"
+      },
+      "rank": null,
+      "sub_criteria": [
+       {
+        "wording": "",
+        "weight": {
+         "amount": 50,
+         "unit": "points"
+        }
+       },
+       {
+        "wording": "",
+        "weight": {
+         "amount": 50,
+         "unit": "points"
+        }
+       }
+      ]
+     },
+     {
+      "lot": "16",
+      "wording": "Achats responsables",
+      "cle": "achat",
+      "weight": {
+       "amount": 5,
+       "unit": "percent"
+      },
+      "rank": null,
+      "sub_criteria": [
+       {
+        "wording": "",
+        "weight": {
+         "amount": 2,
+         "unit": "points"
+        }
+       },
+       {
+        "wording": "",
+        "weight": {
+         "amount": 2,
+         "unit": "points"
+        }
+       },
+       {
+        "wording": "",
+        "weight": {
+         "amount": 6,
+         "unit": "points"
+        }
+       }
+      ]
+     },
+     {
+      "lot": "17",
+      "wording": "Prix des prestations",
+      "cle": "prix",
+      "weight": {
+       "amount": 60,
+       "unit": "percent"
+      },
+      "rank": null,
+      "sub_criteria": [
+       {
+        "wording": "",
+        "weight": {
+         "amount": 15,
+         "unit": "points"
+        }
+       },
+       {
+        "wording": "",
+        "weight": {
+         "amount": 45,
+         "unit": "points"
+        }
+       }
+      ]
+     },
+     {
+      "lot": "17",
+      "wording": "Valeur technique",
+      "cle": "technique",
+      "weight": {
+       "amount": 30,
+       "unit": "percent"
+      },
+      "rank": null,
+      "sub_criteria": [
+       {
+        "wording": "",
+        "weight": {
+         "amount": 50,
+         "unit": "points"
+        }
+       },
+       {
+        "wording": "",
+        "weight": {
+         "amount": 50,
+         "unit": "points"
+        }
+       }
+      ]
+     },
+     {
+      "lot": "17",
+      "wording": "Achats responsables",
+      "cle": "achat",
+      "weight": {
+       "amount": 10,
+       "unit": "percent"
+      },
+      "rank": null,
+      "sub_criteria": [
+       {
+        "wording": "",
+        "weight": {
+         "amount": 2,
+         "unit": "points"
+        }
+       },
+       {
+        "wording": "",
+        "weight": {
+         "amount": 2,
+         "unit": "points"
+        }
+       },
+       {
+        "wording": "",
+        "weight": {
+         "amount": 6,
+         "unit": "points"
+        }
+       }
+      ]
+     },
+     {
+      "lot": "18",
+      "wording": "Prix des prestations",
+      "cle": "prix",
+      "weight": {
+       "amount": 60,
+       "unit": "percent"
+      },
+      "rank": null,
+      "sub_criteria": [
+       {
+        "wording": "",
+        "weight": {
+         "amount": 15,
+         "unit": "points"
+        }
+       },
+       {
+        "wording": "",
+        "weight": {
+         "amount": 45,
+         "unit": "points"
+        }
+       }
+      ]
+     },
+     {
+      "lot": "18",
+      "wording": "Valeur technique",
+      "cle": "technique",
+      "weight": {
+       "amount": 30,
+       "unit": "percent"
+      },
+      "rank": null,
+      "sub_criteria": [
+       {
+        "wording": "",
+        "weight": {
+         "amount": 50,
+         "unit": "points"
+        }
+       },
+       {
+        "wording": "",
+        "weight": {
+         "amount": 50,
+         "unit": "points"
+        }
+       }
+      ]
+     },
+     {
+      "lot": "18",
+      "wording": "Achats responsables",
+      "cle": "achat",
+      "weight": {
+       "amount": 10,
+       "unit": "percent"
+      },
+      "rank": null,
+      "sub_criteria": [
+       {
+        "wording": "",
+        "weight": {
+         "amount": 2,
+         "unit": "points"
+        }
+       },
+       {
+        "wording": "",
+        "weight": {
+         "amount": 2,
+         "unit": "points"
+        }
+       },
+       {
+        "wording": "",
+        "weight": {
+         "amount": 6,
+         "unit": "points"
+        }
+       }
+      ]
+     },
+     {
+      "lot": "19",
+      "wording": "Prix des prestations",
+      "cle": "prix",
+      "weight": {
+       "amount": 60,
+       "unit": "percent"
+      },
+      "rank": null,
+      "sub_criteria": [
+       {
+        "wording": "",
+        "weight": {
+         "amount": 15,
+         "unit": "points"
+        }
+       },
+       {
+        "wording": "",
+        "weight": {
+         "amount": 45,
+         "unit": "points"
+        }
+       }
+      ]
+     },
+     {
+      "lot": "19",
+      "wording": "Valeur technique",
+      "cle": "technique",
+      "weight": {
+       "amount": 30,
+       "unit": "percent"
+      },
+      "rank": null,
+      "sub_criteria": [
+       {
+        "wording": "",
+        "weight": {
+         "amount": 50,
+         "unit": "points"
+        }
+       },
+       {
+        "wording": "",
+        "weight": {
+         "amount": 50,
+         "unit": "points"
+        }
+       }
+      ]
+     },
+     {
+      "lot": "19",
+      "wording": "Achats responsables",
+      "cle": "achat",
+      "weight": {
+       "amount": 10,
+       "unit": "percent"
+      },
+      "rank": null,
+      "sub_criteria": [
+       {
+        "wording": "",
+        "weight": {
+         "amount": 2,
+         "unit": "points"
+        }
+       },
+       {
+        "wording": "",
+        "weight": {
+         "amount": 2,
+         "unit": "points"
+        }
+       },
+       {
+        "wording": "",
+        "weight": {
+         "amount": 6,
+         "unit": "points"
+        }
+       }
+      ]
+     },
+     {
+      "lot": "20",
+      "wording": "Prix des prestations",
+      "cle": "prix",
+      "weight": {
+       "amount": 60,
+       "unit": "percent"
+      },
+      "rank": null,
+      "sub_criteria": [
+       {
+        "wording": "",
+        "weight": {
+         "amount": 15,
+         "unit": "points"
+        }
+       },
+       {
+        "wording": "",
+        "weight": {
+         "amount": 45,
+         "unit": "points"
+        }
+       }
+      ]
+     },
+     {
+      "lot": "20",
+      "wording": "Valeur technique",
+      "cle": "technique",
+      "weight": {
+       "amount": 35,
+       "unit": "percent"
+      },
+      "rank": null,
+      "sub_criteria": [
+       {
+        "wording": "",
+        "weight": {
+         "amount": 50,
+         "unit": "points"
+        }
+       },
+       {
+        "wording": "",
+        "weight": {
+         "amount": 50,
+         "unit": "points"
+        }
+       }
+      ]
+     },
+     {
+      "lot": "20",
+      "wording": "Achats responsables",
+      "cle": "achat",
+      "weight": {
+       "amount": 5,
+       "unit": "percent"
+      },
+      "rank": null,
+      "sub_criteria": [
+       {
+        "wording": "",
+        "weight": {
+         "amount": 2,
+         "unit": "points"
+        }
+       },
+       {
+        "wording": "",
+        "weight": {
+         "amount": 2,
+         "unit": "points"
+        }
+       },
+       {
+        "wording": "",
+        "weight": {
+         "amount": 6,
+         "unit": "points"
+        }
+       }
+      ]
+     },
+     {
+      "lot": "21",
+      "wording": "Prix des prestations",
+      "cle": "prix",
+      "weight": {
+       "amount": 60,
+       "unit": "percent"
+      },
+      "rank": null,
+      "sub_criteria": [
+       {
+        "wording": "",
+        "weight": {
+         "amount": 15,
+         "unit": "points"
+        }
+       },
+       {
+        "wording": "",
+        "weight": {
+         "amount": 45,
+         "unit": "points"
+        }
+       }
+      ]
+     },
+     {
+      "lot": "21",
+      "wording": "Valeur technique",
+      "cle": "technique",
+      "weight": {
+       "amount": 35,
+       "unit": "percent"
+      },
+      "rank": null,
+      "sub_criteria": [
+       {
+        "wording": "",
+        "weight": {
+         "amount": 50,
+         "unit": "points"
+        }
+       },
+       {
+        "wording": "",
+        "weight": {
+         "amount": 50,
+         "unit": "points"
+        }
+       }
+      ]
+     },
+     {
+      "lot": "21",
+      "wording": "Achats responsables",
+      "cle": "achat",
+      "weight": {
+       "amount": 5,
+       "unit": "percent"
+      },
+      "rank": null,
+      "sub_criteria": [
+       {
+        "wording": "",
+        "weight": {
+         "amount": 2,
+         "unit": "points"
+        }
+       },
+       {
+        "wording": "",
+        "weight": {
+         "amount": 2,
+         "unit": "points"
+        }
+       },
+       {
+        "wording": "",
+        "weight": {
+         "amount": 6,
+         "unit": "points"
+        }
+       }
+      ]
+     },
+     {
+      "lot": "22",
+      "wording": "Prix des prestations",
+      "cle": "prix",
+      "weight": {
+       "amount": 60,
+       "unit": "percent"
+      },
+      "rank": null,
+      "sub_criteria": [
+       {
+        "wording": "",
+        "weight": {
+         "amount": 15,
+         "unit": "points"
+        }
+       },
+       {
+        "wording": "",
+        "weight": {
+         "amount": 45,
+         "unit": "points"
+        }
+       }
+      ]
+     },
+     {
+      "lot": "22",
+      "wording": "Valeur technique",
+      "cle": "technique",
+      "weight": {
+       "amount": 35,
+       "unit": "percent"
+      },
+      "rank": null,
+      "sub_criteria": [
+       {
+        "wording": "",
+        "weight": {
+         "amount": 50,
+         "unit": "points"
+        }
+       },
+       {
+        "wording": "",
+        "weight": {
+         "amount": 50,
+         "unit": "points"
+        }
+       }
+      ]
+     },
+     {
+      "lot": "22",
+      "wording": "Achats responsables",
+      "cle": "achat",
+      "weight": {
+       "amount": 5,
+       "unit": "percent"
+      },
+      "rank": null,
+      "sub_criteria": [
+       {
+        "wording": "",
+        "weight": {
+         "amount": 2,
+         "unit": "points"
+        }
+       },
+       {
+        "wording": "",
+        "weight": {
+         "amount": 2,
+         "unit": "points"
+        }
+       },
+       {
+        "wording": "",
+        "weight": {
+         "amount": 6,
+         "unit": "points"
+        }
+       }
+      ]
+     },
+     {
+      "lot": "23",
+      "wording": "Prix des prestations",
+      "cle": "prix",
+      "weight": {
+       "amount": 60,
+       "unit": "percent"
+      },
+      "rank": null,
+      "sub_criteria": [
+       {
+        "wording": "",
+        "weight": {
+         "amount": 15,
+         "unit": "points"
+        }
+       },
+       {
+        "wording": "",
+        "weight": {
+         "amount": 45,
+         "unit": "points"
+        }
+       }
+      ]
+     },
+     {
+      "lot": "23",
+      "wording": "Valeur technique",
+      "cle": "technique",
+      "weight": {
+       "amount": 35,
+       "unit": "percent"
+      },
+      "rank": null,
+      "sub_criteria": [
+       {
+        "wording": "",
+        "weight": {
+         "amount": 50,
+         "unit": "points"
+        }
+       },
+       {
+        "wording": "",
+        "weight": {
+         "amount": 50,
+         "unit": "points"
+        }
+       }
+      ]
+     },
+     {
+      "lot": "23",
+      "wording": "Achats responsables",
+      "cle": "achat",
+      "weight": {
+       "amount": 5,
+       "unit": "percent"
+      },
+      "rank": null,
+      "sub_criteria": [
+       {
+        "wording": "",
+        "weight": {
+         "amount": 2,
+         "unit": "points"
+        }
+       },
+       {
+        "wording": "",
+        "weight": {
+         "amount": 2,
+         "unit": "points"
+        }
+       },
+       {
+        "wording": "",
+        "weight": {
+         "amount": 6,
+         "unit": "points"
+        }
+       }
+      ]
+     },
+     {
+      "lot": "24",
+      "wording": "Prix des prestations",
+      "cle": "prix",
+      "weight": {
+       "amount": 60,
+       "unit": "percent"
+      },
+      "rank": null,
+      "sub_criteria": [
+       {
+        "wording": "",
+        "weight": {
+         "amount": 15,
+         "unit": "points"
+        }
+       },
+       {
+        "wording": "",
+        "weight": {
+         "amount": 45,
+         "unit": "points"
+        }
+       }
+      ]
+     },
+     {
+      "lot": "24",
+      "wording": "Valeur technique",
+      "cle": "technique",
+      "weight": {
+       "amount": 35,
+       "unit": "percent"
+      },
+      "rank": null,
+      "sub_criteria": [
+       {
+        "wording": "",
+        "weight": {
+         "amount": 50,
+         "unit": "points"
+        }
+       },
+       {
+        "wording": "",
+        "weight": {
+         "amount": 50,
+         "unit": "points"
+        }
+       }
+      ]
+     },
+     {
+      "lot": "24",
+      "wording": "Achats responsables",
+      "cle": "achat",
+      "weight": {
+       "amount": 5,
+       "unit": "percent"
+      },
+      "rank": null,
+      "sub_criteria": [
+       {
+        "wording": "",
+        "weight": {
+         "amount": 2,
+         "unit": "points"
+        }
+       },
+       {
+        "wording": "",
+        "weight": {
+         "amount": 2,
+         "unit": "points"
+        }
+       },
+       {
+        "wording": "",
+        "weight": {
+         "amount": 6,
+         "unit": "points"
+        }
+       }
+      ]
+     }
+    ]
+   },
+   "documents_to_return": {
+    "statut": "found",
+    "valeurs": [
+     {
+      "cle": "dc1",
+      "part": "candidature"
+     },
+     {
+      "cle": "dc2",
+      "part": "candidature"
+     },
+     {
+      "cle": "acte d engagement",
+      "part": "offre"
+     },
+     {
+      "cle": "memoire",
+      "part": "offre"
+     }
+    ]
+   }
+  },
+  "RC4": {
+   "offer_deadline": {
+    "statut": "found",
+    "valeurs": [
+     {
+      "date": "2026-02-23",
+      "time": "14:00"
+     }
+    ]
+   },
+   "questions_deadline": {
+    "statut": "not_found",
+    "valeurs": []
+   },
+   "procedure": {
+    "statut": "not_found",
+    "valeurs": []
+   },
+   "lots": {
+    "statut": "found",
+    "valeurs": [
+     {
+      "number": null
+     }
+    ]
+   },
+   "lots_alt": {
+    "statut": "found",
+    "valeurs": [
+     {
+      "number": "1"
+     }
+    ]
+   },
+   "site_visit": {
+    "statut": "found",
+    "valeurs": [
+     true
+    ]
+   },
+   "site_visit_dates": {
+    "statut": "found",
+    "valeurs": [
+     "2026-02-02"
+    ]
+   },
+   "submission_mode": {
+    "statut": "found",
+    "valeurs": [
+     "electronique"
+    ]
+   },
+   "offer_validity": {
+    "statut": "found",
+    "valeurs": [
+     {
+      "amount": 120,
+      "unit": "days"
+     }
+    ]
+   },
+   "variants": {
+    "statut": "found",
+    "valeurs": [
+     false
+    ]
+   },
+   "award_criteria": {
+    "statut": "found",
+    "valeurs": [
+     {
+      "lot": null,
+      "wording": "Valeur technique des prestations",
+      "cle": "technique",
+      "weight": {
+       "amount": 60,
+       "unit": "points"
+      },
+      "rank": null,
+      "sub_criteria": [
+       {
+        "wording": "",
+        "weight": {
+         "amount": 20,
+         "unit": "points"
+        }
+       },
+       {
+        "wording": "",
+        "weight": {
+         "amount": 10,
+         "unit": "points"
+        }
+       },
+       {
+        "wording": "",
+        "weight": {
+         "amount": 10,
+         "unit": "points"
+        }
+       },
+       {
+        "wording": "",
+        "weight": {
+         "amount": 20,
+         "unit": "points"
+        }
+       }
+      ]
+     },
+     {
+      "lot": null,
+      "wording": "Prix des prestations",
+      "cle": "prix",
+      "weight": {
+       "amount": 40,
+       "unit": "points"
+      },
+      "rank": null,
+      "sub_criteria": []
+     }
+    ]
+   },
+   "documents_to_return": {
+    "statut": "found",
+    "valeurs": [
+     {
+      "cle": "dc1",
+      "part": "candidature"
+     },
+     {
+      "cle": "dc2",
+      "part": "candidature"
+     },
+     {
+      "cle": "acte d engagement",
+      "part": "offre"
+     },
+     {
+      "cle": "memoire",
+      "part": "offre"
+     },
+     {
+      "cle": "decennale",
+      "part": "attributaire"
+     }
+    ]
+   }
+  },
+  "RC5": {
+   "offer_deadline": {
+    "statut": "found",
+    "valeurs": [
+     {
+      "date": "2026-08-28",
+      "time": "08:00"
+     }
+    ]
+   },
+   "questions_deadline": {
+    "statut": "not_found",
+    "valeurs": []
+   },
+   "procedure": {
+    "statut": "found",
+    "valeurs": [
+     "procedure_adaptee"
+    ]
+   },
+   "lots": {
+    "statut": "found",
+    "valeurs": [
+     {
+      "number": null
+     }
+    ]
+   },
+   "lots_alt": {
+    "statut": "found",
+    "valeurs": [
+     {
+      "number": "01"
+     }
+    ]
+   },
+   "site_visit": {
+    "statut": "found",
+    "valeurs": [
+     false
+    ]
+   },
+   "site_visit_dates": {
+    "statut": "not_found",
+    "valeurs": []
+   },
+   "submission_mode": {
+    "statut": "found",
+    "valeurs": [
+     "electronique"
+    ]
+   },
+   "offer_validity": {
+    "statut": "found",
+    "valeurs": [
+     {
+      "amount": 120,
+      "unit": "days"
+     }
+    ]
+   },
+   "variants": {
+    "statut": "found",
+    "valeurs": [
+     false
+    ]
+   },
+   "award_criteria": {
+    "statut": "found",
+    "valeurs": [
+     {
+      "lot": null,
+      "wording": "Prix",
+      "cle": "prix",
+      "weight": {
+       "amount": 40,
+       "unit": "percent"
+      },
+      "rank": null,
+      "sub_criteria": []
+     },
+     {
+      "lot": null,
+      "wording": "Valeur technique",
+      "cle": "technique",
+      "weight": {
+       "amount": 60,
+       "unit": "percent"
+      },
+      "rank": null,
+      "sub_criteria": []
+     }
+    ]
+   },
+   "documents_to_return": {
+    "statut": "found",
+    "valeurs": [
+     {
+      "cle": "dc1",
+      "part": "candidature"
+     },
+     {
+      "cle": "dc2",
+      "part": "candidature"
+     },
+     {
+      "cle": "acte d engagement",
+      "part": "offre"
+     },
+     {
+      "cle": "memoire",
+      "part": "offre"
+     },
+     {
+      "cle": "decennale",
+      "part": "attributaire"
+     }
+    ]
+   }
+  }
+ }
+}

@@ -1,0 +1,5 @@
+```python
+    def set_favorite(self, rid: int, favorite: bool) -> None:
+        recipe = self.recipe(rid)
+        recipe['favorite'] = favorite
+```

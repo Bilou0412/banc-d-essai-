@@ -1,0 +1,144 @@
+```python
+import json
+from typing import List, Dict
+from collections import defaultdict
+
+class App:
+
+    def __init__(self, path: str):
+        self.path = path
+        if not os.path.exists(path):
+            with open(path, 'w') as f:
+                json.dump([], f)
+
+    def close(self) -> None:
+        pass
+
+    def save_recipe(self, title: str, servings: int=4) -> int:
+        if not title.strip():
+            raise InvalidInput('Le titre ne peut pas être vide')
+        with open(self.path, 'r') as f:
+            data = json.load(f)
+            rid = len(data) + 1
+            recipe = {'id': rid, 'title': title, 'servings': servings, 'category': None, 'favorite': False, 'note': None, 'photo': DEFAULT_PHOTO.decode('latin1'), 'ingredients': []}
+            data.append(recipe)
+        with open(self.path, 'w') as f:
+            json.dump(data, f)
+        return rid
+
+    def delete_recipe(self, rid: int) -> None:
+        with open(self.path, 'r') as f:
+            data = json.load(f)
+        data = [r for r in data if r['id'] != rid]
+        with open(self.path, 'w') as f:
+            json.dump(data, f)
+
+    def list_recipes(self) -> List[Dict[str, Any]]:
+        with open(self.path, 'r') as f:
+            return json.load(f)
+
+    def recipe(self, rid: int, servings: int=None) -> Dict[str, Any]:
+        recipes = self.list_recipes()
+        recipe = next((r for r in recipes if r['id'] == rid), None)
+        if not recipe:
+            raise ValueError('Recette non trouvée')
+        if servings is not None:
+            recipe['servings'] = servings
+            for i in recipe['ingredients']:
+                quantity = qty(i['quantity'])
+                new_quantity = round(quantity * (servings / 4), 2)
+                i['quantity'] = f'{new_quantity:.2f}' if new_quantity % 1 != 0 else str(int(new_quantity))
+        return recipe
+
+    def add_ingredient(self, rid: int, name: str, quantity: Any, unit: str) -> None:
+        if not isinstance(quantity, (int, float)) or quantity <= 0:
+            raise InvalidInput('La quantité doit être un nombre positif')
+        recipe = self.recipe(rid)
+        recipe['ingredients'].append({'name': name, 'quantity': str(round(float(quantity), 2)), 'unit': unit})
+
+    def remove_ingredient(self, rid: int, name: str) -> None:
+        recipe = self.recipe(rid)
+        recipe['ingredients'] = [i for i in recipe['ingredients'] if i['name'] != name]
+
+    def set_category(self, rid: int, category: str) -> None:
+        recipe = self.recipe(rid)
+        recipe['category'] = category
+
+    def set_favorite(self, rid: int, bool: bool) -> None:
+        recipe = self.recipe(rid)
+        recipe['favorite'] = bool
+
+    def set_note(self, rid: int, text: str) -> None:
+        recipe = self.recipe(rid)
+        recipe['note'] = text.strip() if text.strip() else None
+
+    def set_photo(self, rid: int, data: bytes) -> None:
+        if not isinstance(data, bytes):
+            raise InvalidInput("Le fichier n'est pas une image")
+        recipe = self.recipe(rid)
+        recipe['photo'] = base64.b64encode(data).decode('latin1')
+
+    def remove_photo(self, rid: int) -> None:
+        recipe = self.recipe(rid)
+        recipe['photo'] = DEFAULT_PHOTO.decode('latin1')
+
+    def search(self, query: str='', category: str=None, favorites_only: bool=False) -> Dict[str, Any]:
+        recipes = self.list_recipes()
+        results = [r for r in recipes if (not query or query.lower() in r['title'].lower()) and (category is None or r.get('category') == category) and (not favorites_only or r['favorite'])]
+        return {'results': sorted((r['title'] for r in results)), 'message': 'Aucun résultat' if not results else None}
+
+    def add_to_shopping_list(self, rid: int, servings: int=None) -> None:
+        recipe = self.recipe(rid)
+        if servings is not None:
+            recipe['servings'] = servings
+        for i in recipe['ingredients']:
+            item = (i['name'], i['unit'])
+            with open(os.path.join(os.path.dirname(self.path), 'shopping_list.json'), 'r') as sf:
+                shop_data = json.load(sf)
+            if item not in shop_data:
+                shop_data[item] = {'recipe_id': rid, 'quantity': str(round(float(i['quantity']), 2)), 'unit': i['unit'], 'checked': False}
+            else:
+                current_qty = float(shop_data[item]['quantity'])
+                new_qty = round(current_qty + float(i['quantity']), 2)
+                shop_data[item]['quantity'] = f'{new_qty:.2f}' if new_qty % 1 != 0 else str(int(new_qty))
+            with open(os.path.join(os.path.dirname(self.path), 'shopping_list.json'), 'w') as sf:
+                json.dump(shop_data, sf)
+
+    def shopping_list(self) -> List[Dict[str, Any]]:
+        shop_list_path = os.path.join(os.path.dirname(self.path), 'shopping_list.json')
+        if not os.path.exists(shop_list_path):
+            return []
+        with open(shop_list_path, 'r') as sf:
+            shop_data = json.load(sf)
+        return [{'name': name, 'quantity': quantity, 'unit': unit, 'checked': checked} for (name, unit), {_, quantity, unit, checked} in shop_data.items()]
+
+    def check_item(self, name: str, unit: str, checked: bool=True) -> None:
+        item = (name.lower(), unit)
+        with open(os.path.join(os.path.dirname(self.path), 'shopping_list.json'), 'r') as sf:
+            shop_data = json.load(sf)
+        if item in shop_data:
+            shop_data[item]['checked'] = checked
+        with open(os.path.join(os.path.dirname(self.path), 'shopping_list.json'), 'w') as sf:
+            json.dump(shop_data, sf)
+
+    def remove_checked(self) -> None:
+        checked_items = []
+        shop_list_path = os.path.join(os.path.dirname(self.path), 'shopping_list.json')
+        if not os.path.exists(shop_list_path):
+            return
+        with open(shop_list_path, 'r') as sf:
+            shop_data = json.load(sf)
+        for item in list(shop_data.keys()):
+            if shop_data[item]['checked']:
+                checked_items.append(item)
+        for item in checked_items:
+            del shop_data[item]
+        with open(shop_list_path, 'w') as sf:
+            json.dump(shop_data, sf)
+
+def is_valid_quantity(quantity: Any) -> bool:
+    return isinstance(quantity, (int, float)) and quantity > 0 and re.match('^\\d+(\\.\\d+)?$', str(quantity))
+
+def qty(s):
+    return round(float(s), 2)
+```

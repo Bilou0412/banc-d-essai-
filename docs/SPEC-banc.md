@@ -125,6 +125,9 @@ Deux consignes, deux séries de passes jamais mélangées : **v2 pour k** (`data
 - Une divergence que la spec ne tranche pas → le juge la classe trou | observé: divergence | conditions: assertions
 - Une divergence où la spec donne raison à un des deux codes → le juge la classe bug de l'autre code | observé: divergence | conditions: assertions
 - Deux paires de greens différentes → les trous qu'elles trouvent sont comparés | observé: divergence | conditions: aucune
+- Le taux spec d'une paire atteint le seuil d'arrêt → l'arrêt n'est retenu qu'après un lot de 4 greens neufs sur la même spec, et c'est le taux de ce lot qui est rapporté | observé: taux de compilation | conditions: nombre de greens
+- Un juge reçoit une divergence → il voit l'écart complet entre les variantes (pour une longue liste : tous les éléments qui diffèrent), jamais un extrait coupé | observé: divergence | conditions: aucune
+- Une situation issue d'une entrée réelle (pas du générateur) → son taux est rapporté à part, et un taux mesuré sur des situations générées ne vaut pas pour les entrées réelles | observé: taux de compilation | conditions: situation
 
 ### 6.5 Champ local
 
@@ -182,6 +185,8 @@ La colonne ± donne la moitié de l'écart entre les deux premières passes. Apr
 - Le recuit de température (H10, phase 2).
 - Comparer les blocs entre passes (H9, v2).
 - Toute interface graphique : un rapport texte suffit.
+
+**Limites connues (V5, 22/11/2026).** La consigne v3 (6 mécanismes nommés) ne marque pas les règles métier comme frontières : sur une extraction, elle donne 0 % (P12). Sur de vraies entrées, le banc ne sait pas encore mesurer la compilation : taux brut 0 sur les 5 RC publics à chaque itération de P12, faute d'un générateur réaliste.
 
 ## 10. Ordre de livraison
 

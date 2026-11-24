@@ -1,0 +1,21 @@
+```python
+class App:
+
+    def set_favorite(self, rid: int, bool: bool) -> None:
+        recipe = self.recipe(rid)
+        recipe['favorite'] = bool
+        with open(self.path, 'r+') as f:
+            data = json.load(f)
+            for r in data:
+                if r['id'] == rid:
+                    r['favorite'] = bool
+                    break
+            f.seek(0)
+            json.dump(data, f)
+
+    def save_recipe(self, title: str, servings: int=4) -> int:
+        # ... (rest of the method remains unchanged)
+
+    def recipe(self, rid: int, servings: int=None) -> Dict[str, Any]:
+        # ... (rest of the method remains unchanged)
+```

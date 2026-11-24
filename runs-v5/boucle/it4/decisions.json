@@ -1,0 +1,42 @@
+{
+ "journal": [
+  {
+   "champ": "pieces.liste",
+   "cas": "Une pièce est énumérée dans le RC avec la mention « (facultatif) » collée à son intitulé, et le nom affiché de la pièce peut contenir ou non cette mention.",
+   "porte": "convention",
+   "raison": "La mention « (facultatif) » indique si la pièce est obligatoire, elle ne fait pas partie de son nom ; tout expert la retirerait de l'intitulé et la reporterait dans le champ d'obligation.",
+   "decision": "V1",
+   "proposee": "Quand une page qualifie une pièce de facultative ou d'obligatoire par une mention jointe à son intitulé, après le lancement de l'analyse, le nom de la pièce est son intitulé sans cette mention et son obligation pièce porte cette qualification | observé: pièces | conditions: texte pages"
+  },
+  {
+   "champ": "lots.liste",
+   "cas": "Une même page déclare le marché non alloti en lot unique et énumère aussi deux lots numérotés avec leurs intitulés.",
+   "porte": "client",
+   "raison": "Le RC se contredit (non alloti, mais avec des lots numérotés, souvent des corps d'état) ; les montrer, les cacher ou signaler l'incohérence est un choix de produit sur le traitement d'un RC douteux.",
+   "decision": "V1",
+   "proposee": "Quand une page déclare que le marché n'est pas alloti et qu'une page décrit aussi des lots numérotés, après le lancement de l'analyse, le dossier liste le lot unique sans numéro ni intitulé, avec pour page valeur la page qui le déclare, et chacun des lots numérotés avec son intitulé | observé: lots | conditions: texte pages"
+  },
+  {
+   "champ": "mode_remise.valeurs",
+   "cas": "Une page indique que les offres sont remises par voie dématérialisée et précise sur la même page que le marché attribué sera signé à la main sur papier.",
+   "porte": "convention",
+   "raison": "La remise des offres et le support de signature du marché attribué sont deux sujets distincts ; tout expert les distingue, il n'y a aucun conflit.",
+   "decision": "V2",
+   "proposee": "Quand une page indique le mode de remise des offres et qu'une page mentionne aussi le support sur lequel le marché attribué sera signé, après le lancement de l'analyse, le mode remise affiche seulement le mode de remise des offres, avec pour page valeur seulement la page qui l'indique, et aucun conflit valeurs n'est signalé pour le mode remise | observé: mode remise | conditions: texte pages"
+  }
+ ],
+ "ajouts": {
+  "C14": "Quand une page qualifie une pièce de facultative ou d'obligatoire par une mention jointe à son intitulé, après le lancement de l'analyse, le nom de la pièce est son intitulé sans cette mention et son obligation pièce porte cette qualification, avec pour page valeur la page qui la qualifie | observé: pièces | conditions: texte pages",
+  "C15": "Quand une page indique le mode de remise des offres et qu'une page, la même ou une autre, mentionne aussi le support sur lequel le marché attribué sera signé, après le lancement de l'analyse, le mode remise affiche seulement le mode de remise des offres, avec pour page valeur seulement la page qui l'indique, et aucun conflit valeurs n'est signalé pour le mode remise | observé: mode remise | conditions: texte pages"
+ },
+ "bilan": {
+  "iteration": 4,
+  "trous": 3,
+  "bugs": 9,
+  "tests_trous": 7,
+  "tests_trous_retires": [],
+  "tests_bugs": 7,
+  "tests_bugs_retires": [],
+  "assertions_ajoutees": 2
+ }
+}

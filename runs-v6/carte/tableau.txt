@@ -1,0 +1,32 @@
+
+== synthetiques
+part déterministe : {"assertions": 175, "satisfaites": 161, "part": 0.92, "part_sur_les_11_faits": 0.926, "non_satisfaites_par_champ": {"procedure": 10, "@pages": 4}}
+carte : {"regle suffit": {"n": 1085, "part": 0.986}, "personne ne sait": {"n": 14, "part": 0.013}, "petit modele necessaire": {"n": 1, "part": 0.001}}
+  offer_deadline         règle 1.00  greens [1.0, 1.0, 1.0, 1.0]  carte {'regle suffit': 100}  justesse {'regle': 1.0, 'nuextract': 0.89, 'sonnet': 0.89}
+  questions_deadline     règle 1.00  greens [1.0, 1.0, 1.0, 1.0]  carte {'regle suffit': 100}  justesse {'regle': 1.0, 'nuextract': 1.0, 'sonnet': 1.0}
+  procedure              règle 0.88  greens [0.881, 0.881, 1.0, 0.881]  carte {'regle suffit': 90, 'personne ne sait': 10}  justesse {'regle': 0.9, 'nuextract': 0.9, 'sonnet': 0.9}
+  lots                   règle 0.97  greens [1.0, 0.969, 0.969, 0.969]  carte {'regle suffit': 96, 'personne ne sait': 4}  justesse {'regle': 0.96, 'nuextract': 0.96, 'sonnet': 0.64}
+  site_visit             règle 1.00  greens [1.0, 1.0, 1.0, 1.0]  carte {'regle suffit': 100}  justesse {'regle': 1.0, 'nuextract': 1.0, 'sonnet': 1.0}
+  site_visit_dates       règle 0.99  greens [0.99, 0.99, 0.99, 0.99]  carte {'regle suffit': 100}  justesse {'regle': 1.0, 'nuextract': 1.0, 'sonnet': 1.0}
+  submission_mode        règle 1.00  greens [1.0, 1.0, 1.0, 1.0]  carte {'regle suffit': 100}  justesse {'regle': 1.0, 'nuextract': 1.0, 'sonnet': 1.0}
+  offer_validity         règle 1.00  greens [1.0, 1.0, 1.0, 1.0]  carte {'regle suffit': 100}  justesse {'regle': 1.0, 'nuextract': 1.0, 'sonnet': 0.99}
+  variants               règle 1.00  greens [1.0, 0.925, 1.0, 1.0]  carte {'regle suffit': 100}  justesse {'regle': 1.0, 'nuextract': 1.0, 'sonnet': 1.0}
+  award_criteria         règle 0.99  greens [0.986, 0.898, 0.986, 0.986]  carte {'regle suffit': 99, 'petit modele necessaire': 1}  justesse {'regle': 0.99, 'nuextract': 0.72, 'sonnet': 0.92}
+  documents_to_return    règle 1.00  greens [1.0, 1.0, 1.0, 1.0]  carte {'regle suffit': 100}  justesse {'regle': 1.0, 'nuextract': 0.24, 'sonnet': 0.25}
+accord : {"@controle": {"accord_3_sur_4": 0.997, "satisfait": true}, "@limite_pages": {"accord_3_sur_4": 1.0, "satisfait": true}, "@obligation": {"accord_3_sur_4": 1.0, "satisfait": true}, "@pages": {"accord_3_sur_4": 0.695, "satisfait": false}, "@plan": {"accord_3_sur_4": 1.0, "satisfait": true}, "@type_ponderation": {"accord_3_sur_4": 1.0, "satisfait": true}}
+
+== publics
+part déterministe : {"assertions": 175, "satisfaites": 36, "part": 0.206, "part_sur_les_11_faits": 0.2, "non_satisfaites_par_champ": {"lots": 10, "offer_deadline": 21, "questions_deadline": 10, "site_visit": 8, "variants": 8, "offer_validity": 11, "documents_to_return": 12, "@obligation": 6, "award_criteria": 28, "@type_ponderation": 5, "@plan": 8, "@controle": 8, "@pages": 4}}
+carte : {"petit modele necessaire": {"n": 9, "part": 0.164}, "regle suffit": {"n": 29, "part": 0.527}, "personne ne sait": {"n": 17, "part": 0.309}}
+  offer_deadline         règle 0.20  greens [0.4, 0.6, 0.6, 0.2]  carte {'petit modele necessaire': 4, 'regle suffit': 1}  justesse {'regle': 0.2, 'nuextract': 1.0, 'sonnet': 1.0}
+  questions_deadline     règle 0.20  greens [0.6, 0.6, 1.0, 0.0]  carte {'petit modele necessaire': 4, 'regle suffit': 1}  justesse {'regle': 0.2, 'nuextract': 1.0, 'sonnet': 1.0}
+  procedure              règle 1.00  greens [1.0, 1.0, 1.0, 1.0]  carte {'regle suffit': 5}  justesse {'regle': 1.0, 'nuextract': 1.0, 'sonnet': 1.0}
+  lots                   règle 0.60  greens [0.4, 0.6, 0.6, 0.6]  carte {'regle suffit': 3, 'petit modele necessaire': 1, 'personne ne sait': 1}  justesse {'regle': 0.6, 'nuextract': 0.4, 'sonnet': 0.4}
+  site_visit             règle 0.40  greens [0.4, 0.4, 0.4, 0.4]  carte {'personne ne sait': 3, 'regle suffit': 2}  justesse {'regle': 0.4, 'nuextract': 0.4, 'sonnet': 0.4}
+  site_visit_dates       règle 1.00  greens [1.0, 1.0, 1.0, 1.0]  carte {'regle suffit': 5}  justesse {'regle': 1.0, 'nuextract': 0.8, 'sonnet': 0.8}
+  submission_mode        règle 1.00  greens [1.0, 1.0, 1.0, 1.0]  carte {'regle suffit': 5}  justesse {'regle': 1.0, 'nuextract': 1.0, 'sonnet': 1.0}
+  offer_validity         règle 0.60  greens [0.6, 0.6, 0.6, 0.6]  carte {'regle suffit': 3, 'personne ne sait': 2}  justesse {'regle': 0.6, 'nuextract': 0.6, 'sonnet': 0.6}
+  variants               règle 0.80  greens [0.8, 0.8, 0.8, 1.0]  carte {'regle suffit': 4, 'personne ne sait': 1}  justesse {'regle': 0.8, 'nuextract': 0.8, 'sonnet': 0.8}
+  award_criteria         règle 0.00  greens [0.0, 0.0, 0.0, 0.0]  carte {'personne ne sait': 5}  justesse {'regle': 0.0, 'nuextract': 0.0, 'sonnet': 0.0}
+  documents_to_return    règle 0.00  greens [0.0, 0.0, 0.0, 0.0]  carte {'personne ne sait': 5}  justesse {'regle': 0.0, 'nuextract': 0.0, 'sonnet': 0.0}
+accord : {"@controle": {"accord_3_sur_4": 0.6, "satisfait": false}, "@limite_pages": {"accord_3_sur_4": 1.0, "satisfait": true}, "@obligation": {"accord_3_sur_4": 0.0, "satisfait": false}, "@pages": {"accord_3_sur_4": 0.0, "satisfait": false}, "@plan": {"accord_3_sur_4": 0.2, "satisfait": false}, "@type_ponderation": {"accord_3_sur_4": 0.6, "satisfait": false}}

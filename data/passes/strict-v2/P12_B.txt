@@ -1,0 +1,39 @@
+ÉTATS: texte; lots; date remise; date questions; procédure; visite; dates visite; variantes; validité; mode remise; pièce; phase pièce; obligation pièce; limite pages; critère; sous-critère; pondération; type pondération; lot critère; section; ordre sections; page source; contenu section; alerte; statut
+ASSERTIONS:
+- Quand le texte d'une page contient la date et l'heure limites de remise des offres, après l'analyse, la date remise affichée reprend exactement cette date et cette heure | observé: date remise | conditions: texte
+- Quand aucune page ne contient de date limite de remise des offres, après l'analyse, le statut de la date remise est « non trouvé » | observé: statut | conditions: texte
+- Quand une valeur extraite pour la date questions ne figure dans le texte d'aucune page, après l'analyse, le statut de la date questions est « non trouvé » | observé: statut | conditions: texte | frontière: oui
+- Quand une valeur extraite pour la date questions ne figure dans le texte d'aucune page, après l'analyse, aucune date questions n'est affichée | observé: date questions | conditions: texte | frontière: oui
+- Quand le texte d'une page fixe une date limite pour poser des questions, après l'analyse, la date questions affichée est cette date | observé: date questions | conditions: texte
+- Quand le texte décrit trois lots, après l'analyse, la liste des lots contient ces trois lots dans l'ordre du RC | observé: lots | conditions: texte
+- Quand le texte ne mentionne aucun lot, après l'analyse, le statut des lots est « non trouvé » | observé: statut | conditions: texte
+- Quand le texte indique une procédure adaptée, après l'analyse, la procédure affichée est « procédure adaptée » | observé: procédure | conditions: texte
+- Quand le texte déclare la visite du site obligatoire, après l'analyse, la visite affichée est « obligatoire » | observé: visite | conditions: texte
+- Quand le texte déclare la visite du site facultative, après l'analyse, la visite affichée est « facultative » | observé: visite | conditions: texte
+- Quand le texte donne deux dates de visite du site, après l'analyse, les dates visite affichées sont ces deux dates | observé: dates visite | conditions: texte
+- Quand le texte interdit les variantes, après l'analyse, les variantes affichées sont « non autorisées » | observé: variantes | conditions: texte
+- Quand le texte fixe la validité des offres à 120 jours, après l'analyse, la validité affichée est « 120 jours » | observé: validité | conditions: texte
+- Quand le texte impose une remise électronique sur le profil d'acheteur, après l'analyse, le mode remise affiché est « électronique » | observé: mode remise | conditions: texte
+- Quand le texte exige une pièce dans le dossier de candidature, après l'analyse, la phase pièce de cette pièce est « candidature » | observé: phase pièce | conditions: texte
+- Quand le texte exige une pièce du seul attributaire, après l'analyse, la phase pièce de cette pièce est « attributaire » | observé: phase pièce | conditions: texte
+- Quand le texte déclare une pièce obligatoire, après l'analyse, l'obligation pièce de cette pièce est « obligatoire » | observé: obligation pièce | conditions: texte
+- Quand le texte déclare une pièce facultative, après l'analyse, l'obligation pièce de cette pièce est « facultative » | observé: obligation pièce | conditions: texte
+- Quand le texte limite le mémoire technique à 20 pages, après l'analyse, la limite pages affichée est 20 | observé: limite pages | conditions: texte
+- Quand le texte ne fixe aucune limite de pages au mémoire technique, après l'analyse, le statut de la limite pages est « non trouvé » | observé: statut | conditions: texte
+- Quand le texte rattache un sous-critère à un critère, après l'analyse, ce sous-critère apparaît sous ce critère dans l'arbre | observé: sous-critère | conditions: critère
+- Quand le texte exprime les pondérations en pourcentages, après l'analyse, le type pondération affiché est « pourcentage » | observé: type pondération | conditions: texte
+- Quand le texte exprime les pondérations en points, après l'analyse, le type pondération affiché est « points » | observé: type pondération | conditions: texte
+- Quand le texte classe les critères par ordre d'importance sans valeur chiffrée, après l'analyse, le type pondération affiché est « classement » | observé: type pondération | conditions: texte
+- Quand le type pondération est « classement », après l'analyse, la pondération de chaque critère affiche son rang | observé: pondération | conditions: type pondération
+- Quand le texte donne à un critère des pondérations différentes selon le lot, après l'analyse, la pondération de ce critère est affichée séparément pour chaque lot | observé: pondération | conditions: lot critère
+- Quand un critère est noté sur la valeur technique et n'a pas de sous-critère, après la construction du plan, le plan contient une section pour ce critère | observé: section | conditions: critère, sous-critère
+- Quand un critère porte sur le prix, après la construction du plan, le plan ne contient aucune section pour ce critère | observé: section | conditions: critère
+- Quand un critère technique a des sous-critères, après la construction du plan, le plan contient une section pour chaque sous-critère | observé: section | conditions: sous-critère
+- Après la construction du plan, l'ordre sections suit l'ordre des critères dans le RC | observé: ordre sections | conditions: critère
+- Après la construction du plan, chaque section affiche la pondération de son critère ou sous-critère | observé: pondération | conditions: section
+- Après la construction du plan, chaque section affiche la page source où son critère ou sous-critère figure dans le texte | observé: page source | conditions: texte
+- Après la construction du plan, le contenu section de chaque section est vide de toute rédaction | observé: contenu section | conditions: aucune
+- Quand un critère technique n'a pas de section dans le plan, après le contrôle de conformité, l'alerte « critère sans section » est affichée | observé: alerte | conditions: critère, section
+- Quand la somme des pondérations des sous-critères diffère de la pondération de leur critère, après le contrôle de conformité, l'alerte « pondérations incohérentes » est affichée | observé: alerte | conditions: pondération
+- Quand le type pondération est « pourcentage » et que la somme des critères diffère de 100, après le contrôle de conformité, l'alerte « total différent de 100 » est affichée | observé: alerte | conditions: type pondération, pondération
+- Quand chaque critère technique a sa section et que les pondérations se recoupent, après le contrôle de conformité, aucune alerte n'est affichée | observé: alerte | conditions: section, pondération

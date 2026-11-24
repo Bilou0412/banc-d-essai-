@@ -1,0 +1,11 @@
+```python
+DEFAULT_PHOTO = b'\x89PNG\r\n\x1a\n\x00\x00\x00\rIHDR\x00\x00\x00\x01\x00\x00\x00\x01\x08\x02\x00\x00\x00\x90wS\xde\x00\x00\x00\nIDATxÚcøÿ?\x00\x01\x01þ\x00\x00\x00\x00IEND®B`\x82'
+
+class App:
+
+    def set_photo(self, rid: int, data: bytes) -> None:
+        recipe = self.recipe(rid)
+        if not (data.startswith(b'\x89PNG') or data.startswith(b'GIF89a')):
+            raise InvalidInput("Le fichier n'est pas une image")
+        recipe['photo'] = data
+```

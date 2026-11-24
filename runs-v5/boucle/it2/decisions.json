@@ -1,0 +1,48 @@
+{
+ "journal": [
+  {
+   "champ": "plan",
+   "cas": "Le RC énumère, à côté du prix et de la valeur technique, un critère qui ne relève d'aucun des deux (performances environnementales) et le plan du mémoire doit dire s'il lui consacre une section.",
+   "porte": "convention",
+   "raison": "Le CCP (art. R2152-7) fait de la performance environnementale un critère de jugement de l'offre ; l'usage veut que le candidat réponde à chaque critère non-prix dans le mémoire technique, sauf si le RC prévoit un autre document. La réponse commune est donc d'y consacrer une section, contrairement à la règle prévue. Certitude incertaine : le cas passerait à Bilel seulement s'il a choisi de limiter son produit à la valeur technique, ce que le cas transmis ne dit pas.",
+   "decision": "V1 retenue",
+   "proposee": "Quand un critère ne porte ni sur la valeur technique ni sur le prix, après le lancement de l'analyse, le plan du mémoire ne contient aucune section pour ce critère | observé: sections | conditions: nature critère"
+  },
+  {
+   "champ": "controle.alertes",
+   "cas": "Le RC pondère un critère de valeur technique en points (55 points) et ses sous-critères en pourcentages du critère, et ces pourcentages totalisent 100 %.",
+   "porte": "convention",
+   "raison": "55 points répartis en sous-critères dont les pourcentages totalisent 100 % forment une pondération cohérente ; c'est du simple calcul, aucun expert ne lèverait l'alerte. Certitude sûre.",
+   "decision": "V2",
+   "proposee": "Quand le RC pondère un critère en points et ses sous-critères en pourcentages dont la somme vaut 100 %, après le lancement de l'analyse, le contrôle n'affiche pas l'alerte « pondérations incohérentes » pour ce critère | observé: alerte | conditions: pondération, type pondération"
+  },
+  {
+   "champ": "pieces.liste",
+   "cas": "Le RC contient, hors de la liste des pièces à remettre, des lignes à puces qui ne désignent aucun document (titres de rubrique sur la décomposition en lots ou en tranches, cas de candidatures multiples interdites, adresse du maître d'œuvre).",
+   "porte": "convention",
+   "raison": "Un titre de rubrique, une adresse ou un cas d'interdiction ne désignent aucun document à remettre ; tout lecteur compétent d'un RC les écarte de la liste des pièces. Certitude sûre.",
+   "decision": "V2",
+   "proposee": "Quand une page présente sous forme d'énumération des éléments qui ne désignent aucun document (titre de rubrique, adresse, cas d'interdiction), après le lancement de l'analyse, le dossier ne liste aucun de ces éléments parmi les pièces | observé: pièces | conditions: texte pages"
+  }
+ ],
+ "ajouts": {
+  "C09": "Quand le RC énumère, à côté du prix et de la valeur technique, un critère qui ne porte ni sur la valeur technique ni sur le prix, après le lancement de l'analyse, le plan du mémoire ne contient aucune section pour ce critère et le contrôle n'affiche pas l'alerte « critère sans section » pour ce critère | observé: sections | conditions: nature critère",
+  "C10": "Quand le RC pondère un critère en points et ses sous-critères en pourcentages de ce critère dont la somme vaut 100 %, après le lancement de l'analyse, le contrôle n'affiche pas l'alerte « pondérations incohérentes » pour ce critère | observé: alerte | conditions: pondération, type pondération",
+  "C11": "Quand une page présente sous forme d'énumération des éléments qui ne désignent aucun document (titre de rubrique, adresse, cas d'interdiction), après le lancement de l'analyse, le dossier ne liste aucun de ces éléments parmi les pièces | observé: pièces | conditions: texte pages"
+ },
+ "bilan": {
+  "iteration": 2,
+  "trous": 3,
+  "bugs": 8,
+  "tests_trous": 5,
+  "tests_trous_retires": [
+   "test_C10_points_et_sous_criteres_a_100_pourcent_pas_d_alerte_incoherence"
+  ],
+  "tests_bugs": 5,
+  "tests_bugs_retires": [
+   "test_A21_reg_bareme_et_negociation_ne_sont_pas_des_criteres",
+   "test_A24_reg_pourcentages_du_bareme_ne_font_pas_un_type_pourcentage"
+  ],
+  "assertions_ajoutees": 3
+ }
+}

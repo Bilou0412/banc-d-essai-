@@ -1,0 +1,10 @@
+```python
+def set_photo(self, rid: int, data: bytes) -> None:
+    if not isinstance(data, bytes):
+        raise InvalidInput("Le fichier n'est pas une image")
+    header = data[:8]
+    if not (header.startswith(b'\x89PNG') or header.startswith(b'GIF87a') or header.startswith(b'GIF89a')):
+        raise InvalidInput("Le fichier n'est pas une image valide")
+    recipe = self.recipe(rid)
+    recipe['photo'] = base64.b64encode(data).decode('latin1')
+```

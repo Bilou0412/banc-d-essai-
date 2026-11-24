@@ -28,6 +28,14 @@ Bilel, développeur freelance. Il pense par **intuitions structurelles et parall
 6. **Pas de seuil fixé après avoir vu les données** sans le marquer « non validé ».
 7. **Deux consignes, deux séries de passes, jamais mélangées.** La v2 (`decompositeur-strict-v2.md`) mesure **k** ; la v3 (`decompositeur-strict-v3.md`) mesure les **frontières**. Critère de reproductibilité des frontières : écart de **part** ≤ 10 points entre passes (« non validé » jusqu'à la grosse sonde).
 8. **Les trous du red ne sont pas des données.** Le red attaque toujours, mais son compte de trous a priori ne se répète pas (ρ = 0,00 entre deux reds, V3) : on ne s'en sert plus comme mesure.
+9. **L'arrêt sur le taux spec se vérifie avec 4 greens neufs.** Une paire seule surestime : sur P12, une paire a donné 0,94, puis 4 greens neufs sur la même spec 0,78 à 0,87 (V5). On rapporte le taux du lot de 4.
+10. **Un juge voit l'écart complet, jamais un extrait coupé.** Sur P12, des variantes coupées à 1 500 caractères ont rendu le plus gros groupe non classable (it1) : le taux spec de it1 et it2 n'est qu'une borne basse.
+
+## Limites connues du banc
+
+- **La règle frontière v3 ne voit pas les règles métier.** Ses 6 mécanismes nommés (chiffrement, synchronisation…) ne couvrent pas les cas limites d'un métier (poids qui ne totalisent pas, RC qui se contredit) : 0 % de frontières sur P12.
+- **Sur de vraies entrées, le banc ne sait pas encore mesurer la compilation.** P12 : taux brut 0 sur les 5 RC publics à toutes les itérations. Un taux mesuré sur un générateur ne vaut que pour ce générateur.
+- **Une sonde tirée d'un projet client reste une sonde.** P12 (BuildForge) a produit un audit (`docs/audit-BuildForge.md`), mais le banc ne corrige rien dans le code mesuré.
 
 ## Arborescence
 
@@ -70,6 +78,17 @@ runs-boucle/P11/               la boucle : it<i>/ (spec, tests, lots, décisions
 docs/duel-V0.md … V4           rapports des duels
 docs/boucle-P11.md             rapport de la boucle de compilation
 docs/V5-cadrage.md             V5 : repo client BuildForge, tranche « du RC au plan du mémoire », RC publics, modèles ouverts, budget
+docs/V5.md                     rapport de V5 (sonde P12) : boucle, vérification à 4 greens, H23, green Bilel
+docs/audit-BuildForge.md       ce que le banc a trouvé dans le code de BuildForge (livrable, le banc ne corrige rien)
+outils/v5/                     V5 : générateur de RC, boucle_v5.py, H23 (h23_passer.py, h23.py, shim_sonnet.py), bilel.py
+adaptateurs/bilel/             appelle le code BuildForge tel quel (Rust) sur des pages
+runs-v5/, runs-v5-duel/        données de V5 (boucle, H23, budget)
+docs/V6.md                     rapport de V6 : part déterministe et carte des organes (H30), petit modèle local qui écrit le code (H23b)
+docs/V7.md                     rapport de V7 : organe de lecture (H31), recuit du petit modèle (H10)
+outils/v7/                     V7 : lecture.py (trois lectures des PDF, piste 1) ; le recuit est dans outils/v6/h23b.py --recuit
+runs-v7/                       V7 : recuit/ (journal, tours), lecture/ (sorties des greens par lecture)
+outils/v6/                     V6 : carte.py (piste A), h23b.py (piste B, llama.cpp local)
+data/v6/, runs-v6/             V6 : vérité des 5 RC publics (à la main), table assertion → fait, résultats
 protocol/, .claude/agents/     le protocole adversarial attaché (tools/link.py), ne pas éditer protocol/
 ```
 

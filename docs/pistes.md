@@ -56,3 +56,13 @@ Coûts : « gratuit » = calcul local sur les passes et traces déjà là, sans 
 - Coût : **$**, environ 60 à 80 $ pour une boucle complète au réglage de P11 (passes, duel, 6 à 7 itérations), plus le temps du client pour répondre.
 - Lien avec le cap : c'est **le test réel du cap**. Une spec de client compile-t-elle ? Et que coûtent les questions à poser au client ?
 - Thèse à créer : **H22** est déjà proposée (conventions contre questions client). Elle se mesurerait sur de vraies réponses, au lieu d'un classement après coup.
+
+### Organes (décomposer ce que fait le LLM)
+
+Ajouté le 22/11/2026, sans rien lancer.
+
+- O1. Inventaire : liste chaque tâche qu'un LLM fait dans le banc (découper, juger trou/bug, porte convention/client, extraire, écrire le code, rédiger) et, pour chacune, si sa sortie est vérifiable ou non.
+- O2. Classifieur 1/0 : remplacer les juges (trou/bug) et la porte (convention/client) par un petit classifieur local entraîné sur les décisions déjà jugées de P11 et P12. Mesure : accord avec les juges opus, coût, vitesse.
+- O3. Pour chaque tâche de O1 : le plus petit organe qui atteint le même résultat (règle, classifieur, petit modèle, gros modèle).
+
+Thèse à créer si on lance : « Toute tâche dont la sortie est vérifiable peut être confiée à un organe plus petit qu'un LLM, sans perte mesurable. »

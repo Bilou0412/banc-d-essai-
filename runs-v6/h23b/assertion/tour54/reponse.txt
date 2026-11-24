@@ -1,0 +1,12 @@
+```python
+import unicodedata
+
+def search(self, query: str='', category: str=None, favorites_only: bool=False) -> Dict[str, Any]:
+    recipes = self.list_recipes()
+    normalized_query = unicodedata.normalize('NFD', query.strip().lower())
+    results = [r for r in recipes if (not normalized_query or normalized_query in unicodedata.normalize('NFD', r['title'].lower())) and (category is None or r.get('category') == category) and (not favorites_only or r['favorite'])]
+    ingredients_results = [r for r in recipes if any((normalized_query in unicodedata.normalize('NFD', i['name'].lower()) for i in r['ingredients']))]
+    results.extend(ingredients_results)
+    message = 'Aucun résultat' if not results else None
+    return {'results': sorted((r['title'] for r in set(results))), 'message': message}
+```

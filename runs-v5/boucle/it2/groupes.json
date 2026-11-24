@@ -1,0 +1,1685 @@
+[
+ {
+  "champ": "heure_limite.conflit",
+  "situations": 134,
+  "representant": "S054",
+  "V1_H": true,
+  "V2_S": false,
+  "final": "bug H",
+  "juges": [
+   {
+    "classe": "bug V1",
+    "assertion": "A42",
+    "cas": "L'heure limite de remise des offres est écrite sur deux pages avec la même valeur (10h00), en page 1 et en page 2.",
+    "choix": "aucun",
+    "nouvelle": "aucune",
+    "usd": 0.1424162,
+    "texte": "Les deux pages donnent la même heure limite (« 10h00 » en page 1 et en page 2). L'assertion A42 interdit alors de signaler un conflit : V1 a tort, V2 a raison.\n\n```\nclaim:     Sur ce RC, heure_limite.conflit doit valoir false (V2) et non true (V1).\nruling:    upheld\nbecause:   La page 1 écrit « 11 mai 2026 à 10h00 » et la page 2 écrit « avant le 11.05.2026 à 10h00 ». C'est la même heure, et aucune autre heure n'apparaît dans le RC. A42 tranche ce cas : « Quand un fait à valeur unique est écrit sur deux pages avec la même valeur, […] aucun conflit valeurs n'est signalé pour ce fait ». A62 va dans le même sens (« affiche cette heure limite une seule fois »).\ncertainty: firm\n```\n\nCLASSE: bug V1\nASSERTION: A42\nCAS: L'heure limite de remise des offres est écrite sur deux pages avec la même valeur (10h00), en page 1 et en page 2.\nCHOIX: aucun\nNOUVELLE: aucune"
+   },
+   {
+    "classe": "bug V1",
+    "assertion": "A42",
+    "cas": "Deux pages indiquent la même heure limite de remise des offres (10h00), écrite sous la même forme « 10h00 ».",
+    "choix": "aucun",
+    "nouvelle": "aucune",
+    "usd": 0.025132999999999996,
+    "texte": "**Verdict : bug V1, sûr.** L'heure limite est 10h00 sur les deux pages, et la spec (A42) dit qu'une même valeur écrite sur deux pages ne fait pas de conflit. V1 rend `true` et a donc tort ; V2 rend `false` et a raison.\n\n```\nclaim:     heure_limite.conflit — le RC donne-t-il lieu à un conflit de valeurs sur l'heure limite de remise des offres ?\nruling:    upheld (pas de conflit : V2 a raison, V1 viole la spec)\nbecause:   Les deux pages donnent la même heure : la page 1 dit « Date et heure limites de réception des offres : 11 mai 2026 à 10h00 », la page 2 dit « Les plis doivent parvenir avant le 11.05.2026 à 10h00 ». A42 tranche ce cas : « Quand un fait à valeur unique est écrit sur deux pages avec la même valeur, […] aucun conflit valeurs n'est signalé pour ce fait ». A62 va dans le même sens (« affiche cette heure limite une seule fois »). A64 ne s'applique pas, puisqu'il ne vise que « deux heures limites différentes ».\ncertainty: firm\n```\n\nCLASSE: bug V1\nASSERTION: A42\nCAS: Deux pages indiquent la même heure limite de remise des offres (10h00), écrite sous la même forme « 10h00 ».\nCHOIX: aucun\nNOUVELLE: aucune"
+   }
+  ]
+ },
+ {
+  "champ": "heure_limite.valeurs",
+  "situations": 134,
+  "representant": "S054",
+  "V1_H": [
+   {
+    "valeur": "10:00",
+    "pages": [
+     1,
+     2
+    ]
+   },
+   {
+    "valeur": "07:00",
+    "pages": [
+     2
+    ]
+   }
+  ],
+  "V2_S": [
+   {
+    "valeur": "10:00",
+    "pages": [
+     1,
+     2
+    ]
+   }
+  ],
+  "final": "bug H",
+  "juges": [
+   {
+    "classe": "bug V1",
+    "assertion": "A65",
+    "cas": "Deux pages indiquent la même heure limite de remise (10h00), et une heure proposée par l'extraction (07:00) ne figure dans le texte d'aucune page.",
+    "choix": "aucun",
+    "nouvelle": "aucune",
+    "usd": 0.1514442,
+    "texte": "**Verdict : bug V1.** La valeur « 07:00 » n'apparaît dans le texte d'aucune page, et la spec écarte une telle valeur.\n\n```\nclaim:     heure_limite.valeurs — V1 rend en plus {\"valeur\": \"07:00\", \"pages\": [2]} ; V2 rend seulement {\"valeur\": \"10:00\", \"pages\": [1, 2]}\nruling:    upheld (bug V1)\nbecause:   Les pages n'indiquent qu'une heure, « 11 mai 2026 à 10h00 » (p. 1) et « avant le 11.05.2026 à 10h00 » (p. 2). Aucune n'écrit 7 heures, ni sous forme d'heure ni en lettres. A65 exige qu'« une heure limite proposée par l'extraction [qui] ne figure dans le texte d'aucune page » soit écartée. A62 exige que deux pages indiquant la même heure la fassent afficher « une seule fois ». V1 ajoute une seconde valeur qui ne s'appuie sur aucun texte, attribuée à la page 2, et ouvre ainsi la voie à un faux conflit (A64 ne vaut que si « deux pages indiquent deux heures limites différentes »).\ncertainty: firm\n```\n\nCLASSE: bug V1\nASSERTION: A65\nCAS: Deux pages indiquent la même heure limite de remise (10h00), et une heure proposée par l'extraction (07:00) ne figure dans le texte d'aucune page.\nCHOIX: aucun\nNOUVELLE: aucune"
+   },
+   {
+    "classe": "bug V1",
+    "assertion": "A65",
+    "cas": "Le RC indique « 10h00 » comme heure limite sur les pages 1 et 2, et l'extraction propose aussi une heure « 07:00 » qu'aucune page n'écrit.",
+    "choix": "aucun",
+    "nouvelle": "aucune",
+    "usd": 0.0340504,
+    "texte": "**Verdict : bug V1.** Le RC n'écrit aucune heure « 07:00 », et la spec interdit de garder une heure que le texte des pages ne contient pas.\n\n```\nclaim:     Sur ce RC, heure_limite.valeurs doit-il contenir, en plus de « 10:00 » (pages 1 et 2), une valeur « 07:00 » rattachée à la page 2 ?\nruling:    rejected (la valeur « 07:00 » ne doit pas figurer ; bug V1)\nbecause:   La page 2 n'écrit qu'une seule heure : « Les plis doivent parvenir avant le 11.05.2026 à 10h00 ». Rien sur aucune des deux pages ne se lit « 07:00 » ou « 7 heures ». A65 tranche le cas : « Quand une heure limite proposée par l'extraction ne figure dans le texte d'aucune page, […] l'heure limite est déclarée non trouvée ». Une valeur qui n'est sur aucune page ne peut pas être affichée. En la gardant, V1 crée en plus le cas « deux heures limites différentes » (A63/A64), ce qui ferait signaler un faux conflit valeurs.\ncertainty: firm\n```\n\n**Lecture de A65 :** prise à la lettre, A65 ne vise que le cas où l'heure proposée est la seule. Ici elle s'ajoute à une heure bien ancrée, « 10:00 ». L'esprit commun de A65 et de ses assertions sœurs (A96, A121, A142, A157) est que la valeur non ancrée est écartée, et que les valeurs ancrées restent. V2 respecte cette lecture, V1 non. Ce n'est donc pas un trou.\n\nCLASSE: bug V1\nASSERTION: A65\nCAS: Le RC indique « 10h00 » comme heure limite sur les pages 1 et 2, et l'extraction propose aussi une heure « 07:00 » qu'aucune page n'écrit.\nCHOIX: aucun\nNOUVELLE: aucune"
+   }
+  ]
+ },
+ {
+  "champ": "plan",
+  "situations": 108,
+  "representant": "S054",
+  "V1_H": [
+   {
+    "titre": "Valeur technique",
+    "critere": "Valeur technique",
+    "sous_critere": null,
+    "ponderation": 40,
+    "page_source": 2,
+    "contenu": ""
+   }
+  ],
+  "V2_S": [
+   {
+    "titre": "Valeur technique",
+    "critere": "Valeur technique",
+    "sous_critere": null,
+    "ponderation": 40,
+    "page_source": 2,
+    "contenu": ""
+   },
+   {
+    "titre": "Performances en matière de protection de l'environnement",
+    "critere": "Performances en matière de protection de l'environnement",
+    "sous_critere": null,
+    "ponderation": 10,
+    "page_source": 2,
+    "contenu": ""
+   }
+  ],
+  "final": "trou",
+  "juges": [
+   {
+    "classe": "trou",
+    "assertion": "A27",
+    "cas": "Le RC énumère, à côté du prix et de la valeur technique, un critère qui ne relève d'aucun des deux (performances environnementales) et le plan du mémoire doit dire s'il lui consacre une section.",
+    "choix": "V1 retenue",
+    "nouvelle": "Quand un critère ne porte ni sur la valeur technique ni sur le prix, après le lancement de l'analyse, le plan du mémoire ne contient aucune section pour ce critère | observé: sections | conditions: nature critère",
+    "usd": 0.1603802,
+    "texte": "ur ces autres critères. Elle peut s'écrire à partir de la spec, sans rien demander à l'arbitre.\ncertainty: close\n```\n\nC'est un trou, et je retiens V1 pour trois raisons :\n\n- **V1 colle au RC.** Elle ne crée une section que pour le critère que le RC intitule lui-même « Valeur technique » (page 2, 40 %), ce qui est exactement le cas de A27.\n- **V2 n'est pas cohérente.** Elle ajoute « Performances en matière de protection de l'environnement », mais pas « Planning prévisionnel », alors que ce critère n'est lui non plus ni le prix ni la valeur technique. Aucune règle simple n'explique ce choix.\n- **Le RC n'en dit pas plus.** Il ne précise nulle part ce que doit contenir le mémoire technique. Classer un critère environnemental dans la valeur technique serait donc une interprétation.\n\nMa certitude est `close` : on peut soutenir qu'un utilisateur aurait besoin d'une section pour chaque critère qualitatif. C'est un choix de produit, et la règle « la variante la plus simple et la plus fidèle » le tranche ici en faveur de V1.\n\nCLASSE: trou\nASSERTION: A27\nCAS: Le RC énumère, à côté du prix et de la valeur technique, un critère qui ne relève d'aucun des deux (performances environnementales) et le plan du mémoire doit dire s'il lui consacre une section.\nCHOIX: V1 retenue\nNOUVELLE: Quand un critère ne porte ni sur la valeur technique ni sur le prix, après le lancement de l'analyse, le plan du mémoire ne contient aucune section pour ce critère | observé: sections | conditions: nature critère"
+   },
+   {
+    "classe": "trou",
+    "assertion": "A27",
+    "cas": "Le RC énumère, à côté du prix et de la valeur technique, un critère distinct portant sur les performances environnementales, qui n'est ni le prix ni la valeur technique.",
+    "choix": "V1",
+    "nouvelle": "Quand un critère ne porte ni sur le prix ni sur la valeur technique, après le lancement de l'analyse, le plan du mémoire ne contient aucune section pour ce critère | observé: sections | conditions: nature critère",
+    "usd": 0.0379192,
+    "texte": " en matière de protection de l'environnement ». Le critère environnemental n'est donc ni l'un ni l'autre, et A34 ne vise lui aussi que les critères « de valeur technique ». Aucune assertion n'est violée. C'est un fait que la spec peut contenir : il revient à la spec, pas à l'arbitre.\ncertainty: close\n```\n\n**Pourquoi je retiens V1**\n- **Règle la plus simple :** une section seulement pour les critères de valeur technique, ce que garantit A27.\n- **Fidèle au RC :** le RC présente le critère environnemental comme distinct de la valeur technique.\n- **V2 est incohérente :** elle ajoute une section pour l'environnement mais aucune pour « 4. Planning prévisionnel », alors que ce critère n'est lui non plus ni le prix ni la valeur technique.\n\n**Pourquoi c'est serré**\n- Sur le fond, on peut défendre que le mémoire devrait traiter tous les critères qualitatifs : environnement et planning.\n- Si c'est le résultat voulu, l'assertion doit aller dans l'autre sens. Elle ferait alors échouer V1 et V2 à la fois, car aucune des deux ne crée de section pour le planning.\n\nCLASSE: trou\nASSERTION: A27\nCAS: Le RC énumère, à côté du prix et de la valeur technique, un critère distinct portant sur les performances environnementales, qui n'est ni le prix ni la valeur technique.\nCHOIX: V1\nNOUVELLE: Quand un critère ne porte ni sur le prix ni sur la valeur technique, après le lancement de l'analyse, le plan du mémoire ne contient aucune section pour ce critère | observé: sections | conditions: nature critère"
+   }
+  ],
+  "porte": "convention",
+  "porte_raison": "Le CCP (art. R2152-7) fait de la performance environnementale un critère de jugement de l'offre ; l'usage veut que le candidat réponde à chaque critère non-prix dans le mémoire technique, sauf si le RC prévoit un autre document. La réponse commune est donc d'y consacrer une section, contrairement à la règle prévue. Certitude incertaine : le cas passerait à Bilel seulement s'il a choisi de limiter son produit à la valeur technique, ce que le cas transmis ne dit pas."
+ },
+ {
+  "champ": "validite_offres.valeurs",
+  "situations": 100,
+  "representant": "S195",
+  "V1_H": [
+   {
+    "valeur": {
+     "nombre": 2,
+     "unite": "mois"
+    },
+    "pages": [
+     1
+    ]
+   },
+   {
+    "valeur": {
+     "nombre": 180,
+     "unite": "jours"
+    },
+    "pages": [
+     1
+    ]
+   }
+  ],
+  "V2_S": [
+   {
+    "valeur": {
+     "nombre": 180,
+     "unite": "jours"
+    },
+    "pages": [
+     1
+    ]
+   }
+  ],
+  "final": "bug H",
+  "juges": [
+   {
+    "classe": "bug V1",
+    "assertion": "C03",
+    "cas": "Le RC fixe une seule fois la validité des offres à 180 jours, et la même page mentionne ailleurs un délai de recours de deux mois contre la validité du marché.",
+    "choix": "aucun",
+    "nouvelle": "aucune",
+    "usd": 0.1463922,
+    "texte": "claim:     Sur `validite_offres.valeurs`, le RC donne-t-il deux valeurs (« 2 mois » et « 180 jours ») ou une seule (« 180 jours ») ?\nruling:    upheld — bug V1\nbecause:   La seule page qui fixe la durée de validité des offres l'écrit une seule fois : « Délai de validité des offres : 180 jours. » C03 tranche ce cas : la validité offres « est trouvée avec cette seule valeur et aucun conflit valeurs n'est signalé ». Le « deux mois » rendu par V1 vient de l'article 3 : « recours en contestation de validité dans un délai de deux mois ». C'est le délai pour contester le marché en justice, pas la durée de validité des offres. La spec n'en fait donc pas une valeur de ce champ, et V1 rend deux valeurs là où C03 en exige une seule.\ncertainty: firm\n\nCLASSE: bug V1\nASSERTION: C03\nCAS: Le RC fixe une seule fois la validité des offres à 180 jours, et la même page mentionne ailleurs un délai de recours de deux mois contre la validité du marché.\nCHOIX: aucun\nNOUVELLE: aucune"
+   },
+   {
+    "classe": "bug V1",
+    "assertion": "C03",
+    "cas": "Une seule page fixe la validité des offres à 180 jours, et la même page mentionne un délai de recours de « deux mois » contre la validité du marché, qui n'est pas une durée de validité des offres.",
+    "choix": "aucun",
+    "nouvelle": "aucune",
+    "usd": 0.030374200000000004,
+    "texte": " de la spec.\n\nLe RC ne fixe la durée de validité des offres qu'à un seul endroit : page 1, article 6, « Délai de validité des offres : 180 jours. »\n\nLes « deux mois » rendus par V1 viennent de l'article 3 (Recours), page 1 : « un recours en contestation de validité dans un délai de deux mois à compter de la publicité de l'attribution ». Ce texte donne le délai pour contester la validité du marché. Ce n'est pas la durée de validité des offres. La spec tranche ce cas avec C03, que V1 viole et que V2 respecte.\n\n```\nclaim:     Sur validite_offres.valeurs, V1 rend [2 mois p.1, 180 jours p.1] et V2 rend [180 jours p.1] ; l'une des deux viole la spec.\nruling:    upheld — bug V1\nbecause:   C03 dit : « Quand une seule page fixe la durée de validité des offres, une seule fois, […] la validité offres est trouvée avec cette seule valeur et aucun conflit valeurs n'est signalé ». Ici, seule la page 1 la fixe, une seule fois (« Délai de validité des offres : 180 jours. ») ; « deux mois » est le délai de recours (art. 3), pas une durée de validité des offres. A14 ne couvre pas le cas, puisque « deux mois » figure bien dans le texte : l'ancrage textuel ne suffit pas à rejeter cette valeur, c'est C03 qui la rejette.\ncertainty: firm\n```\n\nCLASSE: bug V1\nASSERTION: C03\nCAS: Une seule page fixe la validité des offres à 180 jours, et la même page mentionne un délai de recours de « deux mois » contre la validité du marché, qui n'est pas une durée de validité des offres.\nCHOIX: aucun\nNOUVELLE: aucune"
+   }
+  ]
+ },
+ {
+  "champ": "validite_offres.conflit",
+  "situations": 82,
+  "representant": "S195",
+  "V1_H": true,
+  "V2_S": false,
+  "final": "bug H",
+  "juges": [
+   {
+    "classe": "bug V1",
+    "assertion": "C03",
+    "cas": "Le RC fixe la validité des offres une seule fois, sur une seule page (« 180 jours », page 1), et aucune autre page n'en parle.",
+    "choix": "aucun",
+    "nouvelle": "aucune",
+    "usd": 0.1411762,
+    "texte": "**Décision : V1 est en tort.** Le RC n'indique la validité des offres qu'à un seul endroit. Il n'y a donc aucun conflit, et l'assertion C03 de la spec règle déjà ce cas.\n\n```\nclaim:     validite_offres.conflit — sur ce RC, un conflit valeurs est-il signalé pour la validité offres (V1 : true, V2 : false) ?\nruling:    rejected\nbecause:   Le RC n'indique la validité qu'une fois, page 1, article 6 : « Délai de validité des offres : 180 jours. » La page 2 ne parle pas de validité. Ce cas correspond exactement à C03 : « Quand une seule page fixe la durée de validité des offres, une seule fois, […] aucun conflit valeurs n'est signalé pour la validité offres ». A111 ne s'applique pas, car elle suppose « deux pages fixent deux durées […] différentes ».\ncertainty: firm\n```\n\nCLASSE: bug V1\nASSERTION: C03\nCAS: Le RC fixe la validité des offres une seule fois, sur une seule page (« 180 jours », page 1), et aucune autre page n'en parle.\nCHOIX: aucun\nNOUVELLE: aucune"
+   },
+   {
+    "classe": "bug V1",
+    "assertion": "C03",
+    "cas": "Une seule page du RC fixe la durée de validité des offres, une seule fois (180 jours), et d'autres durées sans rapport (délai de recours de deux mois, période de préparation d'un mois) figurent sur la même page.",
+    "choix": "aucun",
+    "nouvelle": "aucune",
+    "usd": 0.0228936,
+    "texte": "**Verdict : bug V1.** La spec tranche ce cas avec C03, et V1 la viole en signalant un conflit sur la validité des offres.\n\n```\nclaim:     validite_offres.conflit — sur ce RC, V1 rend true, V2 rend false ; l'une des deux viole la spec\nruling:    upheld — bug V1\nbecause:   Seule la page 1 fixe la validité, et une seule fois : « Délai de validité des offres : 180 jours. » Les autres durées du RC ne portent pas sur la validité des offres : « deux mois » est le délai de recours et « un mois » la période de préparation. C03 s'applique donc à la lettre : « Quand une seule page fixe la durée de validité des offres, une seule fois, […] aucun conflit valeurs n'est signalé pour la validité offres ». V1 rend true et contredit C03 ; V2 rend false et la respecte.\ncertainty: firm\n```\n\nCLASSE: bug V1\nASSERTION: C03\nCAS: Une seule page du RC fixe la durée de validité des offres, une seule fois (180 jours), et d'autres durées sans rapport (délai de recours de deux mois, période de préparation d'un mois) figurent sur la même page.\nCHOIX: aucun\nNOUVELLE: aucune"
+   }
+  ]
+ },
+ {
+  "champ": "controle.alertes",
+  "situations": 27,
+  "representant": "S069",
+  "V1_H": [
+   {
+    "type": "pondérations incohérentes",
+    "objet": "Valeur technique"
+   }
+  ],
+  "V2_S": [],
+  "final": "trou",
+  "juges": [
+   {
+    "classe": "trou",
+    "assertion": "A35",
+    "cas": "Le RC pondère un critère de valeur technique en points (55 points) et ses sous-critères en pourcentages du critère, et ces pourcentages totalisent 100 %.",
+    "choix": "V2",
+    "nouvelle": "Quand le RC pondère un critère en points et ses sous-critères en pourcentages dont la somme vaut 100 %, après le lancement de l'analyse, le contrôle n'affiche pas l'alerte « pondérations incohérentes » pour ce critère | observé: alerte | conditions: pondération, type pondération",
+    "usd": 0.1572922,
+    "texte": "érations incohérentes » sur « Valeur technique » ?\nruling:    not resolvable\nbecause:   A35 compare « la somme des pondérations des sous-critères » à « la pondération du critère parent ». Ici, cela revient à comparer 100 % et 55 points, et la spec ne dit pas comment comparer deux unités différentes. C07 tranche le type pondération dans ce même cas (« points », sans conflit), mais pas l'alerte. A38 parle de pondérations qui « se recoupent » sans définir ce mot. La règle doit donc être ajoutée à la spec ; aucun nouveau fait du RC ne la tranchera. La lecture la plus fidèle au RC est que les pourcentages sont des parts du critère parent : 100 % de 55 points font 55 points, et il n'y a pas d'incohérence.\ncertainty: close\n```\n\nL'alerte de V1 repose sur une comparaison littérale entre 100 et 55, alors que ces deux nombres ne sont pas dans la même unité. V2 ne rend aucune alerte, ce qui correspond à l'intention du RC : 8 + 26 + 66 = 100 % du critère parent. Je retiens V2, plus simple et plus fidèle au RC.\n\nCLASSE: trou\nASSERTION: A35\nCAS: Le RC pondère un critère de valeur technique en points (55 points) et ses sous-critères en pourcentages du critère, et ces pourcentages totalisent 100 %.\nCHOIX: V2\nNOUVELLE: Quand le RC pondère un critère en points et ses sous-critères en pourcentages dont la somme vaut 100 %, après le lancement de l'analyse, le contrôle n'affiche pas l'alerte « pondérations incohérentes » pour ce critère | observé: alerte | conditions: pondération, type pondération"
+   },
+   {
+    "classe": "trou",
+    "assertion": "A35",
+    "cas": "Les sous-critères d'un critère noté en points sont pondérés en pourcentages dont la somme vaut exactement 100 %.",
+    "choix": "V2",
+    "nouvelle": "Quand le RC pondère un critère en points et ses sous-critères en pourcentages dont la somme vaut 100 %, après le lancement de l'analyse, le contrôle n'affiche aucune alerte « pondérations incohérentes » pour ce critère | observé: alerte | conditions: pondération, texte pages",
+    "usd": 0.038947,
+    "texte": "ria are given as 8 %, 26 % and 66 %, which add up to 100 % (p. 1). V1 raises \"pondérations incohérentes\" for this criterion. V2 raises no alert.\nruling:    not resolvable\nbecause:   A35 fires when \"la somme des pondérations des sous-critères diffère de la pondération du critère parent\". Read literally, 100 differs from 55, which backs V1. But it never says how to compare a sum in % with a parent in points. A38 says there is no alert when \"les pondérations se recoupent\", and 100 % of the parent covers its 55 points exactly, which backs V2. C07 allows points for criteria and % for sub-criteria, but only rules on the type pondération, not on the alert. The spec does not decide this case, so it is a gap.\ncertainty: close\n```\n\nThis is a gap: both variants satisfy the spec. The fact that decides it is a rule for comparing weights in different units, and the spec can hold that rule. I pick V2 because it is more faithful to the RC: the sub-criteria share 100 % of their parent criterion, so the weights are consistent. An alert would be a false alarm.\n\nCLASSE: trou\nASSERTION: A35\nCAS: Les sous-critères d'un critère noté en points sont pondérés en pourcentages dont la somme vaut exactement 100 %.\nCHOIX: V2\nNOUVELLE: Quand le RC pondère un critère en points et ses sous-critères en pourcentages dont la somme vaut 100 %, après le lancement de l'analyse, le contrôle n'affiche aucune alerte « pondérations incohérentes » pour ce critère | observé: alerte | conditions: pondération, texte pages"
+   }
+  ],
+  "porte": "convention",
+  "porte_raison": "55 points répartis en sous-critères dont les pourcentages totalisent 100 % forment une pondération cohérente ; c'est du simple calcul, aucun expert ne lèverait l'alerte. Certitude sûre."
+ },
+ {
+  "champ": "validite_offres.statut",
+  "situations": 18,
+  "representant": "S155",
+  "V1_H": "trouvé",
+  "V2_S": "non trouvé",
+  "final": "bug H",
+  "juges": [
+   {
+    "classe": "bug V1",
+    "assertion": "A105",
+    "cas": "Le RC ne fixe aucune durée de validité des offres ; les seuls passages avec « validité » sont le délai de deux mois pour un recours en contestation de validité du contrat et une attestation d'assurance « en cours de validité ».",
+    "choix": "aucun",
+    "nouvelle": "aucune",
+    "usd": 0.14806819999999998,
+    "texte": "Ma décision : **bug V1**. Le RC ne fixe nulle part la durée de validité des offres.\n\n```\nclaim:     validite_offres.statut — V1 rend « trouvé », V2 rend « non trouvé », sur un RC qui ne fixe aucune durée de validité des offres\nruling:    upheld — bug V1\nbecause:   A105 dit : « Quand aucune page ne fixe la durée de validité des offres, […] la validité offres est déclarée non trouvée ». Le mot « validité » apparaît deux fois dans le RC, mais ne fixe jamais la durée de validité des offres :\n           - « recours en contestation de validité dans un délai de deux mois à compter de la publicité de l'attribution » (p. 1, art. 3) parle de la validité du contrat attribué, et donne un délai pour former un recours ;\n           - « en cours de validité » (p. 1, art. 6) parle de l'attestation d'assurance.\n           Le cas tombe donc sous A105, qui impose « non trouvé ». « Deux mois » est bien écrit sur la page, donc A14 ne permet pas de rejeter cette valeur ; c'est A105 qui tranche.\ncertainty: firm\n```\n\nCLASSE: bug V1\nASSERTION: A105\nCAS: Le RC ne fixe aucune durée de validité des offres ; les seuls passages avec « validité » sont le délai de deux mois pour un recours en contestation de validité du contrat et une attestation d'assurance « en cours de validité ».\nCHOIX: aucun\nNOUVELLE: aucune"
+   },
+   {
+    "classe": "bug V1",
+    "assertion": "A105",
+    "cas": "Le RC ne fixe aucune durée de validité des offres ; il ne contient que le mot « validité » dans un délai de recours contre le contrat (« deux mois ») et dans une attestation d'assurance « en cours de validité ».",
+    "choix": "aucun",
+    "nouvelle": "aucune",
+    "usd": 0.0241572,
+    "texte": "Le RC ne fixe nulle part la durée de validité des offres. Le mot « validité » n'y apparaît que deux fois, et jamais à ce sujet :\n- page 1, article 3 : « recours en contestation de validité dans un délai de deux mois », qui est le délai de recours contre le contrat ;\n- page 1, article 6 : « Attestation d'assurance […] en cours de validité », qui concerne une pièce de la candidature.\n\nLa spec tranche ce cas avec A105, donc V2 a raison et V1 se trompe.\n\n```\nclaim:     validite_offres.statut doit valoir « trouvé » (V1) plutôt que « non trouvé » (V2) pour ce RC\nruling:    rejected\nbecause:   A105 : « Quand aucune page ne fixe la durée de validité des offres, […] la validité offres est déclarée non trouvée ». Aucune page ne la fixe : le seul délai proche est « recours en contestation de validité dans un délai de deux mois », qui porte sur le contrat et non sur les offres.\ncertainty: firm\n```\n\nCLASSE: bug V1\nASSERTION: A105\nCAS: Le RC ne fixe aucune durée de validité des offres ; il ne contient que le mot « validité » dans un délai de recours contre le contrat (« deux mois ») et dans une attestation d'assurance « en cours de validité ».\nCHOIX: aucun\nNOUVELLE: aucune"
+   }
+  ]
+ },
+ {
+  "champ": "pieces.liste",
+  "situations": 5,
+  "representant": "RC4",
+  "V1_H": [
+   {
+    "nom": "Décomposition en lots :",
+    "pages": [
+     2
+    ],
+    "phase": {
+     "statut": "non trouvé",
+     "valeurs": [],
+     "conflit": false
+    },
+    "obligation": {
+     "statut": "non trouvé",
+     "valeurs": [],
+     "conflit": false
+    }
+   },
+   {
+    "nom": "Décomposition en tranches :",
+    "pages": [
+     2
+    ],
+    "phase": {
+     "statut": "non trouvé",
+     "valeurs": [],
+     "conflit": false
+    },
+    "obligation": {
+     "statut": "non trouvé",
+     "valeurs": [],
+     "conflit": false
+    }
+   },
+   {
+    "nom": "En qualité de candidats individuels et de membres d'un ou plusieurs groupements",
+    "pages": [
+     3
+    ],
+    "phase": {
+     "statut": "non trouvé",
+     "valeurs": [],
+     "conflit": false
+    },
+    "obligation": {
+     "statut": "non trouvé",
+     "valeurs": [],
+     "conflit": false
+    }
+   },
+   {
+    "nom": "En qualité de membres de plusieurs groupements",
+    "pages": [
+     3
+    ],
+    "phase": {
+     "statut": "non trouvé",
+     "valeurs": [],
+     "conflit": false
+    },
+    "obligation": {
+     "statut": "non trouvé",
+     "valeurs": [],
+     "conflit": false
+    }
+   },
+   {
+    "nom": "L'Atelier Dantan – 78, voie Charles de Gaulle – 76980 Veules-les-Roses/",
+    "pages": [
+     3
+    ],
+    "phase": {
+     "statut": "non trouvé",
+     "valeurs": [],
+     "conflit": false
+    },
+    "obligation": {
+     "statut": "non trouvé",
+     "valeurs": [],
+     "conflit": false
+    }
+   },
+   {
+    "nom": "Cahier des Charges, DTU",
+    "pages": [
+     4
+    ],
+    "phase": {
+     "statut": "non trouvé",
+     "valeurs": [],
+     "conflit": false
+    },
+    "obligation": {
+     "statut": "non trouvé",
+     "valeurs": [],
+     "conflit": false
+    }
+   },
+   {
+    "nom": "Cahier des Clauses Spéciales",
+    "pages": [
+     4
+    ],
+    "phase": {
+     "statut": "non trouvé",
+     "valeurs": [],
+     "conflit": false
+    },
+    "obligation": {
+     "statut": "non trouvé",
+     "valeurs": [],
+     "conflit": false
+    }
+   },
+   {
+    "nom": "Règles de Calculs, DTU",
+    "pages": [
+     4
+    ],
+    "phase": {
+     "statut": "non trouvé",
+     "valeurs": [],
+     "conflit": false
+    },
+    "obligation": {
+     "statut": "non trouvé",
+     "valeurs": [],
+     "conflit": false
+    }
+   },
+   {
+    "nom": "Normes Françaises",
+    "pages": [
+     4
+    ],
+    "phase": {
+     "statut": "non trouvé",
+     "valeurs": [],
+     "conflit": false
+    },
+    "obligation": {
+     "statut": "non trouvé",
+     "valeurs": [],
+     "conflit": false
+    }
+   },
+   {
+    "nom": "Normes UTE USE",
+    "pages": [
+     4
+    ],
+    "phase": {
+     "statut": "non trouvé",
+     "valeurs": [],
+     "conflit": false
+    },
+    "obligation": {
+     "statut": "non trouvé",
+     "valeurs": [],
+     "conflit": false
+    }
+   },
+   {
+    "nom": "Le présent Règlement de Consultation (RC) accompagné du Mémoire Technique pré-établi",
+    "pages": [
+     5
+    ],
+    "phase": {
+     "statut": "non trouvé",
+     "valeurs": [],
+     "conflit": false
+    },
+    "obligation": {
+     "statut": "non trouvé",
+     "valeurs": [],
+     "conflit": false
+    }
+   },
+   {
+    "nom": "L'Acte d'Engagement (AE)",
+    "pages": [
+     5
+    ],
+    "phase": {
+     "statut": "non trouvé",
+     "valeurs": [],
+     "conflit": false
+    },
+    "obligation": {
+     "statut": "non trouvé",
+     "valeurs": [],
+     "conflit": false
+    }
+   },
+   {
+    "nom": "Le Cahier des Clauses Administratives Particulières (CCAP) commun à l'ensemble des lots et ses annexes",
+    "pages": [
+     5
+    ],
+    "phase": {
+     "statut": "non trouvé",
+     "valeurs": [],
+     "conflit": false
+    },
+    "obligation": {
+     "statut": "non trouvé",
+     "valeurs": [],
+     "conflit": false
+    }
+   },
+   {
+    "nom": "Planning Prévisionnel des travaux",
+    "pages": [
+     5
+    ],
+    "phase": {
+     "statut": "non trouvé",
+     "valeurs": [],
+     "conflit": false
+    },
+    "obligation": {
+     "statut": "non trouvé",
+     "valeurs": [],
+     "conflit": false
+    }
+   },
+   {
+    "nom": "Le Cahier des Clauses Techniques Particulières propre à chacun des deux lots, avec son cadre formant",
+    "pages": [
+     5
+    ],
+    "phase": {
+     "statut": "non trouvé",
+     "valeurs": [],
+     "conflit": false
+    },
+    "obligation": {
+     "statut": "non trouvé",
+     "valeurs": [],
+     "conflit": false
+    }
+   },
+   {
+    "nom": "Cahier des plans, selon liste jointe dans le dossier de plans",
+    "pages": [
+     5
+    ],
+    "phase": {
+     "statut": "non trouvé",
+     "valeurs": [],
+     "conflit": false
+    },
+    "obligation": {
+     "statut": "non trouvé",
+     "valeurs": [],
+     "conflit": false
+    }
+   },
+   {
+    "nom": "Les certificats délivrés par les Administrations et Organismes compétents prouvant qu'il a satisfait",
+    "pages": [
+     5
+    ],
+    "phase": {
+     "statut": "trouvé",
+     "valeurs": [
+      {
+       "valeur": "candidature",
+       "pages": [
+        5
+       ]
+      }
+     ],
+     "conflit": false
+    },
+    "obligation": {
+     "statut": "non trouvé",
+     "valeurs": [],
+     "conflit": false
+    }
+   },
+   {
+    "nom": "Les attestations ou documents indiqués en R.324.4 du Code du Travail",
+    "pages": [
+     5
+    ],
+    "phase": {
+     "statut": "trouvé",
+     "valeurs": [
+      {
+       "valeur": "candidature",
+       "pages": [
+        5
+       ]
+      }
+     ],
+     "conflit": false
+    },
+    "obligation": {
+     "statut": "non trouvé",
+     "valeurs": [],
+     "conflit": false
+    }
+   },
+   {
+    "nom": "L'attestation d'assurances Responsabilité Civile et Décennale, en cours de validité",
+    "pages": [
+     5
+    ],
+    "phase": {
+     "statut": "trouvé",
+     "valeurs": [
+      {
+       "valeur": "candidature",
+       "pages": [
+        5
+       ]
+      }
+     ],
+     "conflit": false
+    },
+    "obligation": {
+     "statut": "non trouvé",
+     "valeurs": [],
+     "conflit": false
+    }
+   },
+   {
+    "nom": "Déclaration indiquant les effectifs moyens annuels du candidat et l'importance du personnel d'encadrement",
+    "pages": [
+     6
+    ],
+    "phase": {
+     "statut": "trouvé",
+     "valeurs": [
+      {
+       "valeur": "candidature",
+       "pages": [
+        6
+       ]
+      }
+     ],
+     "conflit": false
+    },
+    "obligation": {
+     "statut": "non trouvé",
+     "valeurs": [],
+     "conflit": false
+    }
+   },
+   {
+    "nom": "Indication des qualifications de l'entreprise et de ses cadres et particulièrement ceux affectés à la conduite",
+    "pages": [
+     6
+    ],
+    "phase": {
+     "statut": "trouvé",
+     "valeurs": [
+      {
+       "valeur": "candidature",
+       "pages": [
+        6
+       ]
+      }
+     ],
+     "conflit": false
+    },
+    "obligation": {
+     "statut": "non trouvé",
+     "valeurs": [],
+     "conflit": false
+    }
+   },
+   {
+    "nom": "Déclaration indiquant l'outillage, le matériel et l'équipement technique dont le candidat dispose pour la",
+    "pages": [
+     6
+    ],
+    "phase": {
+     "statut": "trouvé",
+     "valeurs": [
+      {
+       "valeur": "candidature",
+       "pages": [
+        6
+       ]
+      }
+     ],
+     "conflit": false
+    },
+    "obligation": {
+     "statut": "non trouvé",
+     "valeurs": [],
+     "conflit": false
+    }
+   },
+   {
+    "nom": "pour tous renseignements d'ordre technique :",
+    "pages": [
+     10
+    ],
+    "phase": {
+     "statut": "non trouvé",
+     "valeurs": [],
+     "conflit": false
+    },
+    "obligation": {
+     "statut": "non trouvé",
+     "valeurs": [],
+     "conflit": false
+    }
+   }
+  ],
+  "V2_S": [
+   {
+    "nom": "Cahier des Charges, DTU",
+    "pages": [
+     4
+    ],
+    "phase": {
+     "statut": "non trouvé",
+     "valeurs": [],
+     "conflit": false
+    },
+    "obligation": {
+     "statut": "non trouvé",
+     "valeurs": [],
+     "conflit": false
+    }
+   },
+   {
+    "nom": "Cahier des Clauses Spéciales",
+    "pages": [
+     4
+    ],
+    "phase": {
+     "statut": "non trouvé",
+     "valeurs": [],
+     "conflit": false
+    },
+    "obligation": {
+     "statut": "non trouvé",
+     "valeurs": [],
+     "conflit": false
+    }
+   },
+   {
+    "nom": "Règles de Calculs, DTU",
+    "pages": [
+     4
+    ],
+    "phase": {
+     "statut": "non trouvé",
+     "valeurs": [],
+     "conflit": false
+    },
+    "obligation": {
+     "statut": "non trouvé",
+     "valeurs": [],
+     "conflit": false
+    }
+   },
+   {
+    "nom": "Normes Françaises",
+    "pages": [
+     4
+    ],
+    "phase": {
+     "statut": "non trouvé",
+     "valeurs": [],
+     "conflit": false
+    },
+    "obligation": {
+     "statut": "non trouvé",
+     "valeurs": [],
+     "conflit": false
+    }
+   },
+   {
+    "nom": "Normes UTE USE",
+    "pages": [
+     4
+    ],
+    "phase": {
+     "statut": "non trouvé",
+     "valeurs": [],
+     "conflit": false
+    },
+    "obligation": {
+     "statut": "non trouvé",
+     "valeurs": [],
+     "conflit": false
+    }
+   },
+   {
+    "nom": "Le présent Règlement de Consultation (RC) accompagné du Mémoire Technique pré-établi",
+    "pages": [
+     5
+    ],
+    "phase": {
+     "statut": "non trouvé",
+     "valeurs": [],
+     "conflit": false
+    },
+    "obligation": {
+     "statut": "non trouvé",
+     "valeurs": [],
+     "conflit": false
+    }
+   },
+   {
+    "nom": "L'Acte d'Engagement (AE)",
+    "pages": [
+     5
+    ],
+    "phase": {
+     "statut": "non trouvé",
+     "valeurs": [],
+     "conflit": false
+    },
+    "obligation": {
+     "statut": "non trouvé",
+     "valeurs": [],
+     "conflit": false
+    }
+   },
+   {
+    "nom": "Le Cahier des Clauses Administratives Particulières (CCAP) commun à l'ensemble des lots et ses annexes",
+    "pages": [
+     5
+    ],
+    "phase": {
+     "statut": "non trouvé",
+     "valeurs": [],
+     "conflit": false
+    },
+    "obligation": {
+     "statut": "non trouvé",
+     "valeurs": [],
+     "conflit": false
+    }
+   },
+   {
+    "nom": "Planning Prévisionnel des travaux",
+    "pages": [
+     5
+    ],
+    "phase": {
+     "statut": "non trouvé",
+     "valeurs": [],
+     "conflit": false
+    },
+    "obligation": {
+     "statut": "non trouvé",
+     "valeurs": [],
+     "conflit": false
+    }
+   },
+   {
+    "nom": "Le Cahier des Clauses Techniques Particulières propre à chacun des deux lots, avec son cadre formant",
+    "pages": [
+     5
+    ],
+    "phase": {
+     "statut": "non trouvé",
+     "valeurs": [],
+     "conflit": false
+    },
+    "obligation": {
+     "statut": "non trouvé",
+     "valeurs": [],
+     "conflit": false
+    }
+   },
+   {
+    "nom": "Cahier des plans, selon liste jointe dans le dossier de plans",
+    "pages": [
+     5
+    ],
+    "phase": {
+     "statut": "non trouvé",
+     "valeurs": [],
+     "conflit": false
+    },
+    "obligation": {
+     "statut": "non trouvé",
+     "valeurs": [],
+     "conflit": false
+    }
+   },
+   {
+    "nom": "Les certificats délivrés par les Administrations et Organismes compétents prouvant qu'il a satisfait",
+    "pages": [
+     5
+    ],
+    "phase": {
+     "statut": "non trouvé",
+     "valeurs": [],
+     "conflit": false
+    },
+    "obligation": {
+     "statut": "non trouvé",
+     "valeurs": [],
+     "conflit": false
+    }
+   },
+   {
+    "nom": "Les attestations ou documents indiqués en R.324.4 du Code du Travail",
+    "pages": [
+     5
+    ],
+    "phase": {
+     "statut": "non trouvé",
+     "valeurs": [],
+     "conflit": false
+    },
+    "obligation": {
+     "statut": "non trouvé",
+     "valeurs": [],
+     "conflit": false
+    }
+   },
+   {
+    "nom": "L'attestation d'assurances Responsabilité Civile et Décennale, en cours de validité",
+    "pages": [
+     5
+    ],
+    "phase": {
+     "statut": "non trouvé",
+     "valeurs": [],
+     "conflit": false
+    },
+    "obligation": {
+     "statut": "non trouvé",
+     "valeurs": [],
+     "conflit": false
+    }
+   },
+   {
+    "nom": "Déclaration indiquant les effectifs moyens annuels du candidat et l'importance du personnel d'encadrement",
+    "pages": [
+     6
+    ],
+    "phase": {
+     "statut": "non trouvé",
+     "valeurs": [],
+     "conflit": false
+    },
+    "obligation": {
+     "statut": "non trouvé",
+     "valeurs": [],
+     "conflit": false
+    }
+   },
+   {
+    "nom": "Indication des qualifications de l'entreprise et de ses cadres et particulièrement ceux affectés à la conduite",
+    "pages": [
+     6
+    ],
+    "phase": {
+     "statut": "non trouvé",
+     "valeurs": [],
+     "conflit": false
+    },
+    "obligation": {
+     "statut": "non trouvé",
+     "valeurs": [],
+     "conflit": false
+    }
+   },
+   {
+    "nom": "Déclaration indiquant l'outillage, le matériel et l'équipement technique dont le candidat dispose pour la",
+    "pages": [
+     6
+    ],
+    "phase": {
+     "statut": "non trouvé",
+     "valeurs": [],
+     "conflit": false
+    },
+    "obligation": {
+     "statut": "non trouvé",
+     "valeurs": [],
+     "conflit": false
+    }
+   }
+  ],
+  "final": "trou",
+  "juges": [
+   {
+    "classe": "trou",
+    "assertion": "A15",
+    "cas": "Le RC contient, hors de la liste des pièces à remettre, des lignes à puces qui ne désignent aucun document (titres de rubrique sur la décomposition en lots ou en tranches, cas de candidatures multiples interdites, adresse du maître d'œuvre).",
+    "choix": "V2",
+    "nouvelle": "Quand une page présente sous forme d'énumération des éléments qui ne désignent aucun document (titre de rubrique, adresse, cas d'interdiction), après le lancement de l'analyse, le dossier ne liste aucun de ces éléments parmi les pièces | observé: pièces | conditions: texte pages",
+    "usd": 0.2369842,
+    "texte": " pièces ». A121 n'exclut qu'une valeur qui « ne figure dans le texte d'aucune page ». Or les lignes en trop de V1 figurent bien dans le texte (pages 2 et 3). Aucune assertion n'interdit de lister comme pièce un élément écrit dans le RC qui n'est pas un document, donc les deux variantes respectent la spec. V2 n'est pas sans défaut : elle liste aussi des documents qui ne sont pas à remettre (DTU, normes, contenu du dossier de consultation). Ce point relève d'un autre cas, que la nouvelle assertion ne tranche pas.\ncertainty: close\n```\n\nPourquoi `close` : les deux sorties sont tronquées, et je ne vois donc pas si l'une d'elles oublie une vraie pièce de l'article 6 (DC1, DC2, NOTI2, AE, CCAP, CCTP, attestation de visite, mémoire technique). Si c'est le cas, on aurait un bug de cette variante au titre d'A15. On ne peut le vérifier qu'en lisant les deux listes en entier, ce qui revient au chercheur et non à l'arbitre.\n\nCLASSE: trou\nASSERTION: A15\nCAS: Le RC contient, hors de la liste des pièces à remettre, des lignes à puces qui ne désignent aucun document (titres de rubrique sur la décomposition en lots ou en tranches, cas de candidatures multiples interdites, adresse du maître d'œuvre).\nCHOIX: V2\nNOUVELLE: Quand une page présente sous forme d'énumération des éléments qui ne désignent aucun document (titre de rubrique, adresse, cas d'interdiction), après le lancement de l'analyse, le dossier ne liste aucun de ces éléments parmi les pièces | observé: pièces | conditions: texte pages"
+   },
+   {
+    "classe": "trou",
+    "assertion": "A15",
+    "cas": "Le RC contient, en plus de la liste des pièces que le candidat doit remettre, d'autres énumérations : pièces constitutives du marché, contenu du dossier de consultation, prescriptions techniques, cas d'interdiction de groupement, intitulés de décomposition, coordonnées.",
+    "choix": "V2",
+    "nouvelle": "Quand une page énumère des éléments qui ne sont pas demandés au candidat ou à l'attributaire (pièces constitutives du marché, contenu du dossier de consultation, textes et normes de référence, cas d'interdiction, intitulés, coordonnées), après le lancement de l'analyse, le dossier ne liste aucun de ces éléments parmi les pièces | observé: pièces | conditions: texte pages",
+    "usd": 0.047545000000000004,
+    "texte": "(p. 5). V1 et V2 respectent toutes deux la spec. Ce trou peut être comblé à partir du RC lui-même (les pages 5 à 7 sous « Chaque candidat aura à produire un dossier complet comprenant les pièces suivantes »), sans rien demander à l'arbitre.\ncertainty: close\n```\n\nJe retiens V2 parce qu'elle est plus proche du RC : elle ne garde que des documents, alors que V1 garde aussi des titres, des cas d'interdiction et une adresse. Mais V2 reste fausse elle aussi pour l'utilisateur : la règle stricte ci-dessous exclut aussi ce qu'elle tire des pages 4 et 5. Les deux sorties étant coupées, je n'ai pas pu vérifier si les vraies pièces (DC1, DC2, NOTI2, AE, CCAP, CCTP-DPGF, attestation de visite, mémoire technique) figurent bien dans chacune. Si l'une d'elles en oublie une, A15 est violée et c'est un bug.\n\nCLASSE: trou\nASSERTION: A15\nCAS: Le RC contient, en plus de la liste des pièces que le candidat doit remettre, d'autres énumérations : pièces constitutives du marché, contenu du dossier de consultation, prescriptions techniques, cas d'interdiction de groupement, intitulés de décomposition, coordonnées.\nCHOIX: V2\nNOUVELLE: Quand une page énumère des éléments qui ne sont pas demandés au candidat ou à l'attributaire (pièces constitutives du marché, contenu du dossier de consultation, textes et normes de référence, cas d'interdiction, intitulés, coordonnées), après le lancement de l'analyse, le dossier ne liste aucun de ces éléments parmi les pièces | observé: pièces | conditions: texte pages"
+   }
+  ],
+  "porte": "convention",
+  "porte_raison": "Un titre de rubrique, une adresse ou un cas d'interdiction ne désignent aucun document à remettre ; tout lecteur compétent d'un RC les écarte de la liste des pièces. Certitude sûre."
+ },
+ {
+  "champ": "criteres.liste",
+  "situations": 5,
+  "representant": "RC4",
+  "V1_H": [
+   {
+    "libelle": "Fourni et cohérent avec la présente opération",
+    "pages": [
+     8
+    ],
+    "lot": {
+     "statut": "trouvé",
+     "valeurs": [
+      {
+       "valeur": null,
+       "pages": [
+        2
+       ]
+      }
+     ],
+     "conflit": false
+    },
+    "ponderation": {
+     "statut": "trouvé",
+     "valeurs": [
+      {
+       "valeur": 100,
+       "unite": "pourcentage",
+       "lot": null,
+       "pages": [
+        8
+       ]
+      }
+     ],
+     "conflit": false
+    },
+    "sous_criteres": []
+   },
+   {
+    "libelle": "Fourni partiellement mais cohérent",
+    "pages": [
+     8
+    ],
+    "lot": {
+     "statut": "trouvé",
+     "valeurs": [
+      {
+       "valeur": null,
+       "pages": [
+        2
+       ]
+      }
+     ],
+     "conflit": false
+    },
+    "ponderation": {
+     "statut": "trouvé",
+     "valeurs": [
+      {
+       "valeur": 75,
+       "unite": "pourcentage",
+       "lot": null,
+       "pages": [
+        8
+       ]
+      }
+     ],
+     "conflit": false
+    },
+    "sous_criteres": [
+     {
+      "libelle": "Critère 2",
+      "pages": [
+       8
+      ],
+      "ponderation": {
+       "statut": "trouvé",
+       "valeurs": [
+        {
+         "valeur": 40,
+         "unite": "points",
+         "lot": null,
+         "pages": [
+          8
+         ]
+        }
+       ],
+       "conflit": false
+      }
+     },
+     {
+      "libelle": "Négociation écrite",
+      "pages": [
+       9
+      ],
+      "ponderation": {
+       "statut": "non trouvé",
+       "valeurs": [],
+       "conflit": false
+      }
+     }
+    ]
+   },
+   {
+    "libelle": "Intitulé du marché",
+    "pages": [
+     9
+    ],
+    "lot": {
+     "statut": "trouvé",
+     "valeurs": [
+      {
+       "valeur": null,
+       "pages": [
+        2
+       ]
+      }
+     ],
+     "conflit": false
+    },
+    "ponderation": {
+     "statut": "non trouvé",
+     "valeurs": [],
+     "conflit": false
+    },
+    "sous_criteres": []
+   },
+   {
+    "libelle": "Objet de la négociation",
+    "pages": [
+     9
+    ],
+    "lot": {
+     "statut": "trouvé",
+     "valeurs": [
+      {
+       "valeur": null,
+       "pages": [
+        2
+       ]
+      }
+     ],
+     "conflit": false
+    },
+    "ponderation": {
+     "statut": "non trouvé",
+     "valeurs": [],
+     "conflit": false
+    },
+    "sous_criteres": []
+   },
+   {
+    "libelle": "Date et heure limite à laquelle le candidat devra proposer sa nouvelle offre",
+    "pages": [
+     9
+    ],
+    "lot": {
+     "statut": "trouvé",
+     "valeurs": [
+      {
+       "valeur": null,
+       "pages": [
+        2
+       ]
+      }
+     ],
+     "conflit": false
+    },
+    "ponderation": {
+     "statut": "non trouvé",
+     "valeurs": [],
+     "conflit": false
+    },
+    "sous_criteres": [
+     {
+      "libelle": "Négociation orale",
+      "pages": [
+       9
+      ],
+      "ponderation": {
+       "statut": "non trouvé",
+       "valeurs": [],
+       "conflit": false
+      }
+     }
+    ]
+   }
+  ],
+  "V2_S": [
+   {
+    "libelle": "Les références d'opérations similaires de moins de 5 ans. Ces documents devront préciser pour chaque",
+    "pages": [
+     7
+    ],
+    "lot": {
+     "statut": "trouvé",
+     "valeurs": [
+      {
+       "valeur": null,
+       "pages": [
+        2
+       ]
+      }
+     ],
+     "conflit": false
+    },
+    "ponderation": {
+     "statut": "non trouvé",
+     "valeurs": [],
+     "conflit": false
+    },
+    "sous_criteres": []
+   },
+   {
+    "libelle": "Un programme d'exécution des ouvrages indiquant de façon sommaire la durée prévisionnelle des",
+    "pages": [
+     7
+    ],
+    "lot": {
+     "statut": "trouvé",
+     "valeurs": [
+      {
+       "valeur": null,
+       "pages": [
+        2
+       ]
+      }
+     ],
+     "conflit": false
+    },
+    "ponderation": {
+     "statut": "non trouvé",
+     "valeurs": [],
+     "conflit": false
+    },
+    "sous_criteres": []
+   },
+   {
+    "libelle": "Les fiches techniques des matériaux spécifiques",
+    "pages": [
+     7
+    ],
+    "lot": {
+     "statut": "trouvé",
+     "valeurs": [
+      {
+       "valeur": null,
+       "pages": [
+        2
+       ]
+      }
+     ],
+     "conflit": false
+    },
+    "ponderation": {
+     "statut": "non trouvé",
+     "valeurs": [],
+     "conflit": false
+    },
+    "sous_criteres": []
+   },
+   {
+    "libelle": "Sa méthodologie décrite pour les ouvrages spécifiques et toutes précisions utiles à la compréhension de sa",
+    "pages": [
+     7
+    ],
+    "lot": {
+     "statut": "trouvé",
+     "valeurs": [
+      {
+       "valeur": null,
+       "pages": [
+        2
+       ]
+      }
+     ],
+     "conflit": false
+    },
+    "ponderation": {
+     "statut": "non trouvé",
+     "valeurs": [],
+     "conflit": false
+    },
+    "sous_criteres": []
+   },
+   {
+    "libelle": "Respectant la décomposition du Prix Global et Forfaitaire remis, afin de respecter les Règles de",
+    "pages": [
+     7
+    ],
+    "lot": {
+     "statut": "trouvé",
+     "valeurs": [
+      {
+       "valeur": null,
+       "pages": [
+        2
+       ]
+      }
+     ],
+     "conflit": false
+    },
+    "ponderation": {
+     "statut": "non trouvé",
+     "valeurs": [],
+     "conflit": false
+    },
+    "sous_criteres": []
+   },
+   {
+    "libelle": "Portant dans l'Acte d'Engagement, sur le tableau du montant de l'Offre, un Nota définissant clairement les",
+    "pages": [
+     7
+    ],
+    "lot": {
+     "statut": "trouvé",
+     "valeurs": [
+      {
+       "valeur": null,
+       "pages": [
+        2
+       ]
+      }
+     ],
+     "conflit": false
+    },
+    "ponderation": {
+     "statut": "non trouvé",
+     "valeurs": [],
+     "conflit": false
+    },
+    "sous_criteres": []
+   },
+   {
+    "libelle": "Joignant à l'Acte d'Engagement, cet additif pour constat d'erreur - Celles-ci, après vérification, pourront",
+    "pages": [
+     7
+    ],
+    "lot": {
+     "statut": "trouvé",
+     "valeurs": [
+      {
+       "valeur": null,
+       "pages": [
+        2
+       ]
+      }
+     ],
+     "conflit": false
+    },
+    "ponderation": {
+     "statut": "non trouvé",
+     "valeurs": [],
+     "conflit": false
+    },
+    "sous_criteres": []
+   },
+   {
+    "libelle": "Garanties et capacités techniques et financières",
+    "pages": [
+     8
+    ],
+    "lot": {
+     "statut": "trouvé",
+     "valeurs": [
+      {
+       "valeur": null,
+       "pages": [
+        2
+       ]
+      }
+     ],
+     "conflit": false
+    },
+    "ponderation": {
+     "statut": "non trouvé",
+     "valeurs": [],
+     "conflit": false
+    },
+    "sous_criteres": []
+   },
+   {
+    "libelle": "Capacités professionnelles",
+    "pages": [
+     8
+    ],
+    "lot": {
+     "statut": "trouvé",
+     "valeurs": [
+      {
+       "valeur": null,
+       "pages": [
+        2
+       ]
+      }
+     ],
+     "conflit": false
+    },
+    "ponderation": {
+     "statut": "non trouvé",
+     "valeurs": [],
+     "conflit": false
+    },
+    "sous_criteres": [
+     {
+      "libelle": "Voir l'article C « Qualifications requises » du chapitre II des CCTP",
+      "pages": [
+       8
+      ],
+      "ponderation": {
+       "statut": "non trouvé",
+       "valeurs": [],
+       "conflit": false
+      }
+     },
+     {
+      "libelle": "Critère 1 - Valeur technique des prestations",
+      "pages": [
+       8
+      ],
+      "ponderation": {
+       "statut": "trouvé",
+       "valeurs": [
+        {
+         "valeur": 60,
+         "unite": "points",
+         "lot": null,
+         "pages": [
+          8
+         ]
+        }
+       ],
+       "conflit": false
+      }
+     },
+     {
+      "libelle": "Critère 2 - Prix des prestations",
+      "pages": [
+       8
+      ],
+      "ponderation": {
+       "statut": "trouvé",
+       "valeurs": [
+        {
+         "valeur": 40,
+         "unite": "points",
+         "lot": null,
+         "pages": [
+          8
+         ]
+        }
+       ],
+       "conflit": false
+      }
+     },
+     {
+      "libelle": "Négociation écrite",
+      "pages": [
+       9
+      ],
+      "ponderation": {
+       "statut": "non trouvé",
+       "valeurs": [],
+       "conflit": false
+      }
+     }
+    ]
+   },
+   {
+    "libelle": "Intitulé du marché",
+    "pages": [
+     9
+    ],
+    "lot": {
+     "statut": "trouvé",
+     "valeurs": [
+      {
+       "valeur": null,
+       "pages": [
+        2
+       ]
+      }
+     ],
+     "conflit": false
+    },
+    "ponderation": {
+     "statut": "non trouvé",
+     "valeurs": [],
+     "conflit": false
+    },
+    "sous_criteres": []
+   },
+   {
+    "libelle": "Objet de la négociation",
+    "pages": [
+     9
+    ],
+    "lot": {
+     "statut": "trouvé",
+     "valeurs": [
+      {
+       "valeur": null,
+       "pages": [
+        2
+       ]
+      }
+     ],
+     "conflit": false
+    },
+    "ponderation": {
+     "statut": "non trouvé",
+     "valeurs": [],
+     "conflit": false
+    },
+    "sous_criteres": []
+   },
+   {
+    "libelle": "Date et heure limite à laquelle le candidat devra proposer sa nouvelle offre, étant précisé qu'en l'absence de nouvelle",
+    "pages": [
+     9
+    ],
+    "lot": {
+     "statut": "trouvé",
+     "valeurs": [
+      {
+       "valeur": null,
+       "pages": [
+        2
+       ]
+      }
+     ],
+     "conflit": false
+    },
+    "ponderation": {
+     "statut": "non trouvé",
+     "valeurs": [],
+     "conflit": false
+    },
+    "sous_criteres": [
+     {
+      "libelle": "Négociation orale",
+      "pages": [
+       9
+      ],
+      "ponderation": {
+       "statut": "non trouvé",
+       "valeurs": [],
+       "conflit": false
+      }
+     }
+    ]
+   }
+  ],
+  "final": "bug H",
+  "juges": [
+   {
+    "classe": "bug V1",
+    "assertion": "A21",
+    "cas": "Un RC énumère page 8 deux critères pondérés en points, le premier détaillé en éléments A à D, suivis d'un barème de notation, puis page 9 une liste des éléments d'une négociation.",
+    "choix": "aucun",
+    "nouvelle": "aucune",
+    "usd": 0.2361002,
+    "texte": "itère 1 - Valeur technique des prestations - 60 points », avec les éléments A à D notés 20, 10, 10 et 20 points, puis « Critère 2 - Prix des prestations - 40 points ». A21 exige que l'arbre « affiche ces critères dans l'ordre du RC », A140 qu'il garde « son libellé tel qu'il est écrit dans le RC », et A22 qu'il rattache les sous-critères « à leur critère parent ». V1 viole ces trois assertions. Elle prend pour critères les lignes du barème de notation (« Fourni et cohérent… » à 100 %) et la liste des éléments d'une négociation (page 9). Elle range aussi « Critère 2 » comme sous-critère d'une de ces lignes. V2 viole aussi A21 et A140 : elle rend les tirets de la page 7 et de l'additif pour constat d'erreur, sans pondération, et aucun des deux critères de la page 8.\ncertainty: close\n```\n\nLa spec tranche donc ce cas : ce n'est pas un trou. Le RC est valide et le champ a du sens. La réponse attendue est Critère 1 (valeur technique, 60 points, avec les éléments A à D comme sous-critères), puis Critère 2 (prix, 40 points), avec la page valeur 8. J'attribue le bug à V1 parce qu'elle inverse aussi la hiérarchie (A22) et donne des pondérations inventées, comme 100 % ou 75 %. La certitude reste `close` : V2 doit être corrigée sur le même champ.\n\nCLASSE: bug V1\nASSERTION: A21\nCAS: Un RC énumère page 8 deux critères pondérés en points, le premier détaillé en éléments A à D, suivis d'un barème de notation, puis page 9 une liste des éléments d'une négociation.\nCHOIX: aucun\nNOUVELLE: aucune"
+   },
+   {
+    "classe": "bug V1",
+    "assertion": "A21",
+    "cas": "La page 8 du RC énumère deux critères pondérés en points (valeur technique 60, avec les éléments A à D ; prix 40), au milieu d'autres listes à puces (barème de notation, contenu du mémoire, éléments d'une négociation).",
+    "choix": "aucun",
+    "nouvelle": "aucune",
+    "usd": 0.0560122,
+    "texte": "rtions et doit être corrigée elle aussi.\n\n```\nclaim:     Sur criteres.liste, V1 et V2 divergent pour ce RC ; le désaccord est un trou, un bug V<n> ou invalide.\nruling:    upheld — bug, mais dans les deux variantes (V1 retenue pour la ligne CLASSE, V2 tout aussi fautive)\nbecause:   La page 8 énumère deux critères d'attribution : « Critère 1 - Valeur technique des prestations - 60 points », avec les éléments A à D en sous-critères, et « Critère 2 - Prix des prestations - 40 points ». A21 exige que « l'arbre affiche ces critères dans l'ordre du RC », A140 que chaque libellé soit « tel qu'il est écrit dans le RC », A22 que les sous-critères soient rattachés « à leur critère parent ». V1 prend pour critères le barème de notation et la liste de négociation de la page 9. Elle rattache même « Critère 2 » comme sous-critère de « Fourni partiellement mais cohérent » et invente une pondération de « 100 pourcentage ». V2 prend pour critères le contenu attendu du mémoire (p. 7) et l'additif pour erreur. Aucune des deux n'affiche les critères 1 et 2 en tête, dans l'ordre du RC.\ncertainty: firm sur la violation de V1 ; firm aussi sur celle de V2. La classe à un seul choix ne rend pas compte d'un double bug.\n```\n\nCLASSE: bug V1\nASSERTION: A21\nCAS: La page 8 du RC énumère deux critères pondérés en points (valeur technique 60, avec les éléments A à D ; prix 40), au milieu d'autres listes à puces (barème de notation, contenu du mémoire, éléments d'une négociation).\nCHOIX: aucun\nNOUVELLE: aucune"
+   }
+  ]
+ },
+ {
+  "champ": "mode_remise.valeurs",
+  "situations": 4,
+  "representant": "RC5",
+  "V1_H": [
+   {
+    "valeur": "électronique",
+    "pages": [
+     9
+    ]
+   }
+  ],
+  "V2_S": [],
+  "final": "bug H",
+  "juges": [
+   {
+    "classe": "bug V1",
+    "assertion": "A117",
+    "cas": "Aucune page n'indique le mode de remise des offres : la page 9 dit seulement que les plis sont « déposés » avant la date limite, et « électronique » n'apparaît qu'en page 5, à propos de la mise à disposition du DCE, alors que l'extraction propose « électronique » avec la page 9.",
+    "choix": "aucun",
+    "nouvelle": "aucune",
+    "usd": 0.2285002,
+    "texte": "l'heure limites de réception des offres », et il ne nomme aucun mode. Le mot « électronique » n'apparaît dans aucune page en tant que mode de remise : sa seule occurrence est en page 5 (« disponible à l'adresse électronique suivante »), et elle concerne le retrait du DCE, pas la remise des offres. La valeur « électronique », page 9, ne se retrouve donc pas dans le texte : A117 impose « le mode remise est déclaré non trouvé », et A113 impose le même résultat. V1 viole aussi A118, puisqu'elle donne la page 9 comme page valeur alors que la valeur n'y figure pas. V2 rend [], ce qui est conforme.\ncertainty: close\n```\n\nLa décision reste « close » pour une raison précise : le texte de la page 9 s'arrête au milieu d'une phrase (« NOTA : … inférieure au seuil de 100 000 € HT applicable aux »). Il faut vérifier si les deux variantes ont bien reçu cette page tronquée ou la page complète. Si la suite contient un mode de remise nommé, par exemple « par voie électronique », le résultat s'inverse : V1 respecterait A13 et V2 la violerait. C'est un point que le dossier peut établir, et il revient au chercheur : extraire la page 9 complète du RC source.\n\nCLASSE: bug V1\nASSERTION: A117\nCAS: Aucune page n'indique le mode de remise des offres : la page 9 dit seulement que les plis sont « déposés » avant la date limite, et « électronique » n'apparaît qu'en page 5, à propos de la mise à disposition du DCE, alors que l'extraction propose « électronique » avec la page 9.\nCHOIX: aucun\nNOUVELLE: aucune"
+   },
+   {
+    "classe": "bug V1",
+    "assertion": "A117",
+    "cas": "Le mode de remise rendu (« électronique », page 9) ne figure dans le texte d'aucune page reçue ; la page 9 dit seulement que les plis sont « déposés », sans nommer de mode.",
+    "choix": "aucun",
+    "nouvelle": "aucune",
+    "usd": 0.04635960000000001,
+    "texte": "```\nclaim:     Sur ce RC, le champ mode_remise.valeurs doit valoir [{\"valeur\": \"électronique\", \"pages\": [9]}] (V1) et non [] (V2).\nruling:    upheld for V2: V1 violates A117\nbecause:   The page V1 cites says only « Les plis devront être déposés avant la date et l'heure limites de réception des offres… ». It names no mode of submission, and the word « électronique » appears on no page we received. The only nearby statement, on page 5 (« Aucune demande d'envoi du dossier sur support physique n'est autorisée »), is about getting the consultation file, not about submitting bids. A117 is the rule that applies: « Quand un mode de remise proposé par l'extraction ne figure dans le texte d'aucune page, … le mode remise est déclaré non trouvé ».\ncertainty: close\n```\n\n**Why close:** the page 9 we received stops mid-sentence (« …inférieure au seuil de 100 000 € HT applicable aux »). The rest of that note could name the submission mode, electronic or paper. If the full page 9 contains « électronique » as the required submission mode, then V1 is right under A13/A118 and V2 violates A13.\n\n**What would settle it:** the complete text of page 9 as both versions read it. That is a fact the dossier can hold, so it goes back to the searcher, not to the arbiter.\n\nCLASSE: bug V1\nASSERTION: A117\nCAS: Le mode de remise rendu (« électronique », page 9) ne figure dans le texte d'aucune page reçue ; la page 9 dit seulement que les plis sont « déposés », sans nommer de mode.\nCHOIX: aucun\nNOUVELLE: aucune"
+   }
+  ]
+ },
+ {
+  "champ": "type_ponderation.valeurs",
+  "situations": 4,
+  "representant": "RC4",
+  "V1_H": [
+   {
+    "valeur": "pourcentage",
+    "pages": [
+     8
+    ]
+   }
+  ],
+  "V2_S": [],
+  "final": "bug H",
+  "juges": [
+   {
+    "classe": "bug V1",
+    "assertion": "A24",
+    "cas": "Le RC pondère ses critères et sous-critères en points sur la page 8, et la même page emploie des pourcentages uniquement pour le barème de notation à l'intérieur d'un critère (« 100% des points », « 75%, 50% ou 25 % des points »).",
+    "choix": "aucun",
+    "nouvelle": "aucune",
+    "usd": 0.2233962,
+    "texte": "oints : « Critère 1 - Valeur technique des prestations - 60 points », « Critère 2 - Prix des prestations - 40 points », et les sous-critères aussi (« 20 points pour l'élément A »). Les seuls « % » de la page (« Fourni et cohérent avec la présente opération : 100% des points », « 75%, 50% ou 25 % des points ») décrivent le barème de notation à l'intérieur d'un critère, pas une pondération. A24 s'applique donc : « Quand le RC exprime les pondérations en points, … le type pondération vaut « points » ». V1 affiche une valeur fausse. V2 n'est pas juste non plus : en rendant [], elle déclare non trouvé un fait qui est écrit. La sortie attendue est [{\"valeur\": \"points\", \"pages\": [8]}].\ncertainty: close\n```\n\nC'est « close » parce que le format m'oblige à désigner une seule variante en faute, alors que les deux violent A24. J'ai classé « bug V1 » parce que V1 présente au candidat un type de pondération faux comme s'il venait du RC, ce qui est plus dangereux qu'une valeur manquante. Mais V2 doit aussi être corrigée pour rendre « points ». Ce n'est pas un trou de la spec : A24 tranche ce cas. Il manque seulement un test où des pourcentages de barème apparaissent à côté de pondérations en points.\n\nCLASSE: bug V1\nASSERTION: A24\nCAS: Le RC pondère ses critères et sous-critères en points sur la page 8, et la même page emploie des pourcentages uniquement pour le barème de notation à l'intérieur d'un critère (« 100% des points », « 75%, 50% ou 25 % des points »).\nCHOIX: aucun\nNOUVELLE: aucune"
+   },
+   {
+    "classe": "bug V1",
+    "assertion": "A24",
+    "cas": "Le RC pondère ses critères en points (60 et 40 points) et emploie des pourcentages seulement pour l'échelle de notation (« 100% des points », « 75%, 50% ou 25 % des points »).",
+    "choix": "aucun",
+    "nouvelle": "aucune",
+    "usd": 0.0392634,
+    "texte": " to be « points ». The only percentages on that page (« 100% des points », « 75%, 50% ou 25 % des points ») are a grading scale applied to points that are already set, not the weighting of a criterion. A23 does not apply.\n\n```\nclaim:     Sur ce RC, type_ponderation.valeurs vaut [{\"valeur\": \"pourcentage\", \"pages\": [8]}] (V1) ou [] (V2).\nruling:    upheld — V1 viole A24 en affirmant « pourcentage »\nbecause:   A24 « Quand le RC exprime les pondérations en points, … le type pondération vaut « points » » s'applique : la page 8 écrit « Critère 1 … - 60 points » et « Critère 2 … - 40 points ». Les pourcentages de cette page (« Fourni et cohérent … : 100% des points ») servent à attribuer des points ; ils ne pondèrent aucun critère. V1 cite donc la page 8 pour quelque chose qu'elle ne dit pas.\ncertainty: close\n```\n\n**Why the certainty is close:** V2 does not get it right either. Its `[]` reads as \"non trouvé\", but A24 requires « points ». The protocol only lets me name one faulty variant, so I name V1. Its error is more serious because it states a false value and cites a real page as its source. V2's error is to leave out a value. It still fails A24 on this RC and should get its own correction. This is not a gap in the spec: A24 decides the case.\n\nCLASSE: bug V1\nASSERTION: A24\nCAS: Le RC pondère ses critères en points (60 et 40 points) et emploie des pourcentages seulement pour l'échelle de notation (« 100% des points », « 75%, 50% ou 25 % des points »).\nCHOIX: aucun\nNOUVELLE: aucune"
+   }
+  ]
+ },
+ {
+  "champ": "plan[]",
+  "situations": 3,
+  "representant": "S036",
+  "V1_H": {
+   "titre": "Qualité technique de l'offre",
+   "critere": "Qualité technique de l'offre",
+   "sous_critere": null,
+   "ponderation": null,
+   "page_source": 2,
+   "contenu": ""
+  },
+  "V2_S": {
+   "titre": "Qualité technique de l'offre",
+   "critere": "Qualité technique de l'offre",
+   "sous_critere": null,
+   "ponderation": 55,
+   "page_source": 2,
+   "contenu": ""
+  },
+  "final": "à trancher",
+  "juges": [
+   {
+    "classe": "trou",
+    "assertion": "A31",
+    "cas": "Un critère de valeur technique reçoit une pondération différente selon le lot (55 % pour le lot 01, 50 % pour le lot 02), et le plan ne contient qu'une section pour ce critère, sans indication de lot.",
+    "choix": "V1",
+    "nouvelle": "Quand le RC donne à un critère de valeur technique des pondérations différentes selon le lot et que le plan ne contient qu'une section pour ce critère, après le lancement de l'analyse, la pondération section de cette section est déclarée non trouvée, et aucune pondération d'un seul lot n'y est affichée | observé: pondération section | conditions: pondération lot, sections",
+    "usd": 0.1681242,
+    "texte": "e affiche « une pondération par lot ». Ici, la pondération du critère est donc {lot 01 : 55, lot 02 : 50}. Aucune des deux variantes ne rend cette valeur. La spec ne dit pas comment une section sans lot porte une pondération qui varie selon le lot : c'est un fait que la spec peut trancher, pas une question pour l'arbitre. Le choix le plus fidèle au RC est null, parce que 55 est faux pour le lot 02 (« Critère n° 1 : Qualité technique de l'offre (pondération : 50 %) ») et reprend en silence un seul lot sur deux.\ncertainty: close\n```\n\nLa certitude est `close` pour une raison précise. On peut lire A31 comme exigeant une valeur, puisque la pondération du critère est bien écrite dans le RC. Avec cette lecture, null ne respecte pas A31 non plus. V1 n'a donc pas raison au sens où le demanderait « bug V2 ». C'est pourquoi je classe le désaccord en trou et non en bug.\n\nCLASSE: trou\nASSERTION: A31\nCAS: Un critère de valeur technique reçoit une pondération différente selon le lot (55 % pour le lot 01, 50 % pour le lot 02), et le plan ne contient qu'une section pour ce critère, sans indication de lot.\nCHOIX: V1\nNOUVELLE: Quand le RC donne à un critère de valeur technique des pondérations différentes selon le lot et que le plan ne contient qu'une section pour ce critère, après le lancement de l'analyse, la pondération section de cette section est déclarée non trouvée, et aucune pondération d'un seul lot n'y est affichée | observé: pondération section | conditions: pondération lot, sections"
+   },
+   {
+    "classe": "bug V1",
+    "assertion": "A31",
+    "cas": "Un critère de valeur technique est pondéré à 55 % pour le lot 01 et à 50 % pour le lot 02 sur une même page, et la section du plan qui lui correspond doit afficher sa pondération.",
+    "choix": "aucun",
+    "nouvelle": "aucune",
+    "usd": 0.042272000000000004,
+    "texte": "```\nclaim:     Pour la section « Qualité technique de l'offre » du plan, le RC donne 55 % (lot 01, p. 2). V1 rend une pondération nulle (null) et V2 rend 55.\nruling:    upheld — bug V1\nbecause:   A31 dit que « chaque section affiche une pondération section égale à la pondération de son critère ». Ce critère a une pondération écrite en p. 2 (« Critère n° 1 : Qualité technique de l'offre (pondération : 55 %) » pour le lot n° 01), et une pondération nulle ne lui est égale en aucun cas. 55 est la pondération de ce critère pour le lot 01. Le RC liste ce critère en premier pour ce lot, et le plan suit l'ordre du RC (A30).\ncertainty: close — si le plan ne fait qu'une section pour les deux lots, aucune des deux variantes n'est exacte. A26 demande alors une pondération par lot (55 / 50), et le cas devient un trou sur la façon dont une section porte des pondérations qui varient selon le lot. Le fragment reçu ne montre ni le lot de la section ni la seconde section, donc je ne peux pas trancher cette lecture.\n```\n\nCLASSE: bug V1\nASSERTION: A31\nCAS: Un critère de valeur technique est pondéré à 55 % pour le lot 01 et à 50 % pour le lot 02 sur une même page, et la section du plan qui lui correspond doit afficher sa pondération.\nCHOIX: aucun\nNOUVELLE: aucune"
+   }
+  ]
+ }
+]

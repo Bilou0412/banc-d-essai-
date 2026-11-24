@@ -1,0 +1,7 @@
+```python
+class App:
+
+    def set_favorite(self, rid: int, bool: bool) -> None:
+        recipe = self.recipe(rid)
+        recipe['favorite'] = bool
+```

@@ -1,0 +1,7 @@
+```python
+class App:
+
+    def set_category(self, rid: int, category: str) -> None:
+        recipe = self.recipe(rid)
+        recipe['category'] = category
+```

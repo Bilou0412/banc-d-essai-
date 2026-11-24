@@ -1,0 +1,260 @@
+{
+ "iteration": 4,
+ "majorite_absente": 34,
+ "compares": 1132,
+ "divergences": 103,
+ "accord": 0.909,
+ "par_fait": {
+  "documents_to_return": 77,
+  "offer_deadline": 12,
+  "award_criteria": 8,
+  "submission_mode": 3,
+  "lots": 2,
+  "site_visit_dates": 1
+ },
+ "jugements": [
+  {
+   "fait": "documents_to_return",
+   "divergences": 77,
+   "rc": "S070",
+   "bilel": [
+    [
+     "acte d engagement ae complete ",
+     "offre"
+    ],
+    [
+     "attestation d assurance de res",
+     "candidature"
+    ],
+    [
+     "attestation de visite",
+     "offre"
+    ],
+    [
+     "attestations de regularite fis",
+     "offre"
+    ],
+    [
+     "bordereau des prix unitaires b",
+     "offre"
+    ],
+    [
+     "declaration indiquant les effe",
+     "candidature"
+    ],
+    [
+     "decomposition du prix global e",
+     "offre"
+    ],
+    [
+     "memoire technique",
+     "offre"
+    ],
+    [
+     "pouvoir de la personne habilit",
+     "candidature"
+    ]
+   ],
+   "majorite": [
+    [
+     "acte d engagement ae complete ",
+     "offre"
+    ],
+    [
+     "attestation d assurance de res",
+     "candidature"
+    ],
+    [
+     "attestation de visite",
+     "offre"
+    ],
+    [
+     "attestations de regularite fis",
+     "attributaire"
+    ],
+    [
+     "bordereau des prix unitaires b",
+     "offre"
+    ],
+    [
+     "declaration indiquant les effe",
+     "candidature"
+    ],
+    [
+     "decomposition du prix global e",
+     "offre"
+    ],
+    [
+     "memoire technique",
+     "offre"
+    ],
+    [
+     "pouvoir de la personne habilit",
+     "candidature"
+    ]
+   ],
+   "classe": "bug Bilel",
+   "cas": "Le RC demande une pièce au seul candidat pressenti pour l'attribution, dans un alinéa placé après la liste des pièces de l'offre, et le code B lui donne la phase « offre » au lieu de « attributaire » qu'exige A17."
+  },
+  {
+   "fait": "offer_deadline",
+   "divergences": 12,
+   "rc": "S028",
+   "bilel": [
+    [
+     "2026-02-23",
+     "11:00"
+    ]
+   ],
+   "majorite": [
+    [
+     "2026-02-16",
+     "11:00"
+    ],
+    [
+     "2026-02-23",
+     "11:00"
+    ]
+   ],
+   "classe": "bug Bilel",
+   "cas": "Une même page donne deux dates limites de remise différentes (23/02/2026 dans l'en-tête, 16/02/2026 à l'article 6), et le code B n'en affiche qu'une alors que A02 impose d'afficher chaque date indiquée."
+  },
+  {
+   "fait": "award_criteria",
+   "divergences": 8,
+   "rc": "S056",
+   "bilel": [
+    [
+     "3",
+     "planning previsionnel",
+     10.0,
+     "percent",
+     null
+    ],
+    [
+     "3",
+     "prix des prestations",
+     35.0,
+     "percent",
+     null
+    ],
+    [
+     "3",
+     "valeur technique",
+     55.0,
+     "percent",
+     null
+    ],
+    [
+     null,
+     "merite technique",
+     50.0,
+     "percent",
+     null
+    ],
+    [
+     null,
+     "prix de l offre",
+     50.0,
+     "percent",
+     null
+    ]
+   ],
+   "majorite": [
+    [
+     "1",
+     "merite technique",
+     50.0,
+     "percent",
+     null
+    ],
+    [
+     "1",
+     "prix de l offre",
+     50.0,
+     "percent",
+     null
+    ],
+    [
+     "2",
+     "merite technique",
+     50.0,
+     "percent",
+     null
+    ],
+    [
+     "2",
+     "prix de l offre",
+     50.0,
+     "percent",
+     null
+    ],
+    [
+     "3",
+     "planning previsionnel",
+     10.0,
+     "percent",
+     null
+    ],
+    [
+     "3",
+     "prix des prestations",
+     35.0,
+     "percent",
+     null
+    ],
+    [
+     "3",
+     "valeur technique",
+     55.0,
+     "percent",
+     null
+    ]
+   ],
+   "classe": "bug Bilel",
+   "cas": "Des critères communs aux lots 01 et 2 (« Pour les lots n° 01, 2 ») alors que le lot 03 a ses propres critères : B leur donne un lot critère nul au lieu de les rattacher à chacun des lots 1 et 2."
+  },
+  {
+   "fait": "submission_mode",
+   "divergences": 3,
+   "rc": "RC1",
+   "bilel": [
+    "electronique"
+   ],
+   "majorite": [
+    "electronique",
+    "papier"
+   ],
+   "classe": "bug majorité",
+   "cas": "Le RC impose la remise électronique, et une autre page se borne à interdire la voie papier (le papier ne reparaît que comme support facultatif de la copie de sauvegarde) : C04 exige qu'on affiche seulement le mode nommé, « électronique »."
+  },
+  {
+   "fait": "lots",
+   "divergences": 2,
+   "rc": "RC1",
+   "bilel": [],
+   "majorite": [
+    null
+   ],
+   "classe": "bug Bilel",
+   "cas": "La page 4 déclare qu'aucune décomposition en lots n'est prévue : d'après A45 et C06, le dossier doit lister exactement un lot sans numéro ni intitulé, mais le code B n'en liste aucun."
+  },
+  {
+   "fait": "site_visit_dates",
+   "divergences": 1,
+   "rc": "RC4",
+   "bilel": [],
+   "majorite": [
+    "2026-02-02"
+   ],
+   "classe": "bug Bilel",
+   "cas": "La page 3 indique une date de visite du site (lundi 02 février 2026 à 10h) et le code B ne liste aucune date visite, en violation d'A10."
+  }
+ ],
+ "part_ponderee": {
+  "trou": 0.0,
+  "bug Bilel": 0.971,
+  "bug majorité": 0.029,
+  "non classé": 0.0
+ }
+}

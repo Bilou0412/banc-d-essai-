@@ -1,0 +1,63 @@
+{
+ "situations": 300,
+ "egales": 1,
+ "taux": 0.003,
+ "taux_synth": 0.003,
+ "taux_publics": 0.0,
+ "groupes": {
+  "pieces.liste": 298,
+  "plan[]": 208,
+  "criteres.liste": 141,
+  "type_ponderation.valeurs": 96,
+  "type_ponderation.conflit": 90,
+  "controle.alertes": 86,
+  "validite_offres.valeurs": 80,
+  "validite_offres.conflit": 49,
+  "pieces.statut": 30,
+  "plan": 29,
+  "mode_remise.valeurs": 15,
+  "validite_offres.statut": 7,
+  "variantes.valeurs": 3,
+  "heure_limite.valeurs": 3,
+  "date_limite.valeurs": 3,
+  "date_limite.conflit": 3,
+  "criteres.statut": 2,
+  "heure_limite.conflit": 2,
+  "type_ponderation.statut": 1,
+  "heure_limite.statut": 1,
+  "date_questions.statut": 1,
+  "date_questions.valeurs": 1,
+  "mode_remise.conflit": 1,
+  "dates_visite.valeurs": 1,
+  "lots.liste": 1,
+  "dates_visite.statut": 1
+ },
+ "juges": 12,
+ "non_juges": [
+  "variantes.valeurs (3)",
+  "heure_limite.valeurs (3)",
+  "date_limite.valeurs (3)",
+  "date_limite.conflit (3)",
+  "criteres.statut (2)",
+  "heure_limite.conflit (2)",
+  "type_ponderation.statut (1)",
+  "heure_limite.statut (1)",
+  "date_questions.statut (1)",
+  "date_questions.valeurs (1)",
+  "mode_remise.conflit (1)",
+  "dates_visite.valeurs (1)",
+  "lots.liste (1)",
+  "dates_visite.statut (1)"
+ ],
+ "classes": {
+  "bug S": 6,
+  "trou": 5,
+  "bug H": 1
+ },
+ "accord_juges": 1.0,
+ "taux_spec": 0.387,
+ "porte": {
+  "convention": 5
+ },
+ "principes": []
+}

@@ -1,0 +1,14 @@
+```python
+class App:
+
+    def search(self, query: str='', category: str=None, favorites_only: bool=False) -> Dict[str, Any]:
+        recipes = self.list_recipes()
+        results = [r for r in recipes if (not query or query.lower() in r['title'].lower()) and (category is None or r.get('category') == category) and (not favorites_only or r['favorite'])]
+        ingredients_results = set()
+        for r in recipes:
+            for i in r['ingredients']:
+                if query.lower() in i['name'].lower():
+                    ingredients_results.add(r['title'])
+        results.extend(ingredients_results)
+        return {'results': sorted(results), 'message': 'Aucun résultat' if not results else None}
+```

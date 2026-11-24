@@ -1,0 +1,4 @@
+test:      test_A15_reg_cinq_pieces_sous_rubriques_une_page_toutes_listees
+kind:      contradiction
+assertion: le test exige que la pièce « Attestation d'assurance responsabilité civile professionnelle et décennale en cours de validité » figure dans pieces.liste (PIECES_ATTENDUES[1]) ; or le texte de la page 1 du RC porte « Attestation d'assurance de responsabilité civile professionnelle et décennale en cours de validité » (avec « de »). Le nom attendu n'est pas une sous-chaîne du texte de la page.
+anchor:    règle de la spec : « Une valeur rendue doit être retrouvée dans le texte d'une page, sinon elle n'est pas rendue » (forme exigée par les pièces : nom recopié du texte) ; test_app_reg1.py::test_A15_reg_cinq_pieces_sous_rubriques_une_page_toutes_listees, RC_PIECES_UNE_PAGE (ligne « - Attestation d'assurance de responsabilité civile… ») contre PIECES_ATTENDUES[1]. Les deux exigences sont incompatibles tant que le nom n'est pas recopié à l'identique.

@@ -1,0 +1,124 @@
+```python
+import json
+
+class InvalidInput(ValueError):
+    pass
+
+DEFAULT_PHOTO = b'\x89PNG\r\n\x1a\n\x00\x00\x00\rIHDR\x00\x00\x00\x01\x00\x00\x00\x01\x08\x02\x00\x00\x00\x90wS\xde\x00\x00\x00\nIDATx\xdac\xf8\xff?\x00\x01\x01\xfe\x00\x00\x00\x00IEND\xaeB`\x82'
+
+class App:
+    def __init__(self, path):
+        self.path = path
+        if not os.path.exists(path):
+            with open(path, 'w') as f:
+                json.dump([], f)
+
+    def close(self):
+        pass
+
+    def save_recipe(self, title, servings=4):
+        if not title.strip():
+            raise InvalidInput("Le titre ne peut pas être vide")
+        recipes = self._load_recipes()
+        rid = str(len(recipes) + 1)
+        recipe = {
+            "id": rid,
+            "title": title,
+            "servings": servings,
+            "category": None,
+            "favorite": False,
+            "note": None,
+            "photo": DEFAULT_PHOTO,
+            "ingredients": []
+        }
+        recipes.append(recipe)
+        self._save_recipes(recipes)
+        return rid
+
+    def delete_recipe(self, rid):
+        recipes = self._load_recipes()
+        recipes = [r for r in recipes if r["id"] != rid]
+        self._save_recipes(recipes)
+
+    def list_recipes(self):
+        return self._load_recipes()
+
+    def recipe(self, rid, servings=None):
+        recipes = self._load_recipes()
+        recipe = next((r for r in recipes if r["id"] == rid), None)
+        if recipe:
+            if servings is not None:
+                recipe["servings"] = servings
+            return recipe
+        raise ValueError(f"Recette non trouvée : {rid}")
+
+    def add_ingredient(self, rid, name, quantity, unit):
+        recipe = self.recipe(rid)
+        recipe["ingredients"].append({"name": name, "quantity": str(quantity), "unit": unit})
+        self._save_recipes(self._load_recipes())
+
+    def remove_ingredient(self, rid, name):
+        recipe = self.recipe(rid)
+        recipe["ingredients"] = [i for i in recipe["ingredients"] if i["name"] != name]
+        self._save_recipes(self._load_recipes())
+
+    def set_category(self, rid, category):
+        recipe = self.recipe(rid)
+        recipe["category"] = category
+        self._save_recipes(self._load_recipes())
+
+    def set_favorite(self, rid, bool):
+        recipe = self.recipe(rid)
+        recipe["favorite"] = bool
+        self._save_recipes(self._load_recipes())
+
+    def set_note(self, rid, text):
+        recipe = self.recipe(rid)
+        recipe["note"] = text
+        self._save_recipes(self._load_recipes())
+
+    def set_photo(self, rid, data: bytes):
+        recipe = self.recipe(rid)
+        recipe["photo"] = data
+        self._save_recipes(self._load_recipes())
+
+    def remove_photo(self, rid):
+        recipe = self.recipe(rid)
+        recipe["photo"] = DEFAULT_PHOTO
+        self._save_recipes(self._load_recipes())
+
+    def search(self, query="", category=None, favorites_only=False):
+        recipes = self.list_recipes()
+        results = [r for r in recipes if (query.lower() in r["title"].lower() and
+                                          (category is None or r.get("category") == category) and
+                                          (not favorites_only or r["favorite"]))]
+        return {"results": sorted(r["title"] for r in results), "message": None}
+
+    def add_to_shopping_list(self, rid, servings=None):
+        recipe = self.recipe(rid)
+        ingredients = recipe.get("ingredients", [])
+        for i in ingredients:
+            item = (i["name"], i["unit"])
+            if item not in shop(self):
+                shop(self)[item] = {"quantity": str(qty(i["quantity"]) * (servings or 1)), "checked": False}
+            else:
+                shop(self)[item]["quantity"] = str(float(shop(self)[item]["quantity"]) + qty(i["quantity"]) * (servings or 1)))
+
+    def shopping_list(self):
+        return list(shop(self).values())
+
+    def check_item(self, name, unit, checked=True):
+        if (name, unit) in shop(self):
+            shop(self)[(name, unit)]["checked"] = checked
+
+    def remove_checked(self):
+        shop(self) = {item: info for item, info in shop(self).items() if not info["checked"]}
+
+    def _load_recipes(self):
+        with open(self.path, 'r') as f:
+            return json.load(f)
+
+    def _save_recipes(self, recipes):
+        with open(self.path, 'w') as f:
+            json.dump(recipes, f)
+```

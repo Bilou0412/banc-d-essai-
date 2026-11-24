@@ -1,0 +1,9 @@
+```python
+DEFAULT_PHOTO = b'\x89PNG\r\n\x1a\n\x00\x00\x00\rIHDR\x00\x00\x00\x01\x00\x00\x00\x01\x08\x02\x00\x00\x00\x90wS\xde\x00\x00\x00\nIDATxÚcøÿ?\x00\x01\x01þ\x00\x00\x00\x00IEND®B`\x82'
+
+class App:
+
+    def remove_photo(self, rid: int) -> None:
+        recipe = self.recipe(rid)
+        recipe['photo'] = DEFAULT_PHOTO
+```

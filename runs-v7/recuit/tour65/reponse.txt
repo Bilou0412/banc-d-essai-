@@ -1,0 +1,52 @@
+```python
+import re
+
+def set_note(self, rid: int, text: str) -> None:
+    recipe = self.recipe(rid)
+    recipe['note'] = text.strip() if text.strip() else None
+
+def recipe(self, rid: int, servings: int=None) -> Dict[str, Any]:
+    recipes = self.list_recipes()
+    recipe = next((r for r in recipes if r['id'] == rid), None)
+    if not recipe:
+        raise ValueError('Recette non trouvée')
+    if servings is not None:
+        recipe['servings'] = servings
+        for i in recipe['ingredients']:
+            quantity = qty(i['quantity'])
+            new_quantity = round(quantity * (servings / 4), 2)
+            i['quantity'] = f'{new_quantity:.2f}' if new_quantity % 1 != 0 else str(int(new_quantity))
+    return recipe
+
+def set_photo(self, rid: int, data: bytes) -> None:
+    if not isinstance(data, bytes):
+        raise InvalidInput("Le fichier n'est pas une image")
+    header = data[:8]
+    if not (header.startswith(b'\x89PNG') or header.startswith(b'GIF87a') or header.startswith(b'GIF89a')):
+        raise InvalidInput("Le fichier n'est pas une image valide")
+    recipe = self.recipe(rid)
+    recipe['photo'] = base64.b64encode(data).decode('latin1')
+
+def add_to_shopping_list(self, rid: int, servings: int=None) -> None:
+    recipe = self.recipe(rid)
+    if servings is not None:
+        recipe['servings'] = servings
+    for i in recipe['ingredients']:
+        item = (i['name'].lower(), i['unit'])
+        if item in shop(self):
+            current_qty = qty(shop(self)[item]['quantity'])
+            new_qty = round(current_qty + qty(i['quantity']), 2)
+            shop(self)[item]['quantity'] = f'{new_qty:.2f}' if new_qty % 1 != 0 else str(int(new_qty))
+        else:
+            shop(self)[item] = {'name': i['name'], 'quantity': str(round(float(i['quantity']), 2)), 'unit': i['unit'], 'checked': False}
+
+def add_ingredient(self, rid: int, name: str, quantity: Any, unit: str) -> None:
+    if not isinstance(quantity, (int, float)) or quantity <= 0:
+        raise InvalidInput('La quantité doit être un nombre positif')
+    recipe = self.recipe(rid)
+    recipe['ingredients'].append({'name': name.lower(), 'quantity': str(round(float(quantity), 2)), 'unit': unit})
+
+def remove_ingredient(self, rid: int, name: str) -> None:
+    recipe = self.recipe(rid)
+    recipe['ingredients'] = [i for i in recipe['ingredients'] if i['name'].lower() != name.lower()]
+```

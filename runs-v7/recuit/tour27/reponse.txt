@@ -1,0 +1,10 @@
+```python
+DEFAULT_PHOTO = b'\x89PNG\r\n\x1a\n\x00\x00\x00\rIHDR\x00\x00\x00\x01\x00\x00\x00\x01\x08\x02\x00\x00\x00\x90wS\xde\x00\x00\x00\nIDATx\xdac\xf8\xff?\x00\x01\x01\xfe\x00\x00\x00\x00IEND\xaeB`\x82'
+
+class App:
+    def set_photo(self, rid: int, data: bytes) -> None:
+        if not isinstance(data, bytes):
+            raise InvalidInput("Le fichier n'est pas une image")
+        recipe = self.recipe(rid)
+        recipe['photo'] = base64.b64encode(data).decode('latin1')
+```

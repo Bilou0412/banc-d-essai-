@@ -1,0 +1,176 @@
+{
+ "iteration": 0,
+ "compares": 975,
+ "majorite_absente": 180,
+ "divergences": 144,
+ "accord": 0.852,
+ "par_fait": {
+  "site_visit_dates": 47,
+  "award_criteria": 28,
+  "offer_validity": 26,
+  "offer_deadline": 13,
+  "variants": 11,
+  "procedure": 10,
+  "lots": 5,
+  "submission_mode": 3,
+  "questions_deadline": 1
+ },
+ "jugements": [
+  {
+   "fait": "site_visit_dates",
+   "divergences": 47,
+   "rc": "S020",
+   "bilel": [
+    "2026-09-15",
+    "2026-09-22"
+   ],
+   "majorite": [],
+   "classe": "bug majorité",
+   "cas": "Le RC donne deux dates de visite (l'une en chiffres, l'une en lettres) pour une visite facultative, et la majorité rend une liste vide alors que A10, A91 et A92 exigent de les lister."
+  },
+  {
+   "fait": "award_criteria",
+   "divergences": 28,
+   "rc": "S054",
+   "bilel": [
+    [
+     null,
+     "performances en matiere de protection de l environnement",
+     10.0,
+     "percent",
+     null
+    ],
+    [
+     null,
+     "planning previsionnel",
+     10.0,
+     "percent",
+     null
+    ],
+    [
+     null,
+     "prix",
+     40.0,
+     "percent",
+     null
+    ],
+    [
+     null,
+     "valeur technique",
+     40.0,
+     "percent",
+     null
+    ]
+   ],
+   "majorite": [
+    [
+     null,
+     "performances en matiere de protection de l environnement",
+     10.0,
+     "percent",
+     null
+    ],
+    [
+     null,
+     "planning previsionnel",
+     10.0,
+     "percent",
+     null
+    ],
+    [
+     null,
+     "prix ponderation",
+     40.0,
+     "percent",
+     null
+    ],
+    [
+     null,
+     "valeur technique ponderation",
+     40.0,
+     "percent",
+     null
+    ]
+   ],
+   "classe": "bug majorité",
+   "cas": "Dans un tableau de critères où la colonne Pondération commence par « pondération : 40 % », la majorité ajoute « pondération » au libellé du critère (« prix ponderation »), alors que A140 demande le libellé tel qu'écrit dans le RC, c'est-à-dire « Prix »."
+  },
+  {
+   "fait": "offer_validity",
+   "divergences": 26,
+   "rc": "S006",
+   "bilel": [
+    [
+     120,
+     "days"
+    ]
+   ],
+   "majorite": [
+    [
+     120,
+     "days"
+    ],
+    [
+     2,
+     "months"
+    ]
+   ],
+   "classe": "bug majorité",
+   "cas": "Le RC fixe la validité des offres à 120 jours (art. 4) et mentionne ailleurs un délai de recours de « deux mois » (art. 3) ; la majorité ajoute à tort ces deux mois comme seconde validité des offres."
+  },
+  {
+   "fait": "offer_deadline",
+   "divergences": 13,
+   "rc": "S028",
+   "bilel": [
+    [
+     "2026-02-23",
+     "11:00"
+    ]
+   ],
+   "majorite": [
+    [
+     "2026-02-16",
+     "11:00"
+    ],
+    [
+     "2026-02-23",
+     "11:00"
+    ]
+   ],
+   "classe": "bug Bilel",
+   "cas": "Une même page indique deux dates limites de remise différentes (23/02/2026 en en-tête, 16/02/2026 à l'article 6) et le code B n'en affiche qu'une, alors que A02 exige d'afficher chaque date limite indiquée."
+  },
+  {
+   "fait": "variants",
+   "divergences": 11,
+   "rc": "S079",
+   "bilel": [
+    true
+   ],
+   "majorite": [],
+   "classe": "bug majorité",
+   "cas": "Une page écrit « les candidats peuvent présenter des variantes » : les variantes doivent être affichées comme autorisées (A98), pas comme non trouvées."
+  },
+  {
+   "fait": "procedure",
+   "divergences": 10,
+   "rc": "S067",
+   "bilel": [
+    "appel_offres_restreint"
+   ],
+   "majorite": [
+    "appel_offres_restreint",
+    "procedure_adaptee"
+   ],
+   "classe": "trou",
+   "cas": "Le sigle « MAPA » n'apparaît que dans la référence du dossier (« 2025-MAPA-70 »), alors que la même page déclare une procédure d'appel d'offres restreint, et la spécification ne dit pas si un sigle placé dans un identifiant revient à nommer la procédure."
+  }
+ ],
+ "part_ponderee": {
+  "trou": 0.074,
+  "bug Bilel": 0.096,
+  "bug majorité": 0.83,
+  "non classé": 0.0
+ }
+}

@@ -1,0 +1,49 @@
+```python
+class App:
+
+    def set_favorite(self, rid: int, bool: bool) -> None:
+        recipe = self.recipe(rid)
+        recipe['favorite'] = bool
+        with open(self.path, 'r+') as f:
+            data = json.load(f)
+            for r in data:
+                if r['id'] == rid:
+                    r['favorite'] = bool
+                    break
+            f.seek(0)
+            json.dump(data, f)
+
+    def close(self) -> None:
+        with open(self.path, 'r+') as f:
+            data = json.load(f)
+            for r in data:
+                if isinstance(r['photo'], str):
+                    r['photo'] = DEFAULT_PHOTO.decode('latin-1')
+            f.seek(0)
+            json.dump(data, f)
+
+    def recipe(self, rid: int, servings: int=None) -> Dict[str, Any]:
+        recipes = self.list_recipes()
+        recipe = next((r for r in recipes if r['id'] == rid), None)
+        if not recipe:
+            raise ValueError('Recette non trouvée')
+        if servings is not None and is_valid_quantity(servings):
+            recipe['servings'] = servings
+            for i in recipe['ingredients']:
+                i['quantity'] = str(round(qty(i['quantity']) / servings, 2))
+        return recipe
+
+    def save_recipe(self, title: str, servings: int=4) -> int:
+        if not title.strip():
+            raise InvalidInput('Le titre ne peut pas être vide')
+        if not is_valid_quantity(servings):
+            raise InvalidInput('Le nombre de portions doit être un nombre positif')
+        with open(self.path, 'r+') as f:
+            data = json.load(f)
+            rid = len(data) + 1
+            recipe = {'id': rid, 'title': title, 'servings': servings, 'category': None, 'favorite': False, 'note': None, 'photo': DEFAULT_PHOTO.decode('latin-1'), 'ingredients': []}
+            data.append(recipe)
+            f.seek(0)
+            json.dump(data, f)
+            return rid
+```

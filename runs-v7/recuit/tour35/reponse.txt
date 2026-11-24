@@ -1,0 +1,29 @@
+```python
+import json
+from typing import List, Dict
+from cryptography.fernet import Fernet
+
+class App:
+    def save_recipe(self, title: str, servings: int=4) -> int:
+        if not title.strip():
+            raise InvalidInput('Le titre ne peut pas être vide')
+        with open(self.path, 'r') as f:
+            data = json.load(f)
+            rid = len(data) + 1
+            recipe = {'id': rid, 'title': title, 'servings': servings, 'category': None, 'favorite': False, 'note': None, 'photo': DEFAULT_PHOTO.decode('latin1'), 'ingredients': []}
+            data.append(recipe)
+        with open(self.path, 'w') as f:
+            json.dump(data, f)
+        return rid
+
+    def delete_recipe(self, rid: int) -> None:
+        with open(self.path, 'r') as f:
+            data = json.load(f)
+        data = [r for r in data if r['id'] != rid]
+        with open(self.path, 'w') as f:
+            json.dump(data, f)
+
+    def list_recipes(self) -> List[Dict[str, Any]]:
+        with open(self.path, 'r') as f:
+            return json.load(f)
+```

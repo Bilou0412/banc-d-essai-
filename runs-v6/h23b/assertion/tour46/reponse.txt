@@ -1,0 +1,6 @@
+```python
+import re
+
+def qty(s):
+    return float(re.sub(r',', '.', s))
+```

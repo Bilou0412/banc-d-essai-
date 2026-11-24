@@ -1,0 +1,7 @@
+```python
+def search(self, query: str='', category: str=None, favorites_only: bool=False) -> Dict[str, Any]:
+    recipes = self.list_recipes()
+    normalized_query = unicodedata.normalize('NFD', query.strip().lower())
+    results = [r for r in recipes if (not normalized_query or normalized_query in unicodedata.normalize('NFD', r['title'].lower())) and (category is None or r.get('category') == category) and (not favorites_only or r['favorite'])]
+    return {'results': sorted((r['title'] for r in results)), 'message': None}
+```
