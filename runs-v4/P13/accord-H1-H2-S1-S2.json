@@ -1,0 +1,24 @@
+{
+ "sonde": "P13",
+ "greens": [
+  "H1",
+  "H2",
+  "S1",
+  "S2"
+ ],
+ "situations": 300,
+ "tous_identiques": 36,
+ "au_moins_n_moins_1": 99,
+ "formes_premier_ecart": {
+  "3 contre 1": 220,
+  "2 contre 2": 44
+ },
+ "ecart_seul_par_green": {
+  "H1": 142,
+  "H2": 78
+ },
+ "ecart_seul_par_action": {
+  "H1 / submit_forecast": 142,
+  "H2 / submit_order": 78
+ }
+}

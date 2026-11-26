@@ -1,0 +1,26 @@
+{
+ "sonde": "P13",
+ "a": "H1",
+ "b": "S2",
+ "situations": 300,
+ "jouees": 300,
+ "concordantes": 42,
+ "taux_compilation": 0.14,
+ "non_deterministes": 0,
+ "erreurs_generateur": 0,
+ "divergences": 258,
+ "groupes": 1,
+ "juges": 1,
+ "classes": {
+  "trou": 1
+ },
+ "tokens_juge": {
+  "neufs": 5724,
+  "cache": 1741,
+  "usd": 0.0555402
+ },
+ "stderr": {
+  "H1": "",
+  "S2": ""
+ }
+}

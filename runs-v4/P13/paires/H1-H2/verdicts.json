@@ -1,0 +1,150 @@
+[
+ {
+  "groupe": "submit_forecast",
+  "divergences": 160,
+  "graine": 206,
+  "etape": 3,
+  "action": "submit_forecast('96.3')",
+  "x": {
+   "ecran": {
+    "historique": [
+     103,
+     95,
+     101,
+     101,
+     100,
+     115,
+     93,
+     81
+    ],
+    "explication_affichee": false,
+    "champ_prevision_actif": false,
+    "champ_commande_actif": true,
+    "serie": 0,
+    "niveau_termine": false,
+    "critere_SC0x-01": false,
+    "message_final_affiche": false
+   },
+   "resultat": {
+    "acceptee": true,
+    "succes": true,
+    "moyenne_mobile": 96.3333,
+    "commentaire": {
+     "present": true,
+     "montre_moyenne": false,
+     "montre_3_nombres": false,
+     "montre_calcul": false
+    }
+   }
+  },
+  "y": {
+   "ecran": {
+    "historique": [
+     103,
+     95,
+     101,
+     101,
+     100,
+     115,
+     93,
+     81
+    ],
+    "explication_affichee": false,
+    "champ_prevision_actif": false,
+    "champ_commande_actif": true,
+    "serie": 0,
+    "niveau_termine": false,
+    "critere_SC0x-01": false,
+    "message_final_affiche": false
+   },
+   "resultat": {
+    "acceptee": true,
+    "succes": true,
+    "moyenne_mobile": 96.3333,
+    "commentaire": {
+     "present": true,
+     "montre_moyenne": true,
+     "montre_3_nombres": false,
+     "montre_calcul": false
+    }
+   }
+  },
+  "classe": "trou",
+  "assertion": "A22",
+  "cas": "Après une prévision réussie, rien n'indique si le commentaire du mentor doit afficher la valeur de la moyenne mobile.",
+  "verdict": "Dernières semaines : 115, 93 et 81, donc une moyenne mobile de 289 / 3 = 96,333. La prévision 96,3 s'en écarte de 0,033, bien moins que 1 % (0,963). Les deux implémentations comptent donc un succès (A17).\n\n```\nclaim:     Après un succès, le commentaire du mentor doit (ou ne doit pas) afficher la valeur de la moyenne mobile.\nruling:    not resolvable\nbecause:   La spec ne fixe ce que montre le commentaire qu'après un échec : A22 dit « Après un échec, le commentaire du mentor affiche la valeur correcte de la moyenne mobile ». A21 exige seulement que le mentor « commente l'écart entre la prévision et la moyenne mobile », sans dire s'il affiche la moyenne. Après un succès, l'afficher ou non respecte les deux assertions.\ncertainty: firm\n```\n\nSeule l'intention de l'arbitre peut trancher : faut-il montrer la moyenne correcte après un succès ? Le dossier ne contient pas cette réponse, la question remonte donc à l'arbitre.\n\nCLASSE: trou\nASSERTION: A22\nCAS: Après une prévision réussie, rien n'indique si le commentaire du mentor doit afficher la valeur de la moyenne mobile."
+ },
+ {
+  "groupe": "submit_order",
+  "divergences": 97,
+  "graine": 111,
+  "etape": 5,
+  "action": "submit_order(0)",
+  "x": {
+   "ecran": {
+    "historique": [
+     150,
+     150,
+     150,
+     150,
+     150,
+     150,
+     150,
+     150,
+     63
+    ],
+    "explication_affichee": false,
+    "champ_prevision_actif": true,
+    "champ_commande_actif": false,
+    "serie": 1,
+    "niveau_termine": false,
+    "critere_SC0x-01": false,
+    "message_final_affiche": false
+   },
+   "resultat": {
+    "demande": 63,
+    "vendu": 0,
+    "manque": 63,
+    "jete": 0,
+    "recette": 0.0,
+    "cout": 0.0,
+    "benefice": 0.0
+   }
+  },
+  "y": {
+   "ecran": {
+    "historique": [
+     150,
+     150,
+     150,
+     150,
+     150,
+     150,
+     150,
+     150,
+     67
+    ],
+    "explication_affichee": false,
+    "champ_prevision_actif": true,
+    "champ_commande_actif": false,
+    "serie": 1,
+    "niveau_termine": false,
+    "critere_SC0x-01": false,
+    "message_final_affiche": false
+   },
+   "resultat": {
+    "demande": 67,
+    "vendu": 0,
+    "manque": 67,
+    "jete": 0,
+    "recette": 0.0,
+    "cout": 0.0,
+    "benefice": 0.0
+   }
+  },
+  "classe": "trou",
+  "assertion": "A25",
+  "cas": "Avec une graine donnée, la spec ne fixe pas la valeur exacte de la demande tirée après une commande : elle exige seulement un entier positif tiré selon la loi normale de la partie.",
+  "verdict": "Les deux implémentations tirent une demande différente avec la même graine. La spec ne fixe ni l'algorithme de tirage ni la reproductibilité par graine : c'est un trou, et non un bug.\n\n```\nclaim:     X et Y divergent sur submit_order(0) : la demande tirée vaut 63 chez l'une et 67 chez l'autre, avec la même graine (seed=3485). L'une des deux viole la spec.\nruling:    rejected\nbecause:   L'assertion A25 exige seulement que « la demande de la semaine [soit] tirée selon la loi normale de la partie, entière et jamais négative ». 63 et 67 sont deux entiers positifs, plausibles pour une moyenne tirée entre 60 et 140 (A02), et la suite est cohérente des deux côtés : vendu = min(d, 0) = 0, manque = d, jeté = 0, montants à 0 (A26 à A31), semaine ajoutée à l'historique (A32), série à 1 après le succès à exactement 1 % (A18, A34). Aucune assertion ne dit qu'une graine donnée doit produire un tirage précis. Rien ne départage donc 63 et 67.\ncertainty: firm\n```\n\nPour combler le trou, la spec devrait dire si une même graine doit donner le même tirage. Il faudrait aussi fixer la moyenne et l'écart-type de la partie, que la situation ne montre pas. Seul l'arbitre peut trancher ce point.\n\nCLASSE: trou\nASSERTION: A25\nCAS: Avec une graine donnée, la spec ne fixe pas la valeur exacte de la demande tirée après une commande : elle exige seulement un entier positif tiré selon la loi normale de la partie."
+ }
+]

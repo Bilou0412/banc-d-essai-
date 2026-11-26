@@ -1,0 +1,77 @@
+[
+ {
+  "groupe": "submit_forecast",
+  "divergences": 258,
+  "graine": 111,
+  "etape": 3,
+  "action": "submit_forecast('151.5')",
+  "x": {
+   "ecran": {
+    "historique": [
+     150,
+     150,
+     150,
+     150,
+     150,
+     150,
+     150,
+     150
+    ],
+    "explication_affichee": false,
+    "champ_prevision_actif": false,
+    "champ_commande_actif": true,
+    "serie": 0,
+    "niveau_termine": false,
+    "critere_SC0x-01": false,
+    "message_final_affiche": false
+   },
+   "resultat": {
+    "acceptee": true,
+    "succes": true,
+    "moyenne_mobile": 150.0,
+    "commentaire": {
+     "present": true,
+     "montre_moyenne": false,
+     "montre_3_nombres": false,
+     "montre_calcul": false
+    }
+   }
+  },
+  "y": {
+   "ecran": {
+    "historique": [
+     150,
+     150,
+     150,
+     150,
+     150,
+     150,
+     150,
+     150
+    ],
+    "explication_affichee": false,
+    "champ_prevision_actif": false,
+    "champ_commande_actif": true,
+    "serie": 0,
+    "niveau_termine": false,
+    "critere_SC0x-01": false,
+    "message_final_affiche": false
+   },
+   "resultat": {
+    "acceptee": true,
+    "succes": true,
+    "moyenne_mobile": 150.0,
+    "commentaire": {
+     "present": true,
+     "montre_moyenne": true,
+     "montre_3_nombres": true,
+     "montre_calcul": false
+    }
+   }
+  },
+  "classe": "trou",
+  "assertion": "aucune",
+  "cas": "Après une prévision comptée comme un succès (écart d'exactement 1 % à la moyenne mobile), la spec ne dit pas si le commentaire du mentor doit montrer ou cacher la moyenne mobile et les 3 nombres utilisés.",
+  "verdict": "Le cas est un **trou** : la spécification ne dit pas ce que le commentaire du mentor doit montrer après un succès, et les deux comportements la respectent.\n\n```\nclaim:     X et Y divergent sur le contenu du commentaire du mentor après submit_forecast('151.5') ; l'une des deux viole la spec.\nruling:    rejected\nbecause:   L'écart vaut |151,5 − 150| = 1,5, soit exactement 1 % de 150. A18 classe donc la prévision comme un succès, et X comme Y renvoient « succes: true ». A21 exige seulement qu'un commentaire existe (« le mentor commente l'écart »), ce que les deux respectent. A22 et A23 ne disent quand afficher la moyenne et les 3 nombres que « Après un échec ». Aucune assertion n'interdit de les afficher après un succès, ni ne l'exige.\ncertainty: firm\n```\n\nLes deux implémentations gardent aussi la série à 0 après ce succès. A34 dit pourtant « Après un succès, la série augmente de 1 ». Ce n'est pas la divergence jugée, car X et Y font la même chose. Il faut quand même le vérifier : soit la série n'est mise à jour qu'après la commande, soit les deux implémentations violent A34.\n\nCLASSE: trou\nASSERTION: aucune\nCAS: Après une prévision comptée comme un succès (écart d'exactement 1 % à la moyenne mobile), la spec ne dit pas si le commentaire du mentor doit montrer ou cacher la moyenne mobile et les 3 nombres utilisés."
+ }
+]
