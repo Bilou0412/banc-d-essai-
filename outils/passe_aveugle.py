@@ -26,13 +26,18 @@ RACINE = Path(__file__).resolve().parent.parent
 CONSIGNE = RACINE / "prompts" / "decompositeur-strict.md"
 SONDES = RACINE / "data" / "sondes.md"
 JOURNAL = RACINE / "data" / "passes" / "journal-passes.jsonl"
-INTERDITS = ("densité", "spin", "ising", " k ", "thèse", "prédiction")
+INTERDITS = ("densité", "spin", "ising", " k ", "thèse", "prédiction",
+             # P13 (H32) : les mots de la thèse ne doivent pas atteindre le décompositeur
+             "sous-spécifi", "formules objectives", "pédagogique")
 
 
 def description(sonde):
     for ligne in SONDES.read_text(encoding="utf-8").splitlines():
         cols = [c.strip() for c in ligne.split("|")]
         if len(cols) > 3 and cols[1] == sonde:
+            m = re.search(r"`(data/sondes/[^`]+)`", cols[3])
+            if m:  # longue spec (P13) : tout ce qui suit la ligne « --- » du fichier, tel quel
+                return (RACINE / m.group(1)).read_text(encoding="utf-8").split("\n---\n", 1)[1].strip()
             return cols[3]
     sys.exit(f"sonde inconnue : {sonde}")
 
