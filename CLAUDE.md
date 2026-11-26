@@ -92,7 +92,7 @@ data/v6/, runs-v6/             V6 : vérité des 5 RC publics (à la main), tabl
 protocol/, .claude/agents/     le protocole adversarial attaché (tools/link.py), ne pas éditer protocol/
 ```
 
-`python outils/mesure.py data/passes/strict` doit redonner les k de `data/sondes.md`. Dépendance : `pip install networkx`.
+`python outils/mesure.py data/passes/strict` doit redonner les k de `data/sondes.md`. Dépendances : `pip install networkx pytest pytest-timeout`. Sans `pytest-timeout`, `duel.py` compte chaque test comme cassé (« app.py ne s'importe pas ») : panne du 26/11 sur P13, `runs-p13-panne/`.
 
 ## Première tâche : V0, le duel (teste H14) — faite le 19/11, voir `docs/duel-V0.md`
 

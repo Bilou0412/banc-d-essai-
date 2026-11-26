@@ -1,0 +1,5 @@
+- A13 : une deuxième prévision soumise dans la même semaine (avant la commande) | test: test_A13_trou_deuxieme_prevision_meme_semaine_refusee | présumé: elle est refusée ; seule la première prévision de la semaine compte pour la série
+- A34 : deux prévisions réussies dans la même semaine sans commande | test: test_A34_trou_deux_succes_sans_commande_ne_terminent_pas | présumé: la série augmente au plus de 1 par semaine ; le niveau ne se termine pas
+- A14 : saisie vide, non numérique, « nan », « inf », notation scientifique « 1e2 », double point | test: test_A14_trou_saisie_non_numerique_refusee | présumé: refusée sans effet sur la série ni sur les champs
+- A32 : la liste d'historique fournie à la création de la partie | test: test_A32_trou_historique_fourni_non_modifie | présumé: la partie ne modifie pas la liste de l'appelant
+- A40 : encodage de la page (texte français non-ASCII) | test: test_A40_trou_page_declare_utf8 | présumé: la page déclare UTF-8 dans l'en-tête ou une balise meta
