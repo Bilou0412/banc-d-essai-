@@ -30,6 +30,7 @@ Bilel, développeur freelance. Il pense par **intuitions structurelles et parall
 8. **Les trous du red ne sont pas des données.** Le red attaque toujours, mais son compte de trous a priori ne se répète pas (ρ = 0,00 entre deux reds, V3) : on ne s'en sert plus comme mesure.
 9. **L'arrêt sur le taux spec se vérifie avec 4 greens neufs.** Une paire seule surestime : sur P12, une paire a donné 0,94, puis 4 greens neufs sur la même spec 0,78 à 0,87 (V5). On rapporte le taux du lot de 4.
 10. **Un juge voit l'écart complet, jamais un extrait coupé.** Sur P12, des variantes coupées à 1 500 caractères ont rendu le plus gros groupe non classable (it1) : le taux spec de it1 et it2 n'est qu'une borne basse.
+11. **Contrat observable et zones libres.** Une spec sépare son **contrat observable** (ce qui doit être identique entre implémentations : chiffres, graine, validation, états) de ses **zones libres** (formulation, ton, présentation). Le taux de compilation et le score de mutation ne se calculent que sur le contrat observable. Une divergence en zone libre n'est pas un trou. Une spec qui ne fait pas cette séparation est mesurée telle quelle, et le rapport le dit.
 
 ## Limites connues du banc
 
