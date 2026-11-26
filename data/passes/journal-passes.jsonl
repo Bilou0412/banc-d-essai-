@@ -44,3 +44,5 @@
 {"passe": "P12_A.txt", "consigne": "decompositeur-strict-v2.md", "modele": "opus", "tokens": {"claude-opus-5-5": 21066}, "usd": 0.239164}
 {"passe": "P12_B.txt", "consigne": "decompositeur-strict-v3.md", "modele": "opus", "tokens": {"claude-opus-5-5": 22142}, "usd": 0.25217459999999997}
 {"passe": "P12_A.txt", "consigne": "decompositeur-strict-v3.md", "modele": "opus", "tokens": {"claude-opus-5-5": 22052}, "usd": 0.2509262}
+{"passe": "P13_B.txt", "consigne": "decompositeur-strict-v2.md", "modele": "opus", "tokens": {"claude-opus-5-5": 21928}, "usd": 0.2464516}
+{"passe": "P13_A.txt", "consigne": "decompositeur-strict-v2.md", "modele": "opus", "tokens": {"claude-opus-5-5": 22438}, "usd": 0.25357999999999997}

@@ -1,0 +1,42 @@
+ÉTATS: historique; demande moyenne; écart-type; première ouverture; explication mentor; tableau; graphique; prévision; champ prévision; champ commande; moyenne mobile; succès; commentaire mentor; commande; demande; ventes; ruptures; jeté; recette; coût; bénéfice; série; critère; fin niveau; message final; navigateur; lancement
+ASSERTIONS:
+- Au démarrage d'une nouvelle partie, l'historique contient exactement 8 semaines | observé: historique | conditions: aucune
+- Au démarrage d'une nouvelle partie, la demande moyenne est tirée entre 60 et 140 unités par semaine | observé: demande moyenne | conditions: aucune | frontière: oui
+- Au cours d'une même partie, la demande moyenne ne change pas d'une semaine à l'autre | observé: demande moyenne | conditions: aucune | frontière: oui
+- Au démarrage d'une nouvelle partie, l'écart-type est tiré entre 10 % et 20 % de la demande moyenne | observé: écart-type | conditions: demande moyenne | frontière: oui
+- Chaque semaine de l'historique initial affiche un nombre d'unités entier et jamais négatif | observé: historique | conditions: aucune
+- Lorsque le joueur ouvre l'écran de commande pour la première fois, l'explication de la moyenne mobile sur 3 semaines par le mentor s'affiche | observé: explication mentor | conditions: première ouverture
+- Lorsque le joueur ouvre l'écran de commande une fois suivante, l'explication du mentor ne s'affiche pas | observé: explication mentor | conditions: première ouverture
+- Tant que l'explication du mentor est affichée, le champ de prévision est désactivé | observé: champ prévision | conditions: explication mentor
+- Le tableau affiche une ligne par semaine de l'historique, avec son numéro de semaine | observé: tableau | conditions: historique
+- Chaque ligne du tableau affiche les unités vendues de la semaine correspondante | observé: tableau | conditions: historique
+- Le graphique affiche une barre par semaine de l'historique, de hauteur proportionnelle aux unités | observé: graphique | conditions: historique
+- Tant qu'aucune prévision n'a été soumise pour la semaine, le champ de commande est désactivé | observé: champ commande | conditions: prévision
+- Après la soumission d'une prévision, le champ de commande est activé | observé: champ commande | conditions: prévision
+- Le joueur saisit une prévision avec 1 décimale ; elle est acceptée | observé: prévision | conditions: aucune
+- Le joueur saisit une prévision avec 2 décimales ; elle est refusée | observé: prévision | conditions: aucune
+- Lorsque le joueur soumet une prévision, la moyenne mobile vaut la moyenne des 3 dernières semaines de l'historique | observé: moyenne mobile | conditions: historique | frontière: oui
+- Une prévision dont l'écart absolu à la moyenne mobile non arrondie est inférieur à 1 % de cette moyenne est comptée comme un succès | observé: succès | conditions: prévision, moyenne mobile
+- Une prévision dont l'écart absolu à la moyenne mobile est exactement 1 % de cette moyenne est comptée comme un succès | observé: succès | conditions: prévision, moyenne mobile
+- Une prévision dont l'écart absolu à la moyenne mobile dépasse 1 % de cette moyenne est comptée comme un échec | observé: succès | conditions: prévision, moyenne mobile
+- Avec les 3 dernières semaines à 100, 101 et 101, une prévision de 101,7 est comptée comme un échec (comparaison à 100,667 et non à la valeur arrondie 101) | observé: succès | conditions: prévision, moyenne mobile
+- Après la soumission d'une prévision, le mentor commente l'écart entre la prévision et la moyenne mobile | observé: commentaire mentor | conditions: prévision, moyenne mobile
+- Après un échec, le commentaire du mentor affiche la valeur correcte de la moyenne mobile | observé: commentaire mentor | conditions: succès
+- Après un échec, le commentaire du mentor affiche les 3 nombres utilisés pour la moyenne mobile | observé: commentaire mentor | conditions: succès
+- Après un échec, le commentaire du mentor affiche le calcul de la moyenne mobile | observé: commentaire mentor | conditions: succès
+- Après la soumission de la commande, la demande de la semaine est tirée selon la loi normale de la partie, entière et jamais négative | observé: demande | conditions: demande moyenne, écart-type | frontière: oui
+- Les unités vendues de la semaine valent le minimum entre la demande et la commande | observé: ventes | conditions: demande, commande
+- Les unités manquées de la semaine valent la demande moins les ventes | observé: ruptures | conditions: demande, ventes
+- Les unités jetées de la semaine valent la commande moins les ventes | observé: jeté | conditions: commande, ventes
+- La recette de la semaine vaut les ventes multipliées par 1,20 € | observé: recette | conditions: ventes
+- Le coût de la semaine vaut la commande multipliée par 0,80 € | observé: coût | conditions: commande
+- Le bénéfice de la semaine vaut la recette moins le coût | observé: bénéfice | conditions: recette, coût
+- Après la résolution d'une semaine, cette semaine est ajoutée à la fin de l'historique avec sa demande | observé: historique | conditions: demande
+- À la prévision suivante, la moyenne mobile inclut la semaine qui vient d'être jouée | observé: moyenne mobile | conditions: historique | frontière: oui
+- Après un succès, la série augmente de 1 | observé: série | conditions: succès | frontière: oui
+- Après un échec qui suit un succès, la série revient à 0 | observé: série | conditions: succès | frontière: oui
+- Lorsque la série atteint 2, le critère SC0x-01 est marqué validé | observé: critère | conditions: série
+- Lorsque la série atteint 2, le niveau se termine | observé: fin niveau | conditions: série
+- Lorsque la série vaut 1, le niveau continue avec une nouvelle semaine | observé: fin niveau | conditions: série
+- À la fin du niveau, le mentor affiche un message de conclusion | observé: message final | conditions: fin niveau
+- Le joueur ouvre l'adresse du jeu dans un navigateur mobile ; le jeu se lance sans installation | observé: lancement | conditions: navigateur

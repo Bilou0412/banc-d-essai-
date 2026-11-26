@@ -1,0 +1,242 @@
+{
+ "sonde": "P13",
+ "passes": "strict-v2",
+ "passe": "A",
+ "k_passes": [
+  2.1,
+  2.08
+ ],
+ "k_retenu": 2.09,
+ "concordance": "concordante",
+ "convergent": true,
+ "tours": 2,
+ "attaques": 2,
+ "assertions": 40,
+ "frontieres": 8,
+ "champ_local": {
+  "tout": 1.0,
+  "frontiere": 1.0,
+  "autres": 1.0
+ },
+ "essais": {
+  "A01": 1,
+  "A02": 1,
+  "A03": 1,
+  "A04": 1,
+  "A05": 1,
+  "A06": 1,
+  "A07": 1,
+  "A08": 1,
+  "A09": 1,
+  "A10": 1,
+  "A11": 1,
+  "A12": 1,
+  "A13": 1,
+  "A14": 1,
+  "A15": 1,
+  "A16": 1,
+  "A17": 1,
+  "A18": 1,
+  "A19": 1,
+  "A20": 1,
+  "A21": 1,
+  "A22": 1,
+  "A23": 1,
+  "A24": 1,
+  "A25": 1,
+  "A26": 1,
+  "A27": 1,
+  "A28": 1,
+  "A29": 1,
+  "A31": 1,
+  "A32": 1,
+  "A33": 1,
+  "A34": 1,
+  "A35": 1,
+  "A36": 1,
+  "A37": 1,
+  "A38": 1,
+  "A39": 1,
+  "A40": 1
+ },
+ "non_passees": [],
+ "trous_a_priori": 24,
+ "echecs_par_type": {},
+ "nouvelles_assertions": {},
+ "lacunes": [
+  {
+   "cas": "A01 : la loi de tirage des 8 semaines initiales n'est pas fixée (constante possible)",
+   "test": "test_A01_trou_initial_history_drawn_from_game_law",
+   "présumé": "Les semaines de l'historique initial sont tirées selon la loi normale de la partie | observé: historique | conditions: demande moyenne, écart-type",
+   "attaque": 1
+  },
+  {
+   "cas": "A10 : A10 dit « unités vendues » mais A32 ajoute la semaine « avec sa demande » ; après une rupture, le tableau ne peut montrer les deux",
+   "test": "test_A10_trou_table_after_stockout_shows_history_value",
+   "présumé": "Chaque ligne du tableau affiche la valeur de l'historique (la demande) de la semaine correspondante | observé: tableau | conditions: historique",
+   "attaque": 1
+  },
+  {
+   "cas": "A14 : le séparateur décimal (virgule française ou point) n'est pas fixé",
+   "test": "test_A14_trou_decimal_comma_accepted",
+   "présumé": "Une prévision avec 1 décimale séparée par une virgule est acceptée | observé: prévision | conditions: aucune",
+   "attaque": 1
+  },
+  {
+   "cas": "A14 : une prévision sans décimale n'est ni acceptée ni refusée par la spec",
+   "test": "test_A14_trou_integer_accepted",
+   "présumé": "Une prévision entière sans décimale est acceptée | observé: prévision | conditions: aucune",
+   "attaque": 1
+  },
+  {
+   "cas": "A15 : l'effet d'une prévision refusée sur la série et le niveau n'est pas dit",
+   "test": "test_A15_trou_refused_forecast_does_not_touch_streak",
+   "présumé": "Une prévision refusée ne compte ni comme succès ni comme échec et ne change pas la série | observé: série | conditions: prévision",
+   "attaque": 1
+  },
+  {
+   "cas": "A28 : une commande négative n'est pas traitée (jeté et coût deviendraient négatifs)",
+   "test": "test_A28_trou_negative_order_refused",
+   "présumé": "Une commande négative est refusée et la semaine n'est pas résolue | observé: commande | conditions: aucune",
+   "attaque": 1
+  },
+  {
+   "cas": "A37 : rien ne dit si le joueur peut encore prévoir après la fin du niveau",
+   "test": "test_A37_trou_no_forecast_after_level_end",
+   "présumé": "Après la fin du niveau, le champ de prévision est désactivé | observé: champ prévision | conditions: fin niveau",
+   "attaque": 1
+  },
+  {
+   "cas": "A40 : « se lance sans installation dans un navigateur mobile » n'a pas de forme observable dans un module sans réseau",
+   "test": "test_A40_trou_page_is_self_contained_mobile_html",
+   "présumé": "La page du jeu est un document HTML autonome avec viewport mobile et sans ressource externe | observé: lancement | conditions: navigateur",
+   "attaque": 1
+  },
+  {
+   "cas": "A22 : la précision d'affichage de la moyenne mobile dans le commentaire n'est pas fixée",
+   "test": "test_A22_failure_comment_shows_moving_average",
+   "présumé": "Après un échec, le commentaire affiche la moyenne mobile arrondie à 1 ou 2 décimales | observé: commentaire mentor | conditions: succès",
+   "attaque": 1
+  },
+  {
+   "cas": "A01 : dispersion de l'historique initial",
+   "test": "test_A01_trou_initial_history_spread_matches_std",
+   "présumé": "les 8 semaines initiales sont tirées selon la loi normale de la partie (écart-type de la partie)",
+   "attaque": 2
+  },
+  {
+   "cas": "A02 : même graine ou absence de graine",
+   "test": "test_A02_trou_same_seed_same_game_and_demands",
+   "présumé": "une même graine reproduit la partie et ses demandes",
+   "attaque": 2
+  },
+  {
+   "cas": "A02 : partie sans graine",
+   "test": "test_A02_trou_no_seed_draws_vary",
+   "présumé": "sans graine, la demande moyenne varie d'une partie à l'autre",
+   "attaque": 2
+  },
+  {
+   "cas": "A08 : prévision soumise avant la première ouverture de l'écran de commande",
+   "test": "test_A08_trou_forecast_disabled_before_screen_opened",
+   "présumé": "champ de prévision désactivé tant que l'explication n'a pas été montrée",
+   "attaque": 2
+  },
+  {
+   "cas": "A12 : seconde prévision dans la même semaine après un échec",
+   "test": "test_A12_trou_second_forecast_same_week_cannot_rescue_failure",
+   "présumé": "impossible de sauver un échec en ressaisissant la valeur affichée par le mentor ; la série reste 0",
+   "attaque": 2
+  },
+  {
+   "cas": "A34 : succès répété dans la même semaine",
+   "test": "test_A34_trou_repeated_success_same_week_counts_once",
+   "présumé": "une semaine compte pour un seul succès au plus",
+   "attaque": 2
+  },
+  {
+   "cas": "A14 : valeur d'une saisie avec virgule",
+   "test": "test_A14_trou_comma_value_is_parsed_as_decimal",
+   "présumé": "la virgule est un séparateur décimal (\"100,9\" vaut 100,9)",
+   "attaque": 2
+  },
+  {
+   "cas": "A15 : saisie vide, non numérique, nan/inf, mal formée ou à 3 décimales",
+   "test": "test_A15_trou_non_numeric_or_malformed_refused",
+   "présumé": "refusée sans exception, champ de commande toujours désactivé",
+   "attaque": 2
+  },
+  {
+   "cas": "A21 : commentaire indépendant de l'écart",
+   "test": "test_A21_trou_comment_depends_on_gap",
+   "présumé": "deux écarts différents donnent deux commentaires différents",
+   "attaque": 2
+  },
+  {
+   "cas": "A28 : commande négative refusée puis commande valide",
+   "test": "test_A28_trou_refused_order_keeps_week_open",
+   "présumé": "la semaine reste ouverte et la commande valide la résout",
+   "attaque": 2
+  },
+  {
+   "cas": "A28 : commande non entière",
+   "test": "test_A28_trou_fractional_order_refused",
+   "présumé": "refusée (ValueError ou TypeError), la semaine n'est pas résolue",
+   "attaque": 2
+  },
+  {
+   "cas": "A32 : deux parties simultanées",
+   "test": "test_A32_trou_games_do_not_share_state",
+   "présumé": "aucune partie ne partage historique ni série avec une autre",
+   "attaque": 2
+  },
+  {
+   "cas": "A37 : commande après la fin du niveau",
+   "test": "test_A37_trou_no_order_after_level_end",
+   "présumé": "champ de commande désactivé, FieldDisabledError",
+   "attaque": 2
+  },
+  {
+   "cas": "A40 : contenu de la page servie",
+   "test": "test_A40_trou_page_contains_game_screen",
+   "présumé": "la page porte les champs de prévision et de commande, le tableau et un script",
+   "attaque": 2
+  },
+  {
+   "cas": "A40 : encodage des textes français",
+   "test": "test_A40_trou_page_declares_utf8",
+   "présumé": "la page déclare le jeu de caractères utf-8",
+   "attaque": 2
+  }
+ ],
+ "modeles": {
+  "red": "opus",
+  "green": "haiku",
+  "juge": "opus"
+ },
+ "tokens_decoupe": {
+  "neufs": 88367,
+  "cache": 42512,
+  "usd": 1.1307984
+ },
+ "tokens_execution": {
+  "neufs": 146390,
+  "cache": 193354,
+  "usd": 0.047252640000000005
+ },
+ "part_decoupe": 0.376,
+ "causes": {
+  "causes_distinctes": 0,
+  "causes_par_tour": [
+   0,
+   0
+  ],
+  "champ_local": {
+   "tout": 0.0,
+   "frontiere": 0.0,
+   "autres": 0.0
+  },
+  "par_assertion": {},
+  "liste": []
+ }
+}

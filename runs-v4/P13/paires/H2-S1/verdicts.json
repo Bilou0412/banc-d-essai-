@@ -1,0 +1,150 @@
+[
+ {
+  "groupe": "submit_order",
+  "divergences": 142,
+  "graine": 4,
+  "etape": 5,
+  "action": "submit_order(0)",
+  "x": {
+   "ecran": {
+    "historique": [
+     10,
+     10,
+     10,
+     10,
+     10,
+     10,
+     10,
+     10,
+     94
+    ],
+    "explication_affichee": false,
+    "champ_prevision_actif": true,
+    "champ_commande_actif": false,
+    "serie": 1,
+    "niveau_termine": false,
+    "critere_SC0x-01": false,
+    "message_final_affiche": false
+   },
+   "resultat": {
+    "demande": 94,
+    "vendu": 0,
+    "manque": 94,
+    "jete": 0,
+    "recette": 0.0,
+    "cout": 0.0,
+    "benefice": 0.0
+   }
+  },
+  "y": {
+   "ecran": {
+    "historique": [
+     10,
+     10,
+     10,
+     10,
+     10,
+     10,
+     10,
+     10,
+     99
+    ],
+    "explication_affichee": false,
+    "champ_prevision_actif": true,
+    "champ_commande_actif": false,
+    "serie": 1,
+    "niveau_termine": false,
+    "critere_SC0x-01": false,
+    "message_final_affiche": false
+   },
+   "resultat": {
+    "demande": 99,
+    "vendu": 0,
+    "manque": 99,
+    "jete": 0,
+    "recette": 0.0,
+    "cout": 0.0,
+    "benefice": 0.0
+   }
+  },
+  "classe": "trou",
+  "assertion": "A25",
+  "cas": "Avec la même graine, la demande tirée pour une semaine peut prendre des valeurs différentes, car la spec n'exige que la loi normale de la partie et un entier jamais négatif, sans fixer de tirage reproductible.",
+  "verdict": "     À l'étape submit_order(0), une demande tirée à 94 et une demande tirée à 99 pour la même graine (3867) ne peuvent pas toutes deux respecter la spécification.\nruling:    rejected\nbecause:   A25 demande seulement que la demande soit « tirée selon la loi normale de la partie, entière et jamais négative ». 94 et 99 sont deux entiers positifs, et les deux sont plausibles pour une moyenne tirée « entre 60 et 140 » (A02) avec un écart-type de « 10 % et 20 % » de cette moyenne (A04). Aucune assertion n'impose un générateur aléatoire précis ni une valeur précise pour une graine donnée. Tout ce qui suit le tirage est cohérent des deux côtés : vendu = min(demande, 0) = 0 (A26), manque = demande (A27), jeté = 0 (A28), recette, coût et bénéfice à 0 (A29–A31), semaine ajoutée à la fin de l'historique (A32), série à 1 et niveau non terminé (A34, A38).\ncertainty: firm\n```\n\nLes deux résultats respectent la spécification : c'est un trou. Rien ne dit qu'une même graine doit donner les mêmes tirages d'une implémentation à l'autre, ni quel générateur utiliser. Si la spec veut des parties reproductibles d'une implémentation à l'autre, il faut ajouter une assertion qui fixe le générateur, ou qui accepte qu'on lui donne la séquence de demandes à utiliser.\n\nCLASSE: trou\nASSERTION: A25\nCAS: Avec la même graine, la demande tirée pour une semaine peut prendre des valeurs différentes, car la spec n'exige que la loi normale de la partie et un entier jamais négatif, sans fixer de tirage reproductible."
+ },
+ {
+  "groupe": "submit_forecast",
+  "divergences": 65,
+  "graine": 111,
+  "etape": 3,
+  "action": "submit_forecast('151.5')",
+  "x": {
+   "ecran": {
+    "historique": [
+     150,
+     150,
+     150,
+     150,
+     150,
+     150,
+     150,
+     150
+    ],
+    "explication_affichee": false,
+    "champ_prevision_actif": false,
+    "champ_commande_actif": true,
+    "serie": 0,
+    "niveau_termine": false,
+    "critere_SC0x-01": false,
+    "message_final_affiche": false
+   },
+   "resultat": {
+    "acceptee": true,
+    "succes": true,
+    "moyenne_mobile": 150.0,
+    "commentaire": {
+     "present": true,
+     "montre_moyenne": false,
+     "montre_3_nombres": false,
+     "montre_calcul": false
+    }
+   }
+  },
+  "y": {
+   "ecran": {
+    "historique": [
+     150,
+     150,
+     150,
+     150,
+     150,
+     150,
+     150,
+     150
+    ],
+    "explication_affichee": false,
+    "champ_prevision_actif": false,
+    "champ_commande_actif": true,
+    "serie": 0,
+    "niveau_termine": false,
+    "critere_SC0x-01": false,
+    "message_final_affiche": false
+   },
+   "resultat": {
+    "acceptee": true,
+    "succes": true,
+    "moyenne_mobile": 150.0,
+    "commentaire": {
+     "present": true,
+     "montre_moyenne": true,
+     "montre_3_nombres": true,
+     "montre_calcul": false
+    }
+   }
+  },
+  "classe": "trou",
+  "assertion": "aucune",
+  "cas": "Après une prévision comptée comme un succès (écart exactement 1 %), la spec ne dit pas si le commentaire du mentor doit afficher ou non la valeur de la moyenne mobile et les 3 nombres utilisés.",
+  "verdict": "pec.** X et Y la respectent toutes les deux ; elles diffèrent seulement sur ce que montre le commentaire du mentor après un succès, et la spec ne dit rien de ce cas.\n\n```\nclaim:     La divergence sur le contenu du commentaire du mentor après submit_forecast('151.5') (X ne montre ni la moyenne ni les 3 nombres, Y les montre) révèle un bug de l'une des deux implémentations.\nruling:    rejected\nbecause:   L'écart est de |151,5 − 150| = 1,5, soit exactement 1 % de 150. A18 compte ce cas comme un succès, et X comme Y affichent « succes »: true. Le contenu du commentaire n'est réglé que pour un échec : A22, A23 et A24 commencent toutes par « Après un échec, le commentaire du mentor affiche… ». A21 exige seulement que « le mentor commente l'écart », et les deux ont un commentaire présent. Aucune assertion n'impose ni n'interdit d'afficher la moyenne ou les 3 nombres après un succès.\ncertainty: firm\n```\n\nCela ne remet pas en cause ma réponse, mais la série reste à 0 chez les deux après un succès, alors que A34 dit « Après un succès, la série augmente de 1 ». Comme X et Y se comportent de la même façon, ce n'est pas la divergence à classer ici. C'est quand même peut-être un problème qui leur est commun, ou un moment de mise à jour que la spec ne précise pas.\n\nCLASSE: trou\nASSERTION: aucune\nCAS: Après une prévision comptée comme un succès (écart exactement 1 %), la spec ne dit pas si le commentaire du mentor doit afficher ou non la valeur de la moyenne mobile et les 3 nombres utilisés."
+ }
+]

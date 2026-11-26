@@ -1,0 +1,42 @@
+ÉTATS: graine; demande moyenne; historique; visite; explication; saisie prévision; tableau; barres; prévision; saisie commande; moyenne mobile; succès; correction; série; critère; niveau; message final; commande; demande; ventes; ruptures; jeté; recette; coût; bénéfice; accès
+ASSERTIONS:
+- Au lancement d'une partie neuve, l'historique contient exactement 8 semaines | observé: historique | conditions: aucune
+- Au lancement d'une partie neuve, chaque valeur de l'historique est un entier supérieur ou égal à 0 | observé: historique | conditions: aucune
+- Au lancement d'une partie neuve, la demande moyenne est tirée entre 60 et 140 unités par semaine | observé: demande moyenne | conditions: graine | frontière: oui
+- Les valeurs de l'historique initial sont tirées selon une loi normale centrée sur la demande moyenne, d'écart-type compris entre 10 % et 20 % de celle-ci | observé: historique | conditions: demande moyenne | frontière: oui
+- Deux parties neuves lancées avec la même graine produisent le même historique initial | observé: historique | conditions: graine | frontière: oui
+- À la première visite de l'écran de commande, le mentor affiche l'explication de la moyenne mobile sur 3 semaines | observé: explication | conditions: visite
+- Tant que l'explication du mentor est affichée, la saisie de la prévision est désactivée | observé: saisie prévision | conditions: explication
+- Lors d'une visite ultérieure de l'écran de commande, l'explication n'est pas affichée à nouveau | observé: explication | conditions: visite
+- Le tableau affiche une ligne par semaine de l'historique, avec le numéro de semaine et les unités vendues | observé: tableau | conditions: historique
+- Le graphique affiche une barre par semaine de l'historique, de hauteur proportionnelle aux unités vendues | observé: barres | conditions: historique
+- Tant qu'aucune prévision n'a été soumise pour la semaine, la saisie de la commande est désactivée | observé: saisie commande | conditions: prévision
+- Après la soumission d'une prévision, la saisie de la commande est activée | observé: saisie commande | conditions: prévision
+- Le joueur soumet une prévision comportant une décimale ; la prévision est acceptée | observé: prévision | conditions: aucune
+- Le joueur soumet une prévision comportant plus d'une décimale ; la prévision est refusée | observé: prévision | conditions: aucune
+- À la soumission d'une prévision, la moyenne mobile est la moyenne exacte, non arrondie, des 3 dernières semaines de l'historique | observé: moyenne mobile | conditions: historique | frontière: oui
+- Le joueur soumet une prévision dont l'écart absolu à la moyenne mobile est inférieur à 1 % de celle-ci ; la prévision est comptée comme un succès | observé: succès | conditions: prévision, moyenne mobile
+- Le joueur soumet une prévision dont l'écart absolu à la moyenne mobile est exactement 1 % de celle-ci ; la prévision est comptée comme un succès | observé: succès | conditions: prévision, moyenne mobile
+- Le joueur soumet une prévision dont l'écart absolu à la moyenne mobile dépasse 1 % de celle-ci ; la prévision est comptée comme un échec | observé: succès | conditions: prévision, moyenne mobile
+- Après une prévision en échec, la correction du mentor affiche la valeur correcte de la moyenne mobile | observé: correction | conditions: succès
+- Après une prévision en échec, la correction du mentor affiche les 3 valeurs de l'historique utilisées | observé: correction | conditions: succès
+- Après une prévision en échec, la correction du mentor affiche le détail du calcul | observé: correction | conditions: succès
+- Après une prévision réussie, aucune correction n'est affichée | observé: correction | conditions: succès
+- Après une prévision réussie, la série augmente de 1 | observé: série | conditions: succès
+- Le joueur échoue une prévision alors que la série vaut 1 ; la série revient à 0 | observé: série | conditions: succès, série
+- Lorsque la série atteint 2, le critère SC0x-01 est marqué validé | observé: critère | conditions: série
+- Lorsque la série atteint 2, le niveau se termine | observé: niveau | conditions: série
+- Lorsque la série atteint 2, le mentor affiche un message de fin de niveau | observé: message final | conditions: série
+- Lorsque la série vaut 1 après une prévision, le niveau continue | observé: niveau | conditions: série
+- À la soumission de la commande, la demande de la semaine est tirée selon la même règle que l'historique initial | observé: demande | conditions: demande moyenne | frontière: oui
+- La demande de la semaine ne dépend pas de la commande soumise | observé: demande | conditions: aucune | frontière: oui
+- Après la soumission de la commande, les ventes valent le minimum entre la demande et la commande | observé: ventes | conditions: demande, commande
+- Après la soumission d'une commande inférieure à la demande, les ruptures valent la demande moins la commande | observé: ruptures | conditions: demande, commande
+- Après la soumission d'une commande supérieure ou égale à la demande, les ruptures valent 0 | observé: ruptures | conditions: demande, commande
+- Après la soumission d'une commande supérieure à la demande, le lait jeté vaut la commande moins la demande | observé: jeté | conditions: demande, commande
+- Après la soumission d'une commande inférieure ou égale à la demande, le lait jeté vaut 0 | observé: jeté | conditions: demande, commande
+- Après la soumission de la commande, la recette vaut les ventes multipliées par 1,20 € | observé: recette | conditions: ventes
+- Après la soumission de la commande, le coût vaut la commande multipliée par 0,80 € | observé: coût | conditions: commande
+- Après la soumission de la commande, le bénéfice vaut la recette moins le coût | observé: bénéfice | conditions: recette, coût
+- Après la résolution d'une semaine, l'historique contient une semaine de plus, portant les ventes de cette semaine | observé: historique | conditions: ventes
+- L'utilisateur ouvre l'adresse du jeu dans un navigateur mobile ; le jeu se lance sans installation | observé: accès | conditions: aucune

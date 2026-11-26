@@ -1,0 +1,77 @@
+[
+ {
+  "groupe": "submit_forecast",
+  "divergences": 258,
+  "graine": 111,
+  "etape": 3,
+  "action": "submit_forecast('151.5')",
+  "x": {
+   "ecran": {
+    "historique": [
+     150,
+     150,
+     150,
+     150,
+     150,
+     150,
+     150,
+     150
+    ],
+    "explication_affichee": false,
+    "champ_prevision_actif": false,
+    "champ_commande_actif": true,
+    "serie": 0,
+    "niveau_termine": false,
+    "critere_SC0x-01": false,
+    "message_final_affiche": false
+   },
+   "resultat": {
+    "acceptee": true,
+    "succes": true,
+    "moyenne_mobile": 150.0,
+    "commentaire": {
+     "present": true,
+     "montre_moyenne": false,
+     "montre_3_nombres": false,
+     "montre_calcul": false
+    }
+   }
+  },
+  "y": {
+   "ecran": {
+    "historique": [
+     150,
+     150,
+     150,
+     150,
+     150,
+     150,
+     150,
+     150
+    ],
+    "explication_affichee": false,
+    "champ_prevision_actif": false,
+    "champ_commande_actif": true,
+    "serie": 0,
+    "niveau_termine": false,
+    "critere_SC0x-01": false,
+    "message_final_affiche": false
+   },
+   "resultat": {
+    "acceptee": true,
+    "succes": true,
+    "moyenne_mobile": 150.0,
+    "commentaire": {
+     "present": true,
+     "montre_moyenne": true,
+     "montre_3_nombres": true,
+     "montre_calcul": false
+    }
+   }
+  },
+  "classe": "trou",
+  "assertion": "A22",
+  "cas": "Après une prévision réussie (écart exactement égal à 1 % de la moyenne mobile), la spec ne dit pas si le commentaire du mentor doit montrer la valeur de la moyenne mobile et les 3 nombres utilisés.",
+  "verdict": "Le prévision est de 151,5. La moyenne mobile vaut 150, et l'écart est donc de 1,5, soit exactement 1 % de 150. A18 compte ce cas comme un succès, et X comme Y l'ont bien compté ainsi. Les deux affichent aussi un commentaire du mentor, ce qui respecte A21. La seule différence porte sur le contenu de ce commentaire après un succès : Y montre la moyenne et les 3 nombres, X ne les montre pas.\n\n```\nclaim:     Après un succès (écart exactement 1 %), le commentaire du mentor doit-il afficher ou non la moyenne mobile et les 3 nombres utilisés ?\nruling:    not resolvable\nbecause:   A22 et A23 ne s'appliquent qu'après un échec (« Après un échec, le commentaire du mentor affiche la valeur correcte de la moyenne mobile » / « … les 3 nombres utilisés »). Après un succès, A21 exige seulement que « le mentor commente l'écart », et les deux implémentations le font. Aucune assertion n'exige ces éléments après un succès, et aucune ne les interdit.\ncertainty: firm\n```\n\nSeule l'intention de l'arbitre peut trancher : il faut savoir s'il veut que le commentaire après un succès reste sobre ou qu'il redonne aussi le calcul. Le dossier ne contient pas cette information.\n\nCLASSE: trou\nASSERTION: A22\nCAS: Après une prévision réussie (écart exactement égal à 1 % de la moyenne mobile), la spec ne dit pas si le commentaire du mentor doit montrer la valeur de la moyenne mobile et les 3 nombres utilisés."
+ }
+]

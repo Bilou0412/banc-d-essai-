@@ -1,0 +1,15 @@
+- A01 : dispersion de l'historique initial | test: test_A01_trou_initial_history_spread_matches_std | présumé: les 8 semaines initiales sont tirées selon la loi normale de la partie (écart-type de la partie)
+- A02 : même graine ou absence de graine | test: test_A02_trou_same_seed_same_game_and_demands | présumé: une même graine reproduit la partie et ses demandes
+- A02 : partie sans graine | test: test_A02_trou_no_seed_draws_vary | présumé: sans graine, la demande moyenne varie d'une partie à l'autre
+- A08 : prévision soumise avant la première ouverture de l'écran de commande | test: test_A08_trou_forecast_disabled_before_screen_opened | présumé: champ de prévision désactivé tant que l'explication n'a pas été montrée
+- A12 : seconde prévision dans la même semaine après un échec | test: test_A12_trou_second_forecast_same_week_cannot_rescue_failure | présumé: impossible de sauver un échec en ressaisissant la valeur affichée par le mentor ; la série reste 0
+- A34 : succès répété dans la même semaine | test: test_A34_trou_repeated_success_same_week_counts_once | présumé: une semaine compte pour un seul succès au plus
+- A14 : valeur d'une saisie avec virgule | test: test_A14_trou_comma_value_is_parsed_as_decimal | présumé: la virgule est un séparateur décimal ("100,9" vaut 100,9)
+- A15 : saisie vide, non numérique, nan/inf, mal formée ou à 3 décimales | test: test_A15_trou_non_numeric_or_malformed_refused | présumé: refusée sans exception, champ de commande toujours désactivé
+- A21 : commentaire indépendant de l'écart | test: test_A21_trou_comment_depends_on_gap | présumé: deux écarts différents donnent deux commentaires différents
+- A28 : commande négative refusée puis commande valide | test: test_A28_trou_refused_order_keeps_week_open | présumé: la semaine reste ouverte et la commande valide la résout
+- A28 : commande non entière | test: test_A28_trou_fractional_order_refused | présumé: refusée (ValueError ou TypeError), la semaine n'est pas résolue
+- A32 : deux parties simultanées | test: test_A32_trou_games_do_not_share_state | présumé: aucune partie ne partage historique ni série avec une autre
+- A37 : commande après la fin du niveau | test: test_A37_trou_no_order_after_level_end | présumé: champ de commande désactivé, FieldDisabledError
+- A40 : contenu de la page servie | test: test_A40_trou_page_contains_game_screen | présumé: la page porte les champs de prévision et de commande, le tableau et un script
+- A40 : encodage des textes français | test: test_A40_trou_page_declares_utf8 | présumé: la page déclare le jeu de caractères utf-8

@@ -1,0 +1,150 @@
+[
+ {
+  "groupe": "submit_order",
+  "divergences": 142,
+  "graine": 4,
+  "etape": 5,
+  "action": "submit_order(0)",
+  "x": {
+   "ecran": {
+    "historique": [
+     10,
+     10,
+     10,
+     10,
+     10,
+     10,
+     10,
+     10,
+     94
+    ],
+    "explication_affichee": false,
+    "champ_prevision_actif": true,
+    "champ_commande_actif": false,
+    "serie": 1,
+    "niveau_termine": false,
+    "critere_SC0x-01": false,
+    "message_final_affiche": false
+   },
+   "resultat": {
+    "demande": 94,
+    "vendu": 0,
+    "manque": 94,
+    "jete": 0,
+    "recette": 0.0,
+    "cout": 0.0,
+    "benefice": 0.0
+   }
+  },
+  "y": {
+   "ecran": {
+    "historique": [
+     10,
+     10,
+     10,
+     10,
+     10,
+     10,
+     10,
+     10,
+     99
+    ],
+    "explication_affichee": false,
+    "champ_prevision_actif": true,
+    "champ_commande_actif": false,
+    "serie": 1,
+    "niveau_termine": false,
+    "critere_SC0x-01": false,
+    "message_final_affiche": false
+   },
+   "resultat": {
+    "demande": 99,
+    "vendu": 0,
+    "manque": 99,
+    "jete": 0,
+    "recette": 0.0,
+    "cout": 0.0,
+    "benefice": 0.0
+   }
+  },
+  "classe": "trou",
+  "assertion": "A25",
+  "cas": "Avec la même graine, la demande tirée à la résolution d'une semaine peut prendre des valeurs différentes, car la spec ne fixe ni le générateur aléatoire ni la façon dont la graine détermine les tirages.",
+  "verdict": "```\nclaim:     À la même graine (3867), après submit_order(0), la demande tirée vaut 94 (X) contre 99 (Y). L'une des deux viole-t-elle la spec ?\nruling:    rejected (aucune des deux ne viole la spec)\nbecause:   A25 dit seulement que la demande est « tirée selon la loi normale de la partie, entière et jamais négative ». 94 et 99 respectent toutes deux ces contraintes. La demande moyenne est tirée « entre 60 et 140 » (A02) et l'écart-type entre « 10 % et 20 % » de cette moyenne (A04), donc 94 et 99 sont plausibles. Aucune assertion n'impose le générateur aléatoire, ni le lien entre la graine et les tirages, ni l'ordre des tirages. Les deux observations restent cohérentes avec A26–A31 (vendu 0, manque = demande, jeté 0, montants à 0) et avec A32 (la semaine est ajoutée à la fin de l'historique).\ncertainty: firm\n```\n\nLe contrôle s'arrête à ce que la spec garantit. La demande moyenne et l'écart-type de chaque partie ne sont pas affichés, donc on ne peut pas vérifier que chaque valeur vient bien de la bonne loi. Pour trancher, il faudrait d'abord que la spec dise si une même graine doit donner les mêmes tirages. Cette décision revient à l'auteur de la spec, pas au dossier.\n\nCLASSE: trou\nASSERTION: A25\nCAS: Avec la même graine, la demande tirée à la résolution d'une semaine peut prendre des valeurs différentes, car la spec ne fixe ni le générateur aléatoire ni la façon dont la graine détermine les tirages."
+ },
+ {
+  "groupe": "submit_forecast",
+  "divergences": 65,
+  "graine": 111,
+  "etape": 3,
+  "action": "submit_forecast('151.5')",
+  "x": {
+   "ecran": {
+    "historique": [
+     150,
+     150,
+     150,
+     150,
+     150,
+     150,
+     150,
+     150
+    ],
+    "explication_affichee": false,
+    "champ_prevision_actif": false,
+    "champ_commande_actif": true,
+    "serie": 0,
+    "niveau_termine": false,
+    "critere_SC0x-01": false,
+    "message_final_affiche": false
+   },
+   "resultat": {
+    "acceptee": true,
+    "succes": true,
+    "moyenne_mobile": 150.0,
+    "commentaire": {
+     "present": true,
+     "montre_moyenne": false,
+     "montre_3_nombres": false,
+     "montre_calcul": false
+    }
+   }
+  },
+  "y": {
+   "ecran": {
+    "historique": [
+     150,
+     150,
+     150,
+     150,
+     150,
+     150,
+     150,
+     150
+    ],
+    "explication_affichee": false,
+    "champ_prevision_actif": false,
+    "champ_commande_actif": true,
+    "serie": 0,
+    "niveau_termine": false,
+    "critere_SC0x-01": false,
+    "message_final_affiche": false
+   },
+   "resultat": {
+    "acceptee": true,
+    "succes": true,
+    "moyenne_mobile": 150.0,
+    "commentaire": {
+     "present": true,
+     "montre_moyenne": true,
+     "montre_3_nombres": true,
+     "montre_calcul": false
+    }
+   }
+  },
+  "classe": "trou",
+  "assertion": "aucune",
+  "cas": "Après une prévision qui réussit à exactement 1 % d'écart, la spec ne dit pas si le commentaire du mentor doit afficher ou non la moyenne mobile et les 3 nombres utilisés.",
+  "verdict": "claim:     Avec une prévision de 151,5 et une moyenne mobile de 150,0, le commentaire du mentor diffère : X n'affiche ni la moyenne ni les 3 nombres, Y affiche les deux. La spec impose-t-elle l'un de ces deux comportements ?\nruling:    rejected (aucune des deux implémentations ne viole la spec ; c'est un trou)\nbecause:   L'écart vaut |151,5 − 150| = 1,5, soit exactement 1 % de 150 ; c'est donc un succès selon A18 (« exactement 1 % de cette moyenne est comptée comme un succès »), et X comme Y le comptent ainsi. Les seules assertions sur le contenu du commentaire (A22, A23, A24) commencent toutes par « Après un échec ». Après un succès, A21 exige seulement que le mentor « commente l'écart », et les deux le font (`present: true`). Rien n'impose ni n'interdit d'afficher la moyenne ou les 3 nombres après un succès.\ncertainty: firm\n\nCLASSE: trou\nASSERTION: aucune\nCAS: Après une prévision qui réussit à exactement 1 % d'écart, la spec ne dit pas si le commentaire du mentor doit afficher ou non la moyenne mobile et les 3 nombres utilisés."
+ }
+]
